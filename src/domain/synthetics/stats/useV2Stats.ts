@@ -6,8 +6,8 @@ import type { ContractsChainId } from "sdk/configs/chains";
 import useV2FeesInfo from "./useV2FeesInfo";
 import { useMarketsInfoRequest } from "../markets";
 import { getOpenInterestForBalance } from "../markets/utils";
-import useUsers from "../stats/useUsers";
-import useVolumeInfo from "../stats/useVolumeInfo";
+import useUsers from "./useUsers";
+import useVolumeInfo from "./useVolumeInfo";
 import { useTokensDataRequest } from "../tokens";
 
 type DashboardOverview = {

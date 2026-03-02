@@ -1,8 +1,16 @@
 import { type Address, zeroAddress } from "viem";
 
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ContractsChainId } from "./chains";
+import {
+  ARBITRUM,
+  ARBITRUM_SEPOLIA,
+  AVALANCHE,
+  AVALANCHE_FUJI,
+  BOTANIX,
+  HARDHAT,
+  ContractsChainId,
+} from "./chains";
 
-export const CONTRACTS = {
+const CONTRACTS_BASE = {
   [ARBITRUM]: {
     // V1
     Vault: "0x489ee077994B6658eAfA855C308275EAd8097C4A",
@@ -379,6 +387,30 @@ export const CONTRACTS = {
     GlpRewardRouter: zeroAddress,
   },
 };
+
+const createZeroContractMapping = (template: Record<string, Address>): Record<string, Address> => {
+  const result: Record<string, Address> = {};
+  Object.keys(template).forEach((key) => {
+    result[key] = zeroAddress;
+  });
+  return result;
+};
+
+const HARDHAT_BASE_CONTRACTS = createZeroContractMapping(CONTRACTS_BASE[ARBITRUM] as Record<string, Address>);
+
+const HARDHAT_CONTRACTS = {
+  ...HARDHAT_BASE_CONTRACTS,
+  Vault: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+  RewardRouter: "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+  PositionRouter: "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
+  PositionBridge: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
+  USDG: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+};
+
+export const CONTRACTS = {
+  ...CONTRACTS_BASE,
+  [HARDHAT]: HARDHAT_CONTRACTS,
+} as const satisfies Record<ContractsChainId, Record<ContractName, Address>>;
 
 type ExtractContractNames<T extends object> = {
   [K in keyof T]: keyof T[K];

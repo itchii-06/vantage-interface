@@ -44,6 +44,17 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Local Hardhat testing
+
+1. Start your Hardhat node (from the root of the Vantage repo): `npx hardhat node` and keep it running.
+2. Deploy the Vantage stack against that node: `npx hardhat run scripts/deploy.js --network localhost`.
+   - The script prints the addresses that the frontend now expects (NFT vault, shop vault, reward router, position controller/bridge, mock USDC, reward token, nav oracle, etc.).
+3. Run the frontend in app mode with `yarn start-app`. In development the network selector exposes the **Hardhat (31337)** chain, and the UI will point at `http://127.0.0.1:8545` thanks to `VITE_APP_HARDHAT_RPC_URLS` (already set in `.env`).
+4. Connect a wallet to the Hardhat network (chain ID 31337, RPC `http://127.0.0.1:8545`, use the accounts shown by `npx hardhat node`) before interacting with the new contracts.
+5. When you refresh the page after connecting, the Hardhat option should appear next to the other development chains and use the addresses deployed in step 2.
+
+You can override the RPC URL by setting `VITE_APP_HARDHAT_RPC_URLS` to another JSON array if needed.
+
 ## Project structure
 
 - `App/` - React App root component, contains global providers and routing configuration

@@ -5,6 +5,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  HARDHAT,
   GMX_ACCOUNT_PSEUDO_CHAIN_ID,
   GmxAccountPseudoChainId,
   SOURCE_BASE_MAINNET,
@@ -84,6 +85,12 @@ const ICONS: Record<number | "common", ChainIcons> = {
     gm: gmIcon,
     esgmx: esGMXIcon,
   },
+  [HARDHAT]: {
+    network: eth,
+    gmx: gmxIcon,
+    glp: glpIcon,
+    gm: gmIcon,
+  },
   common: {
     gmx: gmxIcon,
     gmxOutline: gmxOutlineIcon,
@@ -105,6 +112,7 @@ export const CHAIN_ID_TO_NETWORK_ICON: Record<AnyChainId | GmxAccountPseudoChain
   [SOURCE_OPTIMISM_SEPOLIA]: optimismSepolia,
   [SOURCE_SEPOLIA]: sepolia,
   [BOTANIX]: botanix,
+  [HARDHAT]: eth,
   [SOURCE_BSC_MAINNET]: bsc,
 };
 

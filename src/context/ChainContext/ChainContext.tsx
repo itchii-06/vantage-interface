@@ -6,7 +6,7 @@ import { isSourceChain } from "config/multichain";
 import { useGmxAccountSettlementChainId } from "context/GmxAccountContext/hooks";
 import { useEmptyGmxAccounts } from "domain/multichain/useEmptyGmxAccounts";
 import { useChainIdImpl } from "lib/chains/useChainIdImpl";
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, ContractsChainId, SourceChainId } from "sdk/configs/chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, ContractsChainId, HARDHAT, SourceChainId } from "sdk/configs/chains";
 
 type ChainContext = {
   chainId: ContractsChainId;
@@ -19,7 +19,7 @@ type ChainContext = {
 
 let initialChainId: ContractsChainId;
 if (isDevelopment()) {
-  initialChainId = ARBITRUM_SEPOLIA;
+  initialChainId = HARDHAT;
 } else {
   initialChainId = ARBITRUM;
 }

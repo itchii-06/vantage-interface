@@ -18,11 +18,7 @@ import {
 import { createSelector } from "../../utils";
 import { makeSelectOrdersByPositionKey } from "../orderSelectors";
 import { selectSelectedMarketVisualMultiplier } from "../shared/marketSelectors";
-import {
-  selectTradeboxIncreasePositionAmounts,
-  selectTradeboxSelectedPosition,
-  selectTradeboxTradeFlags,
-} from "../tradeboxSelectors";
+import { selectTradeboxIncreasePositionAmounts, selectTradeboxSelectedPosition, selectTradeboxTradeFlags } from ".";
 
 const selectTradeboxExistingSlOrders = createSelector((q) => {
   const positionKey = q(selectTradeboxSelectedPositionKey);

@@ -11,6 +11,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  HARDHAT,
   SOURCE_ETHEREUM_MAINNET,
   SOURCE_BASE_MAINNET,
   SOURCE_BSC_MAINNET,
@@ -29,6 +30,8 @@ const ENV_ARBITRUM_RPC_URLS = parseRpcUrlsFromEnv(import.meta.env.VITE_APP_ARBIT
 const ENV_AVALANCHE_RPC_URLS = parseRpcUrlsFromEnv(import.meta.env.VITE_APP_AVALANCHE_RPC_URLS);
 
 const ENV_BOTANIX_RPC_URLS = parseRpcUrlsFromEnv(import.meta.env.VITE_APP_BOTANIX_RPC_URLS);
+
+const ENV_HARDHAT_RPC_URLS = parseRpcUrlsFromEnv(import.meta.env.VITE_APP_HARDHAT_RPC_URLS);
 
 // Chains that support Alchemy WebSocket endpoints
 const ALCHEMY_WS_SUPPORT_CHAINS = [
@@ -197,6 +200,23 @@ const RPC_CONFIGS: Record<number, RpcConfig[]> = {
 
     // Debug endpoints from settings
     ...(_debugRpcTracker?.getDebugRpcEndpoints(BOTANIX) ?? []),
+  ],
+
+  [HARDHAT]: [
+    ...(ENV_HARDHAT_RPC_URLS
+      ? ENV_HARDHAT_RPC_URLS.map((url: string) => ({
+          url,
+          isPublic: false,
+          purpose: "default",
+        }))
+      : [
+          {
+            url: "http://127.0.0.1:8545",
+            isPublic: false,
+            purpose: "default",
+          },
+        ]),
+    ...(_debugRpcTracker?.getDebugRpcEndpoints(HARDHAT) ?? []),
   ],
 
   // SOURCE CHAINS

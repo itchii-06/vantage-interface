@@ -20,6 +20,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  HARDHAT,
   SOURCE_ETHEREUM_MAINNET,
   SOURCE_BASE_MAINNET,
   SOURCE_BSC_MAINNET,
@@ -33,6 +34,7 @@ export {
   AVALANCHE_FUJI,
   BOTANIX,
   ARBITRUM_SEPOLIA,
+  HARDHAT,
   SOURCE_ETHEREUM_MAINNET,
   SOURCE_BASE_MAINNET,
   SOURCE_BSC_MAINNET,
@@ -41,7 +43,7 @@ export {
 };
 
 export const CONTRACTS_CHAIN_IDS = [ARBITRUM, AVALANCHE, BOTANIX] as const;
-export const CONTRACTS_CHAIN_IDS_DEV = [...CONTRACTS_CHAIN_IDS, AVALANCHE_FUJI, ARBITRUM_SEPOLIA] as const;
+export const CONTRACTS_CHAIN_IDS_DEV = [...CONTRACTS_CHAIN_IDS, AVALANCHE_FUJI, ARBITRUM_SEPOLIA, HARDHAT] as const;
 export const SETTLEMENT_CHAIN_IDS = [ARBITRUM, AVALANCHE] as const;
 export const SETTLEMENT_CHAIN_IDS_DEV = [...SETTLEMENT_CHAIN_IDS, ARBITRUM_SEPOLIA, AVALANCHE_FUJI] as const;
 export const SOURCE_CHAIN_IDS = [
@@ -165,6 +167,25 @@ const CONTRACTS_CHAIN_CONFIGS = {
     gasPriceBuffer: undefined,
     isDisabled: false,
   },
+  [HARDHAT]: {
+    chainId: HARDHAT,
+    name: "Hardhat",
+    slug: "hardhat",
+    explorerUrl: "",
+    nativeTokenSymbol: "ETH",
+    wrappedTokenSymbol: "WETH",
+    defaultCollateralSymbol: "USDC",
+    highExecutionFee: 5,
+    shouldUseMaxPriorityFeePerGas: false,
+    defaultExecutionFeeBufferBps: 1000,
+    maxFeePerGas: undefined,
+    gasPricePremium: 0n,
+    maxPriorityFeePerGas: 0n,
+    excessiveExecutionFee: 10,
+    minExecutionFee: undefined,
+    gasPriceBuffer: undefined,
+    isDisabled: false,
+  },
   // Use this notation to correctly infer chain names, etc. from config
 } as const satisfies Record<ContractsChainId, ContractsChainConfig>;
 
@@ -270,12 +291,36 @@ export const botanix: Chain = defineChain({
   },
 });
 
+export const hardhatChain: Chain = defineChain({
+  id: HARDHAT,
+  name: "Hardhat Local",
+  network: "hardhat",
+  nativeCurrency: {
+    name: "Ethereum",
+    symbol: "ETH",
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: {
+      http: ["http://127.0.0.1:8545"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Hardhat",
+      url: "http://127.0.0.1:8545",
+    },
+  },
+  testnet: true,
+});
+
 export const VIEM_CHAIN_BY_CHAIN_ID: Record<AnyChainId, Chain> = {
   [AVALANCHE_FUJI]: avalancheFuji,
   [ARBITRUM]: arbitrum,
   [AVALANCHE]: avalanche,
   [ARBITRUM_SEPOLIA]: arbitrumSepolia,
   [BOTANIX]: botanix,
+  [HARDHAT]: hardhatChain,
   [SOURCE_ETHEREUM_MAINNET]: mainnet,
   [SOURCE_OPTIMISM_SEPOLIA]: optimismSepolia,
   [SOURCE_SEPOLIA]: sepolia,
