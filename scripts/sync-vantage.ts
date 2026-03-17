@@ -183,15 +183,32 @@ async function syncAbis(protocolPath: string, destRoot: string): Promise<void> {
 }
 
 // ---------------------------------------------------------------------------
-// Generate: Types (Typechain)
+// Step 3: Generate TypeScript types with Typechain
+//
+// What this step does:
+//   1. Reads the ABI JSON files written by syncAbis() from src/vantage/abis/
+//   2. Runs `typechain --target ethers-v6` (via node_modules/.bin/typechain)
+//   3. Outputs typed contract interfaces + factory classes to src/vantage/types/
+//
+// Generated output layout:
+//   src/vantage/types/
+//   ├── index.ts                     ← barrel export for all types
+//   ├── common.ts                    ← shared TypedContractEvent helpers
+//   ├── Vault.ts                     ← Vault contract interface (typed methods/events)
+//   ├── Router.ts                    ← Router contract interface
+//   └── factories/
+//       ├── index.ts
+//       ├── Vault__factory.ts        ← factory to deploy/connect Vault
+//       └── Router__factory.ts      ← factory to deploy/connect Router
+//
+// Usage in application code (ethers-v6):
+//   import { Vault__factory } from "src/vantage/types";
+//   const vault = Vault__factory.connect(address, provider);
+//   await vault.deposit(amount);     ← fully typed
+//
+// Requires devDependencies: typechain, @typechain/ethers-v6
 // ---------------------------------------------------------------------------
 
-/**
- * Runs Typechain locally against the synced ABIs in src/vantage/abis/
- * and writes the generated types to src/vantage/types/.
- *
- * Requires: typechain + @typechain/ethers-v6 installed as devDependencies.
- */
 async function runTypechain(destRoot: string): Promise<void> {
   const abisDir = path.join(destRoot, "abis");
   const abiFiles = (await fs.readdir(abisDir)).filter((f) =>
@@ -206,10 +223,11 @@ async function runTypechain(destRoot: string): Promise<void> {
   const typesDir = path.join(destRoot, "types");
   await fse.emptyDir(typesDir);
 
-  // Paths relative to cwd for typechain
+  // Paths must be relative to cwd for the typechain CLI
   const outDir = path.relative(process.cwd(), typesDir);
   const glob = path.relative(process.cwd(), path.join(abisDir, "*.json"));
 
+  // Use the locally installed typechain binary (node_modules/.bin/typechain)
   const typechainBin = path.resolve(
     process.cwd(),
     "node_modules",
@@ -219,11 +237,13 @@ async function runTypechain(destRoot: string): Promise<void> {
 
   console.log(`  Running: typechain --target ethers-v6 --out-dir ${outDir} "${glob}"`);
 
+  // ===== Typechain execution =====
   const result = spawnSync(
     typechainBin,
     ["--target", "ethers-v6", "--out-dir", outDir, glob],
     { stdio: "inherit", cwd: process.cwd() }
   );
+  // ================================
 
   if (result.error) {
     throw new Error(`Failed to launch Typechain: ${result.error.message}`);
