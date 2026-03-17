@@ -1,16 +1,16 @@
 /**
  * sync-vantage.ts
  *
- * Synchronizes contract artifacts from a local vantage-protocol repository.
+ * Synchronizes contract artifacts from a local bcellar-monorepo repository.
  *
  * Usage:
- *   pnpm sync                           # uses ../vantage-protocol by default
- *   pnpm sync /path/to/vantage-protocol # explicit path
+ *   pnpm sync                           # uses ../bcellar-monorepo by default
+ *   pnpm sync /Users/xxx/xxx/bcellar-monorepo # explicit path
  *   VANTAGE_PROTOCOL_PATH=... pnpm sync # via env var
  */
 
-import fse from "fs-extra";
 import * as fs from "fs/promises";
+import fse from "fs-extra";
 import * as path from "path";
 import { spawnSync } from "child_process";
 
@@ -39,10 +39,7 @@ function toScreamingSnakeCase(str: string): string {
 }
 
 /** Recursively collect files matching a predicate. */
-async function findFiles(
-  dir: string,
-  filter: (filename: string) => boolean
-): Promise<string[]> {
+async function findFiles(dir: string, filter: (filename: string) => boolean): Promise<string[]> {
   if (!(await fse.pathExists(dir))) return [];
   const results: string[] = [];
 
@@ -71,10 +68,7 @@ async function findFiles(
  * with per-network named exports, e.g.:
  *   export const ARBITRUM_SEPOLIA_V2_VAULT = "0x..." as const;
  */
-async function syncAddresses(
-  protocolPath: string,
-  destRoot: string
-): Promise<void> {
+async function syncAddresses(protocolPath: string, destRoot: string): Promise<void> {
   const deploymentsDir = path.join(protocolPath, "deployments");
 
   if (!(await fse.pathExists(deploymentsDir))) {
@@ -82,9 +76,7 @@ async function syncAddresses(
     return;
   }
 
-  const deploymentFiles = (await fs.readdir(deploymentsDir)).filter((f) =>
-    f.endsWith(".json")
-  );
+  const deploymentFiles = (await fs.readdir(deploymentsDir)).filter((f) => f.endsWith(".json"));
 
   if (deploymentFiles.length === 0) {
     console.warn("  ⚠️  No deployment JSON files found.");
@@ -96,9 +88,7 @@ async function syncAddresses(
   for (const file of deploymentFiles.sort()) {
     const networkName = path.basename(file, ".json"); // e.g., "arbitrum-sepolia_v2"
     const prefix = toScreamingSnakeCase(networkName); // e.g., "ARBITRUM_SEPOLIA_V2"
-    const data: Record<string, unknown> = await fse.readJson(
-      path.join(deploymentsDir, file)
-    );
+    const data: Record<string, unknown> = await fse.readJson(path.join(deploymentsDir, file));
 
     const exports: string[] = [];
 
@@ -130,9 +120,7 @@ async function syncAddresses(
   }
 
   await fse.outputFile(path.join(destRoot, "addresses.ts"), lines.join("\n"));
-  console.log(
-    `  ✅ addresses.ts — ${deploymentFiles.length} network file(s) processed`
-  );
+  console.log(`  ✅ addresses.ts — ${deploymentFiles.length} network file(s) processed`);
 }
 
 // ---------------------------------------------------------------------------
@@ -146,10 +134,7 @@ async function syncAddresses(
  * Collision strategy: if two contracts share the same base name, the second
  * one is saved as {parentDirName}_{contractName}.json.
  */
-async function syncAbis(
-  protocolPath: string,
-  destRoot: string
-): Promise<void> {
+async function syncAbis(protocolPath: string, destRoot: string): Promise<void> {
   const artifactsDir = path.join(protocolPath, "artifacts", "contracts");
 
   if (!(await fse.pathExists(artifactsDir))) {
@@ -157,10 +142,7 @@ async function syncAbis(
     return;
   }
 
-  const jsonFiles = await findFiles(
-    artifactsDir,
-    (f) => f.endsWith(".json") && !f.endsWith(".dbg.json")
-  );
+  const jsonFiles = await findFiles(artifactsDir, (f) => f.endsWith(".json") && !f.endsWith(".dbg.json"));
 
   const destAbisDir = path.join(destRoot, "abis");
   await fse.ensureDir(destAbisDir);
@@ -189,17 +171,11 @@ async function syncAbis(
       const subDir = path.dirname(solDir); // .../core
       const prefix = path.basename(subDir); // "core"
       destName = `${prefix}_${contractName}`;
-      console.warn(
-        `  ⚠️  Name collision for "${contractName}" — saving as "${destName}.json"`
-      );
+      console.warn(`  ⚠️  Name collision for "${contractName}" — saving as "${destName}.json"`);
     }
     seen.set(contractName, srcFile);
 
-    await fse.outputJson(
-      path.join(destAbisDir, `${destName}.json`),
-      data.abi,
-      { spaces: 2 }
-    );
+    await fse.outputJson(path.join(destAbisDir, `${destName}.json`), data.abi, { spaces: 2 });
     count++;
   }
 
@@ -266,18 +242,14 @@ async function runTypechain(destRoot: string): Promise<void> {
 
 async function main(): Promise<void> {
   const protocolPath =
-    process.env.VANTAGE_PROTOCOL_PATH ||
-    process.argv[2] ||
-    path.resolve(process.cwd(), "..", "vantage-protocol");
+    process.env.VANTAGE_PROTOCOL_PATH || process.argv[2] || path.resolve(process.cwd(), "..", "bcellar-monorepo");
 
   console.log(`\n🔍 Source: ${protocolPath}`);
 
   if (!(await fse.pathExists(protocolPath))) {
-    console.error(`\n❌  vantage-protocol not found at:\n   ${protocolPath}`);
+    console.error(`\n❌  bcellar-monorepo not found at:\n   ${protocolPath}`);
     console.error("\n   Please check the path and try one of:");
-    console.error(
-      "   • VANTAGE_PROTOCOL_PATH=/path/to/repo pnpm sync"
-    );
+    console.error("   • VANTAGE_PROTOCOL_PATH=/path/to/repo pnpm sync");
     console.error("   • pnpm sync /path/to/repo");
     process.exit(1);
   }
@@ -297,9 +269,7 @@ async function main(): Promise<void> {
   await runTypechain(destRoot);
 
   console.log("\n🎉 Sync complete!");
-  console.log(
-    "   Run `pnpm sync:test` to validate, then `pnpm tscheck` for type safety."
-  );
+  console.log("   Run `pnpm sync:test` to validate, then `pnpm tscheck` for type safety.");
 }
 
 main().catch((err: Error) => {
