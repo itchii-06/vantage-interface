@@ -33,7 +33,9 @@
     "clean:ts": "rm -rf tsconfig.tsbuildinfo landing/tsconfig.tsbuildinfo",
     "prettier": "prettier --write src/**/*.{js,ts,jsx,tsx,css,scss} landing/**/*.{js,ts,jsx,tsx,css,scss}",
     "postinstall": "cd ./sdk && echo \"Building SDK\" && pnpm install && pnpm build",
-    "prebuild": "cd ./sdk && pnpm tsx scripts/prebuild"
+    "prebuild": "cd ./sdk && pnpm tsx scripts/prebuild",
+    "sync": "tsx scripts/sync-vantage.ts",
+    "sync:test": "tsx scripts/test-sync.ts"
   },
   "dependencies": {
     "@apollo/client": "3.5.6",
@@ -150,6 +152,7 @@
     "@lingui/cli": "4.10.0",
     "@lingui/loader": "4.10.0",
     "@lingui/vite-plugin": "4.11.3",
+    "@types/fs-extra": "^11.0.4",
     "@types/react-date-range": "1.4.9",
     "@typescript-eslint/eslint-plugin": "8.26.1",
     "@typescript-eslint/parser": "8.26.1",
@@ -167,6 +170,7 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-react-perf": "3.3.2",
+    "fs-extra": "^11.3.4",
     "happy-dom": "^20.0.0",
     "husky": "7.0.4",
     "lint-staged": "12.3.4",
