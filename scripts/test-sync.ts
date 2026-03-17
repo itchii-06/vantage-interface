@@ -135,29 +135,34 @@ async function main(): Promise<void> {
     console.log(`     → Vault ABI is importable (${vault.length} entries)`);
   });
 
-  // 7. types/ directory (optional — passes if typechain was not found)
-  await check("types/ directory exists (if typechain was synced)", async () => {
-    const typesDir = path.join(VANTAGE_DIR, "types");
+  // 7. types/ — Typechain output
+  const typesDir = path.join(VANTAGE_DIR, "types");
+
+  await check("types/ directory exists (Typechain output)", async () => {
     if (!(await fse.pathExists(typesDir))) {
-      console.log("     → types/ not present (typechain-types was not found in source)");
-      return; // non-fatal
+      throw new Error(
+        "types/ not found — have you run `pnpm sync` first?"
+      );
     }
+  });
 
-    async function countFiles(dir: string): Promise<number> {
-      let n = 0;
-      const entries = await fs.readdir(dir, { withFileTypes: true });
-      for (const entry of entries) {
-        if (entry.isDirectory()) {
-          n += await countFiles(path.join(dir, entry.name));
-        } else if (entry.name.endsWith(".ts")) {
-          n++;
-        }
-      }
-      return n;
+  await check("types/index.ts exists (Typechain barrel export)", async () => {
+    const indexPath = path.join(typesDir, "index.ts");
+    if (!(await fse.pathExists(indexPath))) {
+      throw new Error("index.ts not found — Typechain may not have generated any types");
     }
+    const content = await fse.readFile(indexPath, "utf8");
+    console.log(`     → ${content.split("\n").filter(Boolean).length} export line(s)`);
+  });
 
-    const count = await countFiles(typesDir);
-    console.log(`     → ${count} TypeScript file(s) in types/`);
+  await check("types/factories/ directory exists (Typechain factories)", async () => {
+    const factoriesDir = path.join(typesDir, "factories");
+    if (!(await fse.pathExists(factoriesDir))) {
+      throw new Error("factories/ not found inside types/");
+    }
+    const files = (await fs.readdir(factoriesDir)).filter((f) => f.endsWith(".ts"));
+    if (files.length === 0) throw new Error("No factory files found");
+    console.log(`     → ${files.length} factory file(s): ${files.join(", ")}`);
   });
 
   // ---------------------------------------------------------------------------
