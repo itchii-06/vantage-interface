@@ -3,20 +3,20 @@ set -e
 . "$(dirname "$0")/_/husky.sh"
 
 # Step 1: Start independent tasks in parallel
-yarn lingui:generate &
+pnpm lingui:generate &
 LINGUI_PID=$!
 
-yarn build-sdk &
+pnpm build-sdk &
 BUILD_PID=$!
 
 # Step 2: Wait for build-sdk — lint-staged and tscheck depend on it
 wait $BUILD_PID
 
 # Step 3: Start dependent tasks in parallel
-yarn tscheck &
+pnpm tscheck &
 TSCHECK_PID=$!
 
-yarn lint-staged &
+pnpm lint-staged &
 LINT_PID=$!
 
 # Step 4: Wait for all remaining tasks

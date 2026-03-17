@@ -295,12 +295,12 @@
     }
   },
   "scripts": {
-    "prebuild": "yarn tsx scripts/prebuild",
+    "prebuild": "pnpm tsx scripts/prebuild",
     "prepare": "ts-patch install -s",
     "test": "vitest",
     "test:ci": "vitest run",
     "test:multicall": "vitest run --config vitest.multicall.config.ts",
-    "build": "rm -rf build && yarn build:types && yarn build:cjs && yarn build:esm && yarn clean",
+    "build": "rm -rf build && pnpm build:types && pnpm build:cjs && pnpm build:esm && pnpm clean",
     "build:cjs": "tsc -p tsconfig.cjs.json && echo '{\"type\": \"commonjs\"}' > build/cjs/src/package.json",
     "build:esm": "tsc -p tsconfig.esm.json && echo '{\"type\": \"module\"}' > build/esm/src/package.json",
     "build:types": "tsc -p tsconfig.json --emitDeclarationOnly",
@@ -352,9 +352,14 @@
   "files": [
     "build"
   ],
-  "packageManager": "yarn@4.12.0",
-  "resolutions": {
-    "viem@2.39.0": "patch:viem@npm:2.39.0#../.yarn/patches/viem-npm-2.39.0-c113f391fd",
-    "lodash": "4.17.23"
+  "packageManager": "pnpm@10.32.1",
+  "pnpm": {
+    "overrides": {
+      "lodash": "4.17.23",
+      "viem": "2.39.0"
+    },
+    "patchedDependencies": {
+      "viem@2.39.0": "patches/viem@2.39.0.patch"
+    }
   }
 }

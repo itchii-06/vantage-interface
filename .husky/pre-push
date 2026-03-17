@@ -1,10 +1,10 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn test:ci &
+pnpm test:ci &
 PID1=$!
 
-cd sdk && yarn test:ci &
+cd sdk && pnpm test:ci &
 PID2=$!
 
 wait $PID1

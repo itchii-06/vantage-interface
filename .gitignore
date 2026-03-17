@@ -43,6 +43,8 @@ package-lock.json
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+yarn.lock.bak
+.yarnrc.yml.bak
 /.idea/
 
 .cursor/

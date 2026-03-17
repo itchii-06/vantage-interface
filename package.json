@@ -5,35 +5,35 @@
   "type": "module",
   "scripts": {
     "start": "VITE_APP_VERSION=$(git rev-parse HEAD) vite --port 3010 --host",
-    "start-home": "yarn lingui:prepare && VITE_APP_VERSION=$(git rev-parse HEAD) env-cmd -e development-home vite --port 3010 --config vite.landing.config.ts",
-    "start-app": "yarn lingui:prepare && VITE_APP_VERSION=$(git rev-parse HEAD) env-cmd -e development-app vite --port 3011",
+    "start-home": "pnpm lingui:prepare && VITE_APP_VERSION=$(git rev-parse HEAD) env-cmd -e development-home vite --port 3010 --config vite.landing.config.ts",
+    "start-app": "pnpm lingui:prepare && VITE_APP_VERSION=$(git rev-parse HEAD) env-cmd -e development-app vite --port 3011",
     "build": "VITE_APP_VERSION=$(git rev-parse HEAD) vite build",
     "build:analyze": "VITE_APP_VERSION=$(git rev-parse HEAD) vite build --mode analyze",
     "build-home": "VITE_APP_VERSION=$(git rev-parse HEAD) env-cmd -e production-home vite build --config vite.landing.config.ts",
     "build-home:analyze": "VITE_APP_VERSION=$(git rev-parse HEAD) env-cmd -e production-home vite build --config vite.landing.config.ts --mode analyze",
     "build-app": "VITE_APP_VERSION=$(git rev-parse HEAD) env-cmd -e production-app vite build",
-    "build-sdk": "cd ./sdk && yarn build",
+    "build-sdk": "cd ./sdk && pnpm build",
     "test": "vitest",
     "test:ci": "vitest run",
     "lint": "node node_modules/.bin/eslint src landing --fix --cache --cache-location .eslintcache",
     "lint:ci": "node node_modules/.bin/eslint src landing --max-warnings=0",
-    "pre-commit": "yarn run lint",
+    "pre-commit": "pnpm run lint",
     "pre-push": "vitest run",
-    "prepare": "husky install && yarn lingui:prepare",
+    "prepare": "husky install && pnpm lingui:prepare",
     "extract": "NODE_ENV=development lingui extract --clean",
     "compile": "lingui compile",
-    "lingui:prepare": "NODE_ENV=development yarn extract && yarn compile",
+    "lingui:prepare": "NODE_ENV=development pnpm extract && pnpm compile",
     "lingui:generate": "NODE_ENV=development lingui extract --overwrite",
     "tscheck": "tsc -p tsconfig.json --noEmit --incremental && tsc -p landing/tsconfig.json --noEmit --incremental",
     "tscheck:ci": "tsc -p tsconfig.json --noEmit && tsc -p landing/tsconfig.json --noEmit",
     "tscheck:watch": "tsc -p tsconfig.json --noEmit --incremental --watch",
     "tscheck:watch:landing": "tsc -p landing/tsconfig.json --noEmit --incremental --watch",
-    "clean:cache": "yarn clean:lint && yarn clean:ts",
+    "clean:cache": "pnpm clean:lint && pnpm clean:ts",
     "clean:lint": "rm -rf .eslintcache",
     "clean:ts": "rm -rf tsconfig.tsbuildinfo landing/tsconfig.tsbuildinfo",
     "prettier": "prettier --write src/**/*.{js,ts,jsx,tsx,css,scss} landing/**/*.{js,ts,jsx,tsx,css,scss}",
-    "postinstall": "cd ./sdk && echo \"Building SDK\" && yarn && yarn build",
-    "prebuild": "cd ./sdk && yarn tsx scripts/prebuild"
+    "postinstall": "cd ./sdk && echo \"Building SDK\" && pnpm install && pnpm build",
+    "prebuild": "cd ./sdk && pnpm tsx scripts/prebuild"
   },
   "dependencies": {
     "@apollo/client": "3.5.6",
@@ -109,14 +109,18 @@
     "web-vitals": "1.1.2",
     "worker-loader": "3.0.8"
   },
-  "resolutions": {
-    "react-error-overlay": "6.0.9",
-    "@coinbase/wallet-sdk": "4.3.0",
-    "ethers@6.12.1": "patch:ethers@npm:6.12.1#.yarn/patches/ethers-npm-6.12.1-7d4a09a25c",
-    "jest-runner": "patch:jest-runner@npm:27.5.1#.yarn/patches/jest-runner-npm-27.5.1-2ed2c1cda8",
-    "viem@2.39.0": "patch:viem@npm:2.39.0#.yarn/patches/viem-npm-2.39.0-c113f391fd",
-    "date-fns": "4.1.0",
-    "lodash": "4.17.23"
+  "pnpm": {
+    "overrides": {
+      "react-error-overlay": "6.0.9",
+      "@coinbase/wallet-sdk": "4.3.0",
+      "date-fns": "4.1.0",
+      "lodash": "4.17.23"
+    },
+    "patchedDependencies": {
+      "viem@2.39.0": "patches/viem@2.39.0.patch",
+      "ethers@6.12.1": "patches/ethers@6.12.1.patch",
+      "@davatar/react@1.8.1": "patches/@davatar+react@1.8.1.patch"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -199,5 +203,5 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "pnpm@10.32.1"
 }
