@@ -1,4 +1,21 @@
 import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, SOURCE_ETHEREUM_MAINNET } from "./chains";
+
+// ---------------------------------------------------------------------------
+// Vantage Subgraph endpoints (placeholder — fill in once subgraph is deployed)
+// ---------------------------------------------------------------------------
+const LOCALHOST = 31337;
+
+export const VANTAGE_SUBGRAPH_URLS: Record<number, string> = {
+  [ARBITRUM]: "", // TBD: Vantage Arbitrum subgraph
+  [ARBITRUM_SEPOLIA]: "", // TBD: Vantage Arbitrum Sepolia subgraph
+  [LOCALHOST]: "", // TBD: local Graph Node (e.g. http://localhost:8000/subgraphs/name/vantage)
+};
+
+/** Returns the Vantage subgraph URL for a given chainId, or undefined if not configured. */
+export function getVantageSubgraphUrl(chainId: number): string | undefined {
+  const url = VANTAGE_SUBGRAPH_URLS[chainId];
+  return url || undefined;
+}
 import { isDevelopment } from "./env";
 import { getIndexerUrlKey } from "./localStorage";
 
