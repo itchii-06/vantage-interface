@@ -46,6 +46,16 @@ import {
   ARBITRUM_VAULT_READER,
   ARBITRUM_YIELD_ACCUMULATOR,
   ARBITRUM_YIELD_AWARE_PRICE_FEED,
+  LOCALHOST_ASSET_REGISTRY,
+  LOCALHOST_LP_MANAGER,
+  LOCALHOST_LP_TOKEN,
+  LOCALHOST_MULTI_ORACLE_MIDDLEWARE,
+  LOCALHOST_ORDER_BOOK,
+  LOCALHOST_POSITION_ROUTER,
+  LOCALHOST_ROUTER,
+  LOCALHOST_SHARED_PAYOUT_HUB,
+  LOCALHOST_VAULT,
+  LOCALHOST_YIELD_ACCUMULATOR,
 } from "./addresses";
 
 // ---------------------------------------------------------------------------
@@ -73,6 +83,11 @@ export type VantageContractName =
 
 type VantageAddressMap = Record<VantageContractName, string>;
 
+// Hardhat local node (chainId 31337). Contracts not deployed locally use zero address.
+const LOCALHOST = 31337;
+
+const ZERO = "0x0000000000000000000000000000000000000000";
+
 const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
   [ARBITRUM]: {
     AssetRegistry: ARBITRUM_ASSET_REGISTRY,
@@ -92,6 +107,25 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     VaultReader: ARBITRUM_VAULT_READER,
     YieldAccumulator: ARBITRUM_YIELD_ACCUMULATOR,
     YieldAwarePriceFeed: ARBITRUM_YIELD_AWARE_PRICE_FEED,
+  },
+  [LOCALHOST]: {
+    AssetRegistry: LOCALHOST_ASSET_REGISTRY,
+    ChainlinkAdapter: ZERO,
+    ComplianceRegistry: ZERO,
+    LPManager: LOCALHOST_LP_MANAGER,
+    LPToken: LOCALHOST_LP_TOKEN,
+    ManualAdapter: ZERO,
+    MultiOracleMiddleware: LOCALHOST_MULTI_ORACLE_MIDDLEWARE,
+    OrderBook: LOCALHOST_ORDER_BOOK,
+    PositionRouter: LOCALHOST_POSITION_ROUTER,
+    Router: LOCALHOST_ROUTER,
+    SharedPayoutHub: LOCALHOST_SHARED_PAYOUT_HUB,
+    UniversalPriceLogic: ZERO,
+    Vault: LOCALHOST_VAULT,
+    VaultFactory: ZERO,
+    VaultReader: ZERO,
+    YieldAccumulator: LOCALHOST_YIELD_ACCUMULATOR,
+    YieldAwarePriceFeed: ZERO,
   },
   [ARBITRUM_SEPOLIA]: {
     AssetRegistry: ARBITRUM_SEPOLIA_ASSET_REGISTRY,

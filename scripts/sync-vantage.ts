@@ -28,11 +28,14 @@ const AUTO_GENERATED_HEADER = `\
 // Helpers
 // ---------------------------------------------------------------------------
 
-/** Convert a string like "arbitrum-sepolia_v2" → "ARBITRUM_SEPOLIA_V2" */
+/** Convert a string like "arbitrum-sepolia_v2" → "ARBITRUM_SEPOLIA_V2"
+ *  Also handles acronym prefixes: "LPToken" → "LP_TOKEN", "NFTVault" → "NFT_VAULT"
+ */
 function toScreamingSnakeCase(str: string): string {
   return str
     .replace(/[-./]/g, "_")
-    .replace(/([a-z])([A-Z])/g, "$1_$2")
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1_$2") // LPToken → LP_Token
+    .replace(/([a-z])([A-Z])/g, "$1_$2") // yieldAccumulator → yield_Accumulator
     .toUpperCase()
     .replace(/_+/g, "_")
     .replace(/^_|_$/g, "");
@@ -83,11 +86,13 @@ async function syncAddresses(protocolPath: string, destRoot: string): Promise<vo
     return;
   }
 
-  const lines: string[] = [AUTO_GENERATED_HEADER];
+  // Build new blocks for the networks present in this deployment
+  const newNetworkNames = new Set(deploymentFiles.map((f) => path.basename(f, ".json")));
+  const newBlocks: string[] = [];
 
   for (const file of deploymentFiles.sort()) {
-    const networkName = path.basename(file, ".json"); // e.g., "arbitrum-sepolia_v2"
-    const prefix = toScreamingSnakeCase(networkName); // e.g., "ARBITRUM_SEPOLIA_V2"
+    const networkName = path.basename(file, ".json"); // e.g., "localhost"
+    const prefix = toScreamingSnakeCase(networkName); // e.g., "LOCALHOST"
     const data: Record<string, unknown> = await fse.readJson(path.join(deploymentsDir, file));
 
     const exports: string[] = [];
@@ -113,14 +118,28 @@ async function syncAddresses(protocolPath: string, destRoot: string): Promise<vo
     }
 
     if (exports.length > 0) {
-      lines.push(`// Network: ${networkName}`);
-      lines.push(...exports);
-      lines.push("");
+      newBlocks.push(`// Network: ${networkName}\n${exports.join("\n")}\n`);
     }
   }
 
-  await fse.outputFile(path.join(destRoot, "addresses.ts"), lines.join("\n"));
-  console.log(`  ✅ addresses.ts — ${deploymentFiles.length} network file(s) processed`);
+  // Preserve existing sections for networks NOT in this deployment (e.g., keep
+  // ARBITRUM_* entries when syncing only localhost, and vice-versa).
+  const destFile = path.join(destRoot, "addresses.ts");
+  let preserved = "";
+  if (await fse.pathExists(destFile)) {
+    const raw = await fs.readFile(destFile, "utf-8");
+    // Split on each "// Network:" boundary, keeping the delimiter
+    const sections = raw.split(/(?=^\/\/ Network: )/m).filter(Boolean);
+    const kept = sections.filter((section) => {
+      const match = section.match(/^\/\/ Network: (\S+)/);
+      return match ? !newNetworkNames.has(match[1]) : false;
+    });
+    preserved = kept.join("");
+  }
+
+  const content = AUTO_GENERATED_HEADER + preserved + newBlocks.join("\n");
+  await fse.outputFile(destFile, content);
+  console.log(`  ✅ addresses.ts — ${deploymentFiles.length} network file(s) merged`);
 }
 
 // ---------------------------------------------------------------------------
@@ -276,8 +295,11 @@ async function main(): Promise<void> {
 
   const destRoot = path.resolve(process.cwd(), "src", "vantage");
 
-  console.log(`🗑  Cleaning ${path.relative(process.cwd(), destRoot)}/...`);
-  await fse.emptyDir(destRoot);
+  // Clean only auto-generated sub-directories (abis/ and types/).
+  // Manually-maintained files like contracts.ts are preserved.
+  console.log(`🗑  Cleaning ${path.relative(process.cwd(), destRoot)}/abis and /types...`);
+  await fse.emptyDir(path.join(destRoot, "abis"));
+  await fse.emptyDir(path.join(destRoot, "types"));
 
   console.log("\n📦 Syncing addresses...");
   await syncAddresses(protocolPath, destRoot);
