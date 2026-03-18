@@ -44,6 +44,64 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Vantage Contract Sync
+
+Contract addresses, ABIs, and TypeScript types are managed by the sync script.
+
+### `pnpm sync`
+
+Syncs contract artifacts from a local `bcellar-monorepo` repository.
+
+```bash
+# Uses ../bcellar-monorepo by default
+pnpm sync
+
+# Explicit path
+pnpm sync /path/to/bcellar-monorepo
+
+# Via environment variable
+VANTAGE_PROTOCOL_PATH=/path/to/bcellar-monorepo pnpm sync
+```
+
+What it does:
+
+1. **Addresses** — reads all `deployments/*.json` files and generates `src/vantage/addresses.ts`.
+   Existing network sections not present in the source repo are preserved (merge, not overwrite).
+2. **ABIs** — copies and flattens ABI JSON from `artifacts/contracts/**` into `src/vantage/abis/`.
+3. **Types** — runs Typechain (`ethers-v6` target) to generate typed contract interfaces into `src/vantage/types/`.
+
+> `src/vantage/contracts.ts` is **not** overwritten by sync — it is manually maintained.
+
+### Local development with Hardhat (chainId 31337)
+
+1. Deploy contracts in `bcellar-monorepo`:
+
+   ```bash
+   cd /path/to/bcellar-monorepo
+   npx hardhat node          # start local node
+   npx hardhat run scripts/deploy.ts --network localhost
+   # → writes deployments/localhost.json
+   ```
+
+2. Run sync to pull addresses into the frontend:
+
+   ```bash
+   pnpm sync /path/to/bcellar-monorepo
+   ```
+
+3. Use the hooks with chainId `31337`:
+
+   ```ts
+   import { useVault } from "hooks/useVantageContracts";
+
+   const vault = useVault(undefined, 31337);
+   const price = await vault.getMaxPrice(tokenAddress); // typed ✅
+   ```
+
+Contracts not present in `localhost.json` (e.g. `ChainlinkAdapter`, `VaultFactory`) use a zero address placeholder and will throw a `[useVantageContracts] Address ... is not configured` error if accessed.
+
+---
+
 ## Project structure
 
 - `App/` - React App root component, contains global providers and routing configuration
