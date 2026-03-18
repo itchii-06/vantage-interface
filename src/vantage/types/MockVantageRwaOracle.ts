@@ -21,13 +21,27 @@ import type {
 } from "./common";
 
 export interface MockVantageRwaOracleInterface extends Interface {
-  getFunction(nameOrSignature: "priceForDate" | "setPriceForDate"): FunctionFragment;
+  getFunction(
+    nameOrSignature: "priceForDate" | "setPriceForDate"
+  ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "priceForDate", values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: "setPriceForDate", values: [BigNumberish, BigNumberish, boolean]): string;
+  encodeFunctionData(
+    functionFragment: "priceForDate",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPriceForDate",
+    values: [BigNumberish, BigNumberish, boolean]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "priceForDate", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setPriceForDate", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "priceForDate",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setPriceForDate",
+    data: BytesLike
+  ): Result;
 }
 
 export interface MockVantageRwaOracle extends BaseContract {
@@ -47,21 +61,31 @@ export interface MockVantageRwaOracle extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(
+    event: TCEvent
+  ): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(
+    event?: TCEvent
+  ): Promise<this>;
 
   priceForDate: TypedContractMethod<
     [date: BigNumberish],
@@ -70,7 +94,7 @@ export interface MockVantageRwaOracle extends BaseContract {
         price: bigint;
         timestamp: bigint;
         confirmed: boolean;
-      },
+      }
     ],
     "view"
   >;
@@ -81,22 +105,30 @@ export interface MockVantageRwaOracle extends BaseContract {
     "nonpayable"
   >;
 
-  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+  getFunction<T extends ContractMethod = ContractMethod>(
+    key: string | FunctionFragment
+  ): T;
 
-  getFunction(nameOrSignature: "priceForDate"): TypedContractMethod<
+  getFunction(
+    nameOrSignature: "priceForDate"
+  ): TypedContractMethod<
     [date: BigNumberish],
     [
       [bigint, bigint, boolean] & {
         price: bigint;
         timestamp: bigint;
         confirmed: boolean;
-      },
+      }
     ],
     "view"
   >;
   getFunction(
     nameOrSignature: "setPriceForDate"
-  ): TypedContractMethod<[date: BigNumberish, price: BigNumberish, confirmed: boolean], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [date: BigNumberish, price: BigNumberish, confirmed: boolean],
+    [void],
+    "nonpayable"
+  >;
 
   filters: {};
 }

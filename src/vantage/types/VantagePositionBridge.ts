@@ -42,39 +42,110 @@ export interface VantagePositionBridgeInterface extends Interface {
   ): FunctionFragment;
 
   getEvent(
-    nameOrSignatureOrTopic: "PositionClosed" | "PositionOpened" | "RoleAdminChanged" | "RoleGranted" | "RoleRevoked"
+    nameOrSignatureOrTopic:
+      | "PositionClosed"
+      | "PositionOpened"
+      | "RoleAdminChanged"
+      | "RoleGranted"
+      | "RoleRevoked"
   ): EventFragment;
 
-  encodeFunctionData(functionFragment: "DEFAULT_ADMIN_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "GOVERNOR_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "ORDER_BOOK_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "getRoleAdmin", values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: "grantRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "handlePositionClose", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GOVERNOR_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "ORDER_BOOK_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "handlePositionClose",
+    values: [BytesLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "handlePositionOpen",
     values: [BytesLike, AddressLike, BigNumberish, AddressLike, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "hasRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "positionController", values?: undefined): string;
-  encodeFunctionData(functionFragment: "renounceRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "revokeRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "setOrderBook", values: [AddressLike, boolean]): string;
-  encodeFunctionData(functionFragment: "supportsInterface", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "positionController",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setOrderBook",
+    values: [AddressLike, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [BytesLike]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "DEFAULT_ADMIN_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "GOVERNOR_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "ORDER_BOOK_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getRoleAdmin", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GOVERNOR_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "ORDER_BOOK_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "handlePositionClose", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "handlePositionOpen", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "handlePositionClose",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "handlePositionOpen",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "positionController", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "renounceRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "positionController",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setOrderBook", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setOrderBook",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
 }
 
 export namespace PositionClosedEvent {
@@ -104,8 +175,16 @@ export namespace PositionOpenedEvent {
 }
 
 export namespace RoleAdminChangedEvent {
-  export type InputTuple = [role: BytesLike, previousAdminRole: BytesLike, newAdminRole: BytesLike];
-  export type OutputTuple = [role: string, previousAdminRole: string, newAdminRole: string];
+  export type InputTuple = [
+    role: BytesLike,
+    previousAdminRole: BytesLike,
+    newAdminRole: BytesLike
+  ];
+  export type OutputTuple = [
+    role: string,
+    previousAdminRole: string,
+    newAdminRole: string
+  ];
   export interface OutputObject {
     role: string;
     previousAdminRole: string;
@@ -118,7 +197,11 @@ export namespace RoleAdminChangedEvent {
 }
 
 export namespace RoleGrantedEvent {
-  export type InputTuple = [role: BytesLike, account: AddressLike, sender: AddressLike];
+  export type InputTuple = [
+    role: BytesLike,
+    account: AddressLike,
+    sender: AddressLike
+  ];
   export type OutputTuple = [role: string, account: string, sender: string];
   export interface OutputObject {
     role: string;
@@ -132,7 +215,11 @@ export namespace RoleGrantedEvent {
 }
 
 export namespace RoleRevokedEvent {
-  export type InputTuple = [role: BytesLike, account: AddressLike, sender: AddressLike];
+  export type InputTuple = [
+    role: BytesLike,
+    account: AddressLike,
+    sender: AddressLike
+  ];
   export type OutputTuple = [role: string, account: string, sender: string];
   export interface OutputObject {
     role: string;
@@ -162,21 +249,31 @@ export interface VantagePositionBridge extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(
+    event: TCEvent
+  ): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(
+    event?: TCEvent
+  ): Promise<this>;
 
   DEFAULT_ADMIN_ROLE: TypedContractMethod<[], [string], "view">;
 
@@ -186,9 +283,17 @@ export interface VantagePositionBridge extends BaseContract {
 
   getRoleAdmin: TypedContractMethod<[role: BytesLike], [string], "view">;
 
-  grantRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  grantRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
-  handlePositionClose: TypedContractMethod<[positionKey: BytesLike], [void], "nonpayable">;
+  handlePositionClose: TypedContractMethod<
+    [positionKey: BytesLike],
+    [void],
+    "nonpayable"
+  >;
 
   handlePositionOpen: TypedContractMethod<
     [
@@ -196,33 +301,67 @@ export interface VantagePositionBridge extends BaseContract {
       nftContract: AddressLike,
       tokenId: BigNumberish,
       shop: AddressLike,
-      shopLockedUsdc: BigNumberish,
+      shopLockedUsdc: BigNumberish
     ],
     [void],
     "nonpayable"
   >;
 
-  hasRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [boolean], "view">;
+  hasRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [boolean],
+    "view"
+  >;
 
   positionController: TypedContractMethod<[], [string], "view">;
 
-  renounceRole: TypedContractMethod<[role: BytesLike, callerConfirmation: AddressLike], [void], "nonpayable">;
+  renounceRole: TypedContractMethod<
+    [role: BytesLike, callerConfirmation: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
-  revokeRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  revokeRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
-  setOrderBook: TypedContractMethod<[orderBook: AddressLike, enabled: boolean], [void], "nonpayable">;
+  setOrderBook: TypedContractMethod<
+    [orderBook: AddressLike, enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
 
-  supportsInterface: TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
+  supportsInterface: TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
 
-  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+  getFunction<T extends ContractMethod = ContractMethod>(
+    key: string | FunctionFragment
+  ): T;
 
-  getFunction(nameOrSignature: "DEFAULT_ADMIN_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "GOVERNOR_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "ORDER_BOOK_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "getRoleAdmin"): TypedContractMethod<[role: BytesLike], [string], "view">;
+  getFunction(
+    nameOrSignature: "DEFAULT_ADMIN_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "GOVERNOR_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "ORDER_BOOK_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "getRoleAdmin"
+  ): TypedContractMethod<[role: BytesLike], [string], "view">;
   getFunction(
     nameOrSignature: "grantRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "handlePositionClose"
   ): TypedContractMethod<[positionKey: BytesLike], [void], "nonpayable">;
@@ -234,25 +373,45 @@ export interface VantagePositionBridge extends BaseContract {
       nftContract: AddressLike,
       tokenId: BigNumberish,
       shop: AddressLike,
-      shopLockedUsdc: BigNumberish,
+      shopLockedUsdc: BigNumberish
     ],
     [void],
     "nonpayable"
   >;
   getFunction(
     nameOrSignature: "hasRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [boolean], "view">;
-  getFunction(nameOrSignature: "positionController"): TypedContractMethod<[], [string], "view">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [boolean],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "positionController"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "renounceRole"
-  ): TypedContractMethod<[role: BytesLike, callerConfirmation: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [role: BytesLike, callerConfirmation: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "revokeRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "setOrderBook"
-  ): TypedContractMethod<[orderBook: AddressLike, enabled: boolean], [void], "nonpayable">;
-  getFunction(nameOrSignature: "supportsInterface"): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
+  ): TypedContractMethod<
+    [orderBook: AddressLike, enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "supportsInterface"
+  ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
 
   getEvent(
     key: "PositionClosed"
@@ -277,10 +436,18 @@ export interface VantagePositionBridge extends BaseContract {
   >;
   getEvent(
     key: "RoleGranted"
-  ): TypedContractEvent<RoleGrantedEvent.InputTuple, RoleGrantedEvent.OutputTuple, RoleGrantedEvent.OutputObject>;
+  ): TypedContractEvent<
+    RoleGrantedEvent.InputTuple,
+    RoleGrantedEvent.OutputTuple,
+    RoleGrantedEvent.OutputObject
+  >;
   getEvent(
     key: "RoleRevoked"
-  ): TypedContractEvent<RoleRevokedEvent.InputTuple, RoleRevokedEvent.OutputTuple, RoleRevokedEvent.OutputObject>;
+  ): TypedContractEvent<
+    RoleRevokedEvent.InputTuple,
+    RoleRevokedEvent.OutputTuple,
+    RoleRevokedEvent.OutputObject
+  >;
 
   filters: {
     "PositionClosed(bytes32,address)": TypedContractEvent<

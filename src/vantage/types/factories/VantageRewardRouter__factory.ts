@@ -3,7 +3,10 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { VantageRewardRouter, VantageRewardRouterInterface } from "../VantageRewardRouter";
+import type {
+  VantageRewardRouter,
+  VantageRewardRouterInterface,
+} from "../VantageRewardRouter";
 
 const _abi = [
   {
@@ -420,7 +423,14 @@ export class VantageRewardRouter__factory {
   static createInterface(): VantageRewardRouterInterface {
     return new Interface(_abi) as VantageRewardRouterInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): VantageRewardRouter {
-    return new Contract(address, _abi, runner) as unknown as VantageRewardRouter;
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): VantageRewardRouter {
+    return new Contract(
+      address,
+      _abi,
+      runner
+    ) as unknown as VantageRewardRouter;
   }
 }

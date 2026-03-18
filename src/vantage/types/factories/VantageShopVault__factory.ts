@@ -3,7 +3,10 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { VantageShopVault, VantageShopVaultInterface } from "../VantageShopVault";
+import type {
+  VantageShopVault,
+  VantageShopVaultInterface,
+} from "../VantageShopVault";
 
 const _abi = [
   {
@@ -885,7 +888,10 @@ export class VantageShopVault__factory {
   static createInterface(): VantageShopVaultInterface {
     return new Interface(_abi) as VantageShopVaultInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): VantageShopVault {
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): VantageShopVault {
     return new Contract(address, _abi, runner) as unknown as VantageShopVault;
   }
 }

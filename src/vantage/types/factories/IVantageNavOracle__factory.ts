@@ -3,7 +3,10 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { IVantageNavOracle, IVantageNavOracleInterface } from "../IVantageNavOracle";
+import type {
+  IVantageNavOracle,
+  IVantageNavOracleInterface,
+} from "../IVantageNavOracle";
 
 const _abi = [
   {
@@ -37,7 +40,10 @@ export class IVantageNavOracle__factory {
   static createInterface(): IVantageNavOracleInterface {
     return new Interface(_abi) as IVantageNavOracleInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): IVantageNavOracle {
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): IVantageNavOracle {
     return new Contract(address, _abi, runner) as unknown as IVantageNavOracle;
   }
 }

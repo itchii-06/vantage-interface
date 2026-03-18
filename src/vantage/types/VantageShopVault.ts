@@ -79,79 +79,262 @@ export interface VantageShopVaultInterface extends Interface {
       | "UsdcWithdrawn"
   ): EventFragment;
 
-  encodeFunctionData(functionFragment: "ACC_PRECISION", values?: undefined): string;
-  encodeFunctionData(functionFragment: "BACKEND_SIGNER_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "COLLATERAL_MANAGER_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "DEFAULT_ADMIN_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "GOVERNOR_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "REWARD_ROUTER_ROLE", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "ACC_PRECISION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "BACKEND_SIGNER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "COLLATERAL_MANAGER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GOVERNOR_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "REWARD_ROUTER_ROLE",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "SHOP_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "accRewardPerValue", values?: undefined): string;
-  encodeFunctionData(functionFragment: "allocateReward", values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: "checkCollateralRatio", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "claimReward", values?: undefined): string;
-  encodeFunctionData(functionFragment: "getCollateralRatioBps", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "getPoolValue", values?: undefined): string;
-  encodeFunctionData(functionFragment: "getRoleAdmin", values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: "grantRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "hasRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "lockShopCollateral", values: [AddressLike, BigNumberish]): string;
-  encodeFunctionData(functionFragment: "minCollateralRatioBps", values?: undefined): string;
-  encodeFunctionData(functionFragment: "pendingRewards", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "renounceRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "revokeRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "rewardDebt", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "rewardToken", values?: undefined): string;
-  encodeFunctionData(functionFragment: "setCollateralRatioThreshold", values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: "shopCollateralLocked", values: [AddressLike]): string;
+  encodeFunctionData(
+    functionFragment: "accRewardPerValue",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "allocateReward",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkCollateralRatio",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimReward",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getCollateralRatioBps",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPoolValue",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lockShopCollateral",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "minCollateralRatioBps",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "pendingRewards",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardDebt",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCollateralRatioThreshold",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "shopCollateralLocked",
+    values: [AddressLike]
+  ): string;
   encodeFunctionData(functionFragment: "shopCount", values?: undefined): string;
-  encodeFunctionData(functionFragment: "shopInventoryNav", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "shopStakedUsdc", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "stakeUsdc", values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: "supportsInterface", values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: "totalInventoryNav", values?: undefined): string;
-  encodeFunctionData(functionFragment: "totalStakedUsdc", values?: undefined): string;
-  encodeFunctionData(functionFragment: "unlockShopCollateral", values: [AddressLike, BigNumberish]): string;
-  encodeFunctionData(functionFragment: "updateShopInventoryNav", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "shopInventoryNav",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "shopStakedUsdc",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "stakeUsdc",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalInventoryNav",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalStakedUsdc",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "unlockShopCollateral",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateShopInventoryNav",
+    values: [AddressLike, BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "usdc", values?: undefined): string;
-  encodeFunctionData(functionFragment: "withdrawUsdc", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "withdrawUsdc",
+    values: [BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "ACC_PRECISION", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "BACKEND_SIGNER_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "COLLATERAL_MANAGER_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "DEFAULT_ADMIN_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "GOVERNOR_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "REWARD_ROUTER_ROLE", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "ACC_PRECISION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "BACKEND_SIGNER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "COLLATERAL_MANAGER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GOVERNOR_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "REWARD_ROUTER_ROLE",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "SHOP_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "accRewardPerValue", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "allocateReward", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "checkCollateralRatio", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "claimReward", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getCollateralRatioBps", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getPoolValue", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getRoleAdmin", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "accRewardPerValue",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "allocateReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkCollateralRatio",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "claimReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getCollateralRatioBps",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getPoolValue",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "lockShopCollateral", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "minCollateralRatioBps", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "pendingRewards", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "renounceRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "lockShopCollateral",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "minCollateralRatioBps",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "rewardDebt", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "rewardToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setCollateralRatioThreshold", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "shopCollateralLocked", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCollateralRatioThreshold",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "shopCollateralLocked",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "shopCount", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "shopInventoryNav", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "shopStakedUsdc", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "shopInventoryNav",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "shopStakedUsdc",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "stakeUsdc", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "totalInventoryNav", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "totalStakedUsdc", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "unlockShopCollateral", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "updateShopInventoryNav", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalInventoryNav",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalStakedUsdc",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "unlockShopCollateral",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateShopInventoryNav",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "usdc", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdrawUsdc", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawUsdc",
+    data: BytesLike
+  ): Result;
 }
 
 export namespace CollateralRatioAlertEvent {
@@ -160,14 +343,14 @@ export namespace CollateralRatioAlertEvent {
     stakedUsdc: BigNumberish,
     inventoryNav: BigNumberish,
     ratioBps: BigNumberish,
-    thresholdBps: BigNumberish,
+    thresholdBps: BigNumberish
   ];
   export type OutputTuple = [
     shop: string,
     stakedUsdc: bigint,
     inventoryNav: bigint,
     ratioBps: bigint,
-    thresholdBps: bigint,
+    thresholdBps: bigint
   ];
   export interface OutputObject {
     shop: string;
@@ -195,7 +378,11 @@ export namespace CollateralRatioThresholdUpdatedEvent {
 }
 
 export namespace InventoryNavUpdatedEvent {
-  export type InputTuple = [shop: AddressLike, oldNav: BigNumberish, newNav: BigNumberish];
+  export type InputTuple = [
+    shop: AddressLike,
+    oldNav: BigNumberish,
+    newNav: BigNumberish
+  ];
   export type OutputTuple = [shop: string, oldNav: bigint, newNav: bigint];
   export interface OutputObject {
     shop: string;
@@ -222,8 +409,16 @@ export namespace RewardClaimedEvent {
 }
 
 export namespace RoleAdminChangedEvent {
-  export type InputTuple = [role: BytesLike, previousAdminRole: BytesLike, newAdminRole: BytesLike];
-  export type OutputTuple = [role: string, previousAdminRole: string, newAdminRole: string];
+  export type InputTuple = [
+    role: BytesLike,
+    previousAdminRole: BytesLike,
+    newAdminRole: BytesLike
+  ];
+  export type OutputTuple = [
+    role: string,
+    previousAdminRole: string,
+    newAdminRole: string
+  ];
   export interface OutputObject {
     role: string;
     previousAdminRole: string;
@@ -236,7 +431,11 @@ export namespace RoleAdminChangedEvent {
 }
 
 export namespace RoleGrantedEvent {
-  export type InputTuple = [role: BytesLike, account: AddressLike, sender: AddressLike];
+  export type InputTuple = [
+    role: BytesLike,
+    account: AddressLike,
+    sender: AddressLike
+  ];
   export type OutputTuple = [role: string, account: string, sender: string];
   export interface OutputObject {
     role: string;
@@ -250,7 +449,11 @@ export namespace RoleGrantedEvent {
 }
 
 export namespace RoleRevokedEvent {
-  export type InputTuple = [role: BytesLike, account: AddressLike, sender: AddressLike];
+  export type InputTuple = [
+    role: BytesLike,
+    account: AddressLike,
+    sender: AddressLike
+  ];
   export type OutputTuple = [role: string, account: string, sender: string];
   export interface OutputObject {
     role: string;
@@ -290,7 +493,11 @@ export namespace ShopCollateralUnlockedEvent {
 }
 
 export namespace UsdcStakedEvent {
-  export type InputTuple = [shop: AddressLike, amount: BigNumberish, total: BigNumberish];
+  export type InputTuple = [
+    shop: AddressLike,
+    amount: BigNumberish,
+    total: BigNumberish
+  ];
   export type OutputTuple = [shop: string, amount: bigint, total: bigint];
   export interface OutputObject {
     shop: string;
@@ -304,7 +511,11 @@ export namespace UsdcStakedEvent {
 }
 
 export namespace UsdcWithdrawnEvent {
-  export type InputTuple = [shop: AddressLike, amount: BigNumberish, total: BigNumberish];
+  export type InputTuple = [
+    shop: AddressLike,
+    amount: BigNumberish,
+    total: BigNumberish
+  ];
   export type OutputTuple = [shop: string, amount: bigint, total: bigint];
   export interface OutputObject {
     shop: string;
@@ -334,21 +545,31 @@ export interface VantageShopVault extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(
+    event: TCEvent
+  ): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(
+    event?: TCEvent
+  ): Promise<this>;
 
   ACC_PRECISION: TypedContractMethod<[], [bigint], "view">;
 
@@ -366,39 +587,79 @@ export interface VantageShopVault extends BaseContract {
 
   accRewardPerValue: TypedContractMethod<[], [bigint], "view">;
 
-  allocateReward: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+  allocateReward: TypedContractMethod<
+    [amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
-  checkCollateralRatio: TypedContractMethod<[shop: AddressLike], [bigint], "nonpayable">;
+  checkCollateralRatio: TypedContractMethod<
+    [shop: AddressLike],
+    [bigint],
+    "nonpayable"
+  >;
 
   claimReward: TypedContractMethod<[], [void], "nonpayable">;
 
-  getCollateralRatioBps: TypedContractMethod<[shop: AddressLike], [bigint], "view">;
+  getCollateralRatioBps: TypedContractMethod<
+    [shop: AddressLike],
+    [bigint],
+    "view"
+  >;
 
   getPoolValue: TypedContractMethod<[], [bigint], "view">;
 
   getRoleAdmin: TypedContractMethod<[role: BytesLike], [string], "view">;
 
-  grantRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  grantRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
-  hasRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [boolean], "view">;
+  hasRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [boolean],
+    "view"
+  >;
 
-  lockShopCollateral: TypedContractMethod<[shop: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+  lockShopCollateral: TypedContractMethod<
+    [shop: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
   minCollateralRatioBps: TypedContractMethod<[], [bigint], "view">;
 
   pendingRewards: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
-  renounceRole: TypedContractMethod<[role: BytesLike, callerConfirmation: AddressLike], [void], "nonpayable">;
+  renounceRole: TypedContractMethod<
+    [role: BytesLike, callerConfirmation: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
-  revokeRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  revokeRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
   rewardDebt: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   rewardToken: TypedContractMethod<[], [string], "view">;
 
-  setCollateralRatioThreshold: TypedContractMethod<[thresholdBps: BigNumberish], [void], "nonpayable">;
+  setCollateralRatioThreshold: TypedContractMethod<
+    [thresholdBps: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
-  shopCollateralLocked: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  shopCollateralLocked: TypedContractMethod<
+    [arg0: AddressLike],
+    [bigint],
+    "view"
+  >;
 
   shopCount: TypedContractMethod<[], [bigint], "view">;
 
@@ -408,76 +669,176 @@ export interface VantageShopVault extends BaseContract {
 
   stakeUsdc: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
 
-  supportsInterface: TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
+  supportsInterface: TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
 
   totalInventoryNav: TypedContractMethod<[], [bigint], "view">;
 
   totalStakedUsdc: TypedContractMethod<[], [bigint], "view">;
 
-  unlockShopCollateral: TypedContractMethod<[shop: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+  unlockShopCollateral: TypedContractMethod<
+    [shop: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
-  updateShopInventoryNav: TypedContractMethod<[shop: AddressLike, nav: BigNumberish], [void], "nonpayable">;
+  updateShopInventoryNav: TypedContractMethod<
+    [shop: AddressLike, nav: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
   usdc: TypedContractMethod<[], [string], "view">;
 
-  withdrawUsdc: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+  withdrawUsdc: TypedContractMethod<
+    [amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
-  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+  getFunction<T extends ContractMethod = ContractMethod>(
+    key: string | FunctionFragment
+  ): T;
 
-  getFunction(nameOrSignature: "ACC_PRECISION"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(nameOrSignature: "BACKEND_SIGNER_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "COLLATERAL_MANAGER_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "DEFAULT_ADMIN_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "GOVERNOR_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "REWARD_ROUTER_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "SHOP_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "accRewardPerValue"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(nameOrSignature: "allocateReward"): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "ACC_PRECISION"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "BACKEND_SIGNER_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "COLLATERAL_MANAGER_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "DEFAULT_ADMIN_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "GOVERNOR_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "REWARD_ROUTER_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "SHOP_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "accRewardPerValue"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "allocateReward"
+  ): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "checkCollateralRatio"
   ): TypedContractMethod<[shop: AddressLike], [bigint], "nonpayable">;
-  getFunction(nameOrSignature: "claimReward"): TypedContractMethod<[], [void], "nonpayable">;
-  getFunction(nameOrSignature: "getCollateralRatioBps"): TypedContractMethod<[shop: AddressLike], [bigint], "view">;
-  getFunction(nameOrSignature: "getPoolValue"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(nameOrSignature: "getRoleAdmin"): TypedContractMethod<[role: BytesLike], [string], "view">;
+  getFunction(
+    nameOrSignature: "claimReward"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "getCollateralRatioBps"
+  ): TypedContractMethod<[shop: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "getPoolValue"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "getRoleAdmin"
+  ): TypedContractMethod<[role: BytesLike], [string], "view">;
   getFunction(
     nameOrSignature: "grantRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "hasRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [boolean], "view">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [boolean],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "lockShopCollateral"
-  ): TypedContractMethod<[shop: AddressLike, amount: BigNumberish], [void], "nonpayable">;
-  getFunction(nameOrSignature: "minCollateralRatioBps"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(nameOrSignature: "pendingRewards"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  ): TypedContractMethod<
+    [shop: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "minCollateralRatioBps"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "pendingRewards"
+  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "renounceRole"
-  ): TypedContractMethod<[role: BytesLike, callerConfirmation: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [role: BytesLike, callerConfirmation: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "revokeRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
-  getFunction(nameOrSignature: "rewardDebt"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(nameOrSignature: "rewardToken"): TypedContractMethod<[], [string], "view">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "rewardDebt"
+  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "rewardToken"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "setCollateralRatioThreshold"
   ): TypedContractMethod<[thresholdBps: BigNumberish], [void], "nonpayable">;
-  getFunction(nameOrSignature: "shopCollateralLocked"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(nameOrSignature: "shopCount"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(nameOrSignature: "shopInventoryNav"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(nameOrSignature: "shopStakedUsdc"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(nameOrSignature: "stakeUsdc"): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
-  getFunction(nameOrSignature: "supportsInterface"): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
-  getFunction(nameOrSignature: "totalInventoryNav"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(nameOrSignature: "totalStakedUsdc"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "shopCollateralLocked"
+  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "shopCount"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "shopInventoryNav"
+  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "shopStakedUsdc"
+  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "stakeUsdc"
+  ): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "supportsInterface"
+  ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "totalInventoryNav"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "totalStakedUsdc"
+  ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "unlockShopCollateral"
-  ): TypedContractMethod<[shop: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [shop: AddressLike, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "updateShopInventoryNav"
-  ): TypedContractMethod<[shop: AddressLike, nav: BigNumberish], [void], "nonpayable">;
-  getFunction(nameOrSignature: "usdc"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "withdrawUsdc"): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [shop: AddressLike, nav: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "usdc"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "withdrawUsdc"
+  ): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
 
   getEvent(
     key: "CollateralRatioAlert"
@@ -502,7 +863,11 @@ export interface VantageShopVault extends BaseContract {
   >;
   getEvent(
     key: "RewardClaimed"
-  ): TypedContractEvent<RewardClaimedEvent.InputTuple, RewardClaimedEvent.OutputTuple, RewardClaimedEvent.OutputObject>;
+  ): TypedContractEvent<
+    RewardClaimedEvent.InputTuple,
+    RewardClaimedEvent.OutputTuple,
+    RewardClaimedEvent.OutputObject
+  >;
   getEvent(
     key: "RoleAdminChanged"
   ): TypedContractEvent<
@@ -512,10 +877,18 @@ export interface VantageShopVault extends BaseContract {
   >;
   getEvent(
     key: "RoleGranted"
-  ): TypedContractEvent<RoleGrantedEvent.InputTuple, RoleGrantedEvent.OutputTuple, RoleGrantedEvent.OutputObject>;
+  ): TypedContractEvent<
+    RoleGrantedEvent.InputTuple,
+    RoleGrantedEvent.OutputTuple,
+    RoleGrantedEvent.OutputObject
+  >;
   getEvent(
     key: "RoleRevoked"
-  ): TypedContractEvent<RoleRevokedEvent.InputTuple, RoleRevokedEvent.OutputTuple, RoleRevokedEvent.OutputObject>;
+  ): TypedContractEvent<
+    RoleRevokedEvent.InputTuple,
+    RoleRevokedEvent.OutputTuple,
+    RoleRevokedEvent.OutputObject
+  >;
   getEvent(
     key: "ShopCollateralLocked"
   ): TypedContractEvent<
@@ -532,10 +905,18 @@ export interface VantageShopVault extends BaseContract {
   >;
   getEvent(
     key: "UsdcStaked"
-  ): TypedContractEvent<UsdcStakedEvent.InputTuple, UsdcStakedEvent.OutputTuple, UsdcStakedEvent.OutputObject>;
+  ): TypedContractEvent<
+    UsdcStakedEvent.InputTuple,
+    UsdcStakedEvent.OutputTuple,
+    UsdcStakedEvent.OutputObject
+  >;
   getEvent(
     key: "UsdcWithdrawn"
-  ): TypedContractEvent<UsdcWithdrawnEvent.InputTuple, UsdcWithdrawnEvent.OutputTuple, UsdcWithdrawnEvent.OutputObject>;
+  ): TypedContractEvent<
+    UsdcWithdrawnEvent.InputTuple,
+    UsdcWithdrawnEvent.OutputTuple,
+    UsdcWithdrawnEvent.OutputObject
+  >;
 
   filters: {
     "CollateralRatioAlert(address,uint256,uint256,uint256,uint256)": TypedContractEvent<

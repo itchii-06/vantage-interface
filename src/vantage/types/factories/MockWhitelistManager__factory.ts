@@ -3,7 +3,10 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { MockWhitelistManager, MockWhitelistManagerInterface } from "../MockWhitelistManager";
+import type {
+  MockWhitelistManager,
+  MockWhitelistManagerInterface,
+} from "../MockWhitelistManager";
 
 const _abi = [
   {
@@ -50,7 +53,14 @@ export class MockWhitelistManager__factory {
   static createInterface(): MockWhitelistManagerInterface {
     return new Interface(_abi) as MockWhitelistManagerInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): MockWhitelistManager {
-    return new Contract(address, _abi, runner) as unknown as MockWhitelistManager;
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): MockWhitelistManager {
+    return new Contract(
+      address,
+      _abi,
+      runner
+    ) as unknown as MockWhitelistManager;
   }
 }

@@ -1,5 +1,6 @@
 autotests/
 sdk/build/
+src/vantage/types/
 postcss.config.js
 tailwind.config.js
 vite.config.ts

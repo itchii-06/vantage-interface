@@ -79,87 +79,277 @@ export interface VantageNftVaultInterface extends Interface {
       | "WhitelistUpdated"
   ): EventFragment;
 
-  encodeFunctionData(functionFragment: "ACC_PRECISION", values?: undefined): string;
-  encodeFunctionData(functionFragment: "BACKEND_SIGNER_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "COLLATERAL_MANAGER_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "DEFAULT_ADMIN_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "GOVERNOR_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "REWARD_ROUTER_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "accRewardPerNav", values?: undefined): string;
-  encodeFunctionData(functionFragment: "activeVaultCount", values?: undefined): string;
-  encodeFunctionData(functionFragment: "allocateReward", values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: "claimReward", values?: undefined): string;
-  encodeFunctionData(functionFragment: "depositNft", values: [AddressLike, BigNumberish, string, string]): string;
-  encodeFunctionData(functionFragment: "getPoolValue", values?: undefined): string;
-  encodeFunctionData(functionFragment: "getRoleAdmin", values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: "grantRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "hasRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "lockedNfts", values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: "navForVault", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "ACC_PRECISION",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "BACKEND_SIGNER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "COLLATERAL_MANAGER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GOVERNOR_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "REWARD_ROUTER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "accRewardPerNav",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "activeVaultCount",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "allocateReward",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "claimReward",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositNft",
+    values: [AddressLike, BigNumberish, string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getPoolValue",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lockedNfts",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "navForVault",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "navOracle", values?: undefined): string;
-  encodeFunctionData(functionFragment: "nftToVaultId", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "nftToVaultId",
+    values: [AddressLike, BigNumberish]
+  ): string;
   encodeFunctionData(
     functionFragment: "onERC721Received",
     values: [AddressLike, AddressLike, BigNumberish, BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: "pendingRewards", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "renounceRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "revokeRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "rewardDebt", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "rewardToken", values?: undefined): string;
-  encodeFunctionData(functionFragment: "setCollateralUsage", values: [AddressLike, BigNumberish, boolean]): string;
-  encodeFunctionData(functionFragment: "setNavOracle", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "setWhitelist", values: [AddressLike, boolean]): string;
-  encodeFunctionData(functionFragment: "supportsInterface", values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: "totalNavValue", values?: undefined): string;
-  encodeFunctionData(functionFragment: "updateNav", values: [AddressLike, BigNumberish]): string;
-  encodeFunctionData(functionFragment: "userNavValue", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "userNfts", values: [AddressLike, BigNumberish]): string;
-  encodeFunctionData(functionFragment: "vaultIdOf", values: [AddressLike, BigNumberish]): string;
-  encodeFunctionData(functionFragment: "whitelistedNfts", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "withdrawNft", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "pendingRewards",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardDebt",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rewardToken",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCollateralUsage",
+    values: [AddressLike, BigNumberish, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setNavOracle",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setWhitelist",
+    values: [AddressLike, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalNavValue",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "updateNav",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "userNavValue",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "userNfts",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "vaultIdOf",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "whitelistedNfts",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "withdrawNft",
+    values: [AddressLike, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "ACC_PRECISION", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "BACKEND_SIGNER_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "COLLATERAL_MANAGER_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "DEFAULT_ADMIN_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "GOVERNOR_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "REWARD_ROUTER_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "accRewardPerNav", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "activeVaultCount", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "allocateReward", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "claimReward", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "ACC_PRECISION",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "BACKEND_SIGNER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "COLLATERAL_MANAGER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GOVERNOR_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "REWARD_ROUTER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "accRewardPerNav",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "activeVaultCount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "allocateReward",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "claimReward",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "depositNft", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getPoolValue", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getRoleAdmin", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getPoolValue",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lockedNfts", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "navForVault", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "navForVault",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "navOracle", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "nftToVaultId", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "onERC721Received", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "pendingRewards", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "renounceRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "nftToVaultId",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "pendingRewards",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "rewardDebt", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "rewardToken", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setCollateralUsage", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setNavOracle", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setWhitelist", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "totalNavValue", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "rewardToken",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCollateralUsage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setNavOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setWhitelist",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalNavValue",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "updateNav", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "userNavValue", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "userNavValue",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "userNfts", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "vaultIdOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "whitelistedNfts", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "withdrawNft", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "whitelistedNfts",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawNft",
+    data: BytesLike
+  ): Result;
 }
 
 export namespace CollateralUsageUpdatedEvent {
-  export type InputTuple = [vaultId: BigNumberish, nftContract: AddressLike, tokenId: BigNumberish, inUse: boolean];
-  export type OutputTuple = [vaultId: bigint, nftContract: string, tokenId: bigint, inUse: boolean];
+  export type InputTuple = [
+    vaultId: BigNumberish,
+    nftContract: AddressLike,
+    tokenId: BigNumberish,
+    inUse: boolean
+  ];
+  export type OutputTuple = [
+    vaultId: bigint,
+    nftContract: string,
+    tokenId: bigint,
+    inUse: boolean
+  ];
   export interface OutputObject {
     vaultId: bigint;
     nftContract: string;
@@ -198,8 +388,18 @@ export namespace NavUpdatedEvent {
 }
 
 export namespace NftDepositedEvent {
-  export type InputTuple = [vaultId: BigNumberish, owner: AddressLike, nftContract: AddressLike, tokenId: BigNumberish];
-  export type OutputTuple = [vaultId: bigint, owner: string, nftContract: string, tokenId: bigint];
+  export type InputTuple = [
+    vaultId: BigNumberish,
+    owner: AddressLike,
+    nftContract: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [
+    vaultId: bigint,
+    owner: string,
+    nftContract: string,
+    tokenId: bigint
+  ];
   export interface OutputObject {
     vaultId: bigint;
     owner: string;
@@ -213,8 +413,18 @@ export namespace NftDepositedEvent {
 }
 
 export namespace NftWithdrawnEvent {
-  export type InputTuple = [vaultId: BigNumberish, owner: AddressLike, nftContract: AddressLike, tokenId: BigNumberish];
-  export type OutputTuple = [vaultId: bigint, owner: string, nftContract: string, tokenId: bigint];
+  export type InputTuple = [
+    vaultId: BigNumberish,
+    owner: AddressLike,
+    nftContract: AddressLike,
+    tokenId: BigNumberish
+  ];
+  export type OutputTuple = [
+    vaultId: bigint,
+    owner: string,
+    nftContract: string,
+    tokenId: bigint
+  ];
   export interface OutputObject {
     vaultId: bigint;
     owner: string;
@@ -253,8 +463,16 @@ export namespace RewardRouterUpdatedEvent {
 }
 
 export namespace RoleAdminChangedEvent {
-  export type InputTuple = [role: BytesLike, previousAdminRole: BytesLike, newAdminRole: BytesLike];
-  export type OutputTuple = [role: string, previousAdminRole: string, newAdminRole: string];
+  export type InputTuple = [
+    role: BytesLike,
+    previousAdminRole: BytesLike,
+    newAdminRole: BytesLike
+  ];
+  export type OutputTuple = [
+    role: string,
+    previousAdminRole: string,
+    newAdminRole: string
+  ];
   export interface OutputObject {
     role: string;
     previousAdminRole: string;
@@ -267,7 +485,11 @@ export namespace RoleAdminChangedEvent {
 }
 
 export namespace RoleGrantedEvent {
-  export type InputTuple = [role: BytesLike, account: AddressLike, sender: AddressLike];
+  export type InputTuple = [
+    role: BytesLike,
+    account: AddressLike,
+    sender: AddressLike
+  ];
   export type OutputTuple = [role: string, account: string, sender: string];
   export interface OutputObject {
     role: string;
@@ -281,7 +503,11 @@ export namespace RoleGrantedEvent {
 }
 
 export namespace RoleRevokedEvent {
-  export type InputTuple = [role: BytesLike, account: AddressLike, sender: AddressLike];
+  export type InputTuple = [
+    role: BytesLike,
+    account: AddressLike,
+    sender: AddressLike
+  ];
   export type OutputTuple = [role: string, account: string, sender: string];
   export interface OutputObject {
     role: string;
@@ -324,21 +550,31 @@ export interface VantageNftVault extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(
+    event: TCEvent
+  ): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(
+    event?: TCEvent
+  ): Promise<this>;
 
   ACC_PRECISION: TypedContractMethod<[], [bigint], "view">;
 
@@ -356,12 +592,21 @@ export interface VantageNftVault extends BaseContract {
 
   activeVaultCount: TypedContractMethod<[], [bigint], "view">;
 
-  allocateReward: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+  allocateReward: TypedContractMethod<
+    [amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
   claimReward: TypedContractMethod<[], [void], "nonpayable">;
 
   depositNft: TypedContractMethod<
-    [nftContract: AddressLike, tokenId: BigNumberish, brand: string, grade: string],
+    [
+      nftContract: AddressLike,
+      tokenId: BigNumberish,
+      brand: string,
+      grade: string
+    ],
     [bigint],
     "nonpayable"
   >;
@@ -370,9 +615,17 @@ export interface VantageNftVault extends BaseContract {
 
   getRoleAdmin: TypedContractMethod<[role: BytesLike], [string], "view">;
 
-  grantRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  grantRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
-  hasRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [boolean], "view">;
+  hasRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [boolean],
+    "view"
+  >;
 
   lockedNfts: TypedContractMethod<
     [arg0: BigNumberish],
@@ -386,7 +639,7 @@ export interface VantageNftVault extends BaseContract {
         nav: bigint;
         exists: boolean;
         usedAsCollateral: boolean;
-      },
+      }
     ],
     "view"
   >;
@@ -395,7 +648,11 @@ export interface VantageNftVault extends BaseContract {
 
   navOracle: TypedContractMethod<[], [string], "view">;
 
-  nftToVaultId: TypedContractMethod<[arg0: AddressLike, arg1: BigNumberish], [bigint], "view">;
+  nftToVaultId: TypedContractMethod<
+    [arg0: AddressLike, arg1: BigNumberish],
+    [bigint],
+    "view"
+  >;
 
   onERC721Received: TypedContractMethod<
     [arg0: AddressLike, arg1: AddressLike, arg2: BigNumberish, arg3: BytesLike],
@@ -405,9 +662,17 @@ export interface VantageNftVault extends BaseContract {
 
   pendingRewards: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
-  renounceRole: TypedContractMethod<[role: BytesLike, callerConfirmation: AddressLike], [void], "nonpayable">;
+  renounceRole: TypedContractMethod<
+    [role: BytesLike, callerConfirmation: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
-  revokeRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  revokeRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
   rewardDebt: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
@@ -419,54 +684,123 @@ export interface VantageNftVault extends BaseContract {
     "nonpayable"
   >;
 
-  setNavOracle: TypedContractMethod<[oracle: AddressLike], [void], "nonpayable">;
+  setNavOracle: TypedContractMethod<
+    [oracle: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
-  setWhitelist: TypedContractMethod<[nftContract: AddressLike, allowed: boolean], [void], "nonpayable">;
+  setWhitelist: TypedContractMethod<
+    [nftContract: AddressLike, allowed: boolean],
+    [void],
+    "nonpayable"
+  >;
 
-  supportsInterface: TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
+  supportsInterface: TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
 
   totalNavValue: TypedContractMethod<[], [bigint], "view">;
 
-  updateNav: TypedContractMethod<[nftContract: AddressLike, tokenId: BigNumberish], [void], "nonpayable">;
+  updateNav: TypedContractMethod<
+    [nftContract: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
   userNavValue: TypedContractMethod<[owner: AddressLike], [bigint], "view">;
 
-  userNfts: TypedContractMethod<[arg0: AddressLike, arg1: BigNumberish], [bigint], "view">;
+  userNfts: TypedContractMethod<
+    [arg0: AddressLike, arg1: BigNumberish],
+    [bigint],
+    "view"
+  >;
 
-  vaultIdOf: TypedContractMethod<[nftContract: AddressLike, tokenId: BigNumberish], [bigint], "view">;
+  vaultIdOf: TypedContractMethod<
+    [nftContract: AddressLike, tokenId: BigNumberish],
+    [bigint],
+    "view"
+  >;
 
   whitelistedNfts: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
-  withdrawNft: TypedContractMethod<[nftContract: AddressLike, tokenId: BigNumberish], [void], "nonpayable">;
+  withdrawNft: TypedContractMethod<
+    [nftContract: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
-  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+  getFunction<T extends ContractMethod = ContractMethod>(
+    key: string | FunctionFragment
+  ): T;
 
-  getFunction(nameOrSignature: "ACC_PRECISION"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(nameOrSignature: "BACKEND_SIGNER_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "COLLATERAL_MANAGER_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "DEFAULT_ADMIN_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "GOVERNOR_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "REWARD_ROUTER_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "accRewardPerNav"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(nameOrSignature: "activeVaultCount"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(nameOrSignature: "allocateReward"): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
-  getFunction(nameOrSignature: "claimReward"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "ACC_PRECISION"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "BACKEND_SIGNER_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "COLLATERAL_MANAGER_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "DEFAULT_ADMIN_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "GOVERNOR_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "REWARD_ROUTER_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "accRewardPerNav"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "activeVaultCount"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "allocateReward"
+  ): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "claimReward"
+  ): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "depositNft"
   ): TypedContractMethod<
-    [nftContract: AddressLike, tokenId: BigNumberish, brand: string, grade: string],
+    [
+      nftContract: AddressLike,
+      tokenId: BigNumberish,
+      brand: string,
+      grade: string
+    ],
     [bigint],
     "nonpayable"
   >;
-  getFunction(nameOrSignature: "getPoolValue"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(nameOrSignature: "getRoleAdmin"): TypedContractMethod<[role: BytesLike], [string], "view">;
+  getFunction(
+    nameOrSignature: "getPoolValue"
+  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "getRoleAdmin"
+  ): TypedContractMethod<[role: BytesLike], [string], "view">;
   getFunction(
     nameOrSignature: "grantRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "hasRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [boolean], "view">;
-  getFunction(nameOrSignature: "lockedNfts"): TypedContractMethod<
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [boolean],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "lockedNfts"
+  ): TypedContractMethod<
     [arg0: BigNumberish],
     [
       [string, string, bigint, string, string, bigint, boolean, boolean] & {
@@ -478,50 +812,110 @@ export interface VantageNftVault extends BaseContract {
         nav: bigint;
         exists: boolean;
         usedAsCollateral: boolean;
-      },
+      }
     ],
     "view"
   >;
-  getFunction(nameOrSignature: "navForVault"): TypedContractMethod<[vaultId: BigNumberish], [bigint], "view">;
-  getFunction(nameOrSignature: "navOracle"): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "navForVault"
+  ): TypedContractMethod<[vaultId: BigNumberish], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "navOracle"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "nftToVaultId"
-  ): TypedContractMethod<[arg0: AddressLike, arg1: BigNumberish], [bigint], "view">;
+  ): TypedContractMethod<
+    [arg0: AddressLike, arg1: BigNumberish],
+    [bigint],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "onERC721Received"
-  ): TypedContractMethod<[arg0: AddressLike, arg1: AddressLike, arg2: BigNumberish, arg3: BytesLike], [string], "view">;
-  getFunction(nameOrSignature: "pendingRewards"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  ): TypedContractMethod<
+    [arg0: AddressLike, arg1: AddressLike, arg2: BigNumberish, arg3: BytesLike],
+    [string],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "pendingRewards"
+  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "renounceRole"
-  ): TypedContractMethod<[role: BytesLike, callerConfirmation: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [role: BytesLike, callerConfirmation: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "revokeRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
-  getFunction(nameOrSignature: "rewardDebt"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(nameOrSignature: "rewardToken"): TypedContractMethod<[], [string], "view">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "rewardDebt"
+  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "rewardToken"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "setCollateralUsage"
-  ): TypedContractMethod<[nftContract: AddressLike, tokenId: BigNumberish, inUse: boolean], [void], "nonpayable">;
-  getFunction(nameOrSignature: "setNavOracle"): TypedContractMethod<[oracle: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [nftContract: AddressLike, tokenId: BigNumberish, inUse: boolean],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "setNavOracle"
+  ): TypedContractMethod<[oracle: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setWhitelist"
-  ): TypedContractMethod<[nftContract: AddressLike, allowed: boolean], [void], "nonpayable">;
-  getFunction(nameOrSignature: "supportsInterface"): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
-  getFunction(nameOrSignature: "totalNavValue"): TypedContractMethod<[], [bigint], "view">;
+  ): TypedContractMethod<
+    [nftContract: AddressLike, allowed: boolean],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "supportsInterface"
+  ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "totalNavValue"
+  ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "updateNav"
-  ): TypedContractMethod<[nftContract: AddressLike, tokenId: BigNumberish], [void], "nonpayable">;
-  getFunction(nameOrSignature: "userNavValue"): TypedContractMethod<[owner: AddressLike], [bigint], "view">;
+  ): TypedContractMethod<
+    [nftContract: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "userNavValue"
+  ): TypedContractMethod<[owner: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "userNfts"
-  ): TypedContractMethod<[arg0: AddressLike, arg1: BigNumberish], [bigint], "view">;
+  ): TypedContractMethod<
+    [arg0: AddressLike, arg1: BigNumberish],
+    [bigint],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "vaultIdOf"
-  ): TypedContractMethod<[nftContract: AddressLike, tokenId: BigNumberish], [bigint], "view">;
-  getFunction(nameOrSignature: "whitelistedNfts"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  ): TypedContractMethod<
+    [nftContract: AddressLike, tokenId: BigNumberish],
+    [bigint],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "whitelistedNfts"
+  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "withdrawNft"
-  ): TypedContractMethod<[nftContract: AddressLike, tokenId: BigNumberish], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [nftContract: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
   getEvent(
     key: "CollateralUsageUpdated"
@@ -539,16 +933,32 @@ export interface VantageNftVault extends BaseContract {
   >;
   getEvent(
     key: "NavUpdated"
-  ): TypedContractEvent<NavUpdatedEvent.InputTuple, NavUpdatedEvent.OutputTuple, NavUpdatedEvent.OutputObject>;
+  ): TypedContractEvent<
+    NavUpdatedEvent.InputTuple,
+    NavUpdatedEvent.OutputTuple,
+    NavUpdatedEvent.OutputObject
+  >;
   getEvent(
     key: "NftDeposited"
-  ): TypedContractEvent<NftDepositedEvent.InputTuple, NftDepositedEvent.OutputTuple, NftDepositedEvent.OutputObject>;
+  ): TypedContractEvent<
+    NftDepositedEvent.InputTuple,
+    NftDepositedEvent.OutputTuple,
+    NftDepositedEvent.OutputObject
+  >;
   getEvent(
     key: "NftWithdrawn"
-  ): TypedContractEvent<NftWithdrawnEvent.InputTuple, NftWithdrawnEvent.OutputTuple, NftWithdrawnEvent.OutputObject>;
+  ): TypedContractEvent<
+    NftWithdrawnEvent.InputTuple,
+    NftWithdrawnEvent.OutputTuple,
+    NftWithdrawnEvent.OutputObject
+  >;
   getEvent(
     key: "RewardClaimed"
-  ): TypedContractEvent<RewardClaimedEvent.InputTuple, RewardClaimedEvent.OutputTuple, RewardClaimedEvent.OutputObject>;
+  ): TypedContractEvent<
+    RewardClaimedEvent.InputTuple,
+    RewardClaimedEvent.OutputTuple,
+    RewardClaimedEvent.OutputObject
+  >;
   getEvent(
     key: "RewardRouterUpdated"
   ): TypedContractEvent<
@@ -565,10 +975,18 @@ export interface VantageNftVault extends BaseContract {
   >;
   getEvent(
     key: "RoleGranted"
-  ): TypedContractEvent<RoleGrantedEvent.InputTuple, RoleGrantedEvent.OutputTuple, RoleGrantedEvent.OutputObject>;
+  ): TypedContractEvent<
+    RoleGrantedEvent.InputTuple,
+    RoleGrantedEvent.OutputTuple,
+    RoleGrantedEvent.OutputObject
+  >;
   getEvent(
     key: "RoleRevoked"
-  ): TypedContractEvent<RoleRevokedEvent.InputTuple, RoleRevokedEvent.OutputTuple, RoleRevokedEvent.OutputObject>;
+  ): TypedContractEvent<
+    RoleRevokedEvent.InputTuple,
+    RoleRevokedEvent.OutputTuple,
+    RoleRevokedEvent.OutputObject
+  >;
   getEvent(
     key: "WhitelistUpdated"
   ): TypedContractEvent<

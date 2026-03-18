@@ -3,7 +3,10 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { MockNftCollateralWrapper, MockNftCollateralWrapperInterface } from "../MockNftCollateralWrapper";
+import type {
+  MockNftCollateralWrapper,
+  MockNftCollateralWrapperInterface,
+} from "../MockNftCollateralWrapper";
 
 const _abi = [
   {
@@ -129,7 +132,14 @@ export class MockNftCollateralWrapper__factory {
   static createInterface(): MockNftCollateralWrapperInterface {
     return new Interface(_abi) as MockNftCollateralWrapperInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): MockNftCollateralWrapper {
-    return new Contract(address, _abi, runner) as unknown as MockNftCollateralWrapper;
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): MockNftCollateralWrapper {
+    return new Contract(
+      address,
+      _abi,
+      runner
+    ) as unknown as MockNftCollateralWrapper;
   }
 }

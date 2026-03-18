@@ -3,7 +3,10 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { VantageNftVault, VantageNftVaultInterface } from "../VantageNftVault";
+import type {
+  VantageNftVault,
+  VantageNftVaultInterface,
+} from "../VantageNftVault";
 
 const _abi = [
   {
@@ -993,7 +996,10 @@ export class VantageNftVault__factory {
   static createInterface(): VantageNftVaultInterface {
     return new Interface(_abi) as VantageNftVaultInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): VantageNftVault {
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): VantageNftVault {
     return new Contract(address, _abi, runner) as unknown as VantageNftVault;
   }
 }

@@ -41,7 +41,7 @@ export declare namespace IBaseOrderUtils {
     uiFeeReceiver: string,
     market: string,
     initialCollateralToken: string,
-    swapPath: string[],
+    swapPath: string[]
   ] & {
     receiver: string;
     cancellationReceiver: string;
@@ -71,7 +71,7 @@ export declare namespace IBaseOrderUtils {
     executionFee: bigint,
     callbackGasLimit: bigint,
     minOutputAmount: bigint,
-    validFromTime: bigint,
+    validFromTime: bigint
   ] & {
     sizeDeltaUsd: bigint;
     initialCollateralDeltaAmount: bigint;
@@ -104,7 +104,7 @@ export declare namespace IBaseOrderUtils {
     shouldUnwrapNativeToken: boolean,
     autoCancel: boolean,
     referralCode: string,
-    dataList: string[],
+    dataList: string[]
   ] & {
     addresses: IBaseOrderUtils.CreateOrderParamsAddressesStructOutput;
     numbers: IBaseOrderUtils.CreateOrderParamsNumbersStructOutput;
@@ -125,10 +125,18 @@ export interface MockOrderHandlerInterface extends Interface {
 
   encodeFunctionData(
     functionFragment: "createOrder",
-    values: [AddressLike, BigNumberish, IBaseOrderUtils.CreateOrderParamsStruct, boolean]
+    values: [
+      AddressLike,
+      BigNumberish,
+      IBaseOrderUtils.CreateOrderParamsStruct,
+      boolean
+    ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "createOrder", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "createOrder",
+    data: BytesLike
+  ): Result;
 }
 
 export namespace OrderCreatedEvent {
@@ -161,34 +169,46 @@ export interface MockOrderHandler extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(
+    event: TCEvent
+  ): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(
+    event?: TCEvent
+  ): Promise<this>;
 
   createOrder: TypedContractMethod<
     [
       account: AddressLike,
       srcChainId: BigNumberish,
       params: IBaseOrderUtils.CreateOrderParamsStruct,
-      shouldCapMaxExecutionFee: boolean,
+      shouldCapMaxExecutionFee: boolean
     ],
     [string],
     "view"
   >;
 
-  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+  getFunction<T extends ContractMethod = ContractMethod>(
+    key: string | FunctionFragment
+  ): T;
 
   getFunction(
     nameOrSignature: "createOrder"
@@ -197,7 +217,7 @@ export interface MockOrderHandler extends BaseContract {
       account: AddressLike,
       srcChainId: BigNumberish,
       params: IBaseOrderUtils.CreateOrderParamsStruct,
-      shouldCapMaxExecutionFee: boolean,
+      shouldCapMaxExecutionFee: boolean
     ],
     [string],
     "view"
@@ -205,7 +225,11 @@ export interface MockOrderHandler extends BaseContract {
 
   getEvent(
     key: "OrderCreated"
-  ): TypedContractEvent<OrderCreatedEvent.InputTuple, OrderCreatedEvent.OutputTuple, OrderCreatedEvent.OutputObject>;
+  ): TypedContractEvent<
+    OrderCreatedEvent.InputTuple,
+    OrderCreatedEvent.OutputTuple,
+    OrderCreatedEvent.OutputObject
+  >;
 
   filters: {
     "OrderCreated(bytes32,address)": TypedContractEvent<

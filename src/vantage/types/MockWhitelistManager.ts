@@ -21,13 +21,27 @@ import type {
 } from "./common";
 
 export interface MockWhitelistManagerInterface extends Interface {
-  getFunction(nameOrSignature: "isWhitelisted" | "setWhitelisted"): FunctionFragment;
+  getFunction(
+    nameOrSignature: "isWhitelisted" | "setWhitelisted"
+  ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "isWhitelisted", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "setWhitelisted", values: [AddressLike, boolean]): string;
+  encodeFunctionData(
+    functionFragment: "isWhitelisted",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setWhitelisted",
+    values: [AddressLike, boolean]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "isWhitelisted", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setWhitelisted", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "isWhitelisted",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setWhitelisted",
+    data: BytesLike
+  ): Result;
 }
 
 export interface MockWhitelistManager extends BaseContract {
@@ -47,32 +61,54 @@ export interface MockWhitelistManager extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(
+    event: TCEvent
+  ): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(
+    event?: TCEvent
+  ): Promise<this>;
 
   isWhitelisted: TypedContractMethod<[who: AddressLike], [boolean], "view">;
 
-  setWhitelisted: TypedContractMethod<[who: AddressLike, enabled: boolean], [void], "nonpayable">;
+  setWhitelisted: TypedContractMethod<
+    [who: AddressLike, enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
 
-  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+  getFunction<T extends ContractMethod = ContractMethod>(
+    key: string | FunctionFragment
+  ): T;
 
-  getFunction(nameOrSignature: "isWhitelisted"): TypedContractMethod<[who: AddressLike], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "isWhitelisted"
+  ): TypedContractMethod<[who: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "setWhitelisted"
-  ): TypedContractMethod<[who: AddressLike, enabled: boolean], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [who: AddressLike, enabled: boolean],
+    [void],
+    "nonpayable"
+  >;
 
   filters: {};
 }

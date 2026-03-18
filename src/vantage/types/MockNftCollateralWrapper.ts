@@ -22,16 +22,36 @@ import type {
 } from "./common";
 
 export interface MockNftCollateralWrapperInterface extends Interface {
-  getFunction(nameOrSignature: "collateralValue" | "lockedNft" | "setRecord"): FunctionFragment;
+  getFunction(
+    nameOrSignature: "collateralValue" | "lockedNft" | "setRecord"
+  ): FunctionFragment;
 
-  encodeFunctionData(functionFragment: "collateralValue", values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: "lockedNft", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "collateralValue",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lockedNft",
+    values: [BytesLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "setRecord",
-    values: [BytesLike, AddressLike, AddressLike, BigNumberish, BigNumberish, BigNumberish, BigNumberish, boolean]
+    values: [
+      BytesLike,
+      AddressLike,
+      AddressLike,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      boolean
+    ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "collateralValue", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "collateralValue",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "lockedNft", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setRecord", data: BytesLike): Result;
 }
@@ -53,21 +73,31 @@ export interface MockNftCollateralWrapper extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(
+    event: TCEvent
+  ): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(
+    event?: TCEvent
+  ): Promise<this>;
 
   collateralValue: TypedContractMethod<
     [key: BytesLike],
@@ -76,7 +106,7 @@ export interface MockNftCollateralWrapper extends BaseContract {
         price: bigint;
         valuationDate: bigint;
         confirmed: boolean;
-      },
+      }
     ],
     "view"
   >;
@@ -90,7 +120,7 @@ export interface MockNftCollateralWrapper extends BaseContract {
         tokenId: bigint;
         valuationDate: bigint;
         lockedAt: bigint;
-      },
+      }
     ],
     "view"
   >;
@@ -104,26 +134,32 @@ export interface MockNftCollateralWrapper extends BaseContract {
       valuationDate: BigNumberish,
       lockedAt: BigNumberish,
       price: BigNumberish,
-      confirmed: boolean,
+      confirmed: boolean
     ],
     [void],
     "nonpayable"
   >;
 
-  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+  getFunction<T extends ContractMethod = ContractMethod>(
+    key: string | FunctionFragment
+  ): T;
 
-  getFunction(nameOrSignature: "collateralValue"): TypedContractMethod<
+  getFunction(
+    nameOrSignature: "collateralValue"
+  ): TypedContractMethod<
     [key: BytesLike],
     [
       [bigint, bigint, boolean] & {
         price: bigint;
         valuationDate: bigint;
         confirmed: boolean;
-      },
+      }
     ],
     "view"
   >;
-  getFunction(nameOrSignature: "lockedNft"): TypedContractMethod<
+  getFunction(
+    nameOrSignature: "lockedNft"
+  ): TypedContractMethod<
     [key: BytesLike],
     [
       [string, string, bigint, bigint, bigint] & {
@@ -132,7 +168,7 @@ export interface MockNftCollateralWrapper extends BaseContract {
         tokenId: bigint;
         valuationDate: bigint;
         lockedAt: bigint;
-      },
+      }
     ],
     "view"
   >;
@@ -147,7 +183,7 @@ export interface MockNftCollateralWrapper extends BaseContract {
       valuationDate: BigNumberish,
       lockedAt: BigNumberish,
       price: BigNumberish,
-      confirmed: boolean,
+      confirmed: boolean
     ],
     [void],
     "nonpayable"

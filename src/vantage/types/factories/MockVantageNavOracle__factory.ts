@@ -3,7 +3,10 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { MockVantageNavOracle, MockVantageNavOracleInterface } from "../MockVantageNavOracle";
+import type {
+  MockVantageNavOracle,
+  MockVantageNavOracleInterface,
+} from "../MockVantageNavOracle";
 
 const _abi = [
   {
@@ -60,7 +63,14 @@ export class MockVantageNavOracle__factory {
   static createInterface(): MockVantageNavOracleInterface {
     return new Interface(_abi) as MockVantageNavOracleInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): MockVantageNavOracle {
-    return new Contract(address, _abi, runner) as unknown as MockVantageNavOracle;
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): MockVantageNavOracle {
+    return new Contract(
+      address,
+      _abi,
+      runner
+    ) as unknown as MockVantageNavOracle;
   }
 }

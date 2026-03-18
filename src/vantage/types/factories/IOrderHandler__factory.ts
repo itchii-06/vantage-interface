@@ -173,7 +173,10 @@ export class IOrderHandler__factory {
   static createInterface(): IOrderHandlerInterface {
     return new Interface(_abi) as IOrderHandlerInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): IOrderHandler {
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): IOrderHandler {
     return new Contract(address, _abi, runner) as unknown as IOrderHandler;
   }
 }

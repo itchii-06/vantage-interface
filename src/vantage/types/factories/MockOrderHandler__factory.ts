@@ -3,7 +3,10 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { MockOrderHandler, MockOrderHandlerInterface } from "../MockOrderHandler";
+import type {
+  MockOrderHandler,
+  MockOrderHandlerInterface,
+} from "../MockOrderHandler";
 
 const _abi = [
   {
@@ -192,7 +195,10 @@ export class MockOrderHandler__factory {
   static createInterface(): MockOrderHandlerInterface {
     return new Interface(_abi) as MockOrderHandlerInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): MockOrderHandler {
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): MockOrderHandler {
     return new Contract(address, _abi, runner) as unknown as MockOrderHandler;
   }
 }

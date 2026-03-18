@@ -3,7 +3,10 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { MockVantageRwaOracle, MockVantageRwaOracleInterface } from "../MockVantageRwaOracle";
+import type {
+  MockVantageRwaOracle,
+  MockVantageRwaOracleInterface,
+} from "../MockVantageRwaOracle";
 
 const _abi = [
   {
@@ -65,7 +68,14 @@ export class MockVantageRwaOracle__factory {
   static createInterface(): MockVantageRwaOracleInterface {
     return new Interface(_abi) as MockVantageRwaOracleInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): MockVantageRwaOracle {
-    return new Contract(address, _abi, runner) as unknown as MockVantageRwaOracle;
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): MockVantageRwaOracle {
+    return new Contract(
+      address,
+      _abi,
+      runner
+    ) as unknown as MockVantageRwaOracle;
   }
 }

@@ -3,7 +3,10 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type { VantagePositionController, VantagePositionControllerInterface } from "../VantagePositionController";
+import type {
+  VantagePositionController,
+  VantagePositionControllerInterface,
+} from "../VantagePositionController";
 
 const _abi = [
   {
@@ -451,7 +454,14 @@ export class VantagePositionController__factory {
   static createInterface(): VantagePositionControllerInterface {
     return new Interface(_abi) as VantagePositionControllerInterface;
   }
-  static connect(address: string, runner?: ContractRunner | null): VantagePositionController {
-    return new Contract(address, _abi, runner) as unknown as VantagePositionController;
+  static connect(
+    address: string,
+    runner?: ContractRunner | null
+  ): VantagePositionController {
+    return new Contract(
+      address,
+      _abi,
+      runner
+    ) as unknown as VantagePositionController;
   }
 }

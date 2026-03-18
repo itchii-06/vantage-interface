@@ -44,42 +44,110 @@ export interface VantageNavOracleInterface extends Interface {
   ): FunctionFragment;
 
   getEvent(
-    nameOrSignatureOrTopic: "MaxDataAgeUpdated" | "NavUpdated" | "RoleAdminChanged" | "RoleGranted" | "RoleRevoked"
+    nameOrSignatureOrTopic:
+      | "MaxDataAgeUpdated"
+      | "NavUpdated"
+      | "RoleAdminChanged"
+      | "RoleGranted"
+      | "RoleRevoked"
   ): EventFragment;
 
-  encodeFunctionData(functionFragment: "BACKEND_SIGNER_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "DEFAULT_ADMIN_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "GOVERNOR_ROLE", values?: undefined): string;
-  encodeFunctionData(functionFragment: "getNavData", values: [AddressLike, BigNumberish]): string;
-  encodeFunctionData(functionFragment: "getRoleAdmin", values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: "grantRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "hasRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "latestNav", values: [AddressLike, BigNumberish]): string;
-  encodeFunctionData(functionFragment: "maxDataAge", values?: undefined): string;
-  encodeFunctionData(functionFragment: "navStorage", values: [BytesLike]): string;
-  encodeFunctionData(functionFragment: "renounceRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "revokeRole", values: [BytesLike, AddressLike]): string;
-  encodeFunctionData(functionFragment: "setMaxDataAge", values: [BigNumberish]): string;
-  encodeFunctionData(functionFragment: "supportsInterface", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "BACKEND_SIGNER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "GOVERNOR_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getNavData",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "latestNav",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "maxDataAge",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "navStorage",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMaxDataAge",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [BytesLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "updateNav",
     values: [AddressLike, BigNumberish, BigNumberish, BigNumberish]
   ): string;
 
-  decodeFunctionResult(functionFragment: "BACKEND_SIGNER_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "DEFAULT_ADMIN_ROLE", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "GOVERNOR_ROLE", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "BACKEND_SIGNER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "GOVERNOR_ROLE",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "getNavData", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getRoleAdmin", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "latestNav", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "maxDataAge", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "navStorage", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "renounceRole", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "setMaxDataAge", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setMaxDataAge",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "updateNav", data: BytesLike): Result;
 }
 
@@ -96,8 +164,18 @@ export namespace MaxDataAgeUpdatedEvent {
 }
 
 export namespace NavUpdatedEvent {
-  export type InputTuple = [asset: AddressLike, tokenId: BigNumberish, price: BigNumberish, updatedAt: BigNumberish];
-  export type OutputTuple = [asset: string, tokenId: bigint, price: bigint, updatedAt: bigint];
+  export type InputTuple = [
+    asset: AddressLike,
+    tokenId: BigNumberish,
+    price: BigNumberish,
+    updatedAt: BigNumberish
+  ];
+  export type OutputTuple = [
+    asset: string,
+    tokenId: bigint,
+    price: bigint,
+    updatedAt: bigint
+  ];
   export interface OutputObject {
     asset: string;
     tokenId: bigint;
@@ -111,8 +189,16 @@ export namespace NavUpdatedEvent {
 }
 
 export namespace RoleAdminChangedEvent {
-  export type InputTuple = [role: BytesLike, previousAdminRole: BytesLike, newAdminRole: BytesLike];
-  export type OutputTuple = [role: string, previousAdminRole: string, newAdminRole: string];
+  export type InputTuple = [
+    role: BytesLike,
+    previousAdminRole: BytesLike,
+    newAdminRole: BytesLike
+  ];
+  export type OutputTuple = [
+    role: string,
+    previousAdminRole: string,
+    newAdminRole: string
+  ];
   export interface OutputObject {
     role: string;
     previousAdminRole: string;
@@ -125,7 +211,11 @@ export namespace RoleAdminChangedEvent {
 }
 
 export namespace RoleGrantedEvent {
-  export type InputTuple = [role: BytesLike, account: AddressLike, sender: AddressLike];
+  export type InputTuple = [
+    role: BytesLike,
+    account: AddressLike,
+    sender: AddressLike
+  ];
   export type OutputTuple = [role: string, account: string, sender: string];
   export interface OutputObject {
     role: string;
@@ -139,7 +229,11 @@ export namespace RoleGrantedEvent {
 }
 
 export namespace RoleRevokedEvent {
-  export type InputTuple = [role: BytesLike, account: AddressLike, sender: AddressLike];
+  export type InputTuple = [
+    role: BytesLike,
+    account: AddressLike,
+    sender: AddressLike
+  ];
   export type OutputTuple = [role: string, account: string, sender: string];
   export interface OutputObject {
     role: string;
@@ -169,21 +263,31 @@ export interface VantageNavOracle extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(
+    event: TCEvent,
+    listener: TypedListener<TCEvent>
+  ): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(
+    event: TCEvent
+  ): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(
+    event?: TCEvent
+  ): Promise<this>;
 
   BACKEND_SIGNER_ROLE: TypedContractMethod<[], [string], "view">;
 
@@ -199,35 +303,80 @@ export interface VantageNavOracle extends BaseContract {
 
   getRoleAdmin: TypedContractMethod<[role: BytesLike], [string], "view">;
 
-  grantRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
-
-  hasRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [boolean], "view">;
-
-  latestNav: TypedContractMethod<[asset: AddressLike, tokenId: BigNumberish], [bigint], "view">;
-
-  maxDataAge: TypedContractMethod<[], [bigint], "view">;
-
-  navStorage: TypedContractMethod<[arg0: BytesLike], [[bigint, bigint] & { price: bigint; updatedAt: bigint }], "view">;
-
-  renounceRole: TypedContractMethod<[role: BytesLike, callerConfirmation: AddressLike], [void], "nonpayable">;
-
-  revokeRole: TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
-
-  setMaxDataAge: TypedContractMethod<[newMaxAge: BigNumberish], [void], "nonpayable">;
-
-  supportsInterface: TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
-
-  updateNav: TypedContractMethod<
-    [asset: AddressLike, tokenId: BigNumberish, price: BigNumberish, reportedAt: BigNumberish],
+  grantRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
     [void],
     "nonpayable"
   >;
 
-  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+  hasRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [boolean],
+    "view"
+  >;
 
-  getFunction(nameOrSignature: "BACKEND_SIGNER_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "DEFAULT_ADMIN_ROLE"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "GOVERNOR_ROLE"): TypedContractMethod<[], [string], "view">;
+  latestNav: TypedContractMethod<
+    [asset: AddressLike, tokenId: BigNumberish],
+    [bigint],
+    "view"
+  >;
+
+  maxDataAge: TypedContractMethod<[], [bigint], "view">;
+
+  navStorage: TypedContractMethod<
+    [arg0: BytesLike],
+    [[bigint, bigint] & { price: bigint; updatedAt: bigint }],
+    "view"
+  >;
+
+  renounceRole: TypedContractMethod<
+    [role: BytesLike, callerConfirmation: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  revokeRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  setMaxDataAge: TypedContractMethod<
+    [newMaxAge: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  supportsInterface: TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
+
+  updateNav: TypedContractMethod<
+    [
+      asset: AddressLike,
+      tokenId: BigNumberish,
+      price: BigNumberish,
+      reportedAt: BigNumberish
+    ],
+    [void],
+    "nonpayable"
+  >;
+
+  getFunction<T extends ContractMethod = ContractMethod>(
+    key: string | FunctionFragment
+  ): T;
+
+  getFunction(
+    nameOrSignature: "BACKEND_SIGNER_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "DEFAULT_ADMIN_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "GOVERNOR_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "getNavData"
   ): TypedContractMethod<
@@ -235,32 +384,69 @@ export interface VantageNavOracle extends BaseContract {
     [[bigint, bigint] & { price: bigint; updatedAt: bigint }],
     "view"
   >;
-  getFunction(nameOrSignature: "getRoleAdmin"): TypedContractMethod<[role: BytesLike], [string], "view">;
+  getFunction(
+    nameOrSignature: "getRoleAdmin"
+  ): TypedContractMethod<[role: BytesLike], [string], "view">;
   getFunction(
     nameOrSignature: "grantRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "hasRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [boolean], "view">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [boolean],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "latestNav"
-  ): TypedContractMethod<[asset: AddressLike, tokenId: BigNumberish], [bigint], "view">;
-  getFunction(nameOrSignature: "maxDataAge"): TypedContractMethod<[], [bigint], "view">;
+  ): TypedContractMethod<
+    [asset: AddressLike, tokenId: BigNumberish],
+    [bigint],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "maxDataAge"
+  ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "navStorage"
-  ): TypedContractMethod<[arg0: BytesLike], [[bigint, bigint] & { price: bigint; updatedAt: bigint }], "view">;
+  ): TypedContractMethod<
+    [arg0: BytesLike],
+    [[bigint, bigint] & { price: bigint; updatedAt: bigint }],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "renounceRole"
-  ): TypedContractMethod<[role: BytesLike, callerConfirmation: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<
+    [role: BytesLike, callerConfirmation: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "revokeRole"
-  ): TypedContractMethod<[role: BytesLike, account: AddressLike], [void], "nonpayable">;
-  getFunction(nameOrSignature: "setMaxDataAge"): TypedContractMethod<[newMaxAge: BigNumberish], [void], "nonpayable">;
-  getFunction(nameOrSignature: "supportsInterface"): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "setMaxDataAge"
+  ): TypedContractMethod<[newMaxAge: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "supportsInterface"
+  ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "updateNav"
   ): TypedContractMethod<
-    [asset: AddressLike, tokenId: BigNumberish, price: BigNumberish, reportedAt: BigNumberish],
+    [
+      asset: AddressLike,
+      tokenId: BigNumberish,
+      price: BigNumberish,
+      reportedAt: BigNumberish
+    ],
     [void],
     "nonpayable"
   >;
@@ -274,7 +460,11 @@ export interface VantageNavOracle extends BaseContract {
   >;
   getEvent(
     key: "NavUpdated"
-  ): TypedContractEvent<NavUpdatedEvent.InputTuple, NavUpdatedEvent.OutputTuple, NavUpdatedEvent.OutputObject>;
+  ): TypedContractEvent<
+    NavUpdatedEvent.InputTuple,
+    NavUpdatedEvent.OutputTuple,
+    NavUpdatedEvent.OutputObject
+  >;
   getEvent(
     key: "RoleAdminChanged"
   ): TypedContractEvent<
@@ -284,10 +474,18 @@ export interface VantageNavOracle extends BaseContract {
   >;
   getEvent(
     key: "RoleGranted"
-  ): TypedContractEvent<RoleGrantedEvent.InputTuple, RoleGrantedEvent.OutputTuple, RoleGrantedEvent.OutputObject>;
+  ): TypedContractEvent<
+    RoleGrantedEvent.InputTuple,
+    RoleGrantedEvent.OutputTuple,
+    RoleGrantedEvent.OutputObject
+  >;
   getEvent(
     key: "RoleRevoked"
-  ): TypedContractEvent<RoleRevokedEvent.InputTuple, RoleRevokedEvent.OutputTuple, RoleRevokedEvent.OutputObject>;
+  ): TypedContractEvent<
+    RoleRevokedEvent.InputTuple,
+    RoleRevokedEvent.OutputTuple,
+    RoleRevokedEvent.OutputObject
+  >;
 
   filters: {
     "MaxDataAgeUpdated(uint256)": TypedContractEvent<
