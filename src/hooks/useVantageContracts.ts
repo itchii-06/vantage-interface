@@ -12,7 +12,7 @@
  *
  * Usage:
  *   const vault = useVantageNftVault();
- *   const allAssets = await vault.getAllWhitelistedAssets();  // typed ✅
+ *   const poolValue = await vault.getPoolValue();  // typed ✅
  *
  *   // With Multicall override (future use):
  *   const vault = useVantageNftVault(multicallProvider);
