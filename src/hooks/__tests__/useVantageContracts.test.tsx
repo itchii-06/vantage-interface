@@ -7,12 +7,23 @@ import { ARBITRUM, ARBITRUM_SEPOLIA } from "sdk/configs/chains";
 import { getVantageContractAddress } from "vantage/contracts";
 
 import {
-  useVantageNavOracle,
-  useVantageNftVault,
-  useVantagePositionBridge,
-  useVantagePositionController,
-  useVantageRewardRouter,
-  useVantageShopVault,
+  useAssetRegistry,
+  useChainlinkAdapter,
+  useComplianceRegistry,
+  useLPManager,
+  useLPToken,
+  useManualAdapter,
+  useMultiOracleMiddleware,
+  useOrderBook,
+  usePositionRouter,
+  useRouter,
+  useSharedPayoutHub,
+  useUniversalPriceLogic,
+  useVault,
+  useVaultFactory,
+  useVaultReader,
+  useYieldAccumulator,
+  useYieldAwarePriceFeed,
 } from "../useVantageContracts";
 
 // ---------------------------------------------------------------------------
@@ -76,13 +87,13 @@ function captureHook<T>(hook: () => T, onResult: (value: T) => void, onError?: (
 
 describe("getVantageContractAddress", () => {
   it("returns the address for a known chain and contract", () => {
-    const addr = getVantageContractAddress(ARBITRUM_SEPOLIA, "VantageNftVault");
+    const addr = getVantageContractAddress(ARBITRUM_SEPOLIA, "Vault");
     expect(typeof addr).toBe("string");
     expect(addr).toMatch(/^0x/);
   });
 
   it("throws for an unknown chainId", () => {
-    expect(() => getVantageContractAddress(1, "VantageNftVault")).toThrow(
+    expect(() => getVantageContractAddress(1, "Vault")).toThrow(
       "Vantage contracts not configured for chainId: 1"
     );
   });
@@ -108,12 +119,23 @@ describe("useVantageContracts", () => {
   // --- Smoke: all hooks return a BaseContract ---
 
   it.each([
-    ["useVantageNftVault", useVantageNftVault],
-    ["useVantageShopVault", useVantageShopVault],
-    ["useVantagePositionController", useVantagePositionController],
-    ["useVantagePositionBridge", useVantagePositionBridge],
-    ["useVantageRewardRouter", useVantageRewardRouter],
-    ["useVantageNavOracle", useVantageNavOracle],
+    ["useVault", useVault],
+    ["useVaultFactory", useVaultFactory],
+    ["useVaultReader", useVaultReader],
+    ["useLPManager", useLPManager],
+    ["useLPToken", useLPToken],
+    ["useRouter", useRouter],
+    ["useOrderBook", useOrderBook],
+    ["usePositionRouter", usePositionRouter],
+    ["useYieldAccumulator", useYieldAccumulator],
+    ["useYieldAwarePriceFeed", useYieldAwarePriceFeed],
+    ["useSharedPayoutHub", useSharedPayoutHub],
+    ["useComplianceRegistry", useComplianceRegistry],
+    ["useAssetRegistry", useAssetRegistry],
+    ["useMultiOracleMiddleware", useMultiOracleMiddleware],
+    ["useChainlinkAdapter", useChainlinkAdapter],
+    ["useManualAdapter", useManualAdapter],
+    ["useUniversalPriceLogic", useUniversalPriceLogic],
   ] as const)("%s — returns a contract instance", (_name, hook) => {
     let contract: ethers.BaseContract | undefined;
     let error: Error | undefined;
@@ -141,7 +163,7 @@ describe("useVantageContracts", () => {
     setWalletState(mockSigner, ARBITRUM); // connected to mainnet, app needs Sepolia
     // We observe getProvider being called since assertAddress fires before
     // we can inspect the runner directly.
-    const Comp = captureHook(() => useVantageNftVault(undefined, ARBITRUM_SEPOLIA), noop, noop);
+    const Comp = captureHook(() => useVault(undefined, ARBITRUM_SEPOLIA), noop, noop);
     render(<Comp />);
     expect(getProviderMock).toHaveBeenCalledWith(undefined, ARBITRUM_SEPOLIA);
   });
@@ -150,7 +172,7 @@ describe("useVantageContracts", () => {
 
   it("uses getProvider (read-only) when wallet is not connected", () => {
     setWalletState(undefined, undefined);
-    const Comp = captureHook(() => useVantageNftVault(), noop, noop);
+    const Comp = captureHook(() => useVault(), noop, noop);
     render(<Comp />);
     expect(getProviderMock).toHaveBeenCalled();
   });
@@ -159,7 +181,7 @@ describe("useVantageContracts", () => {
 
   it("does NOT call getProvider when wallet is on the correct chain", () => {
     setWalletState(mockSigner, ARBITRUM_SEPOLIA);
-    const Comp = captureHook(() => useVantageNftVault(undefined, ARBITRUM_SEPOLIA), noop, noop);
+    const Comp = captureHook(() => useVault(undefined, ARBITRUM_SEPOLIA), noop, noop);
     render(<Comp />);
     expect(getProviderMock).not.toHaveBeenCalled();
   });
@@ -168,7 +190,7 @@ describe("useVantageContracts", () => {
 
   it("uses runnerOverride and skips getProvider when override is provided", () => {
     const multicallProvider = { getNetwork: vi.fn() } as unknown as ethers.ContractRunner;
-    const Comp = captureHook(() => useVantageNftVault(multicallProvider), noop, noop);
+    const Comp = captureHook(() => useVault(multicallProvider), noop, noop);
     render(<Comp />);
     expect(getProviderMock).not.toHaveBeenCalled();
   });
@@ -179,7 +201,7 @@ describe("useVantageContracts", () => {
     setWalletState(mockSigner, ARBITRUM_SEPOLIA);
     let error: Error | undefined;
     const Comp = captureHook(
-      () => useVantageNftVault(),
+      () => useVault(),
       noop,
       (e) => {
         error = e;
@@ -187,7 +209,7 @@ describe("useVantageContracts", () => {
     );
     render(<Comp />);
     expect(error).toBeDefined();
-    expect(error?.message).toMatch(/VantageNftVault/);
+    expect(error?.message).toMatch(/Vault/);
     expect(error?.message).toMatch(/pnpm sync/);
   });
 });

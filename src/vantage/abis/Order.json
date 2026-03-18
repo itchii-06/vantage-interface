@@ -1,1 +1,10 @@
-[]
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Order",
+  "sourceName": "contracts/interfaces/gmx/Order.sol",
+  "abi": [],
+  "bytecode": "0x60808060405234601757603a9081601d823930815050f35b600080fdfe600080fdfea26469706673582212208404b29f9d21624d05ea4137b7114f7a13171d0c3ef1c44e8cde033561bd00d464736f6c63430008140033",
+  "deployedBytecode": "0x600080fdfea26469706673582212208404b29f9d21624d05ea4137b7114f7a13171d0c3ef1c44e8cde033561bd00d464736f6c63430008140033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
