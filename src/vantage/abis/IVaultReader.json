@@ -1,0 +1,274 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "IVaultReader",
+  "sourceName": "contracts/interfaces/IVaultReader.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "vault",
+          "type": "address"
+        }
+      ],
+      "name": "getLiquidityStats",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "aum",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address[]",
+              "name": "tokens",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "balances",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "available",
+              "type": "uint256[]"
+            }
+          ],
+          "internalType": "struct IVaultReader.LiquidityStats",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "vault",
+          "type": "address"
+        }
+      ],
+      "name": "getMarketSummaries",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalLongUsd",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalShortUsd",
+              "type": "uint256"
+            },
+            {
+              "internalType": "int256",
+              "name": "instantFundingRateBps",
+              "type": "int256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "availableLiquidityUsd",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IVaultReader.MarketSummary[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "vault",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "start",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "end",
+          "type": "uint256"
+        }
+      ],
+      "name": "getMarketSummariesPaged",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalLongUsd",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalShortUsd",
+              "type": "uint256"
+            },
+            {
+              "internalType": "int256",
+              "name": "instantFundingRateBps",
+              "type": "int256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "availableLiquidityUsd",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct IVaultReader.MarketSummary[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "vault",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "collateralToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "indexToken",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "isLong",
+          "type": "bool"
+        }
+      ],
+      "name": "getPendingPnL",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "pnlUsd",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "positionSize",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "exists",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "vault",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "collateralToken",
+          "type": "address"
+        }
+      ],
+      "name": "getUserAccountSummary",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "totalCollateralUsd",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalPositionValueUsd",
+              "type": "uint256"
+            },
+            {
+              "internalType": "int256",
+              "name": "netPnlUsd",
+              "type": "int256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "marginUsageBps",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "isLiquidatable",
+              "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "isDataFresh",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct IVaultReader.UserAccountSummary",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
