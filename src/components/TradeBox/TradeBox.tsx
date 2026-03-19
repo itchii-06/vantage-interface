@@ -117,6 +117,7 @@ import { useDecreaseOrdersThatWillBeExecuted } from "./hooks/useDecreaseOrdersTh
 import { useTradeboxAcceptablePriceImpactValues } from "./hooks/useTradeboxAcceptablePriceImpactValues";
 import { useTradeboxTPSLReset } from "./hooks/useTradeboxTPSLReset";
 import { useTradeboxButtonState } from "./hooks/useTradeButtonState";
+import { useVantageTradeHandler, VANTAGE_TRADE_ENABLED } from "./hooks/useVantageTradeHandler";
 import { tradeModeLabels, tradeTypeLabels } from "./tradeboxConstants";
 import { TradeBoxAdvancedGroups } from "./TradeBoxRows/AdvancedDisplayRows";
 import { useCollateralWarnings } from "./TradeBoxRows/CollateralSelectorField";
@@ -312,6 +313,18 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
       setExternalIsCurtainOpen(false);
     }
   }, [submitButtonState, isMobile, setExternalIsCurtainOpen]);
+
+  const { handleVantageTrade, isApprovalPending } = useVantageTradeHandler({
+    chainId,
+    account,
+    tradeFlags,
+    fromToken,
+    toToken,
+    markPrice,
+    increaseAmounts,
+    decreaseAmounts,
+    selectedPosition,
+  });
 
   const expressOrdersEnabledForMax = expressOrdersEnabled && fromTokenAddress !== zeroAddress && !isWrapOrUnwrap;
 
@@ -931,15 +944,22 @@ export function TradeBox({ isMobile }: { isMobile: boolean }) {
     [submitButtonState.disabled, shouldDisableValidation, isCursorInside, wrappedOnSubmit]
   );
 
+  // When Vantage mode is active, show a "[Vantage]" suffix on the button label
+  // so testers can immediately see which contract path is being used.
+  const isVantagePositionTrade = VANTAGE_TRADE_ENABLED && !isSwap;
+  const buttonText = isVantagePositionTrade
+    ? `${submitButtonState.text} [Vantage]`
+    : submitButtonState.text;
+
   const buttonContent = (
     <Button
       qa="confirm-trade-button"
       variant="primary-action"
       className="w-full [text-decoration:inherit]"
-      onClick={wrappedOnSubmit}
-      disabled={submitButtonState.disabled && !shouldDisableValidation}
+      onClick={isVantagePositionTrade ? handleVantageTrade : wrappedOnSubmit}
+      disabled={(submitButtonState.disabled && !shouldDisableValidation) || isApprovalPending}
     >
-      {submitButtonState.text}
+      {buttonText}
     </Button>
   );
   const button = submitButtonState.tooltipContent ? (

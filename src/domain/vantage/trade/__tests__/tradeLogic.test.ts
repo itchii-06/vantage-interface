@@ -9,35 +9,47 @@ const PRICE_1000 = 1_000n * WAD;
 // calcAcceptablePrice
 // ---------------------------------------------------------------------------
 describe("calcAcceptablePrice", () => {
-  it("long 30bps: acceptable price is higher than mark price", () => {
-    const result = calcAcceptablePrice(PRICE_1000, 30, true);
+  // --- INCREASE positions ---
+  it("open long 30bps: acceptable price is HIGHER (max buy price)", () => {
+    const result = calcAcceptablePrice(PRICE_1000, 30, true, true);
     expect(result).toBe(1_003n * WAD);
     expect(result).toBeGreaterThan(PRICE_1000);
   });
 
-  it("short 30bps: acceptable price is lower than mark price", () => {
-    const result = calcAcceptablePrice(PRICE_1000, 30, false);
+  it("open short 30bps: acceptable price is LOWER (min sell price)", () => {
+    const result = calcAcceptablePrice(PRICE_1000, 30, false, true);
     expect(result).toBe(997n * WAD);
     expect(result).toBeLessThan(PRICE_1000);
   });
 
+  // --- DECREASE positions (isIncrease=false inverts the bound) ---
+  it("close long 30bps: acceptable price is LOWER (min sell price)", () => {
+    const result = calcAcceptablePrice(PRICE_1000, 30, true, false);
+    expect(result).toBe(997n * WAD);
+    expect(result).toBeLessThan(PRICE_1000);
+  });
+
+  it("close short 30bps: acceptable price is HIGHER (max buy-back price)", () => {
+    const result = calcAcceptablePrice(PRICE_1000, 30, false, false);
+    expect(result).toBe(1_003n * WAD);
+    expect(result).toBeGreaterThan(PRICE_1000);
+  });
+
+  // --- Edge cases ---
   it("0bps: acceptable price equals mark price exactly", () => {
-    expect(calcAcceptablePrice(PRICE_1000, 0, true)).toBe(PRICE_1000);
-    expect(calcAcceptablePrice(PRICE_1000, 0, false)).toBe(PRICE_1000);
+    expect(calcAcceptablePrice(PRICE_1000, 0, true, true)).toBe(PRICE_1000);
+    expect(calcAcceptablePrice(PRICE_1000, 0, false, true)).toBe(PRICE_1000);
+    expect(calcAcceptablePrice(PRICE_1000, 0, true, false)).toBe(PRICE_1000);
+    expect(calcAcceptablePrice(PRICE_1000, 0, false, false)).toBe(PRICE_1000);
   });
 
-  it("direction guard: long acceptablePrice > markPrice", () => {
-    const long = calcAcceptablePrice(PRICE_1000, 50, true);
-    expect(long).toBeGreaterThan(PRICE_1000);
-  });
-
-  it("direction guard: short acceptablePrice < markPrice", () => {
-    const short = calcAcceptablePrice(PRICE_1000, 50, false);
-    expect(short).toBeLessThan(PRICE_1000);
+  it("isIncrease defaults to true (backwards-compatible with Issue #10 callers)", () => {
+    // 3-arg call should behave as increase
+    expect(calcAcceptablePrice(PRICE_1000, 30, true)).toBe(1_003n * WAD);
+    expect(calcAcceptablePrice(PRICE_1000, 30, false)).toBe(997n * WAD);
   });
 
   it("uses default slippage (30 bps) when not specified", () => {
-    // calcAcceptablePrice with 3 args vs 2 — default should be 30bps
     expect(calcAcceptablePrice(PRICE_1000, undefined as unknown as number, true)).toBe(1_003n * WAD);
   });
 });

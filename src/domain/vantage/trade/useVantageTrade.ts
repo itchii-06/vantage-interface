@@ -79,7 +79,8 @@ export function useVantageTrade(chainId: number) {
       }
 
       const slippageBps = params.slippageBps ?? DEFAULT_SLIPPAGE_BPS;
-      const acceptablePrice = calcAcceptablePrice(params.markPrice, slippageBps, params.isLong);
+      // isIncrease=false → calcAcceptablePrice inverts the bound for close/decrease
+      const acceptablePrice = calcAcceptablePrice(params.markPrice, slippageBps, params.isLong, false);
 
       try {
         const tx = await router.decreasePosition(
