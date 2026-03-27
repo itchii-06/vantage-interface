@@ -32,6 +32,7 @@ import { SyntheticsStats } from "pages/SyntheticsStats/SyntheticsStats";
 
 import { EarnRedirect } from "components/Earn/EarnRedirect";
 import { RedirectWithQuery } from "components/RedirectWithQuery/RedirectWithQuery";
+import VantageLPPage from "pages/VantageLP/VantageLPPage";
 
 const LazyUiPage = lazy(() => import("pages/UiPage/UiPage"));
 const UiPage = () => (
@@ -158,6 +159,9 @@ export function MainRoutes({ openSettings }: { openSettings: () => void }) {
         <SyntheticsStateContextProvider skipLocalReferralCode={false} pageType="trade">
           <SyntheticsPage openSettings={openSettings} />
         </SyntheticsStateContextProvider>
+      </Route>
+      <Route exact path="/vantage-lp">
+        <VantageLPPage />
       </Route>
       <Route exact path="/jobs">
         <Jobs />
