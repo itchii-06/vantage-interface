@@ -1,7 +1,7 @@
 import { ethers, JsonRpcProvider, Network, Signer } from "ethers";
 import { useEffect, useMemo, useState } from "react";
 
-import { AnyChainId, AVALANCHE_FUJI } from "config/chains";
+import { AnyChainId, AVALANCHE_FUJI, LOCALHOST } from "config/chains";
 import { getFallbackRpcUrl, getWsRpcProviders } from "config/rpc";
 import { getIsLargeAccount } from "domain/stats/isLargeAccount";
 import { getCurrentExpressRpcUrl, getCurrentRpcUrls, useCurrentRpcUrls } from "lib/rpc/useRpcUrls";
@@ -24,7 +24,7 @@ export function getProvider(signer: Signer | undefined, chainId: number): ethers
 }
 
 export function getWsUrl(chainId: AnyChainId): string | undefined {
-  if (chainId === AVALANCHE_FUJI) {
+  if (chainId === AVALANCHE_FUJI || chainId === LOCALHOST) {
     return undefined;
   }
 

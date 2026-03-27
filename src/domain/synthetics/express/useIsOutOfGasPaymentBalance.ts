@@ -17,7 +17,7 @@ export function useIsOutOfGasPaymentBalance() {
   const l1Reference = useL1ExpressOrderGasReference();
 
   const gasPaymentTokens = getGasPaymentTokens(chainId).map((address) => getByKey(tokensData, address));
-  const relayFeeToken = getByKey(tokensData, getRelayerFeeToken(chainId).address);
+  const relayFeeToken = getByKey(tokensData, getRelayerFeeToken(chainId)?.address);
 
   return useMemo(() => {
     if (!gasPaymentTokens || !relayFeeToken || gasPrice === undefined || !gasLimits || !tokensData) {

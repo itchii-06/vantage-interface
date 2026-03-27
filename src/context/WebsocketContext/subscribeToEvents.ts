@@ -237,7 +237,7 @@ export function subscribeToApprovalEvents({
     tryGetContract(chainId, "Router"),
   ].filter((s): s is string => Boolean(s));
 
-  const tokenAddresses = getTokens(chainId)
+  const tokenAddresses = (getTokens(chainId) ?? [])
     .filter((token) => isAddress(token.address) && token.address !== NATIVE_TOKEN_ADDRESS)
     .map((token) => token.address);
 

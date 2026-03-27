@@ -23,7 +23,7 @@ function buildTokenBalancesRequest(chainId: ContractsChainId, key: CacheKey) {
   if (overrideTokenList && overrideTokenList.length > 0) {
     tokenList = overrideTokenList.map((address) => getToken(chainId, address));
   } else {
-    tokenList = getV2Tokens(chainId);
+    tokenList = getV2Tokens(chainId) ?? [];
   }
 
   return tokenList.reduce((acc, token) => {

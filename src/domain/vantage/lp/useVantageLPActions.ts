@@ -14,17 +14,15 @@ import { t } from "@lingui/macro";
 import { useCallback, useState } from "react";
 import { maxUint256 } from "viem";
 
-import { approveTokens } from "domain/tokens/approveTokens";
+import { usePendingTxns } from "context/PendingTxnsContext/PendingTxnsContext";
 import { useTokensAllowanceData } from "domain/synthetics/tokens/useTokenAllowanceData";
+import { approveTokens } from "domain/tokens/approveTokens";
+import { useLPManager } from "hooks/useVantageContracts";
 import { pushSuccessNotification } from "lib/contracts/notifications";
 import { helperToast } from "lib/helperToast";
 import useWallet from "lib/wallets/useWallet";
-import { usePendingTxns } from "context/PendingTxnsContext/PendingTxnsContext";
-import { useLPManager } from "hooks/useVantageContracts";
-import { getVantageContractAddress } from "vantage/contracts";
 import type { AnyChainId } from "sdk/configs/chains";
-
-const SLIPPAGE_BPS = 50n; // 0.5%
+import { getVantageContractAddress } from "vantage/contracts";
 
 export function useVantageLPActions(chainId: number) {
   const { account, signer } = useWallet();
@@ -39,13 +37,10 @@ export function useVantageLPActions(chainId: number) {
   const [approvingToken, setApprovingToken] = useState<string | undefined>();
   const [depositToken, setDepositToken] = useState<string | undefined>();
 
-  const { tokensAllowanceData, isLoading: isAllowanceLoading } = useTokensAllowanceData(
-    chainId as AnyChainId,
-    {
-      spenderAddress: lpManagerAddress,
-      tokenAddresses: depositToken ? [depositToken] : [],
-    }
-  );
+  const { tokensAllowanceData, isLoading: isAllowanceLoading } = useTokensAllowanceData(chainId as AnyChainId, {
+    spenderAddress: lpManagerAddress,
+    tokenAddresses: depositToken ? [depositToken] : [],
+  });
 
   /** Returns true if LPManager's allowance for `tokenAddress` is below `amount`. */
   const isApprovalNeeded = useCallback(
@@ -97,10 +92,7 @@ export function useVantageLPActions(chainId: number) {
         const tx = await lpManager.addLiquidity(tokenAddress, amount);
 
         helperToast.info(t`Transaction submitted`);
-        setPendingTxns((prev) => [
-          ...prev,
-          { hash: tx.hash, message: t`Adding liquidity...` },
-        ]);
+        setPendingTxns((prev) => [...prev, { hash: tx.hash, message: t`Adding liquidity...` }]);
 
         const receipt = await tx.wait();
         if (receipt) {
@@ -119,23 +111,17 @@ export function useVantageLPActions(chainId: number) {
   // ---------------------------------------------------------------------------
 
   const withdraw = useCallback(
-    async (shares: bigint, tokenAddress: string, minOut?: bigint): Promise<void> => {
+    async (shares: bigint, tokenAddress: string, _minOut?: bigint): Promise<void> => {
       if (!account || !signer) {
         helperToast.error(t`Wallet not connected`);
         return;
       }
 
-      // Apply default slippage if minOut not supplied
-      const safeMinOut = minOut ?? (shares * (10_000n - SLIPPAGE_BPS)) / 10_000n;
-
       try {
-        const tx = await lpManager.removeLiquidity(shares, tokenAddress, safeMinOut);
+        const tx = await lpManager.removeLiquidity(shares, tokenAddress);
 
         helperToast.info(t`Transaction submitted`);
-        setPendingTxns((prev) => [
-          ...prev,
-          { hash: tx.hash, message: t`Removing liquidity...` },
-        ]);
+        setPendingTxns((prev) => [...prev, { hash: tx.hash, message: t`Removing liquidity...` }]);
 
         const receipt = await tx.wait();
         if (receipt) {

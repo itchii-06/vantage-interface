@@ -1,4 +1,12 @@
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, SOURCE_ETHEREUM_MAINNET } from "config/chains";
+import {
+  ARBITRUM,
+  ARBITRUM_SEPOLIA,
+  AVALANCHE,
+  AVALANCHE_FUJI,
+  BOTANIX,
+  LOCALHOST,
+  SOURCE_ETHEREUM_MAINNET,
+} from "config/chains";
 import { isDevelopment } from "config/env";
 
 import { createClient } from "./utils";
@@ -78,7 +86,7 @@ export function getGmxGraphClient(chainId: number) {
     return avalancheGraphClient;
   } else if (chainId === AVALANCHE_FUJI) {
     return null;
-  } else if (chainId === BOTANIX || chainId === ARBITRUM_SEPOLIA) {
+  } else if (chainId === BOTANIX || chainId === ARBITRUM_SEPOLIA || chainId === LOCALHOST) {
     return null;
   }
 
@@ -92,7 +100,7 @@ export function getReferralsGraphClient(chainId) {
     return avalancheReferralsGraphClient;
   } else if (chainId === AVALANCHE_FUJI) {
     return avalancheFujiReferralsGraphClient;
-  } else if (chainId === BOTANIX || chainId === ARBITRUM_SEPOLIA) {
+  } else if (chainId === BOTANIX || chainId === ARBITRUM_SEPOLIA || chainId === LOCALHOST) {
     return null;
   }
   throw new Error(`Unsupported chain ${chainId}`);

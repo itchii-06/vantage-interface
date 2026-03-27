@@ -2104,7 +2104,7 @@ export function isValidToken(chainId: number, address: string) {
 }
 
 export function isValidTokenSafe(chainId: number, address: string) {
-  return address in TOKENS_MAP[chainId];
+  return !!TOKENS_MAP[chainId] && address in TOKENS_MAP[chainId];
 }
 
 export function getToken(chainId: number, address: string) {

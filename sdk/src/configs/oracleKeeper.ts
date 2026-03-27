@@ -1,4 +1,4 @@
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ContractsChainId } from "./chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ContractsChainId, LOCALHOST } from "./chains";
 
 export const ORACLE_FALLBACK_TRACKER_CONFIG = {
   trackInterval: 10 * 1000, // 10 secs
@@ -24,6 +24,10 @@ const ORACLE_KEEPER_URLS: Record<ContractsChainId, string> = {
   [BOTANIX]: "https://botanix-api.gmxinfra.io",
 
   [ARBITRUM_SEPOLIA]: "https://dolphin-app-a2dup.ondigitalocean.app",
+
+  // Localhost: no oracle keeper — placeholder keeps OracleKeeperFetcher from throwing on init.
+  // Requests to this URL will fail silently (hardhat node doesn't serve oracle endpoints).
+  [LOCALHOST]: "http://localhost:8545",
 };
 
 const ORACLE_KEEPER_FALLBACK_URLS: Record<ContractsChainId, string[]> = {
@@ -36,6 +40,8 @@ const ORACLE_KEEPER_FALLBACK_URLS: Record<ContractsChainId, string[]> = {
   [BOTANIX]: ["https://botanix-api-fallback.gmxinfra.io", "https://botanix-api-fallback.gmxinfra2.io"],
 
   [ARBITRUM_SEPOLIA]: ["https://dolphin-app-a2dup.ondigitalocean.app"],
+
+  [LOCALHOST]: ["http://localhost:8545"],
 };
 
 export function getOracleKeeperUrl(chainId: number) {

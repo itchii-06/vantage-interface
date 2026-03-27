@@ -1,6 +1,6 @@
 import { type Address, zeroAddress } from "viem";
 
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ContractsChainId } from "./chains";
+import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ContractsChainId, LOCALHOST } from "./chains";
 
 export const CONTRACTS = {
   [ARBITRUM]: {
@@ -388,11 +388,12 @@ export type ContractName = ExtractContractNames<typeof CONTRACTS>;
 
 export function getContract(chainId: ContractsChainId, name: ContractName): Address {
   if (!CONTRACTS[chainId]) {
+    if (chainId === LOCALHOST) return zeroAddress;
     throw new Error(`Unknown chainId ${chainId}`);
   }
 
   if (!CONTRACTS[chainId][name]) {
-    throw new Error(`Unknown contract "${name}" for chainId ${chainId}`);
+    return zeroAddress;
   }
 
   return CONTRACTS[chainId][name];

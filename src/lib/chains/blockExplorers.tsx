@@ -7,6 +7,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  LOCALHOST,
   getExplorerUrl,
   SOURCE_ETHEREUM_MAINNET,
   SOURCE_BASE_MAINNET,
@@ -29,6 +30,7 @@ export const CHAIN_ID_TO_TX_URL_BUILDER: Record<
   [SOURCE_SEPOLIA]: (txId: string) => `${getExplorerUrl(SOURCE_SEPOLIA)}tx/${txId}`,
   [BOTANIX]: (txId: string) => `${getExplorerUrl(BOTANIX)}tx/${txId}`,
   [SOURCE_BSC_MAINNET]: (txId: string) => `${getExplorerUrl(SOURCE_BSC_MAINNET)}tx/${txId}`,
+  [LOCALHOST]: (txId: string) => `${getExplorerUrl(LOCALHOST)}tx/${txId}`,
   layerzero: (txId: string) => `${getExplorerUrl("layerzero")}tx/${txId}`,
   "layerzero-testnet": (txId: string) => `${getExplorerUrl("layerzero-testnet")}tx/${txId}`,
 };
@@ -44,4 +46,5 @@ export const CHAIN_ID_TO_EXPLORER_NAME: Record<AnyChainId, string> = {
   [SOURCE_SEPOLIA]: "Sepolia Etherscan",
   [BOTANIX]: "Botanix Explorer",
   [SOURCE_BSC_MAINNET]: "BSC Scan",
+  [LOCALHOST]: "Localhost",
 };

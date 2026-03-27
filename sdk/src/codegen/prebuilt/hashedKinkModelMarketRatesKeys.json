@@ -25,6 +25,7 @@
       "aboveOptimalUsageBorrowingFactorShort": "0x9e1a14e48896d7b69cbcd1632d3dd4061324a789f9be86617408fe12ec5700e6"
     }
   },
+  "31337": {},
   "42161": {
     "0x47c031236e19d024b42f8AE6780E44A573170703": {
       "optimalUsageFactorLong": "0x81cc37ff3833298b6114d8317fd6c5996dc7a8ab53fefd3edb9f415ca4267824",

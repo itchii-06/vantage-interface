@@ -8,6 +8,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  LOCALHOST,
   ContractsChainId,
   getChainName,
   getChainNativeTokenSymbol,
@@ -46,6 +47,7 @@ const OPPOSITE_CHAIN_ID: Record<ContractsChainId, ContractsChainId> = {
   [ARBITRUM_SEPOLIA]: AVALANCHE_FUJI,
   [AVALANCHE_FUJI]: ARBITRUM_SEPOLIA,
   [BOTANIX]: ARBITRUM,
+  [LOCALHOST]: ARBITRUM_SEPOLIA,
 };
 
 export default function BuyGMX() {

@@ -1,4 +1,12 @@
-import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, ContractsChainId } from "config/chains";
+import {
+  ARBITRUM,
+  ARBITRUM_SEPOLIA,
+  AVALANCHE,
+  AVALANCHE_FUJI,
+  BOTANIX,
+  LOCALHOST,
+  ContractsChainId,
+} from "config/chains";
 import { getContract } from "config/contracts";
 
 const ARBITRUM_GMX = getContract(ARBITRUM, "GMX").toLowerCase();
@@ -49,6 +57,10 @@ export const EXTERNAL_LINKS: Record<
     buyGmx: {
       uniswap: undefined,
     },
+  },
+  [LOCALHOST]: {
+    networkWebsite: "",
+    buyGmx: {},
   },
 };
 

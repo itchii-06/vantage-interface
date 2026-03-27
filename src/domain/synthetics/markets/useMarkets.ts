@@ -18,7 +18,7 @@ export function useMarkets(chainId: number): MarketsResult {
     const markets = MARKETS[chainId];
 
     if (!markets) {
-      throw new Error(`Static markets data for chain ${chainId} not found`);
+      return { marketsData: {}, marketsAddresses: [] };
     }
 
     return Object.values(markets).reduce(
