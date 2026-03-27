@@ -21,6 +21,8 @@ msgstr "GLP 풀"
 msgid "Slippage exceeded"
 msgstr "슬리피지 초과"
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/trade/useVantageTrade.ts
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 #: src/pages/AccountTransfer/CompleteAccountTransfer/CompleteAccountTransfer.tsx
 #: src/pages/ReferralsTier/ReferralsTier.tsx
@@ -1940,6 +1942,10 @@ msgstr "H2 텍스트 크기"
 msgid "GMX balance"
 msgstr "GMX 잔액"
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Position closed"
+msgstr ""
+
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Price on Avalanche"
 msgstr "Avalanche에서 가격"
@@ -2944,6 +2950,11 @@ msgstr "GMX 프리미엄 RPC로 더 빠른 실행"
 msgid "Order type"
 msgstr "주문 유형"
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Transaction submitted"
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSpreadRow.tsx
 msgid "Collateral spread"
 msgstr "담보 스프레드"
@@ -3564,6 +3575,10 @@ msgstr "최대 용량:"
 #: src/components/GmList/PerformanceLabel.tsx
 msgid "Ann. performance"
 msgstr "연환산 수익률"
+
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Closing position..."
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw and unreserve GMX"
@@ -8219,6 +8234,10 @@ msgstr "수수료 및 순 가격 영향 차감 후 실현 PnL"
 msgid "Transfer {nativeTokenSymbol}"
 msgstr "{nativeTokenSymbol} 전송"
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Opening position..."
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "LIQUIDITY SHORT"
 msgstr "유동성 숏"
@@ -10117,6 +10136,10 @@ msgstr "트리거"
 #: src/pages/DecodeError/DecodeError.tsx
 msgid "Failed to decode error. Make sure the hex data is valid and starts with \"0x\"."
 msgstr "오류 디코딩에 실패했습니다. 16진수 데이터가 유효하고 \"0x\"로 시작하는지 확인하십시오."
+
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Position opened"
+msgstr ""
 
 #: src/pages/UiPage/UiPage.tsx
 msgid "Text colors"

@@ -21,6 +21,8 @@ msgstr ""
 msgid "Slippage exceeded"
 msgstr ""
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/trade/useVantageTrade.ts
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 #: src/pages/AccountTransfer/CompleteAccountTransfer/CompleteAccountTransfer.tsx
 #: src/pages/ReferralsTier/ReferralsTier.tsx
@@ -1940,6 +1942,10 @@ msgstr ""
 msgid "GMX balance"
 msgstr ""
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Position closed"
+msgstr ""
+
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Price on Avalanche"
 msgstr ""
@@ -2944,6 +2950,11 @@ msgstr ""
 msgid "Order type"
 msgstr ""
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Transaction submitted"
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSpreadRow.tsx
 msgid "Collateral spread"
 msgstr ""
@@ -3563,6 +3574,10 @@ msgstr ""
 
 #: src/components/GmList/PerformanceLabel.tsx
 msgid "Ann. performance"
+msgstr ""
+
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Closing position..."
 msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -8219,6 +8234,10 @@ msgstr ""
 msgid "Transfer {nativeTokenSymbol}"
 msgstr ""
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Opening position..."
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "LIQUIDITY SHORT"
 msgstr ""
@@ -10116,6 +10135,10 @@ msgstr ""
 
 #: src/pages/DecodeError/DecodeError.tsx
 msgid "Failed to decode error. Make sure the hex data is valid and starts with \"0x\"."
+msgstr ""
+
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Position opened"
 msgstr ""
 
 #: src/pages/UiPage/UiPage.tsx

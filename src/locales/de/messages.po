@@ -21,6 +21,8 @@ msgstr "GLP Pool"
 msgid "Slippage exceeded"
 msgstr "Slippage überschritten"
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/trade/useVantageTrade.ts
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 #: src/pages/AccountTransfer/CompleteAccountTransfer/CompleteAccountTransfer.tsx
 #: src/pages/ReferralsTier/ReferralsTier.tsx
@@ -1940,6 +1942,10 @@ msgstr "H2-Textgröße"
 msgid "GMX balance"
 msgstr "GMX-Guthaben"
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Position closed"
+msgstr ""
+
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Price on Avalanche"
 msgstr "Preis auf Avalanche"
@@ -2944,6 +2950,11 @@ msgstr "Schnellere Ausführung mit GMX Premium-RPCs"
 msgid "Order type"
 msgstr "Ordertyp"
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Transaction submitted"
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSpreadRow.tsx
 msgid "Collateral spread"
 msgstr "Sicherheits-Spread"
@@ -3564,6 +3575,10 @@ msgstr "Max. Kapazität:"
 #: src/components/GmList/PerformanceLabel.tsx
 msgid "Ann. performance"
 msgstr "Ann. Performance"
+
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Closing position..."
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw and unreserve GMX"
@@ -8219,6 +8234,10 @@ msgstr "Realisierter PnL nach Gebühren und Nettopreiseinfluss"
 msgid "Transfer {nativeTokenSymbol}"
 msgstr "{nativeTokenSymbol} transferieren"
 
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Opening position..."
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "LIQUIDITY SHORT"
 msgstr "LIQUIDITÄT SHORT"
@@ -10117,6 +10136,10 @@ msgstr "Trigger"
 #: src/pages/DecodeError/DecodeError.tsx
 msgid "Failed to decode error. Make sure the hex data is valid and starts with \"0x\"."
 msgstr "Fehler beim Decodieren. Stellen Sie sicher, dass die Hex-Daten gültig sind und mit \"0x\" beginnen."
+
+#: src/domain/vantage/trade/useVantageTrade.ts
+msgid "Position opened"
+msgstr ""
 
 #: src/pages/UiPage/UiPage.tsx
 msgid "Text colors"
