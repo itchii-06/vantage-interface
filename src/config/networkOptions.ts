@@ -4,6 +4,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  LOCALHOST,
   SOURCE_ETHEREUM_MAINNET,
   SOURCE_BASE_MAINNET,
   SOURCE_BSC_MAINNET,
@@ -85,6 +86,12 @@ if (isDevelopment()) {
       value: SOURCE_SEPOLIA,
       icon: getChainIcon(SOURCE_SEPOLIA),
       color: "#aa00ff",
+    },
+    {
+      label: getChainName(LOCALHOST),
+      value: LOCALHOST,
+      icon: getChainIcon(LOCALHOST),
+      color: "#8b8b8b",
     }
   );
 }
