@@ -11,6 +11,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  LOCALHOST,
   SOURCE_ETHEREUM_MAINNET,
   SOURCE_BASE_MAINNET,
   SOURCE_BSC_MAINNET,
@@ -199,6 +200,15 @@ const RPC_CONFIGS: Record<number, RpcConfig[]> = {
     ...(_debugRpcTracker?.getDebugRpcEndpoints(BOTANIX) ?? []),
   ],
 
+  // LOCAL DEVELOPMENT
+  [LOCALHOST]: [
+    {
+      url: "http://127.0.0.1:8545",
+      isPublic: true,
+      purpose: "default",
+    },
+  ],
+
   // SOURCE CHAINS
   [SOURCE_BASE_MAINNET]: [
     ...[
@@ -363,7 +373,7 @@ export function getExpressRpcUrl(chainId: number): string | undefined {
 export type RpcPurpose = "fallback" | "largeAccount" | "express" | "default";
 
 function getAlchemyProvider(
-  chainId: Exclude<AnyChainId, typeof AVALANCHE_FUJI>,
+  chainId: Exclude<AnyChainId, typeof AVALANCHE_FUJI | typeof LOCALHOST>,
   purpose: RpcPurpose,
   type: "http" | "ws" = "http"
 ): RpcConfig {

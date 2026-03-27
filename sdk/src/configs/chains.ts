@@ -7,6 +7,7 @@ import {
   base,
   bsc,
   Chain,
+  hardhat,
   mainnet,
   optimismSepolia,
   sepolia,
@@ -20,6 +21,7 @@ import {
   AVALANCHE,
   AVALANCHE_FUJI,
   BOTANIX,
+  LOCALHOST,
   SOURCE_ETHEREUM_MAINNET,
   SOURCE_BASE_MAINNET,
   SOURCE_BSC_MAINNET,
@@ -33,6 +35,7 @@ export {
   AVALANCHE_FUJI,
   BOTANIX,
   ARBITRUM_SEPOLIA,
+  LOCALHOST,
   SOURCE_ETHEREUM_MAINNET,
   SOURCE_BASE_MAINNET,
   SOURCE_BSC_MAINNET,
@@ -41,7 +44,7 @@ export {
 };
 
 export const CONTRACTS_CHAIN_IDS = [ARBITRUM, AVALANCHE, BOTANIX] as const;
-export const CONTRACTS_CHAIN_IDS_DEV = [...CONTRACTS_CHAIN_IDS, AVALANCHE_FUJI, ARBITRUM_SEPOLIA] as const;
+export const CONTRACTS_CHAIN_IDS_DEV = [...CONTRACTS_CHAIN_IDS, AVALANCHE_FUJI, ARBITRUM_SEPOLIA, LOCALHOST] as const;
 export const SETTLEMENT_CHAIN_IDS = [ARBITRUM, AVALANCHE] as const;
 export const SETTLEMENT_CHAIN_IDS_DEV = [...SETTLEMENT_CHAIN_IDS, ARBITRUM_SEPOLIA, AVALANCHE_FUJI] as const;
 export const SOURCE_CHAIN_IDS = [
@@ -165,6 +168,25 @@ const CONTRACTS_CHAIN_CONFIGS = {
     gasPriceBuffer: undefined,
     isDisabled: false,
   },
+  [LOCALHOST]: {
+    chainId: LOCALHOST,
+    name: "Localhost",
+    slug: "localhost",
+    explorerUrl: "",
+    nativeTokenSymbol: "ETH",
+    wrappedTokenSymbol: "WETH",
+    defaultCollateralSymbol: "USDC",
+    highExecutionFee: 0,
+    shouldUseMaxPriorityFeePerGas: false,
+    defaultExecutionFeeBufferBps: 1000,
+    maxFeePerGas: undefined,
+    gasPricePremium: undefined,
+    maxPriorityFeePerGas: 0n,
+    excessiveExecutionFee: 0,
+    minExecutionFee: undefined,
+    gasPriceBuffer: undefined,
+    isDisabled: false,
+  },
   // Use this notation to correctly infer chain names, etc. from config
 } as const satisfies Record<ContractsChainId, ContractsChainConfig>;
 
@@ -276,6 +298,7 @@ export const VIEM_CHAIN_BY_CHAIN_ID: Record<AnyChainId, Chain> = {
   [AVALANCHE]: avalanche,
   [ARBITRUM_SEPOLIA]: arbitrumSepolia,
   [BOTANIX]: botanix,
+  [LOCALHOST]: hardhat,
   [SOURCE_ETHEREUM_MAINNET]: mainnet,
   [SOURCE_OPTIMISM_SEPOLIA]: optimismSepolia,
   [SOURCE_SEPOLIA]: sepolia,
@@ -314,7 +337,7 @@ export function isContractsChain(chainId: number, dev = false): chainId is Contr
 }
 
 export function isTestnetChain(chainId: number): boolean {
-  return [AVALANCHE_FUJI, ARBITRUM_SEPOLIA, SOURCE_SEPOLIA, SOURCE_OPTIMISM_SEPOLIA].includes(chainId);
+  return [AVALANCHE_FUJI, ARBITRUM_SEPOLIA, SOURCE_SEPOLIA, SOURCE_OPTIMISM_SEPOLIA, LOCALHOST].includes(chainId);
 }
 
 export function getMaxFeePerGas(chainId: ContractsChainId): bigint | undefined {

@@ -7,6 +7,7 @@ import {
   BOTANIX,
   GMX_ACCOUNT_PSEUDO_CHAIN_ID,
   GmxAccountPseudoChainId,
+  LOCALHOST,
   SOURCE_BASE_MAINNET,
   SOURCE_BSC_MAINNET,
   SOURCE_ETHEREUM_MAINNET,
@@ -106,6 +107,7 @@ export const CHAIN_ID_TO_NETWORK_ICON: Record<AnyChainId | GmxAccountPseudoChain
   [SOURCE_SEPOLIA]: sepolia,
   [BOTANIX]: botanix,
   [SOURCE_BSC_MAINNET]: bsc,
+  [LOCALHOST]: eth,
 };
 
 /**
