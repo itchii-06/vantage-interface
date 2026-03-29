@@ -7235,6 +7235,10 @@ msgstr "GLP 补偿（测试）"
 msgid "<0>Return to </0><1>Homepage</1> <2>or </2> <3>Trade</3>"
 msgstr "<0>返回 </0><1>主页</1> <2>或 </2> <3>交易</3>"
 
+#: src/domain/vantage/lp/useVantageLPActions.ts
+msgid "Approval submitted — waiting for confirmation…"
+msgstr ""
+
 #: src/components/BridgingInfo/BridgingInfo.tsx
 msgid "Bridge {tokenSymbol} to {chainName} with"
 msgstr "将 {tokenSymbol} 桥接到 {chainName} 使用"

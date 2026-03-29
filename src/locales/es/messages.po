@@ -7235,6 +7235,10 @@ msgstr "Reembolso de GLP (prueba)"
 msgid "<0>Return to </0><1>Homepage</1> <2>or </2> <3>Trade</3>"
 msgstr "<0>Volver a </0><1>Página inicial</1> <2>o </2> <3>Operar</3>"
 
+#: src/domain/vantage/lp/useVantageLPActions.ts
+msgid "Approval submitted — waiting for confirmation…"
+msgstr ""
+
 #: src/components/BridgingInfo/BridgingInfo.tsx
 msgid "Bridge {tokenSymbol} to {chainName} with"
 msgstr "Puente {tokenSymbol} a {chainName} con"

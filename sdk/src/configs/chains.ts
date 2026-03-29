@@ -292,13 +292,28 @@ export const botanix: Chain = defineChain({
   },
 });
 
+// Hardhat 2.14+ pre-deploys Multicall3 at the canonical address, but viem's
+// built-in `hardhat` chain definition omits contracts.multicall3. Without it,
+// viem falls back to a "deployment-simulation" multicall (eth_call with to:null)
+// which causes a StackOverflow on Hardhat. Extend the chain to fix this.
+const hardhatWithMulticall3: Chain = {
+  ...hardhat,
+  contracts: {
+    ...hardhat.contracts,
+    multicall3: {
+      address: "0xcA11bde05977b3631167028862bE2a173976CA11",
+      blockCreated: 0,
+    },
+  },
+};
+
 export const VIEM_CHAIN_BY_CHAIN_ID: Record<AnyChainId, Chain> = {
   [AVALANCHE_FUJI]: avalancheFuji,
   [ARBITRUM]: arbitrum,
   [AVALANCHE]: avalanche,
   [ARBITRUM_SEPOLIA]: arbitrumSepolia,
   [BOTANIX]: botanix,
-  [LOCALHOST]: hardhat,
+  [LOCALHOST]: hardhatWithMulticall3,
   [SOURCE_ETHEREUM_MAINNET]: mainnet,
   [SOURCE_OPTIMISM_SEPOLIA]: optimismSepolia,
   [SOURCE_SEPOLIA]: sepolia,

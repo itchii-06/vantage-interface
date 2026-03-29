@@ -7235,6 +7235,10 @@ msgstr "GLP 보상금 (테스트)"
 msgid "<0>Return to </0><1>Homepage</1> <2>or </2> <3>Trade</3>"
 msgstr "<0>로 돌아가기 </0><1>홈페이지</1> <2>또는 </2> <3>거래</3>"
 
+#: src/domain/vantage/lp/useVantageLPActions.ts
+msgid "Approval submitted — waiting for confirmation…"
+msgstr ""
+
 #: src/components/BridgingInfo/BridgingInfo.tsx
 msgid "Bridge {tokenSymbol} to {chainName} with"
 msgstr "{tokenSymbol}을 {chainName}으로 브릿지"

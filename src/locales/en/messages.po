@@ -7235,6 +7235,10 @@ msgstr "GLP reimbursement (test)"
 msgid "<0>Return to </0><1>Homepage</1> <2>or </2> <3>Trade</3>"
 msgstr "<0>Return to </0><1>Homepage</1> <2>or </2> <3>Trade</3>"
 
+#: src/domain/vantage/lp/useVantageLPActions.ts
+msgid "Approval submitted — waiting for confirmation…"
+msgstr "Approval submitted — waiting for confirmation…"
+
 #: src/components/BridgingInfo/BridgingInfo.tsx
 msgid "Bridge {tokenSymbol} to {chainName} with"
 msgstr "Bridge {tokenSymbol} to {chainName} with"

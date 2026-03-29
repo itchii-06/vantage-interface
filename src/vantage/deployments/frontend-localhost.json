@@ -1,19 +1,19 @@
 {
   "network": "localhost",
   "addresses": {
-    "Vault": "0x99bbA657f2BbC93c02D617f8bA121cB8Fc104Acf",
-    "LPManager": "0x8f86403A4DE0BB5791fa46B8e795C547942fE4Cf",
-    "LPToken": "0x0E801D84Fa97b50751Dbf25036d067dCf18858bF",
-    "SharedPayoutHub": "0x9d4454B023096f34B160D6B654540c56A1F81688",
-    "AssetRegistry": "0x998abeb3E57409262aE5b751f60747921B33613E",
-    "YieldAccumulator": "0x95401dc811bb5740090279Ba06cfA8fcF6113778",
-    "Router": "0x5eb3Bc0a489C5A8288765d2336659EbCA68FCd00",
-    "PositionRouter": "0x36C02dA8a0983159322a80FFE9F24b1acfF8B570",
-    "OrderBook": "0x809d550fca64d94Bd9F66E60752A544199cfAC3D",
+    "Vault": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
+    "LPManager": "0x9A676e781A523b5d0C0e43731313A708CB607508",
+    "LPToken": "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
+    "SharedPayoutHub": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+    "AssetRegistry": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+    "YieldAccumulator": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
+    "Router": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+    "PositionRouter": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+    "OrderBook": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
     "tokens": {
-      "USDC": "0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB",
-      "ETH": "0x9E545E3C0baAB3E08CdfD552C960A1050f373042",
-      "WETH": "0xa82fF9aFd8f496c3d6ac40E2a0F282E47488CFc9"
+      "USDC": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "ETH": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "WETH": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
     }
   },
   "abis": {
@@ -3540,6 +3540,13 @@
           }
         ],
         "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "acceptLPTokenOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
       },
       {

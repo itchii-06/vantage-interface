@@ -7235,6 +7235,10 @@ msgstr "Remboursement GLP (test)"
 msgid "<0>Return to </0><1>Homepage</1> <2>or </2> <3>Trade</3>"
 msgstr "<0>Retourner à </0><1>la page d'accueil</1> <2>ou </2> <3>Trader</3>"
 
+#: src/domain/vantage/lp/useVantageLPActions.ts
+msgid "Approval submitted — waiting for confirmation…"
+msgstr ""
+
 #: src/components/BridgingInfo/BridgingInfo.tsx
 msgid "Bridge {tokenSymbol} to {chainName} with"
 msgstr "Transférer {tokenSymbol} vers {chainName} avec"

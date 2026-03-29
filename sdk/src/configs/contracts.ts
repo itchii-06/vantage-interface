@@ -386,9 +386,16 @@ type ExtractContractNames<T extends object> = {
 
 export type ContractName = ExtractContractNames<typeof CONTRACTS>;
 
+// Canonical Multicall3 address (same on every network that pre-deploys it,
+// including Hardhat ≥2.14 localhost).
+const MULTICALL3_CANONICAL = "0xcA11bde05977b3631167028862bE2a173976CA11" as Address;
+
 export function getContract(chainId: ContractsChainId, name: ContractName): Address {
   if (!CONTRACTS[chainId]) {
-    if (chainId === LOCALHOST) return zeroAddress;
+    if (chainId === LOCALHOST) {
+      if (name === "Multicall") return MULTICALL3_CANONICAL;
+      return zeroAddress;
+    }
     throw new Error(`Unknown chainId ${chainId}`);
   }
 

@@ -11,16 +11,18 @@
  */
 
 import { t } from "@lingui/macro";
+import { ethers } from "ethers";
 import { useCallback, useState } from "react";
 import { maxUint256 } from "viem";
 
 import { usePendingTxns } from "context/PendingTxnsContext/PendingTxnsContext";
 import { useTokensAllowanceData } from "domain/synthetics/tokens/useTokenAllowanceData";
-import { approveTokens } from "domain/tokens/approveTokens";
+// import { approveTokens } from "domain/tokens/approveTokens";
 import { useLPManager } from "hooks/useVantageContracts";
 import { pushSuccessNotification } from "lib/contracts/notifications";
 import { helperToast } from "lib/helperToast";
 import useWallet from "lib/wallets/useWallet";
+import TokenAbi from "sdk/abis/Token";
 import type { AnyChainId } from "sdk/configs/chains";
 import { getVantageContractAddress } from "vantage/contracts";
 
@@ -56,17 +58,23 @@ export function useVantageLPActions(chainId: number) {
   const approve = useCallback(
     async (tokenAddress: string): Promise<void> => {
       if (!signer) return;
-      await approveTokens({
-        setIsApproving: (v) => setApprovingToken(v ? tokenAddress : undefined),
-        signer,
-        tokenAddress,
-        spender: lpManagerAddress,
-        chainId,
-        permitParams: undefined,
-        approveAmount: maxUint256,
-      });
+      // Ensure allowance polling is active for this token before and after approval
+      setDepositToken(tokenAddress);
+      setApprovingToken(tokenAddress);
+      try {
+        // Send approve and wait for on-chain confirmation before returning.
+        // approveTokens() fires-and-forgets the TX, which causes MetaMask nonce
+        // desync on Hardhat localhost (automining or short-interval mining).
+        // Waiting here ensures the nonce is committed before addLiquidity is sent.
+        const contract = new ethers.Contract(tokenAddress, TokenAbi, signer);
+        const tx = await contract.approve(lpManagerAddress, maxUint256);
+        helperToast.info(t`Approval submitted — waiting for confirmation…`);
+        await tx.wait();
+      } finally {
+        setApprovingToken(undefined);
+      }
     },
-    [signer, lpManagerAddress, chainId]
+    [signer, lpManagerAddress]
   );
 
   // ---------------------------------------------------------------------------
