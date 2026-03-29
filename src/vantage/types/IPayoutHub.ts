@@ -22,43 +22,16 @@ import type {
 } from "./common";
 
 export interface IPayoutHubInterface extends Interface {
-  getFunction(
-    nameOrSignature:
-      | "debtCeilings"
-      | "requestPayout"
-      | "settleProfit"
-      | "vaultDebts"
-  ): FunctionFragment;
+  getFunction(nameOrSignature: "debtCeilings" | "requestPayout" | "settleProfit" | "vaultDebts"): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "debtCeilings",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "requestPayout",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "settleProfit",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "vaultDebts",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "debtCeilings", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "requestPayout", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "settleProfit", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "vaultDebts", values: [AddressLike]): string;
 
-  decodeFunctionResult(
-    functionFragment: "debtCeilings",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "requestPayout",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "settleProfit",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "debtCeilings", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "requestPayout", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "settleProfit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "vaultDebts", data: BytesLike): Result;
 }
 
@@ -79,68 +52,40 @@ export interface IPayoutHub extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
   debtCeilings: TypedContractMethod<[vault: AddressLike], [bigint], "view">;
 
-  requestPayout: TypedContractMethod<
-    [receiver: AddressLike, amount: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  requestPayout: TypedContractMethod<[receiver: AddressLike, amount: BigNumberish], [void], "nonpayable">;
 
-  settleProfit: TypedContractMethod<
-    [amount: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  settleProfit: TypedContractMethod<[_vault: AddressLike, amount: BigNumberish], [void], "nonpayable">;
 
   vaultDebts: TypedContractMethod<[vault: AddressLike], [bigint], "view">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
-  getFunction(
-    nameOrSignature: "debtCeilings"
-  ): TypedContractMethod<[vault: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "debtCeilings"): TypedContractMethod<[vault: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "requestPayout"
-  ): TypedContractMethod<
-    [receiver: AddressLike, amount: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[receiver: AddressLike, amount: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "settleProfit"
-  ): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "vaultDebts"
-  ): TypedContractMethod<[vault: AddressLike], [bigint], "view">;
+  ): TypedContractMethod<[_vault: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "vaultDebts"): TypedContractMethod<[vault: AddressLike], [bigint], "view">;
 
   filters: {};
 }

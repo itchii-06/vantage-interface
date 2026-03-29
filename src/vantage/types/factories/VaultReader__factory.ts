@@ -54,6 +54,62 @@ const _abi = [
         name: "vault",
         type: "address",
       },
+      {
+        internalType: "address",
+        name: "lpToken",
+        type: "address",
+      },
+    ],
+    name: "getLpYieldSummary",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "sharePrice",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "totalAum",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "totalSupply",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "instantaneousApr",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "fundingAprBps",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "feeShareAprBps",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct IVaultReader.LpYieldSummary",
+        name: "s",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "vault",
+        type: "address",
+      },
     ],
     name: "getMarketSummaries",
     outputs: [
@@ -203,6 +259,30 @@ const _abi = [
         internalType: "bool",
         name: "exists",
         type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "vault",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "lpToken",
+        type: "address",
+      },
+    ],
+    name: "getSharePrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",

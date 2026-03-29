@@ -3,12 +3,28 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  IAssetRegistry,
-  IAssetRegistryInterface,
-} from "../IAssetRegistry";
+import type { IAssetRegistry, IAssetRegistryInterface } from "../IAssetRegistry";
 
 const _abi = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "complianceAdapters",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
   {
     inputs: [
       {
@@ -119,6 +135,11 @@ const _abi = [
           },
           {
             internalType: "uint256",
+            name: "liquidationFeeBps",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
             name: "marginFeeBps",
             type: "uint256",
           },
@@ -178,12 +199,76 @@ const _abi = [
         type: "address",
       },
     ],
+    name: "getMinLegalUnit",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
     name: "getRequiresWeekendLock",
     outputs: [
       {
         internalType: "bool",
         name: "",
         type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getRestrictedAssets",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "isMarketOpen",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "utilizationCapBps",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -196,10 +281,7 @@ export class IAssetRegistry__factory {
   static createInterface(): IAssetRegistryInterface {
     return new Interface(_abi) as IAssetRegistryInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): IAssetRegistry {
+  static connect(address: string, runner?: ContractRunner | null): IAssetRegistry {
     return new Contract(address, _abi, runner) as unknown as IAssetRegistry;
   }
 }

@@ -3,10 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  YieldAwarePriceFeed,
-  YieldAwarePriceFeedInterface,
-} from "../YieldAwarePriceFeed";
+import type { YieldAwarePriceFeed, YieldAwarePriceFeedInterface } from "../YieldAwarePriceFeed";
 
 const _abi = [
   {
@@ -94,8 +91,34 @@ const _abi = [
         type: "address",
       },
     ],
+    name: "OwnershipTransferStarted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
     name: "OwnershipTransferred",
     type: "event",
+  },
+  {
+    inputs: [],
+    name: "acceptOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
@@ -253,6 +276,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "pendingOwner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "renounceOwnership",
     outputs: [],
     stateMutability: "nonpayable",
@@ -304,14 +340,7 @@ export class YieldAwarePriceFeed__factory {
   static createInterface(): YieldAwarePriceFeedInterface {
     return new Interface(_abi) as YieldAwarePriceFeedInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): YieldAwarePriceFeed {
-    return new Contract(
-      address,
-      _abi,
-      runner
-    ) as unknown as YieldAwarePriceFeed;
+  static connect(address: string, runner?: ContractRunner | null): YieldAwarePriceFeed {
+    return new Contract(address, _abi, runner) as unknown as YieldAwarePriceFeed;
   }
 }

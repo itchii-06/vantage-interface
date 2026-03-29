@@ -26,61 +26,51 @@ import type {
 export interface ManualAdapterInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "acceptOwnership"
       | "getLatestPrice"
       | "lastUpdatedAt"
       | "owner"
+      | "pendingOwner"
       | "price"
       | "renounceOwnership"
       | "setPrice"
       | "transferOwnership"
   ): FunctionFragment;
 
-  getEvent(
-    nameOrSignatureOrTopic: "OwnershipTransferred" | "PriceSet"
-  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferStarted" | "OwnershipTransferred" | "PriceSet"): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "getLatestPrice",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lastUpdatedAt",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "acceptOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getLatestPrice", values?: undefined): string;
+  encodeFunctionData(functionFragment: "lastUpdatedAt", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
   encodeFunctionData(functionFragment: "price", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPrice",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "setPrice", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "transferOwnership", values: [AddressLike]): string;
 
-  decodeFunctionResult(
-    functionFragment: "getLatestPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "lastUpdatedAt",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getLatestPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "lastUpdatedAt", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "price", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setPrice", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
+}
+
+export namespace OwnershipTransferStartedEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export namespace OwnershipTransferredEvent {
@@ -97,16 +87,8 @@ export namespace OwnershipTransferredEvent {
 }
 
 export namespace PriceSetEvent {
-  export type InputTuple = [
-    oldPrice: BigNumberish,
-    newPrice: BigNumberish,
-    timestamp: BigNumberish
-  ];
-  export type OutputTuple = [
-    oldPrice: bigint,
-    newPrice: bigint,
-    timestamp: bigint
-  ];
+  export type InputTuple = [oldPrice: BigNumberish, newPrice: BigNumberish, timestamp: BigNumberish];
+  export type OutputTuple = [oldPrice: bigint, newPrice: bigint, timestamp: bigint];
   export interface OutputObject {
     oldPrice: bigint;
     newPrice: bigint;
@@ -135,31 +117,23 @@ export interface ManualAdapter extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+
+  acceptOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
   getLatestPrice: TypedContractMethod<[], [[bigint, bigint]], "view">;
 
@@ -167,44 +141,35 @@ export interface ManualAdapter extends BaseContract {
 
   owner: TypedContractMethod<[], [string], "view">;
 
+  pendingOwner: TypedContractMethod<[], [string], "view">;
+
   price: TypedContractMethod<[], [bigint], "view">;
 
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
   setPrice: TypedContractMethod<[_price: BigNumberish], [void], "nonpayable">;
 
-  transferOwnership: TypedContractMethod<
-    [newOwner: AddressLike],
-    [void],
-    "nonpayable"
+  transferOwnership: TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+
+  getFunction(nameOrSignature: "acceptOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "getLatestPrice"): TypedContractMethod<[], [[bigint, bigint]], "view">;
+  getFunction(nameOrSignature: "lastUpdatedAt"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "price"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setPrice"): TypedContractMethod<[_price: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "transferOwnership"): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+
+  getEvent(
+    key: "OwnershipTransferStarted"
+  ): TypedContractEvent<
+    OwnershipTransferStartedEvent.InputTuple,
+    OwnershipTransferStartedEvent.OutputTuple,
+    OwnershipTransferStartedEvent.OutputObject
   >;
-
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
-
-  getFunction(
-    nameOrSignature: "getLatestPrice"
-  ): TypedContractMethod<[], [[bigint, bigint]], "view">;
-  getFunction(
-    nameOrSignature: "lastUpdatedAt"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "price"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "renounceOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "setPrice"
-  ): TypedContractMethod<[_price: BigNumberish], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
-
   getEvent(
     key: "OwnershipTransferred"
   ): TypedContractEvent<
@@ -214,13 +179,20 @@ export interface ManualAdapter extends BaseContract {
   >;
   getEvent(
     key: "PriceSet"
-  ): TypedContractEvent<
-    PriceSetEvent.InputTuple,
-    PriceSetEvent.OutputTuple,
-    PriceSetEvent.OutputObject
-  >;
+  ): TypedContractEvent<PriceSetEvent.InputTuple, PriceSetEvent.OutputTuple, PriceSetEvent.OutputObject>;
 
   filters: {
+    "OwnershipTransferStarted(address,address)": TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+    OwnershipTransferStarted: TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+
     "OwnershipTransferred(address,address)": TypedContractEvent<
       OwnershipTransferredEvent.InputTuple,
       OwnershipTransferredEvent.OutputTuple,
@@ -237,10 +209,6 @@ export interface ManualAdapter extends BaseContract {
       PriceSetEvent.OutputTuple,
       PriceSetEvent.OutputObject
     >;
-    PriceSet: TypedContractEvent<
-      PriceSetEvent.InputTuple,
-      PriceSetEvent.OutputTuple,
-      PriceSetEvent.OutputObject
-    >;
+    PriceSet: TypedContractEvent<PriceSetEvent.InputTuple, PriceSetEvent.OutputTuple, PriceSetEvent.OutputObject>;
   };
 }

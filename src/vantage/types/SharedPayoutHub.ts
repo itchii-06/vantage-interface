@@ -26,11 +26,20 @@ import type {
 export interface SharedPayoutHubInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "HUB_TIMELOCK"
+      | "acceptOwnership"
+      | "acceptVault"
+      | "acceptWithdrawal"
       | "debtCeilings"
+      | "getHubHealth"
+      | "getTotalRemainingCapacity"
       | "globalPaused"
       | "isVaultIsolated"
       | "owner"
-      | "registerVault"
+      | "pendingOwner"
+      | "pendingVaultRegistrations"
+      | "pendingWithdrawal"
+      | "proposeVault"
       | "registeredVaults"
       | "renounceOwnership"
       | "requestPayout"
@@ -39,6 +48,8 @@ export interface SharedPayoutHubInterface extends Interface {
       | "setVaultIsolation"
       | "setVaultPaused"
       | "settleProfit"
+      | "totalOutstandingDebt"
+      | "totalRegisteredCeilings"
       | "transferOwnership"
       | "usdc"
       | "vaultDebts"
@@ -51,157 +62,81 @@ export interface SharedPayoutHubInterface extends Interface {
       | "DebtCeilingUpdated"
       | "GlobalPauseSet"
       | "LiquidityWithdrawn"
+      | "OwnershipTransferStarted"
       | "OwnershipTransferred"
       | "PayoutRequested"
       | "ProfitSettled"
       | "VaultIsolationSet"
       | "VaultPauseSet"
       | "VaultRegistered"
+      | "VaultRegistrationProposed"
+      | "WithdrawalProposed"
   ): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "debtCeilings",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "globalPaused",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isVaultIsolated",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "HUB_TIMELOCK", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptVault", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "acceptWithdrawal", values?: undefined): string;
+  encodeFunctionData(functionFragment: "debtCeilings", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getHubHealth", values: [AddressLike[]]): string;
+  encodeFunctionData(functionFragment: "getTotalRemainingCapacity", values?: undefined): string;
+  encodeFunctionData(functionFragment: "globalPaused", values?: undefined): string;
+  encodeFunctionData(functionFragment: "isVaultIsolated", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "registerVault",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "registeredVaults",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "requestPayout",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setDebtCeiling",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setGlobalPaused",
-    values: [boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setVaultIsolation",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setVaultPaused",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "settleProfit",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pendingVaultRegistrations", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "pendingWithdrawal", values?: undefined): string;
+  encodeFunctionData(functionFragment: "proposeVault", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "registeredVaults", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "requestPayout", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setDebtCeiling", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setGlobalPaused", values: [boolean]): string;
+  encodeFunctionData(functionFragment: "setVaultIsolation", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setVaultPaused", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "settleProfit", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "totalOutstandingDebt", values?: undefined): string;
+  encodeFunctionData(functionFragment: "totalRegisteredCeilings", values?: undefined): string;
+  encodeFunctionData(functionFragment: "transferOwnership", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "usdc", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "vaultDebts",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "vaultPaused",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "withdrawLiquidity",
-    values: [BigNumberish, AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "vaultDebts", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "vaultPaused", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "withdrawLiquidity", values: [BigNumberish, AddressLike]): string;
 
-  decodeFunctionResult(
-    functionFragment: "debtCeilings",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "globalPaused",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isVaultIsolated",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "HUB_TIMELOCK", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptVault", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptWithdrawal", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "debtCeilings", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getHubHealth", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getTotalRemainingCapacity", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "globalPaused", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isVaultIsolated", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "registerVault",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "registeredVaults",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "requestPayout",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setDebtCeiling",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setGlobalPaused",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setVaultIsolation",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setVaultPaused",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "settleProfit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pendingVaultRegistrations", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pendingWithdrawal", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "proposeVault", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "registeredVaults", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "requestPayout", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setDebtCeiling", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setGlobalPaused", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setVaultIsolation", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setVaultPaused", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "settleProfit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalOutstandingDebt", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalRegisteredCeilings", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "usdc", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "vaultDebts", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "vaultPaused",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "withdrawLiquidity",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "vaultPaused", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdrawLiquidity", data: BytesLike): Result;
 }
 
 export namespace DebtCeilingUpdatedEvent {
-  export type InputTuple = [
-    vault: AddressLike,
-    oldCeiling: BigNumberish,
-    newCeiling: BigNumberish
-  ];
-  export type OutputTuple = [
-    vault: string,
-    oldCeiling: bigint,
-    newCeiling: bigint
-  ];
+  export type InputTuple = [vault: AddressLike, oldCeiling: BigNumberish, newCeiling: BigNumberish];
+  export type OutputTuple = [vault: string, oldCeiling: bigint, newCeiling: bigint];
   export interface OutputObject {
     vault: string;
     oldCeiling: bigint;
@@ -238,6 +173,19 @@ export namespace LiquidityWithdrawnEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace OwnershipTransferStartedEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace OwnershipTransferredEvent {
   export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
   export type OutputTuple = [previousOwner: string, newOwner: string];
@@ -252,11 +200,7 @@ export namespace OwnershipTransferredEvent {
 }
 
 export namespace PayoutRequestedEvent {
-  export type InputTuple = [
-    vault: AddressLike,
-    receiver: AddressLike,
-    amount: BigNumberish
-  ];
+  export type InputTuple = [vault: AddressLike, receiver: AddressLike, amount: BigNumberish];
   export type OutputTuple = [vault: string, receiver: string, amount: bigint];
   export interface OutputObject {
     vault: string;
@@ -270,10 +214,11 @@ export namespace PayoutRequestedEvent {
 }
 
 export namespace ProfitSettledEvent {
-  export type InputTuple = [vault: AddressLike, amount: BigNumberish];
-  export type OutputTuple = [vault: string, amount: bigint];
+  export type InputTuple = [vault: AddressLike, payer: AddressLike, amount: BigNumberish];
+  export type OutputTuple = [vault: string, payer: string, amount: bigint];
   export interface OutputObject {
     vault: string;
+    payer: string;
     amount: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
@@ -321,6 +266,34 @@ export namespace VaultRegisteredEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace VaultRegistrationProposedEvent {
+  export type InputTuple = [vault: AddressLike, ceiling: BigNumberish, executableAt: BigNumberish];
+  export type OutputTuple = [vault: string, ceiling: bigint, executableAt: bigint];
+  export interface OutputObject {
+    vault: string;
+    ceiling: bigint;
+    executableAt: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace WithdrawalProposedEvent {
+  export type InputTuple = [amount: BigNumberish, to: AddressLike, executableAt: BigNumberish];
+  export type OutputTuple = [amount: bigint, to: string, executableAt: bigint];
+  export interface OutputObject {
+    amount: bigint;
+    to: string;
+    executableAt: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export interface SharedPayoutHub extends BaseContract {
   connect(runner?: ContractRunner | null): SharedPayoutHub;
   waitForDeployment(): Promise<this>;
@@ -338,33 +311,39 @@ export interface SharedPayoutHub extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+
+  HUB_TIMELOCK: TypedContractMethod<[], [bigint], "view">;
+
+  acceptOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
+  acceptVault: TypedContractMethod<[vault: AddressLike], [void], "nonpayable">;
+
+  acceptWithdrawal: TypedContractMethod<[], [void], "nonpayable">;
 
   debtCeilings: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+
+  getHubHealth: TypedContractMethod<
+    [vaults: AddressLike[]],
+    [[bigint, bigint] & { usdcBalance: bigint; totalDebt: bigint }],
+    "view"
+  >;
+
+  getTotalRemainingCapacity: TypedContractMethod<[], [bigint], "view">;
 
   globalPaused: TypedContractMethod<[], [boolean], "view">;
 
@@ -372,53 +351,49 @@ export interface SharedPayoutHub extends BaseContract {
 
   owner: TypedContractMethod<[], [string], "view">;
 
-  registerVault: TypedContractMethod<
-    [vault: AddressLike, ceiling: BigNumberish],
-    [void],
-    "nonpayable"
+  pendingOwner: TypedContractMethod<[], [string], "view">;
+
+  pendingVaultRegistrations: TypedContractMethod<
+    [arg0: AddressLike],
+    [[bigint, bigint] & { ceiling: bigint; executableAt: bigint }],
+    "view"
   >;
+
+  pendingWithdrawal: TypedContractMethod<
+    [],
+    [
+      [bigint, string, bigint] & {
+        amount: bigint;
+        to: string;
+        executableAt: bigint;
+      },
+    ],
+    "view"
+  >;
+
+  proposeVault: TypedContractMethod<[vault: AddressLike, ceiling: BigNumberish], [void], "nonpayable">;
 
   registeredVaults: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
-  requestPayout: TypedContractMethod<
-    [receiver: AddressLike, amount: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  requestPayout: TypedContractMethod<[receiver: AddressLike, amount: BigNumberish], [void], "nonpayable">;
 
-  setDebtCeiling: TypedContractMethod<
-    [vault: AddressLike, newCeiling: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  setDebtCeiling: TypedContractMethod<[vault: AddressLike, newCeiling: BigNumberish], [void], "nonpayable">;
 
   setGlobalPaused: TypedContractMethod<[paused: boolean], [void], "nonpayable">;
 
-  setVaultIsolation: TypedContractMethod<
-    [vault: AddressLike, isolated: boolean],
-    [void],
-    "nonpayable"
-  >;
+  setVaultIsolation: TypedContractMethod<[vault: AddressLike, isolated: boolean], [void], "nonpayable">;
 
-  setVaultPaused: TypedContractMethod<
-    [vault: AddressLike, paused: boolean],
-    [void],
-    "nonpayable"
-  >;
+  setVaultPaused: TypedContractMethod<[vault: AddressLike, paused: boolean], [void], "nonpayable">;
 
-  settleProfit: TypedContractMethod<
-    [amount: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  settleProfit: TypedContractMethod<[_vault: AddressLike, amount: BigNumberish], [void], "nonpayable">;
 
-  transferOwnership: TypedContractMethod<
-    [newOwner: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  totalOutstandingDebt: TypedContractMethod<[], [bigint], "view">;
+
+  totalRegisteredCeilings: TypedContractMethod<[], [bigint], "view">;
+
+  transferOwnership: TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
   usdc: TypedContractMethod<[], [string], "view">;
 
@@ -426,94 +401,71 @@ export interface SharedPayoutHub extends BaseContract {
 
   vaultPaused: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
-  withdrawLiquidity: TypedContractMethod<
-    [amount: BigNumberish, to: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  withdrawLiquidity: TypedContractMethod<[amount: BigNumberish, to: AddressLike], [void], "nonpayable">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
+  getFunction(nameOrSignature: "HUB_TIMELOCK"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "acceptOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptVault"): TypedContractMethod<[vault: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptWithdrawal"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "debtCeilings"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
-    nameOrSignature: "debtCeilings"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "globalPaused"
-  ): TypedContractMethod<[], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "isVaultIsolated"
-  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "registerVault"
+    nameOrSignature: "getHubHealth"
   ): TypedContractMethod<
-    [vault: AddressLike, ceiling: BigNumberish],
-    [void],
-    "nonpayable"
+    [vaults: AddressLike[]],
+    [[bigint, bigint] & { usdcBalance: bigint; totalDebt: bigint }],
+    "view"
+  >;
+  getFunction(nameOrSignature: "getTotalRemainingCapacity"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "globalPaused"): TypedContractMethod<[], [boolean], "view">;
+  getFunction(nameOrSignature: "isVaultIsolated"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "pendingVaultRegistrations"
+  ): TypedContractMethod<[arg0: AddressLike], [[bigint, bigint] & { ceiling: bigint; executableAt: bigint }], "view">;
+  getFunction(nameOrSignature: "pendingWithdrawal"): TypedContractMethod<
+    [],
+    [
+      [bigint, string, bigint] & {
+        amount: bigint;
+        to: string;
+        executableAt: bigint;
+      },
+    ],
+    "view"
   >;
   getFunction(
-    nameOrSignature: "registeredVaults"
-  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "renounceOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
+    nameOrSignature: "proposeVault"
+  ): TypedContractMethod<[vault: AddressLike, ceiling: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "registeredVaults"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "requestPayout"
-  ): TypedContractMethod<
-    [receiver: AddressLike, amount: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[receiver: AddressLike, amount: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setDebtCeiling"
-  ): TypedContractMethod<
-    [vault: AddressLike, newCeiling: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "setGlobalPaused"
-  ): TypedContractMethod<[paused: boolean], [void], "nonpayable">;
+  ): TypedContractMethod<[vault: AddressLike, newCeiling: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setGlobalPaused"): TypedContractMethod<[paused: boolean], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setVaultIsolation"
-  ): TypedContractMethod<
-    [vault: AddressLike, isolated: boolean],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[vault: AddressLike, isolated: boolean], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setVaultPaused"
-  ): TypedContractMethod<
-    [vault: AddressLike, paused: boolean],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[vault: AddressLike, paused: boolean], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "settleProfit"
-  ): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "usdc"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "vaultDebts"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "vaultPaused"
-  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  ): TypedContractMethod<[_vault: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "totalOutstandingDebt"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "totalRegisteredCeilings"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "transferOwnership"): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "usdc"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "vaultDebts"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "vaultPaused"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "withdrawLiquidity"
-  ): TypedContractMethod<
-    [amount: BigNumberish, to: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[amount: BigNumberish, to: AddressLike], [void], "nonpayable">;
 
   getEvent(
     key: "DebtCeilingUpdated"
@@ -537,6 +489,13 @@ export interface SharedPayoutHub extends BaseContract {
     LiquidityWithdrawnEvent.OutputObject
   >;
   getEvent(
+    key: "OwnershipTransferStarted"
+  ): TypedContractEvent<
+    OwnershipTransferStartedEvent.InputTuple,
+    OwnershipTransferStartedEvent.OutputTuple,
+    OwnershipTransferStartedEvent.OutputObject
+  >;
+  getEvent(
     key: "OwnershipTransferred"
   ): TypedContractEvent<
     OwnershipTransferredEvent.InputTuple,
@@ -552,11 +511,7 @@ export interface SharedPayoutHub extends BaseContract {
   >;
   getEvent(
     key: "ProfitSettled"
-  ): TypedContractEvent<
-    ProfitSettledEvent.InputTuple,
-    ProfitSettledEvent.OutputTuple,
-    ProfitSettledEvent.OutputObject
-  >;
+  ): TypedContractEvent<ProfitSettledEvent.InputTuple, ProfitSettledEvent.OutputTuple, ProfitSettledEvent.OutputObject>;
   getEvent(
     key: "VaultIsolationSet"
   ): TypedContractEvent<
@@ -566,17 +521,27 @@ export interface SharedPayoutHub extends BaseContract {
   >;
   getEvent(
     key: "VaultPauseSet"
-  ): TypedContractEvent<
-    VaultPauseSetEvent.InputTuple,
-    VaultPauseSetEvent.OutputTuple,
-    VaultPauseSetEvent.OutputObject
-  >;
+  ): TypedContractEvent<VaultPauseSetEvent.InputTuple, VaultPauseSetEvent.OutputTuple, VaultPauseSetEvent.OutputObject>;
   getEvent(
     key: "VaultRegistered"
   ): TypedContractEvent<
     VaultRegisteredEvent.InputTuple,
     VaultRegisteredEvent.OutputTuple,
     VaultRegisteredEvent.OutputObject
+  >;
+  getEvent(
+    key: "VaultRegistrationProposed"
+  ): TypedContractEvent<
+    VaultRegistrationProposedEvent.InputTuple,
+    VaultRegistrationProposedEvent.OutputTuple,
+    VaultRegistrationProposedEvent.OutputObject
+  >;
+  getEvent(
+    key: "WithdrawalProposed"
+  ): TypedContractEvent<
+    WithdrawalProposedEvent.InputTuple,
+    WithdrawalProposedEvent.OutputTuple,
+    WithdrawalProposedEvent.OutputObject
   >;
 
   filters: {
@@ -613,6 +578,17 @@ export interface SharedPayoutHub extends BaseContract {
       LiquidityWithdrawnEvent.OutputObject
     >;
 
+    "OwnershipTransferStarted(address,address)": TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+    OwnershipTransferStarted: TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+
     "OwnershipTransferred(address,address)": TypedContractEvent<
       OwnershipTransferredEvent.InputTuple,
       OwnershipTransferredEvent.OutputTuple,
@@ -635,7 +611,7 @@ export interface SharedPayoutHub extends BaseContract {
       PayoutRequestedEvent.OutputObject
     >;
 
-    "ProfitSettled(address,uint256)": TypedContractEvent<
+    "ProfitSettled(address,address,uint256)": TypedContractEvent<
       ProfitSettledEvent.InputTuple,
       ProfitSettledEvent.OutputTuple,
       ProfitSettledEvent.OutputObject
@@ -677,6 +653,28 @@ export interface SharedPayoutHub extends BaseContract {
       VaultRegisteredEvent.InputTuple,
       VaultRegisteredEvent.OutputTuple,
       VaultRegisteredEvent.OutputObject
+    >;
+
+    "VaultRegistrationProposed(address,uint256,uint256)": TypedContractEvent<
+      VaultRegistrationProposedEvent.InputTuple,
+      VaultRegistrationProposedEvent.OutputTuple,
+      VaultRegistrationProposedEvent.OutputObject
+    >;
+    VaultRegistrationProposed: TypedContractEvent<
+      VaultRegistrationProposedEvent.InputTuple,
+      VaultRegistrationProposedEvent.OutputTuple,
+      VaultRegistrationProposedEvent.OutputObject
+    >;
+
+    "WithdrawalProposed(uint256,address,uint256)": TypedContractEvent<
+      WithdrawalProposedEvent.InputTuple,
+      WithdrawalProposedEvent.OutputTuple,
+      WithdrawalProposedEvent.OutputObject
+    >;
+    WithdrawalProposed: TypedContractEvent<
+      WithdrawalProposedEvent.InputTuple,
+      WithdrawalProposedEvent.OutputTuple,
+      WithdrawalProposedEvent.OutputObject
     >;
   };
 }

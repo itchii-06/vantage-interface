@@ -3,10 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  SharedPayoutHub,
-  SharedPayoutHubInterface,
-} from "../SharedPayoutHub";
+import type { SharedPayoutHub, SharedPayoutHubInterface } from "../SharedPayoutHub";
 
 const _abi = [
   {
@@ -49,6 +46,22 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "hubBalanceAfter",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "requiredReserve",
+        type: "uint256",
+      },
+    ],
+    name: "GlobalSolvencyInsufficient",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "vault",
         type: "address",
@@ -74,6 +87,11 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [],
+    name: "NoPendingChange",
+    type: "error",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -93,6 +111,54 @@ const _abi = [
       },
     ],
     name: "OwnableUnauthorizedAccount",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "vault",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "payer",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "RepaymentTransferFailed",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+    ],
+    name: "SafeERC20FailedOperation",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "earliest",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "current",
+        type: "uint256",
+      },
+    ],
+    name: "TimelockNotExpired",
     type: "error",
   },
   {
@@ -190,6 +256,25 @@ const _abi = [
         type: "address",
       },
     ],
+    name: "OwnershipTransferStarted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
     name: "OwnershipTransferred",
     type: "event",
   },
@@ -225,6 +310,12 @@ const _abi = [
         indexed: true,
         internalType: "address",
         name: "vault",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "payer",
         type: "address",
       },
       {
@@ -295,6 +386,96 @@ const _abi = [
     type: "event",
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "vault",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "ceiling",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "executableAt",
+        type: "uint256",
+      },
+    ],
+    name: "VaultRegistrationProposed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "executableAt",
+        type: "uint256",
+      },
+    ],
+    name: "WithdrawalProposed",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "HUB_TIMELOCK",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "acceptOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "vault",
+        type: "address",
+      },
+    ],
+    name: "acceptVault",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "acceptWithdrawal",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -303,6 +484,43 @@ const _abi = [
       },
     ],
     name: "debtCeilings",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address[]",
+        name: "vaults",
+        type: "address[]",
+      },
+    ],
+    name: "getHubHealth",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "usdcBalance",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "totalDebt",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getTotalRemainingCapacity",
     outputs: [
       {
         internalType: "uint256",
@@ -359,6 +577,66 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "pendingOwner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "pendingVaultRegistrations",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "ceiling",
+        type: "uint256",
+      },
+      {
+        internalType: "uint64",
+        name: "executableAt",
+        type: "uint64",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "pendingWithdrawal",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint64",
+        name: "executableAt",
+        type: "uint64",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -371,7 +649,7 @@ const _abi = [
         type: "uint256",
       },
     ],
-    name: "registerVault",
+    name: "proposeVault",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -490,6 +768,11 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "_vault",
+        type: "address",
+      },
+      {
         internalType: "uint256",
         name: "amount",
         type: "uint256",
@@ -498,6 +781,32 @@ const _abi = [
     name: "settleProfit",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "totalOutstandingDebt",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "totalRegisteredCeilings",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -589,10 +898,7 @@ export class SharedPayoutHub__factory {
   static createInterface(): SharedPayoutHubInterface {
     return new Interface(_abi) as SharedPayoutHubInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): SharedPayoutHub {
+  static connect(address: string, runner?: ContractRunner | null): SharedPayoutHub {
     return new Contract(address, _abi, runner) as unknown as SharedPayoutHub;
   }
 }

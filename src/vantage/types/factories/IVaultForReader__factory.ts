@@ -3,10 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  IVaultForReader,
-  IVaultForReaderInterface,
-} from "../IVaultForReader";
+import type { IVaultForReader, IVaultForReaderInterface } from "../IVaultForReader";
 
 const _abi = [
   {
@@ -30,6 +27,38 @@ const _abi = [
         internalType: "address",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+    ],
+    name: "feeReserves",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "feeReservesLpShareBp",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -286,6 +315,30 @@ const _abi = [
         name: "token",
         type: "address",
       },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "toWadAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
     ],
     name: "tokenBalances",
     outputs: [
@@ -343,10 +396,7 @@ export class IVaultForReader__factory {
   static createInterface(): IVaultForReaderInterface {
     return new Interface(_abi) as IVaultForReaderInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): IVaultForReader {
+  static connect(address: string, runner?: ContractRunner | null): IVaultForReader {
     return new Contract(address, _abi, runner) as unknown as IVaultForReader;
   }
 }

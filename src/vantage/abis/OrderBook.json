@@ -115,6 +115,12 @@
         "internalType": "bool",
         "name": "triggerAboveThreshold",
         "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "executionFee",
+        "type": "uint256"
       }
     ],
     "name": "CreateDecreaseOrder",
@@ -182,6 +188,12 @@
         "internalType": "bool",
         "name": "triggerAboveThreshold",
         "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "executionFee",
+        "type": "uint256"
       }
     ],
     "name": "CreateIncreaseOrder",
@@ -393,7 +405,7 @@
     ],
     "name": "createDecreaseOrder",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -441,7 +453,7 @@
     ],
     "name": "createIncreaseOrder",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -498,6 +510,11 @@
         "internalType": "bool",
         "name": "triggerAboveThreshold",
         "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "executionFee",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -640,6 +657,11 @@
         "internalType": "bool",
         "name": "triggerAboveThreshold",
         "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "executionFee",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -665,6 +687,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "minExecutionFee",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -673,6 +708,19 @@
       }
     ],
     "name": "setGov",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_minExecutionFee",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMinExecutionFee",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

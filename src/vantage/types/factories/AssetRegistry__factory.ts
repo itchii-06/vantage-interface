@@ -73,6 +73,22 @@ const _abi = [
         type: "uint256",
       },
     ],
+    name: "InvalidLiquidationFee",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "provided",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "maximum",
+        type: "uint256",
+      },
+    ],
     name: "InvalidMaintenanceMargin",
     type: "error",
   },
@@ -199,6 +215,25 @@ const _abi = [
         type: "address",
       },
       {
+        indexed: true,
+        internalType: "address",
+        name: "adapter",
+        type: "address",
+      },
+    ],
+    name: "ComplianceAdapterSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
         indexed: false,
         internalType: "uint256",
         name: "fundingRateFactor",
@@ -212,6 +247,63 @@ const _abi = [
       },
     ],
     name: "FundingParamsUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isOpen",
+        type: "bool",
+      },
+    ],
+    name: "MarketStatusChanged",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "minUnit",
+        type: "uint256",
+      },
+    ],
+    name: "MinLegalUnitUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferStarted",
     type: "event",
   },
   {
@@ -268,6 +360,25 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: false,
+        internalType: "uint256",
+        name: "oldBps",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "newBps",
+        type: "uint256",
+      },
+    ],
+    name: "UtilizationCapUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: true,
         internalType: "address",
         name: "asset",
@@ -286,6 +397,32 @@ const _abi = [
   {
     inputs: [],
     name: "LEVERAGE_PRECISION",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "MAX_FUNDING_RATE_FACTOR",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "MAX_LIQUIDATION_FEE_BPS",
     outputs: [
       {
         internalType: "uint256",
@@ -333,6 +470,26 @@ const _abi = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "acceptOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address",
+      },
+    ],
+    name: "acceptOwnershipOf",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -416,6 +573,11 @@ const _abi = [
       },
       {
         internalType: "uint256",
+        name: "liquidationFeeBps",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "marginFeeBps",
         type: "uint256",
       },
@@ -423,6 +585,21 @@ const _abi = [
         internalType: "bool",
         name: "requiresWeekendLock",
         type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "isRestricted",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "isRWA",
+        type: "bool",
+      },
+      {
+        internalType: "uint256",
+        name: "minLegalUnit",
+        type: "uint256",
       },
       {
         internalType: "uint256",
@@ -433,6 +610,25 @@ const _abi = [
         internalType: "uint256",
         name: "maxFundingRate",
         type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "complianceAdapters",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
       },
     ],
     stateMutability: "view",
@@ -561,6 +757,11 @@ const _abi = [
           },
           {
             internalType: "uint256",
+            name: "liquidationFeeBps",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
             name: "marginFeeBps",
             type: "uint256",
           },
@@ -620,6 +821,25 @@ const _abi = [
         type: "address",
       },
     ],
+    name: "getMinLegalUnit",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
     name: "getRequiresWeekendLock",
     outputs: [
       {
@@ -633,7 +853,71 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "getRestrictedAssets",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "isMarketOpen",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "isRWA",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "pendingOwner",
     outputs: [
       {
         internalType: "address",
@@ -700,6 +984,11 @@ const _abi = [
           },
           {
             internalType: "uint256",
+            name: "liquidationFeeBps",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
             name: "marginFeeBps",
             type: "uint256",
           },
@@ -717,6 +1006,24 @@ const _abi = [
   {
     inputs: [],
     name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "adapter",
+        type: "address",
+      },
+    ],
+    name: "setComplianceAdapter",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -771,11 +1078,96 @@ const _abi = [
       },
       {
         internalType: "bool",
+        name: "_isRWA",
+        type: "bool",
+      },
+    ],
+    name: "setIsRWA",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "open",
+        type: "bool",
+      },
+    ],
+    name: "setMarketStatus",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "minUnit",
+        type: "uint256",
+      },
+    ],
+    name: "setMinLegalUnit",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "bool",
         name: "requiresLock",
         type: "bool",
       },
     ],
     name: "setRequiresWeekendLock",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_bps",
+        type: "uint256",
+      },
+    ],
+    name: "setUtilizationCap",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "caller",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "authorized",
+        type: "bool",
+      },
+    ],
+    name: "setYieldAccumulatorCaller",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -852,6 +1244,11 @@ const _abi = [
           },
           {
             internalType: "uint256",
+            name: "liquidationFeeBps",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
             name: "marginFeeBps",
             type: "uint256",
           },
@@ -864,6 +1261,19 @@ const _abi = [
     name: "updateRiskConfig",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "utilizationCapBps",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -886,10 +1296,7 @@ export class AssetRegistry__factory {
   static createInterface(): AssetRegistryInterface {
     return new Interface(_abi) as AssetRegistryInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): AssetRegistry {
+  static connect(address: string, runner?: ContractRunner | null): AssetRegistry {
     return new Contract(address, _abi, runner) as unknown as AssetRegistry;
   }
 }

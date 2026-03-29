@@ -24,6 +24,25 @@ import type {
 } from "./common";
 
 export declare namespace MultiOracleMiddleware {
+  export type SpreadConfigStruct = {
+    baseSpreadBps: BigNumberish;
+    stalenessRateBps: BigNumberish;
+    volatilityFactor: BigNumberish;
+    maxSpreadBps: BigNumberish;
+  };
+
+  export type SpreadConfigStructOutput = [
+    baseSpreadBps: bigint,
+    stalenessRateBps: bigint,
+    volatilityFactor: bigint,
+    maxSpreadBps: bigint,
+  ] & {
+    baseSpreadBps: bigint;
+    stalenessRateBps: bigint;
+    volatilityFactor: bigint;
+    maxSpreadBps: bigint;
+  };
+
   export type OracleConfigStruct = {
     adapters: AddressLike[];
     minRequired: BigNumberish;
@@ -35,7 +54,7 @@ export declare namespace MultiOracleMiddleware {
     adapters: string[],
     minRequired: bigint,
     maxDeviationBps: bigint,
-    maxPriceAge: bigint
+    maxPriceAge: bigint,
   ] & {
     adapters: string[];
     minRequired: bigint;
@@ -47,11 +66,13 @@ export declare namespace MultiOracleMiddleware {
 export interface MultiOracleMiddlewareInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "acceptOwnership"
       | "getLastPriceTimestamp"
       | "getLatestPrimaryPrice"
       | "getPrice(address,bool,bool,bool)"
       | "getPrice(address)"
       | "getPrimaryPrice"
+      | "getSpreadConfig"
       | "getTokenConfig"
       | "globalPaused"
       | "isEmergencyOperator"
@@ -59,11 +80,13 @@ export interface MultiOracleMiddlewareInterface extends Interface {
       | "isTokenActive"
       | "maxPriceChangeBps"
       | "owner"
+      | "pendingOwner"
       | "priceSnapshots"
       | "renounceOwnership"
       | "setEmergencyOperator"
       | "setGlobalPause"
       | "setMarketOpen"
+      | "setSpreadConfig"
       | "setTokenCircuitBreaker"
       | "setTokenConfig"
       | "setTokenStatus"
@@ -76,196 +99,79 @@ export interface MultiOracleMiddlewareInterface extends Interface {
       | "EmergencyActionExecuted"
       | "EmergencyOperatorSet"
       | "MarketOpenSet"
+      | "OwnershipTransferStarted"
       | "OwnershipTransferred"
       | "PriceSnapshotUpdated"
+      | "SpreadConfigSet"
       | "TokenConfigSet"
   ): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "getLastPriceTimestamp",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getLatestPrimaryPrice",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "acceptOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getLastPriceTimestamp", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getLatestPrimaryPrice", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "getPrice(address,bool,bool,bool)",
     values: [AddressLike, boolean, boolean, boolean]
   ): string;
-  encodeFunctionData(
-    functionFragment: "getPrice(address)",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPrimaryPrice",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTokenConfig",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "globalPaused",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isEmergencyOperator",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isMarketOpen",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isTokenActive",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxPriceChangeBps",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "getPrice(address)", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getPrimaryPrice", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "getSpreadConfig", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getTokenConfig", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "globalPaused", values?: undefined): string;
+  encodeFunctionData(functionFragment: "isEmergencyOperator", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "isMarketOpen", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "isTokenActive", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "maxPriceChangeBps", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "priceSnapshots", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "setEmergencyOperator", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setGlobalPause", values: [boolean]): string;
+  encodeFunctionData(functionFragment: "setMarketOpen", values: [AddressLike, boolean]): string;
   encodeFunctionData(
-    functionFragment: "priceSnapshots",
-    values: [AddressLike]
+    functionFragment: "setSpreadConfig",
+    values: [AddressLike, BigNumberish, BigNumberish, BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setEmergencyOperator",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setGlobalPause",
-    values: [boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMarketOpen",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setTokenCircuitBreaker",
-    values: [AddressLike, BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: "setTokenCircuitBreaker", values: [AddressLike, BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "setTokenConfig",
-    values: [
-      AddressLike,
-      AddressLike[],
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
-    ]
+    values: [AddressLike, AddressLike[], BigNumberish, BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "setTokenStatus",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "snapshotPrice",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "setTokenStatus", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "snapshotPrice", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "transferOwnership", values: [AddressLike]): string;
 
-  decodeFunctionResult(
-    functionFragment: "getLastPriceTimestamp",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getLatestPrimaryPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPrice(address,bool,bool,bool)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPrice(address)",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPrimaryPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTokenConfig",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "globalPaused",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isEmergencyOperator",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isMarketOpen",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isTokenActive",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxPriceChangeBps",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getLastPriceTimestamp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getLatestPrimaryPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getPrice(address,bool,bool,bool)", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getPrice(address)", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getPrimaryPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getSpreadConfig", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getTokenConfig", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "globalPaused", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isEmergencyOperator", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isMarketOpen", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isTokenActive", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "maxPriceChangeBps", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "priceSnapshots",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setEmergencyOperator",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setGlobalPause",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMarketOpen",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTokenCircuitBreaker",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTokenConfig",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTokenStatus",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "snapshotPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "priceSnapshots", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setEmergencyOperator", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setGlobalPause", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setMarketOpen", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setSpreadConfig", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setTokenCircuitBreaker", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setTokenConfig", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setTokenStatus", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "snapshotPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
 }
 
 export namespace EmergencyActionExecutedEvent {
-  export type InputTuple = [
-    token: AddressLike,
-    action: string,
-    actor: AddressLike
-  ];
+  export type InputTuple = [token: AddressLike, action: string, actor: AddressLike];
   export type OutputTuple = [token: string, action: string, actor: string];
   export interface OutputObject {
     token: string;
@@ -304,6 +210,19 @@ export namespace MarketOpenSetEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace OwnershipTransferStartedEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace OwnershipTransferredEvent {
   export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
   export type OutputTuple = [previousOwner: string, newOwner: string];
@@ -330,20 +249,48 @@ export namespace PriceSnapshotUpdatedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace SpreadConfigSetEvent {
+  export type InputTuple = [
+    token: AddressLike,
+    baseSpreadBps: BigNumberish,
+    stalenessRateBps: BigNumberish,
+    volatilityFactor: BigNumberish,
+    maxSpreadBps: BigNumberish,
+  ];
+  export type OutputTuple = [
+    token: string,
+    baseSpreadBps: bigint,
+    stalenessRateBps: bigint,
+    volatilityFactor: bigint,
+    maxSpreadBps: bigint,
+  ];
+  export interface OutputObject {
+    token: string;
+    baseSpreadBps: bigint;
+    stalenessRateBps: bigint;
+    volatilityFactor: bigint;
+    maxSpreadBps: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace TokenConfigSetEvent {
   export type InputTuple = [
     token: AddressLike,
     adapters: AddressLike[],
     minRequired: BigNumberish,
     maxDeviationBps: BigNumberish,
-    maxPriceAge: BigNumberish
+    maxPriceAge: BigNumberish,
   ];
   export type OutputTuple = [
     token: string,
     adapters: string[],
     minRequired: bigint,
     maxDeviationBps: bigint,
-    maxPriceAge: bigint
+    maxPriceAge: bigint,
   ];
   export interface OutputObject {
     token: string;
@@ -375,75 +322,45 @@ export interface MultiOracleMiddleware extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
-  getLastPriceTimestamp: TypedContractMethod<
-    [_token: AddressLike],
-    [bigint],
-    "view"
-  >;
+  acceptOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
-  getLatestPrimaryPrice: TypedContractMethod<
-    [_token: AddressLike],
-    [bigint],
-    "view"
-  >;
+  getLastPriceTimestamp: TypedContractMethod<[_token: AddressLike], [bigint], "view">;
+
+  getLatestPrimaryPrice: TypedContractMethod<[_token: AddressLike], [bigint], "view">;
 
   "getPrice(address,bool,bool,bool)": TypedContractMethod<
-    [_token: AddressLike, arg1: boolean, arg2: boolean, arg3: boolean],
+    [_token: AddressLike, _maximise: boolean, arg2: boolean, arg3: boolean],
     [bigint],
     "view"
   >;
 
-  "getPrice(address)": TypedContractMethod<
-    [token: AddressLike],
-    [bigint],
-    "view"
-  >;
+  "getPrice(address)": TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
-  getPrimaryPrice: TypedContractMethod<
-    [_token: AddressLike, arg1: boolean],
-    [bigint],
-    "view"
-  >;
+  getPrimaryPrice: TypedContractMethod<[_token: AddressLike, _maximise: boolean], [bigint], "view">;
 
-  getTokenConfig: TypedContractMethod<
-    [token: AddressLike],
-    [MultiOracleMiddleware.OracleConfigStructOutput],
-    "view"
-  >;
+  getSpreadConfig: TypedContractMethod<[token: AddressLike], [MultiOracleMiddleware.SpreadConfigStructOutput], "view">;
+
+  getTokenConfig: TypedContractMethod<[token: AddressLike], [MultiOracleMiddleware.OracleConfigStructOutput], "view">;
 
   globalPaused: TypedContractMethod<[], [boolean], "view">;
 
-  isEmergencyOperator: TypedContractMethod<
-    [arg0: AddressLike],
-    [boolean],
-    "view"
-  >;
+  isEmergencyOperator: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
   isMarketOpen: TypedContractMethod<[_token: AddressLike], [boolean], "view">;
 
@@ -453,20 +370,26 @@ export interface MultiOracleMiddleware extends BaseContract {
 
   owner: TypedContractMethod<[], [string], "view">;
 
+  pendingOwner: TypedContractMethod<[], [string], "view">;
+
   priceSnapshots: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
-  setEmergencyOperator: TypedContractMethod<
-    [operator: AddressLike, active: boolean],
-    [void],
-    "nonpayable"
-  >;
+  setEmergencyOperator: TypedContractMethod<[operator: AddressLike, active: boolean], [void], "nonpayable">;
 
   setGlobalPause: TypedContractMethod<[paused: boolean], [void], "nonpayable">;
 
-  setMarketOpen: TypedContractMethod<
-    [token: AddressLike, open: boolean],
+  setMarketOpen: TypedContractMethod<[token: AddressLike, open: boolean], [void], "nonpayable">;
+
+  setSpreadConfig: TypedContractMethod<
+    [
+      token: AddressLike,
+      baseSpreadBps: BigNumberish,
+      stalenessRateBps: BigNumberish,
+      volatilityFactor: BigNumberish,
+      maxSpreadBps: BigNumberish,
+    ],
     [void],
     "nonpayable"
   >;
@@ -483,112 +406,68 @@ export interface MultiOracleMiddleware extends BaseContract {
       adapters: AddressLike[],
       minRequired: BigNumberish,
       maxDeviationBps: BigNumberish,
-      maxPriceAge: BigNumberish
+      maxPriceAge: BigNumberish,
     ],
     [void],
     "nonpayable"
   >;
 
-  setTokenStatus: TypedContractMethod<
-    [token: AddressLike, active: boolean],
-    [void],
-    "nonpayable"
-  >;
+  setTokenStatus: TypedContractMethod<[token: AddressLike, active: boolean], [void], "nonpayable">;
 
-  snapshotPrice: TypedContractMethod<
-    [token: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  snapshotPrice: TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
 
-  transferOwnership: TypedContractMethod<
-    [newOwner: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  transferOwnership: TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
-  getFunction(
-    nameOrSignature: "getLastPriceTimestamp"
-  ): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getLatestPrimaryPrice"
-  ): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "acceptOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "getLastPriceTimestamp"): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getLatestPrimaryPrice"): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "getPrice(address,bool,bool,bool)"
-  ): TypedContractMethod<
-    [_token: AddressLike, arg1: boolean, arg2: boolean, arg3: boolean],
-    [bigint],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "getPrice(address)"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  ): TypedContractMethod<[_token: AddressLike, _maximise: boolean, arg2: boolean, arg3: boolean], [bigint], "view">;
+  getFunction(nameOrSignature: "getPrice(address)"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "getPrimaryPrice"
-  ): TypedContractMethod<
-    [_token: AddressLike, arg1: boolean],
-    [bigint],
-    "view"
-  >;
+  ): TypedContractMethod<[_token: AddressLike, _maximise: boolean], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "getSpreadConfig"
+  ): TypedContractMethod<[token: AddressLike], [MultiOracleMiddleware.SpreadConfigStructOutput], "view">;
   getFunction(
     nameOrSignature: "getTokenConfig"
-  ): TypedContractMethod<
-    [token: AddressLike],
-    [MultiOracleMiddleware.OracleConfigStructOutput],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "globalPaused"
-  ): TypedContractMethod<[], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "isEmergencyOperator"
-  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "isMarketOpen"
-  ): TypedContractMethod<[_token: AddressLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "isTokenActive"
-  ): TypedContractMethod<[token: AddressLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "maxPriceChangeBps"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "priceSnapshots"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "renounceOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
+  ): TypedContractMethod<[token: AddressLike], [MultiOracleMiddleware.OracleConfigStructOutput], "view">;
+  getFunction(nameOrSignature: "globalPaused"): TypedContractMethod<[], [boolean], "view">;
+  getFunction(nameOrSignature: "isEmergencyOperator"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "isMarketOpen"): TypedContractMethod<[_token: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "isTokenActive"): TypedContractMethod<[token: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "maxPriceChangeBps"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "priceSnapshots"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setEmergencyOperator"
-  ): TypedContractMethod<
-    [operator: AddressLike, active: boolean],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "setGlobalPause"
-  ): TypedContractMethod<[paused: boolean], [void], "nonpayable">;
+  ): TypedContractMethod<[operator: AddressLike, active: boolean], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setGlobalPause"): TypedContractMethod<[paused: boolean], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setMarketOpen"
+  ): TypedContractMethod<[token: AddressLike, open: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setSpreadConfig"
   ): TypedContractMethod<
-    [token: AddressLike, open: boolean],
+    [
+      token: AddressLike,
+      baseSpreadBps: BigNumberish,
+      stalenessRateBps: BigNumberish,
+      volatilityFactor: BigNumberish,
+      maxSpreadBps: BigNumberish,
+    ],
     [void],
     "nonpayable"
   >;
   getFunction(
     nameOrSignature: "setTokenCircuitBreaker"
-  ): TypedContractMethod<
-    [token: AddressLike, _maxPriceChangeBps: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[token: AddressLike, _maxPriceChangeBps: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setTokenConfig"
   ): TypedContractMethod<
@@ -597,24 +476,16 @@ export interface MultiOracleMiddleware extends BaseContract {
       adapters: AddressLike[],
       minRequired: BigNumberish,
       maxDeviationBps: BigNumberish,
-      maxPriceAge: BigNumberish
+      maxPriceAge: BigNumberish,
     ],
     [void],
     "nonpayable"
   >;
   getFunction(
     nameOrSignature: "setTokenStatus"
-  ): TypedContractMethod<
-    [token: AddressLike, active: boolean],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "snapshotPrice"
-  ): TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<[token: AddressLike, active: boolean], [void], "nonpayable">;
+  getFunction(nameOrSignature: "snapshotPrice"): TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "transferOwnership"): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
   getEvent(
     key: "EmergencyActionExecuted"
@@ -632,10 +503,13 @@ export interface MultiOracleMiddleware extends BaseContract {
   >;
   getEvent(
     key: "MarketOpenSet"
+  ): TypedContractEvent<MarketOpenSetEvent.InputTuple, MarketOpenSetEvent.OutputTuple, MarketOpenSetEvent.OutputObject>;
+  getEvent(
+    key: "OwnershipTransferStarted"
   ): TypedContractEvent<
-    MarketOpenSetEvent.InputTuple,
-    MarketOpenSetEvent.OutputTuple,
-    MarketOpenSetEvent.OutputObject
+    OwnershipTransferStartedEvent.InputTuple,
+    OwnershipTransferStartedEvent.OutputTuple,
+    OwnershipTransferStartedEvent.OutputObject
   >;
   getEvent(
     key: "OwnershipTransferred"
@@ -650,6 +524,13 @@ export interface MultiOracleMiddleware extends BaseContract {
     PriceSnapshotUpdatedEvent.InputTuple,
     PriceSnapshotUpdatedEvent.OutputTuple,
     PriceSnapshotUpdatedEvent.OutputObject
+  >;
+  getEvent(
+    key: "SpreadConfigSet"
+  ): TypedContractEvent<
+    SpreadConfigSetEvent.InputTuple,
+    SpreadConfigSetEvent.OutputTuple,
+    SpreadConfigSetEvent.OutputObject
   >;
   getEvent(
     key: "TokenConfigSet"
@@ -693,6 +574,17 @@ export interface MultiOracleMiddleware extends BaseContract {
       MarketOpenSetEvent.OutputObject
     >;
 
+    "OwnershipTransferStarted(address,address)": TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+    OwnershipTransferStarted: TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+
     "OwnershipTransferred(address,address)": TypedContractEvent<
       OwnershipTransferredEvent.InputTuple,
       OwnershipTransferredEvent.OutputTuple,
@@ -713,6 +605,17 @@ export interface MultiOracleMiddleware extends BaseContract {
       PriceSnapshotUpdatedEvent.InputTuple,
       PriceSnapshotUpdatedEvent.OutputTuple,
       PriceSnapshotUpdatedEvent.OutputObject
+    >;
+
+    "SpreadConfigSet(address,uint256,uint256,uint256,uint256)": TypedContractEvent<
+      SpreadConfigSetEvent.InputTuple,
+      SpreadConfigSetEvent.OutputTuple,
+      SpreadConfigSetEvent.OutputObject
+    >;
+    SpreadConfigSet: TypedContractEvent<
+      SpreadConfigSetEvent.InputTuple,
+      SpreadConfigSetEvent.OutputTuple,
+      SpreadConfigSetEvent.OutputObject
     >;
 
     "TokenConfigSet(address,address[],uint256,uint256,uint256)": TypedContractEvent<

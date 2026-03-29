@@ -3,10 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  PositionRouter,
-  PositionRouterInterface,
-} from "../PositionRouter";
+import type { PositionRouter, PositionRouterInterface } from "../PositionRouter";
 
 const _abi = [
   {
@@ -125,6 +122,12 @@ const _abi = [
         name: "acceptablePrice",
         type: "uint256",
       },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
+      },
     ],
     name: "CreateDecreasePosition",
     type: "event",
@@ -178,6 +181,12 @@ const _abi = [
         indexed: false,
         internalType: "uint256",
         name: "acceptablePrice",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "blockNumber",
         type: "uint256",
       },
     ],
@@ -300,7 +309,7 @@ const _abi = [
         type: "bytes32",
       },
     ],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -344,7 +353,7 @@ const _abi = [
         type: "bytes32",
       },
     ],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -399,7 +408,17 @@ const _abi = [
       },
       {
         internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "blockTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "executionFee",
         type: "uint256",
       },
     ],
@@ -489,6 +508,45 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "_indexToken",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_sizeDelta",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_isLong",
+        type: "bool",
+      },
+      {
+        internalType: "uint256",
+        name: "_acceptablePrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_executionFee",
+        type: "uint256",
+      },
+    ],
+    name: "increasePositionETH",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "requestKey",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "bytes32",
         name: "",
         type: "bytes32",
@@ -533,8 +591,23 @@ const _abi = [
       },
       {
         internalType: "uint256",
+        name: "blockNumber",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "blockTime",
         type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "executionFee",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "isNativeETH",
+        type: "bool",
       },
     ],
     stateMutability: "view",
@@ -563,11 +636,136 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "isKeeper",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "maxTimeDelay",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "minBlockDelayKeeper",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "minExecutionFee",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "minTimeDelayPublic",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_minBlockDelayKeeper",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_minTimeDelayPublic",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_maxTimeDelay",
+        type: "uint256",
+      },
+    ],
+    name: "setDelayValues",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
         name: "_gov",
         type: "address",
       },
     ],
     name: "setGov",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_keeper",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "_isKeeper",
+        type: "bool",
+      },
+    ],
+    name: "setIsKeeper",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_minExecutionFee",
+        type: "uint256",
+      },
+    ],
+    name: "setMinExecutionFee",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -598,6 +796,10 @@ const _abi = [
     stateMutability: "view",
     type: "function",
   },
+  {
+    stateMutability: "payable",
+    type: "receive",
+  },
 ] as const;
 
 export class PositionRouter__factory {
@@ -605,10 +807,7 @@ export class PositionRouter__factory {
   static createInterface(): PositionRouterInterface {
     return new Interface(_abi) as PositionRouterInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): PositionRouter {
+  static connect(address: string, runner?: ContractRunner | null): PositionRouter {
     return new Contract(address, _abi, runner) as unknown as PositionRouter;
   }
 }

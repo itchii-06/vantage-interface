@@ -27,25 +27,49 @@ export interface VaultInterface extends Interface {
   getFunction(
     nameOrSignature:
       | "BASIS_POINTS_DIVISOR"
+      | "CHANGE_PRICE_FEED"
+      | "CHANGE_TREASURY"
+      | "CHANGE_YIELD_ACCUMULATOR"
+      | "EXCHANGE_RATE_PRECISION"
       | "LEVERAGE_PRECISION"
       | "OI_PRECISION_FACTOR"
+      | "PAYOUT_HUB_TIMELOCK"
       | "PRICE_PRECISION"
       | "SECONDS_PER_YEAR"
+      | "SETTER_TIMELOCK"
+      | "acceptOwnership"
+      | "acceptPayoutHub"
+      | "acceptPriceFeed"
+      | "acceptTreasury"
+      | "acceptYieldAccumulator"
+      | "adlPosition"
+      | "applyExchangeRateChange"
+      | "assetExchangeRate"
       | "assetRegistry"
       | "checkCompliance"
+      | "collectFees"
       | "complianceRegistry"
+      | "convertYieldToUSDC"
       | "cumulativeFundingRates"
       | "decreasePosition"
+      | "depositedPrincipal"
+      | "emergencyMode"
+      | "executeRecoveryConversion"
+      | "feeReserves"
+      | "feeReservesLpShareBp"
       | "forceClosePosition"
+      | "fromWadAmount"
       | "getAUM"
       | "getDelta"
       | "getMaxPrice"
       | "getMinPrice"
       | "getPositionAssets"
       | "getPositionKey"
+      | "getTotalOI"
       | "getVaultAssets"
       | "harvestYield"
       | "increasePosition"
+      | "isKeeper"
       | "isPermissioned"
       | "isRouter"
       | "lastFundingTime"
@@ -53,13 +77,27 @@ export interface VaultInterface extends Interface {
       | "liquidatePosition"
       | "lpManager"
       | "maxPriceAge"
+      | "maxStalenessSpreadBps"
       | "owner"
       | "pause"
       | "paused"
       | "payoutBufferBps"
       | "payoutHub"
+      | "payoutHubEarliestAccept"
+      | "pendingChanges"
+      | "pendingExchangeRates"
+      | "pendingOwner"
+      | "pendingPayoutHub"
+      | "pendingRecoveries"
       | "positions"
       | "priceFeed"
+      | "proposeExchangeRateChange"
+      | "proposePayoutHub"
+      | "proposePriceFeed"
+      | "proposeRecoveryConversion"
+      | "proposeTreasury"
+      | "proposeYieldAccumulator"
+      | "protocolInsuranceFund"
       | "recordDeposit"
       | "recordWithdraw"
       | "renounceOwnership"
@@ -67,512 +105,392 @@ export interface VaultInterface extends Interface {
       | "reservedAmounts"
       | "setAssetRegistry"
       | "setComplianceRegistry"
+      | "setEmergencyMode"
+      | "setFeeReservesLpShareBp"
+      | "setKeeper"
       | "setLPManager"
       | "setMaxPriceAge"
       | "setPayoutBufferBps"
       | "setPayoutHub"
       | "setPermissioned"
-      | "setPriceFeed"
       | "setRequiredKYCLevel"
       | "setRouter"
+      | "setStalenessPenalty"
+      | "setTokenStrategy"
+      | "setTreasury"
+      | "setUsdcToken"
       | "setWeekendBufferBps"
       | "setYieldAccumulator"
+      | "setYieldConverter"
+      | "settleShortfall"
+      | "stalenessPenaltyRateBps"
       | "syncDebtWithHub"
+      | "syncNetAssetValue"
+      | "toWadAmount"
       | "tokenBalances"
+      | "tokenStrategies"
+      | "totalGlobalOI"
       | "totalLongAveragePrices"
       | "totalLongSize"
+      | "totalNetAssetValue"
       | "totalShortAveragePrices"
       | "totalShortSize"
       | "transferOwnership"
+      | "treasury"
       | "unpause"
       | "updateCumulativeFunding"
+      | "usdcToken"
+      | "userShortfallDebt"
       | "weekendBufferBps"
+      | "withdrawAssetDirectly"
       | "yieldAccumulator"
+      | "yieldConverter"
   ): FunctionFragment;
 
   getEvent(
     nameOrSignatureOrTopic:
+      | "ADLExecuted"
       | "AssetRegistrySet"
       | "BalanceDeficitSynced"
       | "ComplianceRegistrySet"
       | "CumulativeFundingUpdated"
       | "DebtSyncedWithHub"
       | "DecreasePosition"
+      | "EmergencyModeSet"
+      | "EmergencyWithdrawal"
+      | "ExchangeRateApplied"
+      | "ExchangeRateProposed"
+      | "FeesCollected"
       | "ForcedClose"
       | "IncreasePosition"
+      | "KeeperSet"
       | "LPManagerSet"
       | "LiquidatePosition"
       | "MaxPriceAgeSet"
+      | "OwnershipTransferStarted"
       | "OwnershipTransferred"
       | "Paused"
       | "PayoutBufferBpsSet"
+      | "PayoutHubChanged"
+      | "PayoutHubProposed"
       | "PayoutHubSet"
       | "PermissionedSet"
       | "PositionClosed"
       | "PositionUpdated"
       | "PriceFeedSet"
       | "RebasingYieldHarvested"
+      | "RecoveryConversionExecuted"
+      | "RecoveryConversionProposed"
       | "RequiredKYCLevelSet"
       | "RouterSet"
+      | "SetterChangeAccepted"
+      | "SetterChangeProposed"
+      | "ShortfallSettled"
+      | "StalenessPenaltySet"
+      | "TreasurySet"
       | "Unpaused"
+      | "UserShortfallRecorded"
       | "VaultDeposit"
       | "VaultWithdraw"
       | "WeekendBufferBpsSet"
       | "YieldAccumulatorSet"
+      | "YieldConverted"
   ): EventFragment;
 
+  encodeFunctionData(functionFragment: "BASIS_POINTS_DIVISOR", values?: undefined): string;
+  encodeFunctionData(functionFragment: "CHANGE_PRICE_FEED", values?: undefined): string;
+  encodeFunctionData(functionFragment: "CHANGE_TREASURY", values?: undefined): string;
+  encodeFunctionData(functionFragment: "CHANGE_YIELD_ACCUMULATOR", values?: undefined): string;
+  encodeFunctionData(functionFragment: "EXCHANGE_RATE_PRECISION", values?: undefined): string;
+  encodeFunctionData(functionFragment: "LEVERAGE_PRECISION", values?: undefined): string;
+  encodeFunctionData(functionFragment: "OI_PRECISION_FACTOR", values?: undefined): string;
+  encodeFunctionData(functionFragment: "PAYOUT_HUB_TIMELOCK", values?: undefined): string;
+  encodeFunctionData(functionFragment: "PRICE_PRECISION", values?: undefined): string;
+  encodeFunctionData(functionFragment: "SECONDS_PER_YEAR", values?: undefined): string;
+  encodeFunctionData(functionFragment: "SETTER_TIMELOCK", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptPayoutHub", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptPriceFeed", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptTreasury", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptYieldAccumulator", values?: undefined): string;
+  encodeFunctionData(functionFragment: "adlPosition", values: [AddressLike, AddressLike, AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "applyExchangeRateChange", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "assetExchangeRate", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "assetRegistry", values?: undefined): string;
+  encodeFunctionData(functionFragment: "checkCompliance", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "collectFees", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "complianceRegistry", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "BASIS_POINTS_DIVISOR",
-    values?: undefined
+    functionFragment: "convertYieldToUSDC",
+    values: [AddressLike, BigNumberish, BigNumberish, boolean]
   ): string;
-  encodeFunctionData(
-    functionFragment: "LEVERAGE_PRECISION",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "OI_PRECISION_FACTOR",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "PRICE_PRECISION",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "SECONDS_PER_YEAR",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "assetRegistry",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "checkCompliance",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "complianceRegistry",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "cumulativeFundingRates",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "cumulativeFundingRates", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "decreasePosition",
-    values: [
-      AddressLike,
-      AddressLike,
-      AddressLike,
-      BigNumberish,
-      BigNumberish,
-      boolean,
-      AddressLike
-    ]
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, BigNumberish, boolean, AddressLike, BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "depositedPrincipal", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "emergencyMode", values?: undefined): string;
+  encodeFunctionData(functionFragment: "executeRecoveryConversion", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "feeReserves", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "feeReservesLpShareBp", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "forceClosePosition",
     values: [AddressLike, AddressLike, AddressLike, boolean, AddressLike]
   ): string;
+  encodeFunctionData(functionFragment: "fromWadAmount", values: [AddressLike, BigNumberish]): string;
   encodeFunctionData(functionFragment: "getAUM", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "getDelta",
-    values: [AddressLike, BigNumberish, BigNumberish, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getMaxPrice",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getMinPrice",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPositionAssets",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "getDelta", values: [AddressLike, BigNumberish, BigNumberish, boolean]): string;
+  encodeFunctionData(functionFragment: "getMaxPrice", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getMinPrice", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getPositionAssets", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getPositionKey",
     values: [AddressLike, AddressLike, AddressLike, boolean]
   ): string;
-  encodeFunctionData(
-    functionFragment: "getVaultAssets",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "harvestYield",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "getTotalOI", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getVaultAssets", values?: undefined): string;
+  encodeFunctionData(functionFragment: "harvestYield", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "increasePosition",
-    values: [
-      AddressLike,
-      AddressLike,
-      AddressLike,
-      BigNumberish,
-      boolean,
-      BigNumberish
-    ]
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, boolean, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "isPermissioned",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isRouter",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lastFundingTime",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lastHarvestBlock",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "isKeeper", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "isPermissioned", values?: undefined): string;
+  encodeFunctionData(functionFragment: "isRouter", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "lastFundingTime", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "lastHarvestBlock", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "liquidatePosition",
     values: [AddressLike, AddressLike, AddressLike, boolean, AddressLike]
   ): string;
   encodeFunctionData(functionFragment: "lpManager", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "maxPriceAge",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "maxPriceAge", values?: undefined): string;
+  encodeFunctionData(functionFragment: "maxStalenessSpreadBps", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "pause", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "payoutBufferBps",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "payoutBufferBps", values?: undefined): string;
   encodeFunctionData(functionFragment: "payoutHub", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "positions",
-    values: [BytesLike]
-  ): string;
+  encodeFunctionData(functionFragment: "payoutHubEarliestAccept", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pendingChanges", values: [BytesLike]): string;
+  encodeFunctionData(functionFragment: "pendingExchangeRates", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pendingPayoutHub", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pendingRecoveries", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "positions", values: [BytesLike]): string;
   encodeFunctionData(functionFragment: "priceFeed", values?: undefined): string;
+  encodeFunctionData(functionFragment: "proposeExchangeRateChange", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "proposePayoutHub", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "proposePriceFeed", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "proposeRecoveryConversion", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "proposeTreasury", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "proposeYieldAccumulator", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "protocolInsuranceFund", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "recordDeposit", values: [AddressLike, BigNumberish, AddressLike]): string;
+  encodeFunctionData(functionFragment: "recordWithdraw", values: [AddressLike, BigNumberish, AddressLike]): string;
+  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "requiredKYCLevel", values?: undefined): string;
+  encodeFunctionData(functionFragment: "reservedAmounts", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setAssetRegistry", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setComplianceRegistry", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setEmergencyMode", values: [boolean]): string;
+  encodeFunctionData(functionFragment: "setFeeReservesLpShareBp", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setKeeper", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setLPManager", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setMaxPriceAge", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setPayoutBufferBps", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setPayoutHub", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setPermissioned", values: [boolean]): string;
+  encodeFunctionData(functionFragment: "setRequiredKYCLevel", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setRouter", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setStalenessPenalty", values: [BigNumberish, BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: "recordDeposit",
-    values: [AddressLike, BigNumberish, AddressLike]
+    functionFragment: "setTokenStrategy",
+    values: [AddressLike, BigNumberish, AddressLike, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "recordWithdraw",
-    values: [AddressLike, BigNumberish, AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "requiredKYCLevel",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "reservedAmounts",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setAssetRegistry",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setComplianceRegistry",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setLPManager",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMaxPriceAge",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPayoutBufferBps",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPayoutHub",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPermissioned",
-    values: [boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPriceFeed",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setRequiredKYCLevel",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setRouter",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setWeekendBufferBps",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setYieldAccumulator",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "syncDebtWithHub",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tokenBalances",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalLongAveragePrices",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalLongSize",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalShortAveragePrices",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalShortSize",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "setTreasury", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setUsdcToken", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setWeekendBufferBps", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setYieldAccumulator", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setYieldConverter", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "settleShortfall", values: [AddressLike, AddressLike]): string;
+  encodeFunctionData(functionFragment: "stalenessPenaltyRateBps", values?: undefined): string;
+  encodeFunctionData(functionFragment: "syncDebtWithHub", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "syncNetAssetValue", values?: undefined): string;
+  encodeFunctionData(functionFragment: "toWadAmount", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "tokenBalances", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "tokenStrategies", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "totalGlobalOI", values?: undefined): string;
+  encodeFunctionData(functionFragment: "totalLongAveragePrices", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "totalLongSize", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "totalNetAssetValue", values?: undefined): string;
+  encodeFunctionData(functionFragment: "totalShortAveragePrices", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "totalShortSize", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "transferOwnership", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "treasury", values?: undefined): string;
   encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
+  encodeFunctionData(functionFragment: "updateCumulativeFunding", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "usdcToken", values?: undefined): string;
+  encodeFunctionData(functionFragment: "userShortfallDebt", values: [AddressLike, AddressLike]): string;
+  encodeFunctionData(functionFragment: "weekendBufferBps", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "updateCumulativeFunding",
-    values: [AddressLike]
+    functionFragment: "withdrawAssetDirectly",
+    values: [AddressLike, BigNumberish, AddressLike]
   ): string;
-  encodeFunctionData(
-    functionFragment: "weekendBufferBps",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "yieldAccumulator",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "yieldAccumulator", values?: undefined): string;
+  encodeFunctionData(functionFragment: "yieldConverter", values?: undefined): string;
 
-  decodeFunctionResult(
-    functionFragment: "BASIS_POINTS_DIVISOR",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "LEVERAGE_PRECISION",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "OI_PRECISION_FACTOR",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "PRICE_PRECISION",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "SECONDS_PER_YEAR",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "assetRegistry",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "checkCompliance",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "complianceRegistry",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "cumulativeFundingRates",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreasePosition",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "forceClosePosition",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "BASIS_POINTS_DIVISOR", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "CHANGE_PRICE_FEED", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "CHANGE_TREASURY", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "CHANGE_YIELD_ACCUMULATOR", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "EXCHANGE_RATE_PRECISION", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "LEVERAGE_PRECISION", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "OI_PRECISION_FACTOR", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "PAYOUT_HUB_TIMELOCK", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "PRICE_PRECISION", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "SECONDS_PER_YEAR", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "SETTER_TIMELOCK", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptPayoutHub", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptPriceFeed", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptTreasury", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptYieldAccumulator", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "adlPosition", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "applyExchangeRateChange", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "assetExchangeRate", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "assetRegistry", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "checkCompliance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "collectFees", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "complianceRegistry", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "convertYieldToUSDC", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "cumulativeFundingRates", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decreasePosition", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "depositedPrincipal", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "emergencyMode", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "executeRecoveryConversion", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "feeReserves", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "feeReservesLpShareBp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "forceClosePosition", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "fromWadAmount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAUM", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getDelta", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getMaxPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getMinPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPositionAssets",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPositionKey",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getVaultAssets",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "harvestYield",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increasePosition",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isPermissioned",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "getMaxPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getMinPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getPositionAssets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getPositionKey", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getTotalOI", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getVaultAssets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "harvestYield", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "increasePosition", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isKeeper", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isPermissioned", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isRouter", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "lastFundingTime",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "lastHarvestBlock",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidatePosition",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "lastFundingTime", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "lastHarvestBlock", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "liquidatePosition", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lpManager", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "maxPriceAge",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "maxPriceAge", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "maxStalenessSpreadBps", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "payoutBufferBps",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "payoutBufferBps", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "payoutHub", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "payoutHubEarliestAccept", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pendingChanges", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pendingExchangeRates", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pendingPayoutHub", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pendingRecoveries", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "positions", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "priceFeed", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "recordDeposit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "recordWithdraw",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "requiredKYCLevel",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "reservedAmounts",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setAssetRegistry",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setComplianceRegistry",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setLPManager",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMaxPriceAge",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setPayoutBufferBps",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setPayoutHub",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setPermissioned",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setPriceFeed",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setRequiredKYCLevel",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "proposeExchangeRateChange", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "proposePayoutHub", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "proposePriceFeed", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "proposeRecoveryConversion", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "proposeTreasury", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "proposeYieldAccumulator", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "protocolInsuranceFund", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "recordDeposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "recordWithdraw", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "requiredKYCLevel", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "reservedAmounts", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setAssetRegistry", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setComplianceRegistry", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setEmergencyMode", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setFeeReservesLpShareBp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setKeeper", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setLPManager", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setMaxPriceAge", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setPayoutBufferBps", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setPayoutHub", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setPermissioned", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setRequiredKYCLevel", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setRouter", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setWeekendBufferBps",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setYieldAccumulator",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "syncDebtWithHub",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "tokenBalances",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalLongAveragePrices",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalLongSize",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalShortAveragePrices",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalShortSize",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "setStalenessPenalty", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setTokenStrategy", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setTreasury", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setUsdcToken", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setWeekendBufferBps", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setYieldAccumulator", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setYieldConverter", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "settleShortfall", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "stalenessPenaltyRateBps", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "syncDebtWithHub", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "syncNetAssetValue", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "toWadAmount", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "tokenBalances", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "tokenStrategies", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalGlobalOI", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalLongAveragePrices", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalLongSize", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalNetAssetValue", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalShortAveragePrices", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalShortSize", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "treasury", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "updateCumulativeFunding",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "weekendBufferBps",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "yieldAccumulator",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "updateCumulativeFunding", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "usdcToken", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "userShortfallDebt", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "weekendBufferBps", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdrawAssetDirectly", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "yieldAccumulator", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "yieldConverter", data: BytesLike): Result;
+}
+
+export namespace ADLExecutedEvent {
+  export type InputTuple = [
+    account: AddressLike,
+    collateralToken: AddressLike,
+    indexToken: AddressLike,
+    isLong: boolean,
+    size: BigNumberish,
+    realisedPnl: BigNumberish,
+  ];
+  export type OutputTuple = [
+    account: string,
+    collateralToken: string,
+    indexToken: string,
+    isLong: boolean,
+    size: bigint,
+    realisedPnl: bigint,
+  ];
+  export interface OutputObject {
+    account: string;
+    collateralToken: string;
+    indexToken: string;
+    isLong: boolean;
+    size: bigint;
+    realisedPnl: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export namespace AssetRegistrySetEvent {
@@ -613,16 +531,8 @@ export namespace ComplianceRegistrySetEvent {
 }
 
 export namespace CumulativeFundingUpdatedEvent {
-  export type InputTuple = [
-    token: AddressLike,
-    annualRate: BigNumberish,
-    cumulative: BigNumberish
-  ];
-  export type OutputTuple = [
-    token: string,
-    annualRate: bigint,
-    cumulative: bigint
-  ];
+  export type InputTuple = [token: AddressLike, annualRate: BigNumberish, cumulative: BigNumberish];
+  export type OutputTuple = [token: string, annualRate: bigint, cumulative: bigint];
   export interface OutputObject {
     token: string;
     annualRate: bigint;
@@ -657,7 +567,8 @@ export namespace DecreasePositionEvent {
     sizeDelta: BigNumberish,
     isLong: boolean,
     price: BigNumberish,
-    realisedPnl: BigNumberish
+    realisedPnl: BigNumberish,
+    feeUsd: BigNumberish,
   ];
   export type OutputTuple = [
     key: string,
@@ -668,7 +579,8 @@ export namespace DecreasePositionEvent {
     sizeDelta: bigint,
     isLong: boolean,
     price: bigint,
-    realisedPnl: bigint
+    realisedPnl: bigint,
+    feeUsd: bigint,
   ];
   export interface OutputObject {
     key: string;
@@ -680,6 +592,90 @@ export namespace DecreasePositionEvent {
     isLong: boolean;
     price: bigint;
     realisedPnl: bigint;
+    feeUsd: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace EmergencyModeSetEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace EmergencyWithdrawalEvent {
+  export type InputTuple = [
+    asset: AddressLike,
+    amount: BigNumberish,
+    recipient: AddressLike,
+    exchangeRateAtTime: BigNumberish,
+    neededPrincipal: BigNumberish,
+  ];
+  export type OutputTuple = [
+    asset: string,
+    amount: bigint,
+    recipient: string,
+    exchangeRateAtTime: bigint,
+    neededPrincipal: bigint,
+  ];
+  export interface OutputObject {
+    asset: string;
+    amount: bigint;
+    recipient: string;
+    exchangeRateAtTime: bigint;
+    neededPrincipal: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ExchangeRateAppliedEvent {
+  export type InputTuple = [asset: AddressLike, oldRate: BigNumberish, newRate: BigNumberish];
+  export type OutputTuple = [asset: string, oldRate: bigint, newRate: bigint];
+  export interface OutputObject {
+    asset: string;
+    oldRate: bigint;
+    newRate: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ExchangeRateProposedEvent {
+  export type InputTuple = [asset: AddressLike, newRate: BigNumberish, applyAfter: BigNumberish];
+  export type OutputTuple = [asset: string, newRate: bigint, applyAfter: bigint];
+  export interface OutputObject {
+    asset: string;
+    newRate: bigint;
+    applyAfter: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace FeesCollectedEvent {
+  export type InputTuple = [token: AddressLike, treasury: AddressLike, amount: BigNumberish, price: BigNumberish];
+  export type OutputTuple = [token: string, treasury: string, amount: bigint, price: bigint];
+  export interface OutputObject {
+    token: string;
+    treasury: string;
+    amount: bigint;
+    price: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -694,7 +690,7 @@ export namespace ForcedCloseEvent {
     indexToken: AddressLike,
     isLong: boolean,
     receiver: AddressLike,
-    amountOut: BigNumberish
+    amountOut: BigNumberish,
   ];
   export type OutputTuple = [
     account: string,
@@ -702,7 +698,7 @@ export namespace ForcedCloseEvent {
     indexToken: string,
     isLong: boolean,
     receiver: string,
-    amountOut: bigint
+    amountOut: bigint,
   ];
   export interface OutputObject {
     account: string;
@@ -727,7 +723,7 @@ export namespace IncreasePositionEvent {
     collateralDelta: BigNumberish,
     sizeDelta: BigNumberish,
     isLong: boolean,
-    price: BigNumberish
+    price: BigNumberish,
   ];
   export type OutputTuple = [
     key: string,
@@ -737,7 +733,7 @@ export namespace IncreasePositionEvent {
     collateralDelta: bigint,
     sizeDelta: bigint,
     isLong: boolean,
-    price: bigint
+    price: bigint,
   ];
   export interface OutputObject {
     key: string;
@@ -748,6 +744,19 @@ export namespace IncreasePositionEvent {
     sizeDelta: bigint;
     isLong: boolean;
     price: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace KeeperSetEvent {
+  export type InputTuple = [keeper: AddressLike, enabled: boolean];
+  export type OutputTuple = [keeper: string, enabled: boolean];
+  export interface OutputObject {
+    keeper: string;
+    enabled: boolean;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -777,7 +786,8 @@ export namespace LiquidatePositionEvent {
     size: BigNumberish,
     collateral: BigNumberish,
     price: BigNumberish,
-    liquidator: AddressLike
+    liquidator: AddressLike,
+    liquidationFeeUsd: BigNumberish,
   ];
   export type OutputTuple = [
     key: string,
@@ -788,7 +798,8 @@ export namespace LiquidatePositionEvent {
     size: bigint,
     collateral: bigint,
     price: bigint,
-    liquidator: string
+    liquidator: string,
+    liquidationFeeUsd: bigint,
   ];
   export interface OutputObject {
     key: string;
@@ -800,6 +811,7 @@ export namespace LiquidatePositionEvent {
     collateral: bigint;
     price: bigint;
     liquidator: string;
+    liquidationFeeUsd: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -812,6 +824,19 @@ export namespace MaxPriceAgeSetEvent {
   export type OutputTuple = [age: bigint];
   export interface OutputObject {
     age: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferStartedEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -856,6 +881,32 @@ export namespace PayoutBufferBpsSetEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace PayoutHubChangedEvent {
+  export type InputTuple = [oldHub: AddressLike, newHub: AddressLike];
+  export type OutputTuple = [oldHub: string, newHub: string];
+  export interface OutputObject {
+    oldHub: string;
+    newHub: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace PayoutHubProposedEvent {
+  export type InputTuple = [newHub: AddressLike, executableAt: BigNumberish];
+  export type OutputTuple = [newHub: string, executableAt: bigint];
+  export interface OutputObject {
+    newHub: string;
+    executableAt: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace PayoutHubSetEvent {
   export type InputTuple = [payoutHub: AddressLike];
   export type OutputTuple = [payoutHub: string];
@@ -887,7 +938,7 @@ export namespace PositionClosedEvent {
     indexToken: AddressLike,
     size: BigNumberish,
     realisedPnl: BigNumberish,
-    feeUsd: BigNumberish
+    feeUsd: BigNumberish,
   ];
   export type OutputTuple = [
     key: string,
@@ -895,7 +946,7 @@ export namespace PositionClosedEvent {
     indexToken: string,
     size: bigint,
     realisedPnl: bigint,
-    feeUsd: bigint
+    feeUsd: bigint,
   ];
   export interface OutputObject {
     key: string;
@@ -919,7 +970,7 @@ export namespace PositionUpdatedEvent {
     size: BigNumberish,
     collateral: BigNumberish,
     averagePrice: BigNumberish,
-    isLong: boolean
+    isLong: boolean,
   ];
   export type OutputTuple = [
     key: string,
@@ -928,7 +979,7 @@ export namespace PositionUpdatedEvent {
     size: bigint,
     collateral: bigint,
     averagePrice: bigint,
-    isLong: boolean
+    isLong: boolean,
   ];
   export interface OutputObject {
     key: string;
@@ -970,6 +1021,34 @@ export namespace RebasingYieldHarvestedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace RecoveryConversionExecutedEvent {
+  export type InputTuple = [asset: AddressLike, amount: BigNumberish, usdcReceived: BigNumberish];
+  export type OutputTuple = [asset: string, amount: bigint, usdcReceived: bigint];
+  export interface OutputObject {
+    asset: string;
+    amount: bigint;
+    usdcReceived: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RecoveryConversionProposedEvent {
+  export type InputTuple = [asset: AddressLike, amount: BigNumberish, executableAt: BigNumberish];
+  export type OutputTuple = [asset: string, amount: bigint, executableAt: bigint];
+  export interface OutputObject {
+    asset: string;
+    amount: bigint;
+    executableAt: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace RequiredKYCLevelSetEvent {
   export type InputTuple = [level: BigNumberish];
   export type OutputTuple = [level: bigint];
@@ -995,6 +1074,74 @@ export namespace RouterSetEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace SetterChangeAcceptedEvent {
+  export type InputTuple = [slot: BytesLike, oldValue: AddressLike, newValue: AddressLike];
+  export type OutputTuple = [slot: string, oldValue: string, newValue: string];
+  export interface OutputObject {
+    slot: string;
+    oldValue: string;
+    newValue: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace SetterChangeProposedEvent {
+  export type InputTuple = [slot: BytesLike, value: AddressLike, executableAt: BigNumberish];
+  export type OutputTuple = [slot: string, value: string, executableAt: bigint];
+  export interface OutputObject {
+    slot: string;
+    value: string;
+    executableAt: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ShortfallSettledEvent {
+  export type InputTuple = [user: AddressLike, asset: AddressLike, amount: BigNumberish];
+  export type OutputTuple = [user: string, asset: string, amount: bigint];
+  export interface OutputObject {
+    user: string;
+    asset: string;
+    amount: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace StalenessPenaltySetEvent {
+  export type InputTuple = [rateBps: BigNumberish, maxSpreadBps: BigNumberish];
+  export type OutputTuple = [rateBps: bigint, maxSpreadBps: bigint];
+  export interface OutputObject {
+    rateBps: bigint;
+    maxSpreadBps: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace TreasurySetEvent {
+  export type InputTuple = [previous: AddressLike, next: AddressLike];
+  export type OutputTuple = [previous: string, next: string];
+  export interface OutputObject {
+    previous: string;
+    next: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace UnpausedEvent {
   export type InputTuple = [account: AddressLike];
   export type OutputTuple = [account: string];
@@ -1007,12 +1154,22 @@ export namespace UnpausedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace UserShortfallRecordedEvent {
+  export type InputTuple = [user: AddressLike, asset: AddressLike, dust: BigNumberish];
+  export type OutputTuple = [user: string, asset: string, dust: bigint];
+  export interface OutputObject {
+    user: string;
+    asset: string;
+    dust: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace VaultDepositEvent {
-  export type InputTuple = [
-    lp: AddressLike,
-    token: AddressLike,
-    amount: BigNumberish
-  ];
+  export type InputTuple = [lp: AddressLike, token: AddressLike, amount: BigNumberish];
   export type OutputTuple = [lp: string, token: string, amount: bigint];
   export interface OutputObject {
     lp: string;
@@ -1026,11 +1183,7 @@ export namespace VaultDepositEvent {
 }
 
 export namespace VaultWithdrawEvent {
-  export type InputTuple = [
-    lp: AddressLike,
-    token: AddressLike,
-    amount: BigNumberish
-  ];
+  export type InputTuple = [lp: AddressLike, token: AddressLike, amount: BigNumberish];
   export type OutputTuple = [lp: string, token: string, amount: bigint];
   export interface OutputObject {
     lp: string;
@@ -1067,6 +1220,26 @@ export namespace YieldAccumulatorSetEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace YieldConvertedEvent {
+  export type InputTuple = [
+    token: AddressLike,
+    rwaAmount: BigNumberish,
+    route: BigNumberish,
+    usdcReceived: BigNumberish,
+  ];
+  export type OutputTuple = [token: string, rwaAmount: bigint, route: bigint, usdcReceived: bigint];
+  export interface OutputObject {
+    token: string;
+    rwaAmount: bigint;
+    route: bigint;
+    usdcReceived: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export interface Vault extends BaseContract {
   connect(runner?: ContractRunner | null): Vault;
   waitForDeployment(): Promise<this>;
@@ -1084,53 +1257,79 @@ export interface Vault extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
   BASIS_POINTS_DIVISOR: TypedContractMethod<[], [bigint], "view">;
+
+  CHANGE_PRICE_FEED: TypedContractMethod<[], [string], "view">;
+
+  CHANGE_TREASURY: TypedContractMethod<[], [string], "view">;
+
+  CHANGE_YIELD_ACCUMULATOR: TypedContractMethod<[], [string], "view">;
+
+  EXCHANGE_RATE_PRECISION: TypedContractMethod<[], [bigint], "view">;
 
   LEVERAGE_PRECISION: TypedContractMethod<[], [bigint], "view">;
 
   OI_PRECISION_FACTOR: TypedContractMethod<[], [bigint], "view">;
 
+  PAYOUT_HUB_TIMELOCK: TypedContractMethod<[], [bigint], "view">;
+
   PRICE_PRECISION: TypedContractMethod<[], [bigint], "view">;
 
   SECONDS_PER_YEAR: TypedContractMethod<[], [bigint], "view">;
+
+  SETTER_TIMELOCK: TypedContractMethod<[], [bigint], "view">;
+
+  acceptOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
+  acceptPayoutHub: TypedContractMethod<[], [void], "nonpayable">;
+
+  acceptPriceFeed: TypedContractMethod<[], [void], "nonpayable">;
+
+  acceptTreasury: TypedContractMethod<[], [void], "nonpayable">;
+
+  acceptYieldAccumulator: TypedContractMethod<[], [void], "nonpayable">;
+
+  adlPosition: TypedContractMethod<
+    [_account: AddressLike, _collateralToken: AddressLike, _indexToken: AddressLike, _isLong: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  applyExchangeRateChange: TypedContractMethod<[asset: AddressLike], [void], "nonpayable">;
+
+  assetExchangeRate: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   assetRegistry: TypedContractMethod<[], [string], "view">;
 
   checkCompliance: TypedContractMethod<[user: AddressLike], [void], "view">;
 
+  collectFees: TypedContractMethod<[token: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+
   complianceRegistry: TypedContractMethod<[], [string], "view">;
 
-  cumulativeFundingRates: TypedContractMethod<
-    [arg0: AddressLike],
+  convertYieldToUSDC: TypedContractMethod<
+    [rwaToken: AddressLike, amount: BigNumberish, minAmountOut: BigNumberish, isRecovery: boolean],
     [bigint],
-    "view"
+    "nonpayable"
   >;
+
+  cumulativeFundingRates: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   decreasePosition: TypedContractMethod<
     [
@@ -1140,11 +1339,26 @@ export interface Vault extends BaseContract {
       _collateralDelta: BigNumberish,
       _sizeDelta: BigNumberish,
       _isLong: boolean,
-      _receiver: AddressLike
+      _receiver: AddressLike,
+      _acceptablePrice: BigNumberish,
     ],
     [bigint],
     "nonpayable"
   >;
+
+  depositedPrincipal: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+
+  emergencyMode: TypedContractMethod<[], [boolean], "view">;
+
+  executeRecoveryConversion: TypedContractMethod<
+    [asset: AddressLike, minAmountOut: BigNumberish],
+    [bigint],
+    "nonpayable"
+  >;
+
+  feeReserves: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+
+  feeReservesLpShareBp: TypedContractMethod<[], [bigint], "view">;
 
   forceClosePosition: TypedContractMethod<
     [
@@ -1152,21 +1366,18 @@ export interface Vault extends BaseContract {
       _collateralToken: AddressLike,
       _indexToken: AddressLike,
       _isLong: boolean,
-      _receiver: AddressLike
+      _receiver: AddressLike,
     ],
     [bigint],
     "nonpayable"
   >;
 
+  fromWadAmount: TypedContractMethod<[token: AddressLike, wadAmount: BigNumberish], [bigint], "view">;
+
   getAUM: TypedContractMethod<[], [bigint], "view">;
 
   getDelta: TypedContractMethod<
-    [
-      _indexToken: AddressLike,
-      _size: BigNumberish,
-      _averagePrice: BigNumberish,
-      _isLong: boolean
-    ],
+    [_indexToken: AddressLike, _size: BigNumberish, _averagePrice: BigNumberish, _isLong: boolean],
     [[bigint, boolean] & { delta: bigint; hasProfit: boolean }],
     "view"
   >;
@@ -1178,15 +1389,12 @@ export interface Vault extends BaseContract {
   getPositionAssets: TypedContractMethod<[], [string[]], "view">;
 
   getPositionKey: TypedContractMethod<
-    [
-      _account: AddressLike,
-      _collateralToken: AddressLike,
-      _indexToken: AddressLike,
-      _isLong: boolean
-    ],
+    [_account: AddressLike, _collateralToken: AddressLike, _indexToken: AddressLike, _isLong: boolean],
     [string],
     "view"
   >;
+
+  getTotalOI: TypedContractMethod<[], [bigint], "view">;
 
   getVaultAssets: TypedContractMethod<[], [string[]], "view">;
 
@@ -1199,11 +1407,13 @@ export interface Vault extends BaseContract {
       _indexToken: AddressLike,
       _sizeDelta: BigNumberish,
       _isLong: boolean,
-      _collateralDelta: BigNumberish
+      _collateralDelta: BigNumberish,
     ],
     [void],
     "nonpayable"
   >;
+
+  isKeeper: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
   isPermissioned: TypedContractMethod<[], [boolean], "view">;
 
@@ -1219,7 +1429,7 @@ export interface Vault extends BaseContract {
       _collateralToken: AddressLike,
       _indexToken: AddressLike,
       _isLong: boolean,
-      arg4: AddressLike
+      _feeReceiver: AddressLike,
     ],
     [void],
     "nonpayable"
@@ -1228,6 +1438,8 @@ export interface Vault extends BaseContract {
   lpManager: TypedContractMethod<[], [string], "view">;
 
   maxPriceAge: TypedContractMethod<[], [bigint], "view">;
+
+  maxStalenessSpreadBps: TypedContractMethod<[], [bigint], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
 
@@ -1238,6 +1450,30 @@ export interface Vault extends BaseContract {
   payoutBufferBps: TypedContractMethod<[], [bigint], "view">;
 
   payoutHub: TypedContractMethod<[], [string], "view">;
+
+  payoutHubEarliestAccept: TypedContractMethod<[], [bigint], "view">;
+
+  pendingChanges: TypedContractMethod<
+    [arg0: BytesLike],
+    [[string, bigint] & { value: string; executableAt: bigint }],
+    "view"
+  >;
+
+  pendingExchangeRates: TypedContractMethod<
+    [arg0: AddressLike],
+    [[bigint, bigint] & { rate: bigint; executableAt: bigint }],
+    "view"
+  >;
+
+  pendingOwner: TypedContractMethod<[], [string], "view">;
+
+  pendingPayoutHub: TypedContractMethod<[], [string], "view">;
+
+  pendingRecoveries: TypedContractMethod<
+    [arg0: AddressLike],
+    [[bigint, bigint] & { amount: bigint; executableAt: bigint }],
+    "view"
+  >;
 
   positions: TypedContractMethod<
     [arg0: BytesLike],
@@ -1250,18 +1486,28 @@ export interface Vault extends BaseContract {
         isLong: boolean;
         indexToken: string;
         entryFundingRate: bigint;
-      }
+      },
     ],
     "view"
   >;
 
   priceFeed: TypedContractMethod<[], [string], "view">;
 
-  recordDeposit: TypedContractMethod<
-    [token: AddressLike, amount: BigNumberish, lp: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  proposeExchangeRateChange: TypedContractMethod<[asset: AddressLike, newRate: BigNumberish], [void], "nonpayable">;
+
+  proposePayoutHub: TypedContractMethod<[_newHub: AddressLike], [void], "nonpayable">;
+
+  proposePriceFeed: TypedContractMethod<[_priceFeed: AddressLike], [void], "nonpayable">;
+
+  proposeRecoveryConversion: TypedContractMethod<[asset: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+
+  proposeTreasury: TypedContractMethod<[_treasury: AddressLike], [void], "nonpayable">;
+
+  proposeYieldAccumulator: TypedContractMethod<[_yieldAccumulator: AddressLike], [void], "nonpayable">;
+
+  protocolInsuranceFund: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+
+  recordDeposit: TypedContractMethod<[token: AddressLike, amount: BigNumberish, lp: AddressLike], [void], "nonpayable">;
 
   recordWithdraw: TypedContractMethod<
     [token: AddressLike, amount: BigNumberish, to: AddressLike],
@@ -1275,147 +1521,151 @@ export interface Vault extends BaseContract {
 
   reservedAmounts: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
-  setAssetRegistry: TypedContractMethod<
-    [_assetRegistry: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  setAssetRegistry: TypedContractMethod<[_assetRegistry: AddressLike], [void], "nonpayable">;
 
-  setComplianceRegistry: TypedContractMethod<
-    [_registry: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  setComplianceRegistry: TypedContractMethod<[_registry: AddressLike], [void], "nonpayable">;
 
-  setLPManager: TypedContractMethod<
-    [_lpManager: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  setEmergencyMode: TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
 
-  setMaxPriceAge: TypedContractMethod<
-    [_age: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  setFeeReservesLpShareBp: TypedContractMethod<[_bps: BigNumberish], [void], "nonpayable">;
 
-  setPayoutBufferBps: TypedContractMethod<
-    [_bps: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  setKeeper: TypedContractMethod<[keeper: AddressLike, enabled: boolean], [void], "nonpayable">;
+
+  setLPManager: TypedContractMethod<[_lpManager: AddressLike], [void], "nonpayable">;
+
+  setMaxPriceAge: TypedContractMethod<[_age: BigNumberish], [void], "nonpayable">;
+
+  setPayoutBufferBps: TypedContractMethod<[_bps: BigNumberish], [void], "nonpayable">;
 
   setPayoutHub: TypedContractMethod<[_hub: AddressLike], [void], "nonpayable">;
 
-  setPermissioned: TypedContractMethod<
-    [_isPermissioned: boolean],
+  setPermissioned: TypedContractMethod<[_isPermissioned: boolean], [void], "nonpayable">;
+
+  setRequiredKYCLevel: TypedContractMethod<[_level: BigNumberish], [void], "nonpayable">;
+
+  setRouter: TypedContractMethod<[router: AddressLike, enabled: boolean], [void], "nonpayable">;
+
+  setStalenessPenalty: TypedContractMethod<[_rateBps: BigNumberish, _maxSpreadBps: BigNumberish], [void], "nonpayable">;
+
+  setTokenStrategy: TypedContractMethod<
+    [token: AddressLike, route: BigNumberish, facility: AddressLike, poolFee: BigNumberish],
     [void],
     "nonpayable"
   >;
 
-  setPriceFeed: TypedContractMethod<
-    [_priceFeed: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  setTreasury: TypedContractMethod<[_treasury: AddressLike], [void], "nonpayable">;
 
-  setRequiredKYCLevel: TypedContractMethod<
-    [_level: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  setUsdcToken: TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
 
-  setRouter: TypedContractMethod<
-    [router: AddressLike, enabled: boolean],
-    [void],
-    "nonpayable"
-  >;
+  setWeekendBufferBps: TypedContractMethod<[_bps: BigNumberish], [void], "nonpayable">;
 
-  setWeekendBufferBps: TypedContractMethod<
-    [_bps: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  setYieldAccumulator: TypedContractMethod<[_yieldAccumulator: AddressLike], [void], "nonpayable">;
 
-  setYieldAccumulator: TypedContractMethod<
-    [_yieldAccumulator: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  setYieldConverter: TypedContractMethod<[router: AddressLike], [void], "nonpayable">;
 
-  syncDebtWithHub: TypedContractMethod<
-    [token: AddressLike, amount: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  settleShortfall: TypedContractMethod<[user: AddressLike, token: AddressLike], [void], "nonpayable">;
+
+  stalenessPenaltyRateBps: TypedContractMethod<[], [bigint], "view">;
+
+  syncDebtWithHub: TypedContractMethod<[token: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+
+  syncNetAssetValue: TypedContractMethod<[], [void], "nonpayable">;
+
+  toWadAmount: TypedContractMethod<[token: AddressLike, amount: BigNumberish], [bigint], "view">;
 
   tokenBalances: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
-  totalLongAveragePrices: TypedContractMethod<
+  tokenStrategies: TypedContractMethod<
     [arg0: AddressLike],
-    [bigint],
+    [
+      [bigint, string, bigint] & {
+        preferredRoute: bigint;
+        facility: string;
+        poolFee: bigint;
+      },
+    ],
     "view"
   >;
+
+  totalGlobalOI: TypedContractMethod<[], [bigint], "view">;
+
+  totalLongAveragePrices: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   totalLongSize: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
-  totalShortAveragePrices: TypedContractMethod<
-    [arg0: AddressLike],
-    [bigint],
-    "view"
-  >;
+  totalNetAssetValue: TypedContractMethod<[], [bigint], "view">;
+
+  totalShortAveragePrices: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   totalShortSize: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
-  transferOwnership: TypedContractMethod<
-    [newOwner: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  transferOwnership: TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+
+  treasury: TypedContractMethod<[], [string], "view">;
 
   unpause: TypedContractMethod<[], [void], "nonpayable">;
 
-  updateCumulativeFunding: TypedContractMethod<
-    [token: AddressLike],
+  updateCumulativeFunding: TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
+
+  usdcToken: TypedContractMethod<[], [string], "view">;
+
+  userShortfallDebt: TypedContractMethod<[arg0: AddressLike, arg1: AddressLike], [bigint], "view">;
+
+  weekendBufferBps: TypedContractMethod<[], [bigint], "view">;
+
+  withdrawAssetDirectly: TypedContractMethod<
+    [asset: AddressLike, amount: BigNumberish, recipient: AddressLike],
     [void],
     "nonpayable"
   >;
 
-  weekendBufferBps: TypedContractMethod<[], [bigint], "view">;
-
   yieldAccumulator: TypedContractMethod<[], [string], "view">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  yieldConverter: TypedContractMethod<[], [string], "view">;
 
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+
+  getFunction(nameOrSignature: "BASIS_POINTS_DIVISOR"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "CHANGE_PRICE_FEED"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "CHANGE_TREASURY"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "CHANGE_YIELD_ACCUMULATOR"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "EXCHANGE_RATE_PRECISION"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "LEVERAGE_PRECISION"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "OI_PRECISION_FACTOR"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "PAYOUT_HUB_TIMELOCK"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "PRICE_PRECISION"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "SECONDS_PER_YEAR"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "SETTER_TIMELOCK"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "acceptOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptPayoutHub"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptPriceFeed"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptTreasury"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptYieldAccumulator"): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
-    nameOrSignature: "BASIS_POINTS_DIVISOR"
-  ): TypedContractMethod<[], [bigint], "view">;
+    nameOrSignature: "adlPosition"
+  ): TypedContractMethod<
+    [_account: AddressLike, _collateralToken: AddressLike, _indexToken: AddressLike, _isLong: boolean],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
-    nameOrSignature: "LEVERAGE_PRECISION"
-  ): TypedContractMethod<[], [bigint], "view">;
+    nameOrSignature: "applyExchangeRateChange"
+  ): TypedContractMethod<[asset: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "assetExchangeRate"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "assetRegistry"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "checkCompliance"): TypedContractMethod<[user: AddressLike], [void], "view">;
   getFunction(
-    nameOrSignature: "OI_PRECISION_FACTOR"
-  ): TypedContractMethod<[], [bigint], "view">;
+    nameOrSignature: "collectFees"
+  ): TypedContractMethod<[token: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "complianceRegistry"): TypedContractMethod<[], [string], "view">;
   getFunction(
-    nameOrSignature: "PRICE_PRECISION"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "SECONDS_PER_YEAR"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "assetRegistry"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "checkCompliance"
-  ): TypedContractMethod<[user: AddressLike], [void], "view">;
-  getFunction(
-    nameOrSignature: "complianceRegistry"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "cumulativeFundingRates"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+    nameOrSignature: "convertYieldToUSDC"
+  ): TypedContractMethod<
+    [rwaToken: AddressLike, amount: BigNumberish, minAmountOut: BigNumberish, isRecovery: boolean],
+    [bigint],
+    "nonpayable"
+  >;
+  getFunction(nameOrSignature: "cumulativeFundingRates"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "decreasePosition"
   ): TypedContractMethod<
@@ -1426,11 +1676,19 @@ export interface Vault extends BaseContract {
       _collateralDelta: BigNumberish,
       _sizeDelta: BigNumberish,
       _isLong: boolean,
-      _receiver: AddressLike
+      _receiver: AddressLike,
+      _acceptablePrice: BigNumberish,
     ],
     [bigint],
     "nonpayable"
   >;
+  getFunction(nameOrSignature: "depositedPrincipal"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "emergencyMode"): TypedContractMethod<[], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "executeRecoveryConversion"
+  ): TypedContractMethod<[asset: AddressLike, minAmountOut: BigNumberish], [bigint], "nonpayable">;
+  getFunction(nameOrSignature: "feeReserves"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "feeReservesLpShareBp"): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "forceClosePosition"
   ): TypedContractMethod<
@@ -1439,53 +1697,35 @@ export interface Vault extends BaseContract {
       _collateralToken: AddressLike,
       _indexToken: AddressLike,
       _isLong: boolean,
-      _receiver: AddressLike
+      _receiver: AddressLike,
     ],
     [bigint],
     "nonpayable"
   >;
   getFunction(
-    nameOrSignature: "getAUM"
-  ): TypedContractMethod<[], [bigint], "view">;
+    nameOrSignature: "fromWadAmount"
+  ): TypedContractMethod<[token: AddressLike, wadAmount: BigNumberish], [bigint], "view">;
+  getFunction(nameOrSignature: "getAUM"): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "getDelta"
   ): TypedContractMethod<
-    [
-      _indexToken: AddressLike,
-      _size: BigNumberish,
-      _averagePrice: BigNumberish,
-      _isLong: boolean
-    ],
+    [_indexToken: AddressLike, _size: BigNumberish, _averagePrice: BigNumberish, _isLong: boolean],
     [[bigint, boolean] & { delta: bigint; hasProfit: boolean }],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getMaxPrice"
-  ): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getMinPrice"
-  ): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getPositionAssets"
-  ): TypedContractMethod<[], [string[]], "view">;
+  getFunction(nameOrSignature: "getMaxPrice"): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getMinPrice"): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getPositionAssets"): TypedContractMethod<[], [string[]], "view">;
   getFunction(
     nameOrSignature: "getPositionKey"
   ): TypedContractMethod<
-    [
-      _account: AddressLike,
-      _collateralToken: AddressLike,
-      _indexToken: AddressLike,
-      _isLong: boolean
-    ],
+    [_account: AddressLike, _collateralToken: AddressLike, _indexToken: AddressLike, _isLong: boolean],
     [string],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getVaultAssets"
-  ): TypedContractMethod<[], [string[]], "view">;
-  getFunction(
-    nameOrSignature: "harvestYield"
-  ): TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "getTotalOI"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "getVaultAssets"): TypedContractMethod<[], [string[]], "view">;
+  getFunction(nameOrSignature: "harvestYield"): TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "increasePosition"
   ): TypedContractMethod<
@@ -1495,23 +1735,16 @@ export interface Vault extends BaseContract {
       _indexToken: AddressLike,
       _sizeDelta: BigNumberish,
       _isLong: boolean,
-      _collateralDelta: BigNumberish
+      _collateralDelta: BigNumberish,
     ],
     [void],
     "nonpayable"
   >;
-  getFunction(
-    nameOrSignature: "isPermissioned"
-  ): TypedContractMethod<[], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "isRouter"
-  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "lastFundingTime"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "lastHarvestBlock"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "isKeeper"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "isPermissioned"): TypedContractMethod<[], [boolean], "view">;
+  getFunction(nameOrSignature: "isRouter"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "lastFundingTime"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "lastHarvestBlock"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "liquidatePosition"
   ): TypedContractMethod<
@@ -1520,35 +1753,32 @@ export interface Vault extends BaseContract {
       _collateralToken: AddressLike,
       _indexToken: AddressLike,
       _isLong: boolean,
-      arg4: AddressLike
+      _feeReceiver: AddressLike,
     ],
     [void],
     "nonpayable"
   >;
+  getFunction(nameOrSignature: "lpManager"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "maxPriceAge"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "maxStalenessSpreadBps"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "pause"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "paused"): TypedContractMethod<[], [boolean], "view">;
+  getFunction(nameOrSignature: "payoutBufferBps"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "payoutHub"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "payoutHubEarliestAccept"): TypedContractMethod<[], [bigint], "view">;
   getFunction(
-    nameOrSignature: "lpManager"
-  ): TypedContractMethod<[], [string], "view">;
+    nameOrSignature: "pendingChanges"
+  ): TypedContractMethod<[arg0: BytesLike], [[string, bigint] & { value: string; executableAt: bigint }], "view">;
   getFunction(
-    nameOrSignature: "maxPriceAge"
-  ): TypedContractMethod<[], [bigint], "view">;
+    nameOrSignature: "pendingExchangeRates"
+  ): TypedContractMethod<[arg0: AddressLike], [[bigint, bigint] & { rate: bigint; executableAt: bigint }], "view">;
+  getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "pendingPayoutHub"): TypedContractMethod<[], [string], "view">;
   getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "pause"
-  ): TypedContractMethod<[], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "paused"
-  ): TypedContractMethod<[], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "payoutBufferBps"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "payoutHub"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "positions"
-  ): TypedContractMethod<
+    nameOrSignature: "pendingRecoveries"
+  ): TypedContractMethod<[arg0: AddressLike], [[bigint, bigint] & { amount: bigint; executableAt: bigint }], "view">;
+  getFunction(nameOrSignature: "positions"): TypedContractMethod<
     [arg0: BytesLike],
     [
       [bigint, bigint, bigint, bigint, boolean, string, bigint] & {
@@ -1559,118 +1789,127 @@ export interface Vault extends BaseContract {
         isLong: boolean;
         indexToken: string;
         entryFundingRate: bigint;
-      }
+      },
     ],
     "view"
   >;
+  getFunction(nameOrSignature: "priceFeed"): TypedContractMethod<[], [string], "view">;
   getFunction(
-    nameOrSignature: "priceFeed"
-  ): TypedContractMethod<[], [string], "view">;
+    nameOrSignature: "proposeExchangeRateChange"
+  ): TypedContractMethod<[asset: AddressLike, newRate: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "proposePayoutHub"): TypedContractMethod<[_newHub: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "proposePriceFeed"
+  ): TypedContractMethod<[_priceFeed: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "proposeRecoveryConversion"
+  ): TypedContractMethod<[asset: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "proposeTreasury"): TypedContractMethod<[_treasury: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "proposeYieldAccumulator"
+  ): TypedContractMethod<[_yieldAccumulator: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "protocolInsuranceFund"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "recordDeposit"
-  ): TypedContractMethod<
-    [token: AddressLike, amount: BigNumberish, lp: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[token: AddressLike, amount: BigNumberish, lp: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "recordWithdraw"
-  ): TypedContractMethod<
-    [token: AddressLike, amount: BigNumberish, to: AddressLike],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "renounceOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "requiredKYCLevel"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "reservedAmounts"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  ): TypedContractMethod<[token: AddressLike, amount: BigNumberish, to: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "requiredKYCLevel"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "reservedAmounts"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "setAssetRegistry"
   ): TypedContractMethod<[_assetRegistry: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setComplianceRegistry"
   ): TypedContractMethod<[_registry: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setEmergencyMode"): TypedContractMethod<[enabled: boolean], [void], "nonpayable">;
   getFunction(
-    nameOrSignature: "setLPManager"
-  ): TypedContractMethod<[_lpManager: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "setMaxPriceAge"
-  ): TypedContractMethod<[_age: BigNumberish], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "setPayoutBufferBps"
+    nameOrSignature: "setFeeReservesLpShareBp"
   ): TypedContractMethod<[_bps: BigNumberish], [void], "nonpayable">;
   getFunction(
-    nameOrSignature: "setPayoutHub"
-  ): TypedContractMethod<[_hub: AddressLike], [void], "nonpayable">;
+    nameOrSignature: "setKeeper"
+  ): TypedContractMethod<[keeper: AddressLike, enabled: boolean], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setLPManager"): TypedContractMethod<[_lpManager: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setMaxPriceAge"): TypedContractMethod<[_age: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setPayoutBufferBps"): TypedContractMethod<[_bps: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setPayoutHub"): TypedContractMethod<[_hub: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setPermissioned"
   ): TypedContractMethod<[_isPermissioned: boolean], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "setPriceFeed"
-  ): TypedContractMethod<[_priceFeed: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setRequiredKYCLevel"
   ): TypedContractMethod<[_level: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setRouter"
+  ): TypedContractMethod<[router: AddressLike, enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setStalenessPenalty"
+  ): TypedContractMethod<[_rateBps: BigNumberish, _maxSpreadBps: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setTokenStrategy"
   ): TypedContractMethod<
-    [router: AddressLike, enabled: boolean],
+    [token: AddressLike, route: BigNumberish, facility: AddressLike, poolFee: BigNumberish],
     [void],
     "nonpayable"
   >;
-  getFunction(
-    nameOrSignature: "setWeekendBufferBps"
-  ): TypedContractMethod<[_bps: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setTreasury"): TypedContractMethod<[_treasury: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setUsdcToken"): TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setWeekendBufferBps"): TypedContractMethod<[_bps: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setYieldAccumulator"
-  ): TypedContractMethod<
-    [_yieldAccumulator: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[_yieldAccumulator: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setYieldConverter"): TypedContractMethod<[router: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "settleShortfall"
+  ): TypedContractMethod<[user: AddressLike, token: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "stalenessPenaltyRateBps"): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "syncDebtWithHub"
-  ): TypedContractMethod<
-    [token: AddressLike, amount: BigNumberish],
-    [void],
-    "nonpayable"
+  ): TypedContractMethod<[token: AddressLike, amount: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "syncNetAssetValue"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "toWadAmount"
+  ): TypedContractMethod<[token: AddressLike, amount: BigNumberish], [bigint], "view">;
+  getFunction(nameOrSignature: "tokenBalances"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "tokenStrategies"): TypedContractMethod<
+    [arg0: AddressLike],
+    [
+      [bigint, string, bigint] & {
+        preferredRoute: bigint;
+        facility: string;
+        poolFee: bigint;
+      },
+    ],
+    "view"
   >;
-  getFunction(
-    nameOrSignature: "tokenBalances"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalLongAveragePrices"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalLongSize"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalShortAveragePrices"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalShortSize"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "unpause"
-  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "totalGlobalOI"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "totalLongAveragePrices"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "totalLongSize"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "totalNetAssetValue"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "totalShortAveragePrices"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "totalShortSize"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "transferOwnership"): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "treasury"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "unpause"): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "updateCumulativeFunding"
   ): TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "usdcToken"): TypedContractMethod<[], [string], "view">;
   getFunction(
-    nameOrSignature: "weekendBufferBps"
-  ): TypedContractMethod<[], [bigint], "view">;
+    nameOrSignature: "userShortfallDebt"
+  ): TypedContractMethod<[arg0: AddressLike, arg1: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "weekendBufferBps"): TypedContractMethod<[], [bigint], "view">;
   getFunction(
-    nameOrSignature: "yieldAccumulator"
-  ): TypedContractMethod<[], [string], "view">;
+    nameOrSignature: "withdrawAssetDirectly"
+  ): TypedContractMethod<[asset: AddressLike, amount: BigNumberish, recipient: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "yieldAccumulator"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "yieldConverter"): TypedContractMethod<[], [string], "view">;
 
+  getEvent(
+    key: "ADLExecuted"
+  ): TypedContractEvent<ADLExecutedEvent.InputTuple, ADLExecutedEvent.OutputTuple, ADLExecutedEvent.OutputObject>;
   getEvent(
     key: "AssetRegistrySet"
   ): TypedContractEvent<
@@ -1714,12 +1953,39 @@ export interface Vault extends BaseContract {
     DecreasePositionEvent.OutputObject
   >;
   getEvent(
-    key: "ForcedClose"
+    key: "EmergencyModeSet"
   ): TypedContractEvent<
-    ForcedCloseEvent.InputTuple,
-    ForcedCloseEvent.OutputTuple,
-    ForcedCloseEvent.OutputObject
+    EmergencyModeSetEvent.InputTuple,
+    EmergencyModeSetEvent.OutputTuple,
+    EmergencyModeSetEvent.OutputObject
   >;
+  getEvent(
+    key: "EmergencyWithdrawal"
+  ): TypedContractEvent<
+    EmergencyWithdrawalEvent.InputTuple,
+    EmergencyWithdrawalEvent.OutputTuple,
+    EmergencyWithdrawalEvent.OutputObject
+  >;
+  getEvent(
+    key: "ExchangeRateApplied"
+  ): TypedContractEvent<
+    ExchangeRateAppliedEvent.InputTuple,
+    ExchangeRateAppliedEvent.OutputTuple,
+    ExchangeRateAppliedEvent.OutputObject
+  >;
+  getEvent(
+    key: "ExchangeRateProposed"
+  ): TypedContractEvent<
+    ExchangeRateProposedEvent.InputTuple,
+    ExchangeRateProposedEvent.OutputTuple,
+    ExchangeRateProposedEvent.OutputObject
+  >;
+  getEvent(
+    key: "FeesCollected"
+  ): TypedContractEvent<FeesCollectedEvent.InputTuple, FeesCollectedEvent.OutputTuple, FeesCollectedEvent.OutputObject>;
+  getEvent(
+    key: "ForcedClose"
+  ): TypedContractEvent<ForcedCloseEvent.InputTuple, ForcedCloseEvent.OutputTuple, ForcedCloseEvent.OutputObject>;
   getEvent(
     key: "IncreasePosition"
   ): TypedContractEvent<
@@ -1728,12 +1994,11 @@ export interface Vault extends BaseContract {
     IncreasePositionEvent.OutputObject
   >;
   getEvent(
+    key: "KeeperSet"
+  ): TypedContractEvent<KeeperSetEvent.InputTuple, KeeperSetEvent.OutputTuple, KeeperSetEvent.OutputObject>;
+  getEvent(
     key: "LPManagerSet"
-  ): TypedContractEvent<
-    LPManagerSetEvent.InputTuple,
-    LPManagerSetEvent.OutputTuple,
-    LPManagerSetEvent.OutputObject
-  >;
+  ): TypedContractEvent<LPManagerSetEvent.InputTuple, LPManagerSetEvent.OutputTuple, LPManagerSetEvent.OutputObject>;
   getEvent(
     key: "LiquidatePosition"
   ): TypedContractEvent<
@@ -1749,6 +2014,13 @@ export interface Vault extends BaseContract {
     MaxPriceAgeSetEvent.OutputObject
   >;
   getEvent(
+    key: "OwnershipTransferStarted"
+  ): TypedContractEvent<
+    OwnershipTransferStartedEvent.InputTuple,
+    OwnershipTransferStartedEvent.OutputTuple,
+    OwnershipTransferStartedEvent.OutputObject
+  >;
+  getEvent(
     key: "OwnershipTransferred"
   ): TypedContractEvent<
     OwnershipTransferredEvent.InputTuple,
@@ -1757,11 +2029,7 @@ export interface Vault extends BaseContract {
   >;
   getEvent(
     key: "Paused"
-  ): TypedContractEvent<
-    PausedEvent.InputTuple,
-    PausedEvent.OutputTuple,
-    PausedEvent.OutputObject
-  >;
+  ): TypedContractEvent<PausedEvent.InputTuple, PausedEvent.OutputTuple, PausedEvent.OutputObject>;
   getEvent(
     key: "PayoutBufferBpsSet"
   ): TypedContractEvent<
@@ -1770,12 +2038,22 @@ export interface Vault extends BaseContract {
     PayoutBufferBpsSetEvent.OutputObject
   >;
   getEvent(
-    key: "PayoutHubSet"
+    key: "PayoutHubChanged"
   ): TypedContractEvent<
-    PayoutHubSetEvent.InputTuple,
-    PayoutHubSetEvent.OutputTuple,
-    PayoutHubSetEvent.OutputObject
+    PayoutHubChangedEvent.InputTuple,
+    PayoutHubChangedEvent.OutputTuple,
+    PayoutHubChangedEvent.OutputObject
   >;
+  getEvent(
+    key: "PayoutHubProposed"
+  ): TypedContractEvent<
+    PayoutHubProposedEvent.InputTuple,
+    PayoutHubProposedEvent.OutputTuple,
+    PayoutHubProposedEvent.OutputObject
+  >;
+  getEvent(
+    key: "PayoutHubSet"
+  ): TypedContractEvent<PayoutHubSetEvent.InputTuple, PayoutHubSetEvent.OutputTuple, PayoutHubSetEvent.OutputObject>;
   getEvent(
     key: "PermissionedSet"
   ): TypedContractEvent<
@@ -1799,17 +2077,27 @@ export interface Vault extends BaseContract {
   >;
   getEvent(
     key: "PriceFeedSet"
-  ): TypedContractEvent<
-    PriceFeedSetEvent.InputTuple,
-    PriceFeedSetEvent.OutputTuple,
-    PriceFeedSetEvent.OutputObject
-  >;
+  ): TypedContractEvent<PriceFeedSetEvent.InputTuple, PriceFeedSetEvent.OutputTuple, PriceFeedSetEvent.OutputObject>;
   getEvent(
     key: "RebasingYieldHarvested"
   ): TypedContractEvent<
     RebasingYieldHarvestedEvent.InputTuple,
     RebasingYieldHarvestedEvent.OutputTuple,
     RebasingYieldHarvestedEvent.OutputObject
+  >;
+  getEvent(
+    key: "RecoveryConversionExecuted"
+  ): TypedContractEvent<
+    RecoveryConversionExecutedEvent.InputTuple,
+    RecoveryConversionExecutedEvent.OutputTuple,
+    RecoveryConversionExecutedEvent.OutputObject
+  >;
+  getEvent(
+    key: "RecoveryConversionProposed"
+  ): TypedContractEvent<
+    RecoveryConversionProposedEvent.InputTuple,
+    RecoveryConversionProposedEvent.OutputTuple,
+    RecoveryConversionProposedEvent.OutputObject
   >;
   getEvent(
     key: "RequiredKYCLevelSet"
@@ -1820,32 +2108,54 @@ export interface Vault extends BaseContract {
   >;
   getEvent(
     key: "RouterSet"
+  ): TypedContractEvent<RouterSetEvent.InputTuple, RouterSetEvent.OutputTuple, RouterSetEvent.OutputObject>;
+  getEvent(
+    key: "SetterChangeAccepted"
   ): TypedContractEvent<
-    RouterSetEvent.InputTuple,
-    RouterSetEvent.OutputTuple,
-    RouterSetEvent.OutputObject
+    SetterChangeAcceptedEvent.InputTuple,
+    SetterChangeAcceptedEvent.OutputTuple,
+    SetterChangeAcceptedEvent.OutputObject
   >;
   getEvent(
-    key: "Unpaused"
+    key: "SetterChangeProposed"
   ): TypedContractEvent<
-    UnpausedEvent.InputTuple,
-    UnpausedEvent.OutputTuple,
-    UnpausedEvent.OutputObject
+    SetterChangeProposedEvent.InputTuple,
+    SetterChangeProposedEvent.OutputTuple,
+    SetterChangeProposedEvent.OutputObject
+  >;
+  getEvent(
+    key: "ShortfallSettled"
+  ): TypedContractEvent<
+    ShortfallSettledEvent.InputTuple,
+    ShortfallSettledEvent.OutputTuple,
+    ShortfallSettledEvent.OutputObject
+  >;
+  getEvent(
+    key: "StalenessPenaltySet"
+  ): TypedContractEvent<
+    StalenessPenaltySetEvent.InputTuple,
+    StalenessPenaltySetEvent.OutputTuple,
+    StalenessPenaltySetEvent.OutputObject
+  >;
+  getEvent(
+    key: "TreasurySet"
+  ): TypedContractEvent<TreasurySetEvent.InputTuple, TreasurySetEvent.OutputTuple, TreasurySetEvent.OutputObject>;
+  getEvent(
+    key: "Unpaused"
+  ): TypedContractEvent<UnpausedEvent.InputTuple, UnpausedEvent.OutputTuple, UnpausedEvent.OutputObject>;
+  getEvent(
+    key: "UserShortfallRecorded"
+  ): TypedContractEvent<
+    UserShortfallRecordedEvent.InputTuple,
+    UserShortfallRecordedEvent.OutputTuple,
+    UserShortfallRecordedEvent.OutputObject
   >;
   getEvent(
     key: "VaultDeposit"
-  ): TypedContractEvent<
-    VaultDepositEvent.InputTuple,
-    VaultDepositEvent.OutputTuple,
-    VaultDepositEvent.OutputObject
-  >;
+  ): TypedContractEvent<VaultDepositEvent.InputTuple, VaultDepositEvent.OutputTuple, VaultDepositEvent.OutputObject>;
   getEvent(
     key: "VaultWithdraw"
-  ): TypedContractEvent<
-    VaultWithdrawEvent.InputTuple,
-    VaultWithdrawEvent.OutputTuple,
-    VaultWithdrawEvent.OutputObject
-  >;
+  ): TypedContractEvent<VaultWithdrawEvent.InputTuple, VaultWithdrawEvent.OutputTuple, VaultWithdrawEvent.OutputObject>;
   getEvent(
     key: "WeekendBufferBpsSet"
   ): TypedContractEvent<
@@ -1860,8 +2170,26 @@ export interface Vault extends BaseContract {
     YieldAccumulatorSetEvent.OutputTuple,
     YieldAccumulatorSetEvent.OutputObject
   >;
+  getEvent(
+    key: "YieldConverted"
+  ): TypedContractEvent<
+    YieldConvertedEvent.InputTuple,
+    YieldConvertedEvent.OutputTuple,
+    YieldConvertedEvent.OutputObject
+  >;
 
   filters: {
+    "ADLExecuted(address,address,address,bool,uint256,uint256)": TypedContractEvent<
+      ADLExecutedEvent.InputTuple,
+      ADLExecutedEvent.OutputTuple,
+      ADLExecutedEvent.OutputObject
+    >;
+    ADLExecuted: TypedContractEvent<
+      ADLExecutedEvent.InputTuple,
+      ADLExecutedEvent.OutputTuple,
+      ADLExecutedEvent.OutputObject
+    >;
+
     "AssetRegistrySet(address)": TypedContractEvent<
       AssetRegistrySetEvent.InputTuple,
       AssetRegistrySetEvent.OutputTuple,
@@ -1917,7 +2245,7 @@ export interface Vault extends BaseContract {
       DebtSyncedWithHubEvent.OutputObject
     >;
 
-    "DecreasePosition(bytes32,address,address,address,uint256,uint256,bool,uint256,int256)": TypedContractEvent<
+    "DecreasePosition(bytes32,address,address,address,uint256,uint256,bool,uint256,int256,uint256)": TypedContractEvent<
       DecreasePositionEvent.InputTuple,
       DecreasePositionEvent.OutputTuple,
       DecreasePositionEvent.OutputObject
@@ -1926,6 +2254,61 @@ export interface Vault extends BaseContract {
       DecreasePositionEvent.InputTuple,
       DecreasePositionEvent.OutputTuple,
       DecreasePositionEvent.OutputObject
+    >;
+
+    "EmergencyModeSet(bool)": TypedContractEvent<
+      EmergencyModeSetEvent.InputTuple,
+      EmergencyModeSetEvent.OutputTuple,
+      EmergencyModeSetEvent.OutputObject
+    >;
+    EmergencyModeSet: TypedContractEvent<
+      EmergencyModeSetEvent.InputTuple,
+      EmergencyModeSetEvent.OutputTuple,
+      EmergencyModeSetEvent.OutputObject
+    >;
+
+    "EmergencyWithdrawal(address,uint256,address,uint256,uint256)": TypedContractEvent<
+      EmergencyWithdrawalEvent.InputTuple,
+      EmergencyWithdrawalEvent.OutputTuple,
+      EmergencyWithdrawalEvent.OutputObject
+    >;
+    EmergencyWithdrawal: TypedContractEvent<
+      EmergencyWithdrawalEvent.InputTuple,
+      EmergencyWithdrawalEvent.OutputTuple,
+      EmergencyWithdrawalEvent.OutputObject
+    >;
+
+    "ExchangeRateApplied(address,uint256,uint256)": TypedContractEvent<
+      ExchangeRateAppliedEvent.InputTuple,
+      ExchangeRateAppliedEvent.OutputTuple,
+      ExchangeRateAppliedEvent.OutputObject
+    >;
+    ExchangeRateApplied: TypedContractEvent<
+      ExchangeRateAppliedEvent.InputTuple,
+      ExchangeRateAppliedEvent.OutputTuple,
+      ExchangeRateAppliedEvent.OutputObject
+    >;
+
+    "ExchangeRateProposed(address,uint256,uint256)": TypedContractEvent<
+      ExchangeRateProposedEvent.InputTuple,
+      ExchangeRateProposedEvent.OutputTuple,
+      ExchangeRateProposedEvent.OutputObject
+    >;
+    ExchangeRateProposed: TypedContractEvent<
+      ExchangeRateProposedEvent.InputTuple,
+      ExchangeRateProposedEvent.OutputTuple,
+      ExchangeRateProposedEvent.OutputObject
+    >;
+
+    "FeesCollected(address,address,uint256,uint256)": TypedContractEvent<
+      FeesCollectedEvent.InputTuple,
+      FeesCollectedEvent.OutputTuple,
+      FeesCollectedEvent.OutputObject
+    >;
+    FeesCollected: TypedContractEvent<
+      FeesCollectedEvent.InputTuple,
+      FeesCollectedEvent.OutputTuple,
+      FeesCollectedEvent.OutputObject
     >;
 
     "ForcedClose(address,address,address,bool,address,uint256)": TypedContractEvent<
@@ -1950,6 +2333,13 @@ export interface Vault extends BaseContract {
       IncreasePositionEvent.OutputObject
     >;
 
+    "KeeperSet(address,bool)": TypedContractEvent<
+      KeeperSetEvent.InputTuple,
+      KeeperSetEvent.OutputTuple,
+      KeeperSetEvent.OutputObject
+    >;
+    KeeperSet: TypedContractEvent<KeeperSetEvent.InputTuple, KeeperSetEvent.OutputTuple, KeeperSetEvent.OutputObject>;
+
     "LPManagerSet(address)": TypedContractEvent<
       LPManagerSetEvent.InputTuple,
       LPManagerSetEvent.OutputTuple,
@@ -1961,7 +2351,7 @@ export interface Vault extends BaseContract {
       LPManagerSetEvent.OutputObject
     >;
 
-    "LiquidatePosition(bytes32,address,address,address,bool,uint256,uint256,uint256,address)": TypedContractEvent<
+    "LiquidatePosition(bytes32,address,address,address,bool,uint256,uint256,uint256,address,uint256)": TypedContractEvent<
       LiquidatePositionEvent.InputTuple,
       LiquidatePositionEvent.OutputTuple,
       LiquidatePositionEvent.OutputObject
@@ -1983,6 +2373,17 @@ export interface Vault extends BaseContract {
       MaxPriceAgeSetEvent.OutputObject
     >;
 
+    "OwnershipTransferStarted(address,address)": TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+    OwnershipTransferStarted: TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+
     "OwnershipTransferred(address,address)": TypedContractEvent<
       OwnershipTransferredEvent.InputTuple,
       OwnershipTransferredEvent.OutputTuple,
@@ -1994,16 +2395,8 @@ export interface Vault extends BaseContract {
       OwnershipTransferredEvent.OutputObject
     >;
 
-    "Paused(address)": TypedContractEvent<
-      PausedEvent.InputTuple,
-      PausedEvent.OutputTuple,
-      PausedEvent.OutputObject
-    >;
-    Paused: TypedContractEvent<
-      PausedEvent.InputTuple,
-      PausedEvent.OutputTuple,
-      PausedEvent.OutputObject
-    >;
+    "Paused(address)": TypedContractEvent<PausedEvent.InputTuple, PausedEvent.OutputTuple, PausedEvent.OutputObject>;
+    Paused: TypedContractEvent<PausedEvent.InputTuple, PausedEvent.OutputTuple, PausedEvent.OutputObject>;
 
     "PayoutBufferBpsSet(uint256)": TypedContractEvent<
       PayoutBufferBpsSetEvent.InputTuple,
@@ -2014,6 +2407,28 @@ export interface Vault extends BaseContract {
       PayoutBufferBpsSetEvent.InputTuple,
       PayoutBufferBpsSetEvent.OutputTuple,
       PayoutBufferBpsSetEvent.OutputObject
+    >;
+
+    "PayoutHubChanged(address,address)": TypedContractEvent<
+      PayoutHubChangedEvent.InputTuple,
+      PayoutHubChangedEvent.OutputTuple,
+      PayoutHubChangedEvent.OutputObject
+    >;
+    PayoutHubChanged: TypedContractEvent<
+      PayoutHubChangedEvent.InputTuple,
+      PayoutHubChangedEvent.OutputTuple,
+      PayoutHubChangedEvent.OutputObject
+    >;
+
+    "PayoutHubProposed(address,uint256)": TypedContractEvent<
+      PayoutHubProposedEvent.InputTuple,
+      PayoutHubProposedEvent.OutputTuple,
+      PayoutHubProposedEvent.OutputObject
+    >;
+    PayoutHubProposed: TypedContractEvent<
+      PayoutHubProposedEvent.InputTuple,
+      PayoutHubProposedEvent.OutputTuple,
+      PayoutHubProposedEvent.OutputObject
     >;
 
     "PayoutHubSet(address)": TypedContractEvent<
@@ -2082,6 +2497,28 @@ export interface Vault extends BaseContract {
       RebasingYieldHarvestedEvent.OutputObject
     >;
 
+    "RecoveryConversionExecuted(address,uint256,uint256)": TypedContractEvent<
+      RecoveryConversionExecutedEvent.InputTuple,
+      RecoveryConversionExecutedEvent.OutputTuple,
+      RecoveryConversionExecutedEvent.OutputObject
+    >;
+    RecoveryConversionExecuted: TypedContractEvent<
+      RecoveryConversionExecutedEvent.InputTuple,
+      RecoveryConversionExecutedEvent.OutputTuple,
+      RecoveryConversionExecutedEvent.OutputObject
+    >;
+
+    "RecoveryConversionProposed(address,uint256,uint64)": TypedContractEvent<
+      RecoveryConversionProposedEvent.InputTuple,
+      RecoveryConversionProposedEvent.OutputTuple,
+      RecoveryConversionProposedEvent.OutputObject
+    >;
+    RecoveryConversionProposed: TypedContractEvent<
+      RecoveryConversionProposedEvent.InputTuple,
+      RecoveryConversionProposedEvent.OutputTuple,
+      RecoveryConversionProposedEvent.OutputObject
+    >;
+
     "RequiredKYCLevelSet(uint8)": TypedContractEvent<
       RequiredKYCLevelSetEvent.InputTuple,
       RequiredKYCLevelSetEvent.OutputTuple,
@@ -2098,10 +2535,61 @@ export interface Vault extends BaseContract {
       RouterSetEvent.OutputTuple,
       RouterSetEvent.OutputObject
     >;
-    RouterSet: TypedContractEvent<
-      RouterSetEvent.InputTuple,
-      RouterSetEvent.OutputTuple,
-      RouterSetEvent.OutputObject
+    RouterSet: TypedContractEvent<RouterSetEvent.InputTuple, RouterSetEvent.OutputTuple, RouterSetEvent.OutputObject>;
+
+    "SetterChangeAccepted(bytes32,address,address)": TypedContractEvent<
+      SetterChangeAcceptedEvent.InputTuple,
+      SetterChangeAcceptedEvent.OutputTuple,
+      SetterChangeAcceptedEvent.OutputObject
+    >;
+    SetterChangeAccepted: TypedContractEvent<
+      SetterChangeAcceptedEvent.InputTuple,
+      SetterChangeAcceptedEvent.OutputTuple,
+      SetterChangeAcceptedEvent.OutputObject
+    >;
+
+    "SetterChangeProposed(bytes32,address,uint256)": TypedContractEvent<
+      SetterChangeProposedEvent.InputTuple,
+      SetterChangeProposedEvent.OutputTuple,
+      SetterChangeProposedEvent.OutputObject
+    >;
+    SetterChangeProposed: TypedContractEvent<
+      SetterChangeProposedEvent.InputTuple,
+      SetterChangeProposedEvent.OutputTuple,
+      SetterChangeProposedEvent.OutputObject
+    >;
+
+    "ShortfallSettled(address,address,uint256)": TypedContractEvent<
+      ShortfallSettledEvent.InputTuple,
+      ShortfallSettledEvent.OutputTuple,
+      ShortfallSettledEvent.OutputObject
+    >;
+    ShortfallSettled: TypedContractEvent<
+      ShortfallSettledEvent.InputTuple,
+      ShortfallSettledEvent.OutputTuple,
+      ShortfallSettledEvent.OutputObject
+    >;
+
+    "StalenessPenaltySet(uint256,uint256)": TypedContractEvent<
+      StalenessPenaltySetEvent.InputTuple,
+      StalenessPenaltySetEvent.OutputTuple,
+      StalenessPenaltySetEvent.OutputObject
+    >;
+    StalenessPenaltySet: TypedContractEvent<
+      StalenessPenaltySetEvent.InputTuple,
+      StalenessPenaltySetEvent.OutputTuple,
+      StalenessPenaltySetEvent.OutputObject
+    >;
+
+    "TreasurySet(address,address)": TypedContractEvent<
+      TreasurySetEvent.InputTuple,
+      TreasurySetEvent.OutputTuple,
+      TreasurySetEvent.OutputObject
+    >;
+    TreasurySet: TypedContractEvent<
+      TreasurySetEvent.InputTuple,
+      TreasurySetEvent.OutputTuple,
+      TreasurySetEvent.OutputObject
     >;
 
     "Unpaused(address)": TypedContractEvent<
@@ -2109,10 +2597,17 @@ export interface Vault extends BaseContract {
       UnpausedEvent.OutputTuple,
       UnpausedEvent.OutputObject
     >;
-    Unpaused: TypedContractEvent<
-      UnpausedEvent.InputTuple,
-      UnpausedEvent.OutputTuple,
-      UnpausedEvent.OutputObject
+    Unpaused: TypedContractEvent<UnpausedEvent.InputTuple, UnpausedEvent.OutputTuple, UnpausedEvent.OutputObject>;
+
+    "UserShortfallRecorded(address,address,uint256)": TypedContractEvent<
+      UserShortfallRecordedEvent.InputTuple,
+      UserShortfallRecordedEvent.OutputTuple,
+      UserShortfallRecordedEvent.OutputObject
+    >;
+    UserShortfallRecorded: TypedContractEvent<
+      UserShortfallRecordedEvent.InputTuple,
+      UserShortfallRecordedEvent.OutputTuple,
+      UserShortfallRecordedEvent.OutputObject
     >;
 
     "VaultDeposit(address,address,uint256)": TypedContractEvent<
@@ -2157,6 +2652,17 @@ export interface Vault extends BaseContract {
       YieldAccumulatorSetEvent.InputTuple,
       YieldAccumulatorSetEvent.OutputTuple,
       YieldAccumulatorSetEvent.OutputObject
+    >;
+
+    "YieldConverted(address,uint256,uint8,uint256)": TypedContractEvent<
+      YieldConvertedEvent.InputTuple,
+      YieldConvertedEvent.OutputTuple,
+      YieldConvertedEvent.OutputObject
+    >;
+    YieldConverted: TypedContractEvent<
+      YieldConvertedEvent.InputTuple,
+      YieldConvertedEvent.OutputTuple,
+      YieldConvertedEvent.OutputObject
     >;
   };
 }

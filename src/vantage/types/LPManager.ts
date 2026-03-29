@@ -27,10 +27,14 @@ export interface LPManagerInterface extends Interface {
   getFunction(
     nameOrSignature:
       | "PRICE_PRECISION"
+      | "acceptLPTokenOwnership"
+      | "acceptOwnership"
+      | "acceptOwnershipOf"
       | "addLiquidity"
       | "getSharePrice"
       | "lpToken"
       | "owner"
+      | "pendingOwner"
       | "removeLiquidity"
       | "renounceOwnership"
       | "transferOwnership"
@@ -38,66 +42,35 @@ export interface LPManagerInterface extends Interface {
   ): FunctionFragment;
 
   getEvent(
-    nameOrSignatureOrTopic:
-      | "AddLiquidity"
-      | "OwnershipTransferred"
-      | "RemoveLiquidity"
+    nameOrSignatureOrTopic: "AddLiquidity" | "OwnershipTransferStarted" | "OwnershipTransferred" | "RemoveLiquidity"
   ): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "PRICE_PRECISION",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "addLiquidity",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getSharePrice",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "PRICE_PRECISION", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptLPTokenOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptOwnershipOf", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "addLiquidity", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "getSharePrice", values?: undefined): string;
   encodeFunctionData(functionFragment: "lpToken", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "removeLiquidity",
-    values: [BigNumberish, AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "removeLiquidity", values: [BigNumberish, AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "transferOwnership", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "vault", values?: undefined): string;
 
-  decodeFunctionResult(
-    functionFragment: "PRICE_PRECISION",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "addLiquidity",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getSharePrice",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "PRICE_PRECISION", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptLPTokenOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnershipOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "addLiquidity", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getSharePrice", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lpToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "removeLiquidity",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "removeLiquidity", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "vault", data: BytesLike): Result;
 }
 
@@ -107,21 +80,28 @@ export namespace AddLiquidityEvent {
     token: AddressLike,
     tokenAmount: BigNumberish,
     usdValue: BigNumberish,
-    sharesMinted: BigNumberish
+    sharesMinted: BigNumberish,
   ];
-  export type OutputTuple = [
-    user: string,
-    token: string,
-    tokenAmount: bigint,
-    usdValue: bigint,
-    sharesMinted: bigint
-  ];
+  export type OutputTuple = [user: string, token: string, tokenAmount: bigint, usdValue: bigint, sharesMinted: bigint];
   export interface OutputObject {
     user: string;
     token: string;
     tokenAmount: bigint;
     usdValue: bigint;
     sharesMinted: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferStartedEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -147,14 +127,9 @@ export namespace RemoveLiquidityEvent {
     user: AddressLike,
     token: AddressLike,
     sharesBurned: BigNumberish,
-    tokenAmount: BigNumberish
+    tokenAmount: BigNumberish,
   ];
-  export type OutputTuple = [
-    user: string,
-    token: string,
-    sharesBurned: bigint,
-    tokenAmount: bigint
-  ];
+  export type OutputTuple = [user: string, token: string, sharesBurned: bigint, tokenAmount: bigint];
   export interface OutputObject {
     user: string;
     token: string;
@@ -184,39 +159,31 @@ export interface LPManager extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
   PRICE_PRECISION: TypedContractMethod<[], [bigint], "view">;
 
-  addLiquidity: TypedContractMethod<
-    [token: AddressLike, amount: BigNumberish],
-    [bigint],
-    "nonpayable"
-  >;
+  acceptLPTokenOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
+  acceptOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
+  acceptOwnershipOf: TypedContractMethod<[target: AddressLike], [void], "nonpayable">;
+
+  addLiquidity: TypedContractMethod<[token: AddressLike, amount: BigNumberish], [bigint], "nonpayable">;
 
   getSharePrice: TypedContractMethod<[], [bigint], "view">;
 
@@ -224,68 +191,49 @@ export interface LPManager extends BaseContract {
 
   owner: TypedContractMethod<[], [string], "view">;
 
+  pendingOwner: TypedContractMethod<[], [string], "view">;
+
   removeLiquidity: TypedContractMethod<
-    [shares: BigNumberish, token: AddressLike],
+    [shares: BigNumberish, token: AddressLike, _minOut: BigNumberish],
     [bigint],
     "nonpayable"
   >;
 
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
-  transferOwnership: TypedContractMethod<
-    [newOwner: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  transferOwnership: TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
   vault: TypedContractMethod<[], [string], "view">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
-  getFunction(
-    nameOrSignature: "PRICE_PRECISION"
-  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "PRICE_PRECISION"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "acceptLPTokenOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptOwnershipOf"): TypedContractMethod<[target: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "addLiquidity"
-  ): TypedContractMethod<
-    [token: AddressLike, amount: BigNumberish],
-    [bigint],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "getSharePrice"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "lpToken"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
+  ): TypedContractMethod<[token: AddressLike, amount: BigNumberish], [bigint], "nonpayable">;
+  getFunction(nameOrSignature: "getSharePrice"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "lpToken"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "removeLiquidity"
-  ): TypedContractMethod<
-    [shares: BigNumberish, token: AddressLike],
-    [bigint],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "renounceOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "vault"
-  ): TypedContractMethod<[], [string], "view">;
+  ): TypedContractMethod<[shares: BigNumberish, token: AddressLike, _minOut: BigNumberish], [bigint], "nonpayable">;
+  getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "transferOwnership"): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "vault"): TypedContractMethod<[], [string], "view">;
 
   getEvent(
     key: "AddLiquidity"
+  ): TypedContractEvent<AddLiquidityEvent.InputTuple, AddLiquidityEvent.OutputTuple, AddLiquidityEvent.OutputObject>;
+  getEvent(
+    key: "OwnershipTransferStarted"
   ): TypedContractEvent<
-    AddLiquidityEvent.InputTuple,
-    AddLiquidityEvent.OutputTuple,
-    AddLiquidityEvent.OutputObject
+    OwnershipTransferStartedEvent.InputTuple,
+    OwnershipTransferStartedEvent.OutputTuple,
+    OwnershipTransferStartedEvent.OutputObject
   >;
   getEvent(
     key: "OwnershipTransferred"
@@ -312,6 +260,17 @@ export interface LPManager extends BaseContract {
       AddLiquidityEvent.InputTuple,
       AddLiquidityEvent.OutputTuple,
       AddLiquidityEvent.OutputObject
+    >;
+
+    "OwnershipTransferStarted(address,address)": TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+    OwnershipTransferStarted: TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
     >;
 
     "OwnershipTransferred(address,address)": TypedContractEvent<

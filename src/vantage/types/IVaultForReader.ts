@@ -26,6 +26,8 @@ export interface IVaultForReaderInterface extends Interface {
     nameOrSignature:
       | "PRICE_PRECISION"
       | "assetRegistry"
+      | "feeReserves"
+      | "feeReservesLpShareBp"
       | "getAUM"
       | "getDelta"
       | "getMaxPrice"
@@ -37,122 +39,54 @@ export interface IVaultForReaderInterface extends Interface {
       | "positions"
       | "priceFeed"
       | "reservedAmounts"
+      | "toWadAmount"
       | "tokenBalances"
       | "totalLongSize"
       | "totalShortSize"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "PRICE_PRECISION",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "assetRegistry",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "PRICE_PRECISION", values?: undefined): string;
+  encodeFunctionData(functionFragment: "assetRegistry", values?: undefined): string;
+  encodeFunctionData(functionFragment: "feeReserves", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "feeReservesLpShareBp", values?: undefined): string;
   encodeFunctionData(functionFragment: "getAUM", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "getDelta",
-    values: [AddressLike, BigNumberish, BigNumberish, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getMaxPrice",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getMinPrice",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPositionAssets",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "getDelta", values: [AddressLike, BigNumberish, BigNumberish, boolean]): string;
+  encodeFunctionData(functionFragment: "getMaxPrice", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getMinPrice", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getPositionAssets", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getPositionKey",
     values: [AddressLike, AddressLike, AddressLike, boolean]
   ): string;
-  encodeFunctionData(
-    functionFragment: "getVaultAssets",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "maxPriceAge",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "positions",
-    values: [BytesLike]
-  ): string;
+  encodeFunctionData(functionFragment: "getVaultAssets", values?: undefined): string;
+  encodeFunctionData(functionFragment: "maxPriceAge", values?: undefined): string;
+  encodeFunctionData(functionFragment: "positions", values: [BytesLike]): string;
   encodeFunctionData(functionFragment: "priceFeed", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "reservedAmounts",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tokenBalances",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalLongSize",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "totalShortSize",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "reservedAmounts", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "toWadAmount", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "tokenBalances", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "totalLongSize", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "totalShortSize", values: [AddressLike]): string;
 
-  decodeFunctionResult(
-    functionFragment: "PRICE_PRECISION",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "assetRegistry",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "PRICE_PRECISION", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "assetRegistry", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "feeReserves", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "feeReservesLpShareBp", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAUM", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getDelta", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getMaxPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getMinPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPositionAssets",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPositionKey",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getVaultAssets",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "maxPriceAge",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "getMaxPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getMinPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getPositionAssets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getPositionKey", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getVaultAssets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "maxPriceAge", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "positions", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "priceFeed", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "reservedAmounts",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "tokenBalances",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalLongSize",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "totalShortSize",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "reservedAmounts", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "toWadAmount", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "tokenBalances", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalLongSize", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalShortSize", data: BytesLike): Result;
 }
 
 export interface IVaultForReader extends BaseContract {
@@ -172,45 +106,34 @@ export interface IVaultForReader extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
   PRICE_PRECISION: TypedContractMethod<[], [bigint], "view">;
 
   assetRegistry: TypedContractMethod<[], [string], "view">;
 
+  feeReserves: TypedContractMethod<[token: AddressLike], [bigint], "view">;
+
+  feeReservesLpShareBp: TypedContractMethod<[], [bigint], "view">;
+
   getAUM: TypedContractMethod<[], [bigint], "view">;
 
   getDelta: TypedContractMethod<
-    [
-      indexToken: AddressLike,
-      size: BigNumberish,
-      averagePrice: BigNumberish,
-      isLong: boolean
-    ],
+    [indexToken: AddressLike, size: BigNumberish, averagePrice: BigNumberish, isLong: boolean],
     [[bigint, boolean] & { delta: bigint; hasProfit: boolean }],
     "view"
   >;
@@ -222,12 +145,7 @@ export interface IVaultForReader extends BaseContract {
   getPositionAssets: TypedContractMethod<[], [string[]], "view">;
 
   getPositionKey: TypedContractMethod<
-    [
-      account: AddressLike,
-      collateralToken: AddressLike,
-      indexToken: AddressLike,
-      isLong: boolean
-    ],
+    [account: AddressLike, collateralToken: AddressLike, indexToken: AddressLike, isLong: boolean],
     [string],
     "view"
   >;
@@ -247,7 +165,7 @@ export interface IVaultForReader extends BaseContract {
         isLong: boolean;
         indexToken: string;
         entryFundingRate: bigint;
-      }
+      },
     ],
     "view"
   >;
@@ -256,67 +174,41 @@ export interface IVaultForReader extends BaseContract {
 
   reservedAmounts: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
+  toWadAmount: TypedContractMethod<[token: AddressLike, amount: BigNumberish], [bigint], "view">;
+
   tokenBalances: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
   totalLongSize: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
   totalShortSize: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
-  getFunction(
-    nameOrSignature: "PRICE_PRECISION"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "assetRegistry"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "getAUM"
-  ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "PRICE_PRECISION"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "assetRegistry"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "feeReserves"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "feeReservesLpShareBp"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "getAUM"): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "getDelta"
   ): TypedContractMethod<
-    [
-      indexToken: AddressLike,
-      size: BigNumberish,
-      averagePrice: BigNumberish,
-      isLong: boolean
-    ],
+    [indexToken: AddressLike, size: BigNumberish, averagePrice: BigNumberish, isLong: boolean],
     [[bigint, boolean] & { delta: bigint; hasProfit: boolean }],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getMaxPrice"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getMinPrice"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getPositionAssets"
-  ): TypedContractMethod<[], [string[]], "view">;
+  getFunction(nameOrSignature: "getMaxPrice"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getMinPrice"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getPositionAssets"): TypedContractMethod<[], [string[]], "view">;
   getFunction(
     nameOrSignature: "getPositionKey"
   ): TypedContractMethod<
-    [
-      account: AddressLike,
-      collateralToken: AddressLike,
-      indexToken: AddressLike,
-      isLong: boolean
-    ],
+    [account: AddressLike, collateralToken: AddressLike, indexToken: AddressLike, isLong: boolean],
     [string],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getVaultAssets"
-  ): TypedContractMethod<[], [string[]], "view">;
-  getFunction(
-    nameOrSignature: "maxPriceAge"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "positions"
-  ): TypedContractMethod<
+  getFunction(nameOrSignature: "getVaultAssets"): TypedContractMethod<[], [string[]], "view">;
+  getFunction(nameOrSignature: "maxPriceAge"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "positions"): TypedContractMethod<
     [key: BytesLike],
     [
       [bigint, bigint, bigint, bigint, boolean, string, bigint] & {
@@ -327,25 +219,18 @@ export interface IVaultForReader extends BaseContract {
         isLong: boolean;
         indexToken: string;
         entryFundingRate: bigint;
-      }
+      },
     ],
     "view"
   >;
+  getFunction(nameOrSignature: "priceFeed"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "reservedAmounts"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
   getFunction(
-    nameOrSignature: "priceFeed"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "reservedAmounts"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "tokenBalances"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalLongSize"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "totalShortSize"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+    nameOrSignature: "toWadAmount"
+  ): TypedContractMethod<[token: AddressLike, amount: BigNumberish], [bigint], "view">;
+  getFunction(nameOrSignature: "tokenBalances"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "totalLongSize"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "totalShortSize"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
   filters: {};
 }

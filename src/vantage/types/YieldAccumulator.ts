@@ -26,99 +26,122 @@ import type {
 export interface YieldAccumulatorInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "acceptOwnership"
       | "assetYields"
+      | "authorizedCallerCount"
       | "getAccumulatedYield"
+      | "getEffectiveRate"
+      | "isAuthorized"
+      | "isOracleEnabled"
       | "owner"
+      | "pendingOwner"
       | "registerAsset"
       | "renounceOwnership"
       | "setAnnualYield"
+      | "setAuthorizedCaller"
+      | "setIsOracleEnabled"
+      | "setYieldAdapter"
       | "transferOwnership"
       | "updateYield"
+      | "yieldAdapter"
   ): FunctionFragment;
 
   getEvent(
     nameOrSignatureOrTopic:
       | "AnnualYieldSet"
+      | "AuthorizedCallerSet"
+      | "OracleEnabledSet"
+      | "OwnershipTransferStarted"
       | "OwnershipTransferred"
+      | "YieldAdapterFailed"
+      | "YieldAdapterSet"
       | "YieldUpdated"
   ): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "assetYields",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getAccumulatedYield",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "acceptOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "assetYields", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "authorizedCallerCount", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getAccumulatedYield", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getEffectiveRate", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "isAuthorized", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "isOracleEnabled", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "registerAsset",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setAnnualYield",
-    values: [AddressLike, BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateYield",
-    values: [AddressLike, BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "registerAsset", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "setAnnualYield", values: [AddressLike, BigNumberish, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setAuthorizedCaller", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setIsOracleEnabled", values: [boolean]): string;
+  encodeFunctionData(functionFragment: "setYieldAdapter", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "transferOwnership", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "updateYield", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "yieldAdapter", values?: undefined): string;
 
-  decodeFunctionResult(
-    functionFragment: "assetYields",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getAccumulatedYield",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "assetYields", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "authorizedCallerCount", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getAccumulatedYield", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getEffectiveRate", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isAuthorized", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isOracleEnabled", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "registerAsset",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setAnnualYield",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateYield",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "registerAsset", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setAnnualYield", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setAuthorizedCaller", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setIsOracleEnabled", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setYieldAdapter", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "updateYield", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "yieldAdapter", data: BytesLike): Result;
 }
 
 export namespace AnnualYieldSetEvent {
-  export type InputTuple = [
-    asset: AddressLike,
-    oldYieldBps: BigNumberish,
-    newYieldBps: BigNumberish
-  ];
-  export type OutputTuple = [
-    asset: string,
-    oldYieldBps: bigint,
-    newYieldBps: bigint
-  ];
+  export type InputTuple = [asset: AddressLike, oldYieldBps: BigNumberish, newYieldBps: BigNumberish];
+  export type OutputTuple = [asset: string, oldYieldBps: bigint, newYieldBps: bigint];
   export interface OutputObject {
     asset: string;
     oldYieldBps: bigint;
     newYieldBps: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace AuthorizedCallerSetEvent {
+  export type InputTuple = [caller: AddressLike, authorized: boolean];
+  export type OutputTuple = [caller: string, authorized: boolean];
+  export interface OutputObject {
+    caller: string;
+    authorized: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OracleEnabledSetEvent {
+  export type InputTuple = [enabled: boolean];
+  export type OutputTuple = [enabled: boolean];
+  export interface OutputObject {
+    enabled: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferStartedEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -139,19 +162,42 @@ export namespace OwnershipTransferredEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace YieldAdapterFailedEvent {
+  export type InputTuple = [asset: AddressLike, reason: BytesLike];
+  export type OutputTuple = [asset: string, reason: string];
+  export interface OutputObject {
+    asset: string;
+    reason: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace YieldAdapterSetEvent {
+  export type InputTuple = [adapter: AddressLike];
+  export type OutputTuple = [adapter: string];
+  export interface OutputObject {
+    adapter: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace YieldUpdatedEvent {
   export type InputTuple = [
     asset: AddressLike,
+    effectiveRateBps: BigNumberish,
     yieldDelta: BigNumberish,
-    accumulatedYield: BigNumberish
+    accumulatedYield: BigNumberish,
   ];
-  export type OutputTuple = [
-    asset: string,
-    yieldDelta: bigint,
-    accumulatedYield: bigint
-  ];
+  export type OutputTuple = [asset: string, effectiveRateBps: bigint, yieldDelta: bigint, accumulatedYield: bigint];
   export interface OutputObject {
     asset: string;
+    effectiveRateBps: bigint;
     yieldDelta: bigint;
     accumulatedYield: bigint;
   }
@@ -178,31 +224,23 @@ export interface YieldAccumulator extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+
+  acceptOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
   assetYields: TypedContractMethod<
     [arg0: AddressLike],
@@ -211,95 +249,85 @@ export interface YieldAccumulator extends BaseContract {
         accumulatedYield: bigint;
         lastUpdated: bigint;
         annualYieldBps: bigint;
-      }
+      },
     ],
     "view"
   >;
 
-  getAccumulatedYield: TypedContractMethod<
-    [asset: AddressLike],
-    [bigint],
-    "view"
-  >;
+  authorizedCallerCount: TypedContractMethod<[], [bigint], "view">;
+
+  getAccumulatedYield: TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+
+  getEffectiveRate: TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+
+  isAuthorized: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
+  isOracleEnabled: TypedContractMethod<[], [boolean], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
 
-  registerAsset: TypedContractMethod<
-    [asset: AddressLike, yieldBps: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  pendingOwner: TypedContractMethod<[], [string], "view">;
+
+  registerAsset: TypedContractMethod<[asset: AddressLike, yieldBps: BigNumberish], [void], "nonpayable">;
 
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
   setAnnualYield: TypedContractMethod<
-    [asset: AddressLike, rawPrice: BigNumberish, yieldBps: BigNumberish],
+    [asset: AddressLike, rawPrice: BigNumberish, newYieldBps: BigNumberish],
     [void],
     "nonpayable"
   >;
 
-  transferOwnership: TypedContractMethod<
-    [newOwner: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  setAuthorizedCaller: TypedContractMethod<[caller: AddressLike, authorized: boolean], [void], "nonpayable">;
 
-  updateYield: TypedContractMethod<
-    [asset: AddressLike, rawPrice: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  setIsOracleEnabled: TypedContractMethod<[_enabled: boolean], [void], "nonpayable">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  setYieldAdapter: TypedContractMethod<[_adapter: AddressLike], [void], "nonpayable">;
 
-  getFunction(
-    nameOrSignature: "assetYields"
-  ): TypedContractMethod<
+  transferOwnership: TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+
+  updateYield: TypedContractMethod<[asset: AddressLike, rawPrice: BigNumberish], [void], "nonpayable">;
+
+  yieldAdapter: TypedContractMethod<[], [string], "view">;
+
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+
+  getFunction(nameOrSignature: "acceptOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "assetYields"): TypedContractMethod<
     [arg0: AddressLike],
     [
       [bigint, bigint, bigint] & {
         accumulatedYield: bigint;
         lastUpdated: bigint;
         annualYieldBps: bigint;
-      }
+      },
     ],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getAccumulatedYield"
-  ): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "authorizedCallerCount"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "getAccumulatedYield"): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getEffectiveRate"): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "isAuthorized"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "isOracleEnabled"): TypedContractMethod<[], [boolean], "view">;
+  getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "registerAsset"
-  ): TypedContractMethod<
-    [asset: AddressLike, yieldBps: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "renounceOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
+  ): TypedContractMethod<[asset: AddressLike, yieldBps: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setAnnualYield"
-  ): TypedContractMethod<
-    [asset: AddressLike, rawPrice: BigNumberish, yieldBps: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[asset: AddressLike, rawPrice: BigNumberish, newYieldBps: BigNumberish], [void], "nonpayable">;
   getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+    nameOrSignature: "setAuthorizedCaller"
+  ): TypedContractMethod<[caller: AddressLike, authorized: boolean], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setIsOracleEnabled"): TypedContractMethod<[_enabled: boolean], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setYieldAdapter"): TypedContractMethod<[_adapter: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "transferOwnership"): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "updateYield"
-  ): TypedContractMethod<
-    [asset: AddressLike, rawPrice: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[asset: AddressLike, rawPrice: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "yieldAdapter"): TypedContractMethod<[], [string], "view">;
 
   getEvent(
     key: "AnnualYieldSet"
@@ -309,6 +337,27 @@ export interface YieldAccumulator extends BaseContract {
     AnnualYieldSetEvent.OutputObject
   >;
   getEvent(
+    key: "AuthorizedCallerSet"
+  ): TypedContractEvent<
+    AuthorizedCallerSetEvent.InputTuple,
+    AuthorizedCallerSetEvent.OutputTuple,
+    AuthorizedCallerSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "OracleEnabledSet"
+  ): TypedContractEvent<
+    OracleEnabledSetEvent.InputTuple,
+    OracleEnabledSetEvent.OutputTuple,
+    OracleEnabledSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "OwnershipTransferStarted"
+  ): TypedContractEvent<
+    OwnershipTransferStartedEvent.InputTuple,
+    OwnershipTransferStartedEvent.OutputTuple,
+    OwnershipTransferStartedEvent.OutputObject
+  >;
+  getEvent(
     key: "OwnershipTransferred"
   ): TypedContractEvent<
     OwnershipTransferredEvent.InputTuple,
@@ -316,12 +365,22 @@ export interface YieldAccumulator extends BaseContract {
     OwnershipTransferredEvent.OutputObject
   >;
   getEvent(
-    key: "YieldUpdated"
+    key: "YieldAdapterFailed"
   ): TypedContractEvent<
-    YieldUpdatedEvent.InputTuple,
-    YieldUpdatedEvent.OutputTuple,
-    YieldUpdatedEvent.OutputObject
+    YieldAdapterFailedEvent.InputTuple,
+    YieldAdapterFailedEvent.OutputTuple,
+    YieldAdapterFailedEvent.OutputObject
   >;
+  getEvent(
+    key: "YieldAdapterSet"
+  ): TypedContractEvent<
+    YieldAdapterSetEvent.InputTuple,
+    YieldAdapterSetEvent.OutputTuple,
+    YieldAdapterSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "YieldUpdated"
+  ): TypedContractEvent<YieldUpdatedEvent.InputTuple, YieldUpdatedEvent.OutputTuple, YieldUpdatedEvent.OutputObject>;
 
   filters: {
     "AnnualYieldSet(address,uint256,uint256)": TypedContractEvent<
@@ -335,6 +394,39 @@ export interface YieldAccumulator extends BaseContract {
       AnnualYieldSetEvent.OutputObject
     >;
 
+    "AuthorizedCallerSet(address,bool)": TypedContractEvent<
+      AuthorizedCallerSetEvent.InputTuple,
+      AuthorizedCallerSetEvent.OutputTuple,
+      AuthorizedCallerSetEvent.OutputObject
+    >;
+    AuthorizedCallerSet: TypedContractEvent<
+      AuthorizedCallerSetEvent.InputTuple,
+      AuthorizedCallerSetEvent.OutputTuple,
+      AuthorizedCallerSetEvent.OutputObject
+    >;
+
+    "OracleEnabledSet(bool)": TypedContractEvent<
+      OracleEnabledSetEvent.InputTuple,
+      OracleEnabledSetEvent.OutputTuple,
+      OracleEnabledSetEvent.OutputObject
+    >;
+    OracleEnabledSet: TypedContractEvent<
+      OracleEnabledSetEvent.InputTuple,
+      OracleEnabledSetEvent.OutputTuple,
+      OracleEnabledSetEvent.OutputObject
+    >;
+
+    "OwnershipTransferStarted(address,address)": TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+    OwnershipTransferStarted: TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+
     "OwnershipTransferred(address,address)": TypedContractEvent<
       OwnershipTransferredEvent.InputTuple,
       OwnershipTransferredEvent.OutputTuple,
@@ -346,7 +438,29 @@ export interface YieldAccumulator extends BaseContract {
       OwnershipTransferredEvent.OutputObject
     >;
 
-    "YieldUpdated(address,uint256,uint256)": TypedContractEvent<
+    "YieldAdapterFailed(address,bytes)": TypedContractEvent<
+      YieldAdapterFailedEvent.InputTuple,
+      YieldAdapterFailedEvent.OutputTuple,
+      YieldAdapterFailedEvent.OutputObject
+    >;
+    YieldAdapterFailed: TypedContractEvent<
+      YieldAdapterFailedEvent.InputTuple,
+      YieldAdapterFailedEvent.OutputTuple,
+      YieldAdapterFailedEvent.OutputObject
+    >;
+
+    "YieldAdapterSet(address)": TypedContractEvent<
+      YieldAdapterSetEvent.InputTuple,
+      YieldAdapterSetEvent.OutputTuple,
+      YieldAdapterSetEvent.OutputObject
+    >;
+    YieldAdapterSet: TypedContractEvent<
+      YieldAdapterSetEvent.InputTuple,
+      YieldAdapterSetEvent.OutputTuple,
+      YieldAdapterSetEvent.OutputObject
+    >;
+
+    "YieldUpdated(address,uint256,uint256,uint256)": TypedContractEvent<
       YieldUpdatedEvent.InputTuple,
       YieldUpdatedEvent.OutputTuple,
       YieldUpdatedEvent.OutputObject

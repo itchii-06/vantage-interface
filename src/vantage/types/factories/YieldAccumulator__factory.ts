@@ -3,10 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  YieldAccumulator,
-  YieldAccumulatorInterface,
-} from "../YieldAccumulator";
+import type { YieldAccumulator, YieldAccumulatorInterface } from "../YieldAccumulator";
 
 const _abi = [
   {
@@ -45,6 +42,17 @@ const _abi = [
       },
     ],
     name: "FutureTimestamp",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "caller",
+        type: "address",
+      },
+    ],
+    name: "NotAuthorized",
     type: "error",
   },
   {
@@ -100,6 +108,57 @@ const _abi = [
       {
         indexed: true,
         internalType: "address",
+        name: "caller",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "authorized",
+        type: "bool",
+      },
+    ],
+    name: "AuthorizedCallerSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "enabled",
+        type: "bool",
+      },
+    ],
+    name: "OracleEnabledSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferStarted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
         name: "previousOwner",
         type: "address",
       },
@@ -124,6 +183,44 @@ const _abi = [
       },
       {
         indexed: false,
+        internalType: "bytes",
+        name: "reason",
+        type: "bytes",
+      },
+    ],
+    name: "YieldAdapterFailed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "adapter",
+        type: "address",
+      },
+    ],
+    name: "YieldAdapterSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "effectiveRateBps",
+        type: "uint256",
+      },
+      {
+        indexed: false,
         internalType: "uint256",
         name: "yieldDelta",
         type: "uint256",
@@ -137,6 +234,13 @@ const _abi = [
     ],
     name: "YieldUpdated",
     type: "event",
+  },
+  {
+    inputs: [],
+    name: "acceptOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
@@ -168,6 +272,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "authorizedCallerCount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -187,8 +304,72 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "getEffectiveRate",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "isAuthorized",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "isOracleEnabled",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "pendingOwner",
     outputs: [
       {
         internalType: "address",
@@ -238,11 +419,55 @@ const _abi = [
       },
       {
         internalType: "uint256",
-        name: "yieldBps",
+        name: "newYieldBps",
         type: "uint256",
       },
     ],
     name: "setAnnualYield",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "caller",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "authorized",
+        type: "bool",
+      },
+    ],
+    name: "setAuthorizedCaller",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bool",
+        name: "_enabled",
+        type: "bool",
+      },
+    ],
+    name: "setIsOracleEnabled",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_adapter",
+        type: "address",
+      },
+    ],
+    name: "setYieldAdapter",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -278,6 +503,19 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
+  {
+    inputs: [],
+    name: "yieldAdapter",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
 ] as const;
 
 export class YieldAccumulator__factory {
@@ -285,10 +523,7 @@ export class YieldAccumulator__factory {
   static createInterface(): YieldAccumulatorInterface {
     return new Interface(_abi) as YieldAccumulatorInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): YieldAccumulator {
+  static connect(address: string, runner?: ContractRunner | null): YieldAccumulator {
     return new Contract(address, _abi, runner) as unknown as YieldAccumulator;
   }
 }

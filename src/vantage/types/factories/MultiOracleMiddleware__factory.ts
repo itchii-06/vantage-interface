@@ -3,10 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  MultiOracleMiddleware,
-  MultiOracleMiddlewareInterface,
-} from "../MultiOracleMiddleware";
+import type { MultiOracleMiddleware, MultiOracleMiddlewareInterface } from "../MultiOracleMiddleware";
 
 const _abi = [
   {
@@ -111,6 +108,11 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [],
+    name: "SpreadCapRequired",
+    type: "error",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -211,6 +213,25 @@ const _abi = [
         type: "address",
       },
     ],
+    name: "OwnershipTransferStarted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
     name: "OwnershipTransferred",
     type: "event",
   },
@@ -231,6 +252,43 @@ const _abi = [
       },
     ],
     name: "PriceSnapshotUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "baseSpreadBps",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "stalenessRateBps",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "volatilityFactor",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "maxSpreadBps",
+        type: "uint256",
+      },
+    ],
+    name: "SpreadConfigSet",
     type: "event",
   },
   {
@@ -269,6 +327,13 @@ const _abi = [
     ],
     name: "TokenConfigSet",
     type: "event",
+  },
+  {
+    inputs: [],
+    name: "acceptOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
@@ -317,7 +382,7 @@ const _abi = [
       },
       {
         internalType: "bool",
-        name: "",
+        name: "_maximise",
         type: "bool",
       },
       {
@@ -370,7 +435,7 @@ const _abi = [
       },
       {
         internalType: "bool",
-        name: "",
+        name: "_maximise",
         type: "bool",
       },
     ],
@@ -380,6 +445,47 @@ const _abi = [
         internalType: "uint256",
         name: "",
         type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+    ],
+    name: "getSpreadConfig",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "baseSpreadBps",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "stalenessRateBps",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "volatilityFactor",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "maxSpreadBps",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct MultiOracleMiddleware.SpreadConfig",
+        name: "",
+        type: "tuple",
       },
     ],
     stateMutability: "view",
@@ -529,6 +635,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "pendingOwner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -599,6 +718,39 @@ const _abi = [
       },
     ],
     name: "setMarketOpen",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "baseSpreadBps",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "stalenessRateBps",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "volatilityFactor",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "maxSpreadBps",
+        type: "uint256",
+      },
+    ],
+    name: "setSpreadConfig",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -705,14 +857,7 @@ export class MultiOracleMiddleware__factory {
   static createInterface(): MultiOracleMiddlewareInterface {
     return new Interface(_abi) as MultiOracleMiddlewareInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): MultiOracleMiddleware {
-    return new Contract(
-      address,
-      _abi,
-      runner
-    ) as unknown as MultiOracleMiddleware;
+  static connect(address: string, runner?: ContractRunner | null): MultiOracleMiddleware {
+    return new Contract(address, _abi, runner) as unknown as MultiOracleMiddleware;
   }
 }

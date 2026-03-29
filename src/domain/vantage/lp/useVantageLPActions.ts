@@ -126,7 +126,7 @@ export function useVantageLPActions(chainId: number) {
       }
 
       try {
-        const tx = await lpManager.removeLiquidity(shares, tokenAddress);
+        const tx = await lpManager.removeLiquidity(shares, tokenAddress, 0n);
 
         helperToast.info(t`Transaction submitted`);
         setPendingTxns((prev) => [...prev, { hash: tx.hash, message: t`Removing liquidity...` }]);

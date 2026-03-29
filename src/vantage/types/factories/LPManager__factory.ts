@@ -50,6 +50,22 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "currentOI",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "maxOIAfterWithdraw",
+        type: "uint256",
+      },
+    ],
+    name: "WithdrawalBlockedByOI",
+    type: "error",
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -84,6 +100,25 @@ const _abi = [
       },
     ],
     name: "AddLiquidity",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferStarted",
     type: "event",
   },
   {
@@ -150,6 +185,33 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "acceptLPTokenOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "acceptOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address",
+      },
+    ],
+    name: "acceptOwnershipOf",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -213,6 +275,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "pendingOwner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -223,6 +298,11 @@ const _abi = [
         internalType: "address",
         name: "token",
         type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_minOut",
+        type: "uint256",
       },
     ],
     name: "removeLiquidity",

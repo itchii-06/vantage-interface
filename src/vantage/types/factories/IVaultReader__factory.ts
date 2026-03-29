@@ -54,6 +54,62 @@ const _abi = [
         name: "vault",
         type: "address",
       },
+      {
+        internalType: "address",
+        name: "lpToken",
+        type: "address",
+      },
+    ],
+    name: "getLpYieldSummary",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "sharePrice",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "totalAum",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "totalSupply",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "instantaneousApr",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "fundingAprBps",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "feeShareAprBps",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct IVaultReader.LpYieldSummary",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "vault",
+        type: "address",
+      },
     ],
     name: "getMarketSummaries",
     outputs: [
@@ -217,6 +273,30 @@ const _abi = [
       },
       {
         internalType: "address",
+        name: "lpToken",
+        type: "address",
+      },
+    ],
+    name: "getSharePrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "vault",
+        type: "address",
+      },
+      {
+        internalType: "address",
         name: "user",
         type: "address",
       },
@@ -276,10 +356,7 @@ export class IVaultReader__factory {
   static createInterface(): IVaultReaderInterface {
     return new Interface(_abi) as IVaultReaderInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): IVaultReader {
+  static connect(address: string, runner?: ContractRunner | null): IVaultReader {
     return new Contract(address, _abi, runner) as unknown as IVaultReader;
   }
 }

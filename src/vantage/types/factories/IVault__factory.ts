@@ -63,8 +63,45 @@ const _abi = [
         name: "realisedPnl",
         type: "int256",
       },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "feeUsd",
+        type: "uint256",
+      },
     ],
     name: "DecreasePosition",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "treasury",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    name: "FeesCollected",
     type: "event",
   },
   {
@@ -178,6 +215,12 @@ const _abi = [
         internalType: "address",
         name: "liquidator",
         type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "liquidationFeeUsd",
+        type: "uint256",
       },
     ],
     name: "LiquidatePosition",
@@ -300,6 +343,25 @@ const _abi = [
       {
         indexed: true,
         internalType: "address",
+        name: "previous",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "next",
+        type: "address",
+      },
+    ],
+    name: "TreasurySet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
         name: "lp",
         type: "address",
       },
@@ -380,6 +442,11 @@ const _abi = [
         internalType: "address",
         name: "_receiver",
         type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_acceptablePrice",
+        type: "uint256",
       },
     ],
     name: "decreasePosition",

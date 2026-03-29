@@ -48,55 +48,33 @@ export interface IVaultInterface extends Interface {
   getEvent(
     nameOrSignatureOrTopic:
       | "DecreasePosition"
+      | "FeesCollected"
       | "IncreasePosition"
       | "LiquidatePosition"
       | "PositionClosed"
       | "PositionUpdated"
       | "RouterSet"
+      | "TreasurySet"
       | "VaultDeposit"
       | "VaultWithdraw"
   ): EventFragment;
 
   encodeFunctionData(
     functionFragment: "decreasePosition",
-    values: [
-      AddressLike,
-      AddressLike,
-      AddressLike,
-      BigNumberish,
-      BigNumberish,
-      boolean,
-      AddressLike
-    ]
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, BigNumberish, boolean, AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "getAUM", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "getMaxPrice",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getMinPrice",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "getMaxPrice", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getMinPrice", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "getPositionKey",
     values: [AddressLike, AddressLike, AddressLike, boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "increasePosition",
-    values: [
-      AddressLike,
-      AddressLike,
-      AddressLike,
-      BigNumberish,
-      boolean,
-      BigNumberish
-    ]
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, boolean, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "isRouter",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "isRouter", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "liquidatePosition",
     values: [AddressLike, AddressLike, AddressLike, boolean, AddressLike]
@@ -104,81 +82,30 @@ export interface IVaultInterface extends Interface {
   encodeFunctionData(functionFragment: "lpManager", values?: undefined): string;
   encodeFunctionData(functionFragment: "payoutHub", values?: undefined): string;
   encodeFunctionData(functionFragment: "priceFeed", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "recordDeposit",
-    values: [AddressLike, BigNumberish, AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "recordWithdraw",
-    values: [AddressLike, BigNumberish, AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "reservedAmounts",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setLPManager",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setRouter",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tokenBalances",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "recordDeposit", values: [AddressLike, BigNumberish, AddressLike]): string;
+  encodeFunctionData(functionFragment: "recordWithdraw", values: [AddressLike, BigNumberish, AddressLike]): string;
+  encodeFunctionData(functionFragment: "reservedAmounts", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setLPManager", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setRouter", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "tokenBalances", values: [AddressLike]): string;
 
-  decodeFunctionResult(
-    functionFragment: "decreasePosition",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "decreasePosition", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAUM", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getMaxPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getMinPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPositionKey",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increasePosition",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "getMaxPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getMinPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getPositionKey", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "increasePosition", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isRouter", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "liquidatePosition",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "liquidatePosition", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lpManager", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "payoutHub", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "priceFeed", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "recordDeposit",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "recordWithdraw",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "reservedAmounts",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setLPManager",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "recordDeposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "recordWithdraw", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "reservedAmounts", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setLPManager", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setRouter", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "tokenBalances",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "tokenBalances", data: BytesLike): Result;
 }
 
 export namespace DecreasePositionEvent {
@@ -191,7 +118,8 @@ export namespace DecreasePositionEvent {
     sizeDelta: BigNumberish,
     isLong: boolean,
     price: BigNumberish,
-    realisedPnl: BigNumberish
+    realisedPnl: BigNumberish,
+    feeUsd: BigNumberish,
   ];
   export type OutputTuple = [
     key: string,
@@ -202,7 +130,8 @@ export namespace DecreasePositionEvent {
     sizeDelta: bigint,
     isLong: boolean,
     price: bigint,
-    realisedPnl: bigint
+    realisedPnl: bigint,
+    feeUsd: bigint,
   ];
   export interface OutputObject {
     key: string;
@@ -214,6 +143,22 @@ export namespace DecreasePositionEvent {
     isLong: boolean;
     price: bigint;
     realisedPnl: bigint;
+    feeUsd: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace FeesCollectedEvent {
+  export type InputTuple = [token: AddressLike, treasury: AddressLike, amount: BigNumberish, price: BigNumberish];
+  export type OutputTuple = [token: string, treasury: string, amount: bigint, price: bigint];
+  export interface OutputObject {
+    token: string;
+    treasury: string;
+    amount: bigint;
+    price: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -230,7 +175,7 @@ export namespace IncreasePositionEvent {
     collateralDelta: BigNumberish,
     sizeDelta: BigNumberish,
     isLong: boolean,
-    price: BigNumberish
+    price: BigNumberish,
   ];
   export type OutputTuple = [
     key: string,
@@ -240,7 +185,7 @@ export namespace IncreasePositionEvent {
     collateralDelta: bigint,
     sizeDelta: bigint,
     isLong: boolean,
-    price: bigint
+    price: bigint,
   ];
   export interface OutputObject {
     key: string;
@@ -268,7 +213,8 @@ export namespace LiquidatePositionEvent {
     size: BigNumberish,
     collateral: BigNumberish,
     price: BigNumberish,
-    liquidator: AddressLike
+    liquidator: AddressLike,
+    liquidationFeeUsd: BigNumberish,
   ];
   export type OutputTuple = [
     key: string,
@@ -279,7 +225,8 @@ export namespace LiquidatePositionEvent {
     size: bigint,
     collateral: bigint,
     price: bigint,
-    liquidator: string
+    liquidator: string,
+    liquidationFeeUsd: bigint,
   ];
   export interface OutputObject {
     key: string;
@@ -291,6 +238,7 @@ export namespace LiquidatePositionEvent {
     collateral: bigint;
     price: bigint;
     liquidator: string;
+    liquidationFeeUsd: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -305,7 +253,7 @@ export namespace PositionClosedEvent {
     indexToken: AddressLike,
     size: BigNumberish,
     realisedPnl: BigNumberish,
-    feeUsd: BigNumberish
+    feeUsd: BigNumberish,
   ];
   export type OutputTuple = [
     key: string,
@@ -313,7 +261,7 @@ export namespace PositionClosedEvent {
     indexToken: string,
     size: bigint,
     realisedPnl: bigint,
-    feeUsd: bigint
+    feeUsd: bigint,
   ];
   export interface OutputObject {
     key: string;
@@ -337,7 +285,7 @@ export namespace PositionUpdatedEvent {
     size: BigNumberish,
     collateral: BigNumberish,
     averagePrice: BigNumberish,
-    isLong: boolean
+    isLong: boolean,
   ];
   export type OutputTuple = [
     key: string,
@@ -346,7 +294,7 @@ export namespace PositionUpdatedEvent {
     size: bigint,
     collateral: bigint,
     averagePrice: bigint,
-    isLong: boolean
+    isLong: boolean,
   ];
   export interface OutputObject {
     key: string;
@@ -376,12 +324,21 @@ export namespace RouterSetEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace TreasurySetEvent {
+  export type InputTuple = [previous: AddressLike, next: AddressLike];
+  export type OutputTuple = [previous: string, next: string];
+  export interface OutputObject {
+    previous: string;
+    next: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace VaultDepositEvent {
-  export type InputTuple = [
-    lp: AddressLike,
-    token: AddressLike,
-    amount: BigNumberish
-  ];
+  export type InputTuple = [lp: AddressLike, token: AddressLike, amount: BigNumberish];
   export type OutputTuple = [lp: string, token: string, amount: bigint];
   export interface OutputObject {
     lp: string;
@@ -395,11 +352,7 @@ export namespace VaultDepositEvent {
 }
 
 export namespace VaultWithdrawEvent {
-  export type InputTuple = [
-    lp: AddressLike,
-    token: AddressLike,
-    amount: BigNumberish
-  ];
+  export type InputTuple = [lp: AddressLike, token: AddressLike, amount: BigNumberish];
   export type OutputTuple = [lp: string, token: string, amount: bigint];
   export interface OutputObject {
     lp: string;
@@ -429,31 +382,21 @@ export interface IVault extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
   decreasePosition: TypedContractMethod<
     [
@@ -463,7 +406,8 @@ export interface IVault extends BaseContract {
       _collateralDelta: BigNumberish,
       _sizeDelta: BigNumberish,
       _isLong: boolean,
-      _receiver: AddressLike
+      _receiver: AddressLike,
+      _acceptablePrice: BigNumberish,
     ],
     [bigint],
     "nonpayable"
@@ -476,12 +420,7 @@ export interface IVault extends BaseContract {
   getMinPrice: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
   getPositionKey: TypedContractMethod<
-    [
-      account: AddressLike,
-      collateralToken: AddressLike,
-      indexToken: AddressLike,
-      isLong: boolean
-    ],
+    [account: AddressLike, collateralToken: AddressLike, indexToken: AddressLike, isLong: boolean],
     [string],
     "view"
   >;
@@ -493,7 +432,7 @@ export interface IVault extends BaseContract {
       _indexToken: AddressLike,
       _sizeDelta: BigNumberish,
       _isLong: boolean,
-      _collateralDelta: BigNumberish
+      _collateralDelta: BigNumberish,
     ],
     [void],
     "nonpayable"
@@ -507,7 +446,7 @@ export interface IVault extends BaseContract {
       _collateralToken: AddressLike,
       _indexToken: AddressLike,
       _isLong: boolean,
-      _feeReceiver: AddressLike
+      _feeReceiver: AddressLike,
     ],
     [void],
     "nonpayable"
@@ -519,11 +458,7 @@ export interface IVault extends BaseContract {
 
   priceFeed: TypedContractMethod<[], [string], "view">;
 
-  recordDeposit: TypedContractMethod<
-    [token: AddressLike, amount: BigNumberish, lp: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  recordDeposit: TypedContractMethod<[token: AddressLike, amount: BigNumberish, lp: AddressLike], [void], "nonpayable">;
 
   recordWithdraw: TypedContractMethod<
     [token: AddressLike, amount: BigNumberish, to: AddressLike],
@@ -533,23 +468,13 @@ export interface IVault extends BaseContract {
 
   reservedAmounts: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
-  setLPManager: TypedContractMethod<
-    [_lpManager: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  setLPManager: TypedContractMethod<[_lpManager: AddressLike], [void], "nonpayable">;
 
-  setRouter: TypedContractMethod<
-    [router: AddressLike, enabled: boolean],
-    [void],
-    "nonpayable"
-  >;
+  setRouter: TypedContractMethod<[router: AddressLike, enabled: boolean], [void], "nonpayable">;
 
   tokenBalances: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
   getFunction(
     nameOrSignature: "decreasePosition"
@@ -561,29 +486,19 @@ export interface IVault extends BaseContract {
       _collateralDelta: BigNumberish,
       _sizeDelta: BigNumberish,
       _isLong: boolean,
-      _receiver: AddressLike
+      _receiver: AddressLike,
+      _acceptablePrice: BigNumberish,
     ],
     [bigint],
     "nonpayable"
   >;
-  getFunction(
-    nameOrSignature: "getAUM"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getMaxPrice"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getMinPrice"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getAUM"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "getMaxPrice"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getMinPrice"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "getPositionKey"
   ): TypedContractMethod<
-    [
-      account: AddressLike,
-      collateralToken: AddressLike,
-      indexToken: AddressLike,
-      isLong: boolean
-    ],
+    [account: AddressLike, collateralToken: AddressLike, indexToken: AddressLike, isLong: boolean],
     [string],
     "view"
   >;
@@ -596,14 +511,12 @@ export interface IVault extends BaseContract {
       _indexToken: AddressLike,
       _sizeDelta: BigNumberish,
       _isLong: boolean,
-      _collateralDelta: BigNumberish
+      _collateralDelta: BigNumberish,
     ],
     [void],
     "nonpayable"
   >;
-  getFunction(
-    nameOrSignature: "isRouter"
-  ): TypedContractMethod<[router: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "isRouter"): TypedContractMethod<[router: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "liquidatePosition"
   ): TypedContractMethod<
@@ -612,50 +525,26 @@ export interface IVault extends BaseContract {
       _collateralToken: AddressLike,
       _indexToken: AddressLike,
       _isLong: boolean,
-      _feeReceiver: AddressLike
+      _feeReceiver: AddressLike,
     ],
     [void],
     "nonpayable"
   >;
-  getFunction(
-    nameOrSignature: "lpManager"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "payoutHub"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "priceFeed"
-  ): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "lpManager"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "payoutHub"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "priceFeed"): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "recordDeposit"
-  ): TypedContractMethod<
-    [token: AddressLike, amount: BigNumberish, lp: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[token: AddressLike, amount: BigNumberish, lp: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "recordWithdraw"
-  ): TypedContractMethod<
-    [token: AddressLike, amount: BigNumberish, to: AddressLike],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "reservedAmounts"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "setLPManager"
-  ): TypedContractMethod<[_lpManager: AddressLike], [void], "nonpayable">;
+  ): TypedContractMethod<[token: AddressLike, amount: BigNumberish, to: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "reservedAmounts"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "setLPManager"): TypedContractMethod<[_lpManager: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setRouter"
-  ): TypedContractMethod<
-    [router: AddressLike, enabled: boolean],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "tokenBalances"
-  ): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  ): TypedContractMethod<[router: AddressLike, enabled: boolean], [void], "nonpayable">;
+  getFunction(nameOrSignature: "tokenBalances"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
   getEvent(
     key: "DecreasePosition"
@@ -664,6 +553,9 @@ export interface IVault extends BaseContract {
     DecreasePositionEvent.OutputTuple,
     DecreasePositionEvent.OutputObject
   >;
+  getEvent(
+    key: "FeesCollected"
+  ): TypedContractEvent<FeesCollectedEvent.InputTuple, FeesCollectedEvent.OutputTuple, FeesCollectedEvent.OutputObject>;
   getEvent(
     key: "IncreasePosition"
   ): TypedContractEvent<
@@ -694,28 +586,19 @@ export interface IVault extends BaseContract {
   >;
   getEvent(
     key: "RouterSet"
-  ): TypedContractEvent<
-    RouterSetEvent.InputTuple,
-    RouterSetEvent.OutputTuple,
-    RouterSetEvent.OutputObject
-  >;
+  ): TypedContractEvent<RouterSetEvent.InputTuple, RouterSetEvent.OutputTuple, RouterSetEvent.OutputObject>;
+  getEvent(
+    key: "TreasurySet"
+  ): TypedContractEvent<TreasurySetEvent.InputTuple, TreasurySetEvent.OutputTuple, TreasurySetEvent.OutputObject>;
   getEvent(
     key: "VaultDeposit"
-  ): TypedContractEvent<
-    VaultDepositEvent.InputTuple,
-    VaultDepositEvent.OutputTuple,
-    VaultDepositEvent.OutputObject
-  >;
+  ): TypedContractEvent<VaultDepositEvent.InputTuple, VaultDepositEvent.OutputTuple, VaultDepositEvent.OutputObject>;
   getEvent(
     key: "VaultWithdraw"
-  ): TypedContractEvent<
-    VaultWithdrawEvent.InputTuple,
-    VaultWithdrawEvent.OutputTuple,
-    VaultWithdrawEvent.OutputObject
-  >;
+  ): TypedContractEvent<VaultWithdrawEvent.InputTuple, VaultWithdrawEvent.OutputTuple, VaultWithdrawEvent.OutputObject>;
 
   filters: {
-    "DecreasePosition(bytes32,address,address,address,uint256,uint256,bool,uint256,int256)": TypedContractEvent<
+    "DecreasePosition(bytes32,address,address,address,uint256,uint256,bool,uint256,int256,uint256)": TypedContractEvent<
       DecreasePositionEvent.InputTuple,
       DecreasePositionEvent.OutputTuple,
       DecreasePositionEvent.OutputObject
@@ -724,6 +607,17 @@ export interface IVault extends BaseContract {
       DecreasePositionEvent.InputTuple,
       DecreasePositionEvent.OutputTuple,
       DecreasePositionEvent.OutputObject
+    >;
+
+    "FeesCollected(address,address,uint256,uint256)": TypedContractEvent<
+      FeesCollectedEvent.InputTuple,
+      FeesCollectedEvent.OutputTuple,
+      FeesCollectedEvent.OutputObject
+    >;
+    FeesCollected: TypedContractEvent<
+      FeesCollectedEvent.InputTuple,
+      FeesCollectedEvent.OutputTuple,
+      FeesCollectedEvent.OutputObject
     >;
 
     "IncreasePosition(bytes32,address,address,address,uint256,uint256,bool,uint256)": TypedContractEvent<
@@ -737,7 +631,7 @@ export interface IVault extends BaseContract {
       IncreasePositionEvent.OutputObject
     >;
 
-    "LiquidatePosition(bytes32,address,address,address,bool,uint256,uint256,uint256,address)": TypedContractEvent<
+    "LiquidatePosition(bytes32,address,address,address,bool,uint256,uint256,uint256,address,uint256)": TypedContractEvent<
       LiquidatePositionEvent.InputTuple,
       LiquidatePositionEvent.OutputTuple,
       LiquidatePositionEvent.OutputObject
@@ -775,10 +669,17 @@ export interface IVault extends BaseContract {
       RouterSetEvent.OutputTuple,
       RouterSetEvent.OutputObject
     >;
-    RouterSet: TypedContractEvent<
-      RouterSetEvent.InputTuple,
-      RouterSetEvent.OutputTuple,
-      RouterSetEvent.OutputObject
+    RouterSet: TypedContractEvent<RouterSetEvent.InputTuple, RouterSetEvent.OutputTuple, RouterSetEvent.OutputObject>;
+
+    "TreasurySet(address,address)": TypedContractEvent<
+      TreasurySetEvent.InputTuple,
+      TreasurySetEvent.OutputTuple,
+      TreasurySetEvent.OutputObject
+    >;
+    TreasurySet: TypedContractEvent<
+      TreasurySetEvent.InputTuple,
+      TreasurySetEvent.OutputTuple,
+      TreasurySetEvent.OutputObject
     >;
 
     "VaultDeposit(address,address,uint256)": TypedContractEvent<

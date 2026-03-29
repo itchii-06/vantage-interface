@@ -47,7 +47,7 @@ export declare namespace IAssetRegistry {
     maxGlobalLongSize: bigint,
     maxGlobalShortSize: bigint,
     maintenanceMarginBps: bigint,
-    marginFeeBps: bigint
+    marginFeeBps: bigint,
   ] & {
     assetType: bigint;
     priceFeed: string;
@@ -67,6 +67,7 @@ export declare namespace IAssetRegistry {
     maxGlobalLongSize: BigNumberish;
     maxGlobalShortSize: BigNumberish;
     maintenanceMarginBps: BigNumberish;
+    liquidationFeeBps: BigNumberish;
     marginFeeBps: BigNumberish;
     requiresWeekendLock: boolean;
     fundingRateFactor: BigNumberish;
@@ -78,15 +79,17 @@ export declare namespace IAssetRegistry {
     maxGlobalLongSize: bigint,
     maxGlobalShortSize: bigint,
     maintenanceMarginBps: bigint,
+    liquidationFeeBps: bigint,
     marginFeeBps: bigint,
     requiresWeekendLock: boolean,
     fundingRateFactor: bigint,
-    maxFundingRate: bigint
+    maxFundingRate: bigint,
   ] & {
     maxLeverage: bigint;
     maxGlobalLongSize: bigint;
     maxGlobalShortSize: bigint;
     maintenanceMarginBps: bigint;
+    liquidationFeeBps: bigint;
     marginFeeBps: bigint;
     requiresWeekendLock: boolean;
     fundingRateFactor: bigint;
@@ -97,45 +100,36 @@ export declare namespace IAssetRegistry {
 export interface IAssetRegistryInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "complianceAdapters"
       | "getAssetInfo"
       | "getAssetRiskInfo"
       | "getFundingParams"
+      | "getMinLegalUnit"
       | "getRequiresWeekendLock"
+      | "getRestrictedAssets"
+      | "isMarketOpen"
+      | "utilizationCapBps"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "getAssetInfo",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getAssetRiskInfo",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getFundingParams",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getRequiresWeekendLock",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "complianceAdapters", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getAssetInfo", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getAssetRiskInfo", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getFundingParams", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getMinLegalUnit", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getRequiresWeekendLock", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getRestrictedAssets", values?: undefined): string;
+  encodeFunctionData(functionFragment: "isMarketOpen", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "utilizationCapBps", values?: undefined): string;
 
-  decodeFunctionResult(
-    functionFragment: "getAssetInfo",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getAssetRiskInfo",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getFundingParams",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getRequiresWeekendLock",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "complianceAdapters", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getAssetInfo", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getAssetRiskInfo", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getFundingParams", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getMinLegalUnit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getRequiresWeekendLock", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getRestrictedAssets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isMarketOpen", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "utilizationCapBps", data: BytesLike): Result;
 }
 
 export interface IAssetRegistry extends BaseContract {
@@ -155,43 +149,27 @@ export interface IAssetRegistry extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
-  getAssetInfo: TypedContractMethod<
-    [asset: AddressLike],
-    [IAssetRegistry.AssetInfoStructOutput],
-    "view"
-  >;
+  complianceAdapters: TypedContractMethod<[asset: AddressLike], [string], "view">;
 
-  getAssetRiskInfo: TypedContractMethod<
-    [asset: AddressLike],
-    [IAssetRegistry.AssetRiskInfoStructOutput],
-    "view"
-  >;
+  getAssetInfo: TypedContractMethod<[asset: AddressLike], [IAssetRegistry.AssetInfoStructOutput], "view">;
+
+  getAssetRiskInfo: TypedContractMethod<[asset: AddressLike], [IAssetRegistry.AssetRiskInfoStructOutput], "view">;
 
   getFundingParams: TypedContractMethod<
     [asset: AddressLike],
@@ -199,30 +177,25 @@ export interface IAssetRegistry extends BaseContract {
     "view"
   >;
 
-  getRequiresWeekendLock: TypedContractMethod<
-    [asset: AddressLike],
-    [boolean],
-    "view"
-  >;
+  getMinLegalUnit: TypedContractMethod<[asset: AddressLike], [bigint], "view">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getRequiresWeekendLock: TypedContractMethod<[asset: AddressLike], [boolean], "view">;
 
+  getRestrictedAssets: TypedContractMethod<[], [string[]], "view">;
+
+  isMarketOpen: TypedContractMethod<[asset: AddressLike], [boolean], "view">;
+
+  utilizationCapBps: TypedContractMethod<[], [bigint], "view">;
+
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+
+  getFunction(nameOrSignature: "complianceAdapters"): TypedContractMethod<[asset: AddressLike], [string], "view">;
   getFunction(
     nameOrSignature: "getAssetInfo"
-  ): TypedContractMethod<
-    [asset: AddressLike],
-    [IAssetRegistry.AssetInfoStructOutput],
-    "view"
-  >;
+  ): TypedContractMethod<[asset: AddressLike], [IAssetRegistry.AssetInfoStructOutput], "view">;
   getFunction(
     nameOrSignature: "getAssetRiskInfo"
-  ): TypedContractMethod<
-    [asset: AddressLike],
-    [IAssetRegistry.AssetRiskInfoStructOutput],
-    "view"
-  >;
+  ): TypedContractMethod<[asset: AddressLike], [IAssetRegistry.AssetRiskInfoStructOutput], "view">;
   getFunction(
     nameOrSignature: "getFundingParams"
   ): TypedContractMethod<
@@ -230,9 +203,11 @@ export interface IAssetRegistry extends BaseContract {
     [[bigint, bigint] & { fundingRateFactor: bigint; maxFundingRate: bigint }],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getRequiresWeekendLock"
-  ): TypedContractMethod<[asset: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "getMinLegalUnit"): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getRequiresWeekendLock"): TypedContractMethod<[asset: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "getRestrictedAssets"): TypedContractMethod<[], [string[]], "view">;
+  getFunction(nameOrSignature: "isMarketOpen"): TypedContractMethod<[asset: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "utilizationCapBps"): TypedContractMethod<[], [bigint], "view">;
 
   filters: {};
 }

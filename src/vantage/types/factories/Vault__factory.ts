@@ -34,6 +34,38 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+    ],
+    name: "ComplianceAdapterFailed",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "newTotal",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "maxOI",
+        type: "uint256",
+      },
+    ],
+    name: "DynamicMaxOIExceeded",
+    type: "error",
+  },
+  {
     inputs: [],
     name: "EnforcedPause",
     type: "error",
@@ -78,6 +110,22 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "bytes32",
+        name: "slot",
+        type: "bytes32",
+      },
+    ],
+    name: "NoPendingChange",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NoPendingPayoutHub",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "owner",
         type: "address",
@@ -98,8 +146,35 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "current",
+        type: "address",
+      },
+    ],
+    name: "PayoutHubAlreadySet",
+    type: "error",
+  },
+  {
     inputs: [],
     name: "ReentrancyGuardReentrantCall",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "earliest",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "current",
+        type: "uint256",
+      },
+    ],
+    name: "TimelockNotExpired",
     type: "error",
   },
   {
@@ -122,6 +197,65 @@ const _abi = [
     ],
     name: "Unauthorized",
     type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "currentOI",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "maxOIAfterWithdraw",
+        type: "uint256",
+      },
+    ],
+    name: "WithdrawalBlockedByOI",
+    type: "error",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "collateralToken",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "indexToken",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "isLong",
+        type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "size",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "realisedPnl",
+        type: "uint256",
+      },
+    ],
+    name: "ADLExecuted",
+    type: "event",
   },
   {
     anonymous: false,
@@ -269,8 +403,145 @@ const _abi = [
         name: "realisedPnl",
         type: "int256",
       },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "feeUsd",
+        type: "uint256",
+      },
     ],
     name: "DecreasePosition",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "enabled",
+        type: "bool",
+      },
+    ],
+    name: "EmergencyModeSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "recipient",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "exchangeRateAtTime",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "neededPrincipal",
+        type: "uint256",
+      },
+    ],
+    name: "EmergencyWithdrawal",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "oldRate",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "newRate",
+        type: "uint256",
+      },
+    ],
+    name: "ExchangeRateApplied",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "newRate",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "applyAfter",
+        type: "uint256",
+      },
+    ],
+    name: "ExchangeRateProposed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "treasury",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+    ],
+    name: "FeesCollected",
     type: "event",
   },
   {
@@ -377,6 +648,25 @@ const _abi = [
       {
         indexed: true,
         internalType: "address",
+        name: "keeper",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "enabled",
+        type: "bool",
+      },
+    ],
+    name: "KeeperSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
         name: "lpManager",
         type: "address",
       },
@@ -441,6 +731,12 @@ const _abi = [
         name: "liquidator",
         type: "address",
       },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "liquidationFeeUsd",
+        type: "uint256",
+      },
     ],
     name: "LiquidatePosition",
     type: "event",
@@ -456,6 +752,25 @@ const _abi = [
       },
     ],
     name: "MaxPriceAgeSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "OwnershipTransferStarted",
     type: "event",
   },
   {
@@ -501,6 +816,44 @@ const _abi = [
       },
     ],
     name: "PayoutBufferBpsSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "oldHub",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newHub",
+        type: "address",
+      },
+    ],
+    name: "PayoutHubChanged",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newHub",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "executableAt",
+        type: "uint256",
+      },
+    ],
+    name: "PayoutHubProposed",
     type: "event",
   },
   {
@@ -657,6 +1010,56 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdcReceived",
+        type: "uint256",
+      },
+    ],
+    name: "RecoveryConversionExecuted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "executableAt",
+        type: "uint64",
+      },
+    ],
+    name: "RecoveryConversionProposed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: false,
         internalType: "uint8",
         name: "level",
@@ -689,6 +1092,119 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: true,
+        internalType: "bytes32",
+        name: "slot",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "oldValue",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newValue",
+        type: "address",
+      },
+    ],
+    name: "SetterChangeAccepted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "slot",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "value",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "executableAt",
+        type: "uint256",
+      },
+    ],
+    name: "SetterChangeProposed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "ShortfallSettled",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "rateBps",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "maxSpreadBps",
+        type: "uint256",
+      },
+    ],
+    name: "StalenessPenaltySet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previous",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "next",
+        type: "address",
+      },
+    ],
+    name: "TreasurySet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: false,
         internalType: "address",
         name: "account",
@@ -696,6 +1212,31 @@ const _abi = [
       },
     ],
     name: "Unpaused",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "dust",
+        type: "uint256",
+      },
+    ],
+    name: "UserShortfallRecorded",
     type: "event",
   },
   {
@@ -775,8 +1316,91 @@ const _abi = [
     type: "event",
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "rwaAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "enum Vault.Route",
+        name: "route",
+        type: "uint8",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdcReceived",
+        type: "uint256",
+      },
+    ],
+    name: "YieldConverted",
+    type: "event",
+  },
+  {
     inputs: [],
     name: "BASIS_POINTS_DIVISOR",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "CHANGE_PRICE_FEED",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "CHANGE_TREASURY",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "CHANGE_YIELD_ACCUMULATOR",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "EXCHANGE_RATE_PRECISION",
     outputs: [
       {
         internalType: "uint256",
@@ -815,6 +1439,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "PAYOUT_HUB_TIMELOCK",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "PRICE_PRECISION",
     outputs: [
       {
@@ -829,6 +1466,114 @@ const _abi = [
   {
     inputs: [],
     name: "SECONDS_PER_YEAR",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "SETTER_TIMELOCK",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "acceptOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "acceptPayoutHub",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "acceptPriceFeed",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "acceptTreasury",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "acceptYieldAccumulator",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_account",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_collateralToken",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_indexToken",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "_isLong",
+        type: "bool",
+      },
+    ],
+    name: "adlPosition",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "applyExchangeRateChange",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "assetExchangeRate",
     outputs: [
       {
         internalType: "uint256",
@@ -866,6 +1611,24 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "collectFees",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "complianceRegistry",
     outputs: [
@@ -876,6 +1639,40 @@ const _abi = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "rwaToken",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "minAmountOut",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "isRecovery",
+        type: "bool",
+      },
+    ],
+    name: "convertYieldToUSDC",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "usdcReceived",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -934,6 +1731,11 @@ const _abi = [
         name: "_receiver",
         type: "address",
       },
+      {
+        internalType: "uint256",
+        name: "_acceptablePrice",
+        type: "uint256",
+      },
     ],
     name: "decreasePosition",
     outputs: [
@@ -944,6 +1746,94 @@ const _abi = [
       },
     ],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "depositedPrincipal",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "emergencyMode",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "minAmountOut",
+        type: "uint256",
+      },
+    ],
+    name: "executeRecoveryConversion",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "usdcReceived",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "feeReserves",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "feeReservesLpShareBp",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -983,6 +1873,30 @@ const _abi = [
       },
     ],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "wadAmount",
+        type: "uint256",
+      },
+    ],
+    name: "fromWadAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -1124,6 +2038,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "getTotalOI",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "total",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "getVaultAssets",
     outputs: [
       {
@@ -1184,6 +2111,25 @@ const _abi = [
     name: "increasePosition",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "isKeeper",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -1280,7 +2226,7 @@ const _abi = [
       },
       {
         internalType: "address",
-        name: "",
+        name: "_feeReceiver",
         type: "address",
       },
     ],
@@ -1305,6 +2251,19 @@ const _abi = [
   {
     inputs: [],
     name: "maxPriceAge",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "maxStalenessSpreadBps",
     outputs: [
       {
         internalType: "uint256",
@@ -1375,6 +2334,117 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "payoutHubEarliestAccept",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32",
+      },
+    ],
+    name: "pendingChanges",
+    outputs: [
+      {
+        internalType: "address",
+        name: "value",
+        type: "address",
+      },
+      {
+        internalType: "uint64",
+        name: "executableAt",
+        type: "uint64",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "pendingExchangeRates",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "rate",
+        type: "uint256",
+      },
+      {
+        internalType: "uint64",
+        name: "executableAt",
+        type: "uint64",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "pendingOwner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "pendingPayoutHub",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "pendingRecoveries",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint64",
+        name: "executableAt",
+        type: "uint64",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "bytes32",
@@ -1431,6 +2501,113 @@ const _abi = [
         internalType: "address",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "newRate",
+        type: "uint256",
+      },
+    ],
+    name: "proposeExchangeRateChange",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_newHub",
+        type: "address",
+      },
+    ],
+    name: "proposePayoutHub",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_priceFeed",
+        type: "address",
+      },
+    ],
+    name: "proposePriceFeed",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "proposeRecoveryConversion",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_treasury",
+        type: "address",
+      },
+    ],
+    name: "proposeTreasury",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_yieldAccumulator",
+        type: "address",
+      },
+    ],
+    name: "proposeYieldAccumulator",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "protocolInsuranceFund",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -1550,6 +2727,50 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "bool",
+        name: "enabled",
+        type: "bool",
+      },
+    ],
+    name: "setEmergencyMode",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_bps",
+        type: "uint256",
+      },
+    ],
+    name: "setFeeReservesLpShareBp",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "keeper",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "enabled",
+        type: "bool",
+      },
+    ],
+    name: "setKeeper",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "_lpManager",
         type: "address",
@@ -1615,19 +2836,6 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_priceFeed",
-        type: "address",
-      },
-    ],
-    name: "setPriceFeed",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "uint8",
         name: "_level",
         type: "uint8",
@@ -1652,6 +2860,78 @@ const _abi = [
       },
     ],
     name: "setRouter",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_rateBps",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_maxSpreadBps",
+        type: "uint256",
+      },
+    ],
+    name: "setStalenessPenalty",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "enum Vault.Route",
+        name: "route",
+        type: "uint8",
+      },
+      {
+        internalType: "address",
+        name: "facility",
+        type: "address",
+      },
+      {
+        internalType: "uint24",
+        name: "poolFee",
+        type: "uint24",
+      },
+    ],
+    name: "setTokenStrategy",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_treasury",
+        type: "address",
+      },
+    ],
+    name: "setTreasury",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+    ],
+    name: "setUsdcToken",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -1686,6 +2966,50 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
+        name: "router",
+        type: "address",
+      },
+    ],
+    name: "setYieldConverter",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+    ],
+    name: "settleShortfall",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "stalenessPenaltyRateBps",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
         name: "token",
         type: "address",
       },
@@ -1701,6 +3025,37 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "syncNetAssetValue",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "toWadAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -1709,6 +3064,48 @@ const _abi = [
       },
     ],
     name: "tokenBalances",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "tokenStrategies",
+    outputs: [
+      {
+        internalType: "enum Vault.Route",
+        name: "preferredRoute",
+        type: "uint8",
+      },
+      {
+        internalType: "address",
+        name: "facility",
+        type: "address",
+      },
+      {
+        internalType: "uint24",
+        name: "poolFee",
+        type: "uint24",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "totalGlobalOI",
     outputs: [
       {
         internalType: "uint256",
@@ -1747,6 +3144,19 @@ const _abi = [
       },
     ],
     name: "totalLongSize",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "totalNetAssetValue",
     outputs: [
       {
         internalType: "uint256",
@@ -1810,6 +3220,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "treasury",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "unpause",
     outputs: [],
     stateMutability: "nonpayable",
@@ -1830,7 +3253,31 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "weekendBufferBps",
+    name: "usdcToken",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "userShortfallDebt",
     outputs: [
       {
         internalType: "uint256",
@@ -1843,7 +3290,56 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "weekendBufferBps",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "recipient",
+        type: "address",
+      },
+    ],
+    name: "withdrawAssetDirectly",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "yieldAccumulator",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "yieldConverter",
     outputs: [
       {
         internalType: "address",

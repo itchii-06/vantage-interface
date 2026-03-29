@@ -25,6 +25,7 @@ import type {
 export interface YieldAwarePriceFeedInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "acceptOwnership"
       | "assetRegistry"
       | "baseFeed"
       | "getLastPriceTimestamp"
@@ -33,6 +34,7 @@ export interface YieldAwarePriceFeedInterface extends Interface {
       | "getPrimaryPrice"
       | "isMarketOpen"
       | "owner"
+      | "pendingOwner"
       | "renounceOwnership"
       | "setAssetRegistry"
       | "setBaseFeed"
@@ -40,94 +42,38 @@ export interface YieldAwarePriceFeedInterface extends Interface {
   ): FunctionFragment;
 
   getEvent(
-    nameOrSignatureOrTopic:
-      | "AssetRegistrySet"
-      | "BaseFeedSet"
-      | "OwnershipTransferred"
+    nameOrSignatureOrTopic: "AssetRegistrySet" | "BaseFeedSet" | "OwnershipTransferStarted" | "OwnershipTransferred"
   ): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "assetRegistry",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "acceptOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "assetRegistry", values?: undefined): string;
   encodeFunctionData(functionFragment: "baseFeed", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "getLastPriceTimestamp",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getLatestPrimaryPrice",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPrice",
-    values: [AddressLike, boolean, boolean, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPrimaryPrice",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isMarketOpen",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "getLastPriceTimestamp", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getLatestPrimaryPrice", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getPrice", values: [AddressLike, boolean, boolean, boolean]): string;
+  encodeFunctionData(functionFragment: "getPrimaryPrice", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "isMarketOpen", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setAssetRegistry",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setBaseFeed",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "setAssetRegistry", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setBaseFeed", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "transferOwnership", values: [AddressLike]): string;
 
-  decodeFunctionResult(
-    functionFragment: "assetRegistry",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "assetRegistry", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "baseFeed", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getLastPriceTimestamp",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getLatestPrimaryPrice",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "getLastPriceTimestamp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getLatestPrimaryPrice", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getPrice", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getPrimaryPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isMarketOpen",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "getPrimaryPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isMarketOpen", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setAssetRegistry",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setBaseFeed",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setAssetRegistry", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setBaseFeed", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
 }
 
 export namespace AssetRegistrySetEvent {
@@ -147,6 +93,19 @@ export namespace BaseFeedSetEvent {
   export type OutputTuple = [baseFeed: string];
   export interface OutputObject {
     baseFeed: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferStartedEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -184,142 +143,80 @@ export interface YieldAwarePriceFeed extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+
+  acceptOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
   assetRegistry: TypedContractMethod<[], [string], "view">;
 
   baseFeed: TypedContractMethod<[], [string], "view">;
 
-  getLastPriceTimestamp: TypedContractMethod<
-    [_token: AddressLike],
-    [bigint],
-    "view"
-  >;
+  getLastPriceTimestamp: TypedContractMethod<[_token: AddressLike], [bigint], "view">;
 
-  getLatestPrimaryPrice: TypedContractMethod<
-    [_token: AddressLike],
-    [bigint],
-    "view"
-  >;
+  getLatestPrimaryPrice: TypedContractMethod<[_token: AddressLike], [bigint], "view">;
 
   getPrice: TypedContractMethod<
-    [
-      _token: AddressLike,
-      _maximise: boolean,
-      _includeAmmPrice: boolean,
-      _useSwapPricing: boolean
-    ],
+    [_token: AddressLike, _maximise: boolean, _includeAmmPrice: boolean, _useSwapPricing: boolean],
     [bigint],
     "view"
   >;
 
-  getPrimaryPrice: TypedContractMethod<
-    [_token: AddressLike, _maximise: boolean],
-    [bigint],
-    "view"
-  >;
+  getPrimaryPrice: TypedContractMethod<[_token: AddressLike, _maximise: boolean], [bigint], "view">;
 
   isMarketOpen: TypedContractMethod<[_token: AddressLike], [boolean], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
 
+  pendingOwner: TypedContractMethod<[], [string], "view">;
+
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
-  setAssetRegistry: TypedContractMethod<
-    [_assetRegistry: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  setAssetRegistry: TypedContractMethod<[_assetRegistry: AddressLike], [void], "nonpayable">;
 
-  setBaseFeed: TypedContractMethod<
-    [_baseFeed: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  setBaseFeed: TypedContractMethod<[_baseFeed: AddressLike], [void], "nonpayable">;
 
-  transferOwnership: TypedContractMethod<
-    [newOwner: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  transferOwnership: TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
-  getFunction(
-    nameOrSignature: "assetRegistry"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "baseFeed"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "getLastPriceTimestamp"
-  ): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getLatestPrimaryPrice"
-  ): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "acceptOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "assetRegistry"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "baseFeed"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "getLastPriceTimestamp"): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getLatestPrimaryPrice"): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "getPrice"
   ): TypedContractMethod<
-    [
-      _token: AddressLike,
-      _maximise: boolean,
-      _includeAmmPrice: boolean,
-      _useSwapPricing: boolean
-    ],
+    [_token: AddressLike, _maximise: boolean, _includeAmmPrice: boolean, _useSwapPricing: boolean],
     [bigint],
     "view"
   >;
   getFunction(
     nameOrSignature: "getPrimaryPrice"
-  ): TypedContractMethod<
-    [_token: AddressLike, _maximise: boolean],
-    [bigint],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "isMarketOpen"
-  ): TypedContractMethod<[_token: AddressLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "renounceOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
+  ): TypedContractMethod<[_token: AddressLike, _maximise: boolean], [bigint], "view">;
+  getFunction(nameOrSignature: "isMarketOpen"): TypedContractMethod<[_token: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setAssetRegistry"
   ): TypedContractMethod<[_assetRegistry: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "setBaseFeed"
-  ): TypedContractMethod<[_baseFeed: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setBaseFeed"): TypedContractMethod<[_baseFeed: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "transferOwnership"): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
   getEvent(
     key: "AssetRegistrySet"
@@ -330,10 +227,13 @@ export interface YieldAwarePriceFeed extends BaseContract {
   >;
   getEvent(
     key: "BaseFeedSet"
+  ): TypedContractEvent<BaseFeedSetEvent.InputTuple, BaseFeedSetEvent.OutputTuple, BaseFeedSetEvent.OutputObject>;
+  getEvent(
+    key: "OwnershipTransferStarted"
   ): TypedContractEvent<
-    BaseFeedSetEvent.InputTuple,
-    BaseFeedSetEvent.OutputTuple,
-    BaseFeedSetEvent.OutputObject
+    OwnershipTransferStartedEvent.InputTuple,
+    OwnershipTransferStartedEvent.OutputTuple,
+    OwnershipTransferStartedEvent.OutputObject
   >;
   getEvent(
     key: "OwnershipTransferred"
@@ -364,6 +264,17 @@ export interface YieldAwarePriceFeed extends BaseContract {
       BaseFeedSetEvent.InputTuple,
       BaseFeedSetEvent.OutputTuple,
       BaseFeedSetEvent.OutputObject
+    >;
+
+    "OwnershipTransferStarted(address,address)": TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+    OwnershipTransferStarted: TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
     >;
 
     "OwnershipTransferred(address,address)": TypedContractEvent<

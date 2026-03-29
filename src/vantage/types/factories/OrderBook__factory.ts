@@ -123,6 +123,12 @@ const _abi = [
         name: "triggerAboveThreshold",
         type: "bool",
       },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "executionFee",
+        type: "uint256",
+      },
     ],
     name: "CreateDecreaseOrder",
     type: "event",
@@ -189,6 +195,12 @@ const _abi = [
         internalType: "bool",
         name: "triggerAboveThreshold",
         type: "bool",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "executionFee",
+        type: "uint256",
       },
     ],
     name: "CreateIncreaseOrder",
@@ -400,7 +412,7 @@ const _abi = [
     ],
     name: "createDecreaseOrder",
     outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -448,7 +460,7 @@ const _abi = [
     ],
     name: "createIncreaseOrder",
     outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -505,6 +517,11 @@ const _abi = [
         internalType: "bool",
         name: "triggerAboveThreshold",
         type: "bool",
+      },
+      {
+        internalType: "uint256",
+        name: "executionFee",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -648,6 +665,11 @@ const _abi = [
         name: "triggerAboveThreshold",
         type: "bool",
       },
+      {
+        internalType: "uint256",
+        name: "executionFee",
+        type: "uint256",
+      },
     ],
     stateMutability: "view",
     type: "function",
@@ -672,6 +694,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "minExecutionFee",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -680,6 +715,19 @@ const _abi = [
       },
     ],
     name: "setGov",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_minExecutionFee",
+        type: "uint256",
+      },
+    ],
+    name: "setMinExecutionFee",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

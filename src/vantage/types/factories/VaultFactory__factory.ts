@@ -84,6 +84,25 @@ const _abi = [
         type: "address",
       },
     ],
+    name: "OwnershipTransferStarted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
     name: "OwnershipTransferred",
     type: "event",
   },
@@ -117,6 +136,33 @@ const _abi = [
     ],
     name: "VaultCreated",
     type: "event",
+  },
+  {
+    inputs: [],
+    name: "acceptOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "target",
+        type: "address",
+      },
+    ],
+    name: "acceptOwnershipOf",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "acceptSubContractOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [],
@@ -209,6 +255,11 @@ const _abi = [
               },
               {
                 internalType: "uint256",
+                name: "liquidationFeeBps",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
                 name: "marginFeeBps",
                 type: "uint256",
               },
@@ -267,6 +318,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "vault",
+        type: "address",
+      },
+    ],
+    name: "finalizeVaultRegistration",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "hub",
     outputs: [
@@ -282,6 +346,19 @@ const _abi = [
   {
     inputs: [],
     name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "pendingOwner",
     outputs: [
       {
         internalType: "address",
@@ -326,10 +403,7 @@ export class VaultFactory__factory {
   static createInterface(): VaultFactoryInterface {
     return new Interface(_abi) as VaultFactoryInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): VaultFactory {
+  static connect(address: string, runner?: ContractRunner | null): VaultFactory {
     return new Contract(address, _abi, runner) as unknown as VaultFactory;
   }
 }

@@ -29,16 +29,36 @@ export declare namespace IVaultReader {
     available: BigNumberish[];
   };
 
-  export type LiquidityStatsStructOutput = [
-    aum: bigint,
-    tokens: string[],
-    balances: bigint[],
-    available: bigint[]
-  ] & {
+  export type LiquidityStatsStructOutput = [aum: bigint, tokens: string[], balances: bigint[], available: bigint[]] & {
     aum: bigint;
     tokens: string[];
     balances: bigint[];
     available: bigint[];
+  };
+
+  export type LpYieldSummaryStruct = {
+    sharePrice: BigNumberish;
+    totalAum: BigNumberish;
+    totalSupply: BigNumberish;
+    instantaneousApr: BigNumberish;
+    fundingAprBps: BigNumberish;
+    feeShareAprBps: BigNumberish;
+  };
+
+  export type LpYieldSummaryStructOutput = [
+    sharePrice: bigint,
+    totalAum: bigint,
+    totalSupply: bigint,
+    instantaneousApr: bigint,
+    fundingAprBps: bigint,
+    feeShareAprBps: bigint,
+  ] & {
+    sharePrice: bigint;
+    totalAum: bigint;
+    totalSupply: bigint;
+    instantaneousApr: bigint;
+    fundingAprBps: bigint;
+    feeShareAprBps: bigint;
   };
 
   export type MarketSummaryStruct = {
@@ -56,7 +76,7 @@ export declare namespace IVaultReader {
     totalLongUsd: bigint,
     totalShortUsd: bigint,
     instantFundingRateBps: bigint,
-    availableLiquidityUsd: bigint
+    availableLiquidityUsd: bigint,
   ] & {
     token: string;
     price: bigint;
@@ -81,7 +101,7 @@ export declare namespace IVaultReader {
     netPnlUsd: bigint,
     marginUsageBps: bigint,
     isLiquidatable: boolean,
-    isDataFresh: boolean
+    isDataFresh: boolean,
   ] & {
     totalCollateralUsd: bigint;
     totalPositionValueUsd: bigint;
@@ -96,20 +116,17 @@ export interface VaultReaderInterface extends Interface {
   getFunction(
     nameOrSignature:
       | "getLiquidityStats"
+      | "getLpYieldSummary"
       | "getMarketSummaries"
       | "getMarketSummariesPaged"
       | "getPendingPnL"
+      | "getSharePrice"
       | "getUserAccountSummary"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "getLiquidityStats",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getMarketSummaries",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "getLiquidityStats", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getLpYieldSummary", values: [AddressLike, AddressLike]): string;
+  encodeFunctionData(functionFragment: "getMarketSummaries", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "getMarketSummariesPaged",
     values: [AddressLike, BigNumberish, BigNumberish]
@@ -118,31 +135,19 @@ export interface VaultReaderInterface extends Interface {
     functionFragment: "getPendingPnL",
     values: [AddressLike, AddressLike, AddressLike, AddressLike, boolean]
   ): string;
+  encodeFunctionData(functionFragment: "getSharePrice", values: [AddressLike, AddressLike]): string;
   encodeFunctionData(
     functionFragment: "getUserAccountSummary",
     values: [AddressLike, AddressLike, AddressLike]
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "getLiquidityStats",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getMarketSummaries",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getMarketSummariesPaged",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getPendingPnL",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getUserAccountSummary",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "getLiquidityStats", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getLpYieldSummary", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getMarketSummaries", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getMarketSummariesPaged", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getPendingPnL", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getSharePrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getUserAccountSummary", data: BytesLike): Result;
 }
 
 export interface VaultReader extends BaseContract {
@@ -162,43 +167,31 @@ export interface VaultReader extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
-  getLiquidityStats: TypedContractMethod<
-    [vault: AddressLike],
-    [IVaultReader.LiquidityStatsStructOutput],
+  getLiquidityStats: TypedContractMethod<[vault: AddressLike], [IVaultReader.LiquidityStatsStructOutput], "view">;
+
+  getLpYieldSummary: TypedContractMethod<
+    [vault: AddressLike, lpToken: AddressLike],
+    [IVaultReader.LpYieldSummaryStructOutput],
     "view"
   >;
 
-  getMarketSummaries: TypedContractMethod<
-    [vault: AddressLike],
-    [IVaultReader.MarketSummaryStructOutput[]],
-    "view"
-  >;
+  getMarketSummaries: TypedContractMethod<[vault: AddressLike], [IVaultReader.MarketSummaryStructOutput[]], "view">;
 
   getMarketSummariesPaged: TypedContractMethod<
     [vault: AddressLike, start: BigNumberish, end: BigNumberish],
@@ -207,22 +200,18 @@ export interface VaultReader extends BaseContract {
   >;
 
   getPendingPnL: TypedContractMethod<
-    [
-      vault: AddressLike,
-      account: AddressLike,
-      collateralToken: AddressLike,
-      indexToken: AddressLike,
-      isLong: boolean
-    ],
+    [vault: AddressLike, account: AddressLike, collateralToken: AddressLike, indexToken: AddressLike, isLong: boolean],
     [
       [bigint, bigint, boolean] & {
         pnlUsd: bigint;
         positionSize: bigint;
         exists: boolean;
-      }
+      },
     ],
     "view"
   >;
+
+  getSharePrice: TypedContractMethod<[vault: AddressLike, lpToken: AddressLike], [bigint], "view">;
 
   getUserAccountSummary: TypedContractMethod<
     [vault: AddressLike, user: AddressLike, collateralToken: AddressLike],
@@ -230,24 +219,17 @@ export interface VaultReader extends BaseContract {
     "view"
   >;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
   getFunction(
     nameOrSignature: "getLiquidityStats"
-  ): TypedContractMethod<
-    [vault: AddressLike],
-    [IVaultReader.LiquidityStatsStructOutput],
-    "view"
-  >;
+  ): TypedContractMethod<[vault: AddressLike], [IVaultReader.LiquidityStatsStructOutput], "view">;
+  getFunction(
+    nameOrSignature: "getLpYieldSummary"
+  ): TypedContractMethod<[vault: AddressLike, lpToken: AddressLike], [IVaultReader.LpYieldSummaryStructOutput], "view">;
   getFunction(
     nameOrSignature: "getMarketSummaries"
-  ): TypedContractMethod<
-    [vault: AddressLike],
-    [IVaultReader.MarketSummaryStructOutput[]],
-    "view"
-  >;
+  ): TypedContractMethod<[vault: AddressLike], [IVaultReader.MarketSummaryStructOutput[]], "view">;
   getFunction(
     nameOrSignature: "getMarketSummariesPaged"
   ): TypedContractMethod<
@@ -255,25 +237,20 @@ export interface VaultReader extends BaseContract {
     [IVaultReader.MarketSummaryStructOutput[]],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getPendingPnL"
-  ): TypedContractMethod<
-    [
-      vault: AddressLike,
-      account: AddressLike,
-      collateralToken: AddressLike,
-      indexToken: AddressLike,
-      isLong: boolean
-    ],
+  getFunction(nameOrSignature: "getPendingPnL"): TypedContractMethod<
+    [vault: AddressLike, account: AddressLike, collateralToken: AddressLike, indexToken: AddressLike, isLong: boolean],
     [
       [bigint, bigint, boolean] & {
         pnlUsd: bigint;
         positionSize: bigint;
         exists: boolean;
-      }
+      },
     ],
     "view"
   >;
+  getFunction(
+    nameOrSignature: "getSharePrice"
+  ): TypedContractMethod<[vault: AddressLike, lpToken: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "getUserAccountSummary"
   ): TypedContractMethod<

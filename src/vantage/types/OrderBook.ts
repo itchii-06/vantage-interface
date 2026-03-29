@@ -37,7 +37,9 @@ export interface OrderBookInterface extends Interface {
       | "gov"
       | "increaseOrders"
       | "increaseOrdersIndex"
+      | "minExecutionFee"
       | "setGov"
+      | "setMinExecutionFee"
       | "vault"
   ): FunctionFragment;
 
@@ -51,47 +53,18 @@ export interface OrderBookInterface extends Interface {
       | "ExecuteIncreaseOrder"
   ): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "cancelDecreaseOrder",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "cancelIncreaseOrder",
-    values: [BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: "cancelDecreaseOrder", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "cancelIncreaseOrder", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "createDecreaseOrder",
-    values: [
-      AddressLike,
-      BigNumberish,
-      AddressLike,
-      BigNumberish,
-      boolean,
-      BigNumberish,
-      boolean
-    ]
+    values: [AddressLike, BigNumberish, AddressLike, BigNumberish, boolean, BigNumberish, boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "createIncreaseOrder",
-    values: [
-      AddressLike,
-      BigNumberish,
-      AddressLike,
-      AddressLike,
-      BigNumberish,
-      boolean,
-      BigNumberish,
-      boolean
-    ]
+    values: [AddressLike, BigNumberish, AddressLike, AddressLike, BigNumberish, boolean, BigNumberish, boolean]
   ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseOrders",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "decreaseOrdersIndex",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "decreaseOrders", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "decreaseOrdersIndex", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "executeDecreaseOrder",
     values: [AddressLike, BigNumberish, AddressLike]
@@ -101,59 +74,27 @@ export interface OrderBookInterface extends Interface {
     values: [AddressLike, BigNumberish, AddressLike]
   ): string;
   encodeFunctionData(functionFragment: "gov", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "increaseOrders",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "increaseOrdersIndex",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "increaseOrders", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "increaseOrdersIndex", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "minExecutionFee", values?: undefined): string;
   encodeFunctionData(functionFragment: "setGov", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setMinExecutionFee", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "vault", values?: undefined): string;
 
-  decodeFunctionResult(
-    functionFragment: "cancelDecreaseOrder",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "cancelIncreaseOrder",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "createDecreaseOrder",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "createIncreaseOrder",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseOrders",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "decreaseOrdersIndex",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "executeDecreaseOrder",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "executeIncreaseOrder",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "cancelDecreaseOrder", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "cancelIncreaseOrder", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "createDecreaseOrder", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "createIncreaseOrder", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decreaseOrders", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "decreaseOrdersIndex", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "executeDecreaseOrder", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "executeIncreaseOrder", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "gov", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseOrders",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "increaseOrdersIndex",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "increaseOrders", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "increaseOrdersIndex", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "minExecutionFee", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setGov", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setMinExecutionFee", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "vault", data: BytesLike): Result;
 }
 
@@ -193,7 +134,8 @@ export namespace CreateDecreaseOrderEvent {
     sizeDelta: BigNumberish,
     isLong: boolean,
     triggerPrice: BigNumberish,
-    triggerAboveThreshold: boolean
+    triggerAboveThreshold: boolean,
+    executionFee: BigNumberish,
   ];
   export type OutputTuple = [
     account: string,
@@ -204,7 +146,8 @@ export namespace CreateDecreaseOrderEvent {
     sizeDelta: bigint,
     isLong: boolean,
     triggerPrice: bigint,
-    triggerAboveThreshold: boolean
+    triggerAboveThreshold: boolean,
+    executionFee: bigint,
   ];
   export interface OutputObject {
     account: string;
@@ -216,6 +159,7 @@ export namespace CreateDecreaseOrderEvent {
     isLong: boolean;
     triggerPrice: bigint;
     triggerAboveThreshold: boolean;
+    executionFee: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -234,7 +178,8 @@ export namespace CreateIncreaseOrderEvent {
     sizeDelta: BigNumberish,
     isLong: boolean,
     triggerPrice: BigNumberish,
-    triggerAboveThreshold: boolean
+    triggerAboveThreshold: boolean,
+    executionFee: BigNumberish,
   ];
   export type OutputTuple = [
     account: string,
@@ -246,7 +191,8 @@ export namespace CreateIncreaseOrderEvent {
     sizeDelta: bigint,
     isLong: boolean,
     triggerPrice: bigint,
-    triggerAboveThreshold: boolean
+    triggerAboveThreshold: boolean,
+    executionFee: bigint,
   ];
   export interface OutputObject {
     account: string;
@@ -259,6 +205,7 @@ export namespace CreateIncreaseOrderEvent {
     isLong: boolean;
     triggerPrice: bigint;
     triggerAboveThreshold: boolean;
+    executionFee: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -277,7 +224,7 @@ export namespace ExecuteDecreaseOrderEvent {
     isLong: boolean,
     triggerPrice: BigNumberish,
     triggerAboveThreshold: boolean,
-    executionPrice: BigNumberish
+    executionPrice: BigNumberish,
   ];
   export type OutputTuple = [
     account: string,
@@ -289,7 +236,7 @@ export namespace ExecuteDecreaseOrderEvent {
     isLong: boolean,
     triggerPrice: bigint,
     triggerAboveThreshold: boolean,
-    executionPrice: bigint
+    executionPrice: bigint,
   ];
   export interface OutputObject {
     account: string;
@@ -321,7 +268,7 @@ export namespace ExecuteIncreaseOrderEvent {
     isLong: boolean,
     triggerPrice: BigNumberish,
     triggerAboveThreshold: boolean,
-    executionPrice: BigNumberish
+    executionPrice: BigNumberish,
   ];
   export type OutputTuple = [
     account: string,
@@ -334,7 +281,7 @@ export namespace ExecuteIncreaseOrderEvent {
     isLong: boolean,
     triggerPrice: bigint,
     triggerAboveThreshold: boolean,
-    executionPrice: bigint
+    executionPrice: bigint,
   ];
   export interface OutputObject {
     account: string;
@@ -372,43 +319,25 @@ export interface OrderBook extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
-  cancelDecreaseOrder: TypedContractMethod<
-    [_orderIndex: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  cancelDecreaseOrder: TypedContractMethod<[_orderIndex: BigNumberish], [void], "nonpayable">;
 
-  cancelIncreaseOrder: TypedContractMethod<
-    [_orderIndex: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  cancelIncreaseOrder: TypedContractMethod<[_orderIndex: BigNumberish], [void], "nonpayable">;
 
   createDecreaseOrder: TypedContractMethod<
     [
@@ -418,10 +347,10 @@ export interface OrderBook extends BaseContract {
       _sizeDelta: BigNumberish,
       _isLong: boolean,
       _triggerPrice: BigNumberish,
-      _triggerAboveThreshold: boolean
+      _triggerAboveThreshold: boolean,
     ],
     [void],
-    "nonpayable"
+    "payable"
   >;
 
   createIncreaseOrder: TypedContractMethod<
@@ -433,16 +362,16 @@ export interface OrderBook extends BaseContract {
       _sizeDelta: BigNumberish,
       _isLong: boolean,
       _triggerPrice: BigNumberish,
-      _triggerAboveThreshold: boolean
+      _triggerAboveThreshold: boolean,
     ],
     [void],
-    "nonpayable"
+    "payable"
   >;
 
   decreaseOrders: TypedContractMethod<
     [arg0: AddressLike, arg1: BigNumberish],
     [
-      [string, string, bigint, string, bigint, boolean, bigint, boolean] & {
+      [string, string, bigint, string, bigint, boolean, bigint, boolean, bigint] & {
         account: string;
         collateralToken: string;
         collateralDelta: bigint;
@@ -451,33 +380,22 @@ export interface OrderBook extends BaseContract {
         isLong: boolean;
         triggerPrice: bigint;
         triggerAboveThreshold: boolean;
-      }
+        executionFee: bigint;
+      },
     ],
     "view"
   >;
 
-  decreaseOrdersIndex: TypedContractMethod<
-    [arg0: AddressLike],
-    [bigint],
-    "view"
-  >;
+  decreaseOrdersIndex: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   executeDecreaseOrder: TypedContractMethod<
-    [
-      _account: AddressLike,
-      _orderIndex: BigNumberish,
-      _feeReceiver: AddressLike
-    ],
+    [_account: AddressLike, _orderIndex: BigNumberish, _feeReceiver: AddressLike],
     [void],
     "nonpayable"
   >;
 
   executeIncreaseOrder: TypedContractMethod<
-    [
-      _account: AddressLike,
-      _orderIndex: BigNumberish,
-      _feeReceiver: AddressLike
-    ],
+    [_account: AddressLike, _orderIndex: BigNumberish, _feeReceiver: AddressLike],
     [void],
     "nonpayable"
   >;
@@ -487,17 +405,7 @@ export interface OrderBook extends BaseContract {
   increaseOrders: TypedContractMethod<
     [arg0: AddressLike, arg1: BigNumberish],
     [
-      [
-        string,
-        string,
-        bigint,
-        string,
-        string,
-        bigint,
-        boolean,
-        bigint,
-        boolean
-      ] & {
+      [string, string, bigint, string, string, bigint, boolean, bigint, boolean, bigint] & {
         account: string;
         purchaseToken: string;
         purchaseTokenAmount: bigint;
@@ -507,24 +415,23 @@ export interface OrderBook extends BaseContract {
         isLong: boolean;
         triggerPrice: bigint;
         triggerAboveThreshold: boolean;
-      }
+        executionFee: bigint;
+      },
     ],
     "view"
   >;
 
-  increaseOrdersIndex: TypedContractMethod<
-    [arg0: AddressLike],
-    [bigint],
-    "view"
-  >;
+  increaseOrdersIndex: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+
+  minExecutionFee: TypedContractMethod<[], [bigint], "view">;
 
   setGov: TypedContractMethod<[_gov: AddressLike], [void], "nonpayable">;
 
+  setMinExecutionFee: TypedContractMethod<[_minExecutionFee: BigNumberish], [void], "nonpayable">;
+
   vault: TypedContractMethod<[], [string], "view">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
   getFunction(
     nameOrSignature: "cancelDecreaseOrder"
@@ -542,10 +449,10 @@ export interface OrderBook extends BaseContract {
       _sizeDelta: BigNumberish,
       _isLong: boolean,
       _triggerPrice: BigNumberish,
-      _triggerAboveThreshold: boolean
+      _triggerAboveThreshold: boolean,
     ],
     [void],
-    "nonpayable"
+    "payable"
   >;
   getFunction(
     nameOrSignature: "createIncreaseOrder"
@@ -558,17 +465,15 @@ export interface OrderBook extends BaseContract {
       _sizeDelta: BigNumberish,
       _isLong: boolean,
       _triggerPrice: BigNumberish,
-      _triggerAboveThreshold: boolean
+      _triggerAboveThreshold: boolean,
     ],
     [void],
-    "nonpayable"
+    "payable"
   >;
-  getFunction(
-    nameOrSignature: "decreaseOrders"
-  ): TypedContractMethod<
+  getFunction(nameOrSignature: "decreaseOrders"): TypedContractMethod<
     [arg0: AddressLike, arg1: BigNumberish],
     [
-      [string, string, bigint, string, bigint, boolean, bigint, boolean] & {
+      [string, string, bigint, string, bigint, boolean, bigint, boolean, bigint] & {
         account: string;
         collateralToken: string;
         collateralDelta: bigint;
@@ -577,54 +482,31 @@ export interface OrderBook extends BaseContract {
         isLong: boolean;
         triggerPrice: bigint;
         triggerAboveThreshold: boolean;
-      }
+        executionFee: bigint;
+      },
     ],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "decreaseOrdersIndex"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "decreaseOrdersIndex"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "executeDecreaseOrder"
   ): TypedContractMethod<
-    [
-      _account: AddressLike,
-      _orderIndex: BigNumberish,
-      _feeReceiver: AddressLike
-    ],
+    [_account: AddressLike, _orderIndex: BigNumberish, _feeReceiver: AddressLike],
     [void],
     "nonpayable"
   >;
   getFunction(
     nameOrSignature: "executeIncreaseOrder"
   ): TypedContractMethod<
-    [
-      _account: AddressLike,
-      _orderIndex: BigNumberish,
-      _feeReceiver: AddressLike
-    ],
+    [_account: AddressLike, _orderIndex: BigNumberish, _feeReceiver: AddressLike],
     [void],
     "nonpayable"
   >;
-  getFunction(
-    nameOrSignature: "gov"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "increaseOrders"
-  ): TypedContractMethod<
+  getFunction(nameOrSignature: "gov"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "increaseOrders"): TypedContractMethod<
     [arg0: AddressLike, arg1: BigNumberish],
     [
-      [
-        string,
-        string,
-        bigint,
-        string,
-        string,
-        bigint,
-        boolean,
-        bigint,
-        boolean
-      ] & {
+      [string, string, bigint, string, string, bigint, boolean, bigint, boolean, bigint] & {
         account: string;
         purchaseToken: string;
         purchaseTokenAmount: bigint;
@@ -634,19 +516,18 @@ export interface OrderBook extends BaseContract {
         isLong: boolean;
         triggerPrice: bigint;
         triggerAboveThreshold: boolean;
-      }
+        executionFee: bigint;
+      },
     ],
     "view"
   >;
+  getFunction(nameOrSignature: "increaseOrdersIndex"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "minExecutionFee"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "setGov"): TypedContractMethod<[_gov: AddressLike], [void], "nonpayable">;
   getFunction(
-    nameOrSignature: "increaseOrdersIndex"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "setGov"
-  ): TypedContractMethod<[_gov: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "vault"
-  ): TypedContractMethod<[], [string], "view">;
+    nameOrSignature: "setMinExecutionFee"
+  ): TypedContractMethod<[_minExecutionFee: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "vault"): TypedContractMethod<[], [string], "view">;
 
   getEvent(
     key: "CancelDecreaseOrder"
@@ -714,7 +595,7 @@ export interface OrderBook extends BaseContract {
       CancelIncreaseOrderEvent.OutputObject
     >;
 
-    "CreateDecreaseOrder(address,uint256,address,uint256,address,uint256,bool,uint256,bool)": TypedContractEvent<
+    "CreateDecreaseOrder(address,uint256,address,uint256,address,uint256,bool,uint256,bool,uint256)": TypedContractEvent<
       CreateDecreaseOrderEvent.InputTuple,
       CreateDecreaseOrderEvent.OutputTuple,
       CreateDecreaseOrderEvent.OutputObject
@@ -725,7 +606,7 @@ export interface OrderBook extends BaseContract {
       CreateDecreaseOrderEvent.OutputObject
     >;
 
-    "CreateIncreaseOrder(address,uint256,address,uint256,address,address,uint256,bool,uint256,bool)": TypedContractEvent<
+    "CreateIncreaseOrder(address,uint256,address,uint256,address,address,uint256,bool,uint256,bool,uint256)": TypedContractEvent<
       CreateIncreaseOrderEvent.InputTuple,
       CreateIncreaseOrderEvent.OutputTuple,
       CreateIncreaseOrderEvent.OutputObject

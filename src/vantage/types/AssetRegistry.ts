@@ -49,7 +49,7 @@ export declare namespace AssetRegistry {
     maxGlobalLongSize: bigint,
     maxGlobalShortSize: bigint,
     maintenanceMarginBps: bigint,
-    marginFeeBps: bigint
+    marginFeeBps: bigint,
   ] & {
     assetType: bigint;
     priceFeed: string;
@@ -69,6 +69,7 @@ export declare namespace AssetRegistry {
     maxGlobalLongSize: BigNumberish;
     maxGlobalShortSize: BigNumberish;
     maintenanceMarginBps: BigNumberish;
+    liquidationFeeBps: BigNumberish;
     marginFeeBps: BigNumberish;
     requiresWeekendLock: boolean;
     fundingRateFactor: BigNumberish;
@@ -80,15 +81,17 @@ export declare namespace AssetRegistry {
     maxGlobalLongSize: bigint,
     maxGlobalShortSize: bigint,
     maintenanceMarginBps: bigint,
+    liquidationFeeBps: bigint,
     marginFeeBps: bigint,
     requiresWeekendLock: boolean,
     fundingRateFactor: bigint,
-    maxFundingRate: bigint
+    maxFundingRate: bigint,
   ] & {
     maxLeverage: bigint;
     maxGlobalLongSize: bigint;
     maxGlobalShortSize: bigint;
     maintenanceMarginBps: bigint;
+    liquidationFeeBps: bigint;
     marginFeeBps: bigint;
     requiresWeekendLock: boolean;
     fundingRateFactor: bigint;
@@ -100,6 +103,7 @@ export declare namespace AssetRegistry {
     maxGlobalLongSize: BigNumberish;
     maxGlobalShortSize: BigNumberish;
     maintenanceMarginBps: BigNumberish;
+    liquidationFeeBps: BigNumberish;
     marginFeeBps: BigNumberish;
   };
 
@@ -108,12 +112,14 @@ export declare namespace AssetRegistry {
     maxGlobalLongSize: bigint,
     maxGlobalShortSize: bigint,
     maintenanceMarginBps: bigint,
-    marginFeeBps: bigint
+    liquidationFeeBps: bigint,
+    marginFeeBps: bigint,
   ] & {
     maxLeverage: bigint;
     maxGlobalLongSize: bigint;
     maxGlobalShortSize: bigint;
     maintenanceMarginBps: bigint;
+    liquidationFeeBps: bigint;
     marginFeeBps: bigint;
   };
 }
@@ -122,25 +128,42 @@ export interface AssetRegistryInterface extends Interface {
   getFunction(
     nameOrSignature:
       | "LEVERAGE_PRECISION"
+      | "MAX_FUNDING_RATE_FACTOR"
+      | "MAX_LIQUIDATION_FEE_BPS"
       | "MAX_MAINTENANCE_MARGIN_BPS"
       | "MAX_MARGIN_FEE_BPS"
       | "MIN_LEVERAGE"
+      | "acceptOwnership"
+      | "acceptOwnershipOf"
       | "allAssets"
       | "assets"
+      | "complianceAdapters"
       | "getAllAssets"
       | "getAssetInfo"
       | "getAssetRiskInfo"
       | "getFundingParams"
+      | "getMinLegalUnit"
       | "getRequiresWeekendLock"
+      | "getRestrictedAssets"
+      | "isMarketOpen"
+      | "isRWA"
       | "owner"
+      | "pendingOwner"
       | "registerAsset"
       | "renounceOwnership"
+      | "setComplianceAdapter"
       | "setEnabled"
       | "setFundingParams"
+      | "setIsRWA"
+      | "setMarketStatus"
+      | "setMinLegalUnit"
       | "setRequiresWeekendLock"
+      | "setUtilizationCap"
+      | "setYieldAccumulatorCaller"
       | "transferOwnership"
       | "updateAssetConfig"
       | "updateRiskConfig"
+      | "utilizationCapBps"
       | "yieldAccumulator"
   ): FunctionFragment;
 
@@ -149,54 +172,39 @@ export interface AssetRegistryInterface extends Interface {
       | "AssetConfigUpdated"
       | "AssetEnabled"
       | "AssetRegistered"
+      | "ComplianceAdapterSet"
       | "FundingParamsUpdated"
+      | "MarketStatusChanged"
+      | "MinLegalUnitUpdated"
+      | "OwnershipTransferStarted"
       | "OwnershipTransferred"
       | "RiskConfigUpdated"
+      | "UtilizationCapUpdated"
       | "WeekendLockUpdated"
   ): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "LEVERAGE_PRECISION",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "MAX_MAINTENANCE_MARGIN_BPS",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "MAX_MARGIN_FEE_BPS",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "MIN_LEVERAGE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "allAssets",
-    values: [BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: "LEVERAGE_PRECISION", values?: undefined): string;
+  encodeFunctionData(functionFragment: "MAX_FUNDING_RATE_FACTOR", values?: undefined): string;
+  encodeFunctionData(functionFragment: "MAX_LIQUIDATION_FEE_BPS", values?: undefined): string;
+  encodeFunctionData(functionFragment: "MAX_MAINTENANCE_MARGIN_BPS", values?: undefined): string;
+  encodeFunctionData(functionFragment: "MAX_MARGIN_FEE_BPS", values?: undefined): string;
+  encodeFunctionData(functionFragment: "MIN_LEVERAGE", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptOwnershipOf", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "allAssets", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "assets", values: [AddressLike]): string;
-  encodeFunctionData(
-    functionFragment: "getAllAssets",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getAssetInfo",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getAssetRiskInfo",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getFundingParams",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getRequiresWeekendLock",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "complianceAdapters", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getAllAssets", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getAssetInfo", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getAssetRiskInfo", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getFundingParams", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getMinLegalUnit", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getRequiresWeekendLock", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getRestrictedAssets", values?: undefined): string;
+  encodeFunctionData(functionFragment: "isMarketOpen", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "isRWA", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "registerAsset",
     values: [
@@ -206,29 +214,20 @@ export interface AssetRegistryInterface extends Interface {
       BigNumberish,
       boolean,
       BigNumberish,
-      AssetRegistry.RiskParamsStruct
+      AssetRegistry.RiskParamsStruct,
     ]
   ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setEnabled",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setFundingParams",
-    values: [AddressLike, BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setRequiresWeekendLock",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "setComplianceAdapter", values: [AddressLike, AddressLike]): string;
+  encodeFunctionData(functionFragment: "setEnabled", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setFundingParams", values: [AddressLike, BigNumberish, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setIsRWA", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setMarketStatus", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setMinLegalUnit", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setRequiresWeekendLock", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setUtilizationCap", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setYieldAccumulatorCaller", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "transferOwnership", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "updateAssetConfig",
     values: [AddressLike, AddressLike, boolean, boolean]
@@ -237,98 +236,52 @@ export interface AssetRegistryInterface extends Interface {
     functionFragment: "updateRiskConfig",
     values: [AddressLike, AssetRegistry.RiskParamsStruct]
   ): string;
-  encodeFunctionData(
-    functionFragment: "yieldAccumulator",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "utilizationCapBps", values?: undefined): string;
+  encodeFunctionData(functionFragment: "yieldAccumulator", values?: undefined): string;
 
-  decodeFunctionResult(
-    functionFragment: "LEVERAGE_PRECISION",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "MAX_MAINTENANCE_MARGIN_BPS",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "MAX_MARGIN_FEE_BPS",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "MIN_LEVERAGE",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "LEVERAGE_PRECISION", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "MAX_FUNDING_RATE_FACTOR", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "MAX_LIQUIDATION_FEE_BPS", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "MAX_MAINTENANCE_MARGIN_BPS", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "MAX_MARGIN_FEE_BPS", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "MIN_LEVERAGE", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnershipOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "allAssets", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "assets", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getAllAssets",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getAssetInfo",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getAssetRiskInfo",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getFundingParams",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getRequiresWeekendLock",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "complianceAdapters", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getAllAssets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getAssetInfo", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getAssetRiskInfo", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getFundingParams", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getMinLegalUnit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getRequiresWeekendLock", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getRestrictedAssets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isMarketOpen", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isRWA", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "registerAsset",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "registerAsset", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setComplianceAdapter", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setEnabled", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setFundingParams",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setRequiresWeekendLock",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateAssetConfig",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateRiskConfig",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "yieldAccumulator",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "setFundingParams", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setIsRWA", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setMarketStatus", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setMinLegalUnit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setRequiresWeekendLock", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setUtilizationCap", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setYieldAccumulatorCaller", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "updateAssetConfig", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "updateRiskConfig", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "utilizationCapBps", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "yieldAccumulator", data: BytesLike): Result;
 }
 
 export namespace AssetConfigUpdatedEvent {
-  export type InputTuple = [
-    asset: AddressLike,
-    priceFeed: AddressLike,
-    isEnabled: boolean,
-    isShortable: boolean
-  ];
-  export type OutputTuple = [
-    asset: string,
-    priceFeed: string,
-    isEnabled: boolean,
-    isShortable: boolean
-  ];
+  export type InputTuple = [asset: AddressLike, priceFeed: AddressLike, isEnabled: boolean, isShortable: boolean];
+  export type OutputTuple = [asset: string, priceFeed: string, isEnabled: boolean, isShortable: boolean];
   export interface OutputObject {
     asset: string;
     priceFeed: string;
@@ -355,16 +308,8 @@ export namespace AssetEnabledEvent {
 }
 
 export namespace AssetRegisteredEvent {
-  export type InputTuple = [
-    asset: AddressLike,
-    assetType: BigNumberish,
-    priceFeed: AddressLike
-  ];
-  export type OutputTuple = [
-    asset: string,
-    assetType: bigint,
-    priceFeed: string
-  ];
+  export type InputTuple = [asset: AddressLike, assetType: BigNumberish, priceFeed: AddressLike];
+  export type OutputTuple = [asset: string, assetType: bigint, priceFeed: string];
   export interface OutputObject {
     asset: string;
     assetType: bigint;
@@ -376,21 +321,65 @@ export namespace AssetRegisteredEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace ComplianceAdapterSetEvent {
+  export type InputTuple = [asset: AddressLike, adapter: AddressLike];
+  export type OutputTuple = [asset: string, adapter: string];
+  export interface OutputObject {
+    asset: string;
+    adapter: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace FundingParamsUpdatedEvent {
-  export type InputTuple = [
-    asset: AddressLike,
-    fundingRateFactor: BigNumberish,
-    maxFundingRate: BigNumberish
-  ];
-  export type OutputTuple = [
-    asset: string,
-    fundingRateFactor: bigint,
-    maxFundingRate: bigint
-  ];
+  export type InputTuple = [asset: AddressLike, fundingRateFactor: BigNumberish, maxFundingRate: BigNumberish];
+  export type OutputTuple = [asset: string, fundingRateFactor: bigint, maxFundingRate: bigint];
   export interface OutputObject {
     asset: string;
     fundingRateFactor: bigint;
     maxFundingRate: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace MarketStatusChangedEvent {
+  export type InputTuple = [asset: AddressLike, isOpen: boolean];
+  export type OutputTuple = [asset: string, isOpen: boolean];
+  export interface OutputObject {
+    asset: string;
+    isOpen: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace MinLegalUnitUpdatedEvent {
+  export type InputTuple = [asset: AddressLike, minUnit: BigNumberish];
+  export type OutputTuple = [asset: string, minUnit: bigint];
+  export interface OutputObject {
+    asset: string;
+    minUnit: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferStartedEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -416,19 +405,27 @@ export namespace RiskConfigUpdatedEvent {
     asset: AddressLike,
     maxLeverage: BigNumberish,
     maintenanceMarginBps: BigNumberish,
-    marginFeeBps: BigNumberish
+    marginFeeBps: BigNumberish,
   ];
-  export type OutputTuple = [
-    asset: string,
-    maxLeverage: bigint,
-    maintenanceMarginBps: bigint,
-    marginFeeBps: bigint
-  ];
+  export type OutputTuple = [asset: string, maxLeverage: bigint, maintenanceMarginBps: bigint, marginFeeBps: bigint];
   export interface OutputObject {
     asset: string;
     maxLeverage: bigint;
     maintenanceMarginBps: bigint;
     marginFeeBps: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace UtilizationCapUpdatedEvent {
+  export type InputTuple = [oldBps: BigNumberish, newBps: BigNumberish];
+  export type OutputTuple = [oldBps: bigint, newBps: bigint];
+  export interface OutputObject {
+    oldBps: bigint;
+    newBps: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -466,39 +463,37 @@ export interface AssetRegistry extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
   LEVERAGE_PRECISION: TypedContractMethod<[], [bigint], "view">;
+
+  MAX_FUNDING_RATE_FACTOR: TypedContractMethod<[], [bigint], "view">;
+
+  MAX_LIQUIDATION_FEE_BPS: TypedContractMethod<[], [bigint], "view">;
 
   MAX_MAINTENANCE_MARGIN_BPS: TypedContractMethod<[], [bigint], "view">;
 
   MAX_MARGIN_FEE_BPS: TypedContractMethod<[], [bigint], "view">;
 
   MIN_LEVERAGE: TypedContractMethod<[], [bigint], "view">;
+
+  acceptOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
+  acceptOwnershipOf: TypedContractMethod<[target: AddressLike], [void], "nonpayable">;
 
   allAssets: TypedContractMethod<[arg0: BigNumberish], [string], "view">;
 
@@ -517,9 +512,13 @@ export interface AssetRegistry extends BaseContract {
         bigint,
         bigint,
         bigint,
+        bigint,
+        boolean,
+        boolean,
         boolean,
         bigint,
-        bigint
+        bigint,
+        bigint,
       ] & {
         assetType: bigint;
         priceFeed: string;
@@ -531,28 +530,26 @@ export interface AssetRegistry extends BaseContract {
         maxGlobalLongSize: bigint;
         maxGlobalShortSize: bigint;
         maintenanceMarginBps: bigint;
+        liquidationFeeBps: bigint;
         marginFeeBps: bigint;
         requiresWeekendLock: boolean;
+        isRestricted: boolean;
+        isRWA: boolean;
+        minLegalUnit: bigint;
         fundingRateFactor: bigint;
         maxFundingRate: bigint;
-      }
+      },
     ],
     "view"
   >;
 
+  complianceAdapters: TypedContractMethod<[arg0: AddressLike], [string], "view">;
+
   getAllAssets: TypedContractMethod<[], [string[]], "view">;
 
-  getAssetInfo: TypedContractMethod<
-    [asset: AddressLike],
-    [AssetRegistry.AssetInfoStructOutput],
-    "view"
-  >;
+  getAssetInfo: TypedContractMethod<[asset: AddressLike], [AssetRegistry.AssetInfoStructOutput], "view">;
 
-  getAssetRiskInfo: TypedContractMethod<
-    [asset: AddressLike],
-    [AssetRegistry.AssetRiskInfoStructOutput],
-    "view"
-  >;
+  getAssetRiskInfo: TypedContractMethod<[asset: AddressLike], [AssetRegistry.AssetRiskInfoStructOutput], "view">;
 
   getFundingParams: TypedContractMethod<
     [asset: AddressLike],
@@ -560,13 +557,19 @@ export interface AssetRegistry extends BaseContract {
     "view"
   >;
 
-  getRequiresWeekendLock: TypedContractMethod<
-    [asset: AddressLike],
-    [boolean],
-    "view"
-  >;
+  getMinLegalUnit: TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+
+  getRequiresWeekendLock: TypedContractMethod<[asset: AddressLike], [boolean], "view">;
+
+  getRestrictedAssets: TypedContractMethod<[], [string[]], "view">;
+
+  isMarketOpen: TypedContractMethod<[asset: AddressLike], [boolean], "view">;
+
+  isRWA: TypedContractMethod<[asset: AddressLike], [boolean], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
+
+  pendingOwner: TypedContractMethod<[], [string], "view">;
 
   registerAsset: TypedContractMethod<
     [
@@ -576,7 +579,7 @@ export interface AssetRegistry extends BaseContract {
       decimals_: BigNumberish,
       isShortable: boolean,
       initialYieldBps: BigNumberish,
-      risk: AssetRegistry.RiskParamsStruct
+      risk: AssetRegistry.RiskParamsStruct,
     ],
     [void],
     "nonpayable"
@@ -584,41 +587,32 @@ export interface AssetRegistry extends BaseContract {
 
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
-  setEnabled: TypedContractMethod<
-    [asset: AddressLike, enabled: boolean],
-    [void],
-    "nonpayable"
-  >;
+  setComplianceAdapter: TypedContractMethod<[asset: AddressLike, adapter: AddressLike], [void], "nonpayable">;
+
+  setEnabled: TypedContractMethod<[asset: AddressLike, enabled: boolean], [void], "nonpayable">;
 
   setFundingParams: TypedContractMethod<
-    [
-      asset: AddressLike,
-      fundingRateFactor: BigNumberish,
-      maxFundingRate: BigNumberish
-    ],
+    [asset: AddressLike, fundingRateFactor: BigNumberish, maxFundingRate: BigNumberish],
     [void],
     "nonpayable"
   >;
 
-  setRequiresWeekendLock: TypedContractMethod<
-    [asset: AddressLike, requiresLock: boolean],
-    [void],
-    "nonpayable"
-  >;
+  setIsRWA: TypedContractMethod<[asset: AddressLike, _isRWA: boolean], [void], "nonpayable">;
 
-  transferOwnership: TypedContractMethod<
-    [newOwner: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  setMarketStatus: TypedContractMethod<[asset: AddressLike, open: boolean], [void], "nonpayable">;
+
+  setMinLegalUnit: TypedContractMethod<[asset: AddressLike, minUnit: BigNumberish], [void], "nonpayable">;
+
+  setRequiresWeekendLock: TypedContractMethod<[asset: AddressLike, requiresLock: boolean], [void], "nonpayable">;
+
+  setUtilizationCap: TypedContractMethod<[_bps: BigNumberish], [void], "nonpayable">;
+
+  setYieldAccumulatorCaller: TypedContractMethod<[caller: AddressLike, authorized: boolean], [void], "nonpayable">;
+
+  transferOwnership: TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
   updateAssetConfig: TypedContractMethod<
-    [
-      asset: AddressLike,
-      priceFeed: AddressLike,
-      isEnabled: boolean,
-      isShortable: boolean
-    ],
+    [asset: AddressLike, priceFeed: AddressLike, isEnabled: boolean, isShortable: boolean],
     [void],
     "nonpayable"
   >;
@@ -629,30 +623,22 @@ export interface AssetRegistry extends BaseContract {
     "nonpayable"
   >;
 
+  utilizationCapBps: TypedContractMethod<[], [bigint], "view">;
+
   yieldAccumulator: TypedContractMethod<[], [string], "view">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
-  getFunction(
-    nameOrSignature: "LEVERAGE_PRECISION"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "MAX_MAINTENANCE_MARGIN_BPS"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "MAX_MARGIN_FEE_BPS"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "MIN_LEVERAGE"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "allAssets"
-  ): TypedContractMethod<[arg0: BigNumberish], [string], "view">;
-  getFunction(
-    nameOrSignature: "assets"
-  ): TypedContractMethod<
+  getFunction(nameOrSignature: "LEVERAGE_PRECISION"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "MAX_FUNDING_RATE_FACTOR"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "MAX_LIQUIDATION_FEE_BPS"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "MAX_MAINTENANCE_MARGIN_BPS"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "MAX_MARGIN_FEE_BPS"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "MIN_LEVERAGE"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "acceptOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptOwnershipOf"): TypedContractMethod<[target: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "allAssets"): TypedContractMethod<[arg0: BigNumberish], [string], "view">;
+  getFunction(nameOrSignature: "assets"): TypedContractMethod<
     [arg0: AddressLike],
     [
       [
@@ -667,9 +653,13 @@ export interface AssetRegistry extends BaseContract {
         bigint,
         bigint,
         bigint,
+        bigint,
+        boolean,
+        boolean,
         boolean,
         bigint,
-        bigint
+        bigint,
+        bigint,
       ] & {
         assetType: bigint;
         priceFeed: string;
@@ -681,31 +671,26 @@ export interface AssetRegistry extends BaseContract {
         maxGlobalLongSize: bigint;
         maxGlobalShortSize: bigint;
         maintenanceMarginBps: bigint;
+        liquidationFeeBps: bigint;
         marginFeeBps: bigint;
         requiresWeekendLock: boolean;
+        isRestricted: boolean;
+        isRWA: boolean;
+        minLegalUnit: bigint;
         fundingRateFactor: bigint;
         maxFundingRate: bigint;
-      }
+      },
     ],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getAllAssets"
-  ): TypedContractMethod<[], [string[]], "view">;
+  getFunction(nameOrSignature: "complianceAdapters"): TypedContractMethod<[arg0: AddressLike], [string], "view">;
+  getFunction(nameOrSignature: "getAllAssets"): TypedContractMethod<[], [string[]], "view">;
   getFunction(
     nameOrSignature: "getAssetInfo"
-  ): TypedContractMethod<
-    [asset: AddressLike],
-    [AssetRegistry.AssetInfoStructOutput],
-    "view"
-  >;
+  ): TypedContractMethod<[asset: AddressLike], [AssetRegistry.AssetInfoStructOutput], "view">;
   getFunction(
     nameOrSignature: "getAssetRiskInfo"
-  ): TypedContractMethod<
-    [asset: AddressLike],
-    [AssetRegistry.AssetRiskInfoStructOutput],
-    "view"
-  >;
+  ): TypedContractMethod<[asset: AddressLike], [AssetRegistry.AssetRiskInfoStructOutput], "view">;
   getFunction(
     nameOrSignature: "getFundingParams"
   ): TypedContractMethod<
@@ -713,12 +698,13 @@ export interface AssetRegistry extends BaseContract {
     [[bigint, bigint] & { fundingRateFactor: bigint; maxFundingRate: bigint }],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "getRequiresWeekendLock"
-  ): TypedContractMethod<[asset: AddressLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "getMinLegalUnit"): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getRequiresWeekendLock"): TypedContractMethod<[asset: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "getRestrictedAssets"): TypedContractMethod<[], [string[]], "view">;
+  getFunction(nameOrSignature: "isMarketOpen"): TypedContractMethod<[asset: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "isRWA"): TypedContractMethod<[asset: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "registerAsset"
   ): TypedContractMethod<
@@ -729,64 +715,54 @@ export interface AssetRegistry extends BaseContract {
       decimals_: BigNumberish,
       isShortable: boolean,
       initialYieldBps: BigNumberish,
-      risk: AssetRegistry.RiskParamsStruct
+      risk: AssetRegistry.RiskParamsStruct,
     ],
     [void],
     "nonpayable"
   >;
+  getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
-    nameOrSignature: "renounceOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
+    nameOrSignature: "setComplianceAdapter"
+  ): TypedContractMethod<[asset: AddressLike, adapter: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setEnabled"
-  ): TypedContractMethod<
-    [asset: AddressLike, enabled: boolean],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[asset: AddressLike, enabled: boolean], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setFundingParams"
   ): TypedContractMethod<
-    [
-      asset: AddressLike,
-      fundingRateFactor: BigNumberish,
-      maxFundingRate: BigNumberish
-    ],
+    [asset: AddressLike, fundingRateFactor: BigNumberish, maxFundingRate: BigNumberish],
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "setIsRWA"
+  ): TypedContractMethod<[asset: AddressLike, _isRWA: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setMarketStatus"
+  ): TypedContractMethod<[asset: AddressLike, open: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setMinLegalUnit"
+  ): TypedContractMethod<[asset: AddressLike, minUnit: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setRequiresWeekendLock"
-  ): TypedContractMethod<
-    [asset: AddressLike, requiresLock: boolean],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[asset: AddressLike, requiresLock: boolean], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setUtilizationCap"): TypedContractMethod<[_bps: BigNumberish], [void], "nonpayable">;
   getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+    nameOrSignature: "setYieldAccumulatorCaller"
+  ): TypedContractMethod<[caller: AddressLike, authorized: boolean], [void], "nonpayable">;
+  getFunction(nameOrSignature: "transferOwnership"): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "updateAssetConfig"
   ): TypedContractMethod<
-    [
-      asset: AddressLike,
-      priceFeed: AddressLike,
-      isEnabled: boolean,
-      isShortable: boolean
-    ],
+    [asset: AddressLike, priceFeed: AddressLike, isEnabled: boolean, isShortable: boolean],
     [void],
     "nonpayable"
   >;
   getFunction(
     nameOrSignature: "updateRiskConfig"
-  ): TypedContractMethod<
-    [asset: AddressLike, risk: AssetRegistry.RiskParamsStruct],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "yieldAccumulator"
-  ): TypedContractMethod<[], [string], "view">;
+  ): TypedContractMethod<[asset: AddressLike, risk: AssetRegistry.RiskParamsStruct], [void], "nonpayable">;
+  getFunction(nameOrSignature: "utilizationCapBps"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "yieldAccumulator"): TypedContractMethod<[], [string], "view">;
 
   getEvent(
     key: "AssetConfigUpdated"
@@ -797,11 +773,7 @@ export interface AssetRegistry extends BaseContract {
   >;
   getEvent(
     key: "AssetEnabled"
-  ): TypedContractEvent<
-    AssetEnabledEvent.InputTuple,
-    AssetEnabledEvent.OutputTuple,
-    AssetEnabledEvent.OutputObject
-  >;
+  ): TypedContractEvent<AssetEnabledEvent.InputTuple, AssetEnabledEvent.OutputTuple, AssetEnabledEvent.OutputObject>;
   getEvent(
     key: "AssetRegistered"
   ): TypedContractEvent<
@@ -810,11 +782,39 @@ export interface AssetRegistry extends BaseContract {
     AssetRegisteredEvent.OutputObject
   >;
   getEvent(
+    key: "ComplianceAdapterSet"
+  ): TypedContractEvent<
+    ComplianceAdapterSetEvent.InputTuple,
+    ComplianceAdapterSetEvent.OutputTuple,
+    ComplianceAdapterSetEvent.OutputObject
+  >;
+  getEvent(
     key: "FundingParamsUpdated"
   ): TypedContractEvent<
     FundingParamsUpdatedEvent.InputTuple,
     FundingParamsUpdatedEvent.OutputTuple,
     FundingParamsUpdatedEvent.OutputObject
+  >;
+  getEvent(
+    key: "MarketStatusChanged"
+  ): TypedContractEvent<
+    MarketStatusChangedEvent.InputTuple,
+    MarketStatusChangedEvent.OutputTuple,
+    MarketStatusChangedEvent.OutputObject
+  >;
+  getEvent(
+    key: "MinLegalUnitUpdated"
+  ): TypedContractEvent<
+    MinLegalUnitUpdatedEvent.InputTuple,
+    MinLegalUnitUpdatedEvent.OutputTuple,
+    MinLegalUnitUpdatedEvent.OutputObject
+  >;
+  getEvent(
+    key: "OwnershipTransferStarted"
+  ): TypedContractEvent<
+    OwnershipTransferStartedEvent.InputTuple,
+    OwnershipTransferStartedEvent.OutputTuple,
+    OwnershipTransferStartedEvent.OutputObject
   >;
   getEvent(
     key: "OwnershipTransferred"
@@ -829,6 +829,13 @@ export interface AssetRegistry extends BaseContract {
     RiskConfigUpdatedEvent.InputTuple,
     RiskConfigUpdatedEvent.OutputTuple,
     RiskConfigUpdatedEvent.OutputObject
+  >;
+  getEvent(
+    key: "UtilizationCapUpdated"
+  ): TypedContractEvent<
+    UtilizationCapUpdatedEvent.InputTuple,
+    UtilizationCapUpdatedEvent.OutputTuple,
+    UtilizationCapUpdatedEvent.OutputObject
   >;
   getEvent(
     key: "WeekendLockUpdated"
@@ -872,6 +879,17 @@ export interface AssetRegistry extends BaseContract {
       AssetRegisteredEvent.OutputObject
     >;
 
+    "ComplianceAdapterSet(address,address)": TypedContractEvent<
+      ComplianceAdapterSetEvent.InputTuple,
+      ComplianceAdapterSetEvent.OutputTuple,
+      ComplianceAdapterSetEvent.OutputObject
+    >;
+    ComplianceAdapterSet: TypedContractEvent<
+      ComplianceAdapterSetEvent.InputTuple,
+      ComplianceAdapterSetEvent.OutputTuple,
+      ComplianceAdapterSetEvent.OutputObject
+    >;
+
     "FundingParamsUpdated(address,uint256,uint256)": TypedContractEvent<
       FundingParamsUpdatedEvent.InputTuple,
       FundingParamsUpdatedEvent.OutputTuple,
@@ -881,6 +899,39 @@ export interface AssetRegistry extends BaseContract {
       FundingParamsUpdatedEvent.InputTuple,
       FundingParamsUpdatedEvent.OutputTuple,
       FundingParamsUpdatedEvent.OutputObject
+    >;
+
+    "MarketStatusChanged(address,bool)": TypedContractEvent<
+      MarketStatusChangedEvent.InputTuple,
+      MarketStatusChangedEvent.OutputTuple,
+      MarketStatusChangedEvent.OutputObject
+    >;
+    MarketStatusChanged: TypedContractEvent<
+      MarketStatusChangedEvent.InputTuple,
+      MarketStatusChangedEvent.OutputTuple,
+      MarketStatusChangedEvent.OutputObject
+    >;
+
+    "MinLegalUnitUpdated(address,uint256)": TypedContractEvent<
+      MinLegalUnitUpdatedEvent.InputTuple,
+      MinLegalUnitUpdatedEvent.OutputTuple,
+      MinLegalUnitUpdatedEvent.OutputObject
+    >;
+    MinLegalUnitUpdated: TypedContractEvent<
+      MinLegalUnitUpdatedEvent.InputTuple,
+      MinLegalUnitUpdatedEvent.OutputTuple,
+      MinLegalUnitUpdatedEvent.OutputObject
+    >;
+
+    "OwnershipTransferStarted(address,address)": TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+    OwnershipTransferStarted: TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
     >;
 
     "OwnershipTransferred(address,address)": TypedContractEvent<
@@ -903,6 +954,17 @@ export interface AssetRegistry extends BaseContract {
       RiskConfigUpdatedEvent.InputTuple,
       RiskConfigUpdatedEvent.OutputTuple,
       RiskConfigUpdatedEvent.OutputObject
+    >;
+
+    "UtilizationCapUpdated(uint256,uint256)": TypedContractEvent<
+      UtilizationCapUpdatedEvent.InputTuple,
+      UtilizationCapUpdatedEvent.OutputTuple,
+      UtilizationCapUpdatedEvent.OutputObject
+    >;
+    UtilizationCapUpdated: TypedContractEvent<
+      UtilizationCapUpdatedEvent.InputTuple,
+      UtilizationCapUpdatedEvent.OutputTuple,
+      UtilizationCapUpdatedEvent.OutputObject
     >;
 
     "WeekendLockUpdated(address,bool)": TypedContractEvent<

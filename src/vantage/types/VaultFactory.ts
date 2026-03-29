@@ -29,6 +29,7 @@ export declare namespace AssetRegistry {
     maxGlobalLongSize: BigNumberish;
     maxGlobalShortSize: BigNumberish;
     maintenanceMarginBps: BigNumberish;
+    liquidationFeeBps: BigNumberish;
     marginFeeBps: BigNumberish;
   };
 
@@ -37,12 +38,14 @@ export declare namespace AssetRegistry {
     maxGlobalLongSize: bigint,
     maxGlobalShortSize: bigint,
     maintenanceMarginBps: bigint,
-    marginFeeBps: bigint
+    liquidationFeeBps: bigint,
+    marginFeeBps: bigint,
   ] & {
     maxLeverage: bigint;
     maxGlobalLongSize: bigint;
     maxGlobalShortSize: bigint;
     maintenanceMarginBps: bigint;
+    liquidationFeeBps: bigint;
     marginFeeBps: bigint;
   };
 }
@@ -63,7 +66,7 @@ export declare namespace VaultFactory {
     decimals: bigint,
     isShortable: boolean,
     initialYieldBps: bigint,
-    risk: AssetRegistry.RiskParamsStructOutput
+    risk: AssetRegistry.RiskParamsStructOutput,
   ] & {
     assetType: bigint;
     priceFeed: string;
@@ -77,12 +80,17 @@ export declare namespace VaultFactory {
 export interface VaultFactoryInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "acceptOwnership"
+      | "acceptOwnershipOf"
+      | "acceptSubContractOwnership"
       | "assetRegistry"
       | "createVault"
       | "deployedVaults"
       | "deployedVaultsCount"
+      | "finalizeVaultRegistration"
       | "hub"
       | "owner"
+      | "pendingOwner"
       | "renounceFactoryControl"
       | "renounceOwnership"
       | "transferOwnership"
@@ -91,89 +99,64 @@ export interface VaultFactoryInterface extends Interface {
   getEvent(
     nameOrSignatureOrTopic:
       | "FactoryControlRenounced"
+      | "OwnershipTransferStarted"
       | "OwnershipTransferred"
       | "VaultCreated"
   ): EventFragment;
 
-  encodeFunctionData(
-    functionFragment: "assetRegistry",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "acceptOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "acceptOwnershipOf", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "acceptSubContractOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "assetRegistry", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "createVault",
-    values: [
-      AddressLike,
-      BigNumberish,
-      AddressLike,
-      AddressLike,
-      BigNumberish,
-      VaultFactory.AssetParamsStruct
-    ]
+    values: [AddressLike, BigNumberish, AddressLike, AddressLike, BigNumberish, VaultFactory.AssetParamsStruct]
   ): string;
-  encodeFunctionData(
-    functionFragment: "deployedVaults",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "deployedVaultsCount",
-    values?: undefined
-  ): string;
+  encodeFunctionData(functionFragment: "deployedVaults", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "deployedVaultsCount", values?: undefined): string;
+  encodeFunctionData(functionFragment: "finalizeVaultRegistration", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "hub", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "renounceFactoryControl",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
+  encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "renounceFactoryControl", values?: undefined): string;
+  encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "transferOwnership", values: [AddressLike]): string;
 
-  decodeFunctionResult(
-    functionFragment: "assetRegistry",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "createVault",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "deployedVaults",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "deployedVaultsCount",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptOwnershipOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "acceptSubContractOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "assetRegistry", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "createVault", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "deployedVaults", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "deployedVaultsCount", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "finalizeVaultRegistration", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hub", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceFactoryControl",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "renounceFactoryControl", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
 }
 
 export namespace FactoryControlRenouncedEvent {
-  export type InputTuple = [
-    newHubOwner: AddressLike,
-    newRegistryOwner: AddressLike
-  ];
+  export type InputTuple = [newHubOwner: AddressLike, newRegistryOwner: AddressLike];
   export type OutputTuple = [newHubOwner: string, newRegistryOwner: string];
   export interface OutputObject {
     newHubOwner: string;
     newRegistryOwner: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace OwnershipTransferStartedEvent {
+  export type InputTuple = [previousOwner: AddressLike, newOwner: AddressLike];
+  export type OutputTuple = [previousOwner: string, newOwner: string];
+  export interface OutputObject {
+    previousOwner: string;
+    newOwner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -195,18 +178,8 @@ export namespace OwnershipTransferredEvent {
 }
 
 export namespace VaultCreatedEvent {
-  export type InputTuple = [
-    vault: AddressLike,
-    token: AddressLike,
-    debtCeiling: BigNumberish,
-    governance: AddressLike
-  ];
-  export type OutputTuple = [
-    vault: string,
-    token: string,
-    debtCeiling: bigint,
-    governance: string
-  ];
+  export type InputTuple = [vault: AddressLike, token: AddressLike, debtCeiling: BigNumberish, governance: AddressLike];
+  export type OutputTuple = [vault: string, token: string, debtCeiling: bigint, governance: string];
   export interface OutputObject {
     vault: string;
     token: string;
@@ -236,31 +209,27 @@ export interface VaultFactory extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
+
+  acceptOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
+  acceptOwnershipOf: TypedContractMethod<[target: AddressLike], [void], "nonpayable">;
+
+  acceptSubContractOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
   assetRegistry: TypedContractMethod<[], [string], "view">;
 
@@ -271,7 +240,7 @@ export interface VaultFactory extends BaseContract {
       lpManager: AddressLike,
       complianceRegistry: AddressLike,
       requiredKYCLevel: BigNumberish,
-      params: VaultFactory.AssetParamsStruct
+      params: VaultFactory.AssetParamsStruct,
     ],
     [string],
     "nonpayable"
@@ -281,27 +250,26 @@ export interface VaultFactory extends BaseContract {
 
   deployedVaultsCount: TypedContractMethod<[], [bigint], "view">;
 
+  finalizeVaultRegistration: TypedContractMethod<[vault: AddressLike], [void], "nonpayable">;
+
   hub: TypedContractMethod<[], [string], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
+
+  pendingOwner: TypedContractMethod<[], [string], "view">;
 
   renounceFactoryControl: TypedContractMethod<[], [void], "nonpayable">;
 
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
-  transferOwnership: TypedContractMethod<
-    [newOwner: AddressLike],
-    [void],
-    "nonpayable"
-  >;
+  transferOwnership: TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
-  getFunction(
-    nameOrSignature: "assetRegistry"
-  ): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "acceptOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptOwnershipOf"): TypedContractMethod<[target: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "acceptSubContractOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "assetRegistry"): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "createVault"
   ): TypedContractMethod<
@@ -311,32 +279,22 @@ export interface VaultFactory extends BaseContract {
       lpManager: AddressLike,
       complianceRegistry: AddressLike,
       requiredKYCLevel: BigNumberish,
-      params: VaultFactory.AssetParamsStruct
+      params: VaultFactory.AssetParamsStruct,
     ],
     [string],
     "nonpayable"
   >;
+  getFunction(nameOrSignature: "deployedVaults"): TypedContractMethod<[arg0: BigNumberish], [string], "view">;
+  getFunction(nameOrSignature: "deployedVaultsCount"): TypedContractMethod<[], [bigint], "view">;
   getFunction(
-    nameOrSignature: "deployedVaults"
-  ): TypedContractMethod<[arg0: BigNumberish], [string], "view">;
-  getFunction(
-    nameOrSignature: "deployedVaultsCount"
-  ): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "hub"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "owner"
-  ): TypedContractMethod<[], [string], "view">;
-  getFunction(
-    nameOrSignature: "renounceFactoryControl"
-  ): TypedContractMethod<[], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "renounceOwnership"
-  ): TypedContractMethod<[], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "transferOwnership"
-  ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+    nameOrSignature: "finalizeVaultRegistration"
+  ): TypedContractMethod<[vault: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "hub"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "renounceFactoryControl"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "transferOwnership"): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
 
   getEvent(
     key: "FactoryControlRenounced"
@@ -344,6 +302,13 @@ export interface VaultFactory extends BaseContract {
     FactoryControlRenouncedEvent.InputTuple,
     FactoryControlRenouncedEvent.OutputTuple,
     FactoryControlRenouncedEvent.OutputObject
+  >;
+  getEvent(
+    key: "OwnershipTransferStarted"
+  ): TypedContractEvent<
+    OwnershipTransferStartedEvent.InputTuple,
+    OwnershipTransferStartedEvent.OutputTuple,
+    OwnershipTransferStartedEvent.OutputObject
   >;
   getEvent(
     key: "OwnershipTransferred"
@@ -354,11 +319,7 @@ export interface VaultFactory extends BaseContract {
   >;
   getEvent(
     key: "VaultCreated"
-  ): TypedContractEvent<
-    VaultCreatedEvent.InputTuple,
-    VaultCreatedEvent.OutputTuple,
-    VaultCreatedEvent.OutputObject
-  >;
+  ): TypedContractEvent<VaultCreatedEvent.InputTuple, VaultCreatedEvent.OutputTuple, VaultCreatedEvent.OutputObject>;
 
   filters: {
     "FactoryControlRenounced(address,address)": TypedContractEvent<
@@ -370,6 +331,17 @@ export interface VaultFactory extends BaseContract {
       FactoryControlRenouncedEvent.InputTuple,
       FactoryControlRenouncedEvent.OutputTuple,
       FactoryControlRenouncedEvent.OutputObject
+    >;
+
+    "OwnershipTransferStarted(address,address)": TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
+    >;
+    OwnershipTransferStarted: TypedContractEvent<
+      OwnershipTransferStartedEvent.InputTuple,
+      OwnershipTransferStartedEvent.OutputTuple,
+      OwnershipTransferStartedEvent.OutputObject
     >;
 
     "OwnershipTransferred(address,address)": TypedContractEvent<
