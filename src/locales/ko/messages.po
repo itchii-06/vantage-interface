@@ -25,6 +25,8 @@ msgstr "슬리피지 초과"
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 #: src/pages/AccountTransfer/CompleteAccountTransfer/CompleteAccountTransfer.tsx
 #: src/pages/ReferralsTier/ReferralsTier.tsx
@@ -197,6 +199,7 @@ msgstr "포지션 종료 시 가격 영향입니다. 양수 값은 유리합니�
 #: src/components/Referrals/TradersStats.tsx
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
+#: src/pages/Vaults/VaultsPage.tsx
 msgid "Type"
 msgstr "유형"
 
@@ -442,6 +445,10 @@ msgstr "GMX Account 잔액"
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "Best swap path"
 msgstr "최적 스왑 경로"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Connect your wallet to see your deposits."
+msgstr ""
 
 #: src/components/NpsModal/NpsModal.tsx
 #: src/components/UserFeedbackModal/UserFeedbackModal.tsx
@@ -759,6 +766,7 @@ msgstr "다른 네트워크에서 {chainName}으로 {nativeTokenSymbol}을 전�
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Dashboard/DashboardV2.tsx
 #: src/pages/Dashboard/StatsCard.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Stats"
 msgstr "통계"
 
@@ -831,6 +839,10 @@ msgstr "STIP.b 소급 보너스"
 msgid "in liquidity"
 msgstr "유동성 내"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "You have a shortfall debt of {0}. This will be settled when the insurance fund is sufficient."
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Decentralized money market"
 msgstr "탈중앙화 머니마켓"
@@ -868,6 +880,10 @@ msgstr "텔레그램 연락처 (선택)"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Conversion creation failed"
 msgstr "전환 생성 실패"
+
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Rebase +{0}% applied"
+msgstr ""
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "27% of protocol fees fund Treasury buybacks — rewards distributed at $90"
@@ -1474,6 +1490,7 @@ msgid "Tokens"
 msgstr "토큰"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Connect wallet to withdraw"
 msgstr ""
 
@@ -2026,6 +2043,10 @@ msgstr "주문 체결가"
 msgid "Market temporarily disabled"
 msgstr "마켓이 일시적으로 비활성화되었습니다"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Auto-growing"
+msgstr ""
+
 #: src/domain/synthetics/markets/createShiftTxn.ts
 msgid "Shift error"
 msgstr "시프트 오류"
@@ -2373,6 +2394,7 @@ msgid "Layer 2"
 msgstr "레이어 2"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Approving…"
 msgstr ""
 
@@ -2520,6 +2542,7 @@ msgstr "{txnTypeText} {0} 주문"
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Max"
 msgstr "최대"
 
@@ -2628,6 +2651,10 @@ msgstr "토큰 카테고리"
 msgid "You have not traded during the selected period"
 msgstr "선택한 기간 동안 거래 내역이 없습니다"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Token Balance"
+msgstr ""
+
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Default parts for TWAP orders"
 msgstr "TWAP 주문의 기본 분할 수"
@@ -2715,6 +2742,10 @@ msgstr "일일 수익"
 #: src/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
 msgid "Deposited {0} into {positionText}"
 msgstr "{positionText}에 {0} 예치"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Price Yield"
+msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -2933,6 +2964,10 @@ msgstr "소중한 의견을 남겨주십시오"
 msgid "<0>Deposit</0> or <1>buy</1> {wrappedNativeTokenSymbol}."
 msgstr "<0>입금</0> 또는 <1>구매</1> {wrappedNativeTokenSymbol}."
 
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Price updated"
+msgstr ""
+
 #: src/components/Referrals/JoinReferralCode.tsx
 #: src/components/Referrals/JoinReferralCode.tsx
 #: src/components/StatusNotification/OrderStatusNotification.tsx
@@ -2977,6 +3012,8 @@ msgstr "주문 유형"
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Transaction submitted"
 msgstr ""
 
@@ -3198,6 +3235,10 @@ msgstr "{0}으로 변경"
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "It's just an unwrap"
 msgstr "단순 언래핑입니다"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Debug Panel"
+msgstr ""
 
 #: src/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Relayer request failed"
@@ -3449,6 +3490,10 @@ msgstr "거래 확인 알림"
 msgid "Insufficient GLV liquidity"
 msgstr "GLV 유동성 부족"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "My Deposit"
+msgstr ""
+
 #: src/components/ClaimablePositionPriceImpactRebateModal/ClaimablePositionPriceImpactRebateModal.tsx
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
@@ -3484,6 +3529,7 @@ msgid "May lack liquidity for parts of this order when triggered"
 msgstr "발동 시 이 주문의 일부에 대해 유동성이 부족할 수 있습니다"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdrawing…"
 msgstr ""
 
@@ -3540,6 +3586,7 @@ msgid "Order canceled"
 msgstr "주문이 취소되었습니다"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Connect wallet to deposit"
 msgstr ""
 
@@ -3617,6 +3664,10 @@ msgstr "연환산 수익률"
 msgid "Closing position..."
 msgstr ""
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Collecting data…"
+msgstr ""
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw and unreserve GMX"
 msgstr "GMX 출금 및 예약 해제"
@@ -3668,6 +3719,10 @@ msgstr "입금 필요 없음"
 msgid "Trading airdrop"
 msgstr "거래 에어드롭"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Price +10%"
+msgstr ""
+
 #: src/pages/AccountEvents/AccountEvents.tsx
 msgid "Found {0} events in the past {DAYS_BACK} days"
 msgstr "최근 {DAYS_BACK}일간 {0}개의 이벤트가 발견되었습니다"
@@ -3697,6 +3752,11 @@ msgstr "V1 Arbitrum"
 #: src/pages/Dashboard/OverviewCard.tsx
 msgid "Avalanche"
 msgstr "Avalanche"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "AUM"
+msgstr ""
 
 #: src/components/MarketStats/MarketGraphs.tsx
 msgid "Fee APR"
@@ -4255,6 +4315,10 @@ msgstr "{0} 내"
 msgid "{positionName} fees settled"
 msgstr "{positionName} 수수료 정산 완료"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Price -20%"
+msgstr ""
+
 #: src/components/Claims/SettleAccruedCard.tsx
 msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "가격 영향 리베이트가 누적되었습니다. 5일 후 수령 가능합니다. <0>자세히 보기</0>."
@@ -4584,6 +4648,8 @@ msgstr "외부 스왑 실패 처리"
 #: src/pages/UiPage/BannerTest.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdraw"
 msgstr "인출"
 
@@ -4625,6 +4691,10 @@ msgstr "포지션 크기가 너무 작습니다"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Bonus APR"
 msgstr "보너스 APR"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "+5% Rebase"
+msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shift request sent"
@@ -4718,6 +4788,7 @@ msgid "Open interest {directionLabel}"
 msgstr "미결제약정 {directionLabel}"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount exceeds your VLP balance"
 msgstr ""
 
@@ -4923,6 +4994,10 @@ msgstr "추천 코드가 추가되었습니다"
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX bonds on Bond Protocol at a discount with a short vesting period"
 msgstr "Bond Protocol에서 짧은 베스팅 기간으로 GMX 채권을 할인 구매하십시오"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Warning: Your position value exceeds current vault AUM. Withdrawal may be partially settled."
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
@@ -5245,6 +5320,7 @@ msgid "Failed to claim funds"
 msgstr "자금 청구 실패"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Depositing…"
 msgstr ""
 
@@ -5306,6 +5382,7 @@ msgid "Buy failed"
 msgstr "구매 실패"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "USD value"
 msgstr ""
 
@@ -5314,6 +5391,7 @@ msgid "Users"
 msgstr "사용자"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Total AUM"
 msgstr ""
 
@@ -5801,6 +5879,10 @@ msgstr "선택한 필터와 일치하는 거래가 없습니다"
 msgid "Decreased"
 msgstr "감소 완료"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Provide liquidity to earn yield from RWA assets."
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "Earns fees from liquidity provision across GMX V2 markets"
 msgstr "GMX V2 마켓 전반의 유동성 제공을 통해 수수료를 획득합니다"
@@ -5885,6 +5967,10 @@ msgstr "Firebird Finance"
 #: src/components/OldSubaccountWithdraw/OldSubaccountWithdraw.tsx
 msgid "{balanceFormatted} remaining in old 1CT subaccount"
 msgstr "기존 1CT 서브계정에 {balanceFormatted} 잔여"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Shortfall Debt"
+msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shifting from <0><1>GM: {fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>GM: {toIndexName}</4><5>{toPoolName}</5></3>"
@@ -5998,6 +6084,10 @@ msgstr "숏 유동성"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Liquidation fee"
 msgstr "청산 수수료"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "No vaults configured. Deploy contracts first."
+msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Swap impact exponent"
@@ -6268,6 +6358,10 @@ msgstr "주문 허용 가격"
 msgid "Updating {updateOrdersCount} TP/SL orders..."
 msgstr "{updateOrdersCount}개 TP/SL 주문 업데이트 중..."
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Estimated {0}"
+msgstr ""
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Execution price didn't meet acceptable price"
 msgstr "체결가가 허용 가격을 충족하지 못했습니다"
@@ -6487,6 +6581,10 @@ msgstr "경고: 조건가에서 유동성 부족으로 체결되지 않을 수 �
 msgid "Cancel TWAP Swap"
 msgstr "TWAP 스왑 취소"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Vault not found: {address}"
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Transaction"
 msgstr "거래"
@@ -6574,6 +6672,7 @@ msgstr "주문 오류. 이 마켓의 가격 변동성이 높습니다. <0>허용
 
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
+#: src/pages/Vaults/VaultsPage.tsx
 msgid "Asset"
 msgstr "자산"
 
@@ -6621,6 +6720,7 @@ msgid "{orderText} cancelled"
 msgstr "{orderText} 취소됨"
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Removing liquidity..."
 msgstr ""
 
@@ -6961,6 +7061,10 @@ msgstr "수수료 차감 후 PnL 표시"
 msgid "Share position"
 msgstr "포지션 공유"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "USD Value"
+msgstr ""
+
 #: src/components/BotanixBanner/BotanixBanner.tsx
 msgid "Switch to <0><1/><2>Arbitrum</2></0> or <3><4/><5>Avalanche</5></3> for those features"
 msgstr "해당 기능을 사용하려면 <0><1/><2>Arbitrum</2></0> 또는 <3><4/><5>Avalanche</5></3>(으)로 전환하십시오"
@@ -7236,6 +7340,7 @@ msgid "<0>Return to </0><1>Homepage</1> <2>or </2> <3>Trade</3>"
 msgstr "<0>로 돌아가기 </0><1>홈페이지</1> <2>또는 </2> <3>거래</3>"
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Approval submitted — waiting for confirmation…"
 msgstr ""
 
@@ -7301,6 +7406,7 @@ msgstr "입금 금액 입력"
 #: src/components/PositionShare/CreateReferralCode.tsx
 #: src/components/Referrals/AddAffiliateCode.tsx
 #: src/components/Referrals/JoinReferralCode.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Approve {0}"
 msgstr "{0} 승인"
 
@@ -7357,6 +7463,7 @@ msgstr "{formattedNetRate} / 1시간"
 #: src/components/GmxAccountModal/MainView.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
 #: src/pages/PoolsDetails/PoolsDetailsHeader.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Balance"
 msgstr "잔고"
 
@@ -7407,6 +7514,10 @@ msgstr "구매 주문이 체결되었습니다"
 #: src/pages/Earn/EarnAdditionalOpportunitiesPage.tsx
 msgid "No opportunities match your search"
 msgstr "검색 결과와 일치하는 기회가 없습니다"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Estimated VLP"
+msgstr ""
 
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 msgid "Leaderboard for traders on GMX V2"
@@ -7484,6 +7595,10 @@ msgstr "현재 활성 코드와 동일"
 #: src/components/NetworkDropdown/NetworkDropdown.tsx
 msgid "Trade from wallet or GMX Account"
 msgstr "지갑 또는 GMX Account에서 거래"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "← Back to Vaults"
+msgstr ""
 
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Min position size: {0}"
@@ -7629,6 +7744,10 @@ msgstr "1분 미만"
 msgid "Ecosystem"
 msgstr "이코시스템"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "per token"
+msgstr ""
+
 #: src/pages/PriceImpactRebatesStats/PriceImpactRebatesStats.tsx
 msgid "Next"
 msgstr "다음"
@@ -7676,8 +7795,13 @@ msgstr "{fromAmount}을 {toAmount}으로 스왑"
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/TradersStats.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount"
 msgstr "수량"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Mint 1,000 {0} to wallet"
+msgstr ""
 
 #: src/components/TVChart/ChartHeader.tsx
 msgid "Open interest (<0>{longOIPercentage}</0>/<1>{shortOIPercentage}</1>)"
@@ -7803,6 +7927,10 @@ msgstr "SL 가격이 지정가보다 높습니다"
 msgid "for {comment}"
 msgstr "{comment}에 대해"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "My Deposit (USD)"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/TradersStats.tsx
@@ -7837,6 +7965,10 @@ msgstr "매수 요청을 실행하는 중…"
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Buy GM failed"
 msgstr "GM 구매 실패"
+
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Minted tokens to your wallet"
+msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Unknown shift GM order"
@@ -8163,6 +8295,8 @@ msgstr "아래 한도까지 {0} 및 {1}(으)로 GM을 구매할 수 있습니다
 #: src/domain/multichain/useMultichainFundingToast.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Deposit"
 msgstr "예치"
 
@@ -8207,6 +8341,10 @@ msgstr "2021년부터 운영되는 깊은 유동성과 저비용의 탈중앙화
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "TOTAL VOLUME"
 msgstr "총 거래량"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Live (15s poll)"
+msgstr ""
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Enable One-Click Trading"
@@ -8265,6 +8403,7 @@ msgid "Receive"
 msgstr "수령"
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Liquidity removed"
 msgstr ""
 
@@ -8994,6 +9133,7 @@ msgid "What is GMX?"
 msgstr "GMX란 무엇인가요?"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Share price"
 msgstr ""
 
@@ -9078,6 +9218,10 @@ msgstr "{tokenSymbol} 스테이킹"
 #: src/components/PositionShare/PositionShare.tsx
 msgid "Link copied to clipboard"
 msgstr "링크가 클립보드에 복사되었습니다"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "My Position"
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max pool capacity reached. Current: {poolAmountText}, max: {maxPoolAmountText}"
@@ -9547,6 +9691,7 @@ msgid "In progress..."
 msgstr "진행 중..."
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Liquidity added"
 msgstr ""
 
@@ -9804,6 +9949,10 @@ msgstr "GMX Account 및 포지션을 위한 네트워크입니다. 잔액과 포
 msgid "Liquidity only available on {chainNames} or {lastChainName}. Switch networks to continue."
 msgstr "유동성은 {chainNames} 또는 {lastChainName}에서만 이용 가능합니다. 계속하려면 네트워크를 전환하십시오."
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "VLP Balance"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Total trading volume from your referrals"
 msgstr "추천인의 총 거래량"
@@ -9973,7 +10122,13 @@ msgstr "추천 코드 생성"
 msgid "NET VALUE"
 msgstr "순가치"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Vaults"
+msgstr ""
+
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Share Price"
 msgstr ""
 
@@ -10071,6 +10226,7 @@ msgid "Simulate transactions"
 msgstr "트랜잭션 시뮬레이션"
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Adding liquidity..."
 msgstr ""
 
@@ -10182,6 +10338,7 @@ msgid "Unknown order"
 msgstr "알 수 없는 주문"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "VLP Amount"
 msgstr ""
 

@@ -25,6 +25,8 @@ msgstr "Deslizamiento excedido"
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 #: src/pages/AccountTransfer/CompleteAccountTransfer/CompleteAccountTransfer.tsx
 #: src/pages/ReferralsTier/ReferralsTier.tsx
@@ -197,6 +199,7 @@ msgstr "Impacto en el precio al cerrar. Los valores positivos le benefician. <0>
 #: src/components/Referrals/TradersStats.tsx
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
+#: src/pages/Vaults/VaultsPage.tsx
 msgid "Type"
 msgstr "Tipo"
 
@@ -442,6 +445,10 @@ msgstr "Saldo de GMX Account"
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "Best swap path"
 msgstr "Mejor ruta de intercambio"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Connect your wallet to see your deposits."
+msgstr ""
 
 #: src/components/NpsModal/NpsModal.tsx
 #: src/components/UserFeedbackModal/UserFeedbackModal.tsx
@@ -759,6 +766,7 @@ msgstr "Transfiera {nativeTokenSymbol} desde otras redes a {chainName}"
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Dashboard/DashboardV2.tsx
 #: src/pages/Dashboard/StatsCard.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Stats"
 msgstr "Estadísticas"
 
@@ -831,6 +839,10 @@ msgstr "Bonificación retroactiva STIP.b"
 msgid "in liquidity"
 msgstr "en liquidez"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "You have a shortfall debt of {0}. This will be settled when the insurance fund is sufficient."
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Decentralized money market"
 msgstr "Mercado monetario descentralizado"
@@ -868,6 +880,10 @@ msgstr "Contacto de Telegram (opcional)"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Conversion creation failed"
 msgstr "Error en la creación de la conversión"
+
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Rebase +{0}% applied"
+msgstr ""
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "27% of protocol fees fund Treasury buybacks — rewards distributed at $90"
@@ -1474,6 +1490,7 @@ msgid "Tokens"
 msgstr "Tokens"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Connect wallet to withdraw"
 msgstr ""
 
@@ -2026,6 +2043,10 @@ msgstr "Precio de ejecución de la orden"
 msgid "Market temporarily disabled"
 msgstr "Mercado temporalmente deshabilitado"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Auto-growing"
+msgstr ""
+
 #: src/domain/synthetics/markets/createShiftTxn.ts
 msgid "Shift error"
 msgstr "Error de cambio"
@@ -2373,6 +2394,7 @@ msgid "Layer 2"
 msgstr "Capa 2"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Approving…"
 msgstr ""
 
@@ -2520,6 +2542,7 @@ msgstr "{txnTypeText} {0} orden para"
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Max"
 msgstr "Máx."
 
@@ -2628,6 +2651,10 @@ msgstr "Categorías de tokens"
 msgid "You have not traded during the selected period"
 msgstr "No ha operado durante el período seleccionado"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Token Balance"
+msgstr ""
+
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Default parts for TWAP orders"
 msgstr "Partes predeterminadas para órdenes TWAP"
@@ -2715,6 +2742,10 @@ msgstr "Beneficio diario"
 #: src/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
 msgid "Deposited {0} into {positionText}"
 msgstr "Depositado {0} en {positionText}"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Price Yield"
+msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -2933,6 +2964,10 @@ msgstr "Valoramos su opinión"
 msgid "<0>Deposit</0> or <1>buy</1> {wrappedNativeTokenSymbol}."
 msgstr "<0>Depositar</0> o <1>comprar</1> {wrappedNativeTokenSymbol}."
 
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Price updated"
+msgstr ""
+
 #: src/components/Referrals/JoinReferralCode.tsx
 #: src/components/Referrals/JoinReferralCode.tsx
 #: src/components/StatusNotification/OrderStatusNotification.tsx
@@ -2977,6 +3012,8 @@ msgstr "Tipo de orden"
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Transaction submitted"
 msgstr ""
 
@@ -3198,6 +3235,10 @@ msgstr "Cambiar a {0}"
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "It's just an unwrap"
 msgstr "Es solo un unwrap"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Debug Panel"
+msgstr ""
 
 #: src/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Relayer request failed"
@@ -3449,6 +3490,10 @@ msgstr "Confirmaciones de operaciones"
 msgid "Insufficient GLV liquidity"
 msgstr "Liquidez de GLV insuficiente"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "My Deposit"
+msgstr ""
+
 #: src/components/ClaimablePositionPriceImpactRebateModal/ClaimablePositionPriceImpactRebateModal.tsx
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
@@ -3484,6 +3529,7 @@ msgid "May lack liquidity for parts of this order when triggered"
 msgstr "Puede haber liquidez insuficiente para partes de esta orden cuando se ejecute"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdrawing…"
 msgstr ""
 
@@ -3540,6 +3586,7 @@ msgid "Order canceled"
 msgstr "Orden cancelada"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Connect wallet to deposit"
 msgstr ""
 
@@ -3617,6 +3664,10 @@ msgstr "Rend. anualizado"
 msgid "Closing position..."
 msgstr ""
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Collecting data…"
+msgstr ""
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw and unreserve GMX"
 msgstr "Retirar y liberar la reserva de GMX"
@@ -3668,6 +3719,10 @@ msgstr "No se requieren depósitos"
 msgid "Trading airdrop"
 msgstr "Airdrop de trading"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Price +10%"
+msgstr ""
+
 #: src/pages/AccountEvents/AccountEvents.tsx
 msgid "Found {0} events in the past {DAYS_BACK} days"
 msgstr "Se encontraron {0} eventos en los últimos {DAYS_BACK} días"
@@ -3697,6 +3752,11 @@ msgstr "V1 Arbitrum"
 #: src/pages/Dashboard/OverviewCard.tsx
 msgid "Avalanche"
 msgstr "Avalanche"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "AUM"
+msgstr ""
 
 #: src/components/MarketStats/MarketGraphs.tsx
 msgid "Fee APR"
@@ -4255,6 +4315,10 @@ msgstr "en {0}"
 msgid "{positionName} fees settled"
 msgstr "Comisiones de {positionName} liquidadas"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Price -20%"
+msgstr ""
+
 #: src/components/Claims/SettleAccruedCard.tsx
 msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "Reembolsos por impacto en el precio acumulados. Reclamables después de 5 días. <0>Más información</0>."
@@ -4584,6 +4648,8 @@ msgstr "Forzar fallo de intercambios externos"
 #: src/pages/UiPage/BannerTest.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdraw"
 msgstr "Retirar"
 
@@ -4625,6 +4691,10 @@ msgstr "Tamaño de posición demasiado pequeño"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Bonus APR"
 msgstr "APR de Bono"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "+5% Rebase"
+msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shift request sent"
@@ -4718,6 +4788,7 @@ msgid "Open interest {directionLabel}"
 msgstr "Interés abierto {directionLabel}"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount exceeds your VLP balance"
 msgstr ""
 
@@ -4923,6 +4994,10 @@ msgstr "Código de referido añadido"
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX bonds on Bond Protocol at a discount with a short vesting period"
 msgstr "Compre bonos GMX en Bond Protocol con descuento y un periodo de consolidación corto"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Warning: Your position value exceeds current vault AUM. Withdrawal may be partially settled."
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
@@ -5245,6 +5320,7 @@ msgid "Failed to claim funds"
 msgstr "Falló la reclamación de fondos"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Depositing…"
 msgstr ""
 
@@ -5306,6 +5382,7 @@ msgid "Buy failed"
 msgstr "Compra fallida"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "USD value"
 msgstr ""
 
@@ -5314,6 +5391,7 @@ msgid "Users"
 msgstr "Usuarios"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Total AUM"
 msgstr ""
 
@@ -5801,6 +5879,10 @@ msgstr "No hay trades que coincidan con los filtros seleccionados"
 msgid "Decreased"
 msgstr "Reducido"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Provide liquidity to earn yield from RWA assets."
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "Earns fees from liquidity provision across GMX V2 markets"
 msgstr "Genera comisiones mediante la provisión de liquidez en los mercados de GMX V2"
@@ -5885,6 +5967,10 @@ msgstr "Firebird Finance"
 #: src/components/OldSubaccountWithdraw/OldSubaccountWithdraw.tsx
 msgid "{balanceFormatted} remaining in old 1CT subaccount"
 msgstr "{balanceFormatted} restante en la subcuenta 1CT antigua"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Shortfall Debt"
+msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shifting from <0><1>GM: {fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>GM: {toIndexName}</4><5>{toPoolName}</5></3>"
@@ -5998,6 +6084,10 @@ msgstr "Liq. corto"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Liquidation fee"
 msgstr "Comisión de liquidación"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "No vaults configured. Deploy contracts first."
+msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Swap impact exponent"
@@ -6268,6 +6358,10 @@ msgstr "Precio aceptable de la orden"
 msgid "Updating {updateOrdersCount} TP/SL orders..."
 msgstr "Actualizando {updateOrdersCount} órdenes TP/SL..."
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Estimated {0}"
+msgstr ""
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Execution price didn't meet acceptable price"
 msgstr "El precio de ejecución no alcanzó el precio aceptable"
@@ -6487,6 +6581,10 @@ msgstr "Advertencia: Puede no ejecutarse debido a la baja liquidez en su precio 
 msgid "Cancel TWAP Swap"
 msgstr "Cancelar Intercambio TWAP"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Vault not found: {address}"
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Transaction"
 msgstr "Transacción"
@@ -6574,6 +6672,7 @@ msgstr "Error de orden. Los precios son volátiles en este mercado, inténtelo d
 
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
+#: src/pages/Vaults/VaultsPage.tsx
 msgid "Asset"
 msgstr "Activo"
 
@@ -6621,6 +6720,7 @@ msgid "{orderText} cancelled"
 msgstr "{orderText} cancelada"
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Removing liquidity..."
 msgstr ""
 
@@ -6961,6 +7061,10 @@ msgstr "Mostrar PnL después de comisiones"
 msgid "Share position"
 msgstr "Compartir posición"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "USD Value"
+msgstr ""
+
 #: src/components/BotanixBanner/BotanixBanner.tsx
 msgid "Switch to <0><1/><2>Arbitrum</2></0> or <3><4/><5>Avalanche</5></3> for those features"
 msgstr "Cambie a <0><1/><2>Arbitrum</2></0> o <3><4/><5>Avalanche</5></3> para acceder a esas funciones"
@@ -7236,6 +7340,7 @@ msgid "<0>Return to </0><1>Homepage</1> <2>or </2> <3>Trade</3>"
 msgstr "<0>Volver a </0><1>Página inicial</1> <2>o </2> <3>Operar</3>"
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Approval submitted — waiting for confirmation…"
 msgstr ""
 
@@ -7301,6 +7406,7 @@ msgstr "Ingresa cantidad de depósito"
 #: src/components/PositionShare/CreateReferralCode.tsx
 #: src/components/Referrals/AddAffiliateCode.tsx
 #: src/components/Referrals/JoinReferralCode.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Approve {0}"
 msgstr "Aprobar {0}"
 
@@ -7357,6 +7463,7 @@ msgstr "{formattedNetRate} / 1h"
 #: src/components/GmxAccountModal/MainView.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
 #: src/pages/PoolsDetails/PoolsDetailsHeader.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Balance"
 msgstr "Balance"
 
@@ -7407,6 +7514,10 @@ msgstr "Orden de compra ejecutada"
 #: src/pages/Earn/EarnAdditionalOpportunitiesPage.tsx
 msgid "No opportunities match your search"
 msgstr "Ninguna oportunidad coincide con su búsqueda"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Estimated VLP"
+msgstr ""
 
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 msgid "Leaderboard for traders on GMX V2"
@@ -7484,6 +7595,10 @@ msgstr "Igual que el código activo actual"
 #: src/components/NetworkDropdown/NetworkDropdown.tsx
 msgid "Trade from wallet or GMX Account"
 msgstr "Opere desde su monedero o GMX Account"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "← Back to Vaults"
+msgstr ""
 
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Min position size: {0}"
@@ -7629,6 +7744,10 @@ msgstr "menos de un minuto"
 msgid "Ecosystem"
 msgstr "Ecosistema"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "per token"
+msgstr ""
+
 #: src/pages/PriceImpactRebatesStats/PriceImpactRebatesStats.tsx
 msgid "Next"
 msgstr "Siguiente"
@@ -7676,8 +7795,13 @@ msgstr "Intercambiar {fromAmount} por {toAmount}"
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/TradersStats.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount"
 msgstr "Importe"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Mint 1,000 {0} to wallet"
+msgstr ""
 
 #: src/components/TVChart/ChartHeader.tsx
 msgid "Open interest (<0>{longOIPercentage}</0>/<1>{shortOIPercentage}</1>)"
@@ -7803,6 +7927,10 @@ msgstr "Precio de SL por encima del precio límite"
 msgid "for {comment}"
 msgstr "para {comment}"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "My Deposit (USD)"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/TradersStats.tsx
@@ -7837,6 +7965,10 @@ msgstr "Ejecutando solicitud de compra…"
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Buy GM failed"
 msgstr "La compra de GM ha fallado"
+
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Minted tokens to your wallet"
+msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Unknown shift GM order"
@@ -8163,6 +8295,8 @@ msgstr "Comprar GM con {0} y {1} hasta los límites indicados a continuación"
 #: src/domain/multichain/useMultichainFundingToast.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Deposit"
 msgstr "Depositar"
 
@@ -8207,6 +8341,10 @@ msgstr "Exchange descentralizado sin permisos on-chain con liquidez profunda y b
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "TOTAL VOLUME"
 msgstr "VOLUMEN TOTAL"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Live (15s poll)"
+msgstr ""
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Enable One-Click Trading"
@@ -8265,6 +8403,7 @@ msgid "Receive"
 msgstr "Recibir"
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Liquidity removed"
 msgstr ""
 
@@ -8994,6 +9133,7 @@ msgid "What is GMX?"
 msgstr "¿Qué es GMX?"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Share price"
 msgstr ""
 
@@ -9078,6 +9218,10 @@ msgstr "Hacer staking de {tokenSymbol}"
 #: src/components/PositionShare/PositionShare.tsx
 msgid "Link copied to clipboard"
 msgstr "Enlace copiado al portapapeles"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "My Position"
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max pool capacity reached. Current: {poolAmountText}, max: {maxPoolAmountText}"
@@ -9547,6 +9691,7 @@ msgid "In progress..."
 msgstr "En curso..."
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Liquidity added"
 msgstr ""
 
@@ -9804,6 +9949,10 @@ msgstr "Red para su GMX Account y posiciones. Los saldos y las posiciones no se 
 msgid "Liquidity only available on {chainNames} or {lastChainName}. Switch networks to continue."
 msgstr "La liquidez solo está disponible en {chainNames} o {lastChainName}. Cambie de red para continuar."
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "VLP Balance"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Total trading volume from your referrals"
 msgstr "Volumen de negociación total de sus referidos"
@@ -9973,7 +10122,13 @@ msgstr "Generar código de referido"
 msgid "NET VALUE"
 msgstr "VALOR NETO"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Vaults"
+msgstr ""
+
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Share Price"
 msgstr ""
 
@@ -10071,6 +10226,7 @@ msgid "Simulate transactions"
 msgstr "Simular transacciones"
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Adding liquidity..."
 msgstr ""
 
@@ -10182,6 +10338,7 @@ msgid "Unknown order"
 msgstr "Orden desconocida"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "VLP Amount"
 msgstr ""
 

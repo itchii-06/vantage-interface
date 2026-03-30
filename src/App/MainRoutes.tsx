@@ -29,10 +29,12 @@ import Referrals from "pages/Referrals/Referrals";
 import ReferralsTier from "pages/ReferralsTier/ReferralsTier";
 import { SyntheticsPage } from "pages/SyntheticsPage/SyntheticsPage";
 import { SyntheticsStats } from "pages/SyntheticsStats/SyntheticsStats";
+import VantageLPPage from "pages/VantageLP/VantageLPPage";
+import VaultDetailPage from "pages/VaultDetail/VaultDetailPage";
+import VaultsPage from "pages/Vaults/VaultsPage";
 
 import { EarnRedirect } from "components/Earn/EarnRedirect";
 import { RedirectWithQuery } from "components/RedirectWithQuery/RedirectWithQuery";
-import VantageLPPage from "pages/VantageLP/VantageLPPage";
 
 const LazyUiPage = lazy(() => import("pages/UiPage/UiPage"));
 const UiPage = () => (
@@ -162,6 +164,12 @@ export function MainRoutes({ openSettings }: { openSettings: () => void }) {
       </Route>
       <Route exact path="/vantage-lp">
         <VantageLPPage />
+      </Route>
+      <Route exact path="/vaults">
+        <VaultsPage />
+      </Route>
+      <Route exact path="/vaults/:address">
+        <VaultDetailPage />
       </Route>
       <Route exact path="/jobs">
         <Jobs />
