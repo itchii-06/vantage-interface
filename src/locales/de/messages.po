@@ -7464,6 +7464,7 @@ msgstr "{formattedNetRate} / 1h"
 #: src/components/PositionEditor/PositionEditor.tsx
 #: src/pages/PoolsDetails/PoolsDetailsHeader.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Balance"
 msgstr "Balance"
 

@@ -310,9 +310,9 @@ export default function VaultDetailPage() {
                         />
                         <span className="text-14 font-medium text-slate-400">{cfg.symbol}</span>
                       </div>
-                      {account && data.tokenBalance > 0n && (
+                      {account && (
                         <div className="mt-4 text-12 text-slate-500">
-                          {t`Balance`}: {formatToken(data.tokenBalance, cfg.symbol)}
+                          {t`Balance`}: {data.isLoading ? "…" : formatToken(data.tokenBalance, cfg.symbol)}
                         </div>
                       )}
                     </div>
@@ -379,6 +379,11 @@ export default function VaultDetailPage() {
                         />
                         <span className="text-14 font-medium text-slate-400">VLP</span>
                       </div>
+                      {account && (
+                        <div className="mt-4 text-12 text-slate-500">
+                          {t`Balance`}: {data.isLoading ? "…" : formatToken(data.vlpBalance, "VLP")}
+                        </div>
+                      )}
                     </div>
 
                     {/* Preview */}
