@@ -9,21 +9,24 @@
  *
  *   withdraw(shares)
  *     LPManager.removeLiquidity  (no approve needed — LPManager burns VLP)
+ *
+ * NOTE: allowance is checked via a direct ethers call instead of
+ * useTokensAllowanceData, because the GMX Multicall infrastructure does not
+ * support localhost (chainId 31337). The direct approach works on all networks.
  */
 
 import { t } from "@lingui/macro";
 import { Contract, ethers } from "ethers";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { maxUint256 } from "viem";
 
 import { DEFAULT_SETTLEMENT_CHAIN_ID } from "config/chains";
 import { usePendingTxns } from "context/PendingTxnsContext/PendingTxnsContext";
-import { useTokensAllowanceData } from "domain/synthetics/tokens/useTokenAllowanceData";
 import { pushSuccessNotification } from "lib/contracts/notifications";
 import { helperToast } from "lib/helperToast";
+import { getProvider } from "lib/rpc";
 import useWallet from "lib/wallets/useWallet";
 import TokenAbi from "sdk/abis/Token";
-import type { AnyChainId } from "sdk/configs/chains";
 import LPManagerAbi from "vantage/abis/LPManager.json";
 
 import type { VaultConfig } from "./vaultConfig";
@@ -42,38 +45,58 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
   );
 
   // ---------------------------------------------------------------------------
-  // Approval state
+  // Allowance — direct ethers call (works on localhost + all testnets)
   // ---------------------------------------------------------------------------
 
-  const [approvingToken, setApprovingToken] = useState<string | undefined>();
+  const [allowance, setAllowance] = useState<bigint>(0n);
+  const [isApproving, setIsApproving] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const { tokensAllowanceData, isLoading: isAllowanceLoading } = useTokensAllowanceData(chainId as AnyChainId, {
-    spenderAddress: cfg.lpManagerAddress,
-    tokenAddresses: cfg.tokenAddress ? [cfg.tokenAddress] : [],
-  });
+  const fetchAllowance = useCallback(async () => {
+    if (!account || !cfg.tokenAddress || !cfg.lpManagerAddress) return;
+    try {
+      const provider = getProvider(undefined, chainId);
+      const token = new Contract(cfg.tokenAddress, TokenAbi, provider);
+      const raw = (await token.allowance(account, cfg.lpManagerAddress)) as bigint;
+      setAllowance(raw);
+    } catch {
+      // Silently ignore RPC errors
+    }
+  }, [account, cfg.tokenAddress, cfg.lpManagerAddress, chainId]);
+
+  useEffect(() => {
+    fetchAllowance();
+    intervalRef.current = setInterval(fetchAllowance, 5_000);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [fetchAllowance]);
 
   const isApprovalNeeded = useCallback(
     (amount: bigint): boolean => {
-      if (!tokensAllowanceData) return true;
-      const allowance = tokensAllowanceData[cfg.tokenAddress];
-      if (allowance === undefined) return true;
+      if (!account) return false; // wallet not connected — don't show approve
       return allowance < amount;
     },
-    [tokensAllowanceData, cfg.tokenAddress]
+    [allowance, account]
   );
+
+  // ---------------------------------------------------------------------------
+  // Approve
+  // ---------------------------------------------------------------------------
 
   const approve = useCallback(async (): Promise<void> => {
     if (!signer) return;
-    setApprovingToken(cfg.tokenAddress);
+    setIsApproving(true);
     try {
       const contract = new Contract(cfg.tokenAddress, TokenAbi, signer);
       const tx = await contract.approve(cfg.lpManagerAddress, maxUint256);
       helperToast.info(t`Approval submitted — waiting for confirmation…`);
       await tx.wait();
+      await fetchAllowance(); // refresh immediately after approval
     } finally {
-      setApprovingToken(undefined);
+      setIsApproving(false);
     }
-  }, [signer, cfg.tokenAddress, cfg.lpManagerAddress]);
+  }, [signer, cfg.tokenAddress, cfg.lpManagerAddress, fetchAllowance]);
 
   // ---------------------------------------------------------------------------
   // Deposit
@@ -210,8 +233,7 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
     debugSetPrice,
     debugMint,
     isApprovalNeeded,
-    isAllowanceLoading,
-    isApproving: Boolean(approvingToken),
+    isApproving,
     isReady: Boolean(account && signer),
   };
 }
