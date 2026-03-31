@@ -1265,6 +1265,10 @@ msgstr "유동성은 {chainNames}에서만 이용 가능합니다. 계속하려�
 msgid "Stop-Loss"
 msgstr "손절매"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Transactions"
+msgstr ""
+
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "External swap {0} to {1}"
 msgstr "외부 스왑 {0} → {1}"
@@ -4648,6 +4652,7 @@ msgstr "외부 스왑 실패 처리"
 #: src/pages/UiPage/BannerTest.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdraw"
@@ -8298,6 +8303,7 @@ msgstr "아래 한도까지 {0} 및 {1}(으)로 GM을 구매할 수 있습니다
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Deposit"
 msgstr "예치"
 
@@ -9472,6 +9478,10 @@ msgstr "트래커"
 msgid "Select network"
 msgstr "네트워크 선택"
 
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "NAV synced"
+msgstr ""
+
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "No loss of fund ownership"
 msgstr "자금 소유권 손실 없음"
@@ -9614,6 +9624,11 @@ msgstr "TP/SL 버튼을 사용하여 TP/SL 주문을 설정하십시오."
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
 msgid "Close Long"
+msgstr ""
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "APY"
 msgstr ""
 
 #: src/components/Referrals/AffiliatesStats.tsx
@@ -10694,6 +10709,10 @@ msgstr "자금 브릿징 중..."
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Network fee"
 msgstr "네트워크 수수료"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Sync NAV"
+msgstr ""
 
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivated"

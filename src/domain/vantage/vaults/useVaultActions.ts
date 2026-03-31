@@ -28,6 +28,7 @@ import { getProvider } from "lib/rpc";
 import useWallet from "lib/wallets/useWallet";
 import TokenAbi from "sdk/abis/Token";
 import LPManagerAbi from "vantage/abis/LPManager.json";
+import VaultAbi from "vantage/abis/Vault.json";
 
 import type { VaultConfig } from "./vaultConfig";
 
@@ -49,6 +50,7 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
   // ---------------------------------------------------------------------------
 
   const [allowance, setAllowance] = useState<bigint>(0n);
+  const [isAllowanceLoaded, setIsAllowanceLoaded] = useState(false);
   const [isApproving, setIsApproving] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -59,12 +61,15 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
       const token = new Contract(cfg.tokenAddress, TokenAbi, provider);
       const raw = (await token.allowance(account, cfg.lpManagerAddress)) as bigint;
       setAllowance(raw);
+      setIsAllowanceLoaded(true);
     } catch {
       // Silently ignore RPC errors
     }
   }, [account, cfg.tokenAddress, cfg.lpManagerAddress, chainId]);
 
   useEffect(() => {
+    setIsAllowanceLoaded(false);
+    setAllowance(0n);
     fetchAllowance();
     intervalRef.current = setInterval(fetchAllowance, 5_000);
     return () => {
@@ -204,6 +209,24 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
   );
 
   // ---------------------------------------------------------------------------
+  // Debug: Sync NAV (calls vault.syncNetAssetValue — Keeper role required)
+  // ---------------------------------------------------------------------------
+
+  const debugSyncNav = useCallback(async (): Promise<void> => {
+    if (!signer) return;
+    try {
+      const vault = new Contract(cfg.vaultAddress, VaultAbi, signer);
+      const tx = await (
+        vault as ethers.Contract & { syncNetAssetValue: () => Promise<{ wait: () => Promise<unknown> }> }
+      ).syncNetAssetValue();
+      await tx.wait();
+      helperToast.success(t`NAV synced`);
+    } catch (err: unknown) {
+      helperToast.error(err instanceof Error ? err.message : String(err));
+    }
+  }, [signer, cfg.vaultAddress]);
+
+  // ---------------------------------------------------------------------------
   // Debug: Mint tokens to user (testnet only)
   // ---------------------------------------------------------------------------
 
@@ -232,9 +255,11 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
     debugRebase,
     debugSetPrice,
     debugMint,
+    debugSyncNav,
     isApprovalNeeded,
     isApproving,
     allowance,
+    isAllowanceLoaded,
     isReady: Boolean(account && signer),
   };
 }

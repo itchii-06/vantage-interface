@@ -1265,6 +1265,10 @@ msgstr "Liquidity only available on {chainNames}. Switch networks to continue."
 msgid "Stop-Loss"
 msgstr "Stop-Loss"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Transactions"
+msgstr "Transactions"
+
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "External swap {0} to {1}"
 msgstr "External swap {0} to {1}"
@@ -4648,6 +4652,7 @@ msgstr "Fail external swaps"
 #: src/pages/UiPage/BannerTest.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdraw"
@@ -8298,6 +8303,7 @@ msgstr "Buy GM with {0} and {1} up to the caps below"
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Deposit"
 msgstr "Deposit"
 
@@ -9472,6 +9478,10 @@ msgstr "TRACKER"
 msgid "Select network"
 msgstr "Select network"
 
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "NAV synced"
+msgstr "NAV synced"
+
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "No loss of fund ownership"
 msgstr "No loss of fund ownership"
@@ -9615,6 +9625,11 @@ msgstr "Use the TP/SL button to set TP/SL orders."
 #: src/components/TVChartContainer/TVChartContainer.tsx
 msgid "Close Long"
 msgstr "Close Long"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "APY"
+msgstr "APY"
 
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Traders referred on Arbitrum"
@@ -10694,6 +10709,10 @@ msgstr "Funds bridging to..."
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Network fee"
 msgstr "Network fee"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Sync NAV"
+msgstr "Sync NAV"
 
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivated"

@@ -1265,6 +1265,10 @@ msgstr "Liquidez disponible únicamente en {chainNames}. Cambie de red para cont
 msgid "Stop-Loss"
 msgstr "Stop-Loss"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Transactions"
+msgstr ""
+
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "External swap {0} to {1}"
 msgstr "Intercambio externo de {0} a {1}"
@@ -4648,6 +4652,7 @@ msgstr "Forzar fallo de intercambios externos"
 #: src/pages/UiPage/BannerTest.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdraw"
@@ -8298,6 +8303,7 @@ msgstr "Comprar GM con {0} y {1} hasta los límites indicados a continuación"
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Deposit"
 msgstr "Depositar"
 
@@ -9472,6 +9478,10 @@ msgstr "TRACKER"
 msgid "Select network"
 msgstr "Seleccionar red"
 
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "NAV synced"
+msgstr ""
+
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "No loss of fund ownership"
 msgstr "Sin pérdida de propiedad de fondos"
@@ -9614,6 +9624,11 @@ msgstr "Utilice el botón TP/SL para establecer órdenes TP/SL."
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
 msgid "Close Long"
+msgstr ""
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "APY"
 msgstr ""
 
 #: src/components/Referrals/AffiliatesStats.tsx
@@ -10694,6 +10709,10 @@ msgstr "Fondos transfiriéndose a..."
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Network fee"
 msgstr "Comisión de red"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Sync NAV"
+msgstr ""
 
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivated"

@@ -8,12 +8,14 @@
  */
 
 import { t } from "@lingui/macro";
-import { formatEther, parseUnits } from "ethers";
+import { formatEther, formatUnits, parseUnits } from "ethers";
 import { ChangeEvent, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import { useVaultActions } from "domain/vantage/vaults/useVaultActions";
+import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
 import { useVaultDetail } from "domain/vantage/vaults/useVaultDetail";
+import { useVaultTxHistory } from "domain/vantage/vaults/useVaultTxHistory";
 import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, getVaultConfigByAddress } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
@@ -35,8 +37,8 @@ function formatUsd(wad: bigint): string {
   return `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 4 })}`;
 }
 
-function formatToken(wad: bigint, symbol: string): string {
-  const n = parseFloat(formatEther(wad));
+function formatToken(amount: bigint, symbol: string, decimals = 18): string {
+  const n = parseFloat(formatUnits(amount, decimals));
   return `${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 6 })} ${symbol}`;
 }
 
@@ -91,8 +93,10 @@ export default function VaultDetailPage() {
 
   const cfg = getVaultConfigByAddress(address);
 
-  const data = useVaultDetail(cfg!);
+  const data = useVaultDetail(cfg!, chainId);
   const actions = useVaultActions(cfg!, chainId);
+  const { txs } = useVaultTxHistory(cfg!);
+  const apy = useVaultApy(cfg!);
 
   const [activeTab, setActiveTab] = useState<Tab>("deposit");
   const [depositInput, setDepositInput] = useState("");
@@ -143,11 +147,13 @@ export default function VaultDetailPage() {
       ? (((withdrawShares * data.sharePrice) / WAD) * WAD) / data.tokenPrice
       : 0n;
 
-  // Show Approve button if:
-  //   - wallet connected, AND
-  //   - no allowance at all (amount not yet entered), OR allowance < entered amount
+  // Show Approve button only after allowance is fetched (avoids flash on page load).
+  // If no allowance at all: show Approve even before amount is entered.
+  // If allowance < entered amount: show Approve.
   const needsApproval =
-    Boolean(account) && (depositAmount > 0n ? actions.isApprovalNeeded(depositAmount) : actions.allowance === 0n);
+    Boolean(account) &&
+    actions.isAllowanceLoaded &&
+    (depositAmount > 0n ? actions.isApprovalNeeded(depositAmount) : actions.allowance === 0n);
 
   // Below-AUM warning for Direct vault
   const showDirectWarning = cfg.assetType === 0 && data.usdValue > 0n && data.aum < data.usdValue;
@@ -243,15 +249,50 @@ export default function VaultDetailPage() {
               <h2 className="mb-16 text-14 font-semibold text-white">{t`Stats`}</h2>
               <div className="grid grid-cols-2 gap-16">
                 <StatRow label={t`Total AUM`} value={data.isLoading ? "—" : formatUsd(data.aum)} />
+                <StatRow
+                  label={t`APY`}
+                  value={apy === null ? "—" : `${(apy * 100).toFixed(2)}%`}
+                  highlight={apy !== null ? "green" : undefined}
+                />
                 <StatRow label={t`Share Price`} value={data.isLoading ? "—" : formatPrice(data.sharePrice)} />
                 {account && (
                   <StatRow label={t`My Deposit (USD)`} value={data.isLoading ? "—" : formatUsd(data.usdValue)} />
                 )}
                 {account && data.shortfall > 0n && (
-                  <StatRow label={t`Shortfall Debt`} value={formatToken(data.shortfall, cfg.symbol)} highlight="red" />
+                  <StatRow
+                    label={t`Shortfall Debt`}
+                    value={formatToken(data.shortfall, cfg.symbol, cfg.tokenDecimals)}
+                    highlight="red"
+                  />
                 )}
               </div>
             </div>
+
+            {/* Transactions */}
+            {account && txs.length > 0 && (
+              <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+                <h2 className="mb-12 text-14 font-semibold text-white">{t`Transactions`}</h2>
+                <div className="space-y-8">
+                  {txs.map((tx) => (
+                    <div key={tx.txHash} className="flex items-center justify-between text-13">
+                      <div className="flex items-center gap-8">
+                        <span
+                          className={`rounded-full px-8 py-2 text-11 font-medium ${
+                            tx.type === "deposit"
+                              ? "bg-emerald-900/60 text-emerald-300"
+                              : "bg-orange-900/60 text-orange-300"
+                          }`}
+                        >
+                          {tx.type === "deposit" ? t`Deposit` : t`Withdraw`}
+                        </span>
+                        <span className="text-white">{formatToken(tx.tokenAmount, cfg.symbol, cfg.tokenDecimals)}</span>
+                      </div>
+                      <span className="font-mono text-12 text-slate-500">#{tx.blockNumber}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* ================================================================ */}
@@ -269,7 +310,7 @@ export default function VaultDetailPage() {
             {data.shortfall > 0n && (
               <div className="border-amber-700 bg-amber-900/30 text-amber-300 rounded-4 border px-16 py-12 text-13">
                 ⚠️{" "}
-                {t`You have a shortfall debt of ${formatToken(data.shortfall, cfg.symbol)}. This will be settled when the insurance fund is sufficient.`}
+                {t`You have a shortfall debt of ${formatToken(data.shortfall, cfg.symbol, cfg.tokenDecimals)}. This will be settled when the insurance fund is sufficient.`}
               </div>
             )}
 
@@ -312,7 +353,8 @@ export default function VaultDetailPage() {
                       </div>
                       {account && (
                         <div className="mt-4 text-12 text-slate-500">
-                          {t`Balance`}: {data.isLoading ? "…" : formatToken(data.tokenBalance, cfg.symbol)}
+                          {t`Balance`}:{" "}
+                          {data.isLoading ? "…" : formatToken(data.tokenBalance, cfg.symbol, cfg.tokenDecimals)}
                         </div>
                       )}
                     </div>
@@ -391,7 +433,9 @@ export default function VaultDetailPage() {
                       <div className="space-y-4 text-13 text-slate-400">
                         <div className="flex justify-between">
                           <span>{t`Estimated ${cfg.symbol}`}</span>
-                          <span className="text-white">{formatToken(estimatedTokenOut, cfg.symbol)}</span>
+                          <span className="text-white">
+                            {formatToken(estimatedTokenOut, cfg.symbol, cfg.tokenDecimals)}
+                          </span>
                         </div>
                         <div className="flex justify-between">
                           <span>{t`USD value`}</span>
@@ -438,7 +482,9 @@ export default function VaultDetailPage() {
                   {cfg.assetType === 1 && (
                     <div className="flex justify-between">
                       <span className="text-slate-400">{t`Token Balance`}</span>
-                      <span className="text-emerald-400">{formatToken(data.tokenBalance, cfg.symbol)}</span>
+                      <span className="text-emerald-400">
+                        {formatToken(data.tokenBalance, cfg.symbol, cfg.tokenDecimals)}
+                      </span>
                     </div>
                   )}
                   {cfg.assetType === 2 && data.tokenPrice > WAD && (
@@ -466,6 +512,19 @@ export default function VaultDetailPage() {
                     className="w-full text-12"
                   >
                     {t`Mint 1,000 ${cfg.symbol} to wallet`}
+                  </Button>
+
+                  {/* Sync NAV */}
+                  <Button
+                    variant="secondary"
+                    size="small"
+                    onClick={async () => {
+                      await actions.debugSyncNav();
+                      await data.refresh();
+                    }}
+                    className="w-full text-12"
+                  >
+                    {t`Sync NAV`}
                   </Button>
 
                   {/* Rebasing-specific */}
@@ -515,11 +574,12 @@ export default function VaultDetailPage() {
 // StatRow helper
 // ---------------------------------------------------------------------------
 
-function StatRow({ label, value, highlight }: { label: string; value: string; highlight?: "red" }) {
+function StatRow({ label, value, highlight }: { label: string; value: string; highlight?: "red" | "green" }) {
+  const color = highlight === "red" ? "text-red-400" : highlight === "green" ? "text-emerald-400" : "text-white";
   return (
     <div>
       <div className="mb-2 text-12 text-slate-400">{label}</div>
-      <div className={`text-14 font-semibold ${highlight === "red" ? "text-red-400" : "text-white"}`}>{value}</div>
+      <div className={`text-14 font-semibold ${color}`}>{value}</div>
     </div>
   );
 }

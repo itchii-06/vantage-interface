@@ -8,9 +8,9 @@
  */
 
 import { Contract } from "ethers";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { DEFAULT_SETTLEMENT_CHAIN_ID } from "config/chains";
+import { useChainId } from "lib/chains";
 import { getProvider } from "lib/rpc";
 import useWallet from "lib/wallets/useWallet";
 import LPManagerAbi from "vantage/abis/LPManager.json";
@@ -40,7 +40,8 @@ const POLL_INTERVAL_MS = 15_000;
 
 export function useVaultList(): VaultListItem[] {
   const { account } = useWallet();
-  const provider = getProvider(undefined, DEFAULT_SETTLEMENT_CHAIN_ID);
+  const { chainId } = useChainId();
+  const provider = useMemo(() => getProvider(undefined, chainId), [chainId]);
 
   const buildInitial = (): VaultListItem[] =>
     VAULT_CONFIGS.map((cfg) => ({

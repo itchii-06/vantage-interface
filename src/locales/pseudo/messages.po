@@ -1265,6 +1265,10 @@ msgstr ""
 msgid "Stop-Loss"
 msgstr ""
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Transactions"
+msgstr ""
+
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "External swap {0} to {1}"
 msgstr ""
@@ -4648,6 +4652,7 @@ msgstr ""
 #: src/pages/UiPage/BannerTest.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdraw"
@@ -8298,6 +8303,7 @@ msgstr ""
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Deposit"
 msgstr ""
 
@@ -9472,6 +9478,10 @@ msgstr ""
 msgid "Select network"
 msgstr ""
 
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "NAV synced"
+msgstr ""
+
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "No loss of fund ownership"
 msgstr ""
@@ -9614,6 +9624,11 @@ msgstr ""
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
 msgid "Close Long"
+msgstr ""
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "APY"
 msgstr ""
 
 #: src/components/Referrals/AffiliatesStats.tsx
@@ -10693,6 +10708,10 @@ msgstr ""
 #: src/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Network fee"
+msgstr ""
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Sync NAV"
 msgstr ""
 
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
