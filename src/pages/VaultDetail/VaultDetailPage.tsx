@@ -143,7 +143,11 @@ export default function VaultDetailPage() {
       ? (((withdrawShares * data.sharePrice) / WAD) * WAD) / data.tokenPrice
       : 0n;
 
-  const needsApproval = depositAmount > 0n && actions.isApprovalNeeded(depositAmount);
+  // Show Approve button if:
+  //   - wallet connected, AND
+  //   - no allowance at all (amount not yet entered), OR allowance < entered amount
+  const needsApproval =
+    Boolean(account) && (depositAmount > 0n ? actions.isApprovalNeeded(depositAmount) : actions.allowance === 0n);
 
   // Below-AUM warning for Direct vault
   const showDirectWarning = cfg.assetType === 0 && data.usdValue > 0n && data.aum < data.usdValue;
@@ -333,7 +337,7 @@ export default function VaultDetailPage() {
                       <Button
                         variant="primary"
                         size="medium"
-                        disabled={depositAmount === 0n || isSubmitting || actions.isApproving}
+                        disabled={isSubmitting || actions.isApproving}
                         onClick={() => actions.approve()}
                         className="w-full"
                       >

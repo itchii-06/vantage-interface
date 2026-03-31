@@ -234,6 +234,7 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
     debugMint,
     isApprovalNeeded,
     isApproving,
+    allowance,
     isReady: Boolean(account && signer),
   };
 }
