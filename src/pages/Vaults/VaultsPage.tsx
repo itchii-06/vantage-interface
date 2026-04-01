@@ -13,8 +13,9 @@ import { formatEther } from "ethers";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
 import { useVaultList } from "domain/vantage/vaults/useVaultList";
-import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL } from "domain/vantage/vaults/vaultConfig";
+import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
 import useWallet from "lib/wallets/useWallet";
 
 // ---------------------------------------------------------------------------
@@ -32,7 +33,7 @@ function formatUsd(wad: bigint): string {
 // Sort types
 // ---------------------------------------------------------------------------
 
-type SortKey = "aum" | "none";
+type SortKey = "aum" | "apy" | "none";
 type SortDir = "asc" | "desc";
 
 // ---------------------------------------------------------------------------
@@ -43,6 +44,18 @@ export default function VaultsPage() {
   const { account } = useWallet();
   const history = useHistory();
   const items = useVaultList();
+
+  // APY per vault — hooks must be called unconditionally in fixed order
+  const apy0 = useVaultApy(VAULT_CONFIGS[0]);
+  const apy1 = useVaultApy(VAULT_CONFIGS[1]);
+  const apy2 = useVaultApy(VAULT_CONFIGS[2]);
+  const apy3 = useVaultApy(VAULT_CONFIGS[3]);
+  const apyByKey: Record<string, number | null> = {
+    [VAULT_CONFIGS[0].key]: apy0,
+    [VAULT_CONFIGS[1].key]: apy1,
+    [VAULT_CONFIGS[2].key]: apy2,
+    [VAULT_CONFIGS[3].key]: apy3,
+  };
 
   const [sortKey, setSortKey] = useState<SortKey>("none");
   const [sortDir, setSortDir] = useState<SortDir>("desc");
@@ -60,6 +73,11 @@ export default function VaultsPage() {
     if (sortKey === "aum") {
       return sortDir === "desc" ? Number(b.aum - a.aum) : Number(a.aum - b.aum);
     }
+    if (sortKey === "apy") {
+      const apyA = apyByKey[a.key] ?? -Infinity;
+      const apyB = apyByKey[b.key] ?? -Infinity;
+      return sortDir === "desc" ? apyB - apyA : apyA - apyB;
+    }
     return 0;
   });
 
@@ -75,7 +93,7 @@ export default function VaultsPage() {
         {/* Table */}
         <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
           {/* Table header */}
-          <div className="grid grid-cols-[2fr_1fr_1fr_1fr] gap-0 border-b border-stroke-primary px-20 py-12 text-12 text-slate-400">
+          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-0 border-b border-stroke-primary px-20 py-12 text-12 text-slate-400">
             <div>{t`Asset`}</div>
             <div
               className={`cursor-pointer select-none text-right transition-colors hover:text-white ${sortKey === "aum" ? "text-white" : ""}`}
@@ -83,58 +101,76 @@ export default function VaultsPage() {
             >
               {t`AUM`} {sortKey === "aum" ? (sortDir === "desc" ? "↓" : "↑") : "↕"}
             </div>
+            <div
+              className={`cursor-pointer select-none text-right transition-colors hover:text-white ${sortKey === "apy" ? "text-white" : ""}`}
+              onClick={() => handleSort("apy")}
+            >
+              {t`APY`} {sortKey === "apy" ? (sortDir === "desc" ? "↓" : "↑") : "↕"}
+            </div>
             <div className="text-right">{t`Type`}</div>
             <div className="text-right">{account ? t`My Deposit` : ""}</div>
           </div>
 
           {/* Rows */}
-          {sorted.map((item) => (
-            <div
-              key={item.key}
-              onClick={() => item.vaultAddress && history.push(`/vaults/${item.vaultAddress}`)}
-              className="grid cursor-pointer grid-cols-[2fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-16 transition-colors last:border-0 hover:bg-slate-800/40"
-            >
-              {/* Asset */}
-              <div className="flex items-center gap-12">
-                <div className="flex h-36 w-36 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
-                  {item.symbol.slice(0, 2)}
+          {sorted.map((item) => {
+            const apy = apyByKey[item.key];
+            return (
+              <div
+                key={item.key}
+                onClick={() => item.vaultAddress && history.push(`/vaults/${item.vaultAddress}`)}
+                className="grid cursor-pointer grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-16 transition-colors last:border-0 hover:bg-slate-800/40"
+              >
+                {/* Asset */}
+                <div className="flex items-center gap-12">
+                  <div className="flex h-36 w-36 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
+                    {item.symbol.slice(0, 2)}
+                  </div>
+                  <div>
+                    <div className="text-15 font-semibold text-white">{item.symbol}</div>
+                    <div className="text-12 text-slate-400">{item.name}</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-15 font-semibold text-white">{item.symbol}</div>
-                  <div className="text-12 text-slate-400">{item.name}</div>
+
+                {/* AUM */}
+                <div className="text-right">
+                  {item.isLoading ? (
+                    <span className="text-slate-500">—</span>
+                  ) : (
+                    <span className="text-15 font-medium text-white">{formatUsd(item.aum)}</span>
+                  )}
+                </div>
+
+                {/* APY */}
+                <div className="text-right">
+                  {apy === null ? (
+                    <span className="text-14 text-slate-500">—</span>
+                  ) : (
+                    <span className="text-15 font-medium text-green-400">{(apy * 100).toFixed(2)}%</span>
+                  )}
+                </div>
+
+                {/* Type badge */}
+                <div className="flex justify-end">
+                  <span className={`rounded-full px-8 py-2 text-11 font-medium ${ASSET_TYPE_COLOR[item.assetType]}`}>
+                    {ASSET_TYPE_LABEL[item.assetType]}
+                  </span>
+                </div>
+
+                {/* My Deposit */}
+                <div className="text-right">
+                  {!account ? (
+                    <span className="text-14 text-slate-500">—</span>
+                  ) : item.isLoading ? (
+                    <span className="text-14 text-slate-500">…</span>
+                  ) : item.usdValue > 0n ? (
+                    <span className="text-15 font-medium text-white">{formatUsd(item.usdValue)}</span>
+                  ) : (
+                    <span className="text-14 text-slate-500">—</span>
+                  )}
                 </div>
               </div>
-
-              {/* AUM */}
-              <div className="text-right">
-                {item.isLoading ? (
-                  <span className="text-slate-500">—</span>
-                ) : (
-                  <span className="text-15 font-medium text-white">{formatUsd(item.aum)}</span>
-                )}
-              </div>
-
-              {/* Type badge */}
-              <div className="flex justify-end">
-                <span className={`rounded-full px-8 py-2 text-11 font-medium ${ASSET_TYPE_COLOR[item.assetType]}`}>
-                  {ASSET_TYPE_LABEL[item.assetType]}
-                </span>
-              </div>
-
-              {/* My Deposit */}
-              <div className="text-right">
-                {!account ? (
-                  <span className="text-14 text-slate-500">—</span>
-                ) : item.isLoading ? (
-                  <span className="text-14 text-slate-500">…</span>
-                ) : item.usdValue > 0n ? (
-                  <span className="text-15 font-medium text-white">{formatUsd(item.usdValue)}</span>
-                ) : (
-                  <span className="text-14 text-slate-500">—</span>
-                )}
-              </div>
-            </div>
-          ))}
+            );
+          })}
 
           {/* Empty state */}
           {items.length === 0 && (

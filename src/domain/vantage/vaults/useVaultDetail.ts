@@ -14,9 +14,8 @@
  */
 
 import { Contract } from "ethers";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { DEFAULT_SETTLEMENT_CHAIN_ID } from "config/chains";
 import { getProvider } from "lib/rpc";
 import useWallet from "lib/wallets/useWallet";
 import LPManagerAbi from "vantage/abis/LPManager.json";
@@ -47,6 +46,7 @@ export interface VaultDetailData {
   shortfall: bigint; // user's shortfall debt for this token
   aumHistory: AumDataPoint[];
   isLoading: boolean;
+  refresh: () => Promise<void>; // manually trigger a data refetch
 }
 
 // ---------------------------------------------------------------------------
@@ -61,11 +61,13 @@ const MAX_HISTORY_POINTS = 50;
 const d = localhostDeployment.addresses as { MockPriceFeed?: string };
 const MOCK_PRICE_FEED = d.MockPriceFeed ?? "";
 
-export function useVaultDetail(cfg: VaultConfig): VaultDetailData {
-  const { account } = useWallet();
-  const provider = getProvider(undefined, DEFAULT_SETTLEMENT_CHAIN_ID);
+type VaultDetailState = Omit<VaultDetailData, "refresh">;
 
-  const [data, setData] = useState<VaultDetailData>({
+export function useVaultDetail(cfg: VaultConfig, chainId: number): VaultDetailData {
+  const { account } = useWallet();
+  const provider = useMemo(() => getProvider(undefined, chainId), [chainId]);
+
+  const [data, setData] = useState<VaultDetailState>({
     aum: 0n,
     sharePrice: WAD,
     tokenPrice: WAD,
@@ -80,54 +82,58 @@ export function useVaultDetail(cfg: VaultConfig): VaultDetailData {
   const aumHistoryRef = useRef<AumDataPoint[]>([]);
 
   const fetch = useCallback(async () => {
+    const vault = new Contract(cfg.vaultAddress, VaultAbi, provider);
+    const lpManager = new Contract(cfg.lpManagerAddress, LPManagerAbi, provider);
+    const lpToken = new Contract(cfg.lpTokenAddress, LPTokenAbi, provider);
+    const token = new Contract(cfg.tokenAddress, MockERC20Abi, provider);
+
+    // --- User balances: fetch independently so they always display ---
+    const [vlpBalance, tokenBalance, shortfall] = await Promise.all([
+      account ? (lpToken.balanceOf(account) as Promise<bigint>).catch(() => 0n) : Promise.resolve(0n),
+      account ? (token.balanceOf(account) as Promise<bigint>).catch(() => 0n) : Promise.resolve(0n),
+      account
+        ? (vault.userShortfallDebt(account, cfg.tokenAddress) as Promise<bigint>).catch(() => 0n)
+        : Promise.resolve(0n),
+    ]);
+
+    // --- Vault state: may fail if no liquidity yet ---
+    let aum = 0n;
+    let sharePrice = WAD;
     try {
-      const vault = new Contract(cfg.vaultAddress, VaultAbi, provider);
-      const lpManager = new Contract(cfg.lpManagerAddress, LPManagerAbi, provider);
-      const lpToken = new Contract(cfg.lpTokenAddress, LPTokenAbi, provider);
-      const token = new Contract(cfg.tokenAddress, MockERC20Abi, provider);
-
-      const fetchPromises: Promise<unknown>[] = [
-        vault.getAUM(),
-        lpManager.getSharePrice(),
-        account ? lpToken.balanceOf(account) : Promise.resolve(0n),
-        account ? token.balanceOf(account) : Promise.resolve(0n),
-        account ? vault.userShortfallDebt(account, cfg.tokenAddress) : Promise.resolve(0n),
-      ];
-
-      // Fetch token price from MockPriceFeed for PriceShare / Direct vaults
-      let tokenPrice: bigint = WAD;
-      if (MOCK_PRICE_FEED && (cfg.assetType === 0 || cfg.assetType === 2)) {
-        const feed = new Contract(MOCK_PRICE_FEED, MockPriceFeedAbi, provider);
-        try {
-          tokenPrice = (await feed.prices(cfg.tokenAddress)) as bigint;
-          if (tokenPrice === 0n) tokenPrice = WAD;
-        } catch {
-          tokenPrice = WAD;
-        }
-      }
-
-      const [aum, sharePrice, vlpBalance, tokenBalance, shortfall] = (await Promise.all(fetchPromises)) as bigint[];
-
-      const usdValue = (vlpBalance * sharePrice) / WAD;
-
-      // Append AUM to history
-      const point: AumDataPoint = { timestamp: Date.now(), aum };
-      aumHistoryRef.current = [...aumHistoryRef.current.slice(-MAX_HISTORY_POINTS + 1), point];
-
-      setData({
-        aum,
-        sharePrice,
-        tokenPrice,
-        vlpBalance,
-        usdValue,
-        tokenBalance,
-        shortfall,
-        aumHistory: [...aumHistoryRef.current],
-        isLoading: false,
-      });
+      [aum, sharePrice] = (await Promise.all([vault.getAUM(), lpManager.getSharePrice()])) as bigint[];
     } catch {
-      setData((prev) => ({ ...prev, isLoading: false }));
+      // Keep defaults when vault is not yet seeded
     }
+
+    // --- Token price from MockPriceFeed (PriceShare / Direct) ---
+    let tokenPrice: bigint = WAD;
+    if (MOCK_PRICE_FEED && (cfg.assetType === 0 || cfg.assetType === 2)) {
+      const feed = new Contract(MOCK_PRICE_FEED, MockPriceFeedAbi, provider);
+      try {
+        tokenPrice = (await feed.prices(cfg.tokenAddress)) as bigint;
+        if (tokenPrice === 0n) tokenPrice = WAD;
+      } catch {
+        tokenPrice = WAD;
+      }
+    }
+
+    const usdValue = (vlpBalance * sharePrice) / WAD;
+
+    // Append AUM to history
+    const point: AumDataPoint = { timestamp: Date.now(), aum };
+    aumHistoryRef.current = [...aumHistoryRef.current.slice(-MAX_HISTORY_POINTS + 1), point];
+
+    setData({
+      aum,
+      sharePrice,
+      tokenPrice,
+      vlpBalance,
+      usdValue,
+      tokenBalance,
+      shortfall,
+      aumHistory: [...aumHistoryRef.current],
+      isLoading: false,
+    });
   }, [cfg, account, provider]);
 
   useEffect(() => {
@@ -138,5 +144,5 @@ export function useVaultDetail(cfg: VaultConfig): VaultDetailData {
     return () => clearInterval(timer);
   }, [fetch, cfg.assetType]);
 
-  return data;
+  return { ...data, refresh: fetch };
 }
