@@ -3537,6 +3537,10 @@ msgstr "Bei Auslösung kann für Teile dieser Order unzureichende Liquidität vo
 msgid "Withdrawing…"
 msgstr ""
 
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Rebasing balance synced"
+msgstr ""
+
 #: landing/src/pages/Home/FaqSection/FaqSection.tsx
 msgid "What makes GMX more cost-efficient than other perpetual platforms?"
 msgstr "Was macht GMX kosteneffizienter als andere Perpetual-Plattformen?"
@@ -6198,6 +6202,10 @@ msgstr "Positionsgröße übersteigt den Poolwert"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Impact exponent (positive)"
 msgstr "Auswirkungsexponent (positiv)"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Sync Rebasing Balance"
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Can't withdraw collateral. Remaining collateral would be below minimum"
@@ -9479,8 +9487,8 @@ msgid "Select network"
 msgstr "Netzwerk auswählen"
 
 #: src/domain/vantage/vaults/useVaultActions.ts
-msgid "NAV synced"
-msgstr ""
+#~ msgid "NAV synced"
+#~ msgstr ""
 
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "No loss of fund ownership"
@@ -10711,8 +10719,8 @@ msgid "Network fee"
 msgstr "Netzwerkgebühr"
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
-msgid "Sync NAV"
-msgstr ""
+#~ msgid "Sync NAV"
+#~ msgstr ""
 
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivated"
