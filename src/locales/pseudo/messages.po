@@ -23,6 +23,8 @@ msgstr ""
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
@@ -316,6 +318,8 @@ msgid "settings"
 msgstr ""
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Short"
 msgstr ""
 
@@ -505,6 +509,10 @@ msgstr ""
 msgid "Image generation failed. Refresh and try again."
 msgstr ""
 
+#: src/pages/Trade/TradePage.tsx
+msgid "Open Positions"
+msgstr ""
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Unstaking..."
 msgstr ""
@@ -602,8 +610,16 @@ msgstr ""
 msgid "ADDRESS"
 msgstr ""
 
+#: src/pages/Trade/components/SpreadBadge.tsx
+msgid "Bid"
+msgstr ""
+
 #: src/pages/Earn/EarnPageLayout.tsx
 msgid "Additional opportunities"
+msgstr ""
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+msgid "Avg Entry"
 msgstr ""
 
 #: src/pages/AccountDashboard/HistoricalLists.tsx
@@ -778,6 +794,10 @@ msgstr ""
 msgid "Market Swap"
 msgstr ""
 
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "Loading positions…"
+msgstr ""
+
 #: src/components/GmList/GmListItem.tsx
 msgid "View details"
 msgstr ""
@@ -925,6 +945,10 @@ msgstr ""
 msgid "TVL in vaults and pools"
 msgstr ""
 
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "Clear completed"
+msgstr ""
+
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/domain/synthetics/trade/utils/validation.ts
@@ -961,6 +985,7 @@ msgstr ""
 msgid "Caption"
 msgstr ""
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Approve USDC"
 msgstr ""
@@ -1206,6 +1231,7 @@ msgstr ""
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Unrealized PnL"
 msgstr ""
 
@@ -1432,6 +1458,8 @@ msgstr ""
 #: src/components/PositionItem/PositionItem.tsx
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Collateral"
 msgstr ""
 
@@ -1599,6 +1627,10 @@ msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
 msgid "Vest"
+msgstr ""
+
+#: src/pages/Trade/TradePage.tsx
+msgid "Connect wallet to see positions"
 msgstr ""
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
@@ -1786,6 +1818,10 @@ msgstr ""
 
 #: src/pages/UiPage/UiPage.tsx
 msgid "Icons & images"
+msgstr ""
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Approved"
 msgstr ""
 
 #: src/components/PositionItem/PositionItem.tsx
@@ -1996,6 +2032,11 @@ msgstr ""
 #: src/components/ClaimablePositionPriceImpactRebateModal/ClaimablePositionPriceImpactRebateModal.tsx
 #: src/domain/synthetics/claimHistory/claimPriceImpactRebate.ts
 msgid "Claiming price impact rebates..."
+msgstr ""
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/TradePage.tsx
+msgid "Close Position"
 msgstr ""
 
 #: src/components/Earn/AdditionalOpportunities/OpportunityCard.tsx
@@ -2397,6 +2438,7 @@ msgstr ""
 msgid "Layer 2"
 msgstr ""
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Approving…"
@@ -2439,6 +2481,10 @@ msgstr ""
 
 #: src/domain/synthetics/userFeedback/utils.ts
 msgid "How can we address your concerns?"
+msgstr ""
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+msgid "Closing Size"
 msgstr ""
 
 #: src/components/DepthChart/DepthChartTooltip.tsx
@@ -2571,6 +2617,10 @@ msgstr ""
 msgid "Help us improve GMX. For security, we won't contact you first. Send \"I have feedback\" to our official account:"
 msgstr ""
 
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+msgid "Slippage"
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 msgid "Existing position uses {0} collateral. This order won't apply to it. <0>Switch to {1} collateral</0>"
 msgstr ""
@@ -2632,6 +2682,8 @@ msgstr ""
 #: src/components/TPSLModal/AddTPSLModal.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Size"
 msgstr ""
 
@@ -3021,6 +3073,10 @@ msgstr ""
 msgid "Transaction submitted"
 msgstr ""
 
+#: src/pages/Trade/components/SpreadBadge.tsx
+msgid "Ask"
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSpreadRow.tsx
 msgid "Collateral spread"
 msgstr ""
@@ -3142,6 +3198,7 @@ msgid "Buy GMX from centralized services"
 msgstr ""
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Close Short"
 msgstr ""
 
@@ -3482,6 +3539,10 @@ msgstr ""
 msgid "Your transfer is complete"
 msgstr ""
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Custom %"
+msgstr ""
+
 #: src/components/BotanixBanner/BotanixBanner.tsx
 msgid "and"
 msgstr ""
@@ -3712,6 +3773,7 @@ msgstr ""
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Trade"
 msgstr ""
 
@@ -3937,6 +3999,10 @@ msgstr ""
 msgid "Generating session..."
 msgstr ""
 
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+msgid "Close request submitted — waiting for Keeper execution"
+msgstr ""
+
 #: landing/src/pages/Home/FaqSection/FaqSection.tsx
 msgid "How do I get started on GMX?"
 msgstr ""
@@ -3986,6 +4052,8 @@ msgstr ""
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Leverage"
 msgstr ""
 
@@ -4008,6 +4076,10 @@ msgstr ""
 #: src/components/GmList/GmTokensTotalBalanceInfo.tsx
 #: src/components/GmList/GmTokensTotalBalanceInfo.tsx
 msgid "{daysConsidered}d earned fees"
+msgstr ""
+
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "Expires"
 msgstr ""
 
 #: src/components/TokenSelector/ConnectWalletModalContent.tsx
@@ -4056,6 +4128,7 @@ msgstr ""
 #: src/components/TradeBox/tradeboxConstants.tsx
 #: src/components/TradeHistory/TradeHistoryRow/TradeHistoryRow.tsx
 #: src/domain/synthetics/positions/utils.ts
+#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Market"
 msgstr ""
 
@@ -4083,6 +4156,7 @@ msgid "Smart wallets are not supported on Express Trading or One-Click Trading"
 msgstr ""
 
 #: src/pages/ParseTransaction/ParseTransaction.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Executed"
 msgstr ""
 
@@ -4114,6 +4188,10 @@ msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max profit limit reached"
+msgstr ""
+
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "Pending Requests"
 msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -4207,6 +4285,10 @@ msgstr ""
 msgid "The difference between expected and actual execution price due to volatility. Orders won't execute if slippage exceeds your maximum. Adjust the default in settings.<0/><1/>A low value (e.g. less than -{0}) may cause failed orders during volatility.<2/><3/>Slippage differs from price impact, which is based on open interest imbalances. <4>Read more</4>."
 msgstr ""
 
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "Expired"
+msgstr ""
+
 #: src/components/TradeboxPoolWarnings/TradeboxPoolWarnings.tsx
 msgid "Existing position in {0} pool but lacks liquidity for this order"
 msgstr ""
@@ -4236,6 +4318,11 @@ msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Blueberry Pulse"
+msgstr ""
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Submitting…"
 msgstr ""
 
 #: src/domain/tokens/approveTokens.tsx
@@ -4536,6 +4623,10 @@ msgstr ""
 msgid "Failed to load order data:"
 msgstr ""
 
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+msgid "Decrease request cancelled"
+msgstr ""
+
 #: src/components/Earn/Discovery/EarnYieldOverview.tsx
 msgid "Network"
 msgstr ""
@@ -4567,6 +4658,7 @@ msgstr ""
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "PnL"
 msgstr ""
 
@@ -5157,6 +5249,9 @@ msgstr ""
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Short"
 msgstr ""
 
@@ -5224,6 +5319,10 @@ msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Max lendable impact factor for withdrawals"
+msgstr ""
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+msgid "Reduce Position ({closePct}%)"
 msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/ClaimModal.tsx
@@ -5511,6 +5610,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+msgid "Increase request cancelled"
+msgstr ""
+
 #: src/pages/UiPage/UiPage.tsx
 msgid "leading-1"
 msgstr ""
@@ -5663,6 +5766,10 @@ msgstr ""
 
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Staked on Avalanche"
+msgstr ""
+
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "Pending"
 msgstr ""
 
 #: src/pages/TestPermits/TestPermits.tsx
@@ -6259,6 +6366,7 @@ msgid "Steady returns without management"
 msgstr ""
 
 #: src/components/TradeBox/TradeBoxRows/SwapSpreadRow.tsx
+#: src/pages/Trade/components/SpreadBadge.tsx
 msgid "Spread"
 msgstr ""
 
@@ -6602,6 +6710,10 @@ msgstr ""
 msgid "per"
 msgstr ""
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Position Size"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Reserve factor longs"
 msgstr ""
@@ -6766,6 +6878,7 @@ msgstr ""
 #: src/components/PositionList/PositionList.tsx
 #: src/components/PositionList/PositionList.tsx
 #: src/pages/Jobs/Jobs.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "No open positions"
 msgstr ""
 
@@ -6952,6 +7065,8 @@ msgid "Insufficient liquidity to swap collateral"
 msgstr ""
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Long"
 msgstr ""
 
@@ -6998,6 +7113,8 @@ msgstr ""
 #: src/components/StatusNotification/OrderStatusNotification.tsx
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Cancel"
 msgstr ""
 
@@ -7742,6 +7859,10 @@ msgstr ""
 msgid "Claimed"
 msgstr ""
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Connect wallet to trade"
+msgstr ""
+
 #: src/components/TwapRows/TwapRows.tsx
 msgid "less than a minute"
 msgstr ""
@@ -7887,6 +8008,10 @@ msgstr ""
 
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Trading mode"
+msgstr ""
+
+#: src/pages/Trade/TradePage.tsx
+msgid "Back"
 msgstr ""
 
 #: landing/src/pages/Home/RoadmapSection/Quareters.tsx
@@ -8327,6 +8452,11 @@ msgstr ""
 msgid "Edit referral code"
 msgstr ""
 
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Acceptable Price"
+msgstr ""
+
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell request sent"
 msgstr ""
@@ -8379,6 +8509,7 @@ msgid "Increase size (TWAP)"
 msgstr ""
 
 #: src/pages/AccountEvents/AccountEvents.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Refresh"
 msgstr ""
 
@@ -8407,6 +8538,11 @@ msgstr ""
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeBox/TradeBox.tsx
 msgid "Receive"
+msgstr ""
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Execution Fee"
 msgstr ""
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
@@ -8465,6 +8601,10 @@ msgstr ""
 msgid "Opening position..."
 msgstr ""
 
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "Side"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "LIQUIDITY SHORT"
 msgstr ""
@@ -8518,6 +8658,10 @@ msgstr ""
 
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Claimable rebates"
+msgstr ""
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Slippage Tolerance"
 msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx
@@ -8991,6 +9135,14 @@ msgstr ""
 msgid "Exposure to backing tokens"
 msgstr ""
 
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+msgid "Request submitted — waiting for Keeper execution"
+msgstr ""
+
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "No pending requests"
+msgstr ""
+
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
 msgid "Search type"
 msgstr ""
@@ -9046,6 +9198,10 @@ msgstr ""
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "GM tokens represent shares in a liquidity pool for a single GMX market. Buy GM to provide liquidity and earn fees from leverage trading, swaps, and market-making activity on that specific market. All rewards are auto-compounded."
+msgstr ""
+
+#: src/pages/Trade/TradePage.tsx
+msgid "Open Long / Short positions via PositionRouter."
 msgstr ""
 
 #: src/components/Earn/AdditionalOpportunities/useOpportunities.tsx
@@ -9110,6 +9266,9 @@ msgstr ""
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Long"
 msgstr ""
 
@@ -9623,6 +9782,7 @@ msgid "Use the TP/SL button to set TP/SL orders."
 msgstr ""
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Close Long"
 msgstr ""
 
@@ -10170,6 +10330,10 @@ msgstr ""
 msgid "GLP to GM airdrop"
 msgstr ""
 
+#: src/pages/Trade/TradePage.tsx
+msgid "Pending Orders"
+msgstr ""
+
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled"
 msgstr ""
@@ -10366,6 +10530,7 @@ msgid "Entry price"
 msgstr ""
 
 #: src/pages/ParseTransaction/ParseTransaction.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Cancelled"
 msgstr ""
 
@@ -10887,6 +11052,7 @@ msgstr ""
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeInfoIcon/TradeInfoIcon.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Close"
 msgstr ""
 

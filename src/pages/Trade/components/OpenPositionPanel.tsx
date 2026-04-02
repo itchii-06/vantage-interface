@@ -1,0 +1,315 @@
+/**
+ * OpenPositionPanel.tsx
+ *
+ * Form for opening a new Long / Short position via PositionRouter.
+ *
+ * Features:
+ *   - Collateral token selection: USDC (ERC-20) or native ETH
+ *   - Size input (USD) + Leverage slider (1×–50×)
+ *   - Slippage selector (0.1% / 0.3% / 0.5% / custom)
+ *   - Bid/Ask spread display
+ *   - Approve + Submit buttons with correct state management
+ */
+
+import { t } from "@lingui/macro";
+import { Contract, MaxUint256, formatEther, parseUnits } from "ethers";
+import { useMemo, useState } from "react";
+
+import type { UsePositionRequestsResult } from "domain/vantage/trade/usePositionRequests";
+import type { PositionRouterTradeResult } from "domain/vantage/trade/usePositionRouterTrade";
+import { DEFAULT_SLIPPAGE_BPS } from "domain/vantage/trade/usePositionRouterTrade";
+import type { SpreadData } from "domain/vantage/trade/useSpread";
+import { useChainId } from "lib/chains";
+import { helperToast } from "lib/helperToast";
+import { getProvider } from "lib/rpc";
+import useWallet from "lib/wallets/useWallet";
+import TokenAbi from "sdk/abis/Token";
+import { getVantageContractAddress } from "vantage/contracts";
+
+import Button from "components/Button/Button";
+
+import { SpreadBadge } from "./SpreadBadge";
+
+// Tokens available for trade on localhost
+const COLLATERAL_OPTIONS = [
+  { label: "USDC", decimals: 6, isNative: false },
+  { label: "ETH", decimals: 18, isNative: true },
+] as const;
+
+const SLIPPAGE_PRESETS = [10, 30, 50] as const; // bps
+
+type Props = {
+  isLong: boolean;
+  indexToken: string;
+  collateralToken: string;
+  spread: SpreadData;
+  trade: PositionRouterTradeResult;
+  requests: UsePositionRequestsResult;
+  onSuccess?: () => void;
+};
+
+export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread, trade, requests, onSuccess }: Props) {
+  const { account, signer } = useWallet();
+  const { chainId } = useChainId();
+  const provider = useMemo(() => getProvider(undefined, chainId), [chainId]);
+
+  const [collateralInput, setCollateralInput] = useState("");
+  const [leverage, setLeverage] = useState(2); // ×
+  const [slippageBps, setSlippageBps] = useState<number>(DEFAULT_SLIPPAGE_BPS);
+  const [customSlippage, setCustomSlippage] = useState("");
+  const [useNativeEth, setUseNativeEth] = useState(false);
+  const [allowance, setAllowance] = useState<bigint>(0n);
+  const [allowanceLoaded, setAllowanceLoaded] = useState(false);
+  const [isApproving, setIsApproving] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const collateralDecimals = useNativeEth ? 18 : 6;
+
+  // Parse collateral amount
+  const amountIn = useMemo(() => {
+    try {
+      if (!collateralInput || parseFloat(collateralInput) <= 0) return 0n;
+      return parseUnits(collateralInput, collateralDecimals);
+    } catch {
+      return 0n;
+    }
+  }, [collateralInput, collateralDecimals]);
+
+  // USD value of collateral (using ask price for long, bid for short)
+  const collateralUsd = useMemo(() => {
+    const price = isLong ? spread.askPrice : spread.bidPrice;
+    if (useNativeEth) {
+      return (amountIn * price) / 10n ** 18n;
+    }
+    // USDC: 1 USDC = $1 (6 decimals → WAD)
+    return amountIn * 10n ** 12n; // 6 dec → 18 dec
+  }, [amountIn, useNativeEth, spread, isLong]);
+
+  const sizeDelta = collateralUsd * BigInt(leverage);
+
+  // Mark price for acceptablePrice calculation
+  const markPrice = isLong ? spread.askPrice : spread.bidPrice;
+
+  // Allowance check (ERC-20 only)
+  useMemo(() => {
+    if (useNativeEth || !account) {
+      setAllowanceLoaded(true);
+      return;
+    }
+    setAllowanceLoaded(false);
+    const positionRouterAddr = getVantageContractAddress(chainId, "PositionRouter");
+    const token = new Contract(collateralToken, TokenAbi, provider);
+    token
+      .allowance(account, positionRouterAddr)
+      .then((v: bigint) => {
+        setAllowance(v);
+        setAllowanceLoaded(true);
+      })
+      .catch(() => setAllowanceLoaded(true));
+  }, [account, collateralToken, chainId, provider, useNativeEth]);
+
+  const needsApproval = !useNativeEth && allowanceLoaded && amountIn > 0n && allowance < amountIn;
+
+  async function handleApprove() {
+    if (!signer || !account) return;
+    setIsApproving(true);
+    try {
+      const positionRouterAddr = getVantageContractAddress(chainId, "PositionRouter");
+      const token = new Contract(collateralToken, TokenAbi, signer);
+      const tx = await token.approve(positionRouterAddr, MaxUint256);
+      await tx.wait();
+      setAllowance(MaxUint256);
+      helperToast.success(t`Approved`);
+    } catch (err: unknown) {
+      helperToast.error(err instanceof Error ? err.message : String(err));
+    } finally {
+      setIsApproving(false);
+    }
+  }
+
+  async function handleSubmit() {
+    if (!account || sizeDelta === 0n) return;
+    setIsSubmitting(true);
+    try {
+      const now = Date.now();
+      const expiresAtMs = trade.maxTimeDelay > 0 ? now + trade.maxTimeDelay * 1000 : 0;
+
+      const requestKey = await trade.createIncreasePosition({
+        collateralToken,
+        indexToken,
+        amountIn,
+        sizeDelta,
+        isLong,
+        markPrice,
+        slippageBps,
+        useNativeEth,
+      });
+
+      if (requestKey) {
+        requests.addRequest({
+          requestKey,
+          type: "increase",
+          createdAtMs: now,
+          expiresAtMs,
+          indexToken,
+          isLong,
+          sizeDelta,
+        });
+        setCollateralInput("");
+        onSuccess?.();
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  const activeSlippage = customSlippage ? Math.round(parseFloat(customSlippage) * 100) : slippageBps;
+
+  const feeEth = parseFloat(formatEther(trade.minExecutionFee)).toFixed(5);
+
+  return (
+    <div className="flex flex-col gap-12">
+      {/* Spread display */}
+      <SpreadBadge spread={spread} />
+
+      {/* Collateral type toggle */}
+      <div className="flex gap-8">
+        {COLLATERAL_OPTIONS.map((opt) => (
+          <button
+            key={opt.label}
+            onClick={() => setUseNativeEth(opt.isNative)}
+            className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${
+              useNativeEth === opt.isNative
+                ? "bg-blue-600 text-white"
+                : "bg-cold-blue-900 text-slate-400 hover:text-white"
+            }`}
+          >
+            {opt.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Collateral input */}
+      <div className="rounded-4 border border-stroke-primary bg-cold-blue-900 px-16 py-12">
+        <div className="mb-4 flex items-center justify-between text-12 text-slate-400">
+          <span>{t`Collateral`}</span>
+          <span>{useNativeEth ? "ETH" : "USDC"}</span>
+        </div>
+        <input
+          type="number"
+          min="0"
+          placeholder="0.00"
+          value={collateralInput}
+          onChange={(e) => setCollateralInput(e.target.value)}
+          className="bg-transparent w-full text-20 font-semibold text-white outline-none placeholder:text-slate-600"
+        />
+        {collateralUsd > 0n && (
+          <div className="mt-4 text-12 text-slate-400">≈ ${parseFloat(formatEther(collateralUsd)).toFixed(2)} USD</div>
+        )}
+      </div>
+
+      {/* Leverage slider */}
+      <div>
+        <div className="mb-6 flex items-center justify-between text-12">
+          <span className="text-slate-400">{t`Leverage`}</span>
+          <span className="font-semibold text-white">{leverage}×</span>
+        </div>
+        <input
+          type="range"
+          min={1}
+          max={50}
+          step={1}
+          value={leverage}
+          onChange={(e) => setLeverage(Number(e.target.value))}
+          className="w-full accent-blue-500"
+        />
+        <div className="mt-2 flex justify-between text-11 text-slate-500">
+          <span>1×</span>
+          <span>10×</span>
+          <span>25×</span>
+          <span>50×</span>
+        </div>
+      </div>
+
+      {/* Size preview */}
+      {sizeDelta > 0n && (
+        <div className="flex items-center justify-between rounded-4 bg-cold-blue-900 px-12 py-8 text-12">
+          <span className="text-slate-400">{t`Position Size`}</span>
+          <span className="font-medium text-white">${parseFloat(formatEther(sizeDelta)).toFixed(2)}</span>
+        </div>
+      )}
+
+      {/* Slippage */}
+      <div>
+        <div className="mb-6 text-12 text-slate-400">{t`Slippage Tolerance`}</div>
+        <div className="flex items-center gap-6">
+          {SLIPPAGE_PRESETS.map((bps) => (
+            <button
+              key={bps}
+              onClick={() => {
+                setSlippageBps(bps);
+                setCustomSlippage("");
+              }}
+              className={`rounded-4 px-10 py-5 text-12 transition-colors ${
+                !customSlippage && slippageBps === bps
+                  ? "bg-blue-600 text-white"
+                  : "bg-cold-blue-900 text-slate-400 hover:text-white"
+              }`}
+            >
+              {bps / 100}%
+            </button>
+          ))}
+          <input
+            type="number"
+            min="0"
+            placeholder={t`Custom %`}
+            value={customSlippage}
+            onChange={(e) => setCustomSlippage(e.target.value)}
+            className="w-20 rounded-4 border border-stroke-primary bg-cold-blue-900 px-8 py-5 text-12 text-white outline-none placeholder:text-slate-600"
+          />
+        </div>
+      </div>
+
+      {/* Execution fee */}
+      <div className="flex items-center justify-between text-12">
+        <span className="text-slate-400">{t`Execution Fee`}</span>
+        <span className="text-slate-300">{feeEth} ETH</span>
+      </div>
+
+      {/* Accept price */}
+      {markPrice > 0n && (
+        <div className="flex items-center justify-between text-12">
+          <span className="text-slate-400">{t`Acceptable Price`}</span>
+          <span className="text-slate-300">
+            $
+            {parseFloat(
+              formatEther(
+                isLong
+                  ? (markPrice * (10_000n + BigInt(activeSlippage))) / 10_000n
+                  : (markPrice * (10_000n - BigInt(activeSlippage))) / 10_000n
+              )
+            ).toFixed(4)}
+          </span>
+        </div>
+      )}
+
+      {/* CTA buttons */}
+      {!account ? (
+        <div className="py-8 text-center text-13 text-slate-400">{t`Connect wallet to trade`}</div>
+      ) : needsApproval ? (
+        <Button variant="primary" className="w-full" onClick={handleApprove} disabled={isApproving}>
+          {isApproving ? t`Approving…` : t`Approve USDC`}
+        </Button>
+      ) : (
+        <Button
+          variant="primary"
+          className="w-full"
+          onClick={handleSubmit}
+          disabled={isSubmitting || sizeDelta === 0n || !trade.isReady}
+        >
+          {isSubmitting ? t`Submitting…` : isLong ? t`Open Long` : t`Open Short`}
+        </Button>
+      )}
+    </div>
+  );
+}
