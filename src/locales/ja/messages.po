@@ -23,6 +23,8 @@ msgstr "スリッページ超過"
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/lp/useVantageLPActions.ts
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
@@ -316,6 +318,8 @@ msgid "settings"
 msgstr "設定"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Short"
 msgstr ""
 
@@ -505,6 +509,10 @@ msgstr "トークンを選択"
 msgid "Image generation failed. Refresh and try again."
 msgstr "画像の生成に失敗しました。更新して再度お試しください。"
 
+#: src/pages/Trade/TradePage.tsx
+msgid "Open Positions"
+msgstr ""
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Unstaking..."
 msgstr "ステーキング解除中..."
@@ -602,9 +610,17 @@ msgstr "GMXコミュニティによって開発されたプロジェクトです
 msgid "ADDRESS"
 msgstr "ADDRESS"
 
+#: src/pages/Trade/components/SpreadBadge.tsx
+msgid "Bid"
+msgstr ""
+
 #: src/pages/Earn/EarnPageLayout.tsx
 msgid "Additional opportunities"
 msgstr "追加の機会"
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+msgid "Avg Entry"
+msgstr ""
 
 #: src/pages/AccountDashboard/HistoricalLists.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
@@ -778,6 +794,10 @@ msgstr "不明なエラー"
 msgid "Market Swap"
 msgstr "市場スワップ"
 
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "Loading positions…"
+msgstr ""
+
 #: src/components/GmList/GmListItem.tsx
 msgid "View details"
 msgstr "詳細を表示"
@@ -925,6 +945,10 @@ msgstr "手数料は獲得時に計算されます。インセンティブは含
 msgid "TVL in vaults and pools"
 msgstr "ボールトおよびプール内のTVL"
 
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "Clear completed"
+msgstr ""
+
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/domain/synthetics/trade/utils/validation.ts
@@ -961,6 +985,7 @@ msgstr "1位"
 msgid "Caption"
 msgstr "キャプション"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Approve USDC"
 msgstr ""
@@ -1206,6 +1231,7 @@ msgstr "約定時に {0} が {1} にスワップされます"
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Unrealized PnL"
 msgstr "未実現PnL"
 
@@ -1432,6 +1458,8 @@ msgstr "概要"
 #: src/components/PositionItem/PositionItem.tsx
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Collateral"
 msgstr "担保"
 
@@ -1600,6 +1628,10 @@ msgstr "少なく表示"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
 msgid "Vest"
 msgstr "べスト"
+
+#: src/pages/Trade/TradePage.tsx
+msgid "Connect wallet to see positions"
+msgstr ""
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Bridge transaction hash"
@@ -1787,6 +1819,10 @@ msgstr "アカウント送金の完了"
 #: src/pages/UiPage/UiPage.tsx
 msgid "Icons & images"
 msgstr "アイコンと画像"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Approved"
+msgstr ""
 
 #: src/components/PositionItem/PositionItem.tsx
 msgid "Borrow fee / day"
@@ -1997,6 +2033,11 @@ msgstr ""
 #: src/domain/synthetics/claimHistory/claimPriceImpactRebate.ts
 msgid "Claiming price impact rebates..."
 msgstr "価格影響リベートを請求中…"
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/TradePage.tsx
+msgid "Close Position"
+msgstr ""
 
 #: src/components/Earn/AdditionalOpportunities/OpportunityCard.tsx
 msgid "Explore"
@@ -2397,6 +2438,7 @@ msgstr "建玉リザーブファクター（ロング）"
 msgid "Layer 2"
 msgstr "レイヤー2"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Approving…"
@@ -2440,6 +2482,10 @@ msgstr "{pendingReceiver}への<0>保留中の送金</0>があります"
 #: src/domain/synthetics/userFeedback/utils.ts
 msgid "How can we address your concerns?"
 msgstr "ご懸念にどのように対応すればよろしいでしょうか？"
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+msgid "Closing Size"
+msgstr ""
 
 #: src/components/DepthChart/DepthChartTooltip.tsx
 msgid "No liquidity available for increasing longs at<0/>this size. Max long size: {0}<1/><2/>Execution prices for decreasing shorts."
@@ -2571,6 +2617,10 @@ msgstr "対象となる保有資産が検出されませんでした"
 msgid "Help us improve GMX. For security, we won't contact you first. Send \"I have feedback\" to our official account:"
 msgstr "GMXの改善にご協力ください。セキュリティのため、こちらから先にご連絡することはありません。公式アカウントに「I have feedback」とお送りください:"
 
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+msgid "Slippage"
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 msgid "Existing position uses {0} collateral. This order won't apply to it. <0>Switch to {1} collateral</0>"
 msgstr "既存のポジションは{0}担保を使用しています。この注文は適用されません。<0>{1}担保に切り替える</0>"
@@ -2632,6 +2682,8 @@ msgstr "{chainName}でGMXを購入"
 #: src/components/TPSLModal/AddTPSLModal.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Size"
 msgstr "サイズ"
 
@@ -3021,6 +3073,10 @@ msgstr "注文タイプ"
 msgid "Transaction submitted"
 msgstr ""
 
+#: src/pages/Trade/components/SpreadBadge.tsx
+msgid "Ask"
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSpreadRow.tsx
 msgid "Collateral spread"
 msgstr "担保スプレッド"
@@ -3142,6 +3198,7 @@ msgid "Buy GMX from centralized services"
 msgstr "中央集権型サービスからGMXを購入"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Close Short"
 msgstr ""
 
@@ -3482,6 +3539,10 @@ msgstr "流動性不足です。流動性が確保され次第、注文が約定
 msgid "Your transfer is complete"
 msgstr "送金が完了しました"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Custom %"
+msgstr ""
+
 #: src/components/BotanixBanner/BotanixBanner.tsx
 msgid "and"
 msgstr "と"
@@ -3716,6 +3777,7 @@ msgstr "Express Trading はネットワークのネイティブトークン {0} 
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Trade"
 msgstr "トレード"
 
@@ -3941,6 +4003,10 @@ msgstr "自己転送はサポートされていません"
 msgid "Generating session..."
 msgstr "セッション生成中..."
 
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+msgid "Close request submitted — waiting for Keeper execution"
+msgstr ""
+
 #: landing/src/pages/Home/FaqSection/FaqSection.tsx
 msgid "How do I get started on GMX?"
 msgstr "GMXを始めるにはどうしたらいいですか？"
@@ -3990,6 +4056,8 @@ msgstr "仮想マーケットID"
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Leverage"
 msgstr "レバレッジ"
 
@@ -4013,6 +4081,10 @@ msgstr "パーミットに署名"
 #: src/components/GmList/GmTokensTotalBalanceInfo.tsx
 msgid "{daysConsidered}d earned fees"
 msgstr "{daysConsidered}日間の獲得手数料"
+
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "Expires"
+msgstr ""
 
 #: src/components/TokenSelector/ConnectWalletModalContent.tsx
 msgid "Wallet icon"
@@ -4060,6 +4132,7 @@ msgstr "自動キャンセルTP/SL注文は最大5件まで許可されていま
 #: src/components/TradeBox/tradeboxConstants.tsx
 #: src/components/TradeHistory/TradeHistoryRow/TradeHistoryRow.tsx
 #: src/domain/synthetics/positions/utils.ts
+#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Market"
 msgstr "マーケット"
 
@@ -4087,6 +4160,7 @@ msgid "Smart wallets are not supported on Express Trading or One-Click Trading"
 msgstr "スマートウォレットは Express Trading および One-Click Trading に対応していません"
 
 #: src/pages/ParseTransaction/ParseTransaction.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Executed"
 msgstr "実行済み"
 
@@ -4119,6 +4193,10 @@ msgstr "いつでもアンステークできますか？"
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max profit limit reached"
 msgstr "最大利益上限に達しました"
+
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "Pending Requests"
+msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Virtual inventory for swaps (long / short)"
@@ -4211,6 +4289,10 @@ msgstr "スワップを送信しました"
 msgid "The difference between expected and actual execution price due to volatility. Orders won't execute if slippage exceeds your maximum. Adjust the default in settings.<0/><1/>A low value (e.g. less than -{0}) may cause failed orders during volatility.<2/><3/>Slippage differs from price impact, which is based on open interest imbalances. <4>Read more</4>."
 msgstr "ボラティリティによる予想約定価格と実際の約定価格の差です。スリッページが最大値を超えると注文は約定されません。デフォルト値は設定で調整できます。<0/><1/>低い値（例: -{0} 未満）を設定すると、ボラティリティが高い時に注文が失敗する可能性があります。<2/><3/>スリッページは建玉の偏りに基づく価格への影響とは異なります。<4>詳細はこちら</4>。"
 
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "Expired"
+msgstr ""
+
 #: src/components/TradeboxPoolWarnings/TradeboxPoolWarnings.tsx
 msgid "Existing position in {0} pool but lacks liquidity for this order"
 msgstr "{0} プールに既存のポジションがありますが、この注文に必要な流動性が不足しています"
@@ -4241,6 +4323,11 @@ msgstr "清算済"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Blueberry Pulse"
 msgstr "Blueberry Pulse"
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Submitting…"
+msgstr ""
 
 #: src/domain/tokens/approveTokens.tsx
 msgid "Approval cancelled"
@@ -4540,6 +4627,10 @@ msgstr "受け取りを処理中..."
 msgid "Failed to load order data:"
 msgstr "注文データの読み込みに失敗しました:"
 
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+msgid "Decrease request cancelled"
+msgstr ""
+
 #: src/components/Earn/Discovery/EarnYieldOverview.tsx
 msgid "Network"
 msgstr "ネットワーク"
@@ -4571,6 +4662,7 @@ msgstr "GM プール"
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "PnL"
 msgstr "損益"
 
@@ -5161,6 +5253,9 @@ msgstr "設定が更新されました"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Short"
 msgstr "ショート"
 
@@ -5229,6 +5324,10 @@ msgstr "リンク"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Max lendable impact factor for withdrawals"
 msgstr "出金の最大貸出可能インパクトファクター"
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+msgid "Reduce Position ({closePct}%)"
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/ClaimModal.tsx
 msgid "Claim completed"
@@ -5515,6 +5614,10 @@ msgstr "{typeString} ショート Stop Market: 価格がトリガー価格を下
 msgid "Settings"
 msgstr "設定"
 
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+msgid "Increase request cancelled"
+msgstr ""
+
 #: src/pages/UiPage/UiPage.tsx
 msgid "leading-1"
 msgstr "leading-1"
@@ -5668,6 +5771,10 @@ msgstr "編集アイコンをクリックして担保を調整してください
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Staked on Avalanche"
 msgstr "Avalancheでステーク済"
+
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "Pending"
+msgstr ""
 
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "s:"
@@ -6267,6 +6374,7 @@ msgid "Steady returns without management"
 msgstr "管理なしの安定リターン"
 
 #: src/components/TradeBox/TradeBoxRows/SwapSpreadRow.tsx
+#: src/pages/Trade/components/SpreadBadge.tsx
 msgid "Spread"
 msgstr "スプレッド"
 
@@ -6610,6 +6718,10 @@ msgstr "昨年"
 msgid "per"
 msgstr "あたり"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Position Size"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Reserve factor longs"
 msgstr "リザーブファクター（ロング）"
@@ -6774,6 +6886,7 @@ msgstr "入金するアセットを選択してください"
 #: src/components/PositionList/PositionList.tsx
 #: src/components/PositionList/PositionList.tsx
 #: src/pages/Jobs/Jobs.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "No open positions"
 msgstr "オープンのポジションはありません"
 
@@ -6960,6 +7073,8 @@ msgid "Insufficient liquidity to swap collateral"
 msgstr "担保スワップのための流動性不足"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Long"
 msgstr ""
 
@@ -7006,6 +7121,8 @@ msgstr "ガバナンス"
 #: src/components/StatusNotification/OrderStatusNotification.tsx
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -7750,6 +7867,10 @@ msgstr "提出"
 msgid "Claimed"
 msgstr "受け取り完了"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Connect wallet to trade"
+msgstr ""
+
 #: src/components/TwapRows/TwapRows.tsx
 msgid "less than a minute"
 msgstr "1分未満"
@@ -7896,6 +8017,10 @@ msgstr "通知"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Trading mode"
 msgstr "トレーディングモード"
+
+#: src/pages/Trade/TradePage.tsx
+msgid "Back"
+msgstr ""
 
 #: landing/src/pages/Home/RoadmapSection/Quareters.tsx
 msgid "<0>Cross-margin</0><1>Cross-collateral</1>"
@@ -8335,6 +8460,11 @@ msgstr "オープン手数料"
 msgid "Edit referral code"
 msgstr "リファラルコードを編集"
 
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Acceptable Price"
+msgstr ""
+
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell request sent"
 msgstr "売却リクエストが送信されました"
@@ -8387,6 +8517,7 @@ msgid "Increase size (TWAP)"
 msgstr "サイズを増加（TWAP）"
 
 #: src/pages/AccountEvents/AccountEvents.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Refresh"
 msgstr "更新"
 
@@ -8416,6 +8547,11 @@ msgstr "<0>{0}</0> を請求"
 #: src/components/TradeBox/TradeBox.tsx
 msgid "Receive"
 msgstr "受取"
+
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Execution Fee"
+msgstr ""
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
@@ -8473,6 +8609,10 @@ msgstr "{nativeTokenSymbol} を移転"
 msgid "Opening position..."
 msgstr ""
 
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "Side"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "LIQUIDITY SHORT"
 msgstr "流動性 ショート"
@@ -8527,6 +8667,10 @@ msgstr "裏付け構成"
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Claimable rebates"
 msgstr "請求可能なリベート"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Slippage Tolerance"
+msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx
@@ -8999,6 +9143,14 @@ msgstr "取引履歴"
 msgid "Exposure to backing tokens"
 msgstr "裏付けトークンへのエクスポージャー"
 
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+msgid "Request submitted — waiting for Keeper execution"
+msgstr ""
+
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
+msgid "No pending requests"
+msgstr ""
+
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
 msgid "Search type"
 msgstr "タイプを検索"
@@ -9055,6 +9207,10 @@ msgstr "エクスプレス + ワンクリック"
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "GM tokens represent shares in a liquidity pool for a single GMX market. Buy GM to provide liquidity and earn fees from leverage trading, swaps, and market-making activity on that specific market. All rewards are auto-compounded."
 msgstr "GMトークンは、単一のGMXマーケットの流動性プールにおけるシェアを表します。GMを購入して流動性を提供し、そのマーケットにおけるレバレッジ取引、スワップ、マーケットメイキング活動から手数料を獲得できます。すべての報酬は自動的に複利運用されます。"
+
+#: src/pages/Trade/TradePage.tsx
+msgid "Open Long / Short positions via PositionRouter."
+msgstr ""
 
 #: src/components/Earn/AdditionalOpportunities/useOpportunities.tsx
 msgid "Lend GLV or GM tokens, borrow against them, or use LP strategies to maximize yield"
@@ -9118,6 +9274,9 @@ msgstr "{gmOrGlvLabel}の売却は成功しましたが、Baseへのブリッジ
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Long"
 msgstr "ロング"
 
@@ -9631,6 +9790,7 @@ msgid "Use the TP/SL button to set TP/SL orders."
 msgstr "TP/SLボタンを使用してTP/SL注文を設定してください。"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Close Long"
 msgstr ""
 
@@ -10178,6 +10338,10 @@ msgstr "One-Click Trading の承認が無効です。チェーンの切り替え
 msgid "GLP to GM airdrop"
 msgstr "GLP から GM へのエアドロップ"
 
+#: src/pages/Trade/TradePage.tsx
+msgid "Pending Orders"
+msgstr ""
+
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled"
 msgstr "売却注文がキャンセルされました"
@@ -10374,6 +10538,7 @@ msgid "Entry price"
 msgstr "エントリー価格"
 
 #: src/pages/ParseTransaction/ParseTransaction.tsx
+#: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Cancelled"
 msgstr "キャンセル済み"
 
@@ -10895,6 +11060,7 @@ msgstr "複数の資産クラス"
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeInfoIcon/TradeInfoIcon.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
+#: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Close"
 msgstr "クローズ"
 

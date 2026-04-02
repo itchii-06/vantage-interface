@@ -29,6 +29,7 @@ import Referrals from "pages/Referrals/Referrals";
 import ReferralsTier from "pages/ReferralsTier/ReferralsTier";
 import { SyntheticsPage } from "pages/SyntheticsPage/SyntheticsPage";
 import { SyntheticsStats } from "pages/SyntheticsStats/SyntheticsStats";
+import TradePage from "pages/Trade/TradePage";
 import VantageLPPage from "pages/VantageLP/VantageLPPage";
 import VaultDetailPage from "pages/VaultDetail/VaultDetailPage";
 import VaultsPage from "pages/Vaults/VaultsPage";
@@ -170,6 +171,9 @@ export function MainRoutes({ openSettings }: { openSettings: () => void }) {
       </Route>
       <Route exact path="/vaults/:address">
         <VaultDetailPage />
+      </Route>
+      <Route exact path="/trade">
+        <TradePage />
       </Route>
       <Route exact path="/jobs">
         <Jobs />
