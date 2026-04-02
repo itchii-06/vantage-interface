@@ -514,29 +514,29 @@ export default function VaultDetailPage() {
                     {t`Mint 1,000 ${cfg.symbol} to wallet`}
                   </Button>
 
-                  {/* Sync NAV */}
-                  <Button
-                    variant="secondary"
-                    size="small"
-                    onClick={async () => {
-                      await actions.debugSyncNav();
-                      await data.refresh();
-                    }}
-                    className="w-full text-12"
-                  >
-                    {t`Sync NAV`}
-                  </Button>
-
                   {/* Rebasing-specific */}
                   {cfg.assetType === 1 && (
-                    <Button
-                      variant="secondary"
-                      size="small"
-                      onClick={() => actions.debugRebase(500)}
-                      className="w-full text-12"
-                    >
-                      {t`+5% Rebase`}
-                    </Button>
+                    <>
+                      <Button
+                        variant="secondary"
+                        size="small"
+                        onClick={() => actions.debugRebase(500)}
+                        className="w-full text-12"
+                      >
+                        {t`+5% Rebase`}
+                      </Button>
+                      <Button
+                        variant="secondary"
+                        size="small"
+                        onClick={async () => {
+                          await actions.debugSyncRebasingBalance();
+                          await data.refresh();
+                        }}
+                        className="w-full text-12"
+                      >
+                        {t`Sync Rebasing Balance`}
+                      </Button>
+                    </>
                   )}
 
                   {/* PriceShare / Direct price controls */}

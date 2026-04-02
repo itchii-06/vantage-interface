@@ -3537,6 +3537,10 @@ msgstr "При срабатывании возможна недостаточн�
 msgid "Withdrawing…"
 msgstr ""
 
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Rebasing balance synced"
+msgstr ""
+
 #: landing/src/pages/Home/FaqSection/FaqSection.tsx
 msgid "What makes GMX more cost-efficient than other perpetual platforms?"
 msgstr "Что делает GMX более экономичным, чем другие перпетуальные платформы?"
@@ -6198,6 +6202,10 @@ msgstr "Размер позиции превышает стоимость пул
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Impact exponent (positive)"
 msgstr "Экспонента влияния (положительная)"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Sync Rebasing Balance"
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Can't withdraw collateral. Remaining collateral would be below minimum"
@@ -9479,8 +9487,8 @@ msgid "Select network"
 msgstr "Выберите сеть"
 
 #: src/domain/vantage/vaults/useVaultActions.ts
-msgid "NAV synced"
-msgstr ""
+#~ msgid "NAV synced"
+#~ msgstr ""
 
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "No loss of fund ownership"
@@ -10711,8 +10719,8 @@ msgid "Network fee"
 msgstr "Комиссия сети"
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
-msgid "Sync NAV"
-msgstr ""
+#~ msgid "Sync NAV"
+#~ msgstr ""
 
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivated"

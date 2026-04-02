@@ -209,22 +209,25 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
   );
 
   // ---------------------------------------------------------------------------
-  // Debug: Sync NAV (calls vault.syncNetAssetValue — Keeper role required)
+  // Debug: Sync Rebasing Balance (calls vault.syncRebasingBalance — Keeper role required)
+  //        Only meaningful for Rebasing (assetType 1) vaults.
   // ---------------------------------------------------------------------------
 
-  const debugSyncNav = useCallback(async (): Promise<void> => {
+  const debugSyncRebasingBalance = useCallback(async (): Promise<void> => {
     if (!signer) return;
     try {
       const vault = new Contract(cfg.vaultAddress, VaultAbi, signer);
       const tx = await (
-        vault as ethers.Contract & { syncNetAssetValue: () => Promise<{ wait: () => Promise<unknown> }> }
-      ).syncNetAssetValue();
+        vault as ethers.Contract & {
+          syncRebasingBalance: (token: string) => Promise<{ wait: () => Promise<unknown> }>;
+        }
+      ).syncRebasingBalance(cfg.tokenAddress);
       await tx.wait();
-      helperToast.success(t`NAV synced`);
+      helperToast.success(t`Rebasing balance synced`);
     } catch (err: unknown) {
       helperToast.error(err instanceof Error ? err.message : String(err));
     }
-  }, [signer, cfg.vaultAddress]);
+  }, [signer, cfg.vaultAddress, cfg.tokenAddress]);
 
   // ---------------------------------------------------------------------------
   // Debug: Mint tokens to user (testnet only)
@@ -255,7 +258,7 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
     debugRebase,
     debugSetPrice,
     debugMint,
-    debugSyncNav,
+    debugSyncRebasingBalance,
     isApprovalNeeded,
     isApproving,
     allowance,
