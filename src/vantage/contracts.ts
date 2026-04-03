@@ -114,7 +114,7 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     UniversalPriceLogic: ZERO,
     Vault: localhostDeployment.addresses.Vault ?? ZERO,
     VaultFactory: ZERO,
-    VaultReader: ZERO,
+    VaultReader: (localhostDeployment.addresses as { VaultReader?: string }).VaultReader ?? ZERO,
     YieldAccumulator: localhostDeployment.addresses.YieldAccumulator ?? ZERO,
     YieldAwarePriceFeed: ZERO,
   },

@@ -11,6 +11,7 @@
 
 import { t } from "@lingui/macro";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { useVantagePositions } from "domain/vantage/positions/useVantagePositions";
 import { usePositionRequests } from "domain/vantage/trade/usePositionRequests";
@@ -35,11 +36,17 @@ const WETH_ADDRESS = d.tokens?.WETH ?? "";
 export default function TradePage() {
   const { account } = useWallet();
   const { chainId } = useChainId();
+  const { tradeType } = useParams<{ tradeType?: string }>();
 
-  const [activeTab, setActiveTab] = useState<"long" | "short">("long");
+  const [activeTab, setActiveTab] = useState<"long" | "short">(tradeType === "short" ? "short" : "long");
   const [selectedPositionKey, setSelectedPositionKey] = useState<string | null>(null);
 
-  const { positions, isLoading: positionsLoading, refetch } = useVantagePositions(account, chainId);
+  // Pass known collateral tokens so positions opened with USDC collateral are found.
+  const {
+    positions,
+    isLoading: positionsLoading,
+    refetch,
+  } = useVantagePositions(account, chainId, USDC_ADDRESS ? [USDC_ADDRESS] : undefined);
   const trade = usePositionRouterTrade();
   const requests = usePositionRequests();
   const spread = useSpread(WETH_ADDRESS || undefined);

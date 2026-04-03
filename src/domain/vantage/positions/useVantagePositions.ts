@@ -21,8 +21,10 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+import { useVault } from "hooks/useVantageContracts";
+import { getProvider } from "lib/rpc";
 import { getVantageContractAddress } from "vantage/contracts";
-import { useVault, useVaultReader } from "hooks/useVantageContracts";
+import { VaultReader__factory } from "vantage/types";
 
 import type { VantagePosition } from "./types";
 
@@ -35,7 +37,9 @@ type UseVantagePositionsResult = {
 
 export function useVantagePositions(
   account: string | undefined,
-  chainId: number
+  chainId: number,
+  /** Known collateral tokens to check against each index token. Defaults to [indexToken] (GMX-style). */
+  collateralTokens?: string[]
 ): UseVantagePositionsResult {
   const [positions, setPositions] = useState<VantagePosition[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +47,6 @@ export function useVantagePositions(
   const [tick, setTick] = useState(0);
 
   const vault = useVault(undefined, chainId);
-  const vaultReader = useVaultReader(undefined, chainId);
 
   const refetch = useCallback(() => setTick((t) => t + 1), []);
 
@@ -52,6 +55,15 @@ export function useVantagePositions(
       setPositions([]);
       return;
     }
+
+    // VaultReader may not be deployed on all networks (e.g. localhost).
+    // Create it lazily inside the effect so missing address doesn't throw.
+    const ZERO = "0x0000000000000000000000000000000000000000";
+    const vaultReaderAddress = getVantageContractAddress(chainId, "VaultReader");
+    const vaultReader =
+      vaultReaderAddress && vaultReaderAddress !== ZERO
+        ? VaultReader__factory.connect(vaultReaderAddress, getProvider(undefined, chainId))
+        : null;
 
     let cancelled = false;
 
@@ -65,46 +77,54 @@ export function useVantagePositions(
 
         const openPositions: VantagePosition[] = [];
 
-        for (const token of assets) {
-          for (const isLong of [true, false]) {
-            if (cancelled) return;
+        for (const indexToken of assets) {
+          // Candidate collateral tokens: caller-supplied list + the index token itself
+          // (GMX-style longs use collateral == index; our UI uses USDC for all positions).
+          const collaterals = collateralTokens ? [...new Set([...collateralTokens, indexToken])] : [indexToken];
 
-            const key = await vault.getPositionKey(account!, token, token, isLong);
-            const raw = await vault.positions(key);
+          for (const collateralToken of collaterals) {
+            for (const isLong of [true, false]) {
+              if (cancelled) return;
 
-            // Skip closed or never-opened positions
-            if (raw.size === 0n) continue;
+              const key = await vault.getPositionKey(account!, collateralToken, indexToken, isLong);
+              const raw = await vault.positions(key);
 
-            // Fetch unrealized PnL
-            let pendingPnl = 0n;
-            try {
-              const pnlResult = await vaultReader.getPendingPnL(
-                vaultAddress,
-                account!,
-                token,
-                token,
-                isLong
-              );
-              if (pnlResult.exists) {
-                pendingPnl = pnlResult.pnlUsd;
+              // Skip closed or never-opened positions
+              if (raw.size === 0n) continue;
+
+              // Fetch unrealized PnL (skipped when VaultReader is not deployed)
+              let pendingPnl = 0n;
+              if (vaultReader) {
+                try {
+                  const pnlResult = await vaultReader.getPendingPnL(
+                    vaultAddress,
+                    account!,
+                    collateralToken,
+                    indexToken,
+                    isLong
+                  );
+                  if (pnlResult.exists) {
+                    pendingPnl = pnlResult.pnlUsd;
+                  }
+                } catch {
+                  // getPendingPnL may revert if position doesn't exist — safe to ignore
+                }
               }
-            } catch {
-              // getPendingPnL may revert if position doesn't exist — safe to ignore
-            }
 
-            openPositions.push({
-              key: key as string,
-              account: account!,
-              collateralToken: token,
-              indexToken: raw.indexToken,
-              isLong,
-              size: raw.size,
-              collateral: raw.collateral,
-              averagePrice: raw.averagePrice,
-              entryFundingRate: raw.entryFundingRate,
-              lastUpdatedAt: raw.lastUpdatedAt,
-              pendingPnl,
-            });
+              openPositions.push({
+                key: key as string,
+                account: account!,
+                collateralToken,
+                indexToken: raw.indexToken,
+                isLong,
+                size: raw.size,
+                collateral: raw.collateral,
+                averagePrice: raw.averagePrice,
+                entryFundingRate: raw.entryFundingRate,
+                lastUpdatedAt: raw.lastUpdatedAt,
+                pendingPnl,
+              });
+            }
           }
         }
 
@@ -126,7 +146,7 @@ export function useVantagePositions(
     return () => {
       cancelled = true;
     };
-  }, [account, chainId, vault, vaultReader, tick]);
+  }, [account, chainId, vault, tick]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { positions, isLoading, error, refetch };
 }

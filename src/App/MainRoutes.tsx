@@ -27,7 +27,6 @@ import { PoolsDetails } from "pages/PoolsDetails/PoolsDetails";
 import { PriceImpactRebatesStatsPage } from "pages/PriceImpactRebatesStats/PriceImpactRebatesStats";
 import Referrals from "pages/Referrals/Referrals";
 import ReferralsTier from "pages/ReferralsTier/ReferralsTier";
-import { SyntheticsPage } from "pages/SyntheticsPage/SyntheticsPage";
 import { SyntheticsStats } from "pages/SyntheticsStats/SyntheticsStats";
 import TradePage from "pages/Trade/TradePage";
 import VantageLPPage from "pages/VantageLP/VantageLPPage";
@@ -85,7 +84,7 @@ const DecodeErrorPage = () => (
   </Suspense>
 );
 
-export function MainRoutes({ openSettings }: { openSettings: () => void }) {
+export function MainRoutes({ openSettings: _openSettings }: { openSettings: () => void }) {
   const { chainId } = useChainId();
 
   const { pathname } = useLocation();
@@ -159,9 +158,7 @@ export function MainRoutes({ openSettings }: { openSettings: () => void }) {
         </SyntheticsStateContextProvider>
       </Route>
       <Route exact path="/trade/:tradeType?">
-        <SyntheticsStateContextProvider skipLocalReferralCode={false} pageType="trade">
-          <SyntheticsPage openSettings={openSettings} />
-        </SyntheticsStateContextProvider>
+        <TradePage />
       </Route>
       <Route exact path="/vantage-lp">
         <VantageLPPage />
@@ -171,9 +168,6 @@ export function MainRoutes({ openSettings }: { openSettings: () => void }) {
       </Route>
       <Route exact path="/vaults/:address">
         <VaultDetailPage />
-      </Route>
-      <Route exact path="/trade">
-        <TradePage />
       </Route>
       <Route exact path="/jobs">
         <Jobs />

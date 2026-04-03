@@ -30,12 +30,13 @@ export function PositionListPanel({ positions, isLoading, selectedKey, onSelect 
   return (
     <div className="overflow-hidden rounded-4 border border-stroke-primary">
       {/* Header */}
-      <div className="bg-cold-blue-950 grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr] border-b border-stroke-primary px-16 py-10 text-11 text-slate-400">
+      <div className="bg-cold-blue-950 grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr_auto] border-b border-stroke-primary px-16 py-10 text-11 text-slate-400">
         <div>{t`Market`}</div>
         <div className="text-right">{t`Side`}</div>
         <div className="text-right">{t`Size`}</div>
         <div className="text-right">{t`Leverage`}</div>
         <div className="text-right">{t`PnL`}</div>
+        <div />
       </div>
 
       {isLoading && <div className="py-24 text-center text-13 text-slate-400">{t`Loading positions…`}</div>}
@@ -52,9 +53,8 @@ export function PositionListPanel({ positions, isLoading, selectedKey, onSelect 
         return (
           <div
             key={pos.key}
-            onClick={() => onSelect(isSelected ? null : pos.key)}
-            className={`grid cursor-pointer grid-cols-[1.5fr_1fr_1fr_1fr_1fr] items-center border-b border-stroke-primary px-16 py-12 text-13 transition-colors last:border-0 hover:bg-slate-800/40 ${
-              isSelected ? "bg-blue-900/20 ring-1 ring-inset ring-blue-600" : ""
+            className={`grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr_auto] items-center border-b border-stroke-primary px-16 py-12 text-13 transition-colors last:border-0 ${
+              isSelected ? "bg-blue-900/20 ring-1 ring-inset ring-blue-600" : "hover:bg-slate-800/40"
             }`}
           >
             <div className="font-medium text-white">{shortenAddr(pos.indexToken)}</div>
@@ -66,6 +66,18 @@ export function PositionListPanel({ positions, isLoading, selectedKey, onSelect 
             <div className={`text-right font-medium ${pnlColor}`}>
               {pnlSign}
               {formatVantageUsd(pos.pendingPnl < 0n ? -pos.pendingPnl : pos.pendingPnl)}
+            </div>
+            <div className="pl-12">
+              <button
+                onClick={() => onSelect(isSelected ? null : pos.key)}
+                className={`rounded-4 px-10 py-4 text-12 font-medium transition-colors ${
+                  isSelected
+                    ? "bg-blue-600 text-white"
+                    : "text-slate-300 bg-cold-blue-900 hover:bg-blue-700 hover:text-white"
+                }`}
+              >
+                {isSelected ? t`閉じる` : t`詳細`}
+              </button>
             </div>
           </div>
         );

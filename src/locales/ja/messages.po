@@ -8792,6 +8792,10 @@ msgstr "リベート"
 msgid "Events for account:"
 msgstr "アカウントのイベント："
 
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "閉じる"
+msgstr ""
+
 #: src/pages/UiPage/UiPage.tsx
 #: src/pages/UiPage/UiPage.tsx
 msgid "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus beatae atque eligendi sunt quasi et porro nemo cumque nesciunt dolorum earum, minus fuga similique exercitationem ad. Eos omnis vitae suscipit recusandae iste adipisci quasi rem odio, quidem qui modi impedit quibusdam culpa nemo distinctio rerum tempora sequi facilis quaerat laudantium pariatur dicta ab. Pariatur mollitia magni consectetur praesentium nulla nobis non voluptates laborum obcaecati enim unde, in tempore voluptas, expedita aut corrupti ipsum sequi consequatur iste corporis quasi! Officia nihil pariatur, asperiores molestiae quia earum tempora, in neque inventore quisquam dolore veniam minus beatae adipisci quod hic? Saepe, aperiam consequuntur!"
@@ -10515,6 +10519,10 @@ msgstr "{0}: {1} {2}{3}/USD decrease"
 msgid "Enter a new size or price"
 msgstr "新しいサイズまたは価格を入力"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Position size exceeds OI cap. Available: ${availableUsd} (LP liquidity is ${0} × {1}%)"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 #: src/domain/synthetics/trade/utils/validation.ts
 #: src/domain/synthetics/trade/utils/validation.ts
@@ -10770,6 +10778,10 @@ msgstr "非常に可能性が高い"
 #: src/pages/ReferralsTier/ReferralsTier.tsx
 msgid "Save tier"
 msgstr "ティアを保存"
+
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "詳細"
+msgstr ""
 
 #: src/domain/synthetics/orders/cancelOrdersTxn.ts
 msgid "{count, plural, one {Order} other {# Orders}}"

@@ -13,7 +13,7 @@
 
 import { t } from "@lingui/macro";
 import { Contract, MaxUint256, formatEther, parseUnits } from "ethers";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import type { UsePositionRequestsResult } from "domain/vantage/trade/usePositionRequests";
 import type { PositionRouterTradeResult } from "domain/vantage/trade/usePositionRouterTrade";
@@ -25,6 +25,7 @@ import { getProvider } from "lib/rpc";
 import useWallet from "lib/wallets/useWallet";
 import TokenAbi from "sdk/abis/Token";
 import { getVantageContractAddress } from "vantage/contracts";
+import { AssetRegistry__factory, Vault__factory } from "vantage/types";
 
 import Button from "components/Button/Button";
 
@@ -62,6 +63,9 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
   const [allowanceLoaded, setAllowanceLoaded] = useState(false);
   const [isApproving, setIsApproving] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Dynamic OI cap: read from Vault + AssetRegistry
+  const [oiCapError, setOiCapError] = useState<string | null>(null);
 
   const collateralDecimals = useNativeEth ? 18 : 6;
 
@@ -107,6 +111,41 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
       })
       .catch(() => setAllowanceLoaded(true));
   }, [account, collateralToken, chainId, provider, useNativeEth]);
+
+  // Check dynamic OI cap whenever sizeDelta changes
+  useEffect(() => {
+    if (sizeDelta === 0n) {
+      setOiCapError(null);
+      return;
+    }
+    const ZERO_ADDR = "0x0000000000000000000000000000000000000000";
+    const vaultAddr = getVantageContractAddress(chainId, "Vault");
+    const registryAddr = getVantageContractAddress(chainId, "AssetRegistry");
+    if (!vaultAddr || vaultAddr === ZERO_ADDR || !registryAddr || registryAddr === ZERO_ADDR) return;
+
+    const vault = Vault__factory.connect(vaultAddr, provider);
+    const registry = AssetRegistry__factory.connect(registryAddr, provider);
+
+    Promise.all([vault.lpManager(), vault.totalGlobalOI(), vault.totalNetAssetValue(), registry.utilizationCapBps()])
+      .then(([lpMgr, globalOI, nav, capBps]) => {
+        if (lpMgr === ZERO_ADDR || capBps === 0n || nav === 0n) {
+          setOiCapError(null);
+          return;
+        }
+        const maxOI = (nav * capBps) / 10_000n;
+        const projected = globalOI + sizeDelta;
+        if (projected > maxOI) {
+          const available = maxOI > globalOI ? maxOI - globalOI : 0n;
+          const availableUsd = parseFloat(formatEther(available)).toFixed(0);
+          setOiCapError(
+            t`Position size exceeds OI cap. Available: $${availableUsd} (LP liquidity is $${parseFloat(formatEther(nav)).toFixed(0)} × ${Number(capBps) / 100}%)`
+          );
+        } else {
+          setOiCapError(null);
+        }
+      })
+      .catch(() => setOiCapError(null)); // fail silently — don't block trading if read fails
+  }, [sizeDelta, chainId, provider]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const needsApproval = !useNativeEth && allowanceLoaded && amountIn > 0n && allowance < amountIn;
 
@@ -293,6 +332,13 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
         </div>
       )}
 
+      {/* OI cap error */}
+      {oiCapError && (
+        <div className="rounded-4 border border-red-500/40 bg-red-500/10 px-12 py-8 text-12 text-red-400">
+          {oiCapError}
+        </div>
+      )}
+
       {/* CTA buttons */}
       {!account ? (
         <div className="py-8 text-center text-13 text-slate-400">{t`Connect wallet to trade`}</div>
@@ -305,7 +351,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
           variant="primary"
           className="w-full"
           onClick={handleSubmit}
-          disabled={isSubmitting || sizeDelta === 0n || !trade.isReady}
+          disabled={isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError}
         >
           {isSubmitting ? t`Submitting…` : isLong ? t`Open Long` : t`Open Short`}
         </Button>
