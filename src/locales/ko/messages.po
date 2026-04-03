@@ -3192,6 +3192,10 @@ msgstr "GLP 풀 내 토큰의 총 가치"
 msgid "GLV vaults"
 msgstr "GLV 볼트"
 
+#: src/pages/Trade/TradePage.tsx
+msgid "Hub balance is low — ADL may trigger soon. Cover ratio: {0}%"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX from centralized services"
@@ -4057,7 +4061,6 @@ msgstr "가상 마켓 ID"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
-#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Leverage"
 msgstr "레버리지"
 
@@ -5291,6 +5294,10 @@ msgstr "GLV는 GM 풀 전반의 거래 수수료(개설, 청산, 차입, 청산,
 msgid "Failed Market Increase"
 msgstr "시장 증가 실패"
 
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "Liq. Price"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "LEV."
 msgstr "레버리지"
@@ -5711,6 +5718,10 @@ msgstr "이미 전송이 시작되었습니다"
 #: src/components/ChartTokenSelector/ChartTokenSelector.tsx
 msgid "Search token"
 msgstr "토큰 검색"
+
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "Health"
+msgstr ""
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "GLV (GMX Liquidity Vault) holds various GM tokens, giving you diversified exposure to GMX's markets. The vault auto-rebalances to high-demand markets, unlocking higher potential yield compared to isolated pools."
@@ -9625,6 +9636,10 @@ msgstr "GMX 계정"
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Limit price"
 msgstr "지정가"
+
+#: src/pages/Trade/TradePage.tsx
+msgid "ADL is active — profitable positions may be force-closed to restore Hub solvency. Cover ratio: {0}%"
+msgstr ""
 
 #: src/components/UserIncentiveDistribution/ClaimableAmounts.tsx
 msgid "Select at least one distribution to claim"

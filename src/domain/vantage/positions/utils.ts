@@ -60,3 +60,47 @@ export function isDataStale(lastUpdatedAt: bigint, maxAgeSeconds = 300): boolean
   const nowSec = BigInt(Math.floor(Date.now() / 1000));
   return nowSec - lastUpdatedAt > BigInt(maxAgeSeconds);
 }
+
+/**
+ * Calculate the oracle price at which a position becomes liquidatable.
+ * All values in WAD (1e18) precision.
+ *
+ * Long:  liqPrice = averagePrice - (availableCollateral * averagePrice) / size
+ * Short: liqPrice = averagePrice + (availableCollateral * averagePrice) / size
+ *
+ * @param maintenanceMarginBps  from AssetRegistry.getAssetRiskInfo (e.g. 100 = 1%)
+ */
+export function calcLiquidationPrice(
+  size: bigint,
+  collateral: bigint,
+  averagePrice: bigint,
+  isLong: boolean,
+  maintenanceMarginBps: bigint
+): bigint {
+  if (size === 0n || averagePrice === 0n) return 0n;
+  const maintenanceMargin = (size * maintenanceMarginBps) / 10_000n;
+  const availableCollateral = collateral > maintenanceMargin ? collateral - maintenanceMargin : 0n;
+
+  if (isLong) {
+    const loss = (availableCollateral * averagePrice) / size;
+    return averagePrice > loss ? averagePrice - loss : 0n;
+  } else {
+    return averagePrice + (availableCollateral * averagePrice) / size;
+  }
+}
+
+/**
+ * Calculate how far (in bps) the current price is from the liquidation price.
+ * 10000 = fully safe (infinite distance), 0 = at liquidation price.
+ * Returns 0 when already liquidatable.
+ */
+export function calcHealthBps(currentPrice: bigint, liqPrice: bigint, isLong: boolean): number {
+  if (liqPrice === 0n || currentPrice === 0n) return 10_000;
+  if (isLong) {
+    if (currentPrice <= liqPrice) return 0;
+    return Number(((currentPrice - liqPrice) * 10_000n) / currentPrice);
+  } else {
+    if (currentPrice >= liqPrice) return 0;
+    return Number(((liqPrice - currentPrice) * 10_000n) / currentPrice);
+  }
+}

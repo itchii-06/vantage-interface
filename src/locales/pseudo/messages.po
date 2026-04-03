@@ -3192,6 +3192,10 @@ msgstr ""
 msgid "GLV vaults"
 msgstr ""
 
+#: src/pages/Trade/TradePage.tsx
+msgid "Hub balance is low — ADL may trigger soon. Cover ratio: {0}%"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX from centralized services"
@@ -4057,7 +4061,6 @@ msgstr ""
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
-#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Leverage"
 msgstr ""
 
@@ -5291,6 +5294,10 @@ msgstr ""
 msgid "Failed Market Increase"
 msgstr ""
 
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "Liq. Price"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "LEV."
 msgstr ""
@@ -5710,6 +5717,10 @@ msgstr ""
 
 #: src/components/ChartTokenSelector/ChartTokenSelector.tsx
 msgid "Search token"
+msgstr ""
+
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "Health"
 msgstr ""
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
@@ -9624,6 +9635,10 @@ msgstr ""
 #: src/components/TradeboxMarginFields/PriceField.tsx
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Limit price"
+msgstr ""
+
+#: src/pages/Trade/TradePage.tsx
+msgid "ADL is active — profitable positions may be force-closed to restore Hub solvency. Cover ratio: {0}%"
 msgstr ""
 
 #: src/components/UserIncentiveDistribution/ClaimableAmounts.tsx
