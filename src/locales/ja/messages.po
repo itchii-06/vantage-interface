@@ -3192,6 +3192,10 @@ msgstr "GLPプール内のトークンの合計価値"
 msgid "GLV vaults"
 msgstr "GLVボールト"
 
+#: src/pages/Trade/TradePage.tsx
+msgid "Hub balance is low — ADL may trigger soon. Cover ratio: {0}%"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX from centralized services"
@@ -4057,7 +4061,6 @@ msgstr "仮想マーケットID"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
-#: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Leverage"
 msgstr "レバレッジ"
 
@@ -5291,6 +5294,10 @@ msgstr "GLV は GM プール全体の取引手数料（オープン、クロー�
 msgid "Failed Market Increase"
 msgstr "マーケット増額失敗"
 
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "Liq. Price"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "LEV."
 msgstr "LEV."
@@ -5711,6 +5718,10 @@ msgstr "転送は既に開始されています"
 #: src/components/ChartTokenSelector/ChartTokenSelector.tsx
 msgid "Search token"
 msgstr "トークンを検索"
+
+#: src/pages/Trade/components/PositionListPanel.tsx
+msgid "Health"
+msgstr ""
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "GLV (GMX Liquidity Vault) holds various GM tokens, giving you diversified exposure to GMX's markets. The vault auto-rebalances to high-demand markets, unlocking higher potential yield compared to isolated pools."
@@ -9625,6 +9636,10 @@ msgstr "GMXアカウント"
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Limit price"
 msgstr "指値価格"
+
+#: src/pages/Trade/TradePage.tsx
+msgid "ADL is active — profitable positions may be force-closed to restore Hub solvency. Cover ratio: {0}%"
+msgstr ""
 
 #: src/components/UserIncentiveDistribution/ClaimableAmounts.tsx
 msgid "Select at least one distribution to claim"

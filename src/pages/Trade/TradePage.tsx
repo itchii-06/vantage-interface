@@ -6,7 +6,7 @@
  * Layout:
  *   Left  — TradeBox (Long / Short tabs → OpenPositionPanel)
  *            When a position is selected: ClosePositionPanel replaces the open form
- *   Right — PositionListPanel + PendingRequestsPanel
+ *   Right — ADL risk banner (when Hub cover < 130%) + PositionListPanel + PendingRequestsPanel
  */
 
 import { t } from "@lingui/macro";
@@ -17,8 +17,10 @@ import { useVantagePositions } from "domain/vantage/positions/useVantagePosition
 import { usePositionRequests } from "domain/vantage/trade/usePositionRequests";
 import { usePositionRouterTrade } from "domain/vantage/trade/usePositionRouterTrade";
 import { useSpread } from "domain/vantage/trade/useSpread";
+import { useHubHealth } from "domain/vantage/useHubHealth";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
+import { getVantageContractAddress } from "vantage/contracts";
 import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
 import { ClosePositionPanel } from "./components/ClosePositionPanel";
@@ -50,6 +52,10 @@ export default function TradePage() {
   const trade = usePositionRouterTrade();
   const requests = usePositionRequests();
   const spread = useSpread(WETH_ADDRESS || undefined);
+
+  // ADL risk monitoring via SharedPayoutHub
+  const vaultAddress = getVantageContractAddress(chainId, "Vault");
+  const hubHealth = useHubHealth(chainId, vaultAddress);
 
   const selectedPosition = positions.find((p) => p.key === selectedPositionKey) ?? null;
   const isLong = activeTab === "long";
@@ -142,6 +148,21 @@ export default function TradePage() {
 
           {/* ── Right: Positions + Pending ──────────────────────────────────────── */}
           <div className="flex min-w-0 flex-1 flex-col gap-16">
+            {/* ADL risk banner */}
+            {hubHealth && hubHealth.status !== "healthy" && (
+              <div
+                className={`rounded-4 border px-14 py-10 text-13 ${
+                  hubHealth.status === "danger"
+                    ? "border-red-500/40 bg-red-500/10 text-red-400"
+                    : "text-yellow-400 border-yellow-500/40 bg-yellow-500/10"
+                }`}
+              >
+                {hubHealth.status === "danger"
+                  ? t`ADL is active — profitable positions may be force-closed to restore Hub solvency. Cover ratio: ${(hubHealth.coverRatioBps / 100).toFixed(0)}%`
+                  : t`Hub balance is low — ADL may trigger soon. Cover ratio: ${(hubHealth.coverRatioBps / 100).toFixed(0)}%`}
+              </div>
+            )}
+
             {/* Open positions */}
             <div>
               <div className="mb-10 flex items-center justify-between">

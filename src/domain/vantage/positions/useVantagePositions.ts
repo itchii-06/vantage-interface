@@ -11,6 +11,8 @@
  *   3. Filter out positions with size === 0 (closed / never opened)
  *   4. For each open position:
  *        vaultReader.getPendingPnL(...) → unrealized PnL
+ *        vault.getMinPrice(indexToken)  → currentPrice
+ *        assetRegistry.getAssetRiskInfo(indexToken) → maintenanceMarginBps (cached per token)
  *
  * NOTE: Individual RPC calls are used here (no Multicall yet).
  *       Future optimisation: inject a Multicall provider via the runnerOverride
@@ -19,14 +21,17 @@
  * NOTE: All USD values are in PRICE_PRECISION = 1e18 (WAD), not GMX's 1e30.
  */
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useVault } from "hooks/useVantageContracts";
 import { getProvider } from "lib/rpc";
 import { getVantageContractAddress } from "vantage/contracts";
-import { VaultReader__factory } from "vantage/types";
+import { AssetRegistry__factory, VaultReader__factory } from "vantage/types";
 
 import type { VantagePosition } from "./types";
+
+const POLL_INTERVAL_MS = 30_000;
+const ZERO = "0x0000000000000000000000000000000000000000";
 
 type UseVantagePositionsResult = {
   positions: VantagePosition[];
@@ -48,6 +53,9 @@ export function useVantagePositions(
 
   const vault = useVault(undefined, chainId);
 
+  // Cache maintenanceMarginBps per indexToken to avoid repeated RPC calls
+  const riskInfoCache = useRef<Map<string, bigint>>(new Map());
+
   const refetch = useCallback(() => setTick((t) => t + 1), []);
 
   useEffect(() => {
@@ -56,14 +64,19 @@ export function useVantagePositions(
       return;
     }
 
+    const provider = getProvider(undefined, chainId);
+
     // VaultReader may not be deployed on all networks (e.g. localhost).
-    // Create it lazily inside the effect so missing address doesn't throw.
-    const ZERO = "0x0000000000000000000000000000000000000000";
     const vaultReaderAddress = getVantageContractAddress(chainId, "VaultReader");
     const vaultReader =
       vaultReaderAddress && vaultReaderAddress !== ZERO
-        ? VaultReader__factory.connect(vaultReaderAddress, getProvider(undefined, chainId))
+        ? VaultReader__factory.connect(vaultReaderAddress, provider)
         : null;
+
+    // AssetRegistry may not be deployed on all networks (e.g. localhost).
+    const registryAddr = getVantageContractAddress(chainId, "AssetRegistry");
+    const assetRegistry =
+      registryAddr && registryAddr !== ZERO ? AssetRegistry__factory.connect(registryAddr, provider) : null;
 
     let cancelled = false;
 
@@ -79,8 +92,27 @@ export function useVantagePositions(
 
         for (const indexToken of assets) {
           // Candidate collateral tokens: caller-supplied list + the index token itself
-          // (GMX-style longs use collateral == index; our UI uses USDC for all positions).
           const collaterals = collateralTokens ? [...new Set([...collateralTokens, indexToken])] : [indexToken];
+
+          // Fetch current oracle price for this index token
+          let currentPrice = 0n;
+          try {
+            currentPrice = await vault.getMinPrice(indexToken);
+          } catch {
+            // price unavailable — skip health calculations for this token
+          }
+
+          // Fetch maintenanceMarginBps from AssetRegistry (with per-token cache)
+          let maintenanceMarginBps = riskInfoCache.current.get(indexToken) ?? 0n;
+          if (maintenanceMarginBps === 0n && assetRegistry) {
+            try {
+              const riskInfo = await assetRegistry.getAssetRiskInfo(indexToken);
+              maintenanceMarginBps = riskInfo.maintenanceMarginBps;
+              riskInfoCache.current.set(indexToken, maintenanceMarginBps);
+            } catch {
+              // AssetRegistry not configured for this token — leave as 0
+            }
+          }
 
           for (const collateralToken of collaterals) {
             for (const isLong of [true, false]) {
@@ -89,7 +121,6 @@ export function useVantagePositions(
               const key = await vault.getPositionKey(account!, collateralToken, indexToken, isLong);
               const raw = await vault.positions(key);
 
-              // Skip closed or never-opened positions
               if (raw.size === 0n) continue;
 
               // Fetch unrealized PnL (skipped when VaultReader is not deployed)
@@ -123,6 +154,8 @@ export function useVantagePositions(
                 entryFundingRate: raw.entryFundingRate,
                 lastUpdatedAt: raw.lastUpdatedAt,
                 pendingPnl,
+                currentPrice,
+                maintenanceMarginBps,
               });
             }
           }
@@ -143,8 +176,15 @@ export function useVantagePositions(
     }
 
     fetch();
+
+    // Poll every 30 seconds for real-time PnL and price updates
+    const intervalId = setInterval(() => {
+      if (!cancelled) fetch();
+    }, POLL_INTERVAL_MS);
+
     return () => {
       cancelled = true;
+      clearInterval(intervalId);
     };
   }, [account, chainId, vault, tick]); // eslint-disable-line react-hooks/exhaustive-deps
 

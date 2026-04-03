@@ -24,6 +24,10 @@ export type VantagePosition = {
   lastUpdatedAt: bigint;
   /** Unrealized PnL in USD, 1e18 precision (from VaultReader.getPendingPnL) */
   pendingPnl: bigint;
+  /** Current oracle price of the index token, 1e18 precision (from Vault.getMinPrice) */
+  currentPrice: bigint;
+  /** Maintenance margin in basis points from AssetRegistry (e.g. 100 = 1%). 0 if registry unavailable. */
+  maintenanceMarginBps: bigint;
 };
 
 export type VantageAccountSummary = {
