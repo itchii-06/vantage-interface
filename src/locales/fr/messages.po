@@ -581,6 +581,7 @@ msgid "Limit price below mark price"
 msgstr "Prix limite en dessous du prix mark"
 
 #: src/components/TVChart/components/OpenInterestTooltip.tsx
+#: src/pages/Trade/components/OIChart.tsx
 msgid "Long OI"
 msgstr "OI Long"
 
@@ -1125,6 +1126,10 @@ msgstr ""
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Swap fee factor (negative PI)"
 msgstr "Facteur de frais d'échange (PI négatif)"
+
+#: src/pages/Trade/components/ChartPanel.tsx
+msgid "OI"
+msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Claimable balance"
@@ -2897,6 +2902,10 @@ msgstr "SOLDE"
 msgid "GMX market token price chart"
 msgstr "Graphique des prix des tokens de marché GMX"
 
+#: src/pages/Trade/components/OIChart.tsx
+msgid "No position data yet"
+msgstr ""
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Lifetime LP rewards"
 msgstr "Récompenses LP cumulées"
@@ -4471,6 +4480,10 @@ msgstr "Tous"
 msgid "Request Market Increase"
 msgstr "Demander une augmentation du marché"
 
+#: src/pages/Trade/components/FundingRateChart.tsx
+msgid "No funding rate data yet"
+msgstr ""
+
 #: src/pages/Actions/SyntheticsActions.tsx
 msgid "GMX {VERSION_NAME} {networkName} actions for all accounts"
 msgstr "Actions GMX {VERSION_NAME} {networkName} pour tous les comptes"
@@ -4496,6 +4509,10 @@ msgstr "TWAP"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Min impact pool amount"
 msgstr "Montant minimum du pool d'impact"
+
+#: src/pages/Trade/components/FundingRateChart.tsx
+msgid "Annual Funding Rate"
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Price impact too high"
@@ -4542,6 +4559,10 @@ msgstr "Pas encore d'échanges"
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "Price change to liquidation"
 msgstr "Variation de prix jusqu'à la liquidation"
+
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "No trade data yet. Open a position to see the chart."
+msgstr ""
 
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "possibilities in total"
@@ -4979,6 +5000,11 @@ msgstr "Derniers 180j"
 #: src/components/Claims/ClaimableCardUI.tsx
 msgid "Positive funding fees"
 msgstr "Frais de financement positifs"
+
+#: src/pages/Trade/components/FundingRateChart.tsx
+#: src/pages/Trade/components/OIChart.tsx
+msgid "Loading…"
+msgstr ""
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Funds will appear in your GMX Account soon"
@@ -5685,6 +5711,7 @@ msgid "/"
 msgstr "/"
 
 #: src/components/TVChart/components/OpenInterestTooltip.tsx
+#: src/pages/Trade/components/OIChart.tsx
 msgid "Short OI"
 msgstr "Short OI"
 
@@ -6587,6 +6614,7 @@ msgstr "Prix de déclenchement de l'ordre"
 #: src/components/SwapCard/SwapCard.tsx
 #: src/components/TVChart/Chart.tsx
 #: src/pages/Dashboard/GmxCard.tsx
+#: src/pages/Trade/components/ChartPanel.tsx
 msgid "Price"
 msgstr "Prix"
 
@@ -6645,6 +6673,10 @@ msgstr "Les ordres TP/SL dépassent la position"
 #: src/components/MarketNetFee/MarketNetFee.tsx
 msgid "pay"
 msgstr "payer"
+
+#: src/pages/Trade/components/ChartPanel.tsx
+msgid "Funding Rate"
+msgstr ""
 
 #: src/pages/Earn/EarnAdditionalOpportunitiesPage.tsx
 msgid "No opportunities match your holdings"
@@ -7136,6 +7168,10 @@ msgstr "Gouvernance"
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Cancel"
 msgstr "Annuler"
+
+#: src/pages/Trade/components/ChartPanel.tsx
+msgid "Live"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Telegram group"
@@ -8722,6 +8758,10 @@ msgstr "Acheter GMX"
 msgid "Copy error"
 msgstr "Erreur de copie"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Loading chart data…"
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Saulius GMX analytics"
 msgstr "Saulius GMX analytics"
@@ -9663,10 +9703,6 @@ msgstr "TRACKER"
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Select network"
 msgstr "Sélectionner le réseau"
-
-#: src/domain/vantage/vaults/useVaultActions.ts
-#~ msgid "NAV synced"
-#~ msgstr ""
 
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "No loss of fund ownership"
@@ -10909,10 +10945,6 @@ msgstr "Transfert des fonds vers..."
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Network fee"
 msgstr "Frais de réseau"
-
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#~ msgid "Sync NAV"
-#~ msgstr ""
 
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivated"
