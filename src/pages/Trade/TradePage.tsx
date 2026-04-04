@@ -4,6 +4,7 @@
  * Route: /trade
  *
  * Layout:
+ *   Top   — ChartPanel (full-width: Price / OI / Funding Rate tabs)
  *   Left  — TradeBox (Long / Short tabs → OpenPositionPanel)
  *            When a position is selected: ClosePositionPanel replaces the open form
  *   Right — ADL risk banner (when Hub cover < 130%) + PositionListPanel + PendingRequestsPanel
@@ -23,6 +24,7 @@ import useWallet from "lib/wallets/useWallet";
 import { getVantageContractAddress } from "vantage/contracts";
 import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
+import { ChartPanel } from "./components/ChartPanel";
 import { ClosePositionPanel } from "./components/ClosePositionPanel";
 import { OpenPositionPanel } from "./components/OpenPositionPanel";
 import { PendingRequestsPanel } from "./components/PendingRequestsPanel";
@@ -76,6 +78,13 @@ export default function TradePage() {
           <h1 className="text-h1">{t`Trade`}</h1>
           <p className="text-body-medium mt-4 text-slate-400">{t`Open Long / Short positions via PositionRouter.`}</p>
         </div>
+
+        {/* ── Top: Full-width chart panel ─────────────────────────────────────── */}
+        {WETH_ADDRESS && (
+          <div className="mb-16">
+            <ChartPanel chainId={chainId} indexToken={WETH_ADDRESS} />
+          </div>
+        )}
 
         <div className="flex gap-16 lg:items-start">
           {/* ── Left: TradeBox ─────────────────────────────────────────────────── */}
