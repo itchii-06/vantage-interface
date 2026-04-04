@@ -39,7 +39,12 @@ type VaultEventCallbacks = {
  * Calls the provided callbacks whenever new events arrive.
  * Automatically reconnects if the connection drops.
  */
-export function useVaultEvents(chainId: number, indexToken: string, callbacks: VaultEventCallbacks): void {
+export function useVaultEvents(
+  chainId: number,
+  indexToken: string,
+  callbacks: VaultEventCallbacks,
+  vaultAddress?: string
+): void {
   // Stable ref for callbacks so reconnect always uses latest handlers
   const callbacksRef = useRef(callbacks);
   callbacksRef.current = callbacks;
@@ -48,7 +53,7 @@ export function useVaultEvents(chainId: number, indexToken: string, callbacks: V
     const wsUrl = getWsUrl(chainId);
     if (!wsUrl || !indexToken) return;
 
-    const vaultAddr = getVantageContractAddress(chainId, "Vault");
+    const vaultAddr = vaultAddress ?? getVantageContractAddress(chainId, "Vault");
     if (!vaultAddr || vaultAddr === "0x0000000000000000000000000000000000000000") return;
 
     let provider: WebSocketProvider | null = null;

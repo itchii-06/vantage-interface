@@ -26,9 +26,10 @@ type Tab = "price" | "oi" | "funding";
 type Props = {
   chainId: number;
   indexToken: string;
+  vaultAddress?: string;
 };
 
-export function ChartPanel({ chainId, indexToken }: Props) {
+export function ChartPanel({ chainId, indexToken, vaultAddress }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>("price");
   const [timeFrame, setTimeFrame] = useState<TimeFrame>("1h");
 
@@ -37,7 +38,7 @@ export function ChartPanel({ chainId, indexToken }: Props) {
     tradeEvents: historicalTrades,
     fundingRateEvents: historicalFunding,
     isLoading,
-  } = useTradeHistory(chainId, indexToken);
+  } = useTradeHistory(chainId, indexToken, vaultAddress);
 
   // Realtime events accumulated in state
   const [realtimeTrades, setRealtimeTrades] = useState<TradeEvent[]>([]);
@@ -52,10 +53,15 @@ export function ChartPanel({ chainId, indexToken }: Props) {
   }, []);
 
   // Single WebSocket connection shared by all chart tabs
-  useVaultEvents(chainId, indexToken, {
-    onTradeEvent: handleTradeEvent,
-    onFundingRateEvent: handleFundingRateEvent,
-  });
+  useVaultEvents(
+    chainId,
+    indexToken,
+    {
+      onTradeEvent: handleTradeEvent,
+      onFundingRateEvent: handleFundingRateEvent,
+    },
+    vaultAddress
+  );
 
   // Merge historical + realtime (memoized to avoid new array on every render)
   const allTrades = useMemo(() => [...historicalTrades, ...realtimeTrades], [historicalTrades, realtimeTrades]);

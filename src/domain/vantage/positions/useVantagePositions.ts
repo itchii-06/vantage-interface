@@ -23,10 +23,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { useVault } from "hooks/useVantageContracts";
 import { getProvider } from "lib/rpc";
 import { getVantageContractAddress } from "vantage/contracts";
-import { AssetRegistry__factory, VaultReader__factory } from "vantage/types";
+import { AssetRegistry__factory, Vault__factory, VaultReader__factory } from "vantage/types";
 
 import type { VantagePosition } from "./types";
 
@@ -44,14 +43,14 @@ export function useVantagePositions(
   account: string | undefined,
   chainId: number,
   /** Known collateral tokens to check against each index token. Defaults to [indexToken] (GMX-style). */
-  collateralTokens?: string[]
+  collateralTokens?: string[],
+  /** Override vault address. Defaults to the primary Vault from deployment config. */
+  vaultAddress?: string
 ): UseVantagePositionsResult {
   const [positions, setPositions] = useState<VantagePosition[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | undefined>(undefined);
   const [tick, setTick] = useState(0);
-
-  const vault = useVault(undefined, chainId);
 
   // Cache maintenanceMarginBps per indexToken to avoid repeated RPC calls
   const riskInfoCache = useRef<Map<string, bigint>>(new Map());
@@ -65,6 +64,8 @@ export function useVantagePositions(
     }
 
     const provider = getProvider(undefined, chainId);
+    const resolvedVaultAddress = vaultAddress ?? getVantageContractAddress(chainId, "Vault");
+    const vault = Vault__factory.connect(resolvedVaultAddress, provider);
 
     // VaultReader may not be deployed on all networks (e.g. localhost).
     const vaultReaderAddress = getVantageContractAddress(chainId, "VaultReader");
@@ -85,7 +86,6 @@ export function useVantagePositions(
       setError(undefined);
 
       try {
-        const vaultAddress = getVantageContractAddress(chainId, "Vault");
         const assets: string[] = await vault.getPositionAssets();
 
         const openPositions: VantagePosition[] = [];
@@ -128,7 +128,7 @@ export function useVantagePositions(
               if (vaultReader) {
                 try {
                   const pnlResult = await vaultReader.getPendingPnL(
-                    vaultAddress,
+                    resolvedVaultAddress,
                     account!,
                     collateralToken,
                     indexToken,
@@ -186,7 +186,7 @@ export function useVantagePositions(
       cancelled = true;
       clearInterval(intervalId);
     };
-  }, [account, chainId, vault, tick]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [account, chainId, vaultAddress, tick]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { positions, isLoading, error, refetch };
 }

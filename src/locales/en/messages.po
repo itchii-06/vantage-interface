@@ -3301,6 +3301,10 @@ msgstr "Remove endpoint"
 msgid "Community-led Telegram groups"
 msgstr "Community-led Telegram groups"
 
+#: src/pages/Trade/TradePage.tsx
+msgid "Vault"
+msgstr "Vault"
+
 #: src/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "Change to {0}"
 msgstr "Change to {0}"
@@ -3704,6 +3708,10 @@ msgstr "Insufficient gas for network fees"
 #: src/components/TradeHistory/TradeHistoryRow/utils/swap.ts
 msgid "{fromText} to"
 msgstr "{fromText} to"
+
+#: src/pages/Trade/TradePage.tsx
+msgid "Select Market"
+msgstr "Select Market"
 
 #: src/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Decreasing..."
@@ -4430,6 +4438,7 @@ msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 
 #: src/pages/Earn/EarnPageLayout.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Portfolio"
 msgstr "Portfolio"
 
@@ -9262,8 +9271,8 @@ msgid "GM tokens represent shares in a liquidity pool for a single GMX market. B
 msgstr "GM tokens represent shares in a liquidity pool for a single GMX market. Buy GM to provide liquidity and earn fees from leverage trading, swaps, and market-making activity on that specific market. All rewards are auto-compounded."
 
 #: src/pages/Trade/TradePage.tsx
-msgid "Open Long / Short positions via PositionRouter."
-msgstr "Open Long / Short positions via PositionRouter."
+#~ msgid "Open Long / Short positions via PositionRouter."
+#~ msgstr "Open Long / Short positions via PositionRouter."
 
 #: src/components/Earn/AdditionalOpportunities/useOpportunities.tsx
 msgid "Lend GLV or GM tokens, borrow against them, or use LP strategies to maximize yield"

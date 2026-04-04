@@ -27,7 +27,7 @@ type UseTradeHistoryResult = {
   isLoading: boolean;
 };
 
-export function useTradeHistory(chainId: number, indexToken: string): UseTradeHistoryResult {
+export function useTradeHistory(chainId: number, indexToken: string, vaultAddress?: string): UseTradeHistoryResult {
   const [tradeEvents, setTradeEvents] = useState<TradeEvent[]>([]);
   const [fundingRateEvents, setFundingRateEvents] = useState<FundingRateEvent[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +41,7 @@ export function useTradeHistory(chainId: number, indexToken: string): UseTradeHi
       setIsLoading(true);
       try {
         const provider = getProvider(undefined, chainId);
-        const vaultAddr = getVantageContractAddress(chainId, "Vault");
+        const vaultAddr = vaultAddress ?? getVantageContractAddress(chainId, "Vault");
         const vault = Vault__factory.connect(vaultAddr, provider);
 
         // --- Trade events (IncreasePosition + DecreasePosition) ---
@@ -105,7 +105,7 @@ export function useTradeHistory(chainId: number, indexToken: string): UseTradeHi
     // TODO: Add Subgraph query for non-localhost networks
     // const fetchSubgraph = async () => { ... };
 
-    if (chainId === LOCALHOST_CHAIN_ID) {
+    if (chainId === LOCALHOST_CHAIN_ID || vaultAddress) {
       fetchLocalhost();
     } else {
       // Subgraph not yet deployed — show empty chart with TODO notice
