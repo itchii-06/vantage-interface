@@ -318,7 +318,6 @@ msgid "settings"
 msgstr "settings"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Short"
 msgstr "Open Short"
@@ -1464,7 +1463,6 @@ msgstr "Overview"
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Collateral"
 msgstr "Collateral"
 
@@ -2688,6 +2686,7 @@ msgstr "Buy GMX on {chainName}"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Size"
 msgstr "Size"
@@ -6762,8 +6761,8 @@ msgid "per"
 msgstr "per"
 
 #: src/pages/Trade/components/OpenPositionPanel.tsx
-msgid "Position Size"
-msgstr "Position Size"
+#~ msgid "Position Size"
+#~ msgstr "Position Size"
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Reserve factor longs"
@@ -7116,7 +7115,6 @@ msgid "Insufficient liquidity to swap collateral"
 msgstr "Insufficient liquidity to swap collateral"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Long"
 msgstr "Open Long"
@@ -9686,6 +9684,7 @@ msgid "Select at least one distribution to claim"
 msgstr "Select at least one distribution to claim"
 
 #: src/components/Earn/Portfolio/AssetsList/GmGlvAssetCard.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Buy"
 msgstr "Buy"
 
@@ -10795,6 +10794,7 @@ msgid "Set Long Stop Loss @ {0}"
 msgstr "Set Long Stop Loss @ {0}"
 
 #: src/components/Earn/Portfolio/AssetsList/GmGlvAssetCard.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Sell"
 msgstr "Sell"
 

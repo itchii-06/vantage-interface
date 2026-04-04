@@ -318,7 +318,6 @@ msgid "settings"
 msgstr "Einstellungen"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Short"
 msgstr ""
@@ -1464,7 +1463,6 @@ msgstr "Übersicht"
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Collateral"
 msgstr "Kollateral"
 
@@ -2688,6 +2686,7 @@ msgstr "Kaufe GMX auf {chainName}"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Size"
 msgstr "Größe"
@@ -6762,8 +6761,8 @@ msgid "per"
 msgstr "pro"
 
 #: src/pages/Trade/components/OpenPositionPanel.tsx
-msgid "Position Size"
-msgstr ""
+#~ msgid "Position Size"
+#~ msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Reserve factor longs"
@@ -7116,7 +7115,6 @@ msgid "Insufficient liquidity to swap collateral"
 msgstr "Unzureichende Liquidität zum Swappen von Kollateral"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Long"
 msgstr ""
@@ -9686,6 +9684,7 @@ msgid "Select at least one distribution to claim"
 msgstr "Wählen Sie mindestens eine Ausschüttung zum Beanspruchen aus"
 
 #: src/components/Earn/Portfolio/AssetsList/GmGlvAssetCard.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Buy"
 msgstr "Kaufen"
 
@@ -10795,6 +10794,7 @@ msgid "Set Long Stop Loss @ {0}"
 msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmGlvAssetCard.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Sell"
 msgstr "Verkaufen"
 

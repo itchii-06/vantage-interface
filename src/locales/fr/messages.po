@@ -318,7 +318,6 @@ msgid "settings"
 msgstr "paramètres"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Short"
 msgstr ""
@@ -1464,7 +1463,6 @@ msgstr "Aperçu"
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Collateral"
 msgstr "Collatéral"
 
@@ -2688,6 +2686,7 @@ msgstr "Acheter GMX sur {chainName}"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Size"
 msgstr "Taille"
@@ -6762,8 +6761,8 @@ msgid "per"
 msgstr "par"
 
 #: src/pages/Trade/components/OpenPositionPanel.tsx
-msgid "Position Size"
-msgstr ""
+#~ msgid "Position Size"
+#~ msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Reserve factor longs"
@@ -7116,7 +7115,6 @@ msgid "Insufficient liquidity to swap collateral"
 msgstr "Liquidité insuffisante pour échanger le collatéral"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Long"
 msgstr ""
@@ -9686,6 +9684,7 @@ msgid "Select at least one distribution to claim"
 msgstr "Sélectionnez au moins une distribution à récupérer"
 
 #: src/components/Earn/Portfolio/AssetsList/GmGlvAssetCard.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Buy"
 msgstr "Acheter"
 
@@ -10795,6 +10794,7 @@ msgid "Set Long Stop Loss @ {0}"
 msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmGlvAssetCard.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Sell"
 msgstr "Vendre"
 

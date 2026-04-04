@@ -228,10 +228,10 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
         ))}
       </div>
 
-      {/* Collateral input */}
+      {/* Size input */}
       <div className="rounded-4 border border-stroke-primary bg-cold-blue-900 px-16 py-12">
         <div className="mb-4 flex items-center justify-between text-12 text-slate-400">
-          <span>{t`Collateral`}</span>
+          <span>{t`Size`}</span>
           <span>{useNativeEth ? "ETH" : "USDC"}</span>
         </div>
         <input
@@ -269,14 +269,6 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
           <span>50×</span>
         </div>
       </div>
-
-      {/* Size preview */}
-      {sizeDelta > 0n && (
-        <div className="flex items-center justify-between rounded-4 bg-cold-blue-900 px-12 py-8 text-12">
-          <span className="text-slate-400">{t`Position Size`}</span>
-          <span className="font-medium text-white">${parseFloat(formatEther(sizeDelta)).toFixed(2)}</span>
-        </div>
-      )}
 
       {/* Slippage */}
       <div>
@@ -349,11 +341,19 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
       ) : (
         <Button
           variant="primary"
-          className="w-full"
+          className="w-full py-16 text-16 font-bold"
           onClick={handleSubmit}
           disabled={isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError}
         >
-          {isSubmitting ? t`Submitting…` : isLong ? t`Open Long` : t`Open Short`}
+          {isSubmitting
+            ? t`Submitting…`
+            : sizeDelta === 0n
+              ? isLong
+                ? t`Buy`
+                : t`Sell`
+              : isLong
+                ? `Buy ${parseFloat(formatEther(sizeDelta))} USDC`
+                : `Sell ${parseFloat(formatEther(sizeDelta))} USDC`}
         </Button>
       )}
     </div>

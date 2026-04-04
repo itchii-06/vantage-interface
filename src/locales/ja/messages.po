@@ -318,7 +318,6 @@ msgid "settings"
 msgstr "設定"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Short"
 msgstr ""
@@ -1464,7 +1463,6 @@ msgstr "概要"
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Collateral"
 msgstr "担保"
 
@@ -2688,6 +2686,7 @@ msgstr "{chainName}でGMXを購入"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 msgid "Size"
 msgstr "サイズ"
@@ -6762,8 +6761,8 @@ msgid "per"
 msgstr "あたり"
 
 #: src/pages/Trade/components/OpenPositionPanel.tsx
-msgid "Position Size"
-msgstr ""
+#~ msgid "Position Size"
+#~ msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Reserve factor longs"
@@ -7116,7 +7115,6 @@ msgid "Insufficient liquidity to swap collateral"
 msgstr "担保スワップのための流動性不足"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Open Long"
 msgstr ""
@@ -9686,6 +9684,7 @@ msgid "Select at least one distribution to claim"
 msgstr "受け取る配布を1つ以上選択してください"
 
 #: src/components/Earn/Portfolio/AssetsList/GmGlvAssetCard.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Buy"
 msgstr "購入"
 
@@ -10795,6 +10794,7 @@ msgid "Set Long Stop Loss @ {0}"
 msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmGlvAssetCard.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Sell"
 msgstr "売却"
 
