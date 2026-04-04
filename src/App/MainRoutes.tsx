@@ -12,12 +12,13 @@ import BeginAccountTransfer from "pages/AccountTransfer/BeginAccountTransfer/Beg
 import CompleteAccountTransfer from "pages/AccountTransfer/CompleteAccountTransfer/CompleteAccountTransfer";
 import { AccountsRouter } from "pages/Actions/ActionsRouter";
 import BuyGMX from "pages/BuyGMX/BuyGMX";
-import DashboardV2 from "pages/Dashboard/DashboardV2";
+// import DashboardV2 from "pages/Dashboard/DashboardV2";
 import EarnAdditionalOpportunitiesPage from "pages/Earn/EarnAdditionalOpportunitiesPage";
 import EarnDiscoveryPage from "pages/Earn/EarnDiscoveryPage";
 import EarnDistributionsPage from "pages/Earn/EarnDistributionsPage";
 import EarnPortfolioPage from "pages/Earn/EarnPortfolioPage";
 import Ecosystem from "pages/Ecosystem/Ecosystem";
+import HedgePage from "pages/Hedge/HedgePage";
 import Jobs from "pages/Jobs/Jobs";
 import { CompetitionRedirect, LeaderboardPage } from "pages/LeaderboardPage/LeaderboardPage";
 import PageNotFound from "pages/PageNotFound/PageNotFound";
@@ -27,6 +28,7 @@ import { PoolsDetails } from "pages/PoolsDetails/PoolsDetails";
 import { PriceImpactRebatesStatsPage } from "pages/PriceImpactRebatesStats/PriceImpactRebatesStats";
 import Referrals from "pages/Referrals/Referrals";
 import ReferralsTier from "pages/ReferralsTier/ReferralsTier";
+import StatsPage from "pages/Stats/StatsPage";
 import { SyntheticsStats } from "pages/SyntheticsStats/SyntheticsStats";
 import TradePage from "pages/Trade/TradePage";
 import VantageLPPage from "pages/VantageLP/VantageLPPage";
@@ -115,9 +117,7 @@ export function MainRoutes({ openSettings: _openSettings }: { openSettings: () =
         <PriceImpactRebatesStatsPage />
       </Route>
       <Route exact path="/stats">
-        <SyntheticsStateContextProvider skipLocalReferralCode={false} pageType="stats">
-          <DashboardV2 />
-        </SyntheticsStateContextProvider>
+        <StatsPage />
       </Route>
       <Route exact path="/monitor">
         <SyntheticsStats />
@@ -157,10 +157,16 @@ export function MainRoutes({ openSettings: _openSettings }: { openSettings: () =
           <PoolsDetails />
         </SyntheticsStateContextProvider>
       </Route>
+      <Route exact path="/hedge">
+        <HedgePage />
+      </Route>
       <Route exact path="/trade/:tradeType?">
         <TradePage />
       </Route>
       <Route exact path="/vantage-lp">
+        <VantageLPPage />
+      </Route>
+      <Route exact path="/portfolio">
         <VantageLPPage />
       </Route>
       <Route exact path="/vaults">

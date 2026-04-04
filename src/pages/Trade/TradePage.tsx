@@ -10,7 +10,7 @@
 
 import { t } from "@lingui/macro";
 import { useRef, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { useVantagePositions } from "domain/vantage/positions/useVantagePositions";
 import { usePositionRequests } from "domain/vantage/trade/usePositionRequests";
@@ -23,9 +23,9 @@ import useWallet from "lib/wallets/useWallet";
 import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
+import { AppNav } from "components/AppNav/AppNav";
 
 import ChevronDownIcon from "img/ic_chevron_down.svg?react";
-import logoIcon from "img/logo-w.svg";
 
 import { ChartPanel } from "./components/ChartPanel";
 import { ClosePositionPanel } from "./components/ClosePositionPanel";
@@ -44,7 +44,6 @@ export default function TradePage() {
   const { account } = useWallet();
   const { chainId } = useChainId();
   const { tradeType } = useParams<{ tradeType?: string }>();
-  const { pathname } = useLocation();
 
   // Market selector state
   const [selectedVaultKey, setSelectedVaultKey] = useState(TRADEABLE_VAULTS[0]?.key ?? "");
@@ -54,36 +53,6 @@ export default function TradePage() {
   const selectedVault = TRADEABLE_VAULTS.find((v) => v.key === selectedVaultKey) ?? TRADEABLE_VAULTS[0];
   const indexToken = selectedVault?.tokenAddress ?? "";
   const vaultAddress = selectedVault?.vaultAddress;
-
-  const NAV_ITEMS = [
-    { label: t`Trade`, to: "/trade" },
-    { label: t`Vault`, to: "/vaults" },
-    { label: t`Portfolio`, to: "/vantage-lp" },
-  ] as const;
-
-  const navLeftContent = (
-    <div className="flex items-center gap-24">
-      <Link to="/" className="flex items-center gap-8 px-4">
-        <img src={logoIcon} alt="Logo" className="w-88" />
-      </Link>
-      <nav className="flex items-center">
-        {NAV_ITEMS.map(({ label, to }) => {
-          const isActive = pathname === to || pathname.startsWith(`${to}/`);
-          return (
-            <Link
-              key={to}
-              to={to}
-              className={`px-14 py-8 text-14 font-medium transition-colors ${
-                isActive ? "text-white" : "text-slate-400 hover:text-white"
-              }`}
-            >
-              {label}
-            </Link>
-          );
-        })}
-      </nav>
-    </div>
-  );
 
   const [activeTab, setActiveTab] = useState<"long" | "short">(tradeType === "short" ? "short" : "long");
   const [selectedPositionKey, setSelectedPositionKey] = useState<string | null>(null);
@@ -112,7 +81,7 @@ export default function TradePage() {
   return (
     <div className="w-full">
       <div className="border-b border-stroke-primary px-16 py-8">
-        <AppHeader leftContent={navLeftContent} />
+        <AppHeader leftContent={<AppNav />} />
       </div>
       <div className="mt-16 px-16">
         <div className="flex min-h-0 gap-0 lg:items-start">

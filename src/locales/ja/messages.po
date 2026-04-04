@@ -784,9 +784,11 @@ msgstr "マイナスの値：トレーダーがファンディングを支払い
 msgid "Transfer {nativeTokenSymbol} from other networks to {chainName}"
 msgstr "他のネットワークから{chainName}へ{nativeTokenSymbol}を送金"
 
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Dashboard/DashboardV2.tsx
 #: src/pages/Dashboard/StatsCard.tsx
+#: src/pages/Stats/StatsPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Stats"
 msgstr "統計"
@@ -808,6 +810,7 @@ msgstr ""
 msgid "View details"
 msgstr "詳細を表示"
 
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/Tabs/NestedTab.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -973,6 +976,10 @@ msgstr "手動スワップパス（マーケットをクリックして削除）
 #: src/pages/RpcDebug/parts.tsx
 msgid "Worker"
 msgstr "Worker"
+
+#: src/pages/Stats/StatsPage.tsx
+msgid "Protocol statistics — coming soon."
+msgstr ""
 
 #: src/components/SettingsModal/SettingsModal.tsx
 msgid "Max network fee buffer precision is 0.01%"
@@ -3319,8 +3326,8 @@ msgstr "コミュニティ主導のTelegramグループ"
 #: src/pages/Trade/TradePage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
-msgid "Vault"
-msgstr ""
+#~ msgid "Vault"
+#~ msgstr ""
 
 #: src/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "Change to {0}"
@@ -3814,9 +3821,6 @@ msgstr "Express Trading はネットワークのネイティブトークン {0} 
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
-#: src/pages/Trade/TradePage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#: src/pages/Vaults/VaultsPage.tsx
 msgid "Trade"
 msgstr "トレード"
 
@@ -4458,9 +4462,6 @@ msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "価格への影響リベートが発生しました。5日後に受取可能です。<0>詳細はこちら</0>。"
 
 #: src/pages/Earn/EarnPageLayout.tsx
-#: src/pages/Trade/TradePage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#: src/pages/Vaults/VaultsPage.tsx
 msgid "Portfolio"
 msgstr "ポートフォリオ"
 
@@ -5275,6 +5276,10 @@ msgstr "シームレスな取引"
 msgid "from your wallet"
 msgstr "ウォレットから"
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Delta-neutral strategy — coming soon."
+msgstr ""
+
 #: src/components/Earn/Portfolio/RecommendedAssets/RecommendedAssets.tsx
 msgid "Explore more"
 msgstr "さらに探す"
@@ -5653,6 +5658,7 @@ msgid "Executes {numberOfParts} {0} {type} orders of {1} each over the next {2} 
 msgstr "{3} で {2} にわたり、{1} ずつの {0} {type} 注文を {numberOfParts} 回実行します"
 
 #: landing/src/pages/Home/HeaderMenu/HeaderMenu.tsx
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/SideNav/SideNav.tsx
@@ -8318,6 +8324,10 @@ msgstr "プロトコルの分析"
 msgid "Show positions on chart"
 msgstr "チャートにポジションを表示"
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Hedge"
+msgstr ""
+
 #: src/components/MetricsDebugSettings/MetricsDebugSettings.tsx
 msgid "Metrics debug"
 msgstr "メトリクスデバッグ"
@@ -10683,6 +10693,10 @@ msgstr "ダッシュボード"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Leftover collateral below {0} USD"
 msgstr "残余担保が{0} USD未満"
+
+#: src/components/AppNav/AppNav.tsx
+msgid "{label}"
+msgstr ""
 
 #: src/domain/synthetics/positions/utils.ts
 msgid "trigger"

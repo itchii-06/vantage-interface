@@ -11,7 +11,7 @@
 import { t } from "@lingui/macro";
 import { formatEther } from "ethers";
 import { useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
 import { useVaultList } from "domain/vantage/vaults/useVaultList";
@@ -19,8 +19,7 @@ import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, VAULT_CONFIGS } from "domain/vantag
 import useWallet from "lib/wallets/useWallet";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
-
-import logoIcon from "img/logo-w.svg";
+import { AppNav } from "components/AppNav/AppNav";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -47,7 +46,6 @@ type SortDir = "asc" | "desc";
 export default function VaultsPage() {
   const { account } = useWallet();
   const history = useHistory();
-  const { pathname } = useLocation();
   const items = useVaultList();
 
   // APY per vault — hooks must be called unconditionally in fixed order
@@ -86,41 +84,11 @@ export default function VaultsPage() {
     return 0;
   });
 
-  const NAV_ITEMS = [
-    { label: t`Trade`, to: "/trade" },
-    { label: t`Vault`, to: "/vaults" },
-    { label: t`Portfolio`, to: "/vantage-lp" },
-  ] as const;
-
-  const navLeftContent = (
-    <div className="flex items-center gap-24">
-      <Link to="/" className="flex items-center gap-8 px-4">
-        <img src={logoIcon} alt="Logo" className="w-88" />
-      </Link>
-      <nav className="flex items-center">
-        {NAV_ITEMS.map(({ label, to }) => {
-          const isActive = pathname === to || pathname.startsWith(`${to}/`);
-          return (
-            <Link
-              key={to}
-              to={to}
-              className={`px-14 py-8 text-14 font-medium transition-colors ${
-                isActive ? "text-white" : "text-slate-400 hover:text-white"
-              }`}
-            >
-              {label}
-            </Link>
-          );
-        })}
-      </nav>
-    </div>
-  );
-
   return (
     <div className="w-full">
       {/* Header */}
       <div className="border-b border-stroke-primary px-16 py-8">
-        <AppHeader leftContent={navLeftContent} />
+        <AppHeader leftContent={<AppNav />} />
       </div>
 
       <div className="mt-24 px-16">

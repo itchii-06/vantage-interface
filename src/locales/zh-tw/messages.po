@@ -784,9 +784,11 @@ msgstr "負值：交易者支付資金費用"
 msgid "Transfer {nativeTokenSymbol} from other networks to {chainName}"
 msgstr "從其他網路轉帳 {nativeTokenSymbol} 至 {chainName}"
 
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Dashboard/DashboardV2.tsx
 #: src/pages/Dashboard/StatsCard.tsx
+#: src/pages/Stats/StatsPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Stats"
 msgstr "統計"
@@ -808,6 +810,7 @@ msgstr ""
 msgid "View details"
 msgstr "查看詳情"
 
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/Tabs/NestedTab.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -973,6 +976,10 @@ msgstr "手動兌換路徑（點擊市場以移除）"
 #: src/pages/RpcDebug/parts.tsx
 msgid "Worker"
 msgstr "Worker"
+
+#: src/pages/Stats/StatsPage.tsx
+msgid "Protocol statistics — coming soon."
+msgstr ""
 
 #: src/components/SettingsModal/SettingsModal.tsx
 msgid "Max network fee buffer precision is 0.01%"
@@ -3319,8 +3326,8 @@ msgstr "社群主導的 Telegram 群組"
 #: src/pages/Trade/TradePage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
-msgid "Vault"
-msgstr ""
+#~ msgid "Vault"
+#~ msgstr ""
 
 #: src/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "Change to {0}"
@@ -3814,9 +3821,6 @@ msgstr "Express Trading 不支援網路原生代幣 {0}。請考慮改用 {1}。
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
-#: src/pages/Trade/TradePage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#: src/pages/Vaults/VaultsPage.tsx
 msgid "Trade"
 msgstr "交易"
 
@@ -4458,9 +4462,6 @@ msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "價格影響回饋已累積，5 天後可領取。<0>閱讀更多</0>。"
 
 #: src/pages/Earn/EarnPageLayout.tsx
-#: src/pages/Trade/TradePage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#: src/pages/Vaults/VaultsPage.tsx
 msgid "Portfolio"
 msgstr "投資組合"
 
@@ -5275,6 +5276,10 @@ msgstr "無縫交易"
 msgid "from your wallet"
 msgstr "從您的錢包"
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Delta-neutral strategy — coming soon."
+msgstr ""
+
 #: src/components/Earn/Portfolio/RecommendedAssets/RecommendedAssets.tsx
 msgid "Explore more"
 msgstr "探索更多"
@@ -5653,6 +5658,7 @@ msgid "Executes {numberOfParts} {0} {type} orders of {1} each over the next {2} 
 msgstr "在接下來的 {2} 內，為 {3} 執行 {numberOfParts} 筆 {0} {type} 訂單，每筆 {1}"
 
 #: landing/src/pages/Home/HeaderMenu/HeaderMenu.tsx
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/SideNav/SideNav.tsx
@@ -8318,6 +8324,10 @@ msgstr "協議分析"
 msgid "Show positions on chart"
 msgstr "在圖表上顯示倉位"
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Hedge"
+msgstr ""
+
 #: src/components/MetricsDebugSettings/MetricsDebugSettings.tsx
 msgid "Metrics debug"
 msgstr "指標除錯"
@@ -10683,6 +10693,10 @@ msgstr "儀表板"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Leftover collateral below {0} USD"
 msgstr "剩餘抵押品低於 {0} USD"
+
+#: src/components/AppNav/AppNav.tsx
+msgid "{label}"
+msgstr ""
 
 #: src/domain/synthetics/positions/utils.ts
 msgid "trigger"

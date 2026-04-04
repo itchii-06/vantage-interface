@@ -784,9 +784,11 @@ msgstr "Valeur négative : les traders paient le financement"
 msgid "Transfer {nativeTokenSymbol} from other networks to {chainName}"
 msgstr "Transférer des {nativeTokenSymbol} depuis d'autres réseaux vers {chainName}"
 
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Dashboard/DashboardV2.tsx
 #: src/pages/Dashboard/StatsCard.tsx
+#: src/pages/Stats/StatsPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Stats"
 msgstr "Stats"
@@ -808,6 +810,7 @@ msgstr ""
 msgid "View details"
 msgstr "Voir les détails"
 
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/Tabs/NestedTab.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -973,6 +976,10 @@ msgstr "Chemin d'échange manuel (cliquez sur un marché pour le retirer)"
 #: src/pages/RpcDebug/parts.tsx
 msgid "Worker"
 msgstr "Worker"
+
+#: src/pages/Stats/StatsPage.tsx
+msgid "Protocol statistics — coming soon."
+msgstr ""
 
 #: src/components/SettingsModal/SettingsModal.tsx
 msgid "Max network fee buffer precision is 0.01%"
@@ -3319,8 +3326,8 @@ msgstr "Groupes Telegram animés par la communauté"
 #: src/pages/Trade/TradePage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
-msgid "Vault"
-msgstr ""
+#~ msgid "Vault"
+#~ msgstr ""
 
 #: src/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "Change to {0}"
@@ -3814,9 +3821,6 @@ msgstr "Express Trading n'est pas disponible avec le jeton natif du réseau {0}.
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
-#: src/pages/Trade/TradePage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#: src/pages/Vaults/VaultsPage.tsx
 msgid "Trade"
 msgstr "Trader"
 
@@ -4458,9 +4462,6 @@ msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "Remises sur l'impact sur le prix accumulées. Récupérables après 5 jours. <0>En savoir plus</0>."
 
 #: src/pages/Earn/EarnPageLayout.tsx
-#: src/pages/Trade/TradePage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#: src/pages/Vaults/VaultsPage.tsx
 msgid "Portfolio"
 msgstr "Portefeuille"
 
@@ -5275,6 +5276,10 @@ msgstr "Trading fluide"
 msgid "from your wallet"
 msgstr "depuis votre portefeuille"
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Delta-neutral strategy — coming soon."
+msgstr ""
+
 #: src/components/Earn/Portfolio/RecommendedAssets/RecommendedAssets.tsx
 msgid "Explore more"
 msgstr "Explorer davantage"
@@ -5653,6 +5658,7 @@ msgid "Executes {numberOfParts} {0} {type} orders of {1} each over the next {2} 
 msgstr "Exécute {numberOfParts} ordres {type} {0} de {1} chacun sur les prochains {2} pour {3}"
 
 #: landing/src/pages/Home/HeaderMenu/HeaderMenu.tsx
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/SideNav/SideNav.tsx
@@ -8318,6 +8324,10 @@ msgstr "Analyses du protocole"
 msgid "Show positions on chart"
 msgstr "Afficher les positions sur le graphique"
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Hedge"
+msgstr ""
+
 #: src/components/MetricsDebugSettings/MetricsDebugSettings.tsx
 msgid "Metrics debug"
 msgstr "Débogage des métriques"
@@ -10683,6 +10693,10 @@ msgstr "Tableaux de bord"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Leftover collateral below {0} USD"
 msgstr "Collatéral restant inférieur à {0} USD"
+
+#: src/components/AppNav/AppNav.tsx
+msgid "{label}"
+msgstr ""
 
 #: src/domain/synthetics/positions/utils.ts
 msgid "trigger"

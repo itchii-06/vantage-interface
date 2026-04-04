@@ -10,7 +10,7 @@
 import { t } from "@lingui/macro";
 import { formatEther, formatUnits, parseUnits } from "ethers";
 import { ChangeEvent, useState } from "react";
-import { Link, useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import { useVaultActions } from "domain/vantage/vaults/useVaultActions";
 import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
@@ -21,10 +21,9 @@ import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
+import { AppNav } from "components/AppNav/AppNav";
 import Button from "components/Button/Button";
 import NumberInput from "components/NumberInput/NumberInput";
-
-import logoIcon from "img/logo-w.svg";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -91,7 +90,6 @@ type Tab = "deposit" | "withdraw";
 export default function VaultDetailPage() {
   const { address } = useParams<{ address: string }>();
   const history = useHistory();
-  const { pathname } = useLocation();
   const { account } = useWallet();
   const { chainId } = useChainId();
 
@@ -109,42 +107,12 @@ export default function VaultDetailPage() {
 
   const isTestnet = !MAINNET_CHAIN_IDS.has(chainId);
 
-  const NAV_ITEMS = [
-    { label: t`Trade`, to: "/trade" },
-    { label: t`Vault`, to: "/vaults" },
-    { label: t`Portfolio`, to: "/vantage-lp" },
-  ] as const;
-
-  const navLeftContent = (
-    <div className="flex items-center gap-24">
-      <Link to="/" className="flex items-center gap-8 px-4">
-        <img src={logoIcon} alt="Logo" className="w-88" />
-      </Link>
-      <nav className="flex items-center">
-        {NAV_ITEMS.map(({ label, to }) => {
-          const isActive = pathname === to || pathname.startsWith(`${to}/`);
-          return (
-            <Link
-              key={to}
-              to={to}
-              className={`px-14 py-8 text-14 font-medium transition-colors ${
-                isActive ? "text-white" : "text-slate-400 hover:text-white"
-              }`}
-            >
-              {label}
-            </Link>
-          );
-        })}
-      </nav>
-    </div>
-  );
-
   // ── Config missing guard ────────────────────────────────────────────────────
   if (!cfg) {
     return (
       <div className="w-full">
         <div className="border-b border-stroke-primary px-16 py-8">
-          <AppHeader leftContent={navLeftContent} />
+          <AppHeader leftContent={<AppNav />} />
         </div>
         <div className="mx-auto mt-40 max-w-[600px] px-16 text-center">
           <p className="text-16 text-slate-400">{t`Vault not found: ${address}`}</p>
@@ -231,7 +199,7 @@ export default function VaultDetailPage() {
     <div className="w-full">
       {/* Header */}
       <div className="border-b border-stroke-primary px-16 py-8">
-        <AppHeader leftContent={navLeftContent} />
+        <AppHeader leftContent={<AppNav />} />
       </div>
 
       <div className="mt-24 px-16">
