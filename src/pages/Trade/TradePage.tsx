@@ -9,7 +9,6 @@
  */
 
 import { t } from "@lingui/macro";
-import { formatEther } from "ethers";
 import { useRef, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 
@@ -26,14 +25,12 @@ import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 import { AppHeader } from "components/AppHeader/AppHeader";
 
 import ChevronDownIcon from "img/ic_chevron_down.svg?react";
-import LogoText from "img/logo-text.svg?react";
 import logoIcon from "img/logo-w.svg";
 
 import { ChartPanel } from "./components/ChartPanel";
 import { ClosePositionPanel } from "./components/ClosePositionPanel";
 import { OpenPositionPanel } from "./components/OpenPositionPanel";
-import { PendingRequestsPanel } from "./components/PendingRequestsPanel";
-import { PositionListPanel } from "./components/PositionListPanel";
+import { UnifiedPositionList } from "./components/UnifiedPositionList";
 
 const d = localhostDeployment.addresses as {
   tokens?: { USDC?: string; ETH?: string; WETH?: string };
@@ -68,7 +65,6 @@ export default function TradePage() {
     <div className="flex items-center gap-24">
       <Link to="/" className="flex items-center gap-8 px-4">
         <img src={logoIcon} alt="Logo" className="w-88" />
-        <LogoText className="hidden md:block" />
       </Link>
       <nav className="flex items-center">
         {NAV_ITEMS.map(({ label, to }) => {
@@ -104,8 +100,6 @@ export default function TradePage() {
 
   const selectedPosition = positions.find((p) => p.key === selectedPositionKey) ?? null;
   const isLong = activeTab === "long";
-
-  const markPrice = spread.bidPrice > 0n ? parseFloat(formatEther(spread.bidPrice)) : null;
 
   function handleCancelRequest(requestKey: string, type: "increase" | "decrease") {
     if (type === "increase") {
@@ -180,13 +174,6 @@ export default function TradePage() {
                 )}
               </div>
 
-              {/* Current price */}
-              {markPrice !== null && (
-                <span className="text-18 font-semibold text-white">
-                  ${markPrice.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </span>
-              )}
-
               {/* Close dropdown on outside click */}
               {isMarketOpen && <div className="fixed inset-0 z-40" onClick={() => setIsMarketOpen(false)} />}
             </div>
@@ -209,10 +196,10 @@ export default function TradePage() {
               </div>
             )}
 
-            {/* Open positions */}
+            {/* Unified position list */}
             <div>
               <div className="mb-10 flex items-center justify-between">
-                <h2 className="text-14 font-semibold text-white">{t`Open Positions`}</h2>
+                <h2 className="text-14 font-semibold text-white">{t`Positions`}</h2>
                 <button onClick={refetch} className="hover:text-slate-300 text-12 text-slate-500">
                   {t`Refresh`}
                 </button>
@@ -222,19 +209,16 @@ export default function TradePage() {
                   {t`Connect wallet to see positions`}
                 </div>
               ) : (
-                <PositionListPanel
+                <UnifiedPositionList
                   positions={positions}
+                  requests={requests}
                   isLoading={positionsLoading}
                   selectedKey={selectedPositionKey}
                   onSelect={(key) => setSelectedPositionKey(key)}
+                  onCancel={handleCancelRequest}
+                  onRefetch={refetch}
                 />
               )}
-            </div>
-
-            {/* Pending orders */}
-            <div>
-              <h2 className="mb-10 text-14 font-semibold text-white">{t`Pending Orders`}</h2>
-              <PendingRequestsPanel requests={requests} onCancel={handleCancelRequest} />
             </div>
           </div>
 

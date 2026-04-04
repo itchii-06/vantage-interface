@@ -11,12 +11,16 @@
 import { t } from "@lingui/macro";
 import { formatEther } from "ethers";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
 import { useVaultList } from "domain/vantage/vaults/useVaultList";
 import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
 import useWallet from "lib/wallets/useWallet";
+
+import { AppHeader } from "components/AppHeader/AppHeader";
+
+import logoIcon from "img/logo-w.svg";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -43,6 +47,7 @@ type SortDir = "asc" | "desc";
 export default function VaultsPage() {
   const { account } = useWallet();
   const history = useHistory();
+  const { pathname } = useLocation();
   const items = useVaultList();
 
   // APY per vault — hooks must be called unconditionally in fixed order
@@ -81,10 +86,45 @@ export default function VaultsPage() {
     return 0;
   });
 
+  const NAV_ITEMS = [
+    { label: t`Trade`, to: "/trade" },
+    { label: t`Vault`, to: "/vaults" },
+    { label: t`Portfolio`, to: "/vantage-lp" },
+  ] as const;
+
+  const navLeftContent = (
+    <div className="flex items-center gap-24">
+      <Link to="/" className="flex items-center gap-8 px-4">
+        <img src={logoIcon} alt="Logo" className="w-88" />
+      </Link>
+      <nav className="flex items-center">
+        {NAV_ITEMS.map(({ label, to }) => {
+          const isActive = pathname === to || pathname.startsWith(`${to}/`);
+          return (
+            <Link
+              key={to}
+              to={to}
+              className={`px-14 py-8 text-14 font-medium transition-colors ${
+                isActive ? "text-white" : "text-slate-400 hover:text-white"
+              }`}
+            >
+              {label}
+            </Link>
+          );
+        })}
+      </nav>
+    </div>
+  );
+
   return (
-    <div className="default-container page-layout">
-      <div className="mx-auto mt-24 max-w-[900px]">
-        {/* Header */}
+    <div className="w-full">
+      {/* Header */}
+      <div className="border-b border-stroke-primary px-16 py-8">
+        <AppHeader leftContent={navLeftContent} />
+      </div>
+
+      <div className="mt-24 px-16">
+        {/* Page title */}
         <div className="mb-24">
           <h1 className="text-h1">{t`Vaults`}</h1>
           <p className="text-body-medium mt-4 text-slate-400">{t`Provide liquidity to earn yield from RWA assets.`}</p>

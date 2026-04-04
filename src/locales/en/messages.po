@@ -509,8 +509,8 @@ msgid "Image generation failed. Refresh and try again."
 msgstr "Image generation failed. Refresh and try again."
 
 #: src/pages/Trade/TradePage.tsx
-msgid "Open Positions"
-msgstr "Open Positions"
+#~ msgid "Open Positions"
+#~ msgstr "Open Positions"
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Unstaking..."
@@ -624,6 +624,7 @@ msgstr "Avg Entry"
 
 #: src/pages/AccountDashboard/HistoricalLists.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Positions"
 msgstr "Positions"
 
@@ -663,6 +664,10 @@ msgstr "Order execution price"
 #: src/components/TradeboxPoolWarnings/TradeboxPoolWarnings.tsx
 msgid "Insufficient liquidity in any {0}/USD pool"
 msgstr "Insufficient liquidity in any {0}/USD pool"
+
+#: src/pages/Trade/components/UnifiedPositionList.tsx
+msgid "Open"
+msgstr "Open"
 
 #: src/pages/Dashboard/StatsCard.tsx
 msgid "Treasury"
@@ -795,6 +800,7 @@ msgid "Market Swap"
 msgstr "Market Swap"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Loading positions…"
 msgstr "Loading positions…"
 
@@ -1327,6 +1333,10 @@ msgstr "<0>Botanix</0> supports"
 msgid "Selling {symbol}..."
 msgstr "Selling {symbol}..."
 
+#: src/pages/Trade/components/UnifiedPositionList.tsx
+msgid "Opening…"
+msgstr "Opening…"
+
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "The difference between expected and actual execution price due to volatility. Orders won't execute if slippage exceeds your maximum.<0/><1/>Slippage differs from price impact, which is based on open interest imbalances."
 msgstr "The difference between expected and actual execution price due to volatility. Orders won't execute if slippage exceeds your maximum.<0/><1/>Slippage differs from price impact, which is based on open interest imbalances."
@@ -1536,6 +1546,10 @@ msgstr "TP price above limit price"
 #: src/components/OneClickAdvancedSettings/OneClickAdvancedSettings.tsx
 msgid "Action(s)"
 msgstr "Action(s)"
+
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Fetching price data…"
+msgstr "Fetching price data…"
 
 #: src/pages/Dashboard/OverviewCard.tsx
 msgid "May be higher on other sites that include position collateral"
@@ -2688,6 +2702,7 @@ msgstr "Buy GMX on {chainName}"
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Size"
 msgstr "Size"
 
@@ -3302,6 +3317,8 @@ msgid "Community-led Telegram groups"
 msgstr "Community-led Telegram groups"
 
 #: src/pages/Trade/TradePage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
 msgid "Vault"
 msgstr "Vault"
 
@@ -3798,6 +3815,8 @@ msgstr "Express Trading is unavailable with the network's native token {0}. Cons
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 #: src/pages/Trade/TradePage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
 msgid "Trade"
 msgstr "Trade"
 
@@ -4152,6 +4171,7 @@ msgstr "Max 5 auto-cancel TP/SL orders allowed. Extra orders require manual canc
 #: src/components/TradeHistory/TradeHistoryRow/TradeHistoryRow.tsx
 #: src/domain/synthetics/positions/utils.ts
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Market"
 msgstr "Market"
 
@@ -4439,6 +4459,8 @@ msgstr "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 
 #: src/pages/Earn/EarnPageLayout.tsx
 #: src/pages/Trade/TradePage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
 msgid "Portfolio"
 msgstr "Portfolio"
 
@@ -4569,8 +4591,8 @@ msgid "Price change to liquidation"
 msgstr "Price change to liquidation"
 
 #: src/pages/Trade/components/PriceChart.tsx
-msgid "No trade data yet. Open a position to see the chart."
-msgstr "No trade data yet. Open a position to see the chart."
+#~ msgid "No trade data yet. Open a position to see the chart."
+#~ msgstr "No trade data yet. Open a position to see the chart."
 
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "possibilities in total"
@@ -4695,6 +4717,7 @@ msgstr "GM pools"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "PnL"
 msgstr "PnL"
 
@@ -5292,6 +5315,8 @@ msgstr "Settings updated"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 #: src/pages/Trade/TradePage.tsx
 msgid "Short"
 msgstr "Short"
@@ -5329,6 +5354,7 @@ msgid "Failed Market Increase"
 msgstr "Failed Market Increase"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Liq. Price"
 msgstr "Liq. Price"
 
@@ -5755,6 +5781,7 @@ msgid "Search token"
 msgstr "Search token"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Health"
 msgstr "Health"
 
@@ -6938,6 +6965,7 @@ msgstr "Select an asset to deposit"
 #: src/components/PositionList/PositionList.tsx
 #: src/pages/Jobs/Jobs.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "No open positions"
 msgstr "No open positions"
 
@@ -7173,6 +7201,7 @@ msgstr "Governance"
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -8462,6 +8491,10 @@ msgstr "{typeString} Long Stop Market: {0} a long position when the price is bel
 msgid "No price impact. Single execution price for<0/>increasing longs or decreasing shorts at<1/>this size."
 msgstr "No price impact. Single execution price for<0/>increasing longs or decreasing shorts at<1/>this size."
 
+#: src/pages/Trade/components/UnifiedPositionList.tsx
+msgid "Confirming…"
+msgstr "Confirming…"
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Telegram group (Chinese)"
 msgstr "Telegram group (Chinese)"
@@ -8664,6 +8697,7 @@ msgid "Opening position..."
 msgstr "Opening position..."
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Side"
 msgstr "Side"
 
@@ -8851,6 +8885,7 @@ msgid "Events for account:"
 msgstr "Events for account:"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "閉じる"
 msgstr "閉じる"
 
@@ -9338,6 +9373,8 @@ msgstr "{gmOrGlvLabel} sold successfully, but bridge to Base failed. Your funds 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 #: src/pages/Trade/TradePage.tsx
 msgid "Long"
 msgstr "Long"
@@ -10402,8 +10439,8 @@ msgid "GLP to GM airdrop"
 msgstr "GLP to GM airdrop"
 
 #: src/pages/Trade/TradePage.tsx
-msgid "Pending Orders"
-msgstr "Pending Orders"
+#~ msgid "Pending Orders"
+#~ msgstr "Pending Orders"
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled"
@@ -10840,6 +10877,7 @@ msgid "Save tier"
 msgstr "Save tier"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "詳細"
 msgstr "詳細"
 
@@ -11129,6 +11167,7 @@ msgstr "multiple asset classes"
 #: src/components/TradeInfoIcon/TradeInfoIcon.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Close"
 msgstr "Close"
 

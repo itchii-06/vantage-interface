@@ -14,6 +14,7 @@ import { t } from "@lingui/macro";
 import { useCallback, useMemo, useState } from "react";
 
 import type { FundingRateEvent, TimeFrame, TradeEvent } from "domain/vantage/chart/types";
+import { usePriceTicker } from "domain/vantage/chart/usePriceTicker";
 import { useTradeHistory } from "domain/vantage/chart/useTradeHistory";
 import { useVaultEvents } from "domain/vantage/chart/useVaultEvents";
 
@@ -63,7 +64,12 @@ export function ChartPanel({ chainId, indexToken, vaultAddress }: Props) {
     vaultAddress
   );
 
-  // Merge historical + realtime (memoized to avoid new array on every render)
+  // Oracle price ticks — sole data source for the Price chart.
+  // Trade events are NOT used for price because the price is determined by the oracle,
+  // not by user trades. Separating the data sources makes the architecture explicit.
+  const priceTicks = usePriceTicker(chainId, indexToken, vaultAddress);
+
+  // Trade events are used only for OI and Funding Rate charts
   const allTrades = useMemo(() => [...historicalTrades, ...realtimeTrades], [historicalTrades, realtimeTrades]);
   const allFunding = useMemo(() => [...historicalFunding, ...realtimeFunding], [historicalFunding, realtimeFunding]);
 
@@ -105,7 +111,7 @@ export function ChartPanel({ chainId, indexToken, vaultAddress }: Props) {
 
       {/* Chart area */}
       {activeTab === "price" && (
-        <PriceChart events={allTrades} timeFrame={timeFrame} onTimeFrameChange={setTimeFrame} isLoading={isLoading} />
+        <PriceChart events={priceTicks} timeFrame={timeFrame} onTimeFrameChange={setTimeFrame} isLoading={isLoading} />
       )}
       {activeTab === "oi" && <OIChart events={allTrades} isLoading={isLoading} />}
       {activeTab === "funding" && <FundingRateChart events={allFunding} isLoading={isLoading} />}

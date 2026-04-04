@@ -509,8 +509,8 @@ msgid "Image generation failed. Refresh and try again."
 msgstr "图片生成失败。请刷新后重试。"
 
 #: src/pages/Trade/TradePage.tsx
-msgid "Open Positions"
-msgstr ""
+#~ msgid "Open Positions"
+#~ msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Unstaking..."
@@ -624,6 +624,7 @@ msgstr ""
 
 #: src/pages/AccountDashboard/HistoricalLists.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Positions"
 msgstr "仓位"
 
@@ -663,6 +664,10 @@ msgstr "订单成交价格"
 #: src/components/TradeboxPoolWarnings/TradeboxPoolWarnings.tsx
 msgid "Insufficient liquidity in any {0}/USD pool"
 msgstr "所有 {0}/USD 池流动性不足"
+
+#: src/pages/Trade/components/UnifiedPositionList.tsx
+msgid "Open"
+msgstr ""
 
 #: src/pages/Dashboard/StatsCard.tsx
 msgid "Treasury"
@@ -795,6 +800,7 @@ msgid "Market Swap"
 msgstr "市场交换"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Loading positions…"
 msgstr ""
 
@@ -1327,6 +1333,10 @@ msgstr "<0>Botanix</0> 支持"
 msgid "Selling {symbol}..."
 msgstr "售卖 {symbol}..."
 
+#: src/pages/Trade/components/UnifiedPositionList.tsx
+msgid "Opening…"
+msgstr ""
+
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "The difference between expected and actual execution price due to volatility. Orders won't execute if slippage exceeds your maximum.<0/><1/>Slippage differs from price impact, which is based on open interest imbalances."
 msgstr "由于市场波动导致的预期成交价格与实际成交价格之间的差异。如果滑点超过您设置的最大值，订单将不会执行。<0/><1/>滑点不同于价格影响，后者基于未平仓量的不平衡。"
@@ -1536,6 +1546,10 @@ msgstr "止盈价格高于限价"
 #: src/components/OneClickAdvancedSettings/OneClickAdvancedSettings.tsx
 msgid "Action(s)"
 msgstr "操作"
+
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Fetching price data…"
+msgstr ""
 
 #: src/pages/Dashboard/OverviewCard.tsx
 msgid "May be higher on other sites that include position collateral"
@@ -2688,6 +2702,7 @@ msgstr "在 {chainName} 上购买 GMX"
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Size"
 msgstr "规模"
 
@@ -3302,6 +3317,8 @@ msgid "Community-led Telegram groups"
 msgstr "社区主导的 Telegram 群组"
 
 #: src/pages/Trade/TradePage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
 msgid "Vault"
 msgstr ""
 
@@ -3798,6 +3815,8 @@ msgstr "Express Trading 不支持网络原生代币 {0}。请考虑使用 {1} �
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 #: src/pages/Trade/TradePage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
 msgid "Trade"
 msgstr "交易"
 
@@ -4152,6 +4171,7 @@ msgstr "最多允许 5 个自动取消的 TP/SL 订单。超出的订单需手�
 #: src/components/TradeHistory/TradeHistoryRow/TradeHistoryRow.tsx
 #: src/domain/synthetics/positions/utils.ts
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Market"
 msgstr "市场"
 
@@ -4439,6 +4459,8 @@ msgstr "价格影响返利已累计。5 天后可领取。<0>了解更多</0>。
 
 #: src/pages/Earn/EarnPageLayout.tsx
 #: src/pages/Trade/TradePage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/Vaults/VaultsPage.tsx
 msgid "Portfolio"
 msgstr "投资组合"
 
@@ -4569,8 +4591,8 @@ msgid "Price change to liquidation"
 msgstr "距清算价格变动"
 
 #: src/pages/Trade/components/PriceChart.tsx
-msgid "No trade data yet. Open a position to see the chart."
-msgstr ""
+#~ msgid "No trade data yet. Open a position to see the chart."
+#~ msgstr ""
 
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "possibilities in total"
@@ -4695,6 +4717,7 @@ msgstr "GM 池"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "PnL"
 msgstr "PnL"
 
@@ -5292,6 +5315,8 @@ msgstr "设置已更新"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 #: src/pages/Trade/TradePage.tsx
 msgid "Short"
 msgstr "做空"
@@ -5329,6 +5354,7 @@ msgid "Failed Market Increase"
 msgstr "市场增加失败"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Liq. Price"
 msgstr ""
 
@@ -5755,6 +5781,7 @@ msgid "Search token"
 msgstr "搜索代币"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Health"
 msgstr ""
 
@@ -6938,6 +6965,7 @@ msgstr "选择要存入的资产"
 #: src/components/PositionList/PositionList.tsx
 #: src/pages/Jobs/Jobs.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "No open positions"
 msgstr "无开放头寸"
 
@@ -7173,6 +7201,7 @@ msgstr "治理"
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Cancel"
 msgstr "取消"
 
@@ -8462,6 +8491,10 @@ msgstr "{typeString} Long Stop Market：当价格低于触发价格时{0}做多�
 msgid "No price impact. Single execution price for<0/>increasing longs or decreasing shorts at<1/>this size."
 msgstr "无价格影响。在此规模下增加做多<0/>或减少做空仓位的<1/>单一成交价格。"
 
+#: src/pages/Trade/components/UnifiedPositionList.tsx
+msgid "Confirming…"
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Telegram group (Chinese)"
 msgstr "Telegram 群组（中文）"
@@ -8664,6 +8697,7 @@ msgid "Opening position..."
 msgstr ""
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Side"
 msgstr ""
 
@@ -8851,6 +8885,7 @@ msgid "Events for account:"
 msgstr "账户事件："
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "閉じる"
 msgstr ""
 
@@ -9338,6 +9373,8 @@ msgstr "{gmOrGlvLabel} 已成功卖出，但跨链桥至 Base 失败。您的资
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 #: src/pages/Trade/TradePage.tsx
 msgid "Long"
 msgstr "做多"
@@ -10402,8 +10439,8 @@ msgid "GLP to GM airdrop"
 msgstr "GLP 至 GM 空投"
 
 #: src/pages/Trade/TradePage.tsx
-msgid "Pending Orders"
-msgstr ""
+#~ msgid "Pending Orders"
+#~ msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled"
@@ -10840,6 +10877,7 @@ msgid "Save tier"
 msgstr "保存等级"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "詳細"
 msgstr ""
 
@@ -11129,6 +11167,7 @@ msgstr "多个资产类别"
 #: src/components/TradeInfoIcon/TradeInfoIcon.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Close"
 msgstr "关闭"
 

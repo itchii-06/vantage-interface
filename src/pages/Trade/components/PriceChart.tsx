@@ -117,7 +117,7 @@ export function PriceChart({ events, timeFrame, onTimeFrameChange, isLoading }: 
         )}
         {isEmpty && (
           <div className="absolute inset-0 flex items-center justify-center text-13 text-slate-500" style={CHART_STYLE}>
-            {t`No trade data yet. Open a position to see the chart.`}
+            {t`Fetching price data…`}
           </div>
         )}
       </div>
