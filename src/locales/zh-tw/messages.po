@@ -258,6 +258,10 @@ msgstr "限價單失敗"
 msgid "Performance"
 msgstr "績效"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Spot Value"
+msgstr ""
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Total earned"
 msgstr "總收益"
@@ -759,6 +763,10 @@ msgstr "啟用 1CT"
 msgid "Realized PnL"
 msgstr "已實現 PnL"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Managed Hedge"
+msgstr ""
+
 #: src/components/HighPriceImpactOrFeesWarningCard/HighPriceImpactOrFeesWarningCard.tsx
 msgid "High external swap impact"
 msgstr "外部兌換影響過高"
@@ -828,6 +836,10 @@ msgstr "{actionsCount, plural, one {訂單} other {# 筆訂單}}"
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Invalid collateral token. {tokenSymbol} isn't supported as collateral"
 msgstr "抵押品代幣無效。{tokenSymbol} 不支援作為抵押品"
+
+#: src/pages/Hedge/HedgePage.tsx
+msgid "No hedgeable vaults configured. Deploy contracts first."
+msgstr ""
 
 #: src/pages/UiPage/UiPage.tsx
 msgid "Lorem ipsum dolor"
@@ -1045,6 +1057,10 @@ msgstr "{0} <0/><1> 至 </1>{1} <2/>"
 #: src/components/Referrals/AddAffiliateCode.tsx
 msgid "Unable to verify code availability on {0}. You can still create the code, but it may already be taken on those networks."
 msgstr "無法在 {0} 上驗證代碼是否可用。您仍然可以建立代碼，但該代碼在這些網路上可能已被使用。"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
+msgstr ""
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Deposit completed"
@@ -1394,6 +1410,10 @@ msgstr "購買 {operationTokenSymbol}"
 msgid "Buy GM: {0}"
 msgstr "購買 GM：{0}"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "±20% P&L Simulation"
+msgstr ""
+
 #: src/pages/PoolsDetails/PoolsDetailsHeader.tsx
 msgid "TVL (Supply)"
 msgstr "TVL（供應量）"
@@ -1478,6 +1498,7 @@ msgstr "概覽"
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/PositionItem/PositionItem.tsx
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Collateral"
@@ -1589,6 +1610,10 @@ msgstr "存入至 GMX Account"
 #: src/domain/synthetics/markets/createGlvDepositTxn.ts
 msgid "Deposit error"
 msgstr "存入錯誤"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Spot (long)"
+msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx
@@ -2785,6 +2810,10 @@ msgstr "設定了較高的滑點。目前兌換影響：{0}。"
 msgid "Instant"
 msgstr "即時"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
+msgstr ""
+
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Open positions"
 msgstr "未平倉位"
@@ -2943,6 +2972,10 @@ msgstr "這只是一個包裝操作"
 msgid "Subscribe"
 msgstr "訂閱"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Asset not found."
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Decentralized finance dashboard"
 msgstr "去中心化金融儀表板"
@@ -3031,6 +3064,10 @@ msgstr "授權使用 {0}"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Stake submitted"
 msgstr "質押已提交"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Net"
+msgstr ""
 
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 msgid "Insufficient {symbol} balance: {availableFormatted} available, {requiredFormatted} required"
@@ -3866,6 +3903,7 @@ msgstr "V1 Arbitrum"
 msgid "Avalanche"
 msgstr "Avalanche"
 
+#: src/pages/Hedge/HedgePage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "AUM"
@@ -4099,6 +4137,8 @@ msgstr "虛擬市場 ID"
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "槓桿"
@@ -4367,6 +4407,7 @@ msgstr "已清算"
 msgid "Blueberry Pulse"
 msgstr "Blueberry Pulse"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Submitting…"
@@ -4752,6 +4793,11 @@ msgstr "LayerZero scan"
 msgid "Borrow fee"
 msgstr "借貸費用"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Short Size"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Swap impact"
 msgstr "兌換影響"
@@ -4977,6 +5023,10 @@ msgstr "bps"
 msgid "Create TWAP"
 msgstr "建立 TWAP"
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Hold RWA in your wallet, open short only"
+msgstr ""
+
 #: src/components/TradeBox/SwapSlippageField.tsx
 msgid "Slippage is the difference between your expected and actual execution price due to price volatility. Orders won't execute if slippage exceeds your allowed maximum. The default can be adjusted in settings.<0/><1/>A low value (e.g. less than -{0}) may cause failed orders during volatility.<2/><3/>Note: slippage is different from price impact, which is based on open interest imbalances. <4>Read more</4>."
 msgstr "滑點是由於價格波動導致您的預期成交價格與實際成交價格之間的差異。若滑點超過您設定的最大容許值，訂單將不會執行。預設值可在設定中調整。<0/><1/>過低的值（例如低於 -{0}）可能導致在波動期間訂單失敗。<2/><3/>注意：滑點不同於價格影響，後者是基於未平倉量的不平衡。<4>閱讀更多</4>。"
@@ -5136,6 +5186,10 @@ msgstr "倉位在執行後將立即被清算。請嘗試減少規模。"
 msgid "Create TP/SL"
 msgstr "建立 TP/SL"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Short Margin"
+msgstr ""
+
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Purpose: {0} | public: {1}"
 msgstr "用途：{0} | 公開：{1}"
@@ -5268,6 +5322,10 @@ msgstr "為每個市場提供逐倉流動性"
 msgid "Use open interest in tokens for balance"
 msgstr "使用代幣未平倉量計算餘額"
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Deposit RWA to Vault + open short in one transaction"
+msgstr ""
+
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Seamless trading"
 msgstr "無縫交易"
@@ -5277,8 +5335,8 @@ msgid "from your wallet"
 msgstr "從您的錢包"
 
 #: src/pages/Hedge/HedgePage.tsx
-msgid "Delta-neutral strategy — coming soon."
-msgstr ""
+#~ msgid "Delta-neutral strategy — coming soon."
+#~ msgstr ""
 
 #: src/components/Earn/Portfolio/RecommendedAssets/RecommendedAssets.tsx
 msgid "Explore more"
@@ -5311,6 +5369,7 @@ msgstr "設定已更新"
 #: src/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
 #: src/context/SyntheticsStateContext/selectors/chartSelectors/selectChartLines.tsx
 #: src/domain/synthetics/orders/utils.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -5642,6 +5701,10 @@ msgstr "提取手續費"
 #: src/components/Referrals/TradersStats.tsx
 msgid "Your fee savings from referral discounts"
 msgstr "您透過推薦折扣節省的手續費"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Required"
+msgstr ""
 
 #: src/components/TVChartContainer/constants.ts
 #: src/domain/synthetics/positions/utils.ts
@@ -6091,6 +6154,10 @@ msgstr "推薦"
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Decrease"
 msgstr "減倉"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Price change"
+msgstr ""
 
 #: src/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/domain/synthetics/trade/utils/validation.ts
@@ -6823,6 +6890,10 @@ msgstr "使用資金"
 msgid "AVAILABLE LIQ."
 msgstr "可用流動性"
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Delta-neutral strategy: earn RWA yield + short funding rate with zero price exposure."
+msgstr ""
+
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Current endpoints ({0})"
 msgstr "目前端點 ({0})"
@@ -6881,6 +6952,7 @@ msgstr "訂單錯誤。此市場價格波動劇烈，請嘗試<0>提高允許的
 
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
+#: src/pages/Hedge/HedgePage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Asset"
 msgstr "資產"
@@ -7195,6 +7267,10 @@ msgstr "Bond Protocol"
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Withdrawing {0} to {1} is not supported"
 msgstr "不支援將 {0} 提取至 {1}"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Back to Hedge"
+msgstr ""
 
 #: landing/src/pages/Home/HeaderMenu/HeaderMenu.tsx
 #: src/components/Earn/Discovery/EarnProductCard.tsx
@@ -7692,6 +7768,10 @@ msgstr "餘額"
 msgid "Force failures"
 msgstr "強制失敗"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "1× = delta-neutral. Higher = partial hedge."
+msgstr ""
+
 #: src/components/TradeBox/ExpressTradingWarningCard.tsx
 #: src/components/TradeBox/ExpressTradingWarningCard.tsx
 #: src/pages/UiPage/BannerTest.tsx
@@ -7763,6 +7843,10 @@ msgstr "交易錯誤"
 #: src/domain/multichain/useMultichainFundingToast.tsx
 msgid "Depositing to and withdrawing from GMX Account..."
 msgstr "正在存入和提取 GMX Account..."
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Keep {0} in your wallet and open a short position only."
+msgstr ""
 
 #: src/config/uiFlagEvents.tsx
 msgid "Service disruption"
@@ -7848,6 +7932,14 @@ msgstr "已質押 GMX"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Open interest reserve factor shorts"
 msgstr "做空未平倉量儲備因子"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Transaction submitted:"
+msgstr ""
+
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Managed Net APY = Vault APY + Short Funding Rate. Past rates are not indicative of future returns."
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Insufficient pool liquidity"
@@ -8019,6 +8111,7 @@ msgstr "將 {fromAmount} 兌換為 {toAmount}"
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/TradersStats.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount"
 msgstr "金額"
@@ -8073,6 +8166,10 @@ msgstr "{0}ms"
 msgid "Deposit failed"
 msgstr "存入失敗"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Enter an amount to see the P&L simulation."
+msgstr ""
+
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 msgid "EST. PNL"
 msgstr "預估 PNL"
@@ -8102,6 +8199,10 @@ msgstr "x"
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "Notifications"
 msgstr "通知"
+
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Managed Net APY"
+msgstr ""
 
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Trading mode"
@@ -8149,6 +8250,11 @@ msgstr "請輸入數量"
 #: src/domain/synthetics/sidecarOrders/utils.ts
 msgid "SL price above limit price"
 msgstr "止損價格高於限價"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Self-Custody"
+msgstr ""
 
 #: src/lib/tenderly.tsx
 #: src/lib/tenderly.tsx
@@ -8324,6 +8430,9 @@ msgstr "協議分析"
 msgid "Show positions on chart"
 msgstr "在圖表上顯示倉位"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgePage.tsx
 #: src/pages/Hedge/HedgePage.tsx
 msgid "Hedge"
 msgstr ""
@@ -8608,6 +8717,10 @@ msgstr "倉位規模超過可用未平倉量。差額：{usdDeltaText}，最大 
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Yes"
 msgstr "是"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Self-Custody Hedge"
+msgstr ""
 
 #: src/components/PositionDropdown/PositionDropdown.tsx
 msgid "Increase size (TWAP)"
@@ -9947,6 +10060,10 @@ msgstr "獲取 GMX 的提醒和公告，隨時掌握您的交易、清算風險�
 msgid "{gmOrGlvLabel} bought successfully, but bridge to Base failed. Your funds are safe in your GMX Account. Retry the bridge or go to the {indexName} pool to withdraw your GM tokens."
 msgstr "{gmOrGlvLabel} 買入成功，但橋接至 Base 失敗。您的資金安全存放在您的 GMX Account 中。請重試橋接，或前往 {indexName} 池提取您的 GM 代幣。"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Shows spot, short, and net P&L across a ±20% price range. A perfect delta-neutral position (Net) stays flat."
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a yield-optimizing crypto-index token that:"
 msgstr "GLV（GMX Liquidity Vaults）是 GMX V2 對 GLP 的改良版本。這是一種收益優化的加密指數代幣，能夠："
@@ -9959,6 +10076,10 @@ msgstr "{0} 個代幣已從存入歸屬期的 {1} esGMX 轉換為 GMX。"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Trigger price above liquidation price"
 msgstr "觸發價格高於清算價格"
+
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Self-Custody APY"
+msgstr ""
 
 #: src/components/GmxAccountModal/TransferDetailsView.tsx
 msgid "Repeat transaction"
@@ -10605,6 +10726,10 @@ msgstr "下載為 CSV"
 msgid "Set Short Stop Market @ {0}"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Connect wallet to hedge"
+msgstr ""
+
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Benefit from up to 100x leverage and guaranteed on-chain liquidity that's not dependent on order book depth"
 msgstr "享受最高 100 倍槓桿以及不依賴訂單簿深度的鏈上保證流動性"
@@ -10742,6 +10867,15 @@ msgstr "Rage Trade"
 #: src/domain/synthetics/common/incentivesAirdropMessages.ts
 msgid "EIP-4844, 20-27 Mar"
 msgstr "EIP-4844, 20-27 Mar"
+
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Vault APY"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Managed"
+msgstr ""
 
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Save on costs"
@@ -11319,6 +11453,10 @@ msgstr "最低所需抵押品"
 #: src/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "{orderText} update failed"
 msgstr "{orderText} 更新失敗"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode"
+msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Success"

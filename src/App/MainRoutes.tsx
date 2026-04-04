@@ -18,6 +18,7 @@ import EarnDiscoveryPage from "pages/Earn/EarnDiscoveryPage";
 import EarnDistributionsPage from "pages/Earn/EarnDistributionsPage";
 import EarnPortfolioPage from "pages/Earn/EarnPortfolioPage";
 import Ecosystem from "pages/Ecosystem/Ecosystem";
+import HedgeDetailPage from "pages/Hedge/HedgeDetailPage";
 import HedgePage from "pages/Hedge/HedgePage";
 import Jobs from "pages/Jobs/Jobs";
 import { CompetitionRedirect, LeaderboardPage } from "pages/LeaderboardPage/LeaderboardPage";
@@ -159,6 +160,9 @@ export function MainRoutes({ openSettings: _openSettings }: { openSettings: () =
       </Route>
       <Route exact path="/hedge">
         <HedgePage />
+      </Route>
+      <Route exact path="/hedge/:key">
+        <HedgeDetailPage />
       </Route>
       <Route exact path="/trade/:tradeType?">
         <TradePage />
