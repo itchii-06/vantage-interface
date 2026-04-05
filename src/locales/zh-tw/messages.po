@@ -6033,6 +6033,10 @@ msgstr "存入 {gasPaymentTokensText}"
 msgid "GMX (Portuguese)"
 msgstr "GMX（葡萄牙語）"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Oracle Price"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "No eligible trades during the competition window"
@@ -10092,6 +10096,10 @@ msgstr "已提取 {balanceFormatted} 至主帳戶"
 #: src/components/StatusNotification/FeesSettlementStatusNotification.tsx
 msgid "{positionName} failed to settle"
 msgstr "{positionName} 結算失敗"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Fetching price…"
+msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.tsx
 msgid "Ecosystem projects"

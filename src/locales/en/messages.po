@@ -6033,6 +6033,10 @@ msgstr "Deposit {gasPaymentTokensText}"
 msgid "GMX (Portuguese)"
 msgstr "GMX (Portuguese)"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Oracle Price"
+msgstr "Oracle Price"
+
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "No eligible trades during the competition window"
@@ -10092,6 +10096,10 @@ msgstr "Withdrawn {balanceFormatted} to main account"
 #: src/components/StatusNotification/FeesSettlementStatusNotification.tsx
 msgid "{positionName} failed to settle"
 msgstr "{positionName} failed to settle"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Fetching price…"
+msgstr "Fetching price…"
 
 #: src/pages/Ecosystem/Ecosystem.tsx
 msgid "Ecosystem projects"

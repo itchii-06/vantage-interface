@@ -14,15 +14,19 @@
  */
 
 import { t } from "@lingui/macro";
-import { parseEther, parseUnits } from "ethers";
+import { Contract, formatEther, parseEther, parseUnits } from "ethers";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import { useHedgeActions } from "domain/vantage/hedge/useHedgeActions";
 import type { HedgeMarginToken, HedgeMode } from "domain/vantage/hedge/useHedgeActions";
-import { useHedgeSimulator, buildSvgPath } from "domain/vantage/hedge/useHedgeSimulator";
+import { buildSvgPath, useHedgeSimulator } from "domain/vantage/hedge/useHedgeSimulator";
 import { VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
+import { useChainId } from "lib/chains";
+import { getProvider } from "lib/rpc";
 import useWallet from "lib/wallets/useWallet";
+import MockPriceFeedAbi from "vantage/abis/MockPriceFeed.json";
+import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
@@ -34,6 +38,46 @@ import NumberInput from "components/NumberInput/NumberInput";
 
 /** Approximate ETH price in USD used to estimate collateral in ETH */
 const ETH_PRICE_USD = 2000;
+
+const MOCK_PRICE_FEED = (localhostDeployment.addresses as { MockPriceFeed?: string }).MockPriceFeed ?? "";
+const POLL_MS = 15_000;
+
+// ---------------------------------------------------------------------------
+// useRwaSpotPrice — fetches oracle price for a token from MockPriceFeed
+// ---------------------------------------------------------------------------
+
+function useRwaSpotPrice(tokenAddress: string | undefined): number | null {
+  const { chainId } = useChainId();
+  const [price, setPrice] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!tokenAddress || !MOCK_PRICE_FEED) return;
+
+    const provider = getProvider(undefined, chainId);
+    const feed = new Contract(MOCK_PRICE_FEED, MockPriceFeedAbi, provider);
+    let cancelled = false;
+
+    async function poll() {
+      try {
+        const raw: bigint = await feed.prices(tokenAddress);
+        if (!cancelled && raw > 0n) {
+          setPrice(parseFloat(formatEther(raw)));
+        }
+      } catch {
+        // leave null
+      }
+    }
+
+    poll();
+    const timer = setInterval(poll, POLL_MS);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [chainId, tokenAddress]);
+
+  return price;
+}
 
 // ---------------------------------------------------------------------------
 // P&L Simulator Chart
@@ -130,18 +174,27 @@ export default function HedgeDetailPage() {
 
   const { isSubmitting, error: actionError, txHash, validate, execute } = useHedgeActions();
 
-  // Hardcoded spot price for simulation (in production: use oracle price)
-  // For localhost, MockPriceFeed typically sets $1 for RWA tokens
-  const spotPriceUsd = 1.0;
+  // Oracle spot price from MockPriceFeed (WAD → number)
+  const spotPriceUsd = useRwaSpotPrice(cfg?.tokenAddress);
 
   const rwaAmount = parseFloat(rwaAmountStr) || 0;
   const leverage = Math.max(1, parseFloat(leverageStr) || 1);
 
-  // Delta-neutral sizing: sizeDelta = rwaAmount × spotPrice
-  // collateral = sizeDelta / leverage
-  const sizeDeltaUsd = rwaAmount * spotPriceUsd;
-  const requiredCollateralUsd = sizeDeltaUsd / leverage;
-  const requiredCollateralEth = requiredCollateralUsd / ETH_PRICE_USD;
+  // Managed: sizeDelta = rwaAmount × spotPrice (delta-neutral)
+  // Self-Custody: sizeDelta derived from user's collateral input × leverage
+  const price = spotPriceUsd ?? 0;
+  const managedSizeDeltaUsd = rwaAmount * price;
+  const selfCustodyCollateralInput = parseFloat(usdcCollateralStr) || 0;
+  const selfCustodySizeDeltaUsd =
+    marginToken === "usdc"
+      ? selfCustodyCollateralInput * leverage
+      : selfCustodyCollateralInput * ETH_PRICE_USD * leverage;
+
+  const sizeDeltaUsd = mode === "managed" ? managedSizeDeltaUsd : selfCustodySizeDeltaUsd;
+
+  // Required margin = sizeDelta / leverage
+  const requiredCollateralUsd = mode === "managed" ? sizeDeltaUsd / leverage : selfCustodyCollateralInput;
+  const requiredCollateralEth = mode === "managed" ? requiredCollateralUsd / ETH_PRICE_USD : selfCustodyCollateralInput;
 
   // Clear validation error when inputs change
   useEffect(() => {
@@ -253,7 +306,7 @@ export default function HedgeDetailPage() {
               <div>
                 <div className="text-11 text-slate-500">{t`Spot Value`}</div>
                 <div className="mt-4 text-15 font-semibold text-white">
-                  ${(rwaAmount * spotPriceUsd).toLocaleString("en-US", { maximumFractionDigits: 2 })}
+                  ${(rwaAmount * (spotPriceUsd ?? 0)).toLocaleString("en-US", { maximumFractionDigits: 2 })}
                 </div>
               </div>
               <div>
@@ -372,21 +425,29 @@ export default function HedgeDetailPage() {
 
             {/* Calculated amounts */}
             <div className="mb-20 rounded-4 bg-slate-800/40 p-14 text-13">
-              <div className="flex justify-between">
-                <span className="text-slate-400">{t`Short Size`}</span>
-                <span className="text-white">${sizeDeltaUsd.toFixed(2)}</span>
-              </div>
-              {mode === "managed" && (
-                <div className="mt-8 flex justify-between">
-                  <span className="text-slate-400">
-                    {t`Required`} {marginToken === "usdc" ? "USDC" : "ETH"}
-                  </span>
-                  <span className="font-medium text-white">
-                    {marginToken === "usdc"
-                      ? `${requiredCollateralUsd.toFixed(2)} USDC`
-                      : `${requiredCollateralEth.toFixed(6)} ETH`}
-                  </span>
-                </div>
+              {spotPriceUsd === null ? (
+                <div className="text-slate-500">{t`Fetching price…`}</div>
+              ) : (
+                <>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">{t`Oracle Price`}</span>
+                    <span className="text-white">${spotPriceUsd.toFixed(4)}</span>
+                  </div>
+                  <div className="mt-8 flex justify-between">
+                    <span className="text-slate-400">{t`Short Size`}</span>
+                    <span className="text-white">${sizeDeltaUsd.toFixed(2)}</span>
+                  </div>
+                  <div className="mt-8 flex justify-between border-t border-slate-700/60 pt-8">
+                    <span className="text-slate-400">
+                      {t`Required`} {marginToken === "usdc" ? "USDC" : "ETH"}
+                    </span>
+                    <span className="text-indigo-300 font-semibold">
+                      {marginToken === "usdc"
+                        ? `${requiredCollateralUsd.toFixed(2)} USDC`
+                        : `${requiredCollateralEth.toFixed(6)} ETH`}
+                    </span>
+                  </div>
+                </>
               )}
             </div>
 
