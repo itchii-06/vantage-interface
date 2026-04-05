@@ -258,6 +258,10 @@ msgstr ""
 msgid "Performance"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Spot Value"
+msgstr ""
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Total earned"
 msgstr ""
@@ -759,6 +763,10 @@ msgstr ""
 msgid "Realized PnL"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Managed Hedge"
+msgstr ""
+
 #: src/components/HighPriceImpactOrFeesWarningCard/HighPriceImpactOrFeesWarningCard.tsx
 msgid "High external swap impact"
 msgstr ""
@@ -827,6 +835,10 @@ msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Invalid collateral token. {tokenSymbol} isn't supported as collateral"
+msgstr ""
+
+#: src/pages/Hedge/HedgePage.tsx
+msgid "No hedgeable vaults configured. Deploy contracts first."
 msgstr ""
 
 #: src/pages/UiPage/UiPage.tsx
@@ -1044,6 +1056,10 @@ msgstr ""
 #: src/components/Referrals/AddAffiliateCode.tsx
 #: src/components/Referrals/AddAffiliateCode.tsx
 msgid "Unable to verify code availability on {0}. You can still create the code, but it may already be taken on those networks."
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
 msgstr ""
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
@@ -1394,6 +1410,10 @@ msgstr ""
 msgid "Buy GM: {0}"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "±20% P&L Simulation"
+msgstr ""
+
 #: src/pages/PoolsDetails/PoolsDetailsHeader.tsx
 msgid "TVL (Supply)"
 msgstr ""
@@ -1478,6 +1498,7 @@ msgstr ""
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/PositionItem/PositionItem.tsx
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Collateral"
@@ -1588,6 +1609,10 @@ msgstr ""
 #: src/domain/synthetics/markets/createDepositTxn.ts
 #: src/domain/synthetics/markets/createGlvDepositTxn.ts
 msgid "Deposit error"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Spot (long)"
 msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx
@@ -2785,6 +2810,10 @@ msgstr ""
 msgid "Instant"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
+msgstr ""
+
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Open positions"
 msgstr ""
@@ -2943,6 +2972,10 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Asset not found."
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Decentralized finance dashboard"
 msgstr ""
@@ -3030,6 +3063,10 @@ msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Stake submitted"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Net"
 msgstr ""
 
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
@@ -3866,6 +3903,7 @@ msgstr ""
 msgid "Avalanche"
 msgstr ""
 
+#: src/pages/Hedge/HedgePage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "AUM"
@@ -4099,6 +4137,8 @@ msgstr ""
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr ""
@@ -4367,6 +4407,7 @@ msgstr ""
 msgid "Blueberry Pulse"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Submitting…"
@@ -4752,6 +4793,11 @@ msgstr ""
 msgid "Borrow fee"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Short Size"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Swap impact"
 msgstr ""
@@ -4977,6 +5023,10 @@ msgstr ""
 msgid "Create TWAP"
 msgstr ""
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Hold RWA in your wallet, open short only"
+msgstr ""
+
 #: src/components/TradeBox/SwapSlippageField.tsx
 msgid "Slippage is the difference between your expected and actual execution price due to price volatility. Orders won't execute if slippage exceeds your allowed maximum. The default can be adjusted in settings.<0/><1/>A low value (e.g. less than -{0}) may cause failed orders during volatility.<2/><3/>Note: slippage is different from price impact, which is based on open interest imbalances. <4>Read more</4>."
 msgstr ""
@@ -5136,6 +5186,10 @@ msgstr ""
 msgid "Create TP/SL"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Short Margin"
+msgstr ""
+
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Purpose: {0} | public: {1}"
 msgstr ""
@@ -5268,6 +5322,10 @@ msgstr ""
 msgid "Use open interest in tokens for balance"
 msgstr ""
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Deposit RWA to Vault + open short in one transaction"
+msgstr ""
+
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Seamless trading"
 msgstr ""
@@ -5277,8 +5335,8 @@ msgid "from your wallet"
 msgstr ""
 
 #: src/pages/Hedge/HedgePage.tsx
-msgid "Delta-neutral strategy — coming soon."
-msgstr ""
+#~ msgid "Delta-neutral strategy — coming soon."
+#~ msgstr ""
 
 #: src/components/Earn/Portfolio/RecommendedAssets/RecommendedAssets.tsx
 msgid "Explore more"
@@ -5311,6 +5369,7 @@ msgstr ""
 #: src/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
 #: src/context/SyntheticsStateContext/selectors/chartSelectors/selectChartLines.tsx
 #: src/domain/synthetics/orders/utils.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -5643,6 +5702,10 @@ msgstr ""
 msgid "Your fee savings from referral discounts"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Required"
+msgstr ""
+
 #: src/components/TVChartContainer/constants.ts
 #: src/domain/synthetics/positions/utils.ts
 msgid "TP"
@@ -5970,6 +6033,10 @@ msgstr ""
 msgid "GMX (Portuguese)"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Oracle Price"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "No eligible trades during the competition window"
@@ -6090,6 +6157,10 @@ msgstr ""
 #: src/components/TradeInfoIcon/TradeInfoIcon.tsx
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Decrease"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Price change"
 msgstr ""
 
 #: src/domain/synthetics/orders/getPositionOrderError.tsx
@@ -6823,6 +6894,10 @@ msgstr ""
 msgid "AVAILABLE LIQ."
 msgstr ""
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Delta-neutral strategy: earn RWA yield + short funding rate with zero price exposure."
+msgstr ""
+
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Current endpoints ({0})"
 msgstr ""
@@ -6881,6 +6956,7 @@ msgstr ""
 
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
+#: src/pages/Hedge/HedgePage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Asset"
 msgstr ""
@@ -7194,6 +7270,10 @@ msgstr ""
 
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Withdrawing {0} to {1} is not supported"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Back to Hedge"
 msgstr ""
 
 #: landing/src/pages/Home/HeaderMenu/HeaderMenu.tsx
@@ -7692,6 +7772,10 @@ msgstr ""
 msgid "Force failures"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "1× = delta-neutral. Higher = partial hedge."
+msgstr ""
+
 #: src/components/TradeBox/ExpressTradingWarningCard.tsx
 #: src/components/TradeBox/ExpressTradingWarningCard.tsx
 #: src/pages/UiPage/BannerTest.tsx
@@ -7762,6 +7846,10 @@ msgstr ""
 
 #: src/domain/multichain/useMultichainFundingToast.tsx
 msgid "Depositing to and withdrawing from GMX Account..."
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Keep {0} in your wallet and open a short position only."
 msgstr ""
 
 #: src/config/uiFlagEvents.tsx
@@ -7847,6 +7935,14 @@ msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Open interest reserve factor shorts"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Transaction submitted:"
+msgstr ""
+
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Managed Net APY = Vault APY + Short Funding Rate. Past rates are not indicative of future returns."
 msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
@@ -8019,6 +8115,7 @@ msgstr ""
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/TradersStats.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount"
 msgstr ""
@@ -8073,6 +8170,10 @@ msgstr ""
 msgid "Deposit failed"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Enter an amount to see the P&L simulation."
+msgstr ""
+
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 msgid "EST. PNL"
 msgstr ""
@@ -8101,6 +8202,10 @@ msgstr ""
 
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "Notifications"
+msgstr ""
+
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Managed Net APY"
 msgstr ""
 
 #: src/components/SettingsModal/TradingSettings.tsx
@@ -8148,6 +8253,11 @@ msgstr ""
 
 #: src/domain/synthetics/sidecarOrders/utils.ts
 msgid "SL price above limit price"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Self-Custody"
 msgstr ""
 
 #: src/lib/tenderly.tsx
@@ -8324,6 +8434,9 @@ msgstr ""
 msgid "Show positions on chart"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgePage.tsx
 #: src/pages/Hedge/HedgePage.tsx
 msgid "Hedge"
 msgstr ""
@@ -8607,6 +8720,10 @@ msgstr ""
 
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Yes"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Self-Custody Hedge"
 msgstr ""
 
 #: src/components/PositionDropdown/PositionDropdown.tsx
@@ -9947,6 +10064,10 @@ msgstr ""
 msgid "{gmOrGlvLabel} bought successfully, but bridge to Base failed. Your funds are safe in your GMX Account. Retry the bridge or go to the {indexName} pool to withdraw your GM tokens."
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Shows spot, short, and net P&L across a ±20% price range. A perfect delta-neutral position (Net) stays flat."
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a yield-optimizing crypto-index token that:"
 msgstr ""
@@ -9960,6 +10081,10 @@ msgstr ""
 msgid "Trigger price above liquidation price"
 msgstr ""
 
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Self-Custody APY"
+msgstr ""
+
 #: src/components/GmxAccountModal/TransferDetailsView.tsx
 msgid "Repeat transaction"
 msgstr ""
@@ -9970,6 +10095,10 @@ msgstr ""
 
 #: src/components/StatusNotification/FeesSettlementStatusNotification.tsx
 msgid "{positionName} failed to settle"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Fetching price…"
 msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.tsx
@@ -10605,6 +10734,10 @@ msgstr ""
 msgid "Set Short Stop Market @ {0}"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Connect wallet to hedge"
+msgstr ""
+
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Benefit from up to 100x leverage and guaranteed on-chain liquidity that's not dependent on order book depth"
 msgstr ""
@@ -10741,6 +10874,15 @@ msgstr ""
 
 #: src/domain/synthetics/common/incentivesAirdropMessages.ts
 msgid "EIP-4844, 20-27 Mar"
+msgstr ""
+
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Vault APY"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgePage.tsx
+msgid "Managed"
 msgstr ""
 
 #: landing/src/pages/Home/HeroSection/Features.tsx
@@ -11318,6 +11460,10 @@ msgstr ""
 
 #: src/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "{orderText} update failed"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode"
 msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx

@@ -57,6 +57,7 @@ export type VantageContractName =
   | "AssetRegistry"
   | "ChainlinkAdapter"
   | "ComplianceRegistry"
+  | "HedgeController"
   | "LPManager"
   | "LPToken"
   | "ManualAdapter"
@@ -84,6 +85,7 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     AssetRegistry: ARBITRUM_ASSET_REGISTRY,
     ChainlinkAdapter: ARBITRUM_CHAINLINK_ADAPTER,
     ComplianceRegistry: ARBITRUM_COMPLIANCE_REGISTRY,
+    HedgeController: ZERO,
     LPManager: ARBITRUM_LP_MANAGER,
     LPToken: ARBITRUM_LP_TOKEN,
     ManualAdapter: ARBITRUM_MANUAL_ADAPTER,
@@ -103,6 +105,7 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     AssetRegistry: localhostDeployment.addresses.AssetRegistry ?? ZERO,
     ChainlinkAdapter: ZERO,
     ComplianceRegistry: ZERO,
+    HedgeController: (localhostDeployment.addresses as { HedgeController?: string }).HedgeController ?? ZERO,
     LPManager: localhostDeployment.addresses.LPManager ?? ZERO,
     LPToken: localhostDeployment.addresses.LPToken ?? ZERO,
     ManualAdapter: ZERO,
@@ -122,6 +125,7 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     AssetRegistry: ARBITRUM_SEPOLIA_ASSET_REGISTRY,
     ChainlinkAdapter: ARBITRUM_SEPOLIA_CHAINLINK_ADAPTER,
     ComplianceRegistry: ARBITRUM_SEPOLIA_COMPLIANCE_REGISTRY,
+    HedgeController: ZERO,
     LPManager: ARBITRUM_SEPOLIA_LP_MANAGER,
     LPToken: ARBITRUM_SEPOLIA_LP_TOKEN,
     ManualAdapter: ARBITRUM_SEPOLIA_MANUAL_ADAPTER,

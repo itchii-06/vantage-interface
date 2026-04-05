@@ -1,27 +1,165 @@
 /**
  * HedgePage.tsx
  *
- * Delta-Neutral Strategy interface.
+ * Delta-Neutral Strategy list view.
  * Route: /hedge
+ *
+ * Columns: Asset | Vault APY | Managed Net APY | Self-Custody APY | AUM | Action
+ * Interaction: "Hedge" button → /hedge/:key
  */
 
 import { t } from "@lingui/macro";
+import { formatEther } from "ethers";
+import { useHistory } from "react-router-dom";
+
+import { useHedgeList } from "domain/vantage/hedge/useHedgeList";
+import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL } from "domain/vantage/vaults/vaultConfig";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
 
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+function formatUsd(wad: bigint): string {
+  const n = parseFloat(formatEther(wad));
+  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(2)}M`;
+  if (n >= 1_000) return `$${(n / 1_000).toFixed(1)}K`;
+  return `$${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+function formatApy(apy: number | null): string {
+  if (apy === null) return "—";
+  const sign = apy >= 0 ? "+" : "";
+  return `${sign}${(apy * 100).toFixed(2)}%`;
+}
+
+function apyColor(apy: number | null): string {
+  if (apy === null) return "text-slate-500";
+  return apy >= 0 ? "text-green-400" : "text-red-400";
+}
+
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
 export default function HedgePage() {
+  const history = useHistory();
+  const items = useHedgeList();
+
   return (
     <div className="w-full">
+      {/* Header */}
       <div className="border-b border-stroke-primary px-16 py-8">
         <AppHeader leftContent={<AppNav />} />
       </div>
 
       <div className="mt-24 px-16">
+        {/* Page title */}
         <div className="mb-24">
           <h1 className="text-h1">{t`Hedge`}</h1>
-          <p className="text-body-medium mt-4 text-slate-400">{t`Delta-neutral strategy — coming soon.`}</p>
+          <p className="text-body-medium mt-4 text-slate-400">
+            {t`Delta-neutral strategy: earn RWA yield + short funding rate with zero price exposure.`}
+          </p>
         </div>
+
+        {/* Mode legend */}
+        <div className="mb-16 flex gap-24 text-13 text-slate-400">
+          <div>
+            <span className="font-semibold text-white">{t`Managed`}</span>
+            {" — "}
+            {t`Deposit RWA to Vault + open short in one transaction`}
+          </div>
+          <div>
+            <span className="font-semibold text-white">{t`Self-Custody`}</span>
+            {" — "}
+            {t`Hold RWA in your wallet, open short only`}
+          </div>
+        </div>
+
+        {/* Table */}
+        <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
+          {/* Table header */}
+          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] items-center gap-0 border-b border-stroke-primary px-20 py-12 text-12 text-slate-400">
+            <div>{t`Asset`}</div>
+            <div className="text-right">{t`Vault APY`}</div>
+            <div className="text-right">{t`Managed Net APY`}</div>
+            <div className="text-right">{t`Self-Custody APY`}</div>
+            <div className="text-right">{t`AUM`}</div>
+            <div className="w-80" />
+          </div>
+
+          {/* Rows */}
+          {items.map((item) => (
+            <div
+              key={item.key}
+              className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] items-center gap-0 border-b border-stroke-primary px-20 py-16 last:border-0 hover:bg-slate-800/40"
+            >
+              {/* Asset */}
+              <div className="flex items-center gap-12">
+                <div className="flex h-36 w-36 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
+                  {item.symbol.slice(0, 2)}
+                </div>
+                <div>
+                  <div className="text-15 font-semibold text-white">{item.symbol}</div>
+                  <div className="mt-2 flex items-center gap-6">
+                    <span className="text-12 text-slate-400">{item.name}</span>
+                    <span className={`text-10 rounded-full px-6 py-1 font-medium ${ASSET_TYPE_COLOR[item.assetType]}`}>
+                      {ASSET_TYPE_LABEL[item.assetType]}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Vault APY */}
+              <div className={`text-right text-15 font-medium ${apyColor(item.vaultApy)}`}>
+                {formatApy(item.vaultApy)}
+              </div>
+
+              {/* Managed Net APY */}
+              <div className={`text-right text-15 font-medium ${apyColor(item.managedNetApy)}`}>
+                {formatApy(item.managedNetApy)}
+              </div>
+
+              {/* Self-Custody APY */}
+              <div className={`text-right text-15 font-medium ${apyColor(item.selfCustodyApy)}`}>
+                {formatApy(item.selfCustodyApy)}
+              </div>
+
+              {/* AUM */}
+              <div className="text-right">
+                {item.isLoading ? (
+                  <span className="text-slate-500">—</span>
+                ) : (
+                  <span className="text-15 font-medium text-white">{formatUsd(item.aum)}</span>
+                )}
+              </div>
+
+              {/* Action */}
+              <div className="flex w-80 justify-end">
+                <button
+                  onClick={() => history.push(`/hedge/${item.key}`)}
+                  className="bg-indigo-600 hover:bg-indigo-500 rounded-4 px-14 py-6 text-13 font-medium text-white transition-colors"
+                >
+                  {t`Hedge`}
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {/* Empty state */}
+          {items.length === 0 && (
+            <div className="py-40 text-center text-14 text-slate-400">
+              {t`No hedgeable vaults configured. Deploy contracts first.`}
+            </div>
+          )}
+        </div>
+
+        {/* Disclaimer */}
+        <p className="mt-16 text-center text-12 text-slate-500">
+          {t`Managed Net APY = Vault APY + Short Funding Rate. Past rates are not indicative of future returns.`}
+        </p>
       </div>
     </div>
   );
