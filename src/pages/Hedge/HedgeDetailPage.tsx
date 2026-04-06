@@ -40,6 +40,7 @@ import NumberInput from "components/NumberInput/NumberInput";
 const ETH_PRICE_USD = 2000;
 
 const MOCK_PRICE_FEED = (localhostDeployment.addresses as { MockPriceFeed?: string }).MockPriceFeed ?? "";
+const USDC_ADDRESS = (localhostDeployment.addresses as { tokens?: { USDC?: string } }).tokens?.USDC ?? "";
 const POLL_MS = 15_000;
 
 // ---------------------------------------------------------------------------
@@ -238,16 +239,14 @@ export default function HedgeDetailPage() {
     const params = {
       rwaToken: cfg.tokenAddress,
       rwaAmount: rwaAmountWad,
-      collateralToken: cfg.tokenAddress, // placeholder; USDC addr resolved in hook
+      // USDC margin uses tokens.USDC; ETH margin ignores this field (collateral sent via msg.value)
+      collateralToken: USDC_ADDRESS,
       collateralAmount,
+      // Index token = RWA token address (MockPriceFeed has its price)
       indexToken: cfg.tokenAddress,
       sizeDelta: sizeDeltaWad,
     };
 
-    // In managed mode we need the actual USDC address from vault config — use lpManagerAddress as proxy
-    // The real USDC address is deployment-dependent; for localhost, tokens.USDC is used.
-    // For now, pass a zero address (test environment resolves via deployment JSON).
-    // TODO: wire up actual USDC address from vaultConfig / deployment
     const err = await validate(mode, marginToken, params);
     if (err) {
       setValidationError(err);
