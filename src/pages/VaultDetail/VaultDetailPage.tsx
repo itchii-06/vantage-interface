@@ -16,9 +16,11 @@ import { useVaultActions } from "domain/vantage/vaults/useVaultActions";
 import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
 import { useVaultDetail } from "domain/vantage/vaults/useVaultDetail";
 import { useVaultTxHistory } from "domain/vantage/vaults/useVaultTxHistory";
+import { useZapInActions } from "domain/vantage/vaults/useZapInActions";
 import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, getVaultConfigByAddress } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
+import { ZAP_TOKENS, ZapTokenConfig, resolvePoolFee } from "vantage/config/zapTokens";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
@@ -85,7 +87,7 @@ function AumSparkline({ history }: { history: { aum: bigint }[] }) {
 // Page component
 // ---------------------------------------------------------------------------
 
-type Tab = "deposit" | "withdraw";
+type Tab = "deposit" | "zap" | "withdraw";
 
 export default function VaultDetailPage() {
   const { address } = useParams<{ address: string }>();
@@ -95,15 +97,19 @@ export default function VaultDetailPage() {
 
   const cfg = getVaultConfigByAddress(address);
 
-  const data = useVaultDetail(cfg!, chainId);
-  const actions = useVaultActions(cfg!, chainId);
-  const { txs } = useVaultTxHistory(cfg!);
-  const apy = useVaultApy(cfg!);
-
   const [activeTab, setActiveTab] = useState<Tab>("deposit");
   const [depositInput, setDepositInput] = useState("");
   const [withdrawInput, setWithdrawInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [zapToken, setZapToken] = useState<ZapTokenConfig>(ZAP_TOKENS[0]);
+  const [zapInput, setZapInput] = useState("");
+  const [zapError, setZapError] = useState<string | null>(null);
+
+  const data = useVaultDetail(cfg!, chainId);
+  const actions = useVaultActions(cfg!, chainId);
+  const zapActions = useZapInActions(cfg!, zapToken, chainId);
+  const { txs } = useVaultTxHistory(cfg!);
+  const apy = useVaultApy(cfg!);
 
   const isTestnet = !MAINNET_CHAIN_IDS.has(chainId);
 
@@ -190,6 +196,31 @@ export default function VaultDetailPage() {
   function handleSetMaxWithdraw() {
     if (data.vlpBalance > 0n) {
       setWithdrawInput(formatEther(data.vlpBalance));
+    }
+  }
+
+  async function handleZap() {
+    if (!cfg || !zapInput || parseFloat(zapInput) <= 0) return;
+    // For the USDC route we need the USDC token address.
+    // cfg.tokenAddress is the RWA token; USDC address comes from the stable vault config.
+    const { VAULT_CONFIGS } = await import("domain/vantage/vaults/vaultConfig");
+    const stableVault = VAULT_CONFIGS.find((v) => v.assetType === "stable");
+    const params = {
+      amountIn: zapInput,
+      minTokenOut: 0n,
+      usdcAddress: stableVault?.tokenAddress ?? "",
+    };
+    const err = await zapActions.validate(params);
+    if (err) {
+      setZapError(err);
+      return;
+    }
+    setZapError(null);
+    try {
+      await zapActions.execute(params);
+      setZapInput("");
+    } catch (e: any) {
+      setZapError((e as Error)?.message ?? "Transaction failed");
     }
   }
 
@@ -328,7 +359,7 @@ export default function VaultDetailPage() {
             <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
               {/* Tab header */}
               <div className="flex border-b border-stroke-primary">
-                {(["deposit", "withdraw"] as Tab[]).map((tab) => (
+                {(["deposit", "zap", "withdraw"] as Tab[]).map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
@@ -338,7 +369,7 @@ export default function VaultDetailPage() {
                         : "hover:text-slate-200 text-slate-400"
                     }`}
                   >
-                    {tab === "deposit" ? t`Deposit` : t`Withdraw`}
+                    {tab === "deposit" ? t`Deposit` : tab === "zap" ? t`Zap In` : t`Withdraw`}
                   </button>
                 ))}
               </div>
@@ -404,6 +435,90 @@ export default function VaultDetailPage() {
                         className="w-full"
                       >
                         {isSubmitting ? t`Depositing…` : t`Deposit`}
+                      </Button>
+                    )}
+                  </div>
+                )}
+
+                {/* ── Zap In tab ───────────────────────────────────────────── */}
+                {activeTab === "zap" && (
+                  <div className="flex flex-col gap-16">
+                    {/* Token selector */}
+                    <div className="flex gap-8">
+                      {ZAP_TOKENS.map((zt) => (
+                        <button
+                          key={zt.key}
+                          onClick={() => {
+                            setZapToken(zt);
+                            setZapInput("");
+                            setZapError(null);
+                          }}
+                          className={`flex-1 rounded-4 border py-8 text-13 font-medium transition-colors ${
+                            zapToken.key === zt.key
+                              ? "bg-blue-900/40 border-blue-500 text-white"
+                              : "hover:text-slate-200 border-stroke-primary text-slate-400"
+                          }`}
+                        >
+                          {zt.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Amount input */}
+                    <div>
+                      <label className="mb-6 block text-12 text-slate-400">
+                        {t`Amount`} ({zapToken.symbol})
+                      </label>
+                      <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-12 py-10">
+                        <NumberInput
+                          value={zapInput}
+                          onValueChange={(e: ChangeEvent<HTMLInputElement>) => {
+                            setZapInput(e.target.value);
+                            setZapError(null);
+                          }}
+                          placeholder="0.00"
+                          maxDecimals={zapToken.decimals}
+                          className="bg-transparent flex-1 text-16 text-white outline-none"
+                        />
+                        <span className="text-14 font-medium text-slate-400">{zapToken.symbol}</span>
+                      </div>
+                    </div>
+
+                    {/* Info */}
+                    <div className="space-y-4 rounded-4 bg-slate-800/50 p-12 text-12 text-slate-400">
+                      <div className="flex justify-between">
+                        <span>{t`Route`}</span>
+                        <span className="text-white">
+                          {zapToken.symbol} → {cfg.symbol} → VLP
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>{t`DEX`}</span>
+                        <span className="text-white">
+                          Uniswap V3 ({resolvePoolFee(zapToken.isNative ? "eth" : "usdc", cfg.symbol) / 100}% fee)
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>{t`Slippage guard`}</span>
+                        <span className="text-white">Oracle ±3%</span>
+                      </div>
+                    </div>
+
+                    {zapError && (
+                      <div className="rounded-4 bg-red-900/40 px-12 py-8 text-13 text-red-400">{zapError}</div>
+                    )}
+
+                    {!account ? (
+                      <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to zap in`}</div>
+                    ) : (
+                      <Button
+                        variant="primary"
+                        size="medium"
+                        disabled={!zapInput || parseFloat(zapInput) <= 0 || zapActions.isSubmitting}
+                        onClick={handleZap}
+                        className="w-full"
+                      >
+                        {zapActions.isSubmitting ? t`Zapping…` : t`Zap In`}
                       </Button>
                     )}
                   </div>

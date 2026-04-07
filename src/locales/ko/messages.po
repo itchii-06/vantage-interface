@@ -2520,6 +2520,10 @@ msgstr "FUNDING APR"
 msgid "Search action"
 msgstr "액션 검색"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Connect wallet to zap in"
+msgstr ""
+
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "GMX is the utility and governance token. 27% of protocol fees accumulate in the Treasury for GMX buybacks and will be distributed to stakers when GMX reaches $90."
 msgstr ""
@@ -5959,6 +5963,10 @@ msgstr "유동성 부족. 가용: {availableLiquidityText}"
 msgid "Unstake submitted"
 msgstr "언스테이킹 제출됨"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Zapping…"
+msgstr ""
+
 #: src/components/Earn/Discovery/EarnYieldOverview.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
@@ -6085,6 +6093,10 @@ msgstr "조건가에서 지불-담보 스왑을 위한 유동성 부족"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Fewer details"
 msgstr "간략히 보기"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "DEX"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Stryke"
@@ -6241,6 +6253,11 @@ msgstr ""
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shifting from <0><1>GM: {fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>GM: {toIndexName}</4><5>{toPoolName}</5></3>"
 msgstr "<0><1>GM: {fromIndexName}</1><2>{fromPoolName}</2></0>에서 <3><4>GM: {toIndexName}</4><5>{toPoolName}</5></3>으로 이전 중"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Zap In"
+msgstr ""
 
 #: src/components/MarketStats/components/CompositionTable.tsx
 #: src/components/MarketStats/components/CompositionTable.tsx
@@ -8117,6 +8134,7 @@ msgstr "{fromAmount}을 {toAmount}으로 스왑"
 #: src/components/Referrals/TradersStats.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount"
 msgstr "수량"
 
@@ -8616,6 +8634,10 @@ msgstr "가격 영향 없음. 이 규모에서 롱 증가 또는<0/>숏 감소 �
 
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Confirming…"
+msgstr ""
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Slippage guard"
 msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
@@ -10033,6 +10055,10 @@ msgstr "Arbitrum에서 추천된 트레이더"
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "What is GM?"
 msgstr "GM이란 무엇인가요?"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Route"
+msgstr ""
 
 #: src/components/OrderList/OrderList.tsx
 #: src/components/TPSLModal/TPSLOrdersList.tsx
