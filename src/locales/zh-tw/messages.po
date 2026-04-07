@@ -764,8 +764,8 @@ msgid "Realized PnL"
 msgstr "已實現 PnL"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Managed Hedge"
-msgstr ""
+#~ msgid "Managed Hedge"
+#~ msgstr ""
 
 #: src/components/HighPriceImpactOrFeesWarningCard/HighPriceImpactOrFeesWarningCard.tsx
 msgid "High external swap impact"
@@ -2285,6 +2285,11 @@ msgstr "等級 {0}：{currentRebatePercentage}% 回饋"
 msgid "No swap path found"
 msgstr "未找到兌換路徑"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "LP Deposit"
+msgstr ""
+
 #: src/components/MarketsList/MarketsList.tsx
 msgid "MARKETS"
 msgstr "市場"
@@ -2815,8 +2820,8 @@ msgid "Instant"
 msgstr "即時"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
-msgstr ""
+#~ msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
+#~ msgstr ""
 
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Open positions"
@@ -4911,6 +4916,10 @@ msgstr "轉移請求已發送"
 msgid "Current impact: {0}. Add 0.30% buffer for better order execution."
 msgstr "目前影響：{0}。建議增加 0.30% 緩衝以獲得更好的訂單執行。"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposit {0} + Open Short"
+msgstr ""
+
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settle {totalStr}"
 msgstr "結算 {totalStr}"
@@ -5190,6 +5199,7 @@ msgstr "倉位在執行後將立即被清算。請嘗試減少規模。"
 msgid "Create TP/SL"
 msgstr "建立 TP/SL"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Short Margin"
 msgstr ""
@@ -7878,6 +7888,10 @@ msgstr "服務中斷"
 msgid "Stop Market price above mark price"
 msgstr "止損市價高於標記價格"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposited to the LP Vault. You receive VLP shares in return."
+msgstr ""
+
 #: src/components/PoolSelector2/PoolSelector2.tsx
 msgid "SHORT LIQ."
 msgstr "做空流動性"
@@ -8979,6 +8993,10 @@ msgstr "每份規模"
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Add endpoint"
 msgstr "新增端點"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "This transaction sends:"
+msgstr ""
 
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
@@ -10970,6 +10988,10 @@ msgstr "推薦交易者"
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max deposit limit reached: {maxPoolUsdText}"
 msgstr "已達最大存入上限：{maxPoolUsdText}"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposits {0} to the LP Vault AND opens a short position — both in one transaction."
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Yield optimizations"

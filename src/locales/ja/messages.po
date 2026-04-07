@@ -764,8 +764,8 @@ msgid "Realized PnL"
 msgstr "実現PnL"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Managed Hedge"
-msgstr ""
+#~ msgid "Managed Hedge"
+#~ msgstr ""
 
 #: src/components/HighPriceImpactOrFeesWarningCard/HighPriceImpactOrFeesWarningCard.tsx
 msgid "High external swap impact"
@@ -2285,6 +2285,11 @@ msgstr "ティア {0}: {currentRebatePercentage}% リベート"
 msgid "No swap path found"
 msgstr "スワップパスが見つかりません"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "LP Deposit"
+msgstr ""
+
 #: src/components/MarketsList/MarketsList.tsx
 msgid "MARKETS"
 msgstr "マーケット"
@@ -2815,8 +2820,8 @@ msgid "Instant"
 msgstr "即時"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
-msgstr ""
+#~ msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
+#~ msgstr ""
 
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Open positions"
@@ -4911,6 +4916,10 @@ msgstr "シフトリクエストが送信されました"
 msgid "Current impact: {0}. Add 0.30% buffer for better order execution."
 msgstr "現在の影響: {0}。注文の約定精度を高めるために0.30%のバッファを追加してください。"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposit {0} + Open Short"
+msgstr ""
+
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settle {totalStr}"
 msgstr "{totalStr}を決済する"
@@ -5190,6 +5199,7 @@ msgstr "ポジションは約定時に即座に清算されます。サイズを
 msgid "Create TP/SL"
 msgstr "テイクプロフィット/ストップロスを作成"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Short Margin"
 msgstr ""
@@ -7878,6 +7888,10 @@ msgstr "サービス障害"
 msgid "Stop Market price above mark price"
 msgstr "ストップ成行価格がマーク価格を上回っています"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposited to the LP Vault. You receive VLP shares in return."
+msgstr ""
+
 #: src/components/PoolSelector2/PoolSelector2.tsx
 msgid "SHORT LIQ."
 msgstr "ショート清算"
@@ -8979,6 +8993,10 @@ msgstr "部分ごとのサイズ"
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Add endpoint"
 msgstr "エンドポイントを追加"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "This transaction sends:"
+msgstr ""
 
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
@@ -10970,6 +10988,10 @@ msgstr "紹介されたトレーダー"
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max deposit limit reached: {maxPoolUsdText}"
 msgstr "最大入金上限に達しました: {maxPoolUsdText}"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposits {0} to the LP Vault AND opens a short position — both in one transaction."
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Yield optimizations"

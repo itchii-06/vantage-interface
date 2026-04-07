@@ -350,7 +350,7 @@ export default function HedgeDetailPage() {
               </div>
               <p className="mt-8 text-12 text-slate-500">
                 {mode === "managed"
-                  ? t`Deposit ${cfg.symbol} to the Vault and open a delta-neutral short in one transaction.`
+                  ? t`Deposits ${cfg.symbol} to the LP Vault AND opens a short position — both in one transaction.`
                   : t`Keep ${cfg.symbol} in your wallet and open a short position only.`}
               </p>
             </div>
@@ -386,6 +386,9 @@ export default function HedgeDetailPage() {
             {mode === "managed" && (
               <div className="mb-16">
                 <label className="mb-6 block text-12 text-slate-400">
+                  <span className="rounded bg-indigo-900/60 text-indigo-300 mr-6 px-6 py-1 text-11">
+                    ① {t`LP Deposit`}
+                  </span>
                   {cfg.symbol} {t`Amount`}
                 </label>
                 <NumberInput
@@ -394,6 +397,9 @@ export default function HedgeDetailPage() {
                   className="focus:border-indigo-500 w-full rounded-4 border border-stroke-primary bg-slate-800/60 px-12 py-10 text-14 text-white focus:outline-none"
                   placeholder="0.00"
                 />
+                <p className="mt-4 text-11 text-slate-500">
+                  {t`Deposited to the LP Vault. You receive VLP shares in return.`}
+                </p>
               </div>
             )}
 
@@ -436,16 +442,50 @@ export default function HedgeDetailPage() {
                     <span className="text-slate-400">{t`Short Size`}</span>
                     <span className="text-white">${sizeDeltaUsd.toFixed(2)}</span>
                   </div>
-                  <div className="mt-8 flex justify-between border-t border-slate-700/60 pt-8">
-                    <span className="text-slate-400">
-                      {t`Required`} {marginToken === "usdc" ? "USDC" : "ETH"}
-                    </span>
-                    <span className="text-indigo-300 font-semibold">
-                      {marginToken === "usdc"
-                        ? `${requiredCollateralUsd.toFixed(2)} USDC`
-                        : `${requiredCollateralEth.toFixed(6)} ETH`}
-                    </span>
-                  </div>
+
+                  {/* Managed: show both actions clearly */}
+                  {mode === "managed" ? (
+                    <div className="mt-10 space-y-6 border-t border-slate-700/60 pt-10">
+                      <div className="text-11 font-medium uppercase tracking-wide text-slate-500">
+                        {t`This transaction sends:`}
+                      </div>
+                      {/* Action 1: LP Deposit */}
+                      <div className="bg-indigo-900/20 flex items-center justify-between rounded-4 px-10 py-8">
+                        <div className="flex items-center gap-6">
+                          <span className="rounded bg-indigo-800/60 text-10 text-indigo-300 px-5 py-1 font-bold">
+                            ①
+                          </span>
+                          <span className="text-slate-300">{t`LP Deposit`}</span>
+                        </div>
+                        <span className="text-indigo-300 font-semibold">
+                          {rwaAmount > 0 ? `${rwaAmount} ${cfg.symbol}` : "—"}
+                        </span>
+                      </div>
+                      {/* Action 2: Short margin */}
+                      <div className="flex items-center justify-between rounded-4 bg-slate-700/30 px-10 py-8">
+                        <div className="flex items-center gap-6">
+                          <span className="rounded text-10 text-slate-300 bg-slate-600/60 px-5 py-1 font-bold">②</span>
+                          <span className="text-slate-300">{t`Short Margin`}</span>
+                        </div>
+                        <span className="font-semibold text-white">
+                          {marginToken === "usdc"
+                            ? `${requiredCollateralUsd.toFixed(2)} USDC`
+                            : `${requiredCollateralEth.toFixed(6)} ETH`}
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="mt-8 flex justify-between border-t border-slate-700/60 pt-8">
+                      <span className="text-slate-400">
+                        {t`Required`} {marginToken === "usdc" ? "USDC" : "ETH"}
+                      </span>
+                      <span className="text-indigo-300 font-semibold">
+                        {marginToken === "usdc"
+                          ? `${requiredCollateralUsd.toFixed(2)} USDC`
+                          : `${requiredCollateralEth.toFixed(6)} ETH`}
+                      </span>
+                    </div>
+                  )}
                 </>
               )}
             </div>
@@ -479,7 +519,11 @@ export default function HedgeDetailPage() {
                     : "cursor-not-allowed bg-slate-700 text-slate-500"
                 }`}
               >
-                {isSubmitting ? t`Submitting…` : mode === "managed" ? t`Managed Hedge` : t`Self-Custody Hedge`}
+                {isSubmitting
+                  ? t`Submitting…`
+                  : mode === "managed"
+                    ? t`Deposit ${cfg.symbol} + Open Short`
+                    : t`Self-Custody Hedge`}
               </button>
             )}
 

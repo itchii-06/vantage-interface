@@ -764,8 +764,8 @@ msgid "Realized PnL"
 msgstr "Realized PnL"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Managed Hedge"
-msgstr "Managed Hedge"
+#~ msgid "Managed Hedge"
+#~ msgstr "Managed Hedge"
 
 #: src/components/HighPriceImpactOrFeesWarningCard/HighPriceImpactOrFeesWarningCard.tsx
 msgid "High external swap impact"
@@ -2285,6 +2285,11 @@ msgstr "Tier {0}: {currentRebatePercentage}% rebate"
 msgid "No swap path found"
 msgstr "No swap path found"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "LP Deposit"
+msgstr "LP Deposit"
+
 #: src/components/MarketsList/MarketsList.tsx
 msgid "MARKETS"
 msgstr "MARKETS"
@@ -2815,8 +2820,8 @@ msgid "Instant"
 msgstr "Instant"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
-msgstr "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
+#~ msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
+#~ msgstr "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
 
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Open positions"
@@ -4911,6 +4916,10 @@ msgstr "Shift request sent"
 msgid "Current impact: {0}. Add 0.30% buffer for better order execution."
 msgstr "Current impact: {0}. Add 0.30% buffer for better order execution."
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposit {0} + Open Short"
+msgstr "Deposit {0} + Open Short"
+
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settle {totalStr}"
 msgstr "Settle {totalStr}"
@@ -5190,6 +5199,7 @@ msgstr "Position would be immediately liquidated upon execution. Try reducing th
 msgid "Create TP/SL"
 msgstr "Create TP/SL"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Short Margin"
 msgstr "Short Margin"
@@ -7878,6 +7888,10 @@ msgstr "Service disruption"
 msgid "Stop Market price above mark price"
 msgstr "Stop Market price above mark price"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposited to the LP Vault. You receive VLP shares in return."
+msgstr "Deposited to the LP Vault. You receive VLP shares in return."
+
 #: src/components/PoolSelector2/PoolSelector2.tsx
 msgid "SHORT LIQ."
 msgstr "SHORT LIQ."
@@ -8979,6 +8993,10 @@ msgstr "Size per part"
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Add endpoint"
 msgstr "Add endpoint"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "This transaction sends:"
+msgstr "This transaction sends:"
 
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
@@ -10970,6 +10988,10 @@ msgstr "Traders referred"
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max deposit limit reached: {maxPoolUsdText}"
 msgstr "Max deposit limit reached: {maxPoolUsdText}"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposits {0} to the LP Vault AND opens a short position — both in one transaction."
+msgstr "Deposits {0} to the LP Vault AND opens a short position — both in one transaction."
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Yield optimizations"

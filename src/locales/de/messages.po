@@ -764,8 +764,8 @@ msgid "Realized PnL"
 msgstr "Realisierter Gewinn/Verlust"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Managed Hedge"
-msgstr ""
+#~ msgid "Managed Hedge"
+#~ msgstr ""
 
 #: src/components/HighPriceImpactOrFeesWarningCard/HighPriceImpactOrFeesWarningCard.tsx
 msgid "High external swap impact"
@@ -2285,6 +2285,11 @@ msgstr "Tier {0}: {currentRebatePercentage}% Rabatt"
 msgid "No swap path found"
 msgstr "Kein Swap-Pfad gefunden"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "LP Deposit"
+msgstr ""
+
 #: src/components/MarketsList/MarketsList.tsx
 msgid "MARKETS"
 msgstr "MÄRKTE"
@@ -2815,8 +2820,8 @@ msgid "Instant"
 msgstr "Sofort"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
-msgstr ""
+#~ msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
+#~ msgstr ""
 
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Open positions"
@@ -4911,6 +4916,10 @@ msgstr "Shift-Anfrage gesendet"
 msgid "Current impact: {0}. Add 0.30% buffer for better order execution."
 msgstr "Aktueller Einfluss: {0}. Fügen Sie 0,30% Puffer für eine bessere Orderausführung hinzu."
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposit {0} + Open Short"
+msgstr ""
+
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settle {totalStr}"
 msgstr "Abrechnen {totalStr}"
@@ -5190,6 +5199,7 @@ msgstr "Die Position würde bei Ausführung sofort liquidiert werden. Versuchen 
 msgid "Create TP/SL"
 msgstr "TP/SL erstellen"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Short Margin"
 msgstr ""
@@ -7878,6 +7888,10 @@ msgstr "Dienstunterbrechung"
 msgid "Stop Market price above mark price"
 msgstr "Stop-Market-Preis über dem Markpreis"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposited to the LP Vault. You receive VLP shares in return."
+msgstr ""
+
 #: src/components/PoolSelector2/PoolSelector2.tsx
 msgid "SHORT LIQ."
 msgstr "SHORT-LIQ."
@@ -8979,6 +8993,10 @@ msgstr "Größe pro Teil"
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Add endpoint"
 msgstr "Endpunkt hinzufügen"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "This transaction sends:"
+msgstr ""
 
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
@@ -10970,6 +10988,10 @@ msgstr "Geworbene Trader"
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max deposit limit reached: {maxPoolUsdText}"
 msgstr "Maximales Einzahlungslimit erreicht: {maxPoolUsdText}"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposits {0} to the LP Vault AND opens a short position — both in one transaction."
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Yield optimizations"
