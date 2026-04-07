@@ -1498,7 +1498,6 @@ msgstr "概述"
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/PositionItem/PositionItem.tsx
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Collateral"
@@ -5717,8 +5716,8 @@ msgid "Your fee savings from referral discounts"
 msgstr "您通过推荐折扣节省的费用"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Required"
-msgstr ""
+#~ msgid "Required"
+#~ msgstr ""
 
 #: src/components/TVChartContainer/constants.ts
 #: src/domain/synthetics/positions/utils.ts
@@ -7876,8 +7875,8 @@ msgid "Depositing to and withdrawing from GMX Account..."
 msgstr "正在存入和从 GMX Account 提取..."
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Keep {0} in your wallet and open a short position only."
-msgstr ""
+#~ msgid "Keep {0} in your wallet and open a short position only."
+#~ msgstr ""
 
 #: src/config/uiFlagEvents.tsx
 msgid "Service disruption"
@@ -8287,7 +8286,6 @@ msgstr "输入金额"
 msgid "SL price above limit price"
 msgstr "止损价格高于限价"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgePage.tsx
 msgid "Self-Custody"
 msgstr ""
@@ -8759,8 +8757,8 @@ msgid "Yes"
 msgstr "是"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Self-Custody Hedge"
-msgstr ""
+#~ msgid "Self-Custody Hedge"
+#~ msgstr ""
 
 #: src/components/PositionDropdown/PositionDropdown.tsx
 msgid "Increase size (TWAP)"
@@ -11511,8 +11509,8 @@ msgid "{orderText} update failed"
 msgstr "{orderText} 更新失败"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Mode"
-msgstr ""
+#~ msgid "Mode"
+#~ msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Success"

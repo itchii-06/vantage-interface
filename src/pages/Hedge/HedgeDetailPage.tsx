@@ -166,11 +166,10 @@ export default function HedgeDetailPage() {
 
   const cfg = VAULT_CONFIGS.find((v) => v.key === key);
 
-  const [mode, setMode] = useState<HedgeMode>("managed");
+  const mode: HedgeMode = "managed";
   const [marginToken, setMarginToken] = useState<HedgeMarginToken>("usdc");
   const [rwaAmountStr, setRwaAmountStr] = useState("");
   const [leverageStr, setLeverageStr] = useState("1");
-  const [usdcCollateralStr, setUsdcCollateralStr] = useState("");
   const [validationError, setValidationError] = useState<string | null>(null);
 
   const { isSubmitting, error: actionError, txHash, validate, execute } = useHedgeActions();
@@ -185,22 +184,16 @@ export default function HedgeDetailPage() {
   // Self-Custody: sizeDelta derived from user's collateral input × leverage
   const price = spotPriceUsd ?? 0;
   const managedSizeDeltaUsd = rwaAmount * price;
-  const selfCustodyCollateralInput = parseFloat(usdcCollateralStr) || 0;
-  const selfCustodySizeDeltaUsd =
-    marginToken === "usdc"
-      ? selfCustodyCollateralInput * leverage
-      : selfCustodyCollateralInput * ETH_PRICE_USD * leverage;
-
-  const sizeDeltaUsd = mode === "managed" ? managedSizeDeltaUsd : selfCustodySizeDeltaUsd;
+  const sizeDeltaUsd = managedSizeDeltaUsd;
 
   // Required margin = sizeDelta / leverage
-  const requiredCollateralUsd = mode === "managed" ? sizeDeltaUsd / leverage : selfCustodyCollateralInput;
-  const requiredCollateralEth = mode === "managed" ? requiredCollateralUsd / ETH_PRICE_USD : selfCustodyCollateralInput;
+  const requiredCollateralUsd = sizeDeltaUsd / leverage;
+  const requiredCollateralEth = requiredCollateralUsd / ETH_PRICE_USD;
 
   // Clear validation error when inputs change
   useEffect(() => {
     setValidationError(null);
-  }, [rwaAmountStr, leverageStr, usdcCollateralStr, mode, marginToken]);
+  }, [rwaAmountStr, leverageStr, marginToken]);
 
   // ── Not found ─────────────────────────────────────────────────────────────
 
@@ -258,8 +251,7 @@ export default function HedgeDetailPage() {
 
   // ── Render ────────────────────────────────────────────────────────────────
 
-  const canExecute =
-    account && !isSubmitting && (mode === "managed" ? rwaAmount > 0 : parseFloat(usdcCollateralStr) > 0);
+  const canExecute = account && !isSubmitting && rwaAmount > 0;
 
   return (
     <div className="w-full">
@@ -323,35 +315,15 @@ export default function HedgeDetailPage() {
 
           {/* ── Right: Action panel ──────────────────────────────────────────── */}
           <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-24">
-            {/* Mode toggle */}
+            {/* Mode label */}
             <div className="mb-20">
-              <div className="mb-8 text-12 text-slate-400">{t`Mode`}</div>
-              <div className="flex rounded-4 border border-stroke-primary">
-                <button
-                  onClick={() => setMode("managed")}
-                  className={`flex-1 rounded-l-4 py-8 text-13 font-medium transition-colors ${
-                    mode === "managed"
-                      ? "bg-indigo-600 text-white"
-                      : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
-                  }`}
-                >
+              <div className="flex items-center gap-8">
+                <span className="bg-indigo-600 rounded-full px-12 py-4 text-13 font-medium text-white">
                   {t`Managed`}
-                </button>
-                <button
-                  onClick={() => setMode("selfCustody")}
-                  className={`flex-1 rounded-r-4 py-8 text-13 font-medium transition-colors ${
-                    mode === "selfCustody"
-                      ? "bg-indigo-600 text-white"
-                      : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
-                  }`}
-                >
-                  {t`Self-Custody`}
-                </button>
+                </span>
               </div>
               <p className="mt-8 text-12 text-slate-500">
-                {mode === "managed"
-                  ? t`Deposits ${cfg.symbol} to the LP Vault AND opens a short position — both in one transaction.`
-                  : t`Keep ${cfg.symbol} in your wallet and open a short position only.`}
+                {t`Deposits ${cfg.symbol} to the LP Vault AND opens a short position — both in one transaction.`}
               </p>
             </div>
 
@@ -403,20 +375,6 @@ export default function HedgeDetailPage() {
               </div>
             )}
 
-            {mode === "selfCustody" && (
-              <div className="mb-16">
-                <label className="mb-6 block text-12 text-slate-400">
-                  {marginToken === "usdc" ? "USDC" : "ETH"} {t`Collateral`}
-                </label>
-                <NumberInput
-                  value={usdcCollateralStr}
-                  onValueChange={(e) => setUsdcCollateralStr(e.target.value)}
-                  className="focus:border-indigo-500 w-full rounded-4 border border-stroke-primary bg-slate-800/60 px-12 py-10 text-14 text-white focus:outline-none"
-                  placeholder="0.00"
-                />
-              </div>
-            )}
-
             <div className="mb-20">
               <label className="mb-6 block text-12 text-slate-400">{t`Leverage`}</label>
               <NumberInput
@@ -443,49 +401,34 @@ export default function HedgeDetailPage() {
                     <span className="text-white">${sizeDeltaUsd.toFixed(2)}</span>
                   </div>
 
-                  {/* Managed: show both actions clearly */}
-                  {mode === "managed" ? (
-                    <div className="mt-10 space-y-6 border-t border-slate-700/60 pt-10">
-                      <div className="text-11 font-medium uppercase tracking-wide text-slate-500">
-                        {t`This transaction sends:`}
-                      </div>
-                      {/* Action 1: LP Deposit */}
-                      <div className="bg-indigo-900/20 flex items-center justify-between rounded-4 px-10 py-8">
-                        <div className="flex items-center gap-6">
-                          <span className="rounded bg-indigo-800/60 text-10 text-indigo-300 px-5 py-1 font-bold">
-                            ①
-                          </span>
-                          <span className="text-slate-300">{t`LP Deposit`}</span>
-                        </div>
-                        <span className="text-indigo-300 font-semibold">
-                          {rwaAmount > 0 ? `${rwaAmount} ${cfg.symbol}` : "—"}
-                        </span>
-                      </div>
-                      {/* Action 2: Short margin */}
-                      <div className="flex items-center justify-between rounded-4 bg-slate-700/30 px-10 py-8">
-                        <div className="flex items-center gap-6">
-                          <span className="rounded text-10 text-slate-300 bg-slate-600/60 px-5 py-1 font-bold">②</span>
-                          <span className="text-slate-300">{t`Short Margin`}</span>
-                        </div>
-                        <span className="font-semibold text-white">
-                          {marginToken === "usdc"
-                            ? `${requiredCollateralUsd.toFixed(2)} USDC`
-                            : `${requiredCollateralEth.toFixed(6)} ETH`}
-                        </span>
-                      </div>
+                  {/* Both actions in one transaction */}
+                  <div className="mt-10 space-y-6 border-t border-slate-700/60 pt-10">
+                    <div className="text-11 font-medium uppercase tracking-wide text-slate-500">
+                      {t`This transaction sends:`}
                     </div>
-                  ) : (
-                    <div className="mt-8 flex justify-between border-t border-slate-700/60 pt-8">
-                      <span className="text-slate-400">
-                        {t`Required`} {marginToken === "usdc" ? "USDC" : "ETH"}
-                      </span>
+                    {/* Action 1: LP Deposit */}
+                    <div className="bg-indigo-900/20 flex items-center justify-between rounded-4 px-10 py-8">
+                      <div className="flex items-center gap-6">
+                        <span className="rounded bg-indigo-800/60 text-10 text-indigo-300 px-5 py-1 font-bold">①</span>
+                        <span className="text-slate-300">{t`LP Deposit`}</span>
+                      </div>
                       <span className="text-indigo-300 font-semibold">
+                        {rwaAmount > 0 ? `${rwaAmount} ${cfg.symbol}` : "—"}
+                      </span>
+                    </div>
+                    {/* Action 2: Short margin */}
+                    <div className="flex items-center justify-between rounded-4 bg-slate-700/30 px-10 py-8">
+                      <div className="flex items-center gap-6">
+                        <span className="rounded text-10 text-slate-300 bg-slate-600/60 px-5 py-1 font-bold">②</span>
+                        <span className="text-slate-300">{t`Short Margin`}</span>
+                      </div>
+                      <span className="font-semibold text-white">
                         {marginToken === "usdc"
                           ? `${requiredCollateralUsd.toFixed(2)} USDC`
                           : `${requiredCollateralEth.toFixed(6)} ETH`}
                       </span>
                     </div>
-                  )}
+                  </div>
                 </>
               )}
             </div>
@@ -519,11 +462,7 @@ export default function HedgeDetailPage() {
                     : "cursor-not-allowed bg-slate-700 text-slate-500"
                 }`}
               >
-                {isSubmitting
-                  ? t`Submitting…`
-                  : mode === "managed"
-                    ? t`Deposit ${cfg.symbol} + Open Short`
-                    : t`Self-Custody Hedge`}
+                {isSubmitting ? t`Submitting…` : t`Deposit ${cfg.symbol} + Open Short`}
               </button>
             )}
 

@@ -1498,7 +1498,6 @@ msgstr "Overview"
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/PositionItem/PositionItem.tsx
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Collateral"
@@ -5717,8 +5716,8 @@ msgid "Your fee savings from referral discounts"
 msgstr "Your fee savings from referral discounts"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Required"
-msgstr "Required"
+#~ msgid "Required"
+#~ msgstr "Required"
 
 #: src/components/TVChartContainer/constants.ts
 #: src/domain/synthetics/positions/utils.ts
@@ -7876,8 +7875,8 @@ msgid "Depositing to and withdrawing from GMX Account..."
 msgstr "Depositing to and withdrawing from GMX Account..."
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Keep {0} in your wallet and open a short position only."
-msgstr "Keep {0} in your wallet and open a short position only."
+#~ msgid "Keep {0} in your wallet and open a short position only."
+#~ msgstr "Keep {0} in your wallet and open a short position only."
 
 #: src/config/uiFlagEvents.tsx
 msgid "Service disruption"
@@ -8287,7 +8286,6 @@ msgstr "Enter an amount"
 msgid "SL price above limit price"
 msgstr "SL price above limit price"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgePage.tsx
 msgid "Self-Custody"
 msgstr "Self-Custody"
@@ -8759,8 +8757,8 @@ msgid "Yes"
 msgstr "Yes"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Self-Custody Hedge"
-msgstr "Self-Custody Hedge"
+#~ msgid "Self-Custody Hedge"
+#~ msgstr "Self-Custody Hedge"
 
 #: src/components/PositionDropdown/PositionDropdown.tsx
 msgid "Increase size (TWAP)"
@@ -11511,8 +11509,8 @@ msgid "{orderText} update failed"
 msgstr "{orderText} update failed"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Mode"
-msgstr "Mode"
+#~ msgid "Mode"
+#~ msgstr "Mode"
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Success"
