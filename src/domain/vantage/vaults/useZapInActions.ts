@@ -21,6 +21,7 @@ import { useEthersSigner } from "lib/wallets/useEthersSigner";
 import useWallet from "lib/wallets/useWallet";
 import LPZapperAbi from "vantage/abis/LPZapper.json";
 import ERC20Abi from "vantage/abis/MockERC20.json";
+import { resolvePoolFee } from "vantage/config/zapTokens";
 import type { ZapTokenConfig } from "vantage/config/zapTokens";
 import { getVantageContractAddress } from "vantage/contracts";
 
@@ -95,6 +96,9 @@ export function useZapInActions(cfg: VaultConfig, zapToken: ZapTokenConfig, chai
 
       const zapper = new Contract(zapperAddress, LPZapperAbi, signer);
 
+      // Resolve the optimal pool fee for this (inputToken, targetToken) pair.
+      const poolFee = resolvePoolFee(zapToken.isNative ? "eth" : "usdc", cfg.symbol);
+
       setIsSubmitting(true);
       try {
         let tx;
@@ -102,7 +106,7 @@ export function useZapInActions(cfg: VaultConfig, zapToken: ZapTokenConfig, chai
         if (zapToken.isNative) {
           // ETH route: no approve needed
           const ethAmount = parseEther(params.amountIn);
-          tx = await zapper.zapInETH(cfg.tokenAddress, params.minTokenOut, zapToken.poolFee, account, {
+          tx = await zapper.zapInETH(cfg.tokenAddress, params.minTokenOut, poolFee, account, {
             value: ethAmount,
           });
         } else {
@@ -114,7 +118,7 @@ export function useZapInActions(cfg: VaultConfig, zapToken: ZapTokenConfig, chai
             const approveTx = await usdc.approve(zapperAddress, usdcAmount);
             await approveTx.wait();
           }
-          tx = await zapper.zapIn(cfg.tokenAddress, usdcAmount, params.minTokenOut, zapToken.poolFee, account);
+          tx = await zapper.zapIn(cfg.tokenAddress, usdcAmount, params.minTokenOut, poolFee, account);
         }
 
         return tx.hash as string;
@@ -122,7 +126,7 @@ export function useZapInActions(cfg: VaultConfig, zapToken: ZapTokenConfig, chai
         setIsSubmitting(false);
       }
     },
-    [account, signer, resolvedChainId, cfg.tokenAddress, zapToken]
+    [account, signer, resolvedChainId, cfg.tokenAddress, cfg.symbol, zapToken]
   );
 
   return { validate, execute, isSubmitting };

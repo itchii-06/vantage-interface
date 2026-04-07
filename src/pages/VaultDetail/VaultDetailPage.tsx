@@ -20,7 +20,7 @@ import { useZapInActions } from "domain/vantage/vaults/useZapInActions";
 import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, getVaultConfigByAddress } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
-import { ZAP_TOKENS, ZapTokenConfig } from "vantage/config/zapTokens";
+import { ZAP_TOKENS, ZapTokenConfig, resolvePoolFee } from "vantage/config/zapTokens";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
@@ -494,7 +494,9 @@ export default function VaultDetailPage() {
                       </div>
                       <div className="flex justify-between">
                         <span>{t`DEX`}</span>
-                        <span className="text-white">Uniswap V3 ({zapToken.poolFee / 100}% fee)</span>
+                        <span className="text-white">
+                          Uniswap V3 ({resolvePoolFee(zapToken.isNative ? "eth" : "usdc", cfg.symbol) / 100}% fee)
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span>{t`Slippage guard`}</span>
