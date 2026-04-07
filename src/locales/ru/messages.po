@@ -2520,6 +2520,10 @@ msgstr "FUNDING APR"
 msgid "Search action"
 msgstr "Поиск действия"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Connect wallet to zap in"
+msgstr ""
+
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "GMX is the utility and governance token. 27% of protocol fees accumulate in the Treasury for GMX buybacks and will be distributed to stakers when GMX reaches $90."
 msgstr ""
@@ -5959,6 +5963,10 @@ msgstr "Недостаточная ликвидность. Доступно: {av
 msgid "Unstake submitted"
 msgstr "Вывод из стейкинга отправлен"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Zapping…"
+msgstr ""
+
 #: src/components/Earn/Discovery/EarnYieldOverview.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
@@ -6085,6 +6093,10 @@ msgstr "Недостаточная ликвидность для обмена п
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Fewer details"
 msgstr "Меньше деталей"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "DEX"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Stryke"
@@ -6241,6 +6253,11 @@ msgstr ""
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shifting from <0><1>GM: {fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>GM: {toIndexName}</4><5>{toPoolName}</5></3>"
 msgstr "Переход от <0><1>GM: {fromIndexName}</1><2>{fromPoolName}</2></0> к <3><4>GM: {toIndexName}</4><5>{toPoolName}</5></3>"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Zap In"
+msgstr ""
 
 #: src/components/MarketStats/components/CompositionTable.tsx
 #: src/components/MarketStats/components/CompositionTable.tsx
@@ -8117,6 +8134,7 @@ msgstr "Обмен {fromAmount} на {toAmount}"
 #: src/components/Referrals/TradersStats.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount"
 msgstr "Сумма"
 
@@ -8616,6 +8634,10 @@ msgstr "Нет влияния на цену. Единая цена исполн�
 
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Confirming…"
+msgstr ""
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Slippage guard"
 msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
@@ -10033,6 +10055,10 @@ msgstr "Привлечённые трейдеры на Arbitrum"
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "What is GM?"
 msgstr "Что такое GM?"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Route"
+msgstr ""
 
 #: src/components/OrderList/OrderList.tsx
 #: src/components/TPSLModal/TPSLOrdersList.tsx

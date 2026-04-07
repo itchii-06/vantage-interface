@@ -2520,6 +2520,10 @@ msgstr "FUNDING APR"
 msgid "Search action"
 msgstr "Search action"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Connect wallet to zap in"
+msgstr "Connect wallet to zap in"
+
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "GMX is the utility and governance token. 27% of protocol fees accumulate in the Treasury for GMX buybacks and will be distributed to stakers when GMX reaches $90."
 msgstr "GMX is the utility and governance token. 27% of protocol fees accumulate in the Treasury for GMX buybacks and will be distributed to stakers when GMX reaches $90."
@@ -5959,6 +5963,10 @@ msgstr "Insufficient liquidity. Available: {availableLiquidityText}"
 msgid "Unstake submitted"
 msgstr "Unstake submitted"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Zapping…"
+msgstr "Zapping…"
+
 #: src/components/Earn/Discovery/EarnYieldOverview.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
@@ -6085,6 +6093,10 @@ msgstr "Insufficient liquidity for pay-to-collateral swap at trigger price"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Fewer details"
 msgstr "Fewer details"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "DEX"
+msgstr "DEX"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Stryke"
@@ -6241,6 +6253,11 @@ msgstr "Shortfall Debt"
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shifting from <0><1>GM: {fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>GM: {toIndexName}</4><5>{toPoolName}</5></3>"
 msgstr "Shifting from <0><1>GM: {fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>GM: {toIndexName}</4><5>{toPoolName}</5></3>"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Zap In"
+msgstr "Zap In"
 
 #: src/components/MarketStats/components/CompositionTable.tsx
 #: src/components/MarketStats/components/CompositionTable.tsx
@@ -8117,6 +8134,7 @@ msgstr "Swap {fromAmount} for {toAmount}"
 #: src/components/Referrals/TradersStats.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount"
 msgstr "Amount"
 
@@ -8617,6 +8635,10 @@ msgstr "No price impact. Single execution price for<0/>increasing longs or decre
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Confirming…"
 msgstr "Confirming…"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Slippage guard"
+msgstr "Slippage guard"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Telegram group (Chinese)"
@@ -10033,6 +10055,10 @@ msgstr "Traders referred on Arbitrum"
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "What is GM?"
 msgstr "What is GM?"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Route"
+msgstr "Route"
 
 #: src/components/OrderList/OrderList.tsx
 #: src/components/TPSLModal/TPSLOrdersList.tsx

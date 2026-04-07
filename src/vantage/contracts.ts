@@ -60,6 +60,7 @@ export type VantageContractName =
   | "HedgeController"
   | "LPManager"
   | "LPToken"
+  | "LPZapper"
   | "ManualAdapter"
   | "MultiOracleMiddleware"
   | "OrderBook"
@@ -88,6 +89,7 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     HedgeController: ZERO,
     LPManager: ARBITRUM_LP_MANAGER,
     LPToken: ARBITRUM_LP_TOKEN,
+    LPZapper: ZERO,
     ManualAdapter: ARBITRUM_MANUAL_ADAPTER,
     MultiOracleMiddleware: ARBITRUM_MULTI_ORACLE_MIDDLEWARE,
     OrderBook: ARBITRUM_ORDER_BOOK,
@@ -108,6 +110,7 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     HedgeController: (localhostDeployment.addresses as { HedgeController?: string }).HedgeController ?? ZERO,
     LPManager: localhostDeployment.addresses.LPManager ?? ZERO,
     LPToken: localhostDeployment.addresses.LPToken ?? ZERO,
+    LPZapper: (localhostDeployment.addresses as { LPZapper?: string }).LPZapper ?? ZERO,
     ManualAdapter: ZERO,
     MultiOracleMiddleware: ZERO,
     OrderBook: localhostDeployment.addresses.OrderBook ?? ZERO,
@@ -128,6 +131,7 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     HedgeController: ZERO,
     LPManager: ARBITRUM_SEPOLIA_LP_MANAGER,
     LPToken: ARBITRUM_SEPOLIA_LP_TOKEN,
+    LPZapper: ZERO,
     ManualAdapter: ARBITRUM_SEPOLIA_MANUAL_ADAPTER,
     MultiOracleMiddleware: ARBITRUM_SEPOLIA_MULTI_ORACLE_MIDDLEWARE,
     OrderBook: ARBITRUM_SEPOLIA_ORDER_BOOK,

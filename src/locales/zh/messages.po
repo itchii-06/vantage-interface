@@ -2520,6 +2520,10 @@ msgstr "FUNDING APR"
 msgid "Search action"
 msgstr "搜索操作"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Connect wallet to zap in"
+msgstr ""
+
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "GMX is the utility and governance token. 27% of protocol fees accumulate in the Treasury for GMX buybacks and will be distributed to stakers when GMX reaches $90."
 msgstr ""
@@ -5959,6 +5963,10 @@ msgstr "流动性不足。可用：{availableLiquidityText}"
 msgid "Unstake submitted"
 msgstr "解除质押已提交"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Zapping…"
+msgstr ""
+
 #: src/components/Earn/Discovery/EarnYieldOverview.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
@@ -6085,6 +6093,10 @@ msgstr "在触发价格下，支付代币转换为抵押品的流动性不足"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Fewer details"
 msgstr "收起详情"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "DEX"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Stryke"
@@ -6241,6 +6253,11 @@ msgstr ""
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shifting from <0><1>GM: {fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>GM: {toIndexName}</4><5>{toPoolName}</5></3>"
 msgstr "从 <0><1>GM: {fromIndexName}</1><2>{fromPoolName}</2></0> 转移到 <3><4>GM: {toIndexName}</4><5>{toPoolName}</5></3>"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Zap In"
+msgstr ""
 
 #: src/components/MarketStats/components/CompositionTable.tsx
 #: src/components/MarketStats/components/CompositionTable.tsx
@@ -8117,6 +8134,7 @@ msgstr "将 {fromAmount} 交换为 {toAmount}"
 #: src/components/Referrals/TradersStats.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount"
 msgstr "金额"
 
@@ -8616,6 +8634,10 @@ msgstr "无价格影响。在此规模下增加做多<0/>或减少做空仓位�
 
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Confirming…"
+msgstr ""
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Slippage guard"
 msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
@@ -10033,6 +10055,10 @@ msgstr "在 Arbitrum 上推荐的交易者"
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "What is GM?"
 msgstr "什么是 GM？"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Route"
+msgstr ""
 
 #: src/components/OrderList/OrderList.tsx
 #: src/components/TPSLModal/TPSLOrdersList.tsx
