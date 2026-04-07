@@ -64,20 +64,6 @@ export default function HedgePage() {
           </p>
         </div>
 
-        {/* Mode legend */}
-        <div className="mb-16 flex gap-24 text-13 text-slate-400">
-          <div>
-            <span className="font-semibold text-white">{t`Managed`}</span>
-            {" — "}
-            {t`Deposit RWA to Vault + open short in one transaction`}
-          </div>
-          <div>
-            <span className="font-semibold text-white">{t`Self-Custody`}</span>
-            {" — "}
-            {t`Hold RWA in your wallet, open short only`}
-          </div>
-        </div>
-
         {/* Table */}
         <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
           {/* Table header */}
@@ -94,7 +80,8 @@ export default function HedgePage() {
           {items.map((item) => (
             <div
               key={item.key}
-              className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] items-center gap-0 border-b border-stroke-primary px-20 py-16 last:border-0 hover:bg-slate-800/40"
+              onClick={() => history.push(`/hedge/${item.key}`)}
+              className="grid cursor-pointer grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] items-center gap-0 border-b border-stroke-primary px-20 py-16 last:border-0 hover:bg-slate-800/40"
             >
               {/* Asset */}
               <div className="flex items-center gap-12">
