@@ -275,21 +275,21 @@ function MergeAnimation() {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "end 0.3"],
+    offset: ["start 0.85", "end 0.6"],
   });
 
   // RWA slides from left (-180px) to center (0)
-  const rwaX = useTransform(scrollYProgress, [0, 0.6], [-180, 0]);
+  const rwaX = useTransform(scrollYProgress, [0, 0.45], [-180, 0]);
   // Short slides from right (180px) to center (0)
-  const shortX = useTransform(scrollYProgress, [0, 0.6], [180, 0]);
+  const shortX = useTransform(scrollYProgress, [0, 0.45], [180, 0]);
   // Both icons fade out as they merge
-  const bothOpacity = useTransform(scrollYProgress, [0.5, 0.75], [1, 0]);
+  const bothOpacity = useTransform(scrollYProgress, [0.35, 0.55], [1, 0]);
   // Shield fades in + scales up after merge
-  const shieldOpacity = useTransform(scrollYProgress, [0.65, 1], [0, 1]);
-  const shieldScale = useTransform(scrollYProgress, [0.65, 1], [0.6, 1]);
+  const shieldOpacity = useTransform(scrollYProgress, [0.5, 0.75], [0, 1]);
+  const shieldScale = useTransform(scrollYProgress, [0.5, 0.75], [0.6, 1]);
   // Result text fades in
-  const resultOpacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
-  const resultY = useTransform(scrollYProgress, [0.8, 1], [16, 0]);
+  const resultOpacity = useTransform(scrollYProgress, [0.65, 0.85], [0, 1]);
+  const resultY = useTransform(scrollYProgress, [0.65, 0.85], [16, 0]);
 
   const rwaIconStyle = useMemo(
     () => ({ ...MERGE_ICON_BASE, left: "50%" as const, translateX: "-50%", x: rwaX, opacity: bothOpacity }),
