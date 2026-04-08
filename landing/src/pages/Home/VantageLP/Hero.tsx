@@ -62,7 +62,6 @@ function StatItem({ target, format, label, decimals }: StatItemProps) {
 
 const STATS: StatItemProps[] = [
   { target: 12.4, format: "dollar-M", label: "Total Value Locked", decimals: 1 },
-  { target: 8.8, format: "percent", label: "Avg Net APY", decimals: 1 },
   { target: 3, format: "integer", label: "Active Vaults" },
   { target: 142, format: "integer", label: "Positions Protected" },
 ];
