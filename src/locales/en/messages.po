@@ -259,8 +259,8 @@ msgid "Performance"
 msgstr "Performance"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Spot Value"
-msgstr "Spot Value"
+#~ msgid "Spot Value"
+#~ msgstr "Spot Value"
 
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Total earned"
@@ -4175,7 +4175,6 @@ msgstr "Virtual market ID"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "Leverage"
@@ -4834,7 +4833,6 @@ msgstr "LayerZero scan"
 msgid "Borrow fee"
 msgstr "Borrow fee"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Short Size"
 msgstr "Short Size"
@@ -8171,8 +8169,8 @@ msgid "Ecosystem"
 msgstr "Ecosystem"
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
-msgid "per token"
-msgstr "per token"
+#~ msgid "per token"
+#~ msgstr "per token"
 
 #: src/pages/PriceImpactRebatesStats/PriceImpactRebatesStats.tsx
 msgid "Next"
@@ -8542,7 +8540,6 @@ msgstr "Show positions on chart"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
-#: src/pages/Hedge/HedgePage.tsx
 #: src/pages/Hedge/HedgePage.tsx
 msgid "Hedge"
 msgstr "Hedge"

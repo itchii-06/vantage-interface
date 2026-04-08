@@ -67,13 +67,12 @@ export default function HedgePage() {
         {/* Table */}
         <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
           {/* Table header */}
-          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] items-center gap-0 border-b border-stroke-primary px-20 py-12 text-12 text-slate-400">
+          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-12 text-12 text-slate-400">
             <div>{t`Asset`}</div>
             <div className="text-right">{t`Vault APY`}</div>
             <div className="text-right">{t`Managed Net APY`}</div>
             <div className="text-right">{t`Self-Custody APY`}</div>
             <div className="text-right">{t`AUM`}</div>
-            <div className="w-80" />
           </div>
 
           {/* Rows */}
@@ -81,7 +80,7 @@ export default function HedgePage() {
             <div
               key={item.key}
               onClick={() => history.push(`/hedge/${item.key}`)}
-              className="grid cursor-pointer grid-cols-[2fr_1fr_1fr_1fr_1fr_auto] items-center gap-0 border-b border-stroke-primary px-20 py-16 last:border-0 hover:bg-slate-800/40"
+              className="grid cursor-pointer grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-16 last:border-0 hover:bg-slate-800/40"
             >
               {/* Asset */}
               <div className="flex items-center gap-12">
@@ -121,16 +120,6 @@ export default function HedgePage() {
                 ) : (
                   <span className="text-15 font-medium text-white">{formatUsd(item.aum)}</span>
                 )}
-              </div>
-
-              {/* Action */}
-              <div className="flex w-80 justify-end">
-                <button
-                  onClick={() => history.push(`/hedge/${item.key}`)}
-                  className="bg-indigo-600 hover:bg-indigo-500 rounded-4 px-14 py-6 text-13 font-medium text-white transition-colors"
-                >
-                  {t`Hedge`}
-                </button>
               </div>
             </div>
           ))}

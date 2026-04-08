@@ -38,7 +38,7 @@ const d = localhostDeployment.addresses as {
 const USDC_ADDRESS = d.tokens?.USDC ?? "";
 
 // Vault configs that have a valid tokenAddress (tradeable markets)
-const TRADEABLE_VAULTS = VAULT_CONFIGS.filter((v) => v.tokenAddress && v.vaultAddress);
+const TRADEABLE_VAULTS = VAULT_CONFIGS.filter((v) => v.tokenAddress && v.vaultAddress && v.assetType !== "stable");
 
 export default function TradePage() {
   const { account } = useWallet();
@@ -96,7 +96,7 @@ export default function TradePage() {
                   onClick={() => setIsMarketOpen((o) => !o)}
                 >
                   <span className="text-20 font-bold text-white group-hover:text-blue-300">
-                    {selectedVault?.symbol ?? "—"} / USDC
+                    {selectedVault?.symbol ?? "—"}
                   </span>
                   <ChevronDownIcon className="w-16 text-slate-400 group-hover:text-blue-300" />
                 </div>
@@ -127,7 +127,7 @@ export default function TradePage() {
                               {vault.symbol.slice(0, 2)}
                             </div>
                             <div>
-                              <div className="text-14 font-semibold text-white">{vault.symbol} / USDC</div>
+                              <div className="text-14 font-semibold text-white">{vault.symbol}</div>
                               <div className="text-11 text-slate-400">{vault.name}</div>
                             </div>
                           </div>

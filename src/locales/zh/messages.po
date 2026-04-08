@@ -259,8 +259,8 @@ msgid "Performance"
 msgstr "表现"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Spot Value"
-msgstr ""
+#~ msgid "Spot Value"
+#~ msgstr ""
 
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Total earned"
@@ -4175,7 +4175,6 @@ msgstr "虚拟市场 ID"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "杠杆"
@@ -4834,7 +4833,6 @@ msgstr "LayerZero scan"
 msgid "Borrow fee"
 msgstr "借贷费用"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Short Size"
 msgstr ""
@@ -8171,8 +8169,8 @@ msgid "Ecosystem"
 msgstr "生态系统"
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
-msgid "per token"
-msgstr ""
+#~ msgid "per token"
+#~ msgstr ""
 
 #: src/pages/PriceImpactRebatesStats/PriceImpactRebatesStats.tsx
 msgid "Next"
@@ -8542,7 +8540,6 @@ msgstr "在图表上显示仓位"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
-#: src/pages/Hedge/HedgePage.tsx
 #: src/pages/Hedge/HedgePage.tsx
 msgid "Hedge"
 msgstr ""

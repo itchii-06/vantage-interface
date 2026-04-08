@@ -148,7 +148,7 @@ function useHedgeItem(cfg: VaultConfig): HedgeListItem {
 
 // ── Public hook (fixed-order: hooks must not be conditional) ──────────────────
 
-const HEDGEABLE = VAULT_CONFIGS.filter((v) => v.tokenAddress && v.vaultAddress);
+const HEDGEABLE = VAULT_CONFIGS.filter((v) => v.tokenAddress && v.vaultAddress && v.assetType !== "stable");
 
 export function useHedgeList(): HedgeListItem[] {
   // Hooks called in fixed order — never inside map()

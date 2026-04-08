@@ -145,7 +145,7 @@ function HedgeStatusBar({
           <div className="text-11 text-slate-500">
             {symbol} {t`Price`}
           </div>
-          <div className="mt-4 text-24 font-bold text-white">
+          <div className="mt-4 text-15 font-semibold text-white">
             {spotPriceUsd !== null ? `$${spotPriceUsd.toFixed(4)}` : "—"}
           </div>
           <div className="mt-2 text-11 text-slate-500">{t`Oracle price`}</div>
@@ -154,14 +154,14 @@ function HedgeStatusBar({
         {/* TVL Protected */}
         <div>
           <div className="text-11 text-slate-500">{t`TVL Protected`}</div>
-          <div className="mt-4 text-24 font-bold text-white">{fmtUsd(vaultAumUsd, 0)}</div>
+          <div className="mt-4 text-15 font-semibold text-white">{fmtUsd(vaultAumUsd, 0)}</div>
           <div className="mt-2 text-11 text-slate-500">{t`Vault AUM`}</div>
         </div>
 
         {/* Remaining hedge capacity */}
         <div>
           <div className="text-11 text-slate-500">{t`Remaining Capacity`}</div>
-          <div className="mt-4 text-24 font-bold text-white">{fmtUsd(remainingCapacityUsd, 0)}</div>
+          <div className="mt-4 text-15 font-semibold text-white">{fmtUsd(remainingCapacityUsd, 0)}</div>
           {usedPct !== null && (
             <div className="mt-6">
               <div className="text-10 mb-2 flex justify-between text-slate-500">
@@ -176,12 +176,10 @@ function HedgeStatusBar({
         </div>
 
         {/* Health badge */}
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-col">
           <div className="text-11 text-slate-500">{t`Net APY`}</div>
-          <div className={`mt-4 inline-flex items-center gap-8 self-start rounded-full px-14 py-8 ${hc.bg}`}>
-            <span className={`h-8 w-8 rounded-full ${hc.dot} animate-pulse`} />
-            <span className={`text-15 font-bold ${hc.text}`}>{fmtBps(netApyBps)}</span>
-            <span className={`text-11 ${hc.text}`}>{hc.label}</span>
+          <div className="mt-4">
+            <span className={`text-15 font-semibold ${hc.text}`}>{fmtBps(netApyBps)}</span>
           </div>
           {netApyBps !== null && netApyBps > 0 && (
             <div className="mt-6 text-11 text-green-500">{t`You are being paid to hedge`}</div>
@@ -540,22 +538,6 @@ export default function HedgeDetailPage() {
                 onTimeFrameChange={setTimeFrame}
                 isLoading={false}
               />
-
-              {/* Stats row */}
-              <div className="mt-20 grid grid-cols-3 gap-16 border-t border-stroke-primary pt-16">
-                <div>
-                  <div className="text-11 text-slate-500">{t`Spot Value`}</div>
-                  <div className="mt-4 text-15 font-semibold text-white">{fmtUsd(rwaAmount * (spotPriceUsd ?? 0))}</div>
-                </div>
-                <div>
-                  <div className="text-11 text-slate-500">{t`Short Size`}</div>
-                  <div className="mt-4 text-15 font-semibold text-white">{fmtUsd(sizeDeltaUsd)}</div>
-                </div>
-                <div>
-                  <div className="text-11 text-slate-500">{t`Leverage`}</div>
-                  <div className="mt-4 text-15 font-semibold text-white">{leverage}×</div>
-                </div>
-              </div>
             </div>
 
             {/* Current Position (includes Status) */}

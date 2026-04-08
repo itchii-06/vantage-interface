@@ -27,8 +27,6 @@ import TokenAbi from "sdk/abis/Token";
 import { getVantageContractAddress } from "vantage/contracts";
 import { AssetRegistry__factory, Vault__factory } from "vantage/types";
 
-import Button from "components/Button/Button";
-
 import { SpreadBadge } from "./SpreadBadge";
 
 // Tokens available for trade on localhost
@@ -206,6 +204,8 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
 
   const feeEth = parseFloat(formatEther(trade.minExecutionFee)).toFixed(5);
 
+  const approveBtnStyle = useMemo(() => ({ backgroundColor: isApproving ? "#334155" : "#4f46e5" }), [isApproving]);
+
   return (
     <div className="flex flex-col gap-12">
       {/* Spread display */}
@@ -335,15 +335,27 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
       {!account ? (
         <div className="py-8 text-center text-13 text-slate-400">{t`Connect wallet to trade`}</div>
       ) : needsApproval ? (
-        <Button variant="primary" className="w-full" onClick={handleApprove} disabled={isApproving}>
+        <button
+          onClick={handleApprove}
+          disabled={isApproving}
+          className={`w-full rounded-4 py-14 text-15 font-semibold text-white transition-colors ${
+            isApproving ? "cursor-not-allowed text-slate-500" : ""
+          }`}
+          style={approveBtnStyle}
+        >
           {isApproving ? t`Approving…` : t`Approve USDC`}
-        </Button>
+        </button>
       ) : (
-        <Button
-          variant="primary"
-          className="w-full py-16 text-16 font-bold"
+        <button
           onClick={handleSubmit}
           disabled={isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError}
+          className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors ${
+            isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError
+              ? "cursor-not-allowed bg-slate-700 text-slate-500"
+              : isLong
+                ? "bg-green-600 text-white hover:bg-green-500"
+                : "bg-red-600 text-white hover:bg-red-500"
+          }`}
         >
           {isSubmitting
             ? t`Submitting…`
@@ -354,7 +366,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
               : isLong
                 ? `Buy ${parseFloat(formatEther(sizeDelta))} USDC`
                 : `Sell ${parseFloat(formatEther(sizeDelta))} USDC`}
-        </Button>
+        </button>
       )}
     </div>
   );

@@ -9,7 +9,7 @@
 
 import { t } from "@lingui/macro";
 import { formatEther, formatUnits, parseUnits } from "ethers";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useMemo, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import { useVaultActions } from "domain/vantage/vaults/useVaultActions";
@@ -112,6 +112,40 @@ export default function VaultDetailPage() {
   const apy = useVaultApy(cfg!);
 
   const isTestnet = !MAINNET_CHAIN_IDS.has(chainId);
+
+  // ── Button styles (must be before any early return) ─────────────────────────
+  const approveBtnStyle = useMemo(
+    () => ({ backgroundColor: isSubmitting || actions.isApproving ? "#334155" : "#4f46e5" }),
+    [isSubmitting, actions.isApproving]
+  );
+  const depositBtnStyle = useMemo(() => {
+    let amt = 0n;
+    if (cfg && depositInput && parseFloat(depositInput) > 0) {
+      try {
+        amt = parseUnits(depositInput, cfg.tokenDecimals);
+      } catch {
+        /* leave 0n */
+      }
+    }
+    return { backgroundColor: amt === 0n || isSubmitting ? "#334155" : "#4f46e5" };
+  }, [cfg, depositInput, isSubmitting]);
+  const zapBtnStyle = useMemo(
+    () => ({
+      backgroundColor: !zapInput || parseFloat(zapInput) <= 0 || zapActions.isSubmitting ? "#334155" : "#4f46e5",
+    }),
+    [zapInput, zapActions.isSubmitting]
+  );
+  const withdrawBtnStyle = useMemo(() => {
+    let shares = 0n;
+    if (withdrawInput && parseFloat(withdrawInput) > 0) {
+      try {
+        shares = parseUnits(withdrawInput, 18);
+      } catch {
+        /* leave 0n */
+      }
+    }
+    return { backgroundColor: shares === 0n || isSubmitting || shares > data.vlpBalance ? "#334155" : "#4f46e5" };
+  }, [withdrawInput, isSubmitting, data.vlpBalance]);
 
   // ── Config missing guard ────────────────────────────────────────────────────
   if (!cfg) {
@@ -268,12 +302,6 @@ export default function VaultDetailPage() {
                   <div className="mt-2 text-13 text-slate-400">{cfg.name}</div>
                 </div>
               </div>
-
-              {/* Price row */}
-              <div className="mt-12 flex items-baseline gap-8">
-                <span className="text-28 font-bold text-white">{formatPrice(data.tokenPrice)}</span>
-                <span className="text-14 text-slate-400">{t`per token`}</span>
-              </div>
             </div>
 
             {/* AUM Chart */}
@@ -417,25 +445,23 @@ export default function VaultDetailPage() {
                     {!account ? (
                       <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to deposit`}</div>
                     ) : needsApproval ? (
-                      <Button
-                        variant="primary"
-                        size="medium"
+                      <button
                         disabled={isSubmitting || actions.isApproving}
                         onClick={() => actions.approve()}
-                        className="w-full"
+                        className="w-full rounded-4 py-14 text-15 font-semibold text-white transition-colors"
+                        style={approveBtnStyle}
                       >
                         {actions.isApproving ? t`Approving…` : t`Approve ${cfg.symbol}`}
-                      </Button>
+                      </button>
                     ) : (
-                      <Button
-                        variant="primary"
-                        size="medium"
+                      <button
                         disabled={depositAmount === 0n || isSubmitting}
                         onClick={handleDeposit}
-                        className="w-full"
+                        className="w-full rounded-4 py-14 text-15 font-semibold text-white transition-colors"
+                        style={depositBtnStyle}
                       >
                         {isSubmitting ? t`Depositing…` : t`Deposit`}
-                      </Button>
+                      </button>
                     )}
                   </div>
                 )}
@@ -511,15 +537,14 @@ export default function VaultDetailPage() {
                     {!account ? (
                       <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to zap in`}</div>
                     ) : (
-                      <Button
-                        variant="primary"
-                        size="medium"
+                      <button
                         disabled={!zapInput || parseFloat(zapInput) <= 0 || zapActions.isSubmitting}
                         onClick={handleZap}
-                        className="w-full"
+                        className="w-full rounded-4 py-14 text-15 font-semibold text-white transition-colors"
+                        style={zapBtnStyle}
                       >
                         {zapActions.isSubmitting ? t`Zapping…` : t`Zap In`}
-                      </Button>
+                      </button>
                     )}
                   </div>
                 )}
@@ -572,15 +597,14 @@ export default function VaultDetailPage() {
                     {!account ? (
                       <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to withdraw`}</div>
                     ) : (
-                      <Button
-                        variant="primary"
-                        size="medium"
+                      <button
                         disabled={withdrawShares === 0n || isSubmitting || withdrawShares > data.vlpBalance}
                         onClick={handleWithdraw}
-                        className="w-full"
+                        className="w-full rounded-4 py-14 text-15 font-semibold text-white transition-colors"
+                        style={withdrawBtnStyle}
                       >
                         {isSubmitting ? t`Withdrawing…` : t`Withdraw`}
-                      </Button>
+                      </button>
                     )}
 
                     {withdrawShares > data.vlpBalance && data.vlpBalance > 0n && (
