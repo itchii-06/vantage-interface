@@ -592,6 +592,10 @@ msgstr "Limit price below mark price"
 msgid "Long OI"
 msgstr "Long OI"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Net Yield"
+msgstr "Net Yield"
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Traders referred on Avalanche"
 msgstr "Traders referred on Avalanche"
@@ -942,6 +946,10 @@ msgstr "GMX alerts"
 msgid "Net price impact and fees from your trade. <0>Read more</0>."
 msgstr "Net price impact and fees from your trade. <0>Read more</0>."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Hedge Positions"
+msgstr "Hedge Positions"
+
 #: src/domain/synthetics/orders/simulateExecuteTxn.tsx
 msgid "Prices are volatile. <0>Increase allowed slippage</0>"
 msgstr "Prices are volatile. <0>Increase allowed slippage</0>"
@@ -1077,6 +1085,10 @@ msgstr "Claim {totalUsd}"
 #: src/domain/tokens/approveTokens.tsx
 msgid "Insufficient {0} for gas on {networkName}<0/><1/><2>Buy or transfer {1} to {networkName}</2>"
 msgstr "Insufficient {0} for gas on {networkName}<0/><1/><2>Buy or transfer {1} to {networkName}</2>"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Wallet balances are not included in Total Net Worth. Net Yield is annualized; past rates are not indicative of future returns."
+msgstr "Wallet balances are not included in Total Net Worth. Net Yield is annualized; past rates are not indicative of future returns."
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Yield Yak Swap"
@@ -1336,6 +1348,10 @@ msgstr "Transactions"
 msgid "External swap {0} to {1}"
 msgstr "External swap {0} to {1}"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Short size / Your LP value"
+msgstr "Short size / Your LP value"
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "To buy GMX on {0}, <0>change your network</0>"
 msgstr "To buy GMX on {0}, <0>change your network</0>"
@@ -1351,6 +1367,10 @@ msgstr "Signing..."
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Deposit fee"
 msgstr "Deposit fee"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP + Trade collateral ± PnL"
+msgstr "LP + Trade collateral ± PnL"
 
 #: src/components/BotanixBanner/BotanixBanner.tsx
 msgid "<0>Botanix</0> supports"
@@ -1815,6 +1835,10 @@ msgstr "{0} per {1}"
 msgid "In liquidity"
 msgstr "In liquidity"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Connect wallet to view hedge positions"
+msgstr "Connect wallet to view hedge positions"
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/TradeBox/hooks/useTradeButtonState.tsx
@@ -1992,6 +2016,10 @@ msgstr "Express Trading is unavailable for wrapping or unwrapping native token {
 msgid "Virtual short token ID"
 msgstr "Virtual short token ID"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Unrealized P&L"
+msgstr "Unrealized P&L"
+
 #: src/components/TenderlySettings/TenderlySettings.tsx
 msgid "account"
 msgstr "account"
@@ -2077,6 +2105,10 @@ msgstr "Position closed"
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Price on Avalanche"
 msgstr "Price on Avalanche"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Avg. Hedge Ratio"
+msgstr "Avg. Hedge Ratio"
 
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "Chart positions"
@@ -2320,6 +2352,10 @@ msgstr "Max {0}"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Collateral at liquidation"
 msgstr "Collateral at liquidation"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Your delta-neutral positions, trade history, and LP status across all vaults."
+msgstr "Your delta-neutral positions, trade history, and LP status across all vaults."
 
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "Sender has withdrawn all tokens from GMX vesting vault"
@@ -2760,6 +2796,7 @@ msgstr "Buy GMX on {chainName}"
 #: src/components/TPSLModal/AddTPSLModal.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
@@ -3191,6 +3228,10 @@ msgstr "Update 1CT settings"
 msgid "Shift order executed"
 msgstr "Shift order executed"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Active"
+msgstr "Active"
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useTokensToApprove.tsx
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Native token cannot be approved"
@@ -3397,11 +3438,9 @@ msgstr "Remove endpoint"
 msgid "Community-led Telegram groups"
 msgstr "Community-led Telegram groups"
 
-#: src/pages/Trade/TradePage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#: src/pages/Vaults/VaultsPage.tsx
-#~ msgid "Vault"
-#~ msgstr "Vault"
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Vault"
+msgstr "Vault"
 
 #: src/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "Change to {0}"
@@ -4175,6 +4214,7 @@ msgstr "Virtual market ID"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "Leverage"
@@ -4457,6 +4497,10 @@ msgstr "Submitting…"
 msgid "Approval cancelled"
 msgstr "Approval cancelled"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Total Protection"
+msgstr "Total Protection"
+
 #: src/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "Your feedback helps us understand what we're doing well and where we can improve"
 msgstr "Your feedback helps us understand what we're doing well and where we can improve"
@@ -4543,6 +4587,7 @@ msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 
 #: src/pages/Earn/EarnPageLayout.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Portfolio"
 msgstr "Portfolio"
 
@@ -5251,6 +5296,10 @@ msgstr "Distribution rate, {0}"
 msgid "Referral code added"
 msgstr "Referral code added"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Hedge page"
+msgstr "Hedge page"
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX bonds on Bond Protocol at a discount with a short vesting period"
 msgstr "Buy GMX bonds on Bond Protocol at a discount with a short vesting period"
@@ -5258,6 +5307,10 @@ msgstr "Buy GMX bonds on Bond Protocol at a discount with a short vesting period
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Warning: Your position value exceeds current vault AUM. Withdrawal may be partially settled."
 msgstr "Warning: Your position value exceeds current vault AUM. Withdrawal may be partially settled."
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Vault LP"
+msgstr "Vault LP"
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
@@ -5416,6 +5469,8 @@ msgstr "Settings updated"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -5818,6 +5873,10 @@ msgstr "Existing limit order in WETH-USDC pool but lacks liquidity for this orde
 msgid "({0} of swap amount)"
 msgstr "({0} of swap amount)"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "No open positions. Go to the"
+msgstr "No open positions. Go to the"
+
 #: src/domain/synthetics/trade/utils/validation.ts
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Insufficient {0} liquidity"
@@ -5875,6 +5934,10 @@ msgstr "Trigger orders"
 msgid "GMX uses TradingView for real-time cryptocurrency charts. Track <0>BTCUSD</0> and other pairs with interactive charting tools."
 msgstr "GMX uses TradingView for real-time cryptocurrency charts. Track <0>BTCUSD</0> and other pairs with interactive charting tools."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Balanced ✓"
+msgstr "Balanced ✓"
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 msgid "Error simulating deposit"
@@ -5926,6 +5989,7 @@ msgid "Details"
 msgstr "Details"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Vault AUM"
 msgstr "Vault AUM"
 
@@ -6011,6 +6075,10 @@ msgstr "Unstake submitted"
 msgid "Zapping…"
 msgstr "Zapping…"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Trade page"
+msgstr "Trade page"
+
 #: src/components/Earn/Discovery/EarnYieldOverview.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
@@ -6037,6 +6105,10 @@ msgstr "Price impact rebates from closing are claimable in the Claims tab. <0>Re
 #: src/components/PositionEditor/usePositionEditorButtonState.tsx
 msgid "Order failed"
 msgstr "Order failed"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Balance (LP ↔ Short)"
+msgstr "Balance (LP ↔ Short)"
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Airdrop"
@@ -6517,6 +6589,10 @@ msgstr "You must be on this page to accept the transfer. <0>Copy link</0>"
 msgid "<0>Wallet not connected to {0}</0><1/><2>Switch to {1}</2>"
 msgstr "<0>Wallet not connected to {0}</0><1/><2>Switch to {1}</2>"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "My Liquidity"
+msgstr "My Liquidity"
+
 #: src/components/MarketStats/components/CompositionTable.tsx
 msgid "TVL/CAP"
 msgstr "TVL/CAP"
@@ -6597,6 +6673,7 @@ msgid "Steady returns without management"
 msgstr "Steady returns without management"
 
 #: src/components/TradeBox/TradeBoxRows/SwapSpreadRow.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/SpreadBadge.tsx
 msgid "Spread"
 msgstr "Spread"
@@ -7040,6 +7117,8 @@ msgstr "Order error. Prices are volatile for this market, try again by <0>increa
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/pages/Hedge/HedgePage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Asset"
 msgstr "Asset"
@@ -7272,6 +7351,10 @@ msgstr "Use a TWAP order"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Enable external swaps"
 msgstr "Enable external swaps"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Sum of short position sizes"
+msgstr "Sum of short position sizes"
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "BORROWING FEES"
@@ -7532,6 +7615,10 @@ msgstr "Cancel Stop-Loss"
 msgid "{0} is required for collateral.<0/><1/>No swap path found for {1} to {2} within GMX.<2/><3/><4>Buy {3} on 1inch</4>."
 msgstr "{0} is required for collateral.<0/><1/>No swap path found for {1} to {2} within GMX.<2/><3/><4>Buy {3} on 1inch</4>."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP-weighted net APY (annualized)"
+msgstr "LP-weighted net APY (annualized)"
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "27% of protocol fees are accumulating in the Treasury for GMX buybacks. Rewards will be distributed to stakers when GMX reaches $90, proportional to staking power (duration × amount staked)."
 msgstr "27% of protocol fees are accumulating in the Treasury for GMX buybacks. Rewards will be distributed to stakers when GMX reaches $90, proportional to staking power (duration × amount staked)."
@@ -7589,6 +7676,10 @@ msgstr "No available leverage found"
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Total supply"
 msgstr "Total supply"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Connect wallet to view positions"
+msgstr "Connect wallet to view positions"
 
 #: src/components/Earn/Portfolio/AssetsList/AssetsList.tsx
 msgid "My assets"
@@ -8934,6 +9025,7 @@ msgstr "Transfer {nativeTokenSymbol}"
 msgid "Opening position..."
 msgstr "Opening position..."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Side"
@@ -9175,6 +9267,10 @@ msgstr "Claims"
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Date"
 msgstr "Date"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Total Net Worth"
+msgstr "Total Net Worth"
 
 #: src/components/TradeBox/TradeBoxRows/AvailableLiquidityRow.tsx
 msgid "Executes when liquidity and price conditions are met"
@@ -9608,6 +9704,7 @@ msgstr "{gmOrGlvLabel} sold successfully, but bridge to Base failed. Your funds 
 #: src/domain/synthetics/orders/utils.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -9754,6 +9851,10 @@ msgstr "{nativeTokenSymbol} APR"
 msgid "Option-based vaults"
 msgstr "Option-based vaults"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "No hedge positions. Open a hedge on the"
+msgstr "No hedge positions. Open a hedge on the"
+
 #: src/components/OneClickAdvancedSettings/OneClickAdvancedSettings.tsx
 msgid "Time limit"
 msgstr "Time limit"
@@ -9787,6 +9888,10 @@ msgstr "take-profit"
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 msgid "Top PnL ($)"
 msgstr "Top PnL ($)"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP"
+msgstr "LP"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Leverage trading terminal"
@@ -10145,6 +10250,7 @@ msgstr "Use the TP/SL button to set TP/SL orders."
 msgid "Close Long"
 msgstr "Close Long"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "APY"
@@ -10595,6 +10701,10 @@ msgstr "Account events"
 msgid "Transaction failed"
 msgstr "Transaction failed"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Δ"
+msgstr "Δ"
+
 #: src/components/MarketStats/components/CompositionTable.tsx
 #: src/components/PositionList/PositionList.tsx
 msgid "COLLATERAL"
@@ -10616,6 +10726,7 @@ msgstr "Depositing..."
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Status"
 msgstr "Status"
 
@@ -11056,6 +11167,10 @@ msgstr "Max open interest exceeded"
 #: src/domain/synthetics/fees/utils/index.ts
 msgid "Network fees are high due to increased {chainName} network activity"
 msgstr "Network fees are high due to increased {chainName} network activity"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Trading Positions"
+msgstr "Trading Positions"
 
 #: src/components/Claims/ClaimsHistory.tsx
 #: src/components/TradeHistory/useDownloadAsCsv.tsx

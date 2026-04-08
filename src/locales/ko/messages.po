@@ -592,6 +592,10 @@ msgstr "지정가 가격이 마크 가격 미만"
 msgid "Long OI"
 msgstr "롱 OI"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Net Yield"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Traders referred on Avalanche"
 msgstr "Avalanche에서 추천된 트레이더"
@@ -942,6 +946,10 @@ msgstr "GMX 알림"
 msgid "Net price impact and fees from your trade. <0>Read more</0>."
 msgstr "거래에서 발생한 순 가격 영향 및 수수료입니다. <0>자세히 보기</0>."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Hedge Positions"
+msgstr ""
+
 #: src/domain/synthetics/orders/simulateExecuteTxn.tsx
 msgid "Prices are volatile. <0>Increase allowed slippage</0>"
 msgstr "가격 변동이 심합니다. <0>허용 슬리피지를 높이십시오</0>"
@@ -1077,6 +1085,10 @@ msgstr "{totalUsd} 수령"
 #: src/domain/tokens/approveTokens.tsx
 msgid "Insufficient {0} for gas on {networkName}<0/><1/><2>Buy or transfer {1} to {networkName}</2>"
 msgstr "{networkName}에서 Gas에 필요한 {0}이 부족합니다<0/><1/><2>{networkName}으로 {1}을(를) 구매하거나 전송하십시오</2>"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Wallet balances are not included in Total Net Worth. Net Yield is annualized; past rates are not indicative of future returns."
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Yield Yak Swap"
@@ -1336,6 +1348,10 @@ msgstr ""
 msgid "External swap {0} to {1}"
 msgstr "외부 스왑 {0} → {1}"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Short size / Your LP value"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "To buy GMX on {0}, <0>change your network</0>"
 msgstr "{0}에서 GMX를 구매하려면 <0>네트워크를 변경하십시오</0>"
@@ -1351,6 +1367,10 @@ msgstr "서명 중..."
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Deposit fee"
 msgstr "입금 수수료"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP + Trade collateral ± PnL"
+msgstr ""
 
 #: src/components/BotanixBanner/BotanixBanner.tsx
 msgid "<0>Botanix</0> supports"
@@ -1815,6 +1835,10 @@ msgstr "{0}/{1}"
 msgid "In liquidity"
 msgstr "유동성 내"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Connect wallet to view hedge positions"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/TradeBox/hooks/useTradeButtonState.tsx
@@ -1992,6 +2016,10 @@ msgstr "네이티브 토큰 {0}의 래핑 또는 언래핑에는 Express Trading
 msgid "Virtual short token ID"
 msgstr "가상 숏 토큰 ID"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Unrealized P&L"
+msgstr ""
+
 #: src/components/TenderlySettings/TenderlySettings.tsx
 msgid "account"
 msgstr "account"
@@ -2077,6 +2105,10 @@ msgstr ""
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Price on Avalanche"
 msgstr "Avalanche에서 가격"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Avg. Hedge Ratio"
+msgstr ""
 
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "Chart positions"
@@ -2320,6 +2352,10 @@ msgstr "최대 {0}"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Collateral at liquidation"
 msgstr "청산 시 담보"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Your delta-neutral positions, trade history, and LP status across all vaults."
+msgstr ""
 
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "Sender has withdrawn all tokens from GMX vesting vault"
@@ -2760,6 +2796,7 @@ msgstr "{chainName}에서 GMX 구매"
 #: src/components/TPSLModal/AddTPSLModal.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
@@ -3191,6 +3228,10 @@ msgstr "1CT 설정 업데이트"
 msgid "Shift order executed"
 msgstr "Shift 주문이 체결되었습니다"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Active"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useTokensToApprove.tsx
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Native token cannot be approved"
@@ -3397,11 +3438,9 @@ msgstr "엔드포인트 제거"
 msgid "Community-led Telegram groups"
 msgstr "커뮤니티 운영 Telegram 그룹"
 
-#: src/pages/Trade/TradePage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#: src/pages/Vaults/VaultsPage.tsx
-#~ msgid "Vault"
-#~ msgstr ""
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Vault"
+msgstr ""
 
 #: src/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "Change to {0}"
@@ -4175,6 +4214,7 @@ msgstr "가상 마켓 ID"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "레버리지"
@@ -4457,6 +4497,10 @@ msgstr ""
 msgid "Approval cancelled"
 msgstr "승인 취소됨"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Total Protection"
+msgstr ""
+
 #: src/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "Your feedback helps us understand what we're doing well and where we can improve"
 msgstr "귀하의 피드백은 저희가 잘하고 있는 부분과 개선이 필요한 부분을 파악하는 데 도움이 됩니다"
@@ -4543,6 +4587,7 @@ msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "가격 영향 리베이트가 누적되었습니다. 5일 후 수령 가능합니다. <0>자세히 보기</0>."
 
 #: src/pages/Earn/EarnPageLayout.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Portfolio"
 msgstr "포트폴리오"
 
@@ -5251,12 +5296,20 @@ msgstr "분배 비율, {0}"
 msgid "Referral code added"
 msgstr "추천 코드가 추가되었습니다"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Hedge page"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX bonds on Bond Protocol at a discount with a short vesting period"
 msgstr "Bond Protocol에서 짧은 베스팅 기간으로 GMX 채권을 할인 구매하십시오"
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Warning: Your position value exceeds current vault AUM. Withdrawal may be partially settled."
+msgstr ""
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Vault LP"
 msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
@@ -5416,6 +5469,8 @@ msgstr "설정이 업데이트되었습니다"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -5818,6 +5873,10 @@ msgstr "WETH-USDC 풀에 기존 지정가 주문이 있으나 이 주문에 대�
 msgid "({0} of swap amount)"
 msgstr "({0} 스왑 금액 대비)"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "No open positions. Go to the"
+msgstr ""
+
 #: src/domain/synthetics/trade/utils/validation.ts
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Insufficient {0} liquidity"
@@ -5875,6 +5934,10 @@ msgstr "조건부 주문"
 msgid "GMX uses TradingView for real-time cryptocurrency charts. Track <0>BTCUSD</0> and other pairs with interactive charting tools."
 msgstr "GMX는 실시간 암호화폐 차트를 위해 TradingView를 사용합니다. <0>BTCUSD</0> 및 기타 거래쌍을 인터랙티브 차트 도구로 확인하십시오."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Balanced ✓"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 msgid "Error simulating deposit"
@@ -5926,6 +5989,7 @@ msgid "Details"
 msgstr "상세"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Vault AUM"
 msgstr ""
 
@@ -6011,6 +6075,10 @@ msgstr "언스테이킹 제출됨"
 msgid "Zapping…"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Trade page"
+msgstr ""
+
 #: src/components/Earn/Discovery/EarnYieldOverview.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
@@ -6037,6 +6105,10 @@ msgstr "포지션 종료 시 발생한 가격 영향 리베이트는 청구 탭�
 #: src/components/PositionEditor/usePositionEditorButtonState.tsx
 msgid "Order failed"
 msgstr "주문 실패"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Balance (LP ↔ Short)"
+msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Airdrop"
@@ -6517,6 +6589,10 @@ msgstr "전송을 수락하려면 이 페이지에 있어야 합니다. <0>링�
 msgid "<0>Wallet not connected to {0}</0><1/><2>Switch to {1}</2>"
 msgstr "<0>지갑이 {0}에 연결되지 않았습니다</0><1/><2>{1}(으)로 전환</2>"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "My Liquidity"
+msgstr ""
+
 #: src/components/MarketStats/components/CompositionTable.tsx
 msgid "TVL/CAP"
 msgstr "TVL/수용량"
@@ -6597,6 +6673,7 @@ msgid "Steady returns without management"
 msgstr "관리 없이 안정적인 수익"
 
 #: src/components/TradeBox/TradeBoxRows/SwapSpreadRow.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/SpreadBadge.tsx
 msgid "Spread"
 msgstr "스프레드"
@@ -7040,6 +7117,8 @@ msgstr "주문 오류. 이 마켓의 가격 변동성이 높습니다. <0>허용
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/pages/Hedge/HedgePage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Asset"
 msgstr "자산"
@@ -7272,6 +7351,10 @@ msgstr "TWAP 주문 사용"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Enable external swaps"
 msgstr "외부 스왑 활성화"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Sum of short position sizes"
+msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "BORROWING FEES"
@@ -7532,6 +7615,10 @@ msgstr "손절매 취소"
 msgid "{0} is required for collateral.<0/><1/>No swap path found for {1} to {2} within GMX.<2/><3/><4>Buy {3} on 1inch</4>."
 msgstr "담보로 {0}이(가) 필요합니다.<0/><1/>GMX 내에서 {1}에서 {2}로의 스왑 경로를 찾을 수 없습니다.<2/><3/><4>1inch에서 {3} 구매</4>."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP-weighted net APY (annualized)"
+msgstr ""
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "27% of protocol fees are accumulating in the Treasury for GMX buybacks. Rewards will be distributed to stakers when GMX reaches $90, proportional to staking power (duration × amount staked)."
 msgstr ""
@@ -7589,6 +7676,10 @@ msgstr "사용 가능한 레버리지 없음"
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Total supply"
 msgstr "총 공급량"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Connect wallet to view positions"
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/AssetsList.tsx
 msgid "My assets"
@@ -8934,6 +9025,7 @@ msgstr "{nativeTokenSymbol} 전송"
 msgid "Opening position..."
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Side"
@@ -9175,6 +9267,10 @@ msgstr "청구"
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Date"
 msgstr "일자"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Total Net Worth"
+msgstr ""
 
 #: src/components/TradeBox/TradeBoxRows/AvailableLiquidityRow.tsx
 msgid "Executes when liquidity and price conditions are met"
@@ -9608,6 +9704,7 @@ msgstr "{gmOrGlvLabel} 매도가 완료되었으나 Base로의 브릿지가 실�
 #: src/domain/synthetics/orders/utils.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -9754,6 +9851,10 @@ msgstr "{nativeTokenSymbol} APR"
 msgid "Option-based vaults"
 msgstr "옵션 기반 볼트"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "No hedge positions. Open a hedge on the"
+msgstr ""
+
 #: src/components/OneClickAdvancedSettings/OneClickAdvancedSettings.tsx
 msgid "Time limit"
 msgstr "기간 제한"
@@ -9787,6 +9888,10 @@ msgstr "익절매"
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 msgid "Top PnL ($)"
 msgstr "상위 PnL ($)"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Leverage trading terminal"
@@ -10145,6 +10250,7 @@ msgstr "TP/SL 버튼을 사용하여 TP/SL 주문을 설정하십시오."
 msgid "Close Long"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "APY"
@@ -10595,6 +10701,10 @@ msgstr "계정 이벤트"
 msgid "Transaction failed"
 msgstr "트랜잭션 실패"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Δ"
+msgstr ""
+
 #: src/components/MarketStats/components/CompositionTable.tsx
 #: src/components/PositionList/PositionList.tsx
 msgid "COLLATERAL"
@@ -10616,6 +10726,7 @@ msgstr "입금 중…"
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Status"
 msgstr "상태"
 
@@ -11056,6 +11167,10 @@ msgstr "최대 미결제약정을 초과했습니다"
 #: src/domain/synthetics/fees/utils/index.ts
 msgid "Network fees are high due to increased {chainName} network activity"
 msgstr "{chainName} 네트워크 활동 증가로 인해 네트워크 수수료가 높습니다"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Trading Positions"
+msgstr ""
 
 #: src/components/Claims/ClaimsHistory.tsx
 #: src/components/TradeHistory/useDownloadAsCsv.tsx

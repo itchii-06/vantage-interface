@@ -592,6 +592,10 @@ msgstr "限價低於標記價格"
 msgid "Long OI"
 msgstr "做多 OI"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Net Yield"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Traders referred on Avalanche"
 msgstr "在 Avalanche 上推薦的交易者"
@@ -942,6 +946,10 @@ msgstr "GMX 通知"
 msgid "Net price impact and fees from your trade. <0>Read more</0>."
 msgstr "您交易的淨價格影響與費用。<0>閱讀更多</0>。"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Hedge Positions"
+msgstr ""
+
 #: src/domain/synthetics/orders/simulateExecuteTxn.tsx
 msgid "Prices are volatile. <0>Increase allowed slippage</0>"
 msgstr "價格波動劇烈。<0>增加允許的滑點</0>"
@@ -1077,6 +1085,10 @@ msgstr "領取 {totalUsd}"
 #: src/domain/tokens/approveTokens.tsx
 msgid "Insufficient {0} for gas on {networkName}<0/><1/><2>Buy or transfer {1} to {networkName}</2>"
 msgstr "在 {networkName} 上 {0} 不足以支付 Gas 費用<0/><1/><2>購買或轉帳 {1} 至 {networkName}</2>"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Wallet balances are not included in Total Net Worth. Net Yield is annualized; past rates are not indicative of future returns."
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Yield Yak Swap"
@@ -1336,6 +1348,10 @@ msgstr ""
 msgid "External swap {0} to {1}"
 msgstr "外部兌換 {0} 至 {1}"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Short size / Your LP value"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "To buy GMX on {0}, <0>change your network</0>"
 msgstr "若要在 {0} 上購買 GMX，<0>請切換網路</0>"
@@ -1351,6 +1367,10 @@ msgstr "簽署中..."
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Deposit fee"
 msgstr "存入手續費"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP + Trade collateral ± PnL"
+msgstr ""
 
 #: src/components/BotanixBanner/BotanixBanner.tsx
 msgid "<0>Botanix</0> supports"
@@ -1815,6 +1835,10 @@ msgstr "{0} / {1}"
 msgid "In liquidity"
 msgstr "在流動性中"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Connect wallet to view hedge positions"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/TradeBox/hooks/useTradeButtonState.tsx
@@ -1992,6 +2016,10 @@ msgstr "Express Trading 不支援原生代幣 {0} 的包裝或解包裝"
 msgid "Virtual short token ID"
 msgstr "虛擬做空代幣 ID"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Unrealized P&L"
+msgstr ""
+
 #: src/components/TenderlySettings/TenderlySettings.tsx
 msgid "account"
 msgstr "帳戶"
@@ -2077,6 +2105,10 @@ msgstr ""
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Price on Avalanche"
 msgstr "Avalanche 上的價格"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Avg. Hedge Ratio"
+msgstr ""
 
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "Chart positions"
@@ -2320,6 +2352,10 @@ msgstr "最大 {0}"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Collateral at liquidation"
 msgstr "清算時的抵押品"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Your delta-neutral positions, trade history, and LP status across all vaults."
+msgstr ""
 
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "Sender has withdrawn all tokens from GMX vesting vault"
@@ -2760,6 +2796,7 @@ msgstr "在 {chainName} 上買入 GMX"
 #: src/components/TPSLModal/AddTPSLModal.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
@@ -3191,6 +3228,10 @@ msgstr "更新 1CT 設定"
 msgid "Shift order executed"
 msgstr "Shift 訂單已執行"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Active"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useTokensToApprove.tsx
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Native token cannot be approved"
@@ -3397,11 +3438,9 @@ msgstr "移除端點"
 msgid "Community-led Telegram groups"
 msgstr "社群主導的 Telegram 群組"
 
-#: src/pages/Trade/TradePage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#: src/pages/Vaults/VaultsPage.tsx
-#~ msgid "Vault"
-#~ msgstr ""
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Vault"
+msgstr ""
 
 #: src/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "Change to {0}"
@@ -4175,6 +4214,7 @@ msgstr "虛擬市場 ID"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "槓桿"
@@ -4457,6 +4497,10 @@ msgstr ""
 msgid "Approval cancelled"
 msgstr "授權已取消"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Total Protection"
+msgstr ""
+
 #: src/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "Your feedback helps us understand what we're doing well and where we can improve"
 msgstr "您的回饋幫助我們了解做得好的地方以及可以改進之處"
@@ -4543,6 +4587,7 @@ msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "價格影響回饋已累積，5 天後可領取。<0>閱讀更多</0>。"
 
 #: src/pages/Earn/EarnPageLayout.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Portfolio"
 msgstr "投資組合"
 
@@ -5251,12 +5296,20 @@ msgstr "分配率，{0}"
 msgid "Referral code added"
 msgstr "推薦碼已新增"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Hedge page"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX bonds on Bond Protocol at a discount with a short vesting period"
 msgstr "在 Bond Protocol 上以折扣價購買 GMX 債券，享有短期歸屬期"
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Warning: Your position value exceeds current vault AUM. Withdrawal may be partially settled."
+msgstr ""
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Vault LP"
 msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
@@ -5416,6 +5469,8 @@ msgstr "設定已更新"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -5818,6 +5873,10 @@ msgstr "WETH-USDC 池中有現有限價單，但此訂單的流動性不足"
 msgid "({0} of swap amount)"
 msgstr "（{0}，佔兌換金額）"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "No open positions. Go to the"
+msgstr ""
+
 #: src/domain/synthetics/trade/utils/validation.ts
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Insufficient {0} liquidity"
@@ -5875,6 +5934,10 @@ msgstr "觸發訂單"
 msgid "GMX uses TradingView for real-time cryptocurrency charts. Track <0>BTCUSD</0> and other pairs with interactive charting tools."
 msgstr "GMX 使用 TradingView 提供即時加密貨幣圖表。透過互動式圖表工具追蹤 <0>BTCUSD</0> 及其他交易對。"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Balanced ✓"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 msgid "Error simulating deposit"
@@ -5926,6 +5989,7 @@ msgid "Details"
 msgstr "詳情"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Vault AUM"
 msgstr ""
 
@@ -6011,6 +6075,10 @@ msgstr "解除質押已提交"
 msgid "Zapping…"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Trade page"
+msgstr ""
+
 #: src/components/Earn/Discovery/EarnYieldOverview.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
@@ -6037,6 +6105,10 @@ msgstr "平倉產生的價格影響回饋可在「領取」分頁中領取。<0>
 #: src/components/PositionEditor/usePositionEditorButtonState.tsx
 msgid "Order failed"
 msgstr "訂單失敗"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Balance (LP ↔ Short)"
+msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Airdrop"
@@ -6517,6 +6589,10 @@ msgstr "您必須在此頁面上才能接受轉帳。<0>複製連結</0>"
 msgid "<0>Wallet not connected to {0}</0><1/><2>Switch to {1}</2>"
 msgstr "<0>錢包未連接至 {0}</0><1/><2>切換至 {1}</2>"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "My Liquidity"
+msgstr ""
+
 #: src/components/MarketStats/components/CompositionTable.tsx
 msgid "TVL/CAP"
 msgstr "TVL/CAP"
@@ -6597,6 +6673,7 @@ msgid "Steady returns without management"
 msgstr "無需管理的穩定收益"
 
 #: src/components/TradeBox/TradeBoxRows/SwapSpreadRow.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/SpreadBadge.tsx
 msgid "Spread"
 msgstr "價差"
@@ -7040,6 +7117,8 @@ msgstr "訂單錯誤。此市場價格波動劇烈，請嘗試<0>提高允許的
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/pages/Hedge/HedgePage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Asset"
 msgstr "資產"
@@ -7272,6 +7351,10 @@ msgstr "使用 TWAP 訂單"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Enable external swaps"
 msgstr "啟用外部兌換"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Sum of short position sizes"
+msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "BORROWING FEES"
@@ -7532,6 +7615,10 @@ msgstr "取消止損"
 msgid "{0} is required for collateral.<0/><1/>No swap path found for {1} to {2} within GMX.<2/><3/><4>Buy {3} on 1inch</4>."
 msgstr "{0} 為所需抵押品。<0/><1/>在 GMX 中找不到 {1} 至 {2} 的兌換路徑。<2/><3/><4>在 1inch 購買 {3}</4>。"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP-weighted net APY (annualized)"
+msgstr ""
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "27% of protocol fees are accumulating in the Treasury for GMX buybacks. Rewards will be distributed to stakers when GMX reaches $90, proportional to staking power (duration × amount staked)."
 msgstr ""
@@ -7589,6 +7676,10 @@ msgstr "找不到可用的槓桿"
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Total supply"
 msgstr "總供給量"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Connect wallet to view positions"
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/AssetsList.tsx
 msgid "My assets"
@@ -8934,6 +9025,7 @@ msgstr "轉帳 {nativeTokenSymbol}"
 msgid "Opening position..."
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Side"
@@ -9175,6 +9267,10 @@ msgstr "領取"
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Date"
 msgstr "日期"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Total Net Worth"
+msgstr ""
 
 #: src/components/TradeBox/TradeBoxRows/AvailableLiquidityRow.tsx
 msgid "Executes when liquidity and price conditions are met"
@@ -9608,6 +9704,7 @@ msgstr "{gmOrGlvLabel} 賣出成功，但跨鏈橋接至 Base 失敗。您的資
 #: src/domain/synthetics/orders/utils.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -9754,6 +9851,10 @@ msgstr "{nativeTokenSymbol} APR"
 msgid "Option-based vaults"
 msgstr "期權策略金庫"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "No hedge positions. Open a hedge on the"
+msgstr ""
+
 #: src/components/OneClickAdvancedSettings/OneClickAdvancedSettings.tsx
 msgid "Time limit"
 msgstr "時間限制"
@@ -9787,6 +9888,10 @@ msgstr "止盈"
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 msgid "Top PnL ($)"
 msgstr "最高 PnL ($)"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Leverage trading terminal"
@@ -10145,6 +10250,7 @@ msgstr "使用 TP/SL 按鈕設定 TP/SL 訂單。"
 msgid "Close Long"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "APY"
@@ -10595,6 +10701,10 @@ msgstr "帳戶事件"
 msgid "Transaction failed"
 msgstr "交易失敗"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Δ"
+msgstr ""
+
 #: src/components/MarketStats/components/CompositionTable.tsx
 #: src/components/PositionList/PositionList.tsx
 msgid "COLLATERAL"
@@ -10616,6 +10726,7 @@ msgstr "存入中..."
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Status"
 msgstr "狀態"
 
@@ -11056,6 +11167,10 @@ msgstr "已超過最大未平倉量"
 #: src/domain/synthetics/fees/utils/index.ts
 msgid "Network fees are high due to increased {chainName} network activity"
 msgstr "由於 {chainName} 網路活動增加，網路費用偏高"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Trading Positions"
+msgstr ""
 
 #: src/components/Claims/ClaimsHistory.tsx
 #: src/components/TradeHistory/useDownloadAsCsv.tsx

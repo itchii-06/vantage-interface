@@ -592,6 +592,10 @@ msgstr "Limitpreis unter Markpreis"
 msgid "Long OI"
 msgstr "Long OI"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Net Yield"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Traders referred on Avalanche"
 msgstr "Geworbene Trader auf Avalanche"
@@ -942,6 +946,10 @@ msgstr "GMX-Benachrichtigungen"
 msgid "Net price impact and fees from your trade. <0>Read more</0>."
 msgstr "Nettopreiseinfluss und Gebühren aus Ihrem Handel. <0>Mehr erfahren</0>."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Hedge Positions"
+msgstr ""
+
 #: src/domain/synthetics/orders/simulateExecuteTxn.tsx
 msgid "Prices are volatile. <0>Increase allowed slippage</0>"
 msgstr "Preise sind volatil. <0>Erlaubte Slippage erhöhen</0>"
@@ -1077,6 +1085,10 @@ msgstr "Beanspruche {totalUsd}"
 #: src/domain/tokens/approveTokens.tsx
 msgid "Insufficient {0} for gas on {networkName}<0/><1/><2>Buy or transfer {1} to {networkName}</2>"
 msgstr "Unzureichend {0} für Gas auf {networkName}<0/><1/><2>{1} kaufen oder auf {networkName} übertragen</2>"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Wallet balances are not included in Total Net Worth. Net Yield is annualized; past rates are not indicative of future returns."
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Yield Yak Swap"
@@ -1336,6 +1348,10 @@ msgstr ""
 msgid "External swap {0} to {1}"
 msgstr "Externer Tausch {0} zu {1}"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Short size / Your LP value"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "To buy GMX on {0}, <0>change your network</0>"
 msgstr "Um GMX auf {0} zu kaufen, <0>wechseln Sie Ihr Netzwerk</0>"
@@ -1351,6 +1367,10 @@ msgstr "Signierung..."
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Deposit fee"
 msgstr "Einzahlungsgebühr"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP + Trade collateral ± PnL"
+msgstr ""
 
 #: src/components/BotanixBanner/BotanixBanner.tsx
 msgid "<0>Botanix</0> supports"
@@ -1815,6 +1835,10 @@ msgstr "{0} pro {1}"
 msgid "In liquidity"
 msgstr "In Liquidität"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Connect wallet to view hedge positions"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/TradeBox/hooks/useTradeButtonState.tsx
@@ -1992,6 +2016,10 @@ msgstr "Express Trading ist für das Wrapping oder Unwrapping des nativen Tokens
 msgid "Virtual short token ID"
 msgstr "Virtuelle Short-Token-ID"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Unrealized P&L"
+msgstr ""
+
 #: src/components/TenderlySettings/TenderlySettings.tsx
 msgid "account"
 msgstr "Konto"
@@ -2077,6 +2105,10 @@ msgstr ""
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Price on Avalanche"
 msgstr "Preis auf Avalanche"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Avg. Hedge Ratio"
+msgstr ""
 
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "Chart positions"
@@ -2320,6 +2352,10 @@ msgstr "Max. {0}"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Collateral at liquidation"
 msgstr "Sicherheit bei Liquidation"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Your delta-neutral positions, trade history, and LP status across all vaults."
+msgstr ""
 
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "Sender has withdrawn all tokens from GMX vesting vault"
@@ -2760,6 +2796,7 @@ msgstr "Kaufe GMX auf {chainName}"
 #: src/components/TPSLModal/AddTPSLModal.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
@@ -3191,6 +3228,10 @@ msgstr "1CT-Einstellungen aktualisieren"
 msgid "Shift order executed"
 msgstr "Shift-Order ausgeführt"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Active"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useTokensToApprove.tsx
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Native token cannot be approved"
@@ -3397,11 +3438,9 @@ msgstr "Endpunkt entfernen"
 msgid "Community-led Telegram groups"
 msgstr "Community-geführte Telegram-Gruppen"
 
-#: src/pages/Trade/TradePage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#: src/pages/Vaults/VaultsPage.tsx
-#~ msgid "Vault"
-#~ msgstr ""
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Vault"
+msgstr ""
 
 #: src/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "Change to {0}"
@@ -4175,6 +4214,7 @@ msgstr "Virtuelle Markt-ID"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "Hebelwirkung"
@@ -4457,6 +4497,10 @@ msgstr ""
 msgid "Approval cancelled"
 msgstr "Genehmigung abgebrochen"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Total Protection"
+msgstr ""
+
 #: src/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "Your feedback helps us understand what we're doing well and where we can improve"
 msgstr "Ihr Feedback hilft uns zu verstehen, was wir gut machen und wo wir uns verbessern können"
@@ -4543,6 +4587,7 @@ msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "Preiseinflussrückvergütungen aufgelaufen. Nach 5 Tagen beanspruchbar. <0>Mehr erfahren</0>."
 
 #: src/pages/Earn/EarnPageLayout.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Portfolio"
 msgstr "Portfolio"
 
@@ -5251,12 +5296,20 @@ msgstr "Verteilungsrate, {0}"
 msgid "Referral code added"
 msgstr "Empfehlungscode hinzugefügt"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Hedge page"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX bonds on Bond Protocol at a discount with a short vesting period"
 msgstr "Kaufen Sie GMX-Bonds auf Bond Protocol mit einem Rabatt und einer kurzen Sperrfrist"
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Warning: Your position value exceeds current vault AUM. Withdrawal may be partially settled."
+msgstr ""
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Vault LP"
 msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
@@ -5416,6 +5469,8 @@ msgstr "Einstellungen aktualisiert"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -5818,6 +5873,10 @@ msgstr "Bestehende Limitorder im WETH-USDC Pool, aber unzureichende Liquidität 
 msgid "({0} of swap amount)"
 msgstr "({0} des Tauschbetrags)"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "No open positions. Go to the"
+msgstr ""
+
 #: src/domain/synthetics/trade/utils/validation.ts
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Insufficient {0} liquidity"
@@ -5875,6 +5934,10 @@ msgstr "Trigger-Orders"
 msgid "GMX uses TradingView for real-time cryptocurrency charts. Track <0>BTCUSD</0> and other pairs with interactive charting tools."
 msgstr "GMX verwendet TradingView für Echtzeit-Kryptowährungscharts. Verfolgen Sie <0>BTCUSD</0> und andere Paare mit interaktiven Charting-Tools."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Balanced ✓"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 msgid "Error simulating deposit"
@@ -5926,6 +5989,7 @@ msgid "Details"
 msgstr "Details"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Vault AUM"
 msgstr ""
 
@@ -6011,6 +6075,10 @@ msgstr "Entstaken übermittelt"
 msgid "Zapping…"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Trade page"
+msgstr ""
+
 #: src/components/Earn/Discovery/EarnYieldOverview.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
@@ -6037,6 +6105,10 @@ msgstr "Preiseinflussrabatte aus dem Schließen sind im Claims-Tab beanspruchbar
 #: src/components/PositionEditor/usePositionEditorButtonState.tsx
 msgid "Order failed"
 msgstr "Order fehlgeschlagen"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Balance (LP ↔ Short)"
+msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Airdrop"
@@ -6517,6 +6589,10 @@ msgstr "Sie müssen sich auf dieser Seite befinden, um die Übertragung anzunehm
 msgid "<0>Wallet not connected to {0}</0><1/><2>Switch to {1}</2>"
 msgstr "<0>Wallet nicht mit {0} verbunden</0><1/><2>Zu {1} wechseln</2>"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "My Liquidity"
+msgstr ""
+
 #: src/components/MarketStats/components/CompositionTable.tsx
 msgid "TVL/CAP"
 msgstr "TVL/KAP"
@@ -6597,6 +6673,7 @@ msgid "Steady returns without management"
 msgstr "Stabile Renditen ohne Management"
 
 #: src/components/TradeBox/TradeBoxRows/SwapSpreadRow.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/SpreadBadge.tsx
 msgid "Spread"
 msgstr "Spread"
@@ -7040,6 +7117,8 @@ msgstr "Orderfehler. Die Preise in diesem Markt sind volatil, versuchen Sie es e
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/pages/Hedge/HedgePage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Asset"
 msgstr "Asset"
@@ -7272,6 +7351,10 @@ msgstr "TWAP-Order verwenden"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Enable external swaps"
 msgstr "Externe Swaps aktivieren"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Sum of short position sizes"
+msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "BORROWING FEES"
@@ -7532,6 +7615,10 @@ msgstr "Stop-Loss abbrechen"
 msgid "{0} is required for collateral.<0/><1/>No swap path found for {1} to {2} within GMX.<2/><3/><4>Buy {3} on 1inch</4>."
 msgstr "{0} wird als Sicherheit benötigt.<0/><1/>Kein Tauschpfad für {1} zu {2} innerhalb von GMX gefunden.<2/><3/><4>{3} auf 1inch kaufen</4>."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP-weighted net APY (annualized)"
+msgstr ""
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "27% of protocol fees are accumulating in the Treasury for GMX buybacks. Rewards will be distributed to stakers when GMX reaches $90, proportional to staking power (duration × amount staked)."
 msgstr ""
@@ -7589,6 +7676,10 @@ msgstr "Keine verfügbare Hebelwirkung gefunden"
 #: src/pages/Dashboard/GmxCard.tsx
 msgid "Total supply"
 msgstr "Gesamtangebot"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Connect wallet to view positions"
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/AssetsList.tsx
 msgid "My assets"
@@ -8934,6 +9025,7 @@ msgstr "{nativeTokenSymbol} transferieren"
 msgid "Opening position..."
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Side"
@@ -9175,6 +9267,10 @@ msgstr "Beanspruchungen"
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Date"
 msgstr "Datum"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Total Net Worth"
+msgstr ""
 
 #: src/components/TradeBox/TradeBoxRows/AvailableLiquidityRow.tsx
 msgid "Executes when liquidity and price conditions are met"
@@ -9608,6 +9704,7 @@ msgstr "{gmOrGlvLabel} erfolgreich verkauft, aber die Bridge zu Base ist fehlges
 #: src/domain/synthetics/orders/utils.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
@@ -9754,6 +9851,10 @@ msgstr "{nativeTokenSymbol} APR"
 msgid "Option-based vaults"
 msgstr "Optionsbasierte Tresore"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "No hedge positions. Open a hedge on the"
+msgstr ""
+
 #: src/components/OneClickAdvancedSettings/OneClickAdvancedSettings.tsx
 msgid "Time limit"
 msgstr "Zeitlimit"
@@ -9787,6 +9888,10 @@ msgstr "Take-Profit"
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 msgid "Top PnL ($)"
 msgstr "Top Gewinn/Verlust ($)"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Leverage trading terminal"
@@ -10145,6 +10250,7 @@ msgstr "Verwenden Sie die TP/SL-Schaltfläche, um TP/SL-Orders zu setzen."
 msgid "Close Long"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "APY"
@@ -10595,6 +10701,10 @@ msgstr "Kontoereignisse"
 msgid "Transaction failed"
 msgstr "Transaktion fehlgeschlagen"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Δ"
+msgstr ""
+
 #: src/components/MarketStats/components/CompositionTable.tsx
 #: src/components/PositionList/PositionList.tsx
 msgid "COLLATERAL"
@@ -10616,6 +10726,7 @@ msgstr "Wird eingezahlt…"
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Status"
 msgstr "Status"
 
@@ -11056,6 +11167,10 @@ msgstr "Maximales Open Interest überschritten"
 #: src/domain/synthetics/fees/utils/index.ts
 msgid "Network fees are high due to increased {chainName} network activity"
 msgstr "Netzwerkgebühren sind hoch aufgrund erhöhter {chainName}-Netzwerkaktivität"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Trading Positions"
+msgstr ""
 
 #: src/components/Claims/ClaimsHistory.tsx
 #: src/components/TradeHistory/useDownloadAsCsv.tsx

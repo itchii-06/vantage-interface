@@ -26,6 +26,7 @@ import PageNotFound from "pages/PageNotFound/PageNotFound";
 import { ParseTransactionPage } from "pages/ParseTransaction/ParseTransaction";
 import Pools from "pages/Pools/Pools";
 import { PoolsDetails } from "pages/PoolsDetails/PoolsDetails";
+import PortfolioPage from "pages/Portfolio/PortfolioPage";
 import { PriceImpactRebatesStatsPage } from "pages/PriceImpactRebatesStats/PriceImpactRebatesStats";
 import Referrals from "pages/Referrals/Referrals";
 import ReferralsTier from "pages/ReferralsTier/ReferralsTier";
@@ -171,7 +172,7 @@ export function MainRoutes({ openSettings: _openSettings }: { openSettings: () =
         <VantageLPPage />
       </Route>
       <Route exact path="/portfolio">
-        <VantageLPPage />
+        <PortfolioPage />
       </Route>
       <Route exact path="/vaults">
         <VaultsPage />
