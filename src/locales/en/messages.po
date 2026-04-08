@@ -258,10 +258,6 @@ msgstr "Failed Limit"
 msgid "Performance"
 msgstr "Performance"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Spot Value"
-#~ msgstr "Spot Value"
-
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Total earned"
 msgstr "Total earned"
@@ -511,10 +507,6 @@ msgstr "Select token"
 #: src/components/PositionShare/PositionShare.tsx
 msgid "Image generation failed. Refresh and try again."
 msgstr "Image generation failed. Refresh and try again."
-
-#: src/pages/Trade/TradePage.tsx
-#~ msgid "Open Positions"
-#~ msgstr "Open Positions"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Funding"
@@ -770,10 +762,6 @@ msgstr "Activate 1CT"
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "Realized PnL"
 msgstr "Realized PnL"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Managed Hedge"
-#~ msgstr "Managed Hedge"
 
 #: src/components/HighPriceImpactOrFeesWarningCard/HighPriceImpactOrFeesWarningCard.tsx
 msgid "High external swap impact"
@@ -1434,10 +1422,6 @@ msgstr "Buy {operationTokenSymbol}"
 msgid "Buy GM: {0}"
 msgstr "Buy GM: {0}"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "±20% P&L Simulation"
-#~ msgstr "±20% P&L Simulation"
-
 #: src/pages/PoolsDetails/PoolsDetailsHeader.tsx
 msgid "TVL (Supply)"
 msgstr "TVL (Supply)"
@@ -1638,10 +1622,6 @@ msgstr "Deposit to GMX Account"
 #: src/domain/synthetics/markets/createGlvDepositTxn.ts
 msgid "Deposit error"
 msgstr "Deposit error"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Spot (long)"
-#~ msgstr "Spot (long)"
 
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx
@@ -2880,10 +2860,6 @@ msgstr "High slippage set. Current swap impact: {0}."
 msgid "Instant"
 msgstr "Instant"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
-#~ msgstr "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
-
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Open positions"
 msgstr "Open positions"
@@ -3134,10 +3110,6 @@ msgstr "Allow {0} to be spent"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Stake submitted"
 msgstr "Stake submitted"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Net"
-#~ msgstr "Net"
 
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 msgid "Insufficient {symbol} balance: {availableFormatted} available, {requiredFormatted} required"
@@ -4717,10 +4689,6 @@ msgstr "No trades yet"
 msgid "Price change to liquidation"
 msgstr "Price change to liquidation"
 
-#: src/pages/Trade/components/PriceChart.tsx
-#~ msgid "No trade data yet. Open a position to see the chart."
-#~ msgstr "No trade data yet. Open a position to see the chart."
-
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "possibilities in total"
 msgstr "possibilities in total"
@@ -5111,10 +5079,6 @@ msgstr "bps"
 msgid "Create TWAP"
 msgstr "Create TWAP"
 
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Hold RWA in your wallet, open short only"
-#~ msgstr "Hold RWA in your wallet, open short only"
-
 #: src/components/TradeBox/SwapSlippageField.tsx
 msgid "Slippage is the difference between your expected and actual execution price due to price volatility. Orders won't execute if slippage exceeds your allowed maximum. The default can be adjusted in settings.<0/><1/>A low value (e.g. less than -{0}) may cause failed orders during volatility.<2/><3/>Note: slippage is different from price impact, which is based on open interest imbalances. <4>Read more</4>."
 msgstr "Slippage is the difference between your expected and actual execution price due to price volatility. Orders won't execute if slippage exceeds your allowed maximum. The default can be adjusted in settings.<0/><1/>A low value (e.g. less than -{0}) may cause failed orders during volatility.<2/><3/>Note: slippage is different from price impact, which is based on open interest imbalances. <4>Read more</4>."
@@ -5419,10 +5383,6 @@ msgstr "Provide isolated liquidity per market"
 msgid "Use open interest in tokens for balance"
 msgstr "Use open interest in tokens for balance"
 
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Deposit RWA to Vault + open short in one transaction"
-#~ msgstr "Deposit RWA to Vault + open short in one transaction"
-
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Seamless trading"
 msgstr "Seamless trading"
@@ -5430,10 +5390,6 @@ msgstr "Seamless trading"
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 msgid "from your wallet"
 msgstr "from your wallet"
-
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Delta-neutral strategy — coming soon."
-#~ msgstr "Delta-neutral strategy — coming soon."
 
 #: src/components/Earn/Portfolio/RecommendedAssets/RecommendedAssets.tsx
 msgid "Explore more"
@@ -5800,10 +5756,6 @@ msgstr "Withdraw fee"
 #: src/components/Referrals/TradersStats.tsx
 msgid "Your fee savings from referral discounts"
 msgstr "Your fee savings from referral discounts"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Required"
-#~ msgstr "Required"
 
 #: src/components/TVChartContainer/constants.ts
 #: src/domain/synthetics/positions/utils.ts
@@ -6290,10 +6242,6 @@ msgstr "Recommended"
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Decrease"
 msgstr "Decrease"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Price change"
-#~ msgstr "Price change"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Yield"
@@ -7032,10 +6980,6 @@ msgstr "Last year"
 #: src/components/TradeBox/TradeBox.tsx
 msgid "per"
 msgstr "per"
-
-#: src/pages/Trade/components/OpenPositionPanel.tsx
-#~ msgid "Position Size"
-#~ msgstr "Position Size"
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Reserve factor longs"
@@ -8031,10 +7975,6 @@ msgid "Depositing to and withdrawing from GMX Account..."
 msgstr "Depositing to and withdrawing from GMX Account..."
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Keep {0} in your wallet and open a short position only."
-#~ msgstr "Keep {0} in your wallet and open a short position only."
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Loading yield data…"
 msgstr "Loading yield data…"
 
@@ -8259,10 +8199,6 @@ msgstr "less than a minute"
 msgid "Ecosystem"
 msgstr "Ecosystem"
 
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#~ msgid "per token"
-#~ msgstr "per token"
-
 #: src/pages/PriceImpactRebatesStats/PriceImpactRebatesStats.tsx
 msgid "Next"
 msgstr "Next"
@@ -8366,10 +8302,6 @@ msgstr "{0}ms"
 msgid "Deposit failed"
 msgstr "Deposit failed"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Enter an amount to see the P&L simulation."
-#~ msgstr "Enter an amount to see the P&L simulation."
-
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 msgid "EST. PNL"
 msgstr "EST. PNL"
@@ -8450,10 +8382,6 @@ msgstr "Enter an amount"
 #: src/domain/synthetics/sidecarOrders/utils.ts
 msgid "SL price above limit price"
 msgstr "SL price above limit price"
-
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Self-Custody"
-#~ msgstr "Self-Custody"
 
 #: src/lib/tenderly.tsx
 #: src/lib/tenderly.tsx
@@ -8923,10 +8851,6 @@ msgstr "Position size exceeds available open interest. Delta: {usdDeltaText}, ma
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Yes"
 msgstr "Yes"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Self-Custody Hedge"
-#~ msgstr "Self-Custody Hedge"
 
 #: src/components/PositionDropdown/PositionDropdown.tsx
 msgid "Increase size (TWAP)"
@@ -9643,10 +9567,6 @@ msgstr "Express + One-Click"
 msgid "GM tokens represent shares in a liquidity pool for a single GMX market. Buy GM to provide liquidity and earn fees from leverage trading, swaps, and market-making activity on that specific market. All rewards are auto-compounded."
 msgstr "GM tokens represent shares in a liquidity pool for a single GMX market. Buy GM to provide liquidity and earn fees from leverage trading, swaps, and market-making activity on that specific market. All rewards are auto-compounded."
 
-#: src/pages/Trade/TradePage.tsx
-#~ msgid "Open Long / Short positions via PositionRouter."
-#~ msgstr "Open Long / Short positions via PositionRouter."
-
 #: src/components/Earn/AdditionalOpportunities/useOpportunities.tsx
 msgid "Lend GLV or GM tokens, borrow against them, or use LP strategies to maximize yield"
 msgstr "Lend GLV or GM tokens, borrow against them, or use LP strategies to maximize yield"
@@ -10298,10 +10218,6 @@ msgstr "Get alerts and announcements from GMX to stay on top of your trades, liq
 msgid "{gmOrGlvLabel} bought successfully, but bridge to Base failed. Your funds are safe in your GMX Account. Retry the bridge or go to the {indexName} pool to withdraw your GM tokens."
 msgstr "{gmOrGlvLabel} bought successfully, but bridge to Base failed. Your funds are safe in your GMX Account. Retry the bridge or go to the {indexName} pool to withdraw your GM tokens."
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Shows spot, short, and net P&L across a ±20% price range. A perfect delta-neutral position (Net) stays flat."
-#~ msgstr "Shows spot, short, and net P&L across a ±20% price range. A perfect delta-neutral position (Net) stays flat."
-
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a yield-optimizing crypto-index token that:"
 msgstr "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a yield-optimizing crypto-index token that:"
@@ -10330,10 +10246,6 @@ msgstr "Withdrawn {balanceFormatted} to main account"
 #: src/components/StatusNotification/FeesSettlementStatusNotification.tsx
 msgid "{positionName} failed to settle"
 msgstr "{positionName} failed to settle"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Fetching price…"
-#~ msgstr "Fetching price…"
 
 #: src/pages/Ecosystem/Ecosystem.tsx
 msgid "Ecosystem projects"
@@ -10822,10 +10734,6 @@ msgstr "One-Click Trading approval is invalid. This may happen when switching ch
 msgid "GLP to GM airdrop"
 msgstr "GLP to GM airdrop"
 
-#: src/pages/Trade/TradePage.tsx
-#~ msgid "Pending Orders"
-#~ msgstr "Pending Orders"
-
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled"
 msgstr "Sell order cancelled"
@@ -11125,11 +11033,6 @@ msgstr "EIP-4844, 20-27 Mar"
 msgid "Vault APY"
 msgstr "Vault APY"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Managed"
-#~ msgstr "Managed"
-
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Save on costs"
 msgstr "Save on costs"
@@ -11193,10 +11096,6 @@ msgstr "Traders referred"
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max deposit limit reached: {maxPoolUsdText}"
 msgstr "Max deposit limit reached: {maxPoolUsdText}"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Deposits {0} to the LP Vault AND opens a short position — both in one transaction."
-#~ msgstr "Deposits {0} to the LP Vault AND opens a short position — both in one transaction."
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Yield optimizations"
@@ -11715,10 +11614,6 @@ msgstr "Min. required collateral"
 #: src/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "{orderText} update failed"
 msgstr "{orderText} update failed"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Mode"
-#~ msgstr "Mode"
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Success"

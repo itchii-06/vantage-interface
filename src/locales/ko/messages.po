@@ -258,10 +258,6 @@ msgstr "지정가 실패"
 msgid "Performance"
 msgstr "성과"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Spot Value"
-#~ msgstr ""
-
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Total earned"
 msgstr "총 수익"
@@ -511,10 +507,6 @@ msgstr "토큰 선택"
 #: src/components/PositionShare/PositionShare.tsx
 msgid "Image generation failed. Refresh and try again."
 msgstr "이미지 생성에 실패했습니다. 새로고침 후 다시 시도하십시오."
-
-#: src/pages/Trade/TradePage.tsx
-#~ msgid "Open Positions"
-#~ msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Funding"
@@ -770,10 +762,6 @@ msgstr "1CT 활성화"
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "Realized PnL"
 msgstr "실현 PnL"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Managed Hedge"
-#~ msgstr ""
 
 #: src/components/HighPriceImpactOrFeesWarningCard/HighPriceImpactOrFeesWarningCard.tsx
 msgid "High external swap impact"
@@ -1434,10 +1422,6 @@ msgstr "{operationTokenSymbol} 구매"
 msgid "Buy GM: {0}"
 msgstr "GM 구매: {0}"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "±20% P&L Simulation"
-#~ msgstr ""
-
 #: src/pages/PoolsDetails/PoolsDetailsHeader.tsx
 msgid "TVL (Supply)"
 msgstr "TVL (공급)"
@@ -1638,10 +1622,6 @@ msgstr "GMX 계정에 입금"
 #: src/domain/synthetics/markets/createGlvDepositTxn.ts
 msgid "Deposit error"
 msgstr "입금 오류"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Spot (long)"
-#~ msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx
@@ -2880,10 +2860,6 @@ msgstr "높은 슬리피지가 설정되었습니다. 현재 스왑 영향: {0}.
 msgid "Instant"
 msgstr "즉시"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Deposit {0} to the Vault and open a delta-neutral short in one transaction."
-#~ msgstr ""
-
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Open positions"
 msgstr "오픈 포지션"
@@ -3134,10 +3110,6 @@ msgstr "{0} 지출 허용"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Stake submitted"
 msgstr "스테이킹이 제출되었습니다"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Net"
-#~ msgstr ""
 
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 msgid "Insufficient {symbol} balance: {availableFormatted} available, {requiredFormatted} required"
@@ -4717,10 +4689,6 @@ msgstr "거래가 아직 없습니다"
 msgid "Price change to liquidation"
 msgstr "청산까지 가격 변동"
 
-#: src/pages/Trade/components/PriceChart.tsx
-#~ msgid "No trade data yet. Open a position to see the chart."
-#~ msgstr ""
-
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "possibilities in total"
 msgstr "총 경우의 수"
@@ -5111,10 +5079,6 @@ msgstr "bps"
 msgid "Create TWAP"
 msgstr "TWAP 생성"
 
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Hold RWA in your wallet, open short only"
-#~ msgstr ""
-
 #: src/components/TradeBox/SwapSlippageField.tsx
 msgid "Slippage is the difference between your expected and actual execution price due to price volatility. Orders won't execute if slippage exceeds your allowed maximum. The default can be adjusted in settings.<0/><1/>A low value (e.g. less than -{0}) may cause failed orders during volatility.<2/><3/>Note: slippage is different from price impact, which is based on open interest imbalances. <4>Read more</4>."
 msgstr "슬리피지는 가격 변동성으로 인해 예상 체결 가격과 실제 체결 가격의 차이입니다. 슬리피지가 허용 최대값을 초과하면 주문이 체결되지 않습니다. 기본값은 설정에서 조정할 수 있습니다.<0/><1/>낮은 값(예: -{0} 미만)은 변동성이 높을 때 주문 실패를 유발할 수 있습니다.<2/><3/>참고: 슬리피지는 미결제약정 불균형에 기반한 가격 영향과 다릅니다. <4>자세히 보기</4>."
@@ -5419,10 +5383,6 @@ msgstr "마켓별 격리 유동성 제공"
 msgid "Use open interest in tokens for balance"
 msgstr "잔액에 토큰 단위 미결제약정 사용"
 
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Deposit RWA to Vault + open short in one transaction"
-#~ msgstr ""
-
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Seamless trading"
 msgstr "원활한 거래"
@@ -5430,10 +5390,6 @@ msgstr "원활한 거래"
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 msgid "from your wallet"
 msgstr "지갑에서"
-
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Delta-neutral strategy — coming soon."
-#~ msgstr ""
 
 #: src/components/Earn/Portfolio/RecommendedAssets/RecommendedAssets.tsx
 msgid "Explore more"
@@ -5800,10 +5756,6 @@ msgstr "출금 수수료"
 #: src/components/Referrals/TradersStats.tsx
 msgid "Your fee savings from referral discounts"
 msgstr "추천 할인을 통한 수수료 절감액"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Required"
-#~ msgstr ""
 
 #: src/components/TVChartContainer/constants.ts
 #: src/domain/synthetics/positions/utils.ts
@@ -6290,10 +6242,6 @@ msgstr "추천"
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Decrease"
 msgstr "감소"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Price change"
-#~ msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Yield"
@@ -7032,10 +6980,6 @@ msgstr "작년"
 #: src/components/TradeBox/TradeBox.tsx
 msgid "per"
 msgstr "당"
-
-#: src/pages/Trade/components/OpenPositionPanel.tsx
-#~ msgid "Position Size"
-#~ msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Reserve factor longs"
@@ -8031,10 +7975,6 @@ msgid "Depositing to and withdrawing from GMX Account..."
 msgstr "GMX Account 입금 및 출금 중..."
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Keep {0} in your wallet and open a short position only."
-#~ msgstr ""
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Loading yield data…"
 msgstr ""
 
@@ -8259,10 +8199,6 @@ msgstr "1분 미만"
 msgid "Ecosystem"
 msgstr "이코시스템"
 
-#: src/pages/VaultDetail/VaultDetailPage.tsx
-#~ msgid "per token"
-#~ msgstr ""
-
 #: src/pages/PriceImpactRebatesStats/PriceImpactRebatesStats.tsx
 msgid "Next"
 msgstr "다음"
@@ -8366,10 +8302,6 @@ msgstr "{0}ms"
 msgid "Deposit failed"
 msgstr "입금 실패"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Enter an amount to see the P&L simulation."
-#~ msgstr ""
-
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 msgid "EST. PNL"
 msgstr "예상 PNL"
@@ -8450,10 +8382,6 @@ msgstr "금액 입력"
 #: src/domain/synthetics/sidecarOrders/utils.ts
 msgid "SL price above limit price"
 msgstr "SL 가격이 지정가보다 높습니다"
-
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Self-Custody"
-#~ msgstr ""
 
 #: src/lib/tenderly.tsx
 #: src/lib/tenderly.tsx
@@ -8923,10 +8851,6 @@ msgstr "포지션 규모가 가용 미결제약정을 초과합니다. 델타: {
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Yes"
 msgstr "예"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Self-Custody Hedge"
-#~ msgstr ""
 
 #: src/components/PositionDropdown/PositionDropdown.tsx
 msgid "Increase size (TWAP)"
@@ -9643,10 +9567,6 @@ msgstr "익스프레스 + 원클릭"
 msgid "GM tokens represent shares in a liquidity pool for a single GMX market. Buy GM to provide liquidity and earn fees from leverage trading, swaps, and market-making activity on that specific market. All rewards are auto-compounded."
 msgstr "GM 토큰은 단일 GMX 시장의 유동성 풀 지분을 나타냅니다. GM을 구매하여 유동성을 제공하고 해당 시장의 레버리지 거래, 스왑, 마켓 메이킹 활동에서 발생하는 수수료를 받으십시오. 모든 보상은 자동으로 재투자됩니다."
 
-#: src/pages/Trade/TradePage.tsx
-#~ msgid "Open Long / Short positions via PositionRouter."
-#~ msgstr ""
-
 #: src/components/Earn/AdditionalOpportunities/useOpportunities.tsx
 msgid "Lend GLV or GM tokens, borrow against them, or use LP strategies to maximize yield"
 msgstr "GLV 또는 GM 토큰을 대출하거나, 이를 담보로 차입하거나, LP 전략을 활용하여 수익률을 극대화하십시오"
@@ -10298,10 +10218,6 @@ msgstr "GMX에서 알림 및 공지를 받아 거래, 청산 위험 등을 관�
 msgid "{gmOrGlvLabel} bought successfully, but bridge to Base failed. Your funds are safe in your GMX Account. Retry the bridge or go to the {indexName} pool to withdraw your GM tokens."
 msgstr "{gmOrGlvLabel} 구매에 성공했으나 Base로의 브릿지가 실패했습니다. 자금은 GMX Account에 안전하게 보관되어 있습니다. 브릿지를 재시도하거나 {indexName} 풀로 이동하여 GM 토큰을 출금하십시오."
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Shows spot, short, and net P&L across a ±20% price range. A perfect delta-neutral position (Net) stays flat."
-#~ msgstr ""
-
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a yield-optimizing crypto-index token that:"
 msgstr "GLV (GMX Liquidity Vaults)는 GMX V2의 개선된 GLP 버전입니다. 수익률을 최적화하는 암호화폐 인덱스 토큰으로:"
@@ -10330,10 +10246,6 @@ msgstr "메인 계좌로 {balanceFormatted} 출금 완료"
 #: src/components/StatusNotification/FeesSettlementStatusNotification.tsx
 msgid "{positionName} failed to settle"
 msgstr "{positionName} 정산 실패"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Fetching price…"
-#~ msgstr ""
 
 #: src/pages/Ecosystem/Ecosystem.tsx
 msgid "Ecosystem projects"
@@ -10822,10 +10734,6 @@ msgstr "One-Click Trading 승인이 유효하지 않습니다. 체인 전환 또
 msgid "GLP to GM airdrop"
 msgstr "GLP에서 GM 에어드롭"
 
-#: src/pages/Trade/TradePage.tsx
-#~ msgid "Pending Orders"
-#~ msgstr ""
-
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled"
 msgstr "판매 주문이 취소되었습니다"
@@ -11125,11 +11033,6 @@ msgstr "EIP-4844, 3월 20-27일"
 msgid "Vault APY"
 msgstr ""
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Managed"
-#~ msgstr ""
-
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Save on costs"
 msgstr "비용 절감"
@@ -11193,10 +11096,6 @@ msgstr "추천된 트레이더"
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max deposit limit reached: {maxPoolUsdText}"
 msgstr "최대 입금 한도에 도달했습니다: {maxPoolUsdText}"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Deposits {0} to the LP Vault AND opens a short position — both in one transaction."
-#~ msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Yield optimizations"
@@ -11715,10 +11614,6 @@ msgstr "최소 필수 담보"
 #: src/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "{orderText} update failed"
 msgstr "{orderText} 업데이트에 실패했습니다"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Mode"
-#~ msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Success"

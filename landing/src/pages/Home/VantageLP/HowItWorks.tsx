@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { useMemo } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useMemo } from "react";
 
 const COLORS = {
   bg: "#0A0A18",
@@ -147,6 +147,212 @@ function StepCard({ step, index }: { step: Step; index: number }) {
   );
 }
 
+// ---------------------------------------------------------------------------
+// Scroll-driven merge animation
+// ---------------------------------------------------------------------------
+
+const MERGE_SECTION_STYLE: React.CSSProperties = {
+  position: "relative",
+  margin: "80px 0 0",
+  padding: "80px 0",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  overflow: "hidden",
+};
+
+const MERGE_LABEL_STYLE: React.CSSProperties = {
+  fontSize: "11px",
+  fontWeight: 700,
+  color: COLORS.neonCyan,
+  letterSpacing: "2px",
+  textTransform: "uppercase",
+  marginBottom: "12px",
+};
+
+const MERGE_HEADING_STYLE: React.CSSProperties = {
+  fontSize: "clamp(22px, 3vw, 32px)",
+  fontWeight: 900,
+  color: COLORS.textPrimary,
+  letterSpacing: "-1px",
+  marginBottom: "64px",
+  textAlign: "center",
+};
+
+const MERGE_STAGE_STYLE: React.CSSProperties = {
+  position: "relative",
+  width: "100%",
+  maxWidth: "600px",
+  height: "160px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+const MERGE_ICON_BASE: React.CSSProperties = {
+  position: "absolute",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "8px",
+};
+
+const MERGE_ICON_BOX: React.CSSProperties = {
+  width: "80px",
+  height: "80px",
+  borderRadius: "20px",
+  background: COLORS.bgCard,
+  border: `1px solid ${COLORS.borderSubtle}`,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "36px",
+};
+
+const MERGE_ICON_LABEL_RWA: React.CSSProperties = {
+  fontSize: "11px",
+  fontWeight: 700,
+  color: COLORS.neonYellow,
+  letterSpacing: "1px",
+  textTransform: "uppercase",
+};
+
+const MERGE_ICON_LABEL_SHORT: React.CSSProperties = {
+  fontSize: "11px",
+  fontWeight: 700,
+  color: COLORS.neonCyan,
+  letterSpacing: "1px",
+  textTransform: "uppercase",
+};
+
+const MERGE_ICON_LABEL_SHIELD: React.CSSProperties = {
+  fontSize: "11px",
+  fontWeight: 700,
+  color: COLORS.neonPink,
+  letterSpacing: "1px",
+  textTransform: "uppercase",
+};
+
+const SHIELD_BOX_STYLE: React.CSSProperties = {
+  width: "96px",
+  height: "96px",
+  borderRadius: "24px",
+  background: "linear-gradient(135deg, rgba(255,60,172,0.2), rgba(60,247,255,0.2))",
+  border: `1.5px solid rgba(255,60,172,0.5)`,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "44px",
+  boxShadow: "0 0 40px rgba(255,60,172,0.25), 0 0 80px rgba(60,247,255,0.1)",
+};
+
+const MERGE_DIVIDER_STYLE: React.CSSProperties = {
+  marginTop: "48px",
+  width: "1px",
+  height: "40px",
+  background: "linear-gradient(to bottom, rgba(255,255,255,0.15), transparent)",
+};
+
+const MERGE_RESULT_STYLE: React.CSSProperties = {
+  marginTop: "16px",
+  textAlign: "center",
+};
+
+const MERGE_RESULT_TITLE_STYLE: React.CSSProperties = {
+  fontSize: "18px",
+  fontWeight: 800,
+  color: COLORS.textPrimary,
+  marginBottom: "4px",
+};
+
+const MERGE_RESULT_DESC_STYLE: React.CSSProperties = {
+  fontSize: "14px",
+  color: COLORS.textMuted,
+};
+
+function MergeAnimation() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.85", "end 0.3"],
+  });
+
+  // RWA slides from left (-180px) to center (0)
+  const rwaX = useTransform(scrollYProgress, [0, 0.6], [-180, 0]);
+  // Short slides from right (180px) to center (0)
+  const shortX = useTransform(scrollYProgress, [0, 0.6], [180, 0]);
+  // Both icons fade out as they merge
+  const bothOpacity = useTransform(scrollYProgress, [0.5, 0.75], [1, 0]);
+  // Shield fades in + scales up after merge
+  const shieldOpacity = useTransform(scrollYProgress, [0.65, 1], [0, 1]);
+  const shieldScale = useTransform(scrollYProgress, [0.65, 1], [0.6, 1]);
+  // Result text fades in
+  const resultOpacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
+  const resultY = useTransform(scrollYProgress, [0.8, 1], [16, 0]);
+
+  const rwaIconStyle = useMemo(
+    () => ({ ...MERGE_ICON_BASE, left: "50%" as const, translateX: "-50%", x: rwaX, opacity: bothOpacity }),
+    [rwaX, bothOpacity]
+  );
+  const shortIconStyle = useMemo(
+    () => ({ ...MERGE_ICON_BASE, left: "50%" as const, translateX: "-50%", x: shortX, opacity: bothOpacity }),
+    [shortX, bothOpacity]
+  );
+  const shieldIconStyle = useMemo(
+    () => ({
+      ...MERGE_ICON_BASE,
+      left: "50%" as const,
+      translateX: "-50%",
+      opacity: shieldOpacity,
+      scale: shieldScale,
+    }),
+    [shieldOpacity, shieldScale]
+  );
+  const resultMotionStyle = useMemo(
+    () => ({ ...MERGE_RESULT_STYLE, opacity: resultOpacity, y: resultY }),
+    [resultOpacity, resultY]
+  );
+
+  return (
+    <div ref={ref} style={MERGE_SECTION_STYLE}>
+      <span style={MERGE_LABEL_STYLE}>The Magic</span>
+      <h3 style={MERGE_HEADING_STYLE}>RWA Yield + Short Funding → Full Protection</h3>
+
+      <div style={MERGE_STAGE_STYLE}>
+        {/* RWA icon — slides from left */}
+        <motion.div style={rwaIconStyle}>
+          <div style={MERGE_ICON_BOX}>🏦</div>
+          <span style={MERGE_ICON_LABEL_RWA}>RWA</span>
+        </motion.div>
+
+        {/* Short icon — slides from right */}
+        <motion.div style={shortIconStyle}>
+          <div style={MERGE_ICON_BOX}>📉</div>
+          <span style={MERGE_ICON_LABEL_SHORT}>Short</span>
+        </motion.div>
+
+        {/* Shield — appears at center after merge */}
+        <motion.div style={shieldIconStyle}>
+          <div style={SHIELD_BOX_STYLE}>🛡️</div>
+          <span style={MERGE_ICON_LABEL_SHIELD}>Protected</span>
+        </motion.div>
+      </div>
+
+      <div style={MERGE_DIVIDER_STYLE} />
+
+      <motion.div style={resultMotionStyle}>
+        <div style={MERGE_RESULT_TITLE_STYLE}>Delta-Neutral Yield</div>
+        <div style={MERGE_RESULT_DESC_STYLE}>Price risk cancelled. Native yield stays.</div>
+      </motion.div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Section layout constants
+// ---------------------------------------------------------------------------
+
 const SECTION_STYLE: React.CSSProperties = {
   background: COLORS.bg,
   padding: "100px 24px",
@@ -261,6 +467,9 @@ export function HowItWorks() {
             <StepCard key={step.number} step={step} index={i} />
           ))}
         </div>
+
+        {/* Scroll-driven merge animation */}
+        <MergeAnimation />
 
         {/* Trust row */}
         <motion.div
