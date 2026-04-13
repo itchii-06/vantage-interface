@@ -97,21 +97,6 @@ function useRwaSpotPrice(tokenAddress: string | undefined): number | null {
 // HedgeStatusBar — Section 1
 // ---------------------------------------------------------------------------
 
-type HealthStatus = "green" | "yellow" | "red";
-
-function getHealthStatus(netApyBps: number | null): HealthStatus {
-  if (netApyBps === null) return "yellow";
-  if (netApyBps > 50) return "green";
-  if (netApyBps >= 0) return "yellow";
-  return "red";
-}
-
-const HEALTH_CONFIG: Record<HealthStatus, { bg: string; text: string; dot: string; label: string }> = {
-  green: { bg: "bg-green-900/30", text: "text-green-400", dot: "bg-green-400", label: "Hedge Active" },
-  yellow: { bg: "bg-yellow-900/30", text: "text-yellow-400", dot: "bg-yellow-400", label: "Monitor" },
-  red: { bg: "bg-red-900/30", text: "text-red-400", dot: "bg-red-400", label: "Attention" },
-};
-
 type StatusBarProps = {
   symbol: string;
   spotPriceUsd: number | null;
@@ -119,6 +104,8 @@ type StatusBarProps = {
   maxShortCapacityUsd: number | null;
   remainingCapacityUsd: number | null;
   netApyBps: number | null;
+  isHedgeDisabled: boolean;
+  hedgeCapacityPct: number | null;
 };
 
 function HedgeStatusBar({
@@ -128,14 +115,42 @@ function HedgeStatusBar({
   maxShortCapacityUsd,
   remainingCapacityUsd,
   netApyBps,
+  isHedgeDisabled,
+  hedgeCapacityPct,
 }: StatusBarProps) {
-  const health = getHealthStatus(netApyBps);
-  const hc = HEALTH_CONFIG[health];
   const usedPct =
     maxShortCapacityUsd && remainingCapacityUsd !== null
       ? Math.min(100, ((maxShortCapacityUsd - remainingCapacityUsd) / maxShortCapacityUsd) * 100)
       : null;
   const progressBarStyle = usedPct !== null ? { width: `${usedPct}%` } : undefined;
+
+  // System status derived from Safety Buffer Lock
+  const systemStatus: "paused" | "congested" | "healthy" = isHedgeDisabled
+    ? "paused"
+    : hedgeCapacityPct !== null && hedgeCapacityPct >= 80
+      ? "congested"
+      : "healthy";
+
+  const SYSTEM_STATUS_CONFIG = {
+    paused: { bg: "bg-red-900/30", text: "text-red-400", dot: "bg-red-400", label: t`Paused`, bar: "bg-red-500" },
+    congested: {
+      bg: "bg-yellow-900/30",
+      text: "text-yellow-400",
+      dot: "bg-yellow-400",
+      label: t`Congested`,
+      bar: "bg-yellow-500",
+    },
+    healthy: {
+      bg: "bg-green-900/30",
+      text: "text-green-400",
+      dot: "bg-green-400",
+      label: t`Healthy`,
+      bar: "bg-green-500",
+    },
+  };
+
+  const sc = SYSTEM_STATUS_CONFIG[systemStatus];
+  const capacityBarStyle = hedgeCapacityPct !== null ? { width: `${Math.min(100, hedgeCapacityPct)}%` } : undefined;
 
   return (
     <div className="bg-cold-blue-950 mb-24 rounded-4 border border-stroke-primary p-20">
@@ -175,14 +190,30 @@ function HedgeStatusBar({
           )}
         </div>
 
-        {/* Health badge */}
+        {/* System Status (Safety Buffer Lock) */}
         <div className="flex flex-col">
-          <div className="text-11 text-slate-500">{t`Net APY`}</div>
+          <div className="text-11 text-slate-500">{t`System Status`}</div>
           <div className="mt-4">
-            <span className={`text-15 font-semibold ${hc.text}`}>{fmtBps(netApyBps)}</span>
+            <span
+              className={`inline-flex items-center gap-5 rounded-full px-8 py-3 text-12 font-semibold ${sc.bg} ${sc.text}`}
+            >
+              <span className={`h-6 w-6 rounded-full ${sc.dot}`} />
+              {sc.label}
+            </span>
           </div>
-          {netApyBps !== null && netApyBps > 0 && (
-            <div className="mt-6 text-11 text-green-500">{t`You are being paid to hedge`}</div>
+          {hedgeCapacityPct !== null && (
+            <div className="mt-6">
+              <div className="text-10 mb-2 flex justify-between text-slate-500">
+                <span>{t`FR / Buffered Yield`}</span>
+                <span>{hedgeCapacityPct.toFixed(0)}%</span>
+              </div>
+              <div className="h-4 w-full overflow-hidden rounded-full bg-slate-700">
+                <div className={`h-full rounded-full transition-all ${sc.bar}`} style={capacityBarStyle} />
+              </div>
+            </div>
+          )}
+          {systemStatus === "healthy" && netApyBps !== null && netApyBps > 0 && (
+            <div className="mt-4 text-11 text-green-500">{t`You are being paid to hedge`}</div>
           )}
         </div>
       </div>
@@ -475,7 +506,15 @@ export default function HedgeDetailPage() {
     await execute(mode, marginToken, params);
   }
 
-  const canExecute = account && !isSubmitting && rwaAmount > 0;
+  const canExecute = account && !isSubmitting && rwaAmount > 0 && !pageData.isHedgeDisabled;
+
+  // Compute display values for Safety Buffer warning banner
+  const frPct = pageData.fundingRateBps !== null ? (Math.abs(pageData.fundingRateBps) / 100).toFixed(2) : null;
+  const bufferedYieldBps =
+    pageData.yieldAprBps !== null && pageData.safetyBufferBps !== null
+      ? pageData.yieldAprBps * (1 - pageData.safetyBufferBps / 10_000)
+      : null;
+  const bufferedYieldPct = bufferedYieldBps !== null ? (bufferedYieldBps / 100).toFixed(2) : null;
 
   // ── Render ─────────────────────────────────────────────────────────────────
 
@@ -515,6 +554,8 @@ export default function HedgeDetailPage() {
           maxShortCapacityUsd={pageData.maxShortCapacityUsd}
           remainingCapacityUsd={pageData.remainingCapacityUsd}
           netApyBps={pageData.netApyBps}
+          isHedgeDisabled={pageData.isHedgeDisabled}
+          hedgeCapacityPct={pageData.hedgeCapacityPct}
         />
 
         {/* ── Section 2 + 3: Chart (left) + Action panel (right) ───────────── */}
@@ -692,6 +733,18 @@ export default function HedgeDetailPage() {
             {txHash && (
               <div className="mb-16 rounded-4 bg-green-900/30 px-12 py-8 text-12 text-green-400">
                 {t`Transaction submitted:`} {txHash.slice(0, 20)}…
+              </div>
+            )}
+
+            {/* Safety Buffer Lock warning banner */}
+            {pageData.isHedgeDisabled && (
+              <div className="border-yellow-800/50 mb-16 rounded-4 border bg-yellow-900/20 px-12 py-10 text-12 text-yellow-300">
+                <div className="mb-4 font-semibold">⚠ {t`New Hedges Temporarily Paused`}</div>
+                <div className="leading-relaxed text-yellow-400/80">
+                  {frPct !== null && bufferedYieldPct !== null
+                    ? `${t`The current funding rate`} (${frPct}%) ${t`exceeds the buffered RWA yield`} (${bufferedYieldPct}%), ${t`risking insolvency. New hedge positions are blocked. Trade mode remains available.`}`
+                    : t`New hedge positions are temporarily blocked due to the Safety Buffer Lock. Trade mode remains available.`}
+                </div>
               </div>
             )}
 

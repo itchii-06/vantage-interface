@@ -70,6 +70,19 @@ export interface HedgePageData {
   netApyBps: number | null;
   /** User's existing short position, or null if none */
   userPosition: UserPosition | null;
+  /**
+   * True when the Safety Buffer Lock is active — new hedge positions are blocked.
+   * Set by Vault._checkProtocolSolvency() whenever hedgeCost > bufferedYield.
+   */
+  isHedgeDisabled: boolean;
+  /**
+   * Ratio of current hedge FR cost to buffered staked yield (0–100+%).
+   * > 100 means the lock should be / is active.
+   * null when data is unavailable.
+   */
+  hedgeCapacityPct: number | null;
+  /** Safety buffer configured on the Vault (basis points, e.g. 2000 = 20%) */
+  safetyBufferBps: number | null;
 }
 
 const EMPTY: HedgePageData = {
@@ -81,6 +94,9 @@ const EMPTY: HedgePageData = {
   fundingRateBps: null,
   netApyBps: null,
   userPosition: null,
+  isHedgeDisabled: false,
+  hedgeCapacityPct: null,
+  safetyBufferBps: null,
 };
 
 // ---------------------------------------------------------------------------
@@ -176,7 +192,30 @@ export function useHedgePageData(
         // ── 6. Net APY ──────────────────────────────────────────────────────
         const netApyBps = yieldAprBps !== null && fundingRateBps !== null ? yieldAprBps + fundingRateBps : null;
 
-        // ── 7. User position (short, USDC collateral) ───────────────────────
+        // ── 7. Safety Buffer Lock state ─────────────────────────────────────
+        // Read isHedgeDisabled flag and safetyBufferBps from Vault.
+        // hedgeCapacityPct = (|shortFR| × totalHedgedNotional) / (yield × (1-buffer)) × 100
+        // Simplified per-unit estimate: |shortFRBps| / (yieldAprBps × (1-buffer)) × 100.
+        let isHedgeDisabled = false;
+        let safetyBufferBps: number | null = null;
+        let hedgeCapacityPct: number | null = null;
+        try {
+          [isHedgeDisabled, safetyBufferBps] = await Promise.all([
+            vault.isHedgeDisabled() as Promise<boolean>,
+            vault.safetyBufferBps().then(Number) as Promise<number>,
+          ]);
+
+          if (fundingRateBps !== null && yieldAprBps !== null && safetyBufferBps !== null) {
+            const shortCostBps = Math.max(0, -fundingRateBps); // positive when shorts pay
+            const bufferedYieldBps = yieldAprBps * (1 - safetyBufferBps / 10_000);
+            hedgeCapacityPct =
+              bufferedYieldBps > 0 ? (shortCostBps / bufferedYieldBps) * 100 : shortCostBps > 0 ? 100 : 0;
+          }
+        } catch {
+          // Vault may not have these methods in older deployments — fail silently
+        }
+
+        // ── 8. User position (short, USDC collateral) ───────────────────────
         let userPosition: UserPosition | null = null;
         if (account && USDC_ADDRESS) {
           const key: string = await vault.getPositionKey(
@@ -206,6 +245,9 @@ export function useHedgePageData(
             fundingRateBps,
             netApyBps,
             userPosition,
+            isHedgeDisabled,
+            hedgeCapacityPct,
+            safetyBufferBps,
           });
         }
       } catch {

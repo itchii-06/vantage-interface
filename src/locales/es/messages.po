@@ -1006,6 +1006,10 @@ msgstr "DeltaPrime"
 msgid "1st place"
 msgstr "1.er puesto"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "New hedge positions are temporarily blocked due to the Safety Buffer Lock. Trade mode remains available."
+msgstr ""
+
 #: src/pages/UiPage/UiPage.tsx
 msgid "Caption"
 msgstr "Caption"
@@ -2821,6 +2825,10 @@ msgstr "Partes predeterminadas para órdenes TWAP"
 msgid "View in explorer"
 msgstr "Ver en explorador"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "FR / Buffered Yield"
+msgstr ""
+
 #: src/components/SettingsModal/ThemeSelector.tsx
 msgid "System"
 msgstr "Sistema"
@@ -2863,6 +2871,10 @@ msgstr "Instantáneo"
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Open positions"
 msgstr "Posiciones abiertas"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "exceeds the buffered RWA yield"
+msgstr ""
 
 #: src/components/PositionShare/PositionShareCard.tsx
 msgid "Coin"
@@ -3172,6 +3184,10 @@ msgstr "Ejecución más rápida con RPC premium de GMX"
 #: src/components/OrderItem/OrderItem.tsx
 msgid "Order type"
 msgstr "Tipo de orden"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "risking insolvency. New hedge positions are blocked. Trade mode remains available."
+msgstr ""
 
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/lp/useVantageLPActions.ts
@@ -5927,6 +5943,10 @@ msgstr "La red de compensación se ha cambiado a Arbitrum, pero quedan $12.50 en
 msgid "Initial collateral, excluding borrow and funding fees"
 msgstr "Garantía inicial, excluyendo comisiones de préstamo y financiación"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Paused"
+msgstr ""
+
 #: src/components/PositionShare/CreateReferralCode.tsx
 #: src/components/PositionShare/CreateReferralCode.tsx
 #: src/components/Referrals/AddAffiliateCode.tsx
@@ -7656,6 +7676,10 @@ msgstr "Hoy"
 msgid "Link copied"
 msgstr "Enlace copiado"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Congested"
+msgstr ""
+
 #: src/components/Claims/ClaimsHistory.tsx
 #: src/components/Claims/ClaimsHistory.tsx
 #: src/components/OrderList/OrderList.tsx
@@ -8143,7 +8167,6 @@ msgstr "Aprobar GMX"
 msgid "{fromText} to {toExecutionText}"
 msgstr "{fromText} a {toExecutionText}"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Net APY"
 msgstr ""
@@ -9444,6 +9467,10 @@ msgstr "Congelar"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "CONFIG"
 msgstr "CONFIG"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "The current funding rate"
+msgstr ""
 
 #: src/components/ChartTokenSelector/ChartTokenSelector.tsx
 #: src/components/MarketSelector/MarketSelector.tsx
@@ -11189,6 +11216,10 @@ msgstr "Guardar nivel"
 msgid "詳細"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "New Hedges Temporarily Paused"
+msgstr ""
+
 #: src/domain/synthetics/orders/cancelOrdersTxn.ts
 msgid "{count, plural, one {Order} other {# Orders}}"
 msgstr "{count, plural, one {Orden} other {# Órdenes}}"
@@ -11314,6 +11345,10 @@ msgstr "Cantidad de impacto de intercambio {0}"
 msgid "Join an anonymous one-on-one chat to share your experience"
 msgstr "Únase a un chat anónimo individual para compartir su experiencia"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Healthy"
+msgstr ""
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "GMX staked rewards:"
 msgstr "Recompensas de GMX en staking:"
@@ -11368,6 +11403,10 @@ msgstr "Límite"
 #: src/components/Errors/errorToasts.tsx
 msgid "Insufficient {0} for gas on {1}<0/><1/><2>Buy or transfer {2} to {3}</2>"
 msgstr "{0} insuficiente para gas en {1}<0/><1/><2>Comprar o transferir {2} a {3}</2>"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "System Status"
+msgstr ""
 
 #: src/pages/PriceImpactRebatesStats/PriceImpactRebatesStats.tsx
 msgid "TIMEKEY"
