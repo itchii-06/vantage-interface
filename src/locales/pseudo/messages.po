@@ -3821,6 +3821,10 @@ msgstr ""
 msgid "Trade at scale without worrying about thin order books or slippage"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Safety buffer is at its base level ({basePct}%). Market conditions are stable — no FR spike adjustment active."
+msgstr ""
+
 #: src/components/Claims/SettleAccruedCard.tsx
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settle"
@@ -5217,6 +5221,10 @@ msgstr ""
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Buy {gmOrGlvLabel} failed."
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "FR spike detected. Safety buffer has been automatically raised from {basePct}% to {curPct}% to protect LP assets. New hedge capacity is tighter until the market stabilises."
 msgstr ""
 
 #: src/pages/UiPage/BannerTest.tsx
@@ -8558,6 +8566,11 @@ msgstr ""
 
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 msgid "Top positions"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Buffer"
 msgstr ""
 
 #: src/components/Referrals/TradersStats.tsx

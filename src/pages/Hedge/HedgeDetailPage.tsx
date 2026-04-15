@@ -32,6 +32,7 @@ import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
 import NumberInput from "components/NumberInput/NumberInput";
+import Tooltip from "components/Tooltip/Tooltip";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -106,6 +107,10 @@ type StatusBarProps = {
   netApyBps: number | null;
   isHedgeDisabled: boolean;
   hedgeCapacityPct: number | null;
+  /** Base safety buffer (safetyBufferBps). Equals requiredBufferBps during stable markets. */
+  safetyBufferBps: number | null;
+  /** Current dynamic buffer in effect (Issue #179). Rises above safetyBufferBps during FR spikes. */
+  requiredBufferBps: number | null;
 };
 
 function HedgeStatusBar({
@@ -117,6 +122,8 @@ function HedgeStatusBar({
   netApyBps,
   isHedgeDisabled,
   hedgeCapacityPct,
+  safetyBufferBps,
+  requiredBufferBps,
 }: StatusBarProps) {
   const usedPct =
     maxShortCapacityUsd && remainingCapacityUsd !== null
@@ -215,6 +222,47 @@ function HedgeStatusBar({
           {systemStatus === "healthy" && netApyBps !== null && netApyBps > 0 && (
             <div className="mt-4 text-11 text-green-500">{t`You are being paid to hedge`}</div>
           )}
+
+          {/* Dynamic Buffer indicator (Issue #179) */}
+          {safetyBufferBps !== null &&
+            requiredBufferBps !== null &&
+            (() => {
+              const basePct = (safetyBufferBps / 100).toFixed(1);
+              const curPct = (requiredBufferBps / 100).toFixed(1);
+              const isSpiked = requiredBufferBps > safetyBufferBps;
+
+              return (
+                <div className="mt-8">
+                  <Tooltip
+                    position="bottom-end"
+                    content={
+                      isSpiked
+                        ? t`FR spike detected. Safety buffer has been automatically raised from ${basePct}% to ${curPct}% to protect LP assets. New hedge capacity is tighter until the market stabilises.`
+                        : t`Safety buffer is at its base level (${basePct}%). Market conditions are stable — no FR spike adjustment active.`
+                    }
+                    handle={
+                      <div
+                        className={`inline-flex cursor-help items-center gap-5 rounded-full px-8 py-3 text-11 font-medium ${
+                          isSpiked ? "bg-orange-900/30 text-orange-300" : "bg-slate-800 text-slate-400"
+                        }`}
+                      >
+                        {isSpiked ? (
+                          <>
+                            <span className="bg-orange-400 h-5 w-5 rounded-full" />
+                            {t`Buffer`}: {basePct}% → {curPct}% ↑
+                          </>
+                        ) : (
+                          <>
+                            <span className="h-5 w-5 rounded-full bg-slate-500" />
+                            {t`Buffer`}: {curPct}%
+                          </>
+                        )}
+                      </div>
+                    }
+                  />
+                </div>
+              );
+            })()}
         </div>
       </div>
     </div>
@@ -556,6 +604,8 @@ export default function HedgeDetailPage() {
           netApyBps={pageData.netApyBps}
           isHedgeDisabled={pageData.isHedgeDisabled}
           hedgeCapacityPct={pageData.hedgeCapacityPct}
+          safetyBufferBps={pageData.safetyBufferBps}
+          requiredBufferBps={pageData.requiredBufferBps}
         />
 
         {/* ── Section 2 + 3: Chart (left) + Action panel (right) ───────────── */}
