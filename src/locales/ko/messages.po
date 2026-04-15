@@ -3821,6 +3821,10 @@ msgstr "탈중앙화 옵션 프로토콜"
 msgid "Trade at scale without worrying about thin order books or slippage"
 msgstr "얇은 호가창이나 슬리피지 걱정 없이 대규모로 거래하십시오"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Safety buffer is at its base level ({basePct}%). Market conditions are stable — no FR spike adjustment active."
+msgstr ""
+
 #: src/components/Claims/SettleAccruedCard.tsx
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settle"
@@ -5218,6 +5222,10 @@ msgstr "GLV 구매"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Buy {gmOrGlvLabel} failed."
 msgstr "{gmOrGlvLabel} 구매에 실패했습니다."
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "FR spike detected. Safety buffer has been automatically raised from {basePct}% to {curPct}% to protect LP assets. New hedge capacity is tighter until the market stabilises."
+msgstr ""
 
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Existing limit order in WETH-USDC pool.<0>Switch to WETH-USDC pool</0>"
@@ -8559,6 +8567,11 @@ msgstr "One-Click Trading 및 Express Trading으로 원활한 거래 경험을 �
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 msgid "Top positions"
 msgstr "상위 포지션"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Buffer"
+msgstr ""
 
 #: src/components/Referrals/TradersStats.tsx
 msgid "V2 rebates apply automatically as fee discounts and aren't shown here"

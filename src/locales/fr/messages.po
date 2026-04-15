@@ -3821,6 +3821,10 @@ msgstr "Protocole d'options décentralisé"
 msgid "Trade at scale without worrying about thin order books or slippage"
 msgstr "Tradez à grande échelle sans vous soucier de carnets d'ordres peu profonds ou du glissement"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Safety buffer is at its base level ({basePct}%). Market conditions are stable — no FR spike adjustment active."
+msgstr ""
+
 #: src/components/Claims/SettleAccruedCard.tsx
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settle"
@@ -5218,6 +5222,10 @@ msgstr "Acheter GLV"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Buy {gmOrGlvLabel} failed."
 msgstr "L'achat de {gmOrGlvLabel} a échoué."
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "FR spike detected. Safety buffer has been automatically raised from {basePct}% to {curPct}% to protect LP assets. New hedge capacity is tighter until the market stabilises."
+msgstr ""
 
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Existing limit order in WETH-USDC pool.<0>Switch to WETH-USDC pool</0>"
@@ -8559,6 +8567,11 @@ msgstr "Profitez d'une expérience de trading fluide et évitez la congestion de
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 msgid "Top positions"
 msgstr "Meilleures positions"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Buffer"
+msgstr ""
 
 #: src/components/Referrals/TradersStats.tsx
 msgid "V2 rebates apply automatically as fee discounts and aren't shown here"

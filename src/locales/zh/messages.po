@@ -3821,6 +3821,10 @@ msgstr "去中心化期权协议"
 msgid "Trade at scale without worrying about thin order books or slippage"
 msgstr "大规模交易无需担忧订单簿深度不足或滑点问题"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Safety buffer is at its base level ({basePct}%). Market conditions are stable — no FR spike adjustment active."
+msgstr ""
+
 #: src/components/Claims/SettleAccruedCard.tsx
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settle"
@@ -5218,6 +5222,10 @@ msgstr "购买 GLV"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Buy {gmOrGlvLabel} failed."
 msgstr "买入 {gmOrGlvLabel} 失败。"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "FR spike detected. Safety buffer has been automatically raised from {basePct}% to {curPct}% to protect LP assets. New hedge capacity is tighter until the market stabilises."
+msgstr ""
 
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Existing limit order in WETH-USDC pool.<0>Switch to WETH-USDC pool</0>"
@@ -8559,6 +8567,11 @@ msgstr "通过 One-Click Trading 和 Express Trading 享受顺畅的交易体验
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 msgid "Top positions"
 msgstr "排名仓位"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Buffer"
+msgstr ""
 
 #: src/components/Referrals/TradersStats.tsx
 msgid "V2 rebates apply automatically as fee discounts and aren't shown here"

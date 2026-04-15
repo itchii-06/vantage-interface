@@ -83,6 +83,12 @@ export interface HedgePageData {
   hedgeCapacityPct: number | null;
   /** Safety buffer configured on the Vault (basis points, e.g. 2000 = 20%) */
   safetyBufferBps: number | null;
+  /**
+   * Dynamic buffer currently in effect (Issue #179).
+   * Equals safetyBufferBps during stable markets; rises above it during FR spikes.
+   * null when data is unavailable.
+   */
+  requiredBufferBps: number | null;
 }
 
 const EMPTY: HedgePageData = {
@@ -97,6 +103,7 @@ const EMPTY: HedgePageData = {
   isHedgeDisabled: false,
   hedgeCapacityPct: null,
   safetyBufferBps: null,
+  requiredBufferBps: null,
 };
 
 // ---------------------------------------------------------------------------
@@ -198,11 +205,16 @@ export function useHedgePageData(
         // Simplified per-unit estimate: |shortFRBps| / (yieldAprBps × (1-buffer)) × 100.
         let isHedgeDisabled = false;
         let safetyBufferBps: number | null = null;
+        let requiredBufferBps: number | null = null;
         let hedgeCapacityPct: number | null = null;
         try {
-          [isHedgeDisabled, safetyBufferBps] = await Promise.all([
+          [isHedgeDisabled, safetyBufferBps, requiredBufferBps] = await Promise.all([
             vault.isHedgeDisabled() as Promise<boolean>,
             vault.safetyBufferBps().then(Number) as Promise<number>,
+            vault
+              .getRequiredBuffer()
+              .then(Number)
+              .catch(() => null) as Promise<number | null>,
           ]);
 
           if (fundingRateBps !== null && yieldAprBps !== null && safetyBufferBps !== null) {
@@ -248,6 +260,7 @@ export function useHedgePageData(
             isHedgeDisabled,
             hedgeCapacityPct,
             safetyBufferBps,
+            requiredBufferBps,
           });
         }
       } catch {
