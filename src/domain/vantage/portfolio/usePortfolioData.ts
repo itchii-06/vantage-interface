@@ -67,6 +67,17 @@ export type HedgePortfolioItem = {
   /** User's short collateral in USD (float) — null if no position */
   shortCollateralUsd: number | null;
   isLoading: boolean;
+  /**
+   * Unix timestamp when the vault's raw SolvencyRatio first dropped below 1.0 (Issue #180).
+   * 0 or null = currently healthy.
+   */
+  solvencyDropAt: number | null;
+  /** True if the user's own short position is currently soft-locked (FR offset suspended). */
+  isSoftLocked: boolean;
+  /** Yield APR in bps — used for solvency ratio display */
+  yieldAprBps: number | null;
+  /** Funding rate in bps from short's perspective (negative = shorts pay) */
+  fundingRateBps: number | null;
 };
 
 export type PortfolioGlobalStats = {
@@ -167,6 +178,10 @@ export function usePortfolioData(chainId: number, account: string | undefined): 
           shortSizeUsd: hd?.userPosition?.sizeUsd ?? null,
           shortCollateralUsd: hd?.userPosition?.collateralUsd ?? null,
           isLoading: hd ? false : true,
+          solvencyDropAt: hd?.solvencyDropAt ?? null,
+          isSoftLocked: hd?.isSoftLockedPosition ?? false,
+          yieldAprBps: hd?.yieldAprBps ?? null,
+          fundingRateBps: hd?.fundingRateBps ?? null,
         };
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps

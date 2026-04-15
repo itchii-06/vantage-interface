@@ -645,6 +645,18 @@ export default function HedgeDetailPage() {
                 />
               </div>
 
+              {/* Soft-lock warning (Issue #180) */}
+              {pageData.isSoftLockedPosition && (
+                <div className="border-amber-800/50 bg-amber-900/20 text-amber-300 mb-16 rounded-4 border px-12 py-10 text-12">
+                  <div className="mb-4 font-semibold">
+                    ⚠️ {t`システム収益保護のため、現在一時的にFR相殺が停止されています`}
+                  </div>
+                  <div className="leading-relaxed text-amber-400/80">
+                    {t`プロトコルのソルベンシー比率が低下したため、このポジションのファンディングレート相殺が一時的に停止されました。ソルベンシーが回復次第、自動的に復元されます。コラテラルおよびポジションは安全に保持されています。`}
+                  </div>
+                </div>
+              )}
+
               {/* Position details */}
               {pageData.userPosition ? (
                 <CurrentPositionPanel

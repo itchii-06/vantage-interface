@@ -876,6 +876,11 @@ msgstr ""
 msgid "in liquidity"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "システム収益保護のため、現在一時的にFR相殺が停止されています"
+msgstr ""
+
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "You have a shortfall debt of {0}. This will be settled when the insurance fund is sufficient."
 msgstr ""
@@ -1054,6 +1059,10 @@ msgstr ""
 
 #: src/components/TradeHistory/TradeHistoryRow/TradeHistoryRow.tsx
 msgid "{0} <0/><1> to </1>{1} <2/>"
+msgstr ""
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "前より赤字検知"
 msgstr ""
 
 #: src/components/PositionShare/CreateReferralCode.tsx
@@ -2236,6 +2245,10 @@ msgstr ""
 msgid "V2 Avalanche"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "プロトコル・ソルベンシー"
+msgstr ""
+
 #: src/components/TradeHistory/keys.ts
 msgid "Failed Market Decrease"
 msgstr ""
@@ -2663,6 +2676,10 @@ msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Protocol risk explorer and stats"
+msgstr ""
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "FRコスト"
 msgstr ""
 
 #: src/components/PositionShare/PositionShareCard.tsx
@@ -6227,6 +6244,10 @@ msgstr ""
 msgid "High price impact"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "FR停止中"
+msgstr ""
+
 #: src/components/GmList/GmList.tsx
 #: src/components/MarketsList/NetFeeTooltip.tsx
 #: src/components/PoolSelector2/PoolSelector2.tsx
@@ -7397,6 +7418,10 @@ msgstr ""
 msgid "Purpose"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "RWA利回りがFRコストを下回っているため、ヘッジのFR相殺が一時停止されています。ソルベンシー回復後に自動的に復元されます。"
+msgstr ""
+
 #: src/components/Earn/AdditionalOpportunities/OpportunityFilters.tsx
 msgid "For me"
 msgstr ""
@@ -7790,6 +7815,10 @@ msgstr ""
 
 #: src/components/UserIncentiveDistribution/utils.tsx
 msgid "GLP reimbursement (test)"
+msgstr ""
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "（赤字）"
 msgstr ""
 
 #: src/pages/PageNotFound/PageNotFound.tsx
@@ -8585,6 +8614,10 @@ msgstr ""
 msgid "V2 trading"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "（健全）"
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Protocol analytics"
 msgstr ""
@@ -9277,6 +9310,10 @@ msgstr ""
 msgid "Sellable"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "FR相殺停止中"
+msgstr ""
+
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Select positions where accrued funding fee exceeds the {0} gas cost to settle"
 msgstr ""
@@ -9573,6 +9610,10 @@ msgstr ""
 
 #: src/components/GmSwap/GmFees/GmFees.tsx
 msgid "shift"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "プロトコルのソルベンシー比率が低下したため、このポジションのファンディングレート相殺が一時的に停止されました。ソルベンシーが回復次第、自動的に復元されます。コラテラルおよびポジションは安全に保持されています。"
 msgstr ""
 
 #: src/components/NotifyModal/NotifyModal.tsx
@@ -10635,6 +10676,10 @@ msgstr ""
 msgid "Performance vs benchmark over selected period"
 msgstr ""
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "ソルベンシーは回復しています。ポジションの復元を待っています。"
+msgstr ""
+
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Referral code updated"
 msgstr ""
@@ -10689,6 +10734,10 @@ msgstr ""
 
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "30s"
+msgstr ""
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "ソルベンシー比率"
 msgstr ""
 
 #: src/components/GmList/PerformanceLabel.tsx
@@ -11093,6 +11142,10 @@ msgstr ""
 #: src/components/MarketSelector/MarketSelector.tsx
 #: src/components/MarketsList/MarketsList.tsx
 msgid "No markets found"
+msgstr ""
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "利回り"
 msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx

@@ -125,6 +125,153 @@ function HeroSection({ totalNetWorthUsd, totalProtectionUsd, avgHedgeRatio, netY
 }
 
 // ---------------------------------------------------------------------------
+// Protocol Solvency section (Issue #180 — Soft Deleveraging)
+// ---------------------------------------------------------------------------
+
+type SolvencyItemProps = {
+  symbol: string;
+  solvencyDropAt: number | null;
+  isSoftLocked: boolean;
+  yieldAprBps: number | null;
+  fundingRateBps: number | null;
+};
+
+function SolvencyItem({ symbol, solvencyDropAt, isSoftLocked, yieldAprBps, fundingRateBps }: SolvencyItemProps) {
+  // Solvency ratio: yield / |cost|  (< 1 = insolvent)
+  const costBps = fundingRateBps !== null ? Math.max(0, -fundingRateBps) : null;
+  const yieldBps = yieldAprBps ?? 0;
+  const solvencyRatio = costBps !== null && costBps > 0 ? yieldBps / costBps : null;
+
+  const maxScale = Math.max(yieldBps, costBps ?? 0, 100);
+  const yieldPct = Math.min(100, (yieldBps / maxScale) * 100);
+  const costPct = costBps !== null ? Math.min(100, (costBps / maxScale) * 100) : 0;
+
+  // useMemo called before any conditional return (Rules of Hooks)
+  const yieldBarStyle = useMemo(() => ({ width: `${yieldPct}%` }), [yieldPct]);
+  const costBarStyle = useMemo(() => ({ width: `${costPct}%` }), [costPct]);
+
+  // Deficit duration
+  let deficitDuration: string | null = null;
+  if (solvencyDropAt && solvencyDropAt > 0) {
+    const nowSec = Math.floor(Date.now() / 1000);
+    const elapsedSec = Math.max(0, nowSec - solvencyDropAt);
+    const hours = Math.floor(elapsedSec / 3600);
+    const minutes = Math.floor((elapsedSec % 3600) / 60);
+    deficitDuration = hours > 0 ? `${hours}時間${minutes}分` : `${minutes}分`;
+  }
+
+  // Only show when in deficit or user is soft-locked (after all hooks)
+  const isInDeficit = (solvencyDropAt !== null && solvencyDropAt > 0) || isSoftLocked;
+  if (!isInDeficit) return null;
+
+  return (
+    <div className="border-amber-800/40 bg-amber-900/10 rounded-4 border p-16">
+      {/* Header */}
+      <div className="mb-12 flex items-center justify-between">
+        <div className="flex items-center gap-8">
+          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-slate-700 text-11 font-bold text-white">
+            {symbol.slice(0, 2)}
+          </div>
+          <span className="text-13 font-semibold text-white">{symbol}</span>
+        </div>
+        <div className="flex items-center gap-8">
+          {isSoftLocked && (
+            <span className="bg-amber-900/50 text-amber-300 rounded-full px-8 py-2 text-11 font-semibold">
+              {t`FR相殺停止中`}
+            </span>
+          )}
+          {deficitDuration && (
+            <span className="text-11 text-slate-500">
+              {deficitDuration}
+              {t`前より赤字検知`}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Warning */}
+      {isSoftLocked && (
+        <div className="text-amber-400/90 mb-12 text-12">
+          ⚠️ {t`システム収益保護のため、現在一時的にFR相殺が停止されています`}
+        </div>
+      )}
+
+      {/* Solvency ratio bar */}
+      {yieldAprBps !== null && fundingRateBps !== null && (
+        <div className="space-y-8">
+          {/* Yield */}
+          <div className="flex items-center gap-10">
+            <div className="w-[60px] text-right text-11 text-slate-400">{t`利回り`}</div>
+            <div className="relative h-12 flex-1 overflow-hidden rounded-full bg-slate-700/50">
+              <div className="h-full rounded-full bg-green-500 transition-all" style={yieldBarStyle} />
+            </div>
+            <div className="w-[48px] text-right text-11 font-semibold text-green-400">
+              {(yieldBps / 100).toFixed(2)}%
+            </div>
+          </div>
+          {/* FR cost */}
+          <div className="flex items-center gap-10">
+            <div className="w-[60px] text-right text-11 text-slate-400">{t`FRコスト`}</div>
+            <div className="relative h-12 flex-1 overflow-hidden rounded-full bg-slate-700/50">
+              <div className="h-full rounded-full bg-red-500 transition-all" style={costBarStyle} />
+            </div>
+            <div className="w-[48px] text-right text-11 font-semibold text-red-400">
+              {costBps !== null ? (costBps / 100).toFixed(2) : "—"}%
+            </div>
+          </div>
+          {/* Ratio */}
+          {solvencyRatio !== null && (
+            <div className="border-t border-slate-700/60 pt-8">
+              <div className="flex items-center justify-between text-12">
+                <span className="text-slate-400">{t`ソルベンシー比率`}</span>
+                <div className="flex items-center gap-8">
+                  <span className={`font-semibold ${solvencyRatio >= 1 ? "text-green-400" : "text-red-400"}`}>
+                    {solvencyRatio.toFixed(2)}×
+                  </span>
+                  <span className={`text-11 ${solvencyRatio >= 1 ? "text-green-500/70" : "text-red-500/70"}`}>
+                    {solvencyRatio >= 1 ? t`（健全）` : t`（赤字）`}
+                  </span>
+                </div>
+              </div>
+              <div className="mt-6 text-11 text-slate-500">
+                {solvencyRatio < 1
+                  ? t`RWA利回りがFRコストを下回っているため、ヘッジのFR相殺が一時停止されています。ソルベンシー回復後に自動的に復元されます。`
+                  : t`ソルベンシーは回復しています。ポジションの復元を待っています。`}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+type SolvencySectionProps = { items: HedgePortfolioItem[] };
+
+function SolvencySection({ items }: SolvencySectionProps) {
+  const activeItems = items.filter((h) => (h.solvencyDropAt !== null && h.solvencyDropAt > 0) || h.isSoftLocked);
+  if (activeItems.length === 0) return null;
+
+  return (
+    <div className="mb-24">
+      <h2 className="mb-12 text-14 font-semibold text-white">{t`プロトコル・ソルベンシー`}</h2>
+      <div className="space-y-12">
+        {activeItems.map((h) => (
+          <SolvencyItem
+            key={h.key}
+            symbol={h.symbol}
+            solvencyDropAt={h.solvencyDropAt}
+            isSoftLocked={h.isSoftLocked}
+            yieldAprBps={h.yieldAprBps}
+            fundingRateBps={h.fundingRateBps}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Hedge Positions section — Balancer bar
 // ---------------------------------------------------------------------------
 
@@ -228,7 +375,9 @@ function HedgeSection({ items, hasAccount }: HedgeSectionProps) {
 
                 {/* Status */}
                 <div className="text-right">
-                  {hasPosition ? (
+                  {h.isSoftLocked ? (
+                    <span className="bg-amber-900/40 text-amber-300 rounded-full px-8 py-2 text-11">{t`FR停止中`}</span>
+                  ) : hasPosition ? (
                     <span className="rounded-full bg-green-900/40 px-8 py-2 text-11 text-green-400">{t`Active`}</span>
                   ) : (
                     <span className="text-11 text-slate-500">—</span>
@@ -409,13 +558,16 @@ export default function PortfolioPage() {
           netYieldApy={globalStats.netYieldApy}
         />
 
-        {/* ② Hedge Positions */}
+        {/* ② Solvency Alerts (Issue #180 — shown only when deficit is active) */}
+        <SolvencySection items={hedgeItems} />
+
+        {/* ③ Hedge Positions */}
         <HedgeSection items={hedgeItems} hasAccount={!!account} />
 
-        {/* ③ Trading Terminal */}
+        {/* ④ Trading Terminal */}
         <TradingSection positions={allPositions} hasAccount={!!account} />
 
-        {/* ④ Vault LP Status */}
+        {/* ⑤ Vault LP Status */}
         <VaultLpSection items={vaultLpItems} hasAccount={!!account} />
 
         {/* Disclaimer */}
