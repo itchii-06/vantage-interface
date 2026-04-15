@@ -876,6 +876,11 @@ msgstr "STIP.b遡及ボーナス"
 msgid "in liquidity"
 msgstr "流動性で"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "システム収益保護のため、現在一時的にFR相殺が停止されています"
+msgstr ""
+
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "You have a shortfall debt of {0}. This will be settled when the insurance fund is sufficient."
 msgstr ""
@@ -1055,6 +1060,10 @@ msgstr "Express の信頼性によるシームレスな取引"
 #: src/components/TradeHistory/TradeHistoryRow/TradeHistoryRow.tsx
 msgid "{0} <0/><1> to </1>{1} <2/>"
 msgstr "{0} <0/><1> から </1>{1} <2/>"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "前より赤字検知"
+msgstr ""
 
 #: src/components/PositionShare/CreateReferralCode.tsx
 #: src/components/Referrals/AddAffiliateCode.tsx
@@ -2236,6 +2245,10 @@ msgstr "出金失敗"
 msgid "V2 Avalanche"
 msgstr "V2 Avalanche"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "プロトコル・ソルベンシー"
+msgstr ""
+
 #: src/components/TradeHistory/keys.ts
 msgid "Failed Market Decrease"
 msgstr "マーケット減少失敗"
@@ -2664,6 +2677,10 @@ msgstr "決済を確認"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Protocol risk explorer and stats"
 msgstr "プロトコルリスクエクスプローラーと統計"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "FRコスト"
+msgstr ""
 
 #: src/components/PositionShare/PositionShareCard.tsx
 msgid "Generating shareable image..."
@@ -6227,6 +6244,10 @@ msgstr "最大ファンディングファクター"
 msgid "High price impact"
 msgstr "高い価格影響"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "FR停止中"
+msgstr ""
+
 #: src/components/GmList/GmList.tsx
 #: src/components/MarketsList/NetFeeTooltip.tsx
 #: src/components/PoolSelector2/PoolSelector2.tsx
@@ -7397,6 +7418,10 @@ msgstr "GMXアカウントからの引き出し"
 msgid "Purpose"
 msgstr "目的"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "RWA利回りがFRコストを下回っているため、ヘッジのFR相殺が一時停止されています。ソルベンシー回復後に自動的に復元されます。"
+msgstr ""
+
 #: src/components/Earn/AdditionalOpportunities/OpportunityFilters.tsx
 msgid "For me"
 msgstr "自分用"
@@ -7791,6 +7816,10 @@ msgstr "ファンディング手数料 / 日"
 #: src/components/UserIncentiveDistribution/utils.tsx
 msgid "GLP reimbursement (test)"
 msgstr "GLP払い戻し（テスト）"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "（赤字）"
+msgstr ""
 
 #: src/pages/PageNotFound/PageNotFound.tsx
 msgid "<0>Return to </0><1>Homepage</1> <2>or </2> <3>Trade</3>"
@@ -8585,6 +8614,10 @@ msgstr "以下の上限まで{0}でGMを購入できます"
 msgid "V2 trading"
 msgstr "V2取引"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "（健全）"
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Protocol analytics"
 msgstr "プロトコルの分析"
@@ -9277,6 +9310,10 @@ msgstr "GMXをステークし、GLVまたはGMを購入して報酬を獲得"
 msgid "Sellable"
 msgstr "売却可能"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "FR相殺停止中"
+msgstr ""
+
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Select positions where accrued funding fee exceeds the {0} gas cost to settle"
 msgstr "発生したファンディング手数料が決済のGasコスト{0}を超えるポジションを選択してください"
@@ -9574,6 +9611,10 @@ msgstr "Avalancheでは入金はサポートされていません。"
 #: src/components/GmSwap/GmFees/GmFees.tsx
 msgid "shift"
 msgstr "シフト"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "プロトコルのソルベンシー比率が低下したため、このポジションのファンディングレート相殺が一時的に停止されました。ソルベンシーが回復次第、自動的に復元されます。コラテラルおよびポジションは安全に保持されています。"
+msgstr ""
 
 #: src/components/NotifyModal/NotifyModal.tsx
 msgid "Liquidation risk alerts"
@@ -10635,6 +10676,10 @@ msgstr "リファラルコード"
 msgid "Performance vs benchmark over selected period"
 msgstr "選択期間におけるベンチマークとの比較パフォーマンス"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "ソルベンシーは回復しています。ポジションの復元を待っています。"
+msgstr ""
+
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Referral code updated"
 msgstr "リファラルコードが更新されました"
@@ -10690,6 +10735,10 @@ msgstr "やや重要度の低いテキストですが、読み取り可能です
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "30s"
 msgstr "30秒"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "ソルベンシー比率"
+msgstr ""
 
 #: src/components/GmList/PerformanceLabel.tsx
 msgid "Annualized performance"
@@ -11094,6 +11143,10 @@ msgstr "手数料控除後の担保が低くなっています。清算リスク
 #: src/components/MarketsList/MarketsList.tsx
 msgid "No markets found"
 msgstr "マーケットが見つかりません"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "利回り"
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Insufficient collateral. Need more"

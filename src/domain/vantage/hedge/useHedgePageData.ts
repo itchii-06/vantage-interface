@@ -89,6 +89,17 @@ export interface HedgePageData {
    * null when data is unavailable.
    */
   requiredBufferBps: number | null;
+  /**
+   * Unix timestamp when the raw SolvencyRatio first dropped below 1.0 (Issue #180).
+   * 0 = currently healthy. Non-zero = deficit has been ongoing since this time.
+   * null when data is unavailable.
+   */
+  solvencyDropAt: number | null;
+  /**
+   * True when the user's own short position in this vault has been soft-locked
+   * by the Keeper (FR offset temporarily suspended, Issue #180).
+   */
+  isSoftLockedPosition: boolean;
 }
 
 const EMPTY: HedgePageData = {
@@ -104,6 +115,8 @@ const EMPTY: HedgePageData = {
   hedgeCapacityPct: null,
   safetyBufferBps: null,
   requiredBufferBps: null,
+  solvencyDropAt: null,
+  isSoftLockedPosition: false,
 };
 
 // ---------------------------------------------------------------------------
@@ -207,14 +220,19 @@ export function useHedgePageData(
         let safetyBufferBps: number | null = null;
         let requiredBufferBps: number | null = null;
         let hedgeCapacityPct: number | null = null;
+        let solvencyDropAt: number | null = null;
         try {
-          [isHedgeDisabled, safetyBufferBps, requiredBufferBps] = await Promise.all([
+          [isHedgeDisabled, safetyBufferBps, requiredBufferBps, solvencyDropAt] = await Promise.all([
             vault.isHedgeDisabled() as Promise<boolean>,
             vault.safetyBufferBps().then(Number) as Promise<number>,
             vault
               .getRequiredBuffer()
               .then(Number)
               .catch(() => null) as Promise<number | null>,
+            vault
+              .solvencyDropAt()
+              .then(Number)
+              .catch(() => 0) as Promise<number>,
           ]);
 
           if (fundingRateBps !== null && yieldAprBps !== null && safetyBufferBps !== null) {
@@ -227,8 +245,9 @@ export function useHedgePageData(
           // Vault may not have these methods in older deployments — fail silently
         }
 
-        // ── 8. User position (short, USDC collateral) ───────────────────────
+        // ── 8. User position (short, USDC collateral) + soft-lock status ───────
         let userPosition: UserPosition | null = null;
+        let isSoftLockedPosition = false;
         if (account && USDC_ADDRESS) {
           const key: string = await vault.getPositionKey(
             account,
@@ -236,7 +255,10 @@ export function useHedgePageData(
             tokenAddr,
             false // isLong = false (short)
           );
-          const pos = await vault.positions(key);
+          const [pos, softLocked] = await Promise.all([
+            vault.positions(key),
+            vault.isSoftLockedPosition(key).catch(() => false) as Promise<boolean>,
+          ]);
           if (BigInt(pos.size) > 0n) {
             userPosition = {
               sizeUsd: parseFloat(formatEther(pos.size)),
@@ -244,6 +266,7 @@ export function useHedgePageData(
               averagePrice: parseFloat(formatEther(pos.averagePrice)),
               collateralToken: "USDC",
             };
+            isSoftLockedPosition = softLocked;
           }
         }
 
@@ -261,6 +284,8 @@ export function useHedgePageData(
             hedgeCapacityPct,
             safetyBufferBps,
             requiredBufferBps,
+            solvencyDropAt,
+            isSoftLockedPosition,
           });
         }
       } catch {
