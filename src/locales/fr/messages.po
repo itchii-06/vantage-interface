@@ -555,6 +555,10 @@ msgstr "Frais non réalisés"
 msgid "Max slippage precision is 0.01%"
 msgstr "La précision maximale du glissement est de 0,01 %"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+#~ msgid "LP Management"
+#~ msgstr ""
+
 #: landing/src/pages/Home/SocialSection/SocialSection.tsx
 msgid "Join"
 msgstr "Rejoindre"
@@ -1005,6 +1009,11 @@ msgstr "La précision maximale du buffer de frais de réseau est de 0.01%"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "DeltaPrime"
 msgstr "DeltaPrime"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "h"
+msgstr ""
 
 #: src/pages/LeaderboardPage/components/CompetitionPrizes.tsx
 #: src/pages/LeaderboardPage/components/CompetitionPrizes.tsx
@@ -1587,6 +1596,7 @@ msgstr "Quêtes et récompenses onchain"
 msgid "Tokens"
 msgstr "Tokens"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Connect wallet to withdraw"
@@ -1794,6 +1804,10 @@ msgstr "Swap limité échoué"
 #: src/pages/RpcDebug/parts.tsx
 msgid "Failed"
 msgstr "Échec"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Restricted (weekend)"
+msgstr ""
 
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
@@ -2510,6 +2524,11 @@ msgstr "Sortir max {0}"
 msgid "No assets available for deposit"
 msgstr "Aucun actif disponible pour le dépôt"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "s"
+msgstr ""
+
 #: src/components/TVChartContainer/useChartContextMenu.ts
 msgid "Set Short Stop Loss @ {0}"
 msgstr ""
@@ -2614,6 +2633,11 @@ msgstr "Pontage GM vers..."
 msgid "Deactivate 1CT"
 msgstr "Désactiver 1CT"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "Redemption pending — yield continues to accrue"
+msgstr ""
+
 #: src/components/PositionShare/PositionShareCard.tsx
 msgid "/ USD"
 msgstr "/ USD"
@@ -2706,6 +2730,7 @@ msgstr "{txnTypeText} {0} ordre pour"
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Max"
@@ -3049,6 +3074,10 @@ msgstr "S'abonner"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Asset not found."
+msgstr ""
+
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "Next redemption execution:"
 msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
@@ -3636,6 +3665,11 @@ msgstr "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam enim e
 msgid "Fees (including swap)"
 msgstr "Frais (incluant l'échange)"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "d"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Exponent (positive)"
 msgstr "Exposant (positif)"
@@ -3751,6 +3785,7 @@ msgstr "Fonctionne entièrement sur des chaînes publiques"
 msgid "May lack liquidity for parts of this order when triggered"
 msgstr "La liquidité pourrait être insuffisante pour certaines parties de cet ordre lors de son déclenchement"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdrawing…"
@@ -3798,6 +3833,11 @@ msgstr "Thread Worker"
 #: src/domain/synthetics/orders/setAutoCancelOrdersTxn.ts
 msgid "Failed to update orders"
 msgstr "Échec de la mise à jour des ordres"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "Ready to execute"
+msgstr ""
 
 #: src/components/TPSLModal/AddTPSLModal.tsx
 #: src/components/TradeBox/TradeBoxRows/PriceImpactFeesRow.tsx
@@ -4714,6 +4754,10 @@ msgstr "Sélectionner un marché"
 msgid "No tokens matched"
 msgstr "Aucun jeton correspondant"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Est. USDC received"
+msgstr ""
+
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Error sending permit for {0}: {1}"
 msgstr "Erreur lors de l'envoi du permis pour {0} : {1}"
@@ -4936,6 +4980,7 @@ msgstr "Forcer l'échec des swaps externes"
 #: src/components/PositionEditor/types.ts
 #: src/components/TradeHistory/keys.ts
 #: src/domain/multichain/useMultichainFundingToast.tsx
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/UiPage/BannerTest.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
@@ -6793,6 +6838,10 @@ msgstr "La position serait liquidable"
 msgid "Media kit"
 msgstr "Kit média"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Exceeds your VLP balance"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 msgid "$ 0.00"
 msgstr ""
@@ -6861,6 +6910,10 @@ msgstr "Facteur de financement minimum"
 #: src/components/NotifyModal/NotifyModal.tsx
 msgid "Governance alerts"
 msgstr "Alertes de gouvernance"
+
+#: src/pages/Trade/TradePage.tsx
+msgid "LP redemption demand may reduce open positions by up to 5% per day via ADL to fund withdrawals."
+msgstr ""
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -7551,6 +7604,10 @@ msgstr "Facteur de frais de position (PI négatif)"
 msgid "90d"
 msgstr "90j"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP Withdrawal"
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "({0} days ago)"
 msgstr "(il y a {0} jours)"
@@ -8156,6 +8213,11 @@ msgstr "Les ordres TP/SL sont automatiquement annulés à la fermeture de la pos
 #: src/components/TradeBox/TradeBoxRows/PriceImpactFeesRow.tsx
 msgid "fees"
 msgstr "frais"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "m"
+msgstr ""
 
 #: src/domain/synthetics/userFeedback/utils.ts
 msgid "What could we improve?"
@@ -9967,6 +10029,10 @@ msgstr "La position peut être liquidée uniquement par les frais (financement +
 msgid "Claim price impact rebates"
 msgstr "Récupérer les remises d'impact sur le prix"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Next redemption:"
+msgstr ""
+
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Fulfilling shift request..."
 msgstr "Exécution de la demande de transfert…"
@@ -10688,6 +10754,10 @@ msgstr "Code de parrainage mis à jour"
 msgid "to toggle its filtering. To use this debug tool on swap, stay on MARKET GRAPH tab and switch to swap. Settings are saved in local storage; don't forget to clear it when done."
 msgstr "pour activer/désactiver son filtrage. Pour utiliser cet outil de débogage sur l'échange, restez sur l'onglet MARKET GRAPH et passez à l'échange. Les paramètres sont enregistrés dans le stockage local ; n'oubliez pas de le vider une fois terminé."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Withdraw VLP"
+msgstr ""
+
 #: src/pages/AccountEvents/AccountEvents.tsx
 #: src/pages/AccountEvents/AccountEvents.tsx
 msgid "Account events"
@@ -11014,6 +11084,7 @@ msgstr "Montant max. du pool dépassé"
 msgid "Unknown order"
 msgstr "Ordre inconnu"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "VLP Amount"
@@ -11256,6 +11327,10 @@ msgstr "Portefeuilles intelligents non pris en charge sur ce réseau"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Lent position impact pool amount"
 msgstr "Montant prêté du pool d'impact sur le prix des positions"
+
+#: src/pages/Portfolio/PortfolioPage.tsx
+#~ msgid "Est. VLP received"
+#~ msgstr ""
 
 #: src/domain/synthetics/orders/utils.tsx
 msgid "short"

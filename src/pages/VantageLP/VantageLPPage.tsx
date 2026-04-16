@@ -1,19 +1,22 @@
 /**
  * VantageLPPage.tsx
  *
- * LP deposit / withdraw UI for the Vantage protocol.
  * Route: /vantage-lp
  *
+ * LP deposit / withdraw UI for the Vantage protocol.
+ *
  * Features:
+ *   - Share Price / AUM / VLP balance stats
+ *   - Monthly redemption countdown (Issue #181)
+ *   - Pending redemption status (Issue #181)
  *   - Deposit tab: approve USDC → addLiquidity → receive VLP
  *   - Withdraw tab: input VLP shares → removeLiquidity → receive USDC
- *   - Share Price, AUM, VLP balance, estimated USD value display
- *   - Weekend lock warning (UTC Sat/Sun when weekendBufferBps > 0)
+ *   - Weekend lock warning
  */
 
 import { t } from "@lingui/macro";
 import { formatEther, formatUnits, parseUnits } from "ethers";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 
 import { useVantageLPActions } from "domain/vantage/lp/useVantageLPActions";
 import { useVantageLPData } from "domain/vantage/lp/useVantageLPData";
@@ -30,8 +33,6 @@ import NumberInput from "components/NumberInput/NumberInput";
 // Constants
 // ---------------------------------------------------------------------------
 
-// USDC token address — loaded from local deployment JSON for Localhost.
-// For other chains this would come from a token config per chainId.
 const USDC_ADDRESS: string = localhostDeployment.addresses.tokens?.USDC ?? "";
 const USDC_DECIMALS = 6;
 const WAD = BigInt("1000000000000000000"); // 1e18
@@ -71,43 +72,76 @@ export default function VantageLPPage() {
   const [depositInput, setDepositInput] = useState("");
   const [withdrawInput, setWithdrawInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [countdown, setCountdown] = useState("");
+
+  // ---------------------------------------------------------------------------
+  // Redemption countdown (ticks every second)
+  // ---------------------------------------------------------------------------
+
+  useEffect(() => {
+    if (lpData.nextEpochTimestamp === 0n) return;
+    function tick() {
+      const nowSec = BigInt(Math.floor(Date.now() / 1000));
+      const remaining = lpData.nextEpochTimestamp > nowSec ? lpData.nextEpochTimestamp - nowSec : 0n;
+      if (remaining === 0n) {
+        setCountdown(t`Ready to execute`);
+        return;
+      }
+      const days = remaining / 86400n;
+      const hours = (remaining % 86400n) / 3600n;
+      const mins = (remaining % 3600n) / 60n;
+      const secs = remaining % 60n;
+      setCountdown(
+        `${days}${t`d`} ${String(hours).padStart(2, "0")}${t`h`} ${String(mins).padStart(2, "0")}${t`m`} ${String(secs).padStart(2, "0")}${t`s`}`
+      );
+    }
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [lpData.nextEpochTimestamp]);
 
   // ---------------------------------------------------------------------------
   // Derived values
   // ---------------------------------------------------------------------------
 
-  // Deposit: estimate VLP output
-  const depositAmountUSDC: bigint = (() => {
+  const depositAmountUSDC: bigint = useMemo(() => {
     try {
       if (!depositInput || parseFloat(depositInput) <= 0) return 0n;
       return parseUnits(depositInput, USDC_DECIMALS);
     } catch {
       return 0n;
     }
-  })();
+  }, [depositInput]);
 
-  // Convert USDC amount to WAD for share price estimation
   const depositWad = depositAmountUSDC * BigInt(10 ** (18 - USDC_DECIMALS));
   const estimatedVlpOut = lpData.sharePrice > 0n ? (depositWad * WAD) / lpData.sharePrice : 0n;
 
-  // Withdraw: parse VLP input (WAD)
-  const withdrawShares: bigint = (() => {
+  const withdrawShares: bigint = useMemo(() => {
     try {
       if (!withdrawInput || parseFloat(withdrawInput) <= 0) return 0n;
       return parseUnits(withdrawInput, 18);
     } catch {
       return 0n;
     }
-  })();
+  }, [withdrawInput]);
 
-  // Estimate USDC out from VLP shares
   const estimatedUsdcOut: bigint =
     withdrawShares > 0n && lpData.sharePrice > 0n
       ? (withdrawShares * lpData.sharePrice) / WAD / BigInt(10 ** (18 - USDC_DECIMALS))
       : 0n;
 
-  // Approval check for deposit
   const needsApproval = depositAmountUSDC > 0n && actions.isApprovalNeeded(USDC_ADDRESS, depositAmountUSDC);
+
+  const pendingUsdFormatted = useMemo(
+    () =>
+      lpData.pendingUsdValue > 0n
+        ? parseFloat(formatEther(lpData.pendingUsdValue)).toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })
+        : "0.00",
+    [lpData.pendingUsdValue]
+  );
 
   // ---------------------------------------------------------------------------
   // Handlers
@@ -153,9 +187,7 @@ export default function VantageLPPage() {
 
       <div className="mt-24 px-16">
         <div className="mx-auto max-w-[480px]">
-          {/* ------------------------------------------------------------------ */}
-          {/* Header                                                              */}
-          {/* ------------------------------------------------------------------ */}
+          {/* Header */}
           <div className="mb-16">
             <h1 className="text-h1">Portfolio</h1>
             <p className="text-body-medium mt-4 text-slate-400">
@@ -163,9 +195,7 @@ export default function VantageLPPage() {
             </p>
           </div>
 
-          {/* ------------------------------------------------------------------ */}
-          {/* Stats row                                                           */}
-          {/* ------------------------------------------------------------------ */}
+          {/* Stats row */}
           <div className="bg-cold-blue-950 mb-20 grid grid-cols-3 gap-8 rounded-4 border border-stroke-primary p-16">
             <div>
               <div className="mb-4 text-12 text-slate-400">{t`Share Price`}</div>
@@ -186,9 +216,25 @@ export default function VantageLPPage() {
             </div>
           </div>
 
-          {/* ------------------------------------------------------------------ */}
-          {/* Weekend lock warning                                                */}
-          {/* ------------------------------------------------------------------ */}
+          {/* Redemption countdown */}
+          {!lpData.isLoading && lpData.nextEpochTimestamp > 0n && (
+            <div className="text-slate-300 mb-16 rounded-4 border border-slate-600/40 bg-slate-800/30 px-16 py-12 text-13">
+              <span className="text-slate-400">{t`Next redemption execution:`}</span>{" "}
+              <span className="font-semibold tabular-nums text-white">{countdown}</span>
+            </div>
+          )}
+
+          {/* Pending redemption status */}
+          {account && lpData.pendingShares > 0n && (
+            <div className="bg-blue-900/20 mb-16 rounded-4 border border-blue-600/40 px-16 py-12 text-13">
+              <div className="font-semibold text-blue-300">{t`Redemption pending — yield continues to accrue`}</div>
+              <div className="mt-4 text-12 text-blue-400">
+                {formatVlp(lpData.pendingShares)} VLP ≈ ${pendingUsdFormatted}
+              </div>
+            </div>
+          )}
+
+          {/* Weekend lock warning */}
           {lpData.isWeekendLocked && (
             <div className="bg-amber-900/40 border-amber-700 text-amber-300 mb-16 rounded-4 border px-16 py-12 text-13">
               ⚠️{" "}
@@ -196,11 +242,8 @@ export default function VantageLPPage() {
             </div>
           )}
 
-          {/* ------------------------------------------------------------------ */}
-          {/* Tabs                                                                */}
-          {/* ------------------------------------------------------------------ */}
+          {/* Tabs */}
           <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
-            {/* Tab header */}
             <div className="flex border-b border-stroke-primary">
               {(["deposit", "withdraw"] as Tab[]).map((tab) => (
                 <button
@@ -216,9 +259,7 @@ export default function VantageLPPage() {
             </div>
 
             <div className="p-20">
-              {/* ---------------------------------------------------------------- */}
-              {/* Deposit tab                                                       */}
-              {/* ---------------------------------------------------------------- */}
+              {/* Deposit tab */}
               {activeTab === "deposit" && (
                 <div className="flex flex-col gap-16">
                   <div>
@@ -235,7 +276,6 @@ export default function VantageLPPage() {
                     </div>
                   </div>
 
-                  {/* Preview */}
                   {depositAmountUSDC > 0n && (
                     <div className="space-y-4 text-13 text-slate-400">
                       <div className="flex justify-between">
@@ -249,7 +289,6 @@ export default function VantageLPPage() {
                     </div>
                   )}
 
-                  {/* Approve or Deposit button */}
                   {!account ? (
                     <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to deposit`}</div>
                   ) : needsApproval ? (
@@ -276,9 +315,7 @@ export default function VantageLPPage() {
                 </div>
               )}
 
-              {/* ---------------------------------------------------------------- */}
-              {/* Withdraw tab                                                      */}
-              {/* ---------------------------------------------------------------- */}
+              {/* Withdraw tab */}
               {activeTab === "withdraw" && (
                 <div className="flex flex-col gap-16">
                   <div>
@@ -302,7 +339,6 @@ export default function VantageLPPage() {
                     </div>
                   </div>
 
-                  {/* Preview */}
                   {withdrawShares > 0n && (
                     <div className="space-y-4 text-13 text-slate-400">
                       <div className="flex justify-between">
@@ -322,7 +358,6 @@ export default function VantageLPPage() {
                     </div>
                   )}
 
-                  {/* Withdraw button */}
                   {!account ? (
                     <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to withdraw`}</div>
                   ) : (

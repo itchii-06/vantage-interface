@@ -11,17 +11,30 @@
  */
 
 import { t } from "@lingui/macro";
-import { formatEther } from "ethers";
-import { useMemo } from "react";
+import { formatEther, formatUnits, parseUnits } from "ethers";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 
+import { useVantageLPActions } from "domain/vantage/lp/useVantageLPActions";
+import { useVantageLPData } from "domain/vantage/lp/useVantageLPData";
 import { usePortfolioData } from "domain/vantage/portfolio/usePortfolioData";
 import type { HedgePortfolioItem, VaultLpItem } from "domain/vantage/portfolio/usePortfolioData";
 import type { VantagePosition } from "domain/vantage/positions/types";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
+import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
+import Button from "components/Button/Button";
+import NumberInput from "components/NumberInput/NumberInput";
+
+// ---------------------------------------------------------------------------
+// Constants
+// ---------------------------------------------------------------------------
+
+const LP_USDC_ADDRESS: string = (localhostDeployment.addresses as { tokens?: { USDC?: string } }).tokens?.USDC ?? "";
+const LP_USDC_DECIMALS = 6;
+const LP_WAD = BigInt("1000000000000000000"); // 1e18
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -525,6 +538,161 @@ function VaultLpSection({ items, hasAccount }: VaultLpSectionProps) {
 }
 
 // ---------------------------------------------------------------------------
+// LP Management section (Issue #181 — Monthly Redemption)
+// ---------------------------------------------------------------------------
+
+function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAccount: boolean }) {
+  const lpData = useVantageLPData();
+  const actions = useVantageLPActions(chainId);
+
+  const [withdrawInput, setWithdrawInput] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [countdown, setCountdown] = useState("");
+
+  useEffect(() => {
+    if (lpData.nextEpochTimestamp === 0n) return;
+    function tick() {
+      const nowSec = BigInt(Math.floor(Date.now() / 1000));
+      const remaining = lpData.nextEpochTimestamp > nowSec ? lpData.nextEpochTimestamp - nowSec : 0n;
+      if (remaining === 0n) {
+        setCountdown(t`Ready to execute`);
+        return;
+      }
+      const days = remaining / 86400n;
+      const hours = (remaining % 86400n) / 3600n;
+      const mins = (remaining % 3600n) / 60n;
+      const secs = remaining % 60n;
+      setCountdown(
+        `${days}${t`d`} ${String(hours).padStart(2, "0")}${t`h`} ${String(mins).padStart(2, "0")}${t`m`} ${String(secs).padStart(2, "0")}${t`s`}`
+      );
+    }
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [lpData.nextEpochTimestamp]);
+
+  const withdrawShares = useMemo(() => {
+    try {
+      if (!withdrawInput || parseFloat(withdrawInput) <= 0) return 0n;
+      return parseUnits(withdrawInput, 18);
+    } catch {
+      return 0n;
+    }
+  }, [withdrawInput]);
+
+  const estimatedUsdcOut =
+    withdrawShares > 0n && lpData.sharePrice > 0n
+      ? (withdrawShares * lpData.sharePrice) / LP_WAD / BigInt(10 ** (18 - LP_USDC_DECIMALS))
+      : 0n;
+
+  const pendingUsdFormatted = useMemo(
+    () =>
+      lpData.pendingUsdValue > 0n
+        ? parseFloat(formatEther(lpData.pendingUsdValue)).toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })
+        : "0.00",
+    [lpData.pendingUsdValue]
+  );
+
+  async function handleWithdraw() {
+    if (withdrawShares === 0n) return;
+    setIsSubmitting(true);
+    try {
+      await actions.withdraw(withdrawShares, LP_USDC_ADDRESS);
+      setWithdrawInput("");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  return (
+    <div className="mb-24">
+      <h2 className="mb-12 text-14 font-semibold text-white">{t`LP Withdrawal`}</h2>
+
+      {/* Redemption countdown */}
+      {!lpData.isLoading && lpData.nextEpochTimestamp > 0n && (
+        <div className="text-slate-300 mb-10 rounded-4 border border-slate-600/40 bg-slate-800/30 px-14 py-10 text-13">
+          <span className="text-slate-400">{t`Next redemption:`}</span>{" "}
+          <span className="font-semibold tabular-nums text-white">{countdown}</span>
+        </div>
+      )}
+
+      {/* Pending redemption status */}
+      {hasAccount && lpData.pendingShares > 0n && (
+        <div className="bg-blue-900/20 mb-10 rounded-4 border border-blue-600/40 px-14 py-10 text-13">
+          <div className="font-semibold text-blue-300">{t`Redemption pending — yield continues to accrue`}</div>
+          <div className="mt-2 text-12 text-blue-400">
+            {parseFloat(formatEther(lpData.pendingShares)).toFixed(4)} VLP ≈ ${pendingUsdFormatted}
+          </div>
+        </div>
+      )}
+
+      {/* Withdraw form */}
+      <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
+        <div className="border-b border-stroke-primary px-16 py-10 text-13 font-medium text-white">
+          {t`Withdraw VLP`}
+        </div>
+        <div className="p-16">
+          <div className="flex flex-col gap-12">
+            <div>
+              <div className="mb-4 flex justify-between">
+                <label className="text-11 text-slate-400">{t`VLP Amount`}</label>
+                {hasAccount && lpData.vlpBalance > 0n && (
+                  <button
+                    onClick={() => setWithdrawInput(formatEther(lpData.vlpBalance))}
+                    className="text-11 text-blue-400 hover:text-blue-300"
+                  >
+                    {t`Max`}: {parseFloat(formatEther(lpData.vlpBalance)).toFixed(4)}
+                  </button>
+                )}
+              </div>
+              <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-10 py-8">
+                <NumberInput
+                  value={withdrawInput}
+                  onValueChange={(e: ChangeEvent<HTMLInputElement>) => setWithdrawInput(e.target.value)}
+                  placeholder="0.0000"
+                  maxDecimals={18}
+                  className="bg-transparent flex-1 text-14 text-white outline-none"
+                />
+                <span className="text-12 text-slate-400">VLP</span>
+              </div>
+            </div>
+            {withdrawShares > 0n && (
+              <div className="flex justify-between text-12 text-slate-400">
+                <span>{t`Est. USDC received`}</span>
+                <span className="text-white">
+                  {parseFloat(formatUnits(estimatedUsdcOut, LP_USDC_DECIMALS)).toFixed(2)} USDC
+                </span>
+              </div>
+            )}
+            {withdrawShares > lpData.vlpBalance && lpData.vlpBalance > 0n && (
+              <div className="text-11 text-red-400">{t`Exceeds your VLP balance`}</div>
+            )}
+            {!hasAccount ? (
+              <div className="text-center text-12 text-slate-500">{t`Connect wallet to withdraw`}</div>
+            ) : (
+              <Button
+                variant="primary"
+                size="medium"
+                disabled={
+                  withdrawShares === 0n || isSubmitting || lpData.isWeekendLocked || withdrawShares > lpData.vlpBalance
+                }
+                onClick={handleWithdraw}
+                className="w-full"
+              >
+                {lpData.isWeekendLocked ? t`Restricted (weekend)` : isSubmitting ? t`Withdrawing…` : t`Withdraw`}
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Main Page
 // ---------------------------------------------------------------------------
 
@@ -569,6 +737,9 @@ export default function PortfolioPage() {
 
         {/* ⑤ Vault LP Status */}
         <VaultLpSection items={vaultLpItems} hasAccount={!!account} />
+
+        {/* ⑥ LP Management */}
+        <LpManagementSection chainId={chainId} hasAccount={!!account} />
 
         {/* Disclaimer */}
         <p className="mt-8 text-center text-11 text-slate-600">
