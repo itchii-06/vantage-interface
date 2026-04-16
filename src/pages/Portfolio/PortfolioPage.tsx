@@ -545,8 +545,6 @@ function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAcco
   const lpData = useVantageLPData();
   const actions = useVantageLPActions(chainId);
 
-  const [activeTab, setActiveTab] = useState<"deposit" | "withdraw">("deposit");
-  const [depositInput, setDepositInput] = useState("");
   const [withdrawInput, setWithdrawInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [countdown, setCountdown] = useState("");
@@ -573,20 +571,6 @@ function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAcco
     return () => clearInterval(id);
   }, [lpData.nextEpochTimestamp]);
 
-  const depositAmountUSDC = useMemo(() => {
-    try {
-      if (!depositInput || parseFloat(depositInput) <= 0) return 0n;
-      return parseUnits(depositInput, LP_USDC_DECIMALS);
-    } catch {
-      return 0n;
-    }
-  }, [depositInput]);
-
-  const estimatedVlpOut =
-    lpData.sharePrice > 0n
-      ? (depositAmountUSDC * BigInt(10 ** (18 - LP_USDC_DECIMALS)) * LP_WAD) / lpData.sharePrice
-      : 0n;
-
   const withdrawShares = useMemo(() => {
     try {
       if (!withdrawInput || parseFloat(withdrawInput) <= 0) return 0n;
@@ -612,19 +596,6 @@ function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAcco
     [lpData.pendingUsdValue]
   );
 
-  const needsApproval = depositAmountUSDC > 0n && actions.isApprovalNeeded(LP_USDC_ADDRESS, depositAmountUSDC);
-
-  async function handleDeposit() {
-    if (depositAmountUSDC === 0n) return;
-    setIsSubmitting(true);
-    try {
-      await actions.deposit(LP_USDC_ADDRESS, depositAmountUSDC);
-      setDepositInput("");
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
-
   async function handleWithdraw() {
     if (withdrawShares === 0n) return;
     setIsSubmitting(true);
@@ -638,7 +609,7 @@ function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAcco
 
   return (
     <div className="mb-24">
-      <h2 className="mb-12 text-14 font-semibold text-white">{t`LP Management`}</h2>
+      <h2 className="mb-12 text-14 font-semibold text-white">{t`LP Withdrawal`}</h2>
 
       {/* Redemption countdown */}
       {!lpData.isLoading && lpData.nextEpochTimestamp > 0n && (
@@ -658,125 +629,63 @@ function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAcco
         </div>
       )}
 
-      {/* Deposit / Withdraw form */}
+      {/* Withdraw form */}
       <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
-        {/* Tabs */}
-        <div className="flex border-b border-stroke-primary">
-          {(["deposit", "withdraw"] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex-1 py-10 text-13 font-medium transition-colors ${
-                activeTab === tab ? "border-b-2 border-blue-400 text-white" : "hover:text-slate-200 text-slate-400"
-              }`}
-            >
-              {tab === "deposit" ? t`Deposit` : t`Withdraw`}
-            </button>
-          ))}
+        <div className="border-b border-stroke-primary px-16 py-10 text-13 font-medium text-white">
+          {t`Withdraw VLP`}
         </div>
-
         <div className="p-16">
-          {activeTab === "deposit" ? (
-            <div className="flex flex-col gap-12">
-              <div>
-                <label className="mb-4 block text-11 text-slate-400">{t`Amount (USDC)`}</label>
-                <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-10 py-8">
-                  <NumberInput
-                    value={depositInput}
-                    onValueChange={(e: ChangeEvent<HTMLInputElement>) => setDepositInput(e.target.value)}
-                    placeholder="0.00"
-                    maxDecimals={LP_USDC_DECIMALS}
-                    className="bg-transparent flex-1 text-14 text-white outline-none"
-                  />
-                  <span className="text-12 text-slate-400">USDC</span>
-                </div>
+          <div className="flex flex-col gap-12">
+            <div>
+              <div className="mb-4 flex justify-between">
+                <label className="text-11 text-slate-400">{t`VLP Amount`}</label>
+                {hasAccount && lpData.vlpBalance > 0n && (
+                  <button
+                    onClick={() => setWithdrawInput(formatEther(lpData.vlpBalance))}
+                    className="text-11 text-blue-400 hover:text-blue-300"
+                  >
+                    {t`Max`}: {parseFloat(formatEther(lpData.vlpBalance)).toFixed(4)}
+                  </button>
+                )}
               </div>
-              {depositAmountUSDC > 0n && (
-                <div className="flex justify-between text-12 text-slate-400">
-                  <span>{t`Est. VLP received`}</span>
-                  <span className="text-white">{parseFloat(formatEther(estimatedVlpOut)).toFixed(4)} VLP</span>
-                </div>
-              )}
-              {!hasAccount ? (
-                <div className="text-center text-12 text-slate-500">{t`Connect wallet to deposit`}</div>
-              ) : needsApproval ? (
-                <Button
-                  variant="primary"
-                  size="medium"
-                  disabled={depositAmountUSDC === 0n || actions.isApproving}
-                  onClick={() => actions.approve(LP_USDC_ADDRESS)}
-                  className="w-full"
-                >
-                  {actions.isApproving ? t`Approving…` : t`Approve USDC`}
-                </Button>
-              ) : (
-                <Button
-                  variant="primary"
-                  size="medium"
-                  disabled={depositAmountUSDC === 0n || isSubmitting}
-                  onClick={handleDeposit}
-                  className="w-full"
-                >
-                  {isSubmitting ? t`Depositing…` : t`Deposit`}
-                </Button>
-              )}
-            </div>
-          ) : (
-            <div className="flex flex-col gap-12">
-              <div>
-                <div className="mb-4 flex justify-between">
-                  <label className="text-11 text-slate-400">{t`VLP Amount`}</label>
-                  {hasAccount && lpData.vlpBalance > 0n && (
-                    <button
-                      onClick={() => setWithdrawInput(formatEther(lpData.vlpBalance))}
-                      className="text-11 text-blue-400 hover:text-blue-300"
-                    >
-                      {t`Max`}: {parseFloat(formatEther(lpData.vlpBalance)).toFixed(4)}
-                    </button>
-                  )}
-                </div>
-                <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-10 py-8">
-                  <NumberInput
-                    value={withdrawInput}
-                    onValueChange={(e: ChangeEvent<HTMLInputElement>) => setWithdrawInput(e.target.value)}
-                    placeholder="0.0000"
-                    maxDecimals={18}
-                    className="bg-transparent flex-1 text-14 text-white outline-none"
-                  />
-                  <span className="text-12 text-slate-400">VLP</span>
-                </div>
+              <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-10 py-8">
+                <NumberInput
+                  value={withdrawInput}
+                  onValueChange={(e: ChangeEvent<HTMLInputElement>) => setWithdrawInput(e.target.value)}
+                  placeholder="0.0000"
+                  maxDecimals={18}
+                  className="bg-transparent flex-1 text-14 text-white outline-none"
+                />
+                <span className="text-12 text-slate-400">VLP</span>
               </div>
-              {withdrawShares > 0n && (
-                <div className="flex justify-between text-12 text-slate-400">
-                  <span>{t`Est. USDC received`}</span>
-                  <span className="text-white">
-                    {parseFloat(formatUnits(estimatedUsdcOut, LP_USDC_DECIMALS)).toFixed(2)} USDC
-                  </span>
-                </div>
-              )}
-              {withdrawShares > lpData.vlpBalance && lpData.vlpBalance > 0n && (
-                <div className="text-11 text-red-400">{t`Exceeds your VLP balance`}</div>
-              )}
-              {!hasAccount ? (
-                <div className="text-center text-12 text-slate-500">{t`Connect wallet to withdraw`}</div>
-              ) : (
-                <Button
-                  variant="primary"
-                  size="medium"
-                  disabled={
-                    withdrawShares === 0n ||
-                    isSubmitting ||
-                    lpData.isWeekendLocked ||
-                    withdrawShares > lpData.vlpBalance
-                  }
-                  onClick={handleWithdraw}
-                  className="w-full"
-                >
-                  {lpData.isWeekendLocked ? t`Restricted (weekend)` : isSubmitting ? t`Withdrawing…` : t`Withdraw`}
-                </Button>
-              )}
             </div>
-          )}
+            {withdrawShares > 0n && (
+              <div className="flex justify-between text-12 text-slate-400">
+                <span>{t`Est. USDC received`}</span>
+                <span className="text-white">
+                  {parseFloat(formatUnits(estimatedUsdcOut, LP_USDC_DECIMALS)).toFixed(2)} USDC
+                </span>
+              </div>
+            )}
+            {withdrawShares > lpData.vlpBalance && lpData.vlpBalance > 0n && (
+              <div className="text-11 text-red-400">{t`Exceeds your VLP balance`}</div>
+            )}
+            {!hasAccount ? (
+              <div className="text-center text-12 text-slate-500">{t`Connect wallet to withdraw`}</div>
+            ) : (
+              <Button
+                variant="primary"
+                size="medium"
+                disabled={
+                  withdrawShares === 0n || isSubmitting || lpData.isWeekendLocked || withdrawShares > lpData.vlpBalance
+                }
+                onClick={handleWithdraw}
+                className="w-full"
+              >
+                {lpData.isWeekendLocked ? t`Restricted (weekend)` : isSubmitting ? t`Withdrawing…` : t`Withdraw`}
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </div>

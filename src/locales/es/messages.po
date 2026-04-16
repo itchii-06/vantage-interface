@@ -556,8 +556,8 @@ msgid "Max slippage precision is 0.01%"
 msgstr "La precisión máxima de deslizamiento es del 0,01%"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
-msgid "LP Management"
-msgstr ""
+#~ msgid "LP Management"
+#~ msgstr ""
 
 #: landing/src/pages/Home/SocialSection/SocialSection.tsx
 msgid "Join"
@@ -1011,6 +1011,7 @@ msgid "DeltaPrime"
 msgstr "DeltaPrime"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 msgid "h"
 msgstr ""
 
@@ -1027,8 +1028,8 @@ msgstr ""
 msgid "Caption"
 msgstr "Caption"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Approve USDC"
 msgstr ""
 
@@ -1596,6 +1597,7 @@ msgid "Tokens"
 msgstr "Tokens"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Connect wallet to withdraw"
 msgstr ""
@@ -1724,8 +1726,8 @@ msgid "Powered by the Arbitrum DAO STIP."
 msgstr "Impulsado por el Arbitrum DAO STIP."
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#~ msgid "Withdrawals restricted (weekend)"
-#~ msgstr ""
+msgid "Withdrawals restricted (weekend)"
+msgstr ""
 
 #: src/components/PoolSelector2/PoolSelector2.tsx
 msgid "Select pool"
@@ -2523,6 +2525,7 @@ msgid "No assets available for deposit"
 msgstr "No hay activos disponibles para depositar"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 msgid "s"
 msgstr ""
 
@@ -2561,8 +2564,8 @@ msgstr "Factor de reserva de interés abierto largos"
 msgid "Layer 2"
 msgstr "Capa 2"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Approving…"
 msgstr ""
@@ -2631,6 +2634,7 @@ msgid "Deactivate 1CT"
 msgstr "Desactivar 1CT"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Redemption pending — yield continues to accrue"
 msgstr ""
 
@@ -2712,8 +2716,8 @@ msgid "RANK"
 msgstr "RANGO"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#~ msgid "Estimated VLP received"
-#~ msgstr ""
+msgid "Estimated VLP received"
+msgstr ""
 
 #: src/components/StatusNotification/OrderStatusNotification.tsx
 msgid "{txnTypeText} {0} order for"
@@ -2727,6 +2731,7 @@ msgstr "{txnTypeText} {0} orden para"
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Max"
 msgstr "Máx."
@@ -3072,8 +3077,8 @@ msgid "Asset not found."
 msgstr ""
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#~ msgid "Next redemption execution:"
-#~ msgstr ""
+msgid "Next redemption execution:"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Decentralized finance dashboard"
@@ -3641,8 +3646,8 @@ msgid "Permit signed"
 msgstr "Permiso firmado"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#~ msgid "Withdrawals are restricted on weekends due to RWA liquidity protection. Please try again on Monday UTC."
-#~ msgstr ""
+msgid "Withdrawals are restricted on weekends due to RWA liquidity protection. Please try again on Monday UTC."
+msgstr ""
 
 #: src/components/SideNav/BottomMenuSection.tsx
 msgid "Collapse"
@@ -3661,6 +3666,7 @@ msgid "Fees (including swap)"
 msgstr "Comisiones (incluido intercambio)"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 msgid "d"
 msgstr ""
 
@@ -3780,6 +3786,7 @@ msgid "May lack liquidity for parts of this order when triggered"
 msgstr "Puede haber liquidez insuficiente para partes de esta orden cuando se ejecute"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdrawing…"
 msgstr ""
@@ -3828,6 +3835,7 @@ msgid "Failed to update orders"
 msgstr "Error al actualizar las órdenes"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Ready to execute"
 msgstr ""
 
@@ -3844,7 +3852,7 @@ msgstr "Los descuentos de V2 se aplican automáticamente y no se muestran aquí"
 msgid "Order canceled"
 msgstr "Orden cancelada"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Connect wallet to deposit"
 msgstr ""
@@ -4973,8 +4981,9 @@ msgstr "Forzar fallo de intercambios externos"
 #: src/components/TradeHistory/keys.ts
 #: src/domain/multichain/useMultichainFundingToast.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/UiPage/BannerTest.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
@@ -5119,6 +5128,7 @@ msgstr "Capacidad del vault"
 msgid "Open interest {directionLabel}"
 msgstr "Interés abierto {directionLabel}"
 
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount exceeds your VLP balance"
 msgstr ""
@@ -5689,7 +5699,7 @@ msgstr "Análisis de PnL"
 msgid "Failed to claim funds"
 msgstr "Falló la reclamación de fondos"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Depositing…"
 msgstr ""
@@ -5751,6 +5761,7 @@ msgstr "Reclamaciones no disponibles en Avalanche Fuji"
 msgid "Buy failed"
 msgstr "Compra fallida"
 
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "USD value"
 msgstr ""
@@ -5759,6 +5770,7 @@ msgstr ""
 msgid "Users"
 msgstr "Usuarios"
 
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Total AUM"
 msgstr ""
@@ -6782,7 +6794,7 @@ msgstr "Rastreador de cartera DeFi"
 msgid "Trades"
 msgstr "Operaciones"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Amount (USDC)"
 msgstr ""
 
@@ -7592,6 +7604,10 @@ msgstr "Factor de comisión de posición (PI negativo)"
 msgid "90d"
 msgstr "90d"
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "LP Withdrawal"
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "({0} days ago)"
 msgstr "(hace {0} días)"
@@ -7602,8 +7618,8 @@ msgid "Liquidation"
 msgstr "Liquidación"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#~ msgid "My VLP"
-#~ msgstr ""
+msgid "My VLP"
+msgstr ""
 
 #: src/components/TPSLModal/TPSLModal.tsx
 #: src/components/TPSLModal/TPSLModal.tsx
@@ -8199,6 +8215,7 @@ msgid "fees"
 msgstr "comisiones"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 msgid "m"
 msgstr ""
 
@@ -8827,8 +8844,8 @@ msgid "Price impact"
 msgstr "Impacto en el precio"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#~ msgid "Estimated USDC received"
-#~ msgstr ""
+msgid "Estimated USDC received"
+msgstr ""
 
 #: src/components/Referrals/AddAffiliateCode.tsx
 msgid "You don't have a referral code to share. <0/> Create one now and start earning rebates!"
@@ -8886,8 +8903,8 @@ msgstr "Comprar GM con {0} y {1} hasta los límites indicados a continuación"
 #: src/components/TradeBox/hooks/useTradeButtonState.tsx
 #: src/components/TradeHistory/keys.ts
 #: src/domain/multichain/useMultichainFundingToast.tsx
-#: src/pages/Portfolio/PortfolioPage.tsx
-#: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
@@ -9364,8 +9381,8 @@ msgid "Select positions where accrued funding fee exceeds the {0} gas cost to se
 msgstr "Seleccione las posiciones en las que la comisión de financiación acumulada supere el coste de gas de {0} para compensar"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#~ msgid "Provide liquidity to earn yield from trades and RWA assets."
-#~ msgstr ""
+msgid "Provide liquidity to earn yield from trades and RWA assets."
+msgstr ""
 
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "No from token address"
@@ -9794,6 +9811,7 @@ msgstr ""
 msgid "What is GMX?"
 msgstr "¿Qué es GMX?"
 
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Share price"
 msgstr ""
@@ -10736,6 +10754,10 @@ msgstr "Código de referido actualizado"
 msgid "to toggle its filtering. To use this debug tool on swap, stay on MARKET GRAPH tab and switch to swap. Settings are saved in local storage; don't forget to clear it when done."
 msgstr "para alternar su filtrado. Para utilizar esta herramienta de depuración en intercambio, permanezca en la pestaña MARKET GRAPH y cambie a intercambio. La configuración se guarda en el almacenamiento local; no olvide borrarla cuando termine."
 
+#: src/pages/Portfolio/PortfolioPage.tsx
+msgid "Withdraw VLP"
+msgstr ""
+
 #: src/pages/AccountEvents/AccountEvents.tsx
 #: src/pages/AccountEvents/AccountEvents.tsx
 msgid "Account events"
@@ -10844,6 +10866,7 @@ msgstr "VALOR NETO"
 msgid "Vaults"
 msgstr ""
 
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Share Price"
 msgstr ""
@@ -11062,6 +11085,7 @@ msgid "Unknown order"
 msgstr "Orden desconocida"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "VLP Amount"
 msgstr ""
@@ -11305,8 +11329,8 @@ msgid "Lent position impact pool amount"
 msgstr "Cantidad prestada del pool de impacto de posición"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
-msgid "Est. VLP received"
-msgstr ""
+#~ msgid "Est. VLP received"
+#~ msgstr ""
 
 #: src/domain/synthetics/orders/utils.tsx
 msgid "short"
