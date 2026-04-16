@@ -760,6 +760,10 @@ msgstr ""
 msgid "Use manual path"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode B — Convert to Paid-Short"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Longs / shorts"
 msgstr ""
@@ -3265,6 +3269,10 @@ msgstr ""
 msgid "Ask"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Position is kept as a normal short. Funding rate payments apply from ADL moment."
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSpreadRow.tsx
 msgid "Collateral spread"
 msgstr ""
@@ -5398,6 +5406,10 @@ msgstr ""
 msgid "Vault LP"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode A — Auto-Terminate"
+msgstr ""
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "Transfer account"
@@ -5495,6 +5507,10 @@ msgstr ""
 
 #: src/components/Referrals/referralsHelper.ts
 msgid "Max {MAX_REFERRAL_CODE_LENGTH} characters"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Convert to Paid-Short"
 msgstr ""
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
@@ -8466,6 +8482,10 @@ msgstr ""
 msgid "{0}ms"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Position is closed and margin is returned when ADL is triggered."
+msgstr ""
+
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -9773,6 +9793,10 @@ msgstr ""
 
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Express + One-Click"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "ADL Mode:"
 msgstr ""
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
@@ -11233,6 +11257,10 @@ msgstr ""
 msgid "7d"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Close (Recommended)"
+msgstr ""
+
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Token permit"
 msgstr ""
@@ -11743,6 +11771,10 @@ msgstr ""
 
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Enter a referral code to get fee discounts"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Emergency Behavior (ADL)"
 msgstr ""
 
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx

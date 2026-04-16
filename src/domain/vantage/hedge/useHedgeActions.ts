@@ -70,7 +70,8 @@ export type HedgeActionResult = {
   execute: (
     mode: HedgeMode,
     marginToken: HedgeMarginToken,
-    params: Omit<HedgeParams, "acceptablePrice">
+    params: Omit<HedgeParams, "acceptablePrice">,
+    convertOnADL: boolean
   ) => Promise<void>;
 };
 
@@ -140,7 +141,8 @@ export function useHedgeActions(): HedgeActionResult {
     async (
       mode: HedgeMode,
       marginToken: HedgeMarginToken,
-      params: Omit<HedgeParams, "acceptablePrice">
+      params: Omit<HedgeParams, "acceptablePrice">,
+      convertOnADL: boolean
     ): Promise<void> => {
       if (!signer) {
         setError("Wallet not connected");
@@ -184,6 +186,7 @@ export function useHedgeActions(): HedgeActionResult {
               params.indexToken,
               params.sizeDelta,
               acceptablePrice,
+              convertOnADL,
               executionFee,
               { value: executionFee }
             );
@@ -198,6 +201,7 @@ export function useHedgeActions(): HedgeActionResult {
               params.indexToken,
               params.sizeDelta,
               acceptablePrice,
+              convertOnADL,
               executionFee,
               { value: msgValue }
             );
@@ -221,6 +225,7 @@ export function useHedgeActions(): HedgeActionResult {
               params.indexToken,
               params.sizeDelta,
               acceptablePrice,
+              convertOnADL,
               executionFee,
               { value: executionFee }
             );
@@ -232,6 +237,7 @@ export function useHedgeActions(): HedgeActionResult {
               params.indexToken,
               params.sizeDelta,
               acceptablePrice,
+              convertOnADL,
               executionFee,
               { value: msgValue }
             );

@@ -400,6 +400,7 @@ type PositionPanelProps = {
   collateralUsd: number;
   averagePrice: number;
   collateralToken: "USDC" | "ETH";
+  shouldConvertOnADL: boolean;
 };
 
 function CurrentPositionPanel({
@@ -409,6 +410,7 @@ function CurrentPositionPanel({
   collateralUsd,
   averagePrice,
   collateralToken,
+  shouldConvertOnADL,
 }: PositionPanelProps) {
   const tokenAmount = averagePrice > 0 ? sizeUsd / averagePrice : 0;
   const currentPrice = spotPriceUsd ?? averagePrice;
@@ -458,6 +460,20 @@ function CurrentPositionPanel({
           </div>
         </div>
       </div>
+
+      {/* ADL mode badge */}
+      <div className="mt-14 flex items-center gap-8">
+        <span className="text-11 text-slate-500">{t`ADL Mode:`}</span>
+        {shouldConvertOnADL ? (
+          <span className="bg-blue-900/40 rounded-full px-10 py-3 text-11 font-medium text-blue-300">
+            {t`Mode B — Convert to Paid-Short`}
+          </span>
+        ) : (
+          <span className="rounded-full bg-slate-700/60 px-10 py-3 text-11 font-medium text-slate-400">
+            {t`Mode A — Auto-Terminate`}
+          </span>
+        )}
+      </div>
     </>
   );
 }
@@ -478,6 +494,7 @@ export default function HedgeDetailPage() {
   const [marginToken, setMarginToken] = useState<HedgeMarginToken>("usdc");
   const [rwaAmountStr, setRwaAmountStr] = useState("");
   const [leverageStr, setLeverageStr] = useState("1");
+  const [convertOnADL, setConvertOnADL] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
   const [timeFrame, setTimeFrame] = useState<TimeFrame>("1h");
 
@@ -551,7 +568,7 @@ export default function HedgeDetailPage() {
       setValidationError(err);
       return;
     }
-    await execute(mode, marginToken, params);
+    await execute(mode, marginToken, params, convertOnADL);
   }
 
   const canExecute = account && !isSubmitting && rwaAmount > 0 && !pageData.isHedgeDisabled;
@@ -666,6 +683,7 @@ export default function HedgeDetailPage() {
                   collateralUsd={pageData.userPosition.collateralUsd}
                   averagePrice={pageData.userPosition.averagePrice}
                   collateralToken={pageData.userPosition.collateralToken}
+                  shouldConvertOnADL={pageData.userPosition.shouldConvertOnADL}
                 />
               ) : (
                 <p className="text-13 text-slate-500">{t`No open short position. Use the form above to open one.`}</p>
@@ -739,6 +757,34 @@ export default function HedgeDetailPage() {
                 placeholder="1"
               />
               <p className="mt-4 text-11 text-slate-500">{t`1× = delta-neutral. Higher = partial hedge.`}</p>
+            </div>
+
+            {/* ADL Mode toggle */}
+            <div className="mb-16">
+              <div className="mb-8 text-12 text-slate-400">{t`Emergency Behavior (ADL)`}</div>
+              <div className="flex rounded-4 border border-stroke-primary">
+                <button
+                  onClick={() => setConvertOnADL(false)}
+                  className={`flex-1 rounded-l-4 py-8 text-12 font-medium transition-colors ${
+                    !convertOnADL ? "bg-slate-600 text-white" : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
+                  }`}
+                >
+                  {t`Close (Recommended)`}
+                </button>
+                <button
+                  onClick={() => setConvertOnADL(true)}
+                  className={`flex-1 rounded-r-4 py-8 text-12 font-medium transition-colors ${
+                    convertOnADL ? "bg-blue-700 text-white" : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
+                  }`}
+                >
+                  {t`Convert to Paid-Short`}
+                </button>
+              </div>
+              <p className="mt-4 text-11 text-slate-500">
+                {convertOnADL
+                  ? t`Position is kept as a normal short. Funding rate payments apply from ADL moment.`
+                  : t`Position is closed and margin is returned when ADL is triggered.`}
+              </p>
             </div>
 
             {/* Calculated amounts */}

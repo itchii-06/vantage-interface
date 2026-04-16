@@ -760,6 +760,10 @@ msgstr "Light"
 msgid "Use manual path"
 msgstr "Use manual path"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode B — Convert to Paid-Short"
+msgstr "Mode B — Convert to Paid-Short"
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Longs / shorts"
 msgstr "Longs / shorts"
@@ -3265,6 +3269,10 @@ msgstr "Transaction submitted"
 msgid "Ask"
 msgstr "Ask"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Position is kept as a normal short. Funding rate payments apply from ADL moment."
+msgstr "Position is kept as a normal short. Funding rate payments apply from ADL moment."
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSpreadRow.tsx
 msgid "Collateral spread"
 msgstr "Collateral spread"
@@ -5398,6 +5406,10 @@ msgstr "Warning: Your position value exceeds current vault AUM. Withdrawal may b
 msgid "Vault LP"
 msgstr "Vault LP"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode A — Auto-Terminate"
+msgstr "Mode A — Auto-Terminate"
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "Transfer account"
@@ -5496,6 +5508,10 @@ msgstr "Set TP/SL"
 #: src/components/Referrals/referralsHelper.ts
 msgid "Max {MAX_REFERRAL_CODE_LENGTH} characters"
 msgstr "Max {MAX_REFERRAL_CODE_LENGTH} characters"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Convert to Paid-Short"
+msgstr "Convert to Paid-Short"
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "Provide isolated liquidity per market"
@@ -8466,6 +8482,10 @@ msgstr "Not staked"
 msgid "{0}ms"
 msgstr "{0}ms"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Position is closed and margin is returned when ADL is triggered."
+msgstr "Position is closed and margin is returned when ADL is triggered."
+
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -9774,6 +9794,10 @@ msgstr "/USD"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Express + One-Click"
 msgstr "Express + One-Click"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "ADL Mode:"
+msgstr "ADL Mode:"
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "GM tokens represent shares in a liquidity pool for a single GMX market. Buy GM to provide liquidity and earn fees from leverage trading, swaps, and market-making activity on that specific market. All rewards are auto-compounded."
@@ -11233,6 +11257,10 @@ msgstr "Text colors"
 msgid "7d"
 msgstr "7d"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Close (Recommended)"
+msgstr "Close (Recommended)"
+
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Token permit"
 msgstr "Token permit"
@@ -11744,6 +11772,10 @@ msgstr "Available to deposit"
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Enter a referral code to get fee discounts"
 msgstr "Enter a referral code to get fee discounts"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Emergency Behavior (ADL)"
+msgstr "Emergency Behavior (ADL)"
 
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "General performance details"

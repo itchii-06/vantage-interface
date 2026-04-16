@@ -1,8 +1,16 @@
 [
   {
     "inputs": [
-      { "internalType": "address", "name": "_lpManager",      "type": "address" },
-      { "internalType": "address", "name": "_positionRouter", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_lpManager",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_positionRouter",
+        "type": "address"
+      }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -10,10 +18,30 @@
   {
     "anonymous": false,
     "inputs": [
-      { "indexed": true,  "internalType": "address", "name": "user",            "type": "address" },
-      { "indexed": true,  "internalType": "address", "name": "rwaToken",        "type": "address" },
-      { "indexed": false, "internalType": "uint256", "name": "rwaAmount",       "type": "uint256" },
-      { "indexed": false, "internalType": "bytes32", "name": "shortRequestKey", "type": "bytes32" }
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "rwaToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "rwaAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "shortRequestKey",
+        "type": "bytes32"
+      }
     ],
     "name": "ManagedHedgeCreated",
     "type": "event"
@@ -21,24 +49,81 @@
   {
     "anonymous": false,
     "inputs": [
-      { "indexed": true,  "internalType": "address", "name": "user",            "type": "address" },
-      { "indexed": true,  "internalType": "address", "name": "indexToken",      "type": "address" },
-      { "indexed": false, "internalType": "uint256", "name": "sizeDelta",       "type": "uint256" },
-      { "indexed": false, "internalType": "bytes32", "name": "shortRequestKey", "type": "bytes32" }
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "indexToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "sizeDelta",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "shortRequestKey",
+        "type": "bytes32"
+      }
     ],
     "name": "SelfCustodyHedgeCreated",
     "type": "event"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "rwaToken",         "type": "address" },
-      { "internalType": "uint256", "name": "rwaAmount",        "type": "uint256" },
-      { "internalType": "address", "name": "collateralToken",  "type": "address" },
-      { "internalType": "uint256", "name": "collateralAmount", "type": "uint256" },
-      { "internalType": "address", "name": "indexToken",       "type": "address" },
-      { "internalType": "uint256", "name": "sizeDelta",        "type": "uint256" },
-      { "internalType": "uint256", "name": "acceptablePrice",  "type": "uint256" },
-      { "internalType": "uint256", "name": "executionFee",     "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "rwaToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rwaAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "collateralToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateralAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "indexToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "sizeDelta",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "acceptablePrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "convertOnADL",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "executionFee",
+        "type": "uint256"
+      }
     ],
     "name": "createManagedHedge",
     "outputs": [],
@@ -47,12 +132,41 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "rwaToken",        "type": "address" },
-      { "internalType": "uint256", "name": "rwaAmount",       "type": "uint256" },
-      { "internalType": "address", "name": "indexToken",      "type": "address" },
-      { "internalType": "uint256", "name": "sizeDelta",       "type": "uint256" },
-      { "internalType": "uint256", "name": "acceptablePrice", "type": "uint256" },
-      { "internalType": "uint256", "name": "executionFee",    "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "rwaToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rwaAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "indexToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "sizeDelta",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "acceptablePrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "convertOnADL",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "executionFee",
+        "type": "uint256"
+      }
     ],
     "name": "createManagedHedgeETH",
     "outputs": [],
@@ -61,12 +175,41 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "collateralToken",  "type": "address" },
-      { "internalType": "uint256", "name": "collateralAmount", "type": "uint256" },
-      { "internalType": "address", "name": "indexToken",       "type": "address" },
-      { "internalType": "uint256", "name": "sizeDelta",        "type": "uint256" },
-      { "internalType": "uint256", "name": "acceptablePrice",  "type": "uint256" },
-      { "internalType": "uint256", "name": "executionFee",     "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "collateralToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "collateralAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "indexToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "sizeDelta",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "acceptablePrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "convertOnADL",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "executionFee",
+        "type": "uint256"
+      }
     ],
     "name": "createSelfCustodyHedge",
     "outputs": [],
@@ -75,10 +218,31 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "indexToken",      "type": "address" },
-      { "internalType": "uint256", "name": "sizeDelta",       "type": "uint256" },
-      { "internalType": "uint256", "name": "acceptablePrice", "type": "uint256" },
-      { "internalType": "uint256", "name": "executionFee",    "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "indexToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "sizeDelta",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "acceptablePrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "convertOnADL",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "executionFee",
+        "type": "uint256"
+      }
     ],
     "name": "createSelfCustodyHedgeETH",
     "outputs": [],
@@ -88,14 +252,26 @@
   {
     "inputs": [],
     "name": "lpManager",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "positionRouter",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   }
