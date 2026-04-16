@@ -81,6 +81,10 @@ msgstr "Factor exponente de financiación"
 msgid "Request deposit"
 msgstr "Solicitar depósito"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI is near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded."
+msgstr ""
+
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Sign each transaction on-chain using your own RPC, typically provided by your wallet.<0/><1/>Gas payments in {nativeTokenSymbol}."
 msgstr "Firme cada transacción en cadena utilizando su propio RPC, normalmente proporcionado por su monedero.<0/><1/>Pagos de Gas en {nativeTokenSymbol}."
@@ -508,6 +512,10 @@ msgstr "Seleccionar token"
 msgid "Image generation failed. Refresh and try again."
 msgstr "La generación de la imagen ha fallado. Actualice la página e inténtelo de nuevo."
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Admin Dashboard"
+msgstr ""
+
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Funding"
 msgstr ""
@@ -817,6 +825,10 @@ msgstr ""
 #: src/components/GmList/GmListItem.tsx
 msgid "View details"
 msgstr "Ver detalles"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI"
+msgstr ""
 
 #: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
@@ -3039,6 +3051,11 @@ msgstr "Copiar dirección"
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr "Rendimiento anual proyectado frente a un índice de referencia de estilo Uniswap V2.<0/><1/>Nota: Los plazos cortos pueden no reflejar el rendimiento a largo plazo.<2/><3/><4>Ver estadísticas detalladas en Dune</4>."
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+#~ msgid "Disabled"
+#~ msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Create referral code"
 msgstr "Crear código de referido"
@@ -3421,6 +3438,10 @@ msgstr "El impacto en el precio del intercambio es alto"
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "Cancelable en {minutesText}{seconds}s"
+
+#: src/pages/Admin/AdminPage.tsx
+#~ msgid "No cap"
+#~ msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -3951,6 +3972,10 @@ msgstr "Retirar y liberar la reserva de GMX"
 msgid "Copin"
 msgstr "Copin"
 
+#: src/pages/Admin/AdminPage.tsx
+#~ msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+#~ msgstr ""
+
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -4162,6 +4187,10 @@ msgstr "Compartir opinión sobre GMX"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw failed"
 msgstr "Error en el retiro"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Saving…"
+msgstr ""
 
 #. chainname balance
 #: src/components/MultichainBalanceTooltip/MultichainBalanceTooltip.tsx
@@ -4702,6 +4731,12 @@ msgstr "Editar {0}"
 msgid "<0>Buy</0> {wrappedNativeTokenSymbol}."
 msgstr "<0>Comprar</0> {wrappedNativeTokenSymbol}."
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Unlimited"
+msgstr ""
+
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
@@ -5217,6 +5252,7 @@ msgstr "Últimos 180d"
 msgid "Positive funding fees"
 msgstr "Comisiones de financiación positivas"
 
+#: src/pages/Admin/AdminPage.tsx
 #: src/pages/Trade/components/FundingRateChart.tsx
 #: src/pages/Trade/components/OIChart.tsx
 msgid "Loading…"
@@ -5835,6 +5871,10 @@ msgstr "Seleccionar mercado"
 msgid "Referral code creation failed"
 msgstr "Error al crear el código de referido"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade Cap"
+msgstr ""
+
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Withdraw fee"
 msgstr "Comisión de retirada"
@@ -5847,6 +5887,10 @@ msgstr "Su ahorro en comisiones por descuentos de referido"
 #: src/domain/synthetics/positions/utils.ts
 msgid "TP"
 msgstr "TP"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI"
+msgstr ""
 
 #: src/components/Claims/ClaimableCard.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -7079,6 +7123,11 @@ msgstr "Transacción"
 msgid "Last year"
 msgstr "Último año"
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Off"
+msgstr ""
+
 #: src/components/TradeBox/TradeBox.tsx
 msgid "per"
 msgstr "por"
@@ -7686,6 +7735,10 @@ msgstr "Stakear recompensas de {tokenSymbol}"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Max amount exceeded"
 msgstr "Superado el importe máximo"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded."
+msgstr ""
 
 #: src/components/PositionSeller/CollateralDestinationDialog.tsx
 msgid "You chose to send the remaining collateral to your <0>{chosenLabel}</0>. Do you want to make this the default destination when closing positions?"
@@ -8833,6 +8886,10 @@ msgstr "<0>a </0><1>{0}</1>"
 msgid "Borrowing exponent short"
 msgstr "Exponente de préstamo corto"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 (Unlimited) means no restriction."
+msgstr ""
+
 #: src/components/Claims/filters/ActionFilter.tsx
 #: src/components/DepthChart/DepthChartTooltip.tsx
 #: src/components/GmSwap/GmFees/GmFees.tsx
@@ -9052,6 +9109,10 @@ msgstr "Reservas"
 msgid "Pool long amount"
 msgstr "Cantidad largo del pool"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge and trade OI are both near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded or TradeCapExceeded."
+msgstr ""
+
 #: src/components/GmList/GlvList.tsx
 msgid "VAULT"
 msgstr "VAULT"
@@ -9078,6 +9139,10 @@ msgstr "Transferir {nativeTokenSymbol}"
 
 #: src/domain/vantage/trade/useVantageTrade.ts
 msgid "Opening position..."
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Apply Caps"
 msgstr ""
 
 #: src/pages/Portfolio/PortfolioPage.tsx
@@ -9600,6 +9665,10 @@ msgstr "Comisión de financiación negativa"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Min margin per part: {0}"
 msgstr "Margen mín. por parte: {0}"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge Cap"
+msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx

@@ -81,6 +81,10 @@ msgstr "펀딩 지수 계수"
 msgid "Request deposit"
 msgstr "입금 요청"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI is near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded."
+msgstr ""
+
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Sign each transaction on-chain using your own RPC, typically provided by your wallet.<0/><1/>Gas payments in {nativeTokenSymbol}."
 msgstr "지갑에서 제공하는 RPC를 사용하여 각 트랜잭션을 온체인에서 서명합니다.<0/><1/>Gas 수수료는 {nativeTokenSymbol}로 지불합니다."
@@ -508,6 +512,10 @@ msgstr "토큰 선택"
 msgid "Image generation failed. Refresh and try again."
 msgstr "이미지 생성에 실패했습니다. 새로고침 후 다시 시도하십시오."
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Admin Dashboard"
+msgstr ""
+
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Funding"
 msgstr ""
@@ -817,6 +825,10 @@ msgstr ""
 #: src/components/GmList/GmListItem.tsx
 msgid "View details"
 msgstr "상세 보기"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI"
+msgstr ""
 
 #: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
@@ -3039,6 +3051,11 @@ msgstr "주소 복사"
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr "Uniswap V2 스타일 벤치마크 대비 예상 연간 수익률입니다.<0/><1/>참고: 단기간의 데이터는 장기 성과를 반영하지 못할 수 있습니다.<2/><3/><4>Dune에서 상세 통계 보기</4>."
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+#~ msgid "Disabled"
+#~ msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Create referral code"
 msgstr "추천 코드 생성"
@@ -3421,6 +3438,10 @@ msgstr "스왑 가격 영향이 높습니다"
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "{minutesText}{seconds}초 후 취소 가능"
+
+#: src/pages/Admin/AdminPage.tsx
+#~ msgid "No cap"
+#~ msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -3951,6 +3972,10 @@ msgstr "GMX 출금 및 예약 해제"
 msgid "Copin"
 msgstr "Copin"
 
+#: src/pages/Admin/AdminPage.tsx
+#~ msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+#~ msgstr ""
+
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -4162,6 +4187,10 @@ msgstr "GMX 피드백 공유"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw failed"
 msgstr "출금에 실패했습니다"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Saving…"
+msgstr ""
 
 #. chainname balance
 #: src/components/MultichainBalanceTooltip/MultichainBalanceTooltip.tsx
@@ -4702,6 +4731,12 @@ msgstr "{0} 편집"
 msgid "<0>Buy</0> {wrappedNativeTokenSymbol}."
 msgstr "<0>{wrappedNativeTokenSymbol} 구매</0>."
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Unlimited"
+msgstr ""
+
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
@@ -5217,6 +5252,7 @@ msgstr "최근 180일"
 msgid "Positive funding fees"
 msgstr "양의 펀딩 수수료"
 
+#: src/pages/Admin/AdminPage.tsx
 #: src/pages/Trade/components/FundingRateChart.tsx
 #: src/pages/Trade/components/OIChart.tsx
 msgid "Loading…"
@@ -5835,6 +5871,10 @@ msgstr "마켓 선택"
 msgid "Referral code creation failed"
 msgstr "추천 코드 생성에 실패했습니다"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade Cap"
+msgstr ""
+
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Withdraw fee"
 msgstr "출금 수수료"
@@ -5847,6 +5887,10 @@ msgstr "추천 할인을 통한 수수료 절감액"
 #: src/domain/synthetics/positions/utils.ts
 msgid "TP"
 msgstr "TP"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI"
+msgstr ""
 
 #: src/components/Claims/ClaimableCard.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -7079,6 +7123,11 @@ msgstr "거래"
 msgid "Last year"
 msgstr "작년"
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Off"
+msgstr ""
+
 #: src/components/TradeBox/TradeBox.tsx
 msgid "per"
 msgstr "당"
@@ -7686,6 +7735,10 @@ msgstr "{tokenSymbol} 보상 스테이킹"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Max amount exceeded"
 msgstr "최대 수량 초과"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded."
+msgstr ""
 
 #: src/components/PositionSeller/CollateralDestinationDialog.tsx
 msgid "You chose to send the remaining collateral to your <0>{chosenLabel}</0>. Do you want to make this the default destination when closing positions?"
@@ -8833,6 +8886,10 @@ msgstr "<0>로 </0><1>{0}</1>"
 msgid "Borrowing exponent short"
 msgstr "차입 지수 (숏)"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 (Unlimited) means no restriction."
+msgstr ""
+
 #: src/components/Claims/filters/ActionFilter.tsx
 #: src/components/DepthChart/DepthChartTooltip.tsx
 #: src/components/GmSwap/GmFees/GmFees.tsx
@@ -9052,6 +9109,10 @@ msgstr "풀"
 msgid "Pool long amount"
 msgstr "풀 롱 수량"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge and trade OI are both near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded or TradeCapExceeded."
+msgstr ""
+
 #: src/components/GmList/GlvList.tsx
 msgid "VAULT"
 msgstr "볼트"
@@ -9078,6 +9139,10 @@ msgstr "{nativeTokenSymbol} 전송"
 
 #: src/domain/vantage/trade/useVantageTrade.ts
 msgid "Opening position..."
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Apply Caps"
 msgstr ""
 
 #: src/pages/Portfolio/PortfolioPage.tsx
@@ -9600,6 +9665,10 @@ msgstr "음의 펀딩 수수료"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Min margin per part: {0}"
 msgstr "파트당 최소 증거금: {0}"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge Cap"
+msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx

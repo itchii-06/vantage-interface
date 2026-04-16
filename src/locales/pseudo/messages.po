@@ -81,6 +81,10 @@ msgstr ""
 msgid "Request deposit"
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI is near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded."
+msgstr ""
+
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Sign each transaction on-chain using your own RPC, typically provided by your wallet.<0/><1/>Gas payments in {nativeTokenSymbol}."
 msgstr ""
@@ -508,6 +512,10 @@ msgstr ""
 msgid "Image generation failed. Refresh and try again."
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Admin Dashboard"
+msgstr ""
+
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Funding"
 msgstr ""
@@ -816,6 +824,10 @@ msgstr ""
 
 #: src/components/GmList/GmListItem.tsx
 msgid "View details"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI"
 msgstr ""
 
 #: src/components/AppNav/AppNav.tsx
@@ -3039,6 +3051,11 @@ msgstr ""
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+#~ msgid "Disabled"
+#~ msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Create referral code"
 msgstr ""
@@ -3421,6 +3438,10 @@ msgstr ""
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
 msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+#~ msgid "No cap"
+#~ msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -3951,6 +3972,10 @@ msgstr ""
 msgid "Copin"
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+#~ msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+#~ msgstr ""
+
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -4161,6 +4186,10 @@ msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw failed"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Saving…"
 msgstr ""
 
 #. chainname balance
@@ -4702,6 +4731,12 @@ msgstr ""
 msgid "<0>Buy</0> {wrappedNativeTokenSymbol}."
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Unlimited"
+msgstr ""
+
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
@@ -5217,6 +5252,7 @@ msgstr ""
 msgid "Positive funding fees"
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
 #: src/pages/Trade/components/FundingRateChart.tsx
 #: src/pages/Trade/components/OIChart.tsx
 msgid "Loading…"
@@ -5835,6 +5871,10 @@ msgstr ""
 msgid "Referral code creation failed"
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade Cap"
+msgstr ""
+
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Withdraw fee"
 msgstr ""
@@ -5846,6 +5886,10 @@ msgstr ""
 #: src/components/TVChartContainer/constants.ts
 #: src/domain/synthetics/positions/utils.ts
 msgid "TP"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI"
 msgstr ""
 
 #: src/components/Claims/ClaimableCard.tsx
@@ -7079,6 +7123,11 @@ msgstr ""
 msgid "Last year"
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Off"
+msgstr ""
+
 #: src/components/TradeBox/TradeBox.tsx
 msgid "per"
 msgstr ""
@@ -7685,6 +7734,10 @@ msgstr ""
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Max amount exceeded"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded."
 msgstr ""
 
 #: src/components/PositionSeller/CollateralDestinationDialog.tsx
@@ -8833,6 +8886,10 @@ msgstr ""
 msgid "Borrowing exponent short"
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 (Unlimited) means no restriction."
+msgstr ""
+
 #: src/components/Claims/filters/ActionFilter.tsx
 #: src/components/DepthChart/DepthChartTooltip.tsx
 #: src/components/GmSwap/GmFees/GmFees.tsx
@@ -9052,6 +9109,10 @@ msgstr ""
 msgid "Pool long amount"
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge and trade OI are both near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded or TradeCapExceeded."
+msgstr ""
+
 #: src/components/GmList/GlvList.tsx
 msgid "VAULT"
 msgstr ""
@@ -9078,6 +9139,10 @@ msgstr ""
 
 #: src/domain/vantage/trade/useVantageTrade.ts
 msgid "Opening position..."
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Apply Caps"
 msgstr ""
 
 #: src/pages/Portfolio/PortfolioPage.tsx
@@ -9599,6 +9664,10 @@ msgstr ""
 
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Min margin per part: {0}"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge Cap"
 msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx
