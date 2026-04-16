@@ -508,6 +508,10 @@ msgstr "選擇代幣"
 msgid "Image generation failed. Refresh and try again."
 msgstr "圖片生成失敗。請重新整理後再試一次。"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Admin Dashboard"
+msgstr ""
+
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Funding"
 msgstr ""
@@ -817,6 +821,10 @@ msgstr ""
 #: src/components/GmList/GmListItem.tsx
 msgid "View details"
 msgstr "查看詳情"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI"
+msgstr ""
 
 #: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
@@ -3039,6 +3047,11 @@ msgstr "複製地址"
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr "與 Uniswap V2 風格基準相比的預估年化回報。<0/><1/>注意：短期時間範圍可能無法反映長期績效。<2/><3/><4>在 Dune 上查看詳細數據</4>。"
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Disabled"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Create referral code"
 msgstr "建立推薦碼"
@@ -3421,6 +3434,10 @@ msgstr "兌換價格影響偏高"
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "可在 {minutesText}{seconds} 秒後取消"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "No cap"
+msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -3951,6 +3968,10 @@ msgstr "提取並解除 GMX 預留"
 msgid "Copin"
 msgstr "Copin"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+msgstr ""
+
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -4162,6 +4183,10 @@ msgstr "分享 GMX 意見回饋"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw failed"
 msgstr "提取失敗"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Saving…"
+msgstr ""
 
 #. chainname balance
 #: src/components/MultichainBalanceTooltip/MultichainBalanceTooltip.tsx
@@ -5217,6 +5242,7 @@ msgstr "近 180 天"
 msgid "Positive funding fees"
 msgstr "正向資金費用"
 
+#: src/pages/Admin/AdminPage.tsx
 #: src/pages/Trade/components/FundingRateChart.tsx
 #: src/pages/Trade/components/OIChart.tsx
 msgid "Loading…"
@@ -5835,6 +5861,10 @@ msgstr "選擇市場"
 msgid "Referral code creation failed"
 msgstr "推薦碼建立失敗"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade Cap"
+msgstr ""
+
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Withdraw fee"
 msgstr "提取手續費"
@@ -5847,6 +5877,10 @@ msgstr "您透過推薦折扣節省的手續費"
 #: src/domain/synthetics/positions/utils.ts
 msgid "TP"
 msgstr "止盈"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI"
+msgstr ""
 
 #: src/components/Claims/ClaimableCard.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -7078,6 +7112,11 @@ msgstr "交易"
 #: src/components/DateRangeSelect/DateRangeSelect.tsx
 msgid "Last year"
 msgstr "過去一年"
+
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Off"
+msgstr ""
 
 #: src/components/TradeBox/TradeBox.tsx
 msgid "per"
@@ -9080,6 +9119,10 @@ msgstr "轉帳 {nativeTokenSymbol}"
 msgid "Opening position..."
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Apply Caps"
+msgstr ""
+
 #: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
@@ -9600,6 +9643,10 @@ msgstr "負資金費用"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Min margin per part: {0}"
 msgstr "每份最低保證金：{0}"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge Cap"
+msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx

@@ -508,6 +508,10 @@ msgstr "Select token"
 msgid "Image generation failed. Refresh and try again."
 msgstr "Image generation failed. Refresh and try again."
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Admin Dashboard"
+msgstr "Admin Dashboard"
+
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Funding"
 msgstr "Funding"
@@ -817,6 +821,10 @@ msgstr "Loading positions…"
 #: src/components/GmList/GmListItem.tsx
 msgid "View details"
 msgstr "View details"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI"
+msgstr "Hedge OI"
 
 #: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
@@ -3039,6 +3047,11 @@ msgstr "Copy address"
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Disabled"
+msgstr "Disabled"
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Create referral code"
 msgstr "Create referral code"
@@ -3421,6 +3434,10 @@ msgstr "Swap price impact is high"
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "Cancellable in {minutesText}{seconds}s"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "No cap"
+msgstr "No cap"
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -3951,6 +3968,10 @@ msgstr "Withdraw and unreserve GMX"
 msgid "Copin"
 msgstr "Copin"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+msgstr "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -4162,6 +4183,10 @@ msgstr "Share GMX feedback"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw failed"
 msgstr "Withdraw failed"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Saving…"
+msgstr "Saving…"
 
 #. chainname balance
 #: src/components/MultichainBalanceTooltip/MultichainBalanceTooltip.tsx
@@ -5217,6 +5242,7 @@ msgstr "Last 180d"
 msgid "Positive funding fees"
 msgstr "Positive funding fees"
 
+#: src/pages/Admin/AdminPage.tsx
 #: src/pages/Trade/components/FundingRateChart.tsx
 #: src/pages/Trade/components/OIChart.tsx
 msgid "Loading…"
@@ -5835,6 +5861,10 @@ msgstr "Select market"
 msgid "Referral code creation failed"
 msgstr "Referral code creation failed"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade Cap"
+msgstr "Trade Cap"
+
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Withdraw fee"
 msgstr "Withdraw fee"
@@ -5847,6 +5877,10 @@ msgstr "Your fee savings from referral discounts"
 #: src/domain/synthetics/positions/utils.ts
 msgid "TP"
 msgstr "TP"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI"
+msgstr "Trade OI"
 
 #: src/components/Claims/ClaimableCard.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -7078,6 +7112,11 @@ msgstr "Transaction"
 #: src/components/DateRangeSelect/DateRangeSelect.tsx
 msgid "Last year"
 msgstr "Last year"
+
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Off"
+msgstr "Off"
 
 #: src/components/TradeBox/TradeBox.tsx
 msgid "per"
@@ -9080,6 +9119,10 @@ msgstr "Transfer {nativeTokenSymbol}"
 msgid "Opening position..."
 msgstr "Opening position..."
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Apply Caps"
+msgstr "Apply Caps"
+
 #: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
@@ -9600,6 +9643,10 @@ msgstr "Negative funding fee"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Min margin per part: {0}"
 msgstr "Min margin per part: {0}"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge Cap"
+msgstr "Hedge Cap"
 
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx

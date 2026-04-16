@@ -11,6 +11,7 @@ import { buildAccountDashboardUrl } from "pages/AccountDashboard/buildAccountDas
 import BeginAccountTransfer from "pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer";
 import CompleteAccountTransfer from "pages/AccountTransfer/CompleteAccountTransfer/CompleteAccountTransfer";
 import { AccountsRouter } from "pages/Actions/ActionsRouter";
+import AdminPage from "pages/Admin/AdminPage";
 import BuyGMX from "pages/BuyGMX/BuyGMX";
 // import DashboardV2 from "pages/Dashboard/DashboardV2";
 import EarnAdditionalOpportunitiesPage from "pages/Earn/EarnAdditionalOpportunitiesPage";
@@ -173,6 +174,9 @@ export function MainRoutes({ openSettings: _openSettings }: { openSettings: () =
       </Route>
       <Route exact path="/portfolio">
         <PortfolioPage />
+      </Route>
+      <Route exact path="/admin">
+        <AdminPage />
       </Route>
       <Route exact path="/vaults">
         <VaultsPage />

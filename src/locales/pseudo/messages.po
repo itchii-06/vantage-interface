@@ -508,6 +508,10 @@ msgstr ""
 msgid "Image generation failed. Refresh and try again."
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Admin Dashboard"
+msgstr ""
+
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Funding"
 msgstr ""
@@ -816,6 +820,10 @@ msgstr ""
 
 #: src/components/GmList/GmListItem.tsx
 msgid "View details"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI"
 msgstr ""
 
 #: src/components/AppNav/AppNav.tsx
@@ -3039,6 +3047,11 @@ msgstr ""
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Disabled"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Create referral code"
 msgstr ""
@@ -3420,6 +3433,10 @@ msgstr ""
 
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "No cap"
 msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
@@ -3951,6 +3968,10 @@ msgstr ""
 msgid "Copin"
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+msgstr ""
+
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -4161,6 +4182,10 @@ msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw failed"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Saving…"
 msgstr ""
 
 #. chainname balance
@@ -5217,6 +5242,7 @@ msgstr ""
 msgid "Positive funding fees"
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
 #: src/pages/Trade/components/FundingRateChart.tsx
 #: src/pages/Trade/components/OIChart.tsx
 msgid "Loading…"
@@ -5835,6 +5861,10 @@ msgstr ""
 msgid "Referral code creation failed"
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade Cap"
+msgstr ""
+
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Withdraw fee"
 msgstr ""
@@ -5846,6 +5876,10 @@ msgstr ""
 #: src/components/TVChartContainer/constants.ts
 #: src/domain/synthetics/positions/utils.ts
 msgid "TP"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI"
 msgstr ""
 
 #: src/components/Claims/ClaimableCard.tsx
@@ -7077,6 +7111,11 @@ msgstr ""
 
 #: src/components/DateRangeSelect/DateRangeSelect.tsx
 msgid "Last year"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Off"
 msgstr ""
 
 #: src/components/TradeBox/TradeBox.tsx
@@ -9080,6 +9119,10 @@ msgstr ""
 msgid "Opening position..."
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Apply Caps"
+msgstr ""
+
 #: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
@@ -9599,6 +9642,10 @@ msgstr ""
 
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Min margin per part: {0}"
+msgstr ""
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge Cap"
 msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx

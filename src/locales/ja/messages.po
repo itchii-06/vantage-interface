@@ -508,6 +508,10 @@ msgstr "トークンを選択"
 msgid "Image generation failed. Refresh and try again."
 msgstr "画像の生成に失敗しました。更新して再度お試しください。"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Admin Dashboard"
+msgstr ""
+
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Funding"
 msgstr ""
@@ -817,6 +821,10 @@ msgstr ""
 #: src/components/GmList/GmListItem.tsx
 msgid "View details"
 msgstr "詳細を表示"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI"
+msgstr ""
 
 #: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
@@ -3039,6 +3047,11 @@ msgstr "アドレスをコピー"
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr "Uniswap V2スタイルのベンチマークに対する予想年間リターンです。<0/><1/>注意：短期間のデータは長期的なパフォーマンスを反映しない場合があります。<2/><3/><4>Duneで詳細な統計を見る</4>。"
 
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Disabled"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Create referral code"
 msgstr "リファラルコードを作成"
@@ -3421,6 +3434,10 @@ msgstr "スワップの価格への影響が大きいです"
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "{minutesText}{seconds}秒後にキャンセル可能"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "No cap"
+msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -3951,6 +3968,10 @@ msgstr "GMX を出金してリザーブを解除する"
 msgid "Copin"
 msgstr "Copin"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+msgstr ""
+
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -4162,6 +4183,10 @@ msgstr "GMX のフィードバックを共有する"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Withdraw failed"
 msgstr "出金に失敗しました"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Saving…"
+msgstr ""
 
 #. chainname balance
 #: src/components/MultichainBalanceTooltip/MultichainBalanceTooltip.tsx
@@ -5217,6 +5242,7 @@ msgstr "過去180日"
 msgid "Positive funding fees"
 msgstr "正のファンディング手数料"
 
+#: src/pages/Admin/AdminPage.tsx
 #: src/pages/Trade/components/FundingRateChart.tsx
 #: src/pages/Trade/components/OIChart.tsx
 msgid "Loading…"
@@ -5835,6 +5861,10 @@ msgstr "マーケットを選択"
 msgid "Referral code creation failed"
 msgstr "リファラルコードの作成に失敗しました"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade Cap"
+msgstr ""
+
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Withdraw fee"
 msgstr "出金手数料"
@@ -5847,6 +5877,10 @@ msgstr "リファラル割引による手数料の節約額"
 #: src/domain/synthetics/positions/utils.ts
 msgid "TP"
 msgstr "TP"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI"
+msgstr ""
 
 #: src/components/Claims/ClaimableCard.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -7078,6 +7112,11 @@ msgstr "取引"
 #: src/components/DateRangeSelect/DateRangeSelect.tsx
 msgid "Last year"
 msgstr "昨年"
+
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Off"
+msgstr ""
 
 #: src/components/TradeBox/TradeBox.tsx
 msgid "per"
@@ -9080,6 +9119,10 @@ msgstr "{nativeTokenSymbol} を移転"
 msgid "Opening position..."
 msgstr ""
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Apply Caps"
+msgstr ""
+
 #: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
@@ -9600,6 +9643,10 @@ msgstr "ネガティブファンディング手数料"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Min margin per part: {0}"
 msgstr "パートあたりの最小証拠金：{0}"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge Cap"
+msgstr ""
 
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx
