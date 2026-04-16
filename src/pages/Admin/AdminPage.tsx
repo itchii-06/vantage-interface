@@ -68,7 +68,7 @@ function UtilizationBar({
       <div className="mb-4 flex justify-between text-12">
         <span className="text-slate-400">{label}</span>
         {disabled ? (
-          <span className="text-slate-500">{t`No cap`}</span>
+          <span className="text-slate-500">{t`Unlimited`}</span>
         ) : (
           <span className={warningColor}>
             ${formatUsd(current)} / ${formatUsd(max)} ({pct.toFixed(1)}%)
@@ -109,6 +109,13 @@ function VaultAllocationPanel({ config }: { config: VaultConfig }) {
     status !== null &&
     (resolvedHedgeBps !== Number(status.hedgeCapBps) || resolvedTradeBps !== Number(status.tradeCapBps));
 
+  // Near-cap warning: utilization ≥ 95% means an oracle price move could push the TX over the cap.
+  const NEAR_CAP_THRESHOLD = 95;
+  const hedgeUtilPct = !hedgeDisabled && status ? utilizationPct(status.currentHedgeOI, status.maxHedgeOI) : 0;
+  const tradeUtilPct = !tradeDisabled && status ? utilizationPct(status.currentTradeOI, status.maxTradeOI) : 0;
+  const hedgeNearCap = hedgeUtilPct >= NEAR_CAP_THRESHOLD;
+  const tradeNearCap = tradeUtilPct >= NEAR_CAP_THRESHOLD;
+
   return (
     <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-16">
       {/* Header */}
@@ -137,6 +144,17 @@ function VaultAllocationPanel({ config }: { config: VaultConfig }) {
             color="green"
           />
 
+          {/* Near-cap warnings */}
+          {(hedgeNearCap || tradeNearCap) && (
+            <div className="border-yellow-600/40 rounded-4 border bg-yellow-900/20 px-12 py-10 text-12 text-yellow-300">
+              {hedgeNearCap && tradeNearCap
+                ? t`Hedge and trade OI are both near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded or TradeCapExceeded.`
+                : hedgeNearCap
+                  ? t`Hedge OI is near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded.`
+                  : t`Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded.`}
+            </div>
+          )}
+
           {/* Divider */}
           <div className="border-t border-stroke-primary" />
 
@@ -145,7 +163,7 @@ function VaultAllocationPanel({ config }: { config: VaultConfig }) {
             <div className="mb-6 flex justify-between text-12">
               <label className="text-slate-400">{t`Hedge Cap`}</label>
               <span className="font-medium text-white">
-                {resolvedHedgeBps === 0 ? t`Disabled` : `${(resolvedHedgeBps / 100).toFixed(0)}%`}
+                {resolvedHedgeBps === 0 ? t`Unlimited` : `${(resolvedHedgeBps / 100).toFixed(0)}%`}
               </span>
             </div>
             <input
@@ -168,7 +186,7 @@ function VaultAllocationPanel({ config }: { config: VaultConfig }) {
             <div className="mb-6 flex justify-between text-12">
               <label className="text-slate-400">{t`Trade Cap`}</label>
               <span className="font-medium text-white">
-                {resolvedTradeBps === 0 ? t`Disabled` : `${(resolvedTradeBps / 100).toFixed(0)}%`}
+                {resolvedTradeBps === 0 ? t`Unlimited` : `${(resolvedTradeBps / 100).toFixed(0)}%`}
               </span>
             </div>
             <input
@@ -222,7 +240,7 @@ export default function AdminPage() {
           <div className="mb-20">
             <h1 className="text-h1">{t`Admin Dashboard`}</h1>
             <p className="text-body-medium mt-4 text-slate-400">
-              {t`Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction.`}
+              {t`Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 (Unlimited) means no restriction.`}
             </p>
           </div>
 

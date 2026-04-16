@@ -81,6 +81,10 @@ msgstr "Funding exponent factor"
 msgid "Request deposit"
 msgstr "Request deposit"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI is near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded."
+msgstr "Hedge OI is near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded."
+
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Sign each transaction on-chain using your own RPC, typically provided by your wallet.<0/><1/>Gas payments in {nativeTokenSymbol}."
 msgstr "Sign each transaction on-chain using your own RPC, typically provided by your wallet.<0/><1/>Gas payments in {nativeTokenSymbol}."
@@ -3049,8 +3053,8 @@ msgstr "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: S
 
 #: src/pages/Admin/AdminPage.tsx
 #: src/pages/Admin/AdminPage.tsx
-msgid "Disabled"
-msgstr "Disabled"
+#~ msgid "Disabled"
+#~ msgstr "Disabled"
 
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Create referral code"
@@ -3436,8 +3440,8 @@ msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "Cancellable in {minutesText}{seconds}s"
 
 #: src/pages/Admin/AdminPage.tsx
-msgid "No cap"
-msgstr "No cap"
+#~ msgid "No cap"
+#~ msgstr "No cap"
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -3969,8 +3973,8 @@ msgid "Copin"
 msgstr "Copin"
 
 #: src/pages/Admin/AdminPage.tsx
-msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
-msgstr "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+#~ msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+#~ msgstr "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
 
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
@@ -4726,6 +4730,12 @@ msgstr "Edit {0}"
 #: src/components/GmxAccountModal/InsufficientWntBanner.tsx
 msgid "<0>Buy</0> {wrappedNativeTokenSymbol}."
 msgstr "<0>Buy</0> {wrappedNativeTokenSymbol}."
+
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Unlimited"
+msgstr "Unlimited"
 
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
@@ -7726,6 +7736,10 @@ msgstr "Stake {tokenSymbol} rewards"
 msgid "Max amount exceeded"
 msgstr "Max amount exceeded"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded."
+msgstr "Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded."
+
 #: src/components/PositionSeller/CollateralDestinationDialog.tsx
 msgid "You chose to send the remaining collateral to your <0>{chosenLabel}</0>. Do you want to make this the default destination when closing positions?"
 msgstr "You chose to send the remaining collateral to your <0>{chosenLabel}</0>. Do you want to make this the default destination when closing positions?"
@@ -8872,6 +8886,10 @@ msgstr "<0>to </0><1>{0}</1>"
 msgid "Borrowing exponent short"
 msgstr "Borrowing exponent short"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 (Unlimited) means no restriction."
+msgstr "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 (Unlimited) means no restriction."
+
 #: src/components/Claims/filters/ActionFilter.tsx
 #: src/components/DepthChart/DepthChartTooltip.tsx
 #: src/components/GmSwap/GmFees/GmFees.tsx
@@ -9090,6 +9108,10 @@ msgstr "Pools"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Pool long amount"
 msgstr "Pool long amount"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge and trade OI are both near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded or TradeCapExceeded."
+msgstr "Hedge and trade OI are both near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded or TradeCapExceeded."
 
 #: src/components/GmList/GlvList.tsx
 msgid "VAULT"

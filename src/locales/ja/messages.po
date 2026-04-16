@@ -81,6 +81,10 @@ msgstr "ファンディング指数ファクター"
 msgid "Request deposit"
 msgstr "入金リクエスト"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge OI is near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded."
+msgstr ""
+
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Sign each transaction on-chain using your own RPC, typically provided by your wallet.<0/><1/>Gas payments in {nativeTokenSymbol}."
 msgstr "ウォレットが提供するRPCを使用して、各トランザクションをオンチェーンで署名します。<0/><1/>Gasの支払いは{nativeTokenSymbol}で行われます。"
@@ -3049,8 +3053,8 @@ msgstr "Uniswap V2スタイルのベンチマークに対する予想年間リ�
 
 #: src/pages/Admin/AdminPage.tsx
 #: src/pages/Admin/AdminPage.tsx
-msgid "Disabled"
-msgstr ""
+#~ msgid "Disabled"
+#~ msgstr ""
 
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Create referral code"
@@ -3436,8 +3440,8 @@ msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "{minutesText}{seconds}秒後にキャンセル可能"
 
 #: src/pages/Admin/AdminPage.tsx
-msgid "No cap"
-msgstr ""
+#~ msgid "No cap"
+#~ msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -3969,8 +3973,8 @@ msgid "Copin"
 msgstr "Copin"
 
 #: src/pages/Admin/AdminPage.tsx
-msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
-msgstr ""
+#~ msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
+#~ msgstr ""
 
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
@@ -4726,6 +4730,12 @@ msgstr "{0}を編集"
 #: src/components/GmxAccountModal/InsufficientWntBanner.tsx
 msgid "<0>Buy</0> {wrappedNativeTokenSymbol}."
 msgstr "<0>{wrappedNativeTokenSymbol}を購入</0>。"
+
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+#: src/pages/Admin/AdminPage.tsx
+msgid "Unlimited"
+msgstr ""
 
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
 #: src/components/OrderList/filters/OrderTypeFilter.tsx
@@ -7726,6 +7736,10 @@ msgstr "{tokenSymbol}報酬をステーク"
 msgid "Max amount exceeded"
 msgstr "最大値超過"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded."
+msgstr ""
+
 #: src/components/PositionSeller/CollateralDestinationDialog.tsx
 msgid "You chose to send the remaining collateral to your <0>{chosenLabel}</0>. Do you want to make this the default destination when closing positions?"
 msgstr ""
@@ -8872,6 +8886,10 @@ msgstr "<0>へ </0><1>{0}</1>"
 msgid "Borrowing exponent short"
 msgstr "ショート借入指数"
 
+#: src/pages/Admin/AdminPage.tsx
+msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 (Unlimited) means no restriction."
+msgstr ""
+
 #: src/components/Claims/filters/ActionFilter.tsx
 #: src/components/DepthChart/DepthChartTooltip.tsx
 #: src/components/GmSwap/GmFees/GmFees.tsx
@@ -9090,6 +9108,10 @@ msgstr "プール"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Pool long amount"
 msgstr "プールのロング数量"
+
+#: src/pages/Admin/AdminPage.tsx
+msgid "Hedge and trade OI are both near cap (≥95%). Oracle price movements at TX time may trigger HedgeCapExceeded or TradeCapExceeded."
+msgstr ""
 
 #: src/components/GmList/GlvList.tsx
 msgid "VAULT"
