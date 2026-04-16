@@ -760,6 +760,10 @@ msgstr "라이트"
 msgid "Use manual path"
 msgstr "수동 경로 사용"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode B — Convert to Paid-Short"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Longs / shorts"
 msgstr "롱 / 숏"
@@ -3265,6 +3269,10 @@ msgstr ""
 msgid "Ask"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Position is kept as a normal short. Funding rate payments apply from ADL moment."
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSpreadRow.tsx
 msgid "Collateral spread"
 msgstr "담보 스프레드"
@@ -5398,6 +5406,10 @@ msgstr ""
 msgid "Vault LP"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode A — Auto-Terminate"
+msgstr ""
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "Transfer account"
@@ -5496,6 +5508,10 @@ msgstr "TP/SL 설정"
 #: src/components/Referrals/referralsHelper.ts
 msgid "Max {MAX_REFERRAL_CODE_LENGTH} characters"
 msgstr "최대 {MAX_REFERRAL_CODE_LENGTH}자"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Convert to Paid-Short"
+msgstr ""
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "Provide isolated liquidity per market"
@@ -8466,6 +8482,10 @@ msgstr "미스테이킹"
 msgid "{0}ms"
 msgstr "{0}ms"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Position is closed and margin is returned when ADL is triggered."
+msgstr ""
+
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -9774,6 +9794,10 @@ msgstr "/USD"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Express + One-Click"
 msgstr "익스프레스 + 원클릭"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "ADL Mode:"
+msgstr ""
 
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "GM tokens represent shares in a liquidity pool for a single GMX market. Buy GM to provide liquidity and earn fees from leverage trading, swaps, and market-making activity on that specific market. All rewards are auto-compounded."
@@ -11233,6 +11257,10 @@ msgstr "텍스트 색상"
 msgid "7d"
 msgstr "7일"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Close (Recommended)"
+msgstr ""
+
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Token permit"
 msgstr "토큰 허가"
@@ -11744,6 +11772,10 @@ msgstr "입금 가능"
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Enter a referral code to get fee discounts"
 msgstr "추천 코드를 입력하면 수수료 할인을 받으실 수 있습니다"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Emergency Behavior (ADL)"
+msgstr ""
 
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "General performance details"

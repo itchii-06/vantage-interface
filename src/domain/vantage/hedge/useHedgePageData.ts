@@ -48,6 +48,8 @@ export interface UserPosition {
   averagePrice: number;
   /** Which token was used as collateral */
   collateralToken: "USDC" | "ETH";
+  /** ADL handling mode: true = convert to paid-short (Mode B), false = auto-terminate (Mode A) */
+  shouldConvertOnADL: boolean;
 }
 
 export interface HedgePageData {
@@ -255,9 +257,10 @@ export function useHedgePageData(
             tokenAddr,
             false // isLong = false (short)
           );
-          const [pos, softLocked] = await Promise.all([
+          const [pos, softLocked, convertOnADL] = await Promise.all([
             vault.positions(key),
             vault.isSoftLockedPosition(key).catch(() => false) as Promise<boolean>,
+            vault.shouldConvertOnADL(key).catch(() => false) as Promise<boolean>,
           ]);
           if (BigInt(pos.size) > 0n) {
             userPosition = {
@@ -265,6 +268,7 @@ export function useHedgePageData(
               collateralUsd: parseFloat(formatEther(pos.collateral)),
               averagePrice: parseFloat(formatEther(pos.averagePrice)),
               collateralToken: "USDC",
+              shouldConvertOnADL: convertOnADL,
             };
             isSoftLockedPosition = softLocked;
           }
