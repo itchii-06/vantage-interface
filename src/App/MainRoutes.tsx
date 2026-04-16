@@ -33,7 +33,6 @@ import ReferralsTier from "pages/ReferralsTier/ReferralsTier";
 import StatsPage from "pages/Stats/StatsPage";
 import { SyntheticsStats } from "pages/SyntheticsStats/SyntheticsStats";
 import TradePage from "pages/Trade/TradePage";
-import VantageLPPage from "pages/VantageLP/VantageLPPage";
 import VaultDetailPage from "pages/VaultDetail/VaultDetailPage";
 import VaultsPage from "pages/Vaults/VaultsPage";
 
@@ -168,9 +167,7 @@ export function MainRoutes({ openSettings: _openSettings }: { openSettings: () =
       <Route exact path="/trade/:tradeType?">
         <TradePage />
       </Route>
-      <Route exact path="/vantage-lp">
-        <VantageLPPage />
-      </Route>
+      <Redirect exact from="/vantage-lp" to="/portfolio" />
       <Route exact path="/portfolio">
         <PortfolioPage />
       </Route>
