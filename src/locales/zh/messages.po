@@ -1006,6 +1006,10 @@ msgstr "最大网络费用缓冲精度为 0.01%"
 msgid "DeltaPrime"
 msgstr "DeltaPrime"
 
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "h"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/CompetitionPrizes.tsx
 #: src/pages/LeaderboardPage/components/CompetitionPrizes.tsx
 msgid "1st place"
@@ -2510,6 +2514,10 @@ msgstr "最大 {0} 输出"
 msgid "No assets available for deposit"
 msgstr "无可用资产进行存入"
 
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "s"
+msgstr ""
+
 #: src/components/TVChartContainer/useChartContextMenu.ts
 msgid "Set Short Stop Loss @ {0}"
 msgstr ""
@@ -2613,6 +2621,10 @@ msgstr "GM 跨链桥接至..."
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivate 1CT"
 msgstr "停用 1CT"
+
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "Redemption pending — yield continues to accrue"
+msgstr ""
 
 #: src/components/PositionShare/PositionShareCard.tsx
 msgid "/ USD"
@@ -3049,6 +3061,10 @@ msgstr "订阅"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Asset not found."
+msgstr ""
+
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "Next redemption execution:"
 msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
@@ -3636,6 +3652,10 @@ msgstr "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam enim e
 msgid "Fees (including swap)"
 msgstr "费用（含兑换）"
 
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "d"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Exponent (positive)"
 msgstr "指数（正）"
@@ -3798,6 +3818,10 @@ msgstr "Worker 线程"
 #: src/domain/synthetics/orders/setAutoCancelOrdersTxn.ts
 msgid "Failed to update orders"
 msgstr "更新订单失败"
+
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "Ready to execute"
+msgstr ""
 
 #: src/components/TPSLModal/AddTPSLModal.tsx
 #: src/components/TradeBox/TradeBoxRows/PriceImpactFeesRow.tsx
@@ -6862,6 +6886,10 @@ msgstr "最低资金费率因子"
 msgid "Governance alerts"
 msgstr "治理提醒"
 
+#: src/pages/Trade/TradePage.tsx
+msgid "LP redemption demand may reduce open positions by up to 5% per day via ADL to fund withdrawals."
+msgstr ""
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -8156,6 +8184,10 @@ msgstr "仓位关闭时 TP/SL 订单将自动取消。仅适用于启用后创�
 #: src/components/TradeBox/TradeBoxRows/PriceImpactFeesRow.tsx
 msgid "fees"
 msgstr "费用"
+
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "m"
+msgstr ""
 
 #: src/domain/synthetics/userFeedback/utils.ts
 msgid "What could we improve?"

@@ -1006,6 +1006,10 @@ msgstr "Max network fee buffer precision is 0.01%"
 msgid "DeltaPrime"
 msgstr "DeltaPrime"
 
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "h"
+msgstr "h"
+
 #: src/pages/LeaderboardPage/components/CompetitionPrizes.tsx
 #: src/pages/LeaderboardPage/components/CompetitionPrizes.tsx
 msgid "1st place"
@@ -2510,6 +2514,10 @@ msgstr "Max {0} out"
 msgid "No assets available for deposit"
 msgstr "No assets available for deposit"
 
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "s"
+msgstr "s"
+
 #: src/components/TVChartContainer/useChartContextMenu.ts
 msgid "Set Short Stop Loss @ {0}"
 msgstr "Set Short Stop Loss @ {0}"
@@ -2613,6 +2621,10 @@ msgstr "GM bridging to..."
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivate 1CT"
 msgstr "Deactivate 1CT"
+
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "Redemption pending — yield continues to accrue"
+msgstr "Redemption pending — yield continues to accrue"
 
 #: src/components/PositionShare/PositionShareCard.tsx
 msgid "/ USD"
@@ -3050,6 +3062,10 @@ msgstr "Subscribe"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Asset not found."
 msgstr "Asset not found."
+
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "Next redemption execution:"
+msgstr "Next redemption execution:"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Decentralized finance dashboard"
@@ -3636,6 +3652,10 @@ msgstr "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam enim e
 msgid "Fees (including swap)"
 msgstr "Fees (including swap)"
 
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "d"
+msgstr "d"
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Exponent (positive)"
 msgstr "Exponent (positive)"
@@ -3798,6 +3818,10 @@ msgstr "Worker thread"
 #: src/domain/synthetics/orders/setAutoCancelOrdersTxn.ts
 msgid "Failed to update orders"
 msgstr "Failed to update orders"
+
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "Ready to execute"
+msgstr "Ready to execute"
 
 #: src/components/TPSLModal/AddTPSLModal.tsx
 #: src/components/TradeBox/TradeBoxRows/PriceImpactFeesRow.tsx
@@ -6862,6 +6886,10 @@ msgstr "Min funding factor"
 msgid "Governance alerts"
 msgstr "Governance alerts"
 
+#: src/pages/Trade/TradePage.tsx
+msgid "LP redemption demand may reduce open positions by up to 5% per day via ADL to fund withdrawals."
+msgstr "LP redemption demand may reduce open positions by up to 5% per day via ADL to fund withdrawals."
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -8156,6 +8184,10 @@ msgstr "TP/SL orders auto-cancel when the position closes. Applies only to order
 #: src/components/TradeBox/TradeBoxRows/PriceImpactFeesRow.tsx
 msgid "fees"
 msgstr "fees"
+
+#: src/pages/VantageLP/VantageLPPage.tsx
+msgid "m"
+msgstr "m"
 
 #: src/domain/synthetics/userFeedback/utils.ts
 msgid "What could we improve?"

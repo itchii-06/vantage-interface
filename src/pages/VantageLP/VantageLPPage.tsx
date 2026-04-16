@@ -13,7 +13,7 @@
 
 import { t } from "@lingui/macro";
 import { formatEther, formatUnits, parseUnits } from "ethers";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 
 import { useVantageLPActions } from "domain/vantage/lp/useVantageLPActions";
 import { useVantageLPData } from "domain/vantage/lp/useVantageLPData";
@@ -71,6 +71,48 @@ export default function VantageLPPage() {
   const [depositInput, setDepositInput] = useState("");
   const [withdrawInput, setWithdrawInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [countdown, setCountdown] = useState("");
+
+  // ---------------------------------------------------------------------------
+  // Redemption countdown (ticks every second)
+  // ---------------------------------------------------------------------------
+
+  useEffect(() => {
+    if (lpData.nextEpochTimestamp === 0n) return;
+
+    function tick() {
+      const nowSec = BigInt(Math.floor(Date.now() / 1000));
+      const remaining = lpData.nextEpochTimestamp > nowSec ? lpData.nextEpochTimestamp - nowSec : 0n;
+
+      if (remaining === 0n) {
+        setCountdown(t`Ready to execute`);
+        return;
+      }
+
+      const days = remaining / 86400n;
+      const hours = (remaining % 86400n) / 3600n;
+      const mins = (remaining % 3600n) / 60n;
+      const secs = remaining % 60n;
+      setCountdown(
+        `${days}${t`d`} ${String(hours).padStart(2, "0")}${t`h`} ${String(mins).padStart(2, "0")}${t`m`} ${String(secs).padStart(2, "0")}${t`s`}`
+      );
+    }
+
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [lpData.nextEpochTimestamp]);
+
+  const pendingUsdFormatted = useMemo(
+    () =>
+      lpData.pendingUsdValue > 0n
+        ? parseFloat(formatEther(lpData.pendingUsdValue)).toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })
+        : "0.00",
+    [lpData.pendingUsdValue]
+  );
 
   // ---------------------------------------------------------------------------
   // Derived values
@@ -185,6 +227,28 @@ export default function VantageLPPage() {
               )}
             </div>
           </div>
+
+          {/* ------------------------------------------------------------------ */}
+          {/* Redemption countdown                                                */}
+          {/* ------------------------------------------------------------------ */}
+          {!lpData.isLoading && lpData.nextEpochTimestamp > 0n && (
+            <div className="text-slate-300 mb-16 rounded-4 border border-slate-600/40 bg-slate-800/30 px-16 py-12 text-13">
+              <span className="text-slate-400">{t`Next redemption execution:`}</span>{" "}
+              <span className="font-semibold tabular-nums text-white">{countdown}</span>
+            </div>
+          )}
+
+          {/* ------------------------------------------------------------------ */}
+          {/* Pending redemption status                                           */}
+          {/* ------------------------------------------------------------------ */}
+          {account && lpData.pendingShares > 0n && (
+            <div className="bg-blue-900/20 mb-16 rounded-4 border border-blue-600/40 px-16 py-12 text-13">
+              <div className="font-semibold text-blue-300">{t`Redemption pending — yield continues to accrue`}</div>
+              <div className="mt-4 text-12 text-blue-400">
+                {formatVlp(lpData.pendingShares)} VLP ≈ ${pendingUsdFormatted}
+              </div>
+            </div>
+          )}
 
           {/* ------------------------------------------------------------------ */}
           {/* Weekend lock warning                                                */}

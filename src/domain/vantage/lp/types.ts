@@ -13,4 +13,12 @@ export type VantageLPData = {
   weekendBufferBps: bigint;
   /** True when withdrawals are restricted (UTC Sat/Sun AND weekendBufferBps > 0) */
   isWeekendLocked: boolean;
+  /** Unix timestamp (seconds) of the next scheduled redemption epoch execution */
+  nextEpochTimestamp: bigint;
+  /** User's pending redemption shares; 0 if no active request */
+  pendingShares: bigint;
+  /** Epoch ID at which the user's pending redemption was registered */
+  pendingEpochId: bigint;
+  /** USD value of pending redemption at current share price, WAD */
+  pendingUsdValue: bigint;
 };

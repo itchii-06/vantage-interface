@@ -165,6 +165,11 @@ export default function TradePage() {
               </div>
             )}
 
+            {/* Redemption ADL risk notice */}
+            <div className="rounded-4 border border-slate-600/30 bg-slate-700/10 px-14 py-10 text-13 text-slate-400">
+              {t`LP redemption demand may reduce open positions by up to 5% per day via ADL to fund withdrawals.`}
+            </div>
+
             {/* Unified position list */}
             <div>
               <div className="mb-10 flex items-center justify-between">
