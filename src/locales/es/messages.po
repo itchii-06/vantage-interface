@@ -575,10 +575,6 @@ msgstr "Comisiones no realizadas"
 msgid "Max slippage precision is 0.01%"
 msgstr "La precisión máxima de deslizamiento es del 0,01%"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "LP Management"
-#~ msgstr ""
-
 #: landing/src/pages/Home/SocialSection/SocialSection.tsx
 msgid "Join"
 msgstr "Unirse"
@@ -3127,11 +3123,6 @@ msgstr "Copiar dirección"
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr "Rendimiento anual proyectado frente a un índice de referencia de estilo Uniswap V2.<0/><1/>Nota: Los plazos cortos pueden no reflejar el rendimiento a largo plazo.<2/><3/><4>Ver estadísticas detalladas en Dune</4>."
 
-#: src/pages/Admin/AdminPage.tsx
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "Disabled"
-#~ msgstr ""
-
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Long profit positions"
 msgstr ""
@@ -3526,10 +3517,6 @@ msgstr "El impacto en el precio del intercambio es alto"
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "Cancelable en {minutesText}{seconds}s"
-
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "No cap"
-#~ msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -4075,10 +4062,6 @@ msgstr "Retirar y liberar la reserva de GMX"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Copin"
 msgstr "Copin"
-
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
-#~ msgstr ""
 
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
@@ -11664,10 +11647,6 @@ msgstr "Monederos inteligentes no compatibles en esta red"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Lent position impact pool amount"
 msgstr "Cantidad prestada del pool de impacto de posición"
-
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Est. VLP received"
-#~ msgstr ""
 
 #: src/domain/synthetics/orders/utils.tsx
 msgid "short"

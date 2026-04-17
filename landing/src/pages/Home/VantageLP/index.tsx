@@ -7,9 +7,9 @@ import { Ticker } from "./Ticker";
 import { Vaults } from "./Vaults";
 
 const PAGE_STYLE: React.CSSProperties = {
-  background: "#07070F",
+  background: "#000000",
   minHeight: "100vh",
-  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif',
+  fontFamily: '"Overused Grotesk", sans-serif',
   WebkitFontSmoothing: "antialiased",
   MozOsxFontSmoothing: "grayscale",
 };

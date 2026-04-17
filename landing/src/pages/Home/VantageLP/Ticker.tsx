@@ -1,25 +1,24 @@
 import { useMemo } from "react";
 
 const COLORS = {
-  bg: "#07070F",
-  borderSubtle: "rgba(255,255,255,0.07)",
-  neonYellow: "#F5E642",
-  neonCyan: "#3CF7FF",
+  bg: "#000000",
+  border: "rgba(255,255,255,0.1)",
   green: "#22C55E",
-  textMuted: "#6B6B99",
+  textMuted: "#888888",
+  textPrimary: "#FFFFFF",
 };
 
 const EVENTS = [
-  { text: "mBUIDL Vault: +5.2% APY", icon: "✓", color: COLORS.neonYellow },
+  { text: "mBUIDL Vault: +5.2% APY", icon: "✓", color: COLORS.textPrimary },
   { text: "Hedge Position Active", icon: "✓", color: COLORS.green },
   { text: "ADL Status: Healthy", icon: "✓", color: COLORS.green },
-  { text: "Cover Ratio: 142%", icon: "✓", color: COLORS.neonCyan },
-  { text: "Short Funding: +3.6%", icon: "✓", color: COLORS.neonYellow },
+  { text: "Cover Ratio: 142%", icon: "✓", color: COLORS.textPrimary },
+  { text: "Short Funding: +3.6%", icon: "✓", color: COLORS.textPrimary },
   { text: "Payout Hub: Solvent", icon: "✓", color: COLORS.green },
-  { text: "mUSDY Vault: +8.5% Net APY", icon: "✓", color: COLORS.neonCyan },
-  { text: "mRWA Vault: +10.0% Net APY", icon: "✓", color: COLORS.neonYellow },
+  { text: "mUSDY Vault: +8.5% Net APY", icon: "✓", color: COLORS.textPrimary },
+  { text: "mRWA Vault: +10.0% Net APY", icon: "✓", color: COLORS.textPrimary },
   { text: "Compliance Check: Passed", icon: "✓", color: COLORS.green },
-  { text: "NAV Sync: Up to Date", icon: "✓", color: COLORS.neonCyan },
+  { text: "NAV Sync: Up to Date", icon: "✓", color: COLORS.textPrimary },
 ];
 
 // Duplicate for seamless loop
@@ -42,7 +41,7 @@ const TICKER_ITEM_STYLE: React.CSSProperties = {
 
 const TICKER_TEXT_STYLE: React.CSSProperties = {
   fontSize: "13px",
-  fontWeight: 600,
+  fontWeight: 500,
   color: COLORS.textMuted,
 };
 
@@ -68,7 +67,7 @@ function TickerItem({ text, icon, color }: TickerItemProps) {
     () => ({
       fontSize: "13px",
       color: color,
-      fontWeight: 700,
+      fontWeight: 600,
     }),
     [color]
   );
@@ -85,8 +84,8 @@ function TickerItem({ text, icon, color }: TickerItemProps) {
 
 const SECTION_STYLE: React.CSSProperties = {
   background: COLORS.bg,
-  borderTop: `1px solid ${COLORS.borderSubtle}`,
-  borderBottom: `1px solid ${COLORS.borderSubtle}`,
+  borderTop: `1px solid ${COLORS.border}`,
+  borderBottom: `1px solid ${COLORS.border}`,
   padding: "16px 0",
   overflow: "hidden",
 };

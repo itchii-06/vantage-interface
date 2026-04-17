@@ -2,15 +2,13 @@ import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 
 const COLORS = {
-  bg: "#07070F",
-  bgCard: "#0E0E1C",
-  bgCardHover: "#12122A",
-  borderSubtle: "rgba(255,255,255,0.07)",
-  neonYellow: "#F5E642",
-  neonPink: "#FF3CAC",
-  neonCyan: "#3CF7FF",
+  bg: "#000000",
+  bgCard: "#0C0C0C",
+  bgCardHover: "#111111",
+  border: "rgba(255,255,255,0.1)",
+  borderHover: "rgba(255,255,255,0.25)",
   textPrimary: "#FFFFFF",
-  textMuted: "#6B6B99",
+  textMuted: "#888888",
   green: "#22C55E",
 };
 
@@ -18,12 +16,10 @@ interface VaultData {
   name: string;
   type: string;
   icon: string;
-  iconBg: string;
   vaultApy: number;
   fundingRate: number;
   netApy: number;
   capacity: number; // 0-100
-  typeBadgeColor: string;
 }
 
 const VAULTS: VaultData[] = [
@@ -31,34 +27,28 @@ const VAULTS: VaultData[] = [
     name: "mBUIDL",
     type: "Money Market RWA",
     icon: "B",
-    iconBg: "linear-gradient(135deg, #F5E642 0%, #E5D400 100%)",
     vaultApy: 5.2,
     fundingRate: 3.6,
     netApy: 8.8,
     capacity: 68,
-    typeBadgeColor: "rgba(245,230,66,0.15)",
   },
   {
     name: "mUSDY",
     type: "Yield-Bearing Stablecoin",
     icon: "U",
-    iconBg: "linear-gradient(135deg, #3CF7FF 0%, #00D4E0 100%)",
     vaultApy: 6.1,
     fundingRate: 2.4,
     netApy: 8.5,
     capacity: 45,
-    typeBadgeColor: "rgba(60,247,255,0.12)",
   },
   {
     name: "mRWA",
     type: "Diversified RWA Basket",
     icon: "R",
-    iconBg: "linear-gradient(135deg, #FF3CAC 0%, #CC2288 100%)",
     vaultApy: 4.8,
     fundingRate: 5.2,
     netApy: 10.0,
     capacity: 32,
-    typeBadgeColor: "rgba(255,60,172,0.12)",
   },
 ];
 
@@ -73,7 +63,7 @@ const CARD_METRIC_LABEL_STYLE: React.CSSProperties = {
 
 const CARD_PROGRESS_BG_STYLE: React.CSSProperties = {
   background: "rgba(255,255,255,0.06)",
-  borderRadius: "100px",
+  borderRadius: "2px",
   height: "6px",
   overflow: "hidden",
   marginBottom: "20px",
@@ -83,11 +73,11 @@ const CARD_BTN_STYLE: React.CSSProperties = {
   display: "block",
   width: "100%",
   padding: "13px",
-  background: COLORS.neonYellow,
-  color: "#07070F",
-  fontWeight: 700,
+  background: "#FFFFFF",
+  color: "#000000",
+  fontWeight: 600,
   fontSize: "15px",
-  borderRadius: "12px",
+  borderRadius: "4px",
   border: "none",
   cursor: "pointer",
   textDecoration: "none",
@@ -98,7 +88,7 @@ const CARD_BTN_STYLE: React.CSSProperties = {
 const CARD_INITIAL = { opacity: 0, y: 40 };
 const CARD_WHILE_IN_VIEW = { opacity: 1, y: 0 };
 const CARD_VIEWPORT = { once: true };
-const CARD_WHILE_HOVER = { y: -6 };
+const CARD_WHILE_HOVER = { y: -4 };
 
 const CARD_HEADER_STYLE: React.CSSProperties = {
   display: "flex",
@@ -129,19 +119,19 @@ const CARD_CAPACITY_ROW_STYLE: React.CSSProperties = {
 
 const CARD_VAULT_APY_STYLE: React.CSSProperties = {
   fontSize: "18px",
-  fontWeight: 700,
+  fontWeight: 500,
   color: COLORS.textPrimary,
 };
 
 const CARD_FUNDING_RATE_STYLE: React.CSSProperties = {
   fontSize: "18px",
-  fontWeight: 700,
-  color: COLORS.neonCyan,
+  fontWeight: 500,
+  color: COLORS.textPrimary,
 };
 
 const CARD_NET_APY_STYLE: React.CSSProperties = {
   fontSize: "26px",
-  fontWeight: 900,
+  fontWeight: 600,
   color: COLORS.green,
   letterSpacing: "-1px",
 };
@@ -155,12 +145,12 @@ const CARD_CAPACITY_LABEL_STYLE: React.CSSProperties = {
 const CARD_CAPACITY_VALUE_STYLE: React.CSSProperties = {
   fontSize: "11px",
   color: COLORS.textMuted,
-  fontWeight: 600,
+  fontWeight: 500,
 };
 
 const CARD_VAULT_NAME_STYLE: React.CSSProperties = {
   fontSize: "20px",
-  fontWeight: 800,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   letterSpacing: "-0.5px",
 };
@@ -169,18 +159,27 @@ const CARD_BADGE_WRAPPER_STYLE: React.CSSProperties = {
   marginTop: "4px",
 };
 
+const CARD_BADGE_STYLE: React.CSSProperties = {
+  background: "rgba(255,255,255,0.06)",
+  borderRadius: "4px",
+  padding: "3px 10px",
+  fontSize: "11px",
+  fontWeight: 500,
+  color: COLORS.textMuted,
+  letterSpacing: "0.3px",
+};
+
 function VaultCard({ vault, index }: { vault: VaultData; index: number }) {
   const [hovered, setHovered] = useState(false);
 
   const cardStyle = useMemo(
     () => ({
       background: hovered ? COLORS.bgCardHover : COLORS.bgCard,
-      borderRadius: "24px",
-      border: hovered ? `1px solid rgba(245,230,66,0.5)` : `1px solid ${COLORS.borderSubtle}`,
+      borderRadius: "4px",
+      border: hovered ? `1px solid ${COLORS.borderHover}` : `1px solid ${COLORS.border}`,
       padding: "28px",
       cursor: "pointer",
-      boxShadow: hovered ? "0 0 40px rgba(245,230,66,0.12), 0 16px 48px rgba(0,0,0,0.4)" : "0 4px 24px rgba(0,0,0,0.2)",
-      transition: "background 0.2s, border 0.2s, box-shadow 0.2s",
+      transition: "background 0.2s, border-color 0.2s",
     }),
     [hovered]
   );
@@ -189,38 +188,25 @@ function VaultCard({ vault, index }: { vault: VaultData; index: number }) {
     () => ({
       width: "48px",
       height: "48px",
-      borderRadius: "14px",
-      background: vault.iconBg,
+      borderRadius: "4px",
+      background: "#FFFFFF",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       fontSize: "20px",
-      fontWeight: 900,
-      color: "#07070F",
+      fontWeight: 600,
+      color: "#000000",
       flexShrink: 0,
     }),
-    [vault.iconBg]
-  );
-
-  const badgeStyle = useMemo(
-    () => ({
-      background: vault.typeBadgeColor,
-      borderRadius: "6px",
-      padding: "3px 10px",
-      fontSize: "11px",
-      fontWeight: 600,
-      color: COLORS.textMuted,
-      letterSpacing: "0.3px",
-    }),
-    [vault.typeBadgeColor]
+    []
   );
 
   const progressFillStyle = useMemo(
     () => ({
       height: "100%",
-      borderRadius: "100px",
+      borderRadius: "2px",
       width: `${vault.capacity}%`,
-      background: `linear-gradient(90deg, ${COLORS.neonYellow} 0%, ${COLORS.neonPink} 100%)`,
+      background: "#FFFFFF",
       transition: "width 0.8s ease",
     }),
     [vault.capacity]
@@ -246,7 +232,7 @@ function VaultCard({ vault, index }: { vault: VaultData; index: number }) {
           <div>
             <div style={CARD_VAULT_NAME_STYLE}>{vault.name}</div>
             <div style={CARD_BADGE_WRAPPER_STYLE}>
-              <span style={badgeStyle}>{vault.type}</span>
+              <span style={CARD_BADGE_STYLE}>{vault.type}</span>
             </div>
           </div>
         </div>
@@ -283,11 +269,9 @@ function VaultCard({ vault, index }: { vault: VaultData; index: number }) {
         style={CARD_BTN_STYLE}
         onMouseEnter={(e) => {
           (e.currentTarget as HTMLElement).style.opacity = "0.88";
-          (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
         }}
         onMouseLeave={(e) => {
           (e.currentTarget as HTMLElement).style.opacity = "1";
-          (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
         }}
       >
         Zap &amp; Deposit →
@@ -309,8 +293,8 @@ const INNER_STYLE: React.CSSProperties = {
 const LABEL_STYLE: React.CSSProperties = {
   display: "inline-block",
   fontSize: "11px",
-  fontWeight: 700,
-  color: COLORS.neonYellow,
+  fontWeight: 600,
+  color: COLORS.textMuted,
   letterSpacing: "2px",
   textTransform: "uppercase",
   marginBottom: "16px",
@@ -318,7 +302,7 @@ const LABEL_STYLE: React.CSSProperties = {
 
 const HEADING_STYLE: React.CSSProperties = {
   fontSize: "clamp(32px, 5vw, 52px)",
-  fontWeight: 900,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   letterSpacing: "-2px",
   marginBottom: "12px",

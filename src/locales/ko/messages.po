@@ -575,10 +575,6 @@ msgstr "미실현 수수료"
 msgid "Max slippage precision is 0.01%"
 msgstr "최대 슬리피지 정밀도는 0.01%입니다"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "LP Management"
-#~ msgstr ""
-
 #: landing/src/pages/Home/SocialSection/SocialSection.tsx
 msgid "Join"
 msgstr "참여하기"
@@ -3127,11 +3123,6 @@ msgstr "주소 복사"
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr "Uniswap V2 스타일 벤치마크 대비 예상 연간 수익률입니다.<0/><1/>참고: 단기간의 데이터는 장기 성과를 반영하지 못할 수 있습니다.<2/><3/><4>Dune에서 상세 통계 보기</4>."
 
-#: src/pages/Admin/AdminPage.tsx
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "Disabled"
-#~ msgstr ""
-
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Long profit positions"
 msgstr ""
@@ -3526,10 +3517,6 @@ msgstr "스왑 가격 영향이 높습니다"
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "{minutesText}{seconds}초 후 취소 가능"
-
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "No cap"
-#~ msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -4075,10 +4062,6 @@ msgstr "GMX 출금 및 예약 해제"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Copin"
 msgstr "Copin"
-
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
-#~ msgstr ""
 
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
@@ -11664,10 +11647,6 @@ msgstr "이 네트워크에서는 스마트 지갑이 지원되지 않습니다"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Lent position impact pool amount"
 msgstr "포지션 영향 풀 대출 금액"
-
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Est. VLP received"
-#~ msgstr ""
 
 #: src/domain/synthetics/orders/utils.tsx
 msgid "short"

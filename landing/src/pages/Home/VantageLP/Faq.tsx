@@ -2,13 +2,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
 
 const COLORS = {
-  bg: "#07070F",
-  bgCard: "#0E0E1C",
-  bgCardHover: "#12122A",
-  borderSubtle: "rgba(255,255,255,0.07)",
-  neonYellow: "#F5E642",
+  bg: "#000000",
+  bgCard: "#0C0C0C",
+  bgCardHover: "#111111",
+  border: "rgba(255,255,255,0.1)",
   textPrimary: "#FFFFFF",
-  textMuted: "#6B6B99",
+  textMuted: "#888888",
 };
 
 interface FaqItem {
@@ -49,7 +48,7 @@ const ROW_HEADER_STYLE: React.CSSProperties = {
 
 const QUESTION_STYLE: React.CSSProperties = {
   fontSize: "16px",
-  fontWeight: 700,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   letterSpacing: "-0.3px",
   flex: 1,
@@ -82,8 +81,8 @@ function FaqRow({ item, index }: { item: FaqItem; index: number }) {
   const rowStyle = useMemo(
     () => ({
       background: open ? COLORS.bgCardHover : COLORS.bgCard,
-      borderRadius: "16px",
-      border: open ? `1px solid rgba(245,230,66,0.2)` : `1px solid ${COLORS.borderSubtle}`,
+      borderRadius: "4px",
+      border: open ? `1px solid rgba(255,255,255,0.2)` : `1px solid ${COLORS.border}`,
       overflow: "hidden",
       cursor: "pointer",
       transition: "background 0.2s, border-color 0.2s",
@@ -95,8 +94,8 @@ function FaqRow({ item, index }: { item: FaqItem; index: number }) {
     () => ({
       width: "28px",
       height: "28px",
-      borderRadius: "8px",
-      background: open ? "rgba(245,230,66,0.12)" : "rgba(255,255,255,0.05)",
+      borderRadius: "4px",
+      background: open ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.05)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -132,7 +131,7 @@ function FaqRow({ item, index }: { item: FaqItem; index: number }) {
           >
             <path
               d="M2 4.5L7 9.5L12 4.5"
-              stroke={open ? COLORS.neonYellow : COLORS.textMuted}
+              stroke={open ? COLORS.textPrimary : COLORS.textMuted}
               strokeWidth="1.8"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -171,8 +170,8 @@ const INNER_STYLE: React.CSSProperties = {
 const LABEL_STYLE: React.CSSProperties = {
   display: "inline-block",
   fontSize: "11px",
-  fontWeight: 700,
-  color: COLORS.neonYellow,
+  fontWeight: 600,
+  color: COLORS.textMuted,
   letterSpacing: "2px",
   textTransform: "uppercase",
   marginBottom: "16px",
@@ -180,7 +179,7 @@ const LABEL_STYLE: React.CSSProperties = {
 
 const HEADING_STYLE: React.CSSProperties = {
   fontSize: "clamp(28px, 4vw, 44px)",
-  fontWeight: 900,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   letterSpacing: "-1.5px",
   marginBottom: "48px",

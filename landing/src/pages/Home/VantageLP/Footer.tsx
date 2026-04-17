@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 
 const COLORS = {
-  bg: "#07070F",
-  borderSubtle: "rgba(255,255,255,0.07)",
-  neonYellow: "#F5E642",
+  bg: "#000000",
+  border: "rgba(255,255,255,0.1)",
   textPrimary: "#FFFFFF",
-  textMuted: "#6B6B99",
+  textMuted: "#888888",
 };
 
 const LINKS = [
@@ -17,7 +16,7 @@ const LINKS = [
 
 const SECTION_STYLE: React.CSSProperties = {
   background: COLORS.bg,
-  borderTop: `1px solid ${COLORS.borderSubtle}`,
+  borderTop: `1px solid ${COLORS.border}`,
   padding: "48px 24px",
 };
 
@@ -41,19 +40,19 @@ const LOGO_STYLE: React.CSSProperties = {
 const LOGO_MARK_STYLE: React.CSSProperties = {
   width: "30px",
   height: "30px",
-  borderRadius: "8px",
-  background: `linear-gradient(135deg, ${COLORS.neonYellow} 0%, #FF3CAC 100%)`,
+  borderRadius: "4px",
+  background: "#FFFFFF",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontWeight: 800,
+  fontWeight: 600,
   fontSize: "13px",
-  color: "#07070F",
+  color: "#000000",
 };
 
 const LOGO_TEXT_STYLE: React.CSSProperties = {
   fontSize: "16px",
-  fontWeight: 800,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   letterSpacing: "-0.4px",
 };
@@ -76,7 +75,7 @@ const LINK_STYLE: React.CSSProperties = {
 const COPYRIGHT_STYLE: React.CSSProperties = {
   width: "100%",
   paddingTop: "24px",
-  borderTop: `1px solid ${COLORS.borderSubtle}`,
+  borderTop: `1px solid ${COLORS.border}`,
   marginTop: "8px",
   maxWidth: "1100px",
   margin: "24px auto 0",
@@ -94,7 +93,7 @@ const COPYRIGHT_TEXT_STYLE: React.CSSProperties = {
 
 const DISCLAIMER_STYLE: React.CSSProperties = {
   fontSize: "12px",
-  color: "rgba(107,107,153,0.6)",
+  color: "rgba(136,136,136,0.6)",
   maxWidth: "480px",
   textAlign: "right",
 };

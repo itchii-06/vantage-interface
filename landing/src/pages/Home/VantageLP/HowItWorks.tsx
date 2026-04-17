@@ -2,14 +2,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useMemo } from "react";
 
 const COLORS = {
-  bg: "#0A0A18",
-  bgCard: "#0E0E1C",
-  borderSubtle: "rgba(255,255,255,0.07)",
-  neonYellow: "#F5E642",
-  neonPink: "#FF3CAC",
-  neonCyan: "#3CF7FF",
+  bg: "#000000",
+  bgCard: "#0C0C0C",
+  border: "rgba(255,255,255,0.1)",
   textPrimary: "#FFFFFF",
-  textMuted: "#6B6B99",
+  textMuted: "#888888",
 };
 
 interface Step {
@@ -17,7 +14,6 @@ interface Step {
   icon: string;
   title: string;
   description: string;
-  accentColor: string;
   animationProps: {
     initial: { opacity: number; x?: number; scale?: number };
     whileInView: { opacity: number; x?: number; scale?: number };
@@ -31,7 +27,6 @@ const STEPS: Step[] = [
     title: "Deposit RWA",
     description:
       "Deposit your real-world asset tokens — like mBUIDL, mUSDY, or mRWA — directly into the vault. Your principal is securely custodied on-chain.",
-    accentColor: COLORS.neonYellow,
     animationProps: {
       initial: { opacity: 0, x: -60 },
       whileInView: { opacity: 1, x: 0 },
@@ -43,7 +38,6 @@ const STEPS: Step[] = [
     title: "Short Opens Automatically",
     description:
       "The protocol automatically opens a corresponding short position using funding-rate arbitrage — neutralizing any price exposure on your deposited asset.",
-    accentColor: COLORS.neonCyan,
     animationProps: {
       initial: { opacity: 0, x: 60 },
       whileInView: { opacity: 1, x: 0 },
@@ -55,7 +49,6 @@ const STEPS: Step[] = [
     title: "Earn Delta-Neutral Yield",
     description:
       "You collect the RWA's native yield plus positive funding rates — with zero directional risk. Withdraw anytime as conditions update.",
-    accentColor: COLORS.neonPink,
     animationProps: {
       initial: { opacity: 0, scale: 0.85 },
       whileInView: { opacity: 1, scale: 1 },
@@ -65,8 +58,8 @@ const STEPS: Step[] = [
 
 const CARD_BASE_STYLE: React.CSSProperties = {
   background: COLORS.bgCard,
-  borderRadius: "24px",
-  border: `1px solid ${COLORS.borderSubtle}`,
+  borderRadius: "4px",
+  border: `1px solid ${COLORS.border}`,
   padding: "36px 32px",
   position: "relative",
   overflow: "hidden",
@@ -75,7 +68,7 @@ const CARD_BASE_STYLE: React.CSSProperties = {
 const ICON_WRAP_STYLE: React.CSSProperties = {
   width: "60px",
   height: "60px",
-  borderRadius: "16px",
+  borderRadius: "4px",
   background: "rgba(255,255,255,0.04)",
   border: "1px solid rgba(255,255,255,0.08)",
   display: "flex",
@@ -87,7 +80,7 @@ const ICON_WRAP_STYLE: React.CSSProperties = {
 
 const TITLE_STYLE: React.CSSProperties = {
   fontSize: "22px",
-  fontWeight: 800,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   letterSpacing: "-0.5px",
   marginBottom: "12px",
@@ -108,24 +101,23 @@ function StepCard({ step, index }: { step: Step; index: number }) {
       top: 0,
       left: 0,
       right: 0,
-      height: "3px",
-      background: step.accentColor,
-      borderRadius: "24px 24px 0 0",
+      height: "1px",
+      background: "rgba(255,255,255,0.2)",
     }),
-    [step.accentColor]
+    []
   );
 
   const stepNumStyle = useMemo(
     () => ({
       fontSize: "11px",
-      fontWeight: 800,
-      color: step.accentColor,
+      fontWeight: 600,
+      color: COLORS.textMuted,
       letterSpacing: "2px",
       textTransform: "uppercase" as const,
       marginBottom: "16px",
       display: "block",
     }),
-    [step.accentColor]
+    []
   );
 
   const cardTransition = useMemo(() => ({ duration: 0.6, delay: index * 0.15, ease: "easeOut" }), [index]);
@@ -163,8 +155,8 @@ const MERGE_SECTION_STYLE: React.CSSProperties = {
 
 const MERGE_LABEL_STYLE: React.CSSProperties = {
   fontSize: "11px",
-  fontWeight: 700,
-  color: COLORS.neonCyan,
+  fontWeight: 600,
+  color: COLORS.textMuted,
   letterSpacing: "2px",
   textTransform: "uppercase",
   marginBottom: "12px",
@@ -172,7 +164,7 @@ const MERGE_LABEL_STYLE: React.CSSProperties = {
 
 const MERGE_HEADING_STYLE: React.CSSProperties = {
   fontSize: "clamp(22px, 3vw, 32px)",
-  fontWeight: 900,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   letterSpacing: "-1px",
   marginBottom: "64px",
@@ -200,35 +192,19 @@ const MERGE_ICON_BASE: React.CSSProperties = {
 const MERGE_ICON_BOX: React.CSSProperties = {
   width: "80px",
   height: "80px",
-  borderRadius: "20px",
+  borderRadius: "4px",
   background: COLORS.bgCard,
-  border: `1px solid ${COLORS.borderSubtle}`,
+  border: `1px solid ${COLORS.border}`,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   fontSize: "36px",
 };
 
-const MERGE_ICON_LABEL_RWA: React.CSSProperties = {
+const MERGE_ICON_LABEL: React.CSSProperties = {
   fontSize: "11px",
-  fontWeight: 700,
-  color: COLORS.neonYellow,
-  letterSpacing: "1px",
-  textTransform: "uppercase",
-};
-
-const MERGE_ICON_LABEL_SHORT: React.CSSProperties = {
-  fontSize: "11px",
-  fontWeight: 700,
-  color: COLORS.neonCyan,
-  letterSpacing: "1px",
-  textTransform: "uppercase",
-};
-
-const MERGE_ICON_LABEL_SHIELD: React.CSSProperties = {
-  fontSize: "11px",
-  fontWeight: 700,
-  color: COLORS.neonPink,
+  fontWeight: 600,
+  color: COLORS.textMuted,
   letterSpacing: "1px",
   textTransform: "uppercase",
 };
@@ -236,14 +212,13 @@ const MERGE_ICON_LABEL_SHIELD: React.CSSProperties = {
 const SHIELD_BOX_STYLE: React.CSSProperties = {
   width: "96px",
   height: "96px",
-  borderRadius: "24px",
-  background: "linear-gradient(135deg, rgba(255,60,172,0.2), rgba(60,247,255,0.2))",
-  border: `1.5px solid rgba(255,60,172,0.5)`,
+  borderRadius: "4px",
+  background: COLORS.bgCard,
+  border: `1px solid rgba(255,255,255,0.25)`,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   fontSize: "44px",
-  boxShadow: "0 0 40px rgba(255,60,172,0.25), 0 0 80px rgba(60,247,255,0.1)",
 };
 
 const MERGE_DIVIDER_STYLE: React.CSSProperties = {
@@ -260,7 +235,7 @@ const MERGE_RESULT_STYLE: React.CSSProperties = {
 
 const MERGE_RESULT_TITLE_STYLE: React.CSSProperties = {
   fontSize: "18px",
-  fontWeight: 800,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   marginBottom: "4px",
 };
@@ -323,19 +298,19 @@ function MergeAnimation() {
         {/* RWA icon — slides from left */}
         <motion.div style={rwaIconStyle}>
           <div style={MERGE_ICON_BOX}>🏦</div>
-          <span style={MERGE_ICON_LABEL_RWA}>RWA</span>
+          <span style={MERGE_ICON_LABEL}>RWA</span>
         </motion.div>
 
         {/* Short icon — slides from right */}
         <motion.div style={shortIconStyle}>
           <div style={MERGE_ICON_BOX}>📉</div>
-          <span style={MERGE_ICON_LABEL_SHORT}>Short</span>
+          <span style={MERGE_ICON_LABEL}>Short</span>
         </motion.div>
 
         {/* Shield — appears at center after merge */}
         <motion.div style={shieldIconStyle}>
           <div style={SHIELD_BOX_STYLE}>🛡️</div>
-          <span style={MERGE_ICON_LABEL_SHIELD}>Protected</span>
+          <span style={MERGE_ICON_LABEL}>Protected</span>
         </motion.div>
       </div>
 
@@ -371,8 +346,8 @@ const HEADER_STYLE: React.CSSProperties = {
 const LABEL_STYLE: React.CSSProperties = {
   display: "inline-block",
   fontSize: "11px",
-  fontWeight: 700,
-  color: COLORS.neonCyan,
+  fontWeight: 600,
+  color: COLORS.textMuted,
   letterSpacing: "2px",
   textTransform: "uppercase",
   marginBottom: "16px",
@@ -380,7 +355,7 @@ const LABEL_STYLE: React.CSSProperties = {
 
 const HEADING_STYLE: React.CSSProperties = {
   fontSize: "clamp(32px, 5vw, 52px)",
-  fontWeight: 900,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   letterSpacing: "-2px",
   marginBottom: "12px",
@@ -402,9 +377,9 @@ const GRID_STYLE: React.CSSProperties = {
 const TRUST_ROW_STYLE: React.CSSProperties = {
   marginTop: "64px",
   padding: "28px 32px",
-  background: "rgba(245,230,66,0.04)",
-  borderRadius: "16px",
-  border: "1px solid rgba(245,230,66,0.1)",
+  background: "rgba(255,255,255,0.03)",
+  borderRadius: "4px",
+  border: `1px solid ${COLORS.border}`,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -425,7 +400,7 @@ const TRUST_ICON_STYLE: React.CSSProperties = {
 
 const TRUST_LABEL_STYLE: React.CSSProperties = {
   fontSize: "14px",
-  fontWeight: 600,
+  fontWeight: 500,
   color: COLORS.textMuted,
 };
 
