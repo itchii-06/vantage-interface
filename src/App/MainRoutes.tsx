@@ -32,6 +32,7 @@ import { PriceImpactRebatesStatsPage } from "pages/PriceImpactRebatesStats/Price
 import Referrals from "pages/Referrals/Referrals";
 import ReferralsTier from "pages/ReferralsTier/ReferralsTier";
 import StatsPage from "pages/Stats/StatsPage";
+import StatusPage from "pages/Status/StatusPage";
 import { SyntheticsStats } from "pages/SyntheticsStats/SyntheticsStats";
 import TradePage from "pages/Trade/TradePage";
 import VantageLPPage from "pages/VantageLP/VantageLPPage";
@@ -159,6 +160,9 @@ export function MainRoutes({ openSettings: _openSettings }: { openSettings: () =
         <SyntheticsStateContextProvider skipLocalReferralCode={false} pageType="pools">
           <PoolsDetails />
         </SyntheticsStateContextProvider>
+      </Route>
+      <Route exact path="/status">
+        <StatusPage />
       </Route>
       <Route exact path="/hedge">
         <HedgePage />

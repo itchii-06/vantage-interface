@@ -65,6 +65,10 @@ msgstr "Or update your wallet's RPC via <0>chainlist.org</0>"
 msgid "REFERRAL CODE"
 msgstr "REFERRAL CODE"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Profit Extraction Risk"
+msgstr "Profit Extraction Risk"
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 msgid "Existing limit order uses {symbol} collateral. <0>Switch to {symbol} collateral</0>"
 msgstr "Existing limit order uses {symbol} collateral. <0>Switch to {symbol} collateral</0>"
@@ -453,6 +457,10 @@ msgstr "GMX Account balance"
 msgid "Best swap path"
 msgstr "Best swap path"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Your position carries high leverage with significant profit — among the most likely ADL candidates."
+msgstr "Your position carries high leverage with significant profit — among the most likely ADL candidates."
+
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Connect your wallet to see your deposits."
 msgstr "Connect your wallet to see your deposits."
@@ -511,6 +519,10 @@ msgstr "Select token"
 #: src/components/PositionShare/PositionShare.tsx
 msgid "Image generation failed. Refresh and try again."
 msgstr "Image generation failed. Refresh and try again."
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Loyalty Timer"
+msgstr "Loyalty Timer"
 
 #: src/pages/Admin/AdminPage.tsx
 msgid "Admin Dashboard"
@@ -821,6 +833,10 @@ msgstr "Unknown error"
 msgid "Market Swap"
 msgstr "Market Swap"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "{ageDays} days"
+msgstr "{ageDays} days"
+
 #: src/pages/Trade/components/PositionListPanel.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Loading positions…"
@@ -904,6 +920,10 @@ msgstr "システム収益保護のため、現在一時的にFR相殺が停止�
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "You have a shortfall debt of {0}. This will be settled when the insurance fund is sufficient."
 msgstr "You have a shortfall debt of {0}. This will be settled when the insurance fund is sufficient."
+
+#: src/pages/Status/components/OIStats.tsx
+msgid "Hedge Capacity Used"
+msgstr "Hedge Capacity Used"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Decentralized money market"
@@ -1306,6 +1326,7 @@ msgstr "{0} swapped to {1} when executed"
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/pages/Status/components/AdlLeaderboard.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Unrealized PnL"
 msgstr "Unrealized PnL"
@@ -1341,6 +1362,10 @@ msgstr "Creating referral code..."
 msgid "DATE"
 msgstr "DATE"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Position Age"
+msgstr "Position Age"
+
 #: src/components/NetworkDropdown/SolanaNetworkItem.tsx
 #: src/components/NetworkDropdown/SolanaNetworkItem.tsx
 msgid "Solana"
@@ -1353,6 +1378,10 @@ msgstr "Max {allowedAutoCancelOrdersNumber} auto-cancel TP/SL orders allowed. Ex
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "GMX proposals voting page"
 msgstr "GMX proposals voting page"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "1. Leverage (higher = first)"
+msgstr "1. Leverage (higher = first)"
 
 #: src/components/SwitchToSettlementChain/SwitchToSettlementChainWarning.tsx
 msgid "Liquidity only available on {chainNames}. Switch networks to continue."
@@ -1622,6 +1651,10 @@ msgstr "Connect wallet to withdraw"
 msgid "TP price above limit price"
 msgstr "TP price above limit price"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "2. Entry recency (newer = first)"
+msgstr "2. Entry recency (newer = first)"
+
 #: src/components/OneClickAdvancedSettings/OneClickAdvancedSettings.tsx
 msgid "Action(s)"
 msgstr "Action(s)"
@@ -1821,6 +1854,10 @@ msgstr "Failed Limit Swap"
 msgid "Failed"
 msgstr "Failed"
 
+#: src/pages/Status/components/ProtocolCommitmentBanner.tsx
+msgid "Protocol Commitment — No Surprise Rate Hikes"
+msgstr "Protocol Commitment — No Surprise Rate Hikes"
+
 #: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Restricted (weekend)"
 msgstr "Restricted (weekend)"
@@ -1833,6 +1870,10 @@ msgstr "No fee"
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Swap liquidity may be insufficient when order triggers"
 msgstr "Swap liquidity may be insufficient when order triggers"
+
+#: src/pages/Status/components/BufferGauges.tsx
+msgid "Reserve Fund"
+msgstr "Reserve Fund"
 
 #: src/domain/synthetics/orders/cancelOrdersTxn.ts
 msgid "Canceling {ordersText}..."
@@ -1901,6 +1942,10 @@ msgstr "Change to Base"
 #: src/components/ToastifyDebug/ToastifyDebug.tsx
 msgid "Hide error"
 msgstr "Hide error"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "No active trade (long) position in this vault."
+msgstr "No active trade (long) position in this vault."
 
 #: src/components/AlertInfo/AlertInfo.tsx
 msgid "Alert icon"
@@ -2228,6 +2273,10 @@ msgstr "Total value of tokens in GM pools"
 msgid "Price impact rebates"
 msgstr "Price impact rebates"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Your ADL Risk"
+msgstr "Your ADL Risk"
+
 #: src/components/TradeHistory/keys.ts
 msgid "Update Limit Swap"
 msgstr "Update Limit Swap"
@@ -2287,6 +2336,10 @@ msgstr "Failed Market Decrease"
 msgid "DefiLlama"
 msgstr "DefiLlama"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Phase 4 · Hedge ADL"
+msgstr "Phase 4 · Hedge ADL"
+
 #: src/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily and cumulative PnL"
 msgstr "Daily and cumulative PnL"
@@ -2310,6 +2363,10 @@ msgstr "Net Value"
 #: src/components/PositionShare/CreateReferralCode.tsx
 msgid "May take a few minutes to appear. Check back later"
 msgstr "May take a few minutes to appear. Check back later"
+
+#: src/pages/Status/components/BufferGauges.tsx
+msgid "Absorbed"
+msgstr "Absorbed"
 
 #: src/components/TradeHistory/keys.ts
 msgid "Failed deposit"
@@ -2439,6 +2496,10 @@ msgstr "Update Stop-Loss"
 #: src/components/PositionSeller/CollateralDestinationDialog.tsx
 msgid "How do I choose?"
 msgstr "How do I choose?"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Consider reducing leverage to lower your ADL priority."
+msgstr "Consider reducing leverage to lower your ADL priority."
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "LP Deposit + Short in one transaction"
@@ -2633,6 +2694,10 @@ msgstr "How can we address your concerns?"
 msgid "Closing Size"
 msgstr "Closing Size"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode B"
+msgstr "Mode B"
+
 #: src/components/DepthChart/DepthChartTooltip.tsx
 msgid "No liquidity available for increasing longs at<0/>this size. Max long size: {0}<1/><2/>Execution prices for decreasing shorts."
 msgstr "No liquidity available for increasing longs at<0/>this size. Max long size: {0}<1/><2/>Execution prices for decreasing shorts."
@@ -2747,6 +2812,7 @@ msgstr "{txnTypeText} {0} order for"
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Status/components/OIStats.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Max"
@@ -2839,6 +2905,8 @@ msgstr "Buy GMX on {chainName}"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeboxMarginFields/SizeField.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Status/components/AdlLeaderboard.tsx
+#: src/pages/Status/components/AdlLeaderboard.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/Trade/components/PositionListPanel.tsx
@@ -3043,6 +3111,10 @@ msgstr "High potential net price impact (capped at {formattedCap} for this marke
 msgid "Update Take-Profit"
 msgstr "Update Take-Profit"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "High leverage or recent entry increases ADL risk. Consider reducing leverage."
+msgstr "High leverage or recent entry increases ADL risk. Consider reducing leverage."
+
 #: src/components/GmxAccountModal/TransferDetailsView.tsx
 msgid "Deposit from {sourceChainName} failed"
 msgstr "Deposit from {sourceChainName} failed"
@@ -3059,6 +3131,10 @@ msgstr "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: S
 #: src/pages/Admin/AdminPage.tsx
 #~ msgid "Disabled"
 #~ msgstr "Disabled"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Long profit positions"
+msgstr "Long profit positions"
 
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Create referral code"
@@ -3273,6 +3349,10 @@ msgstr "Ask"
 msgid "Position is kept as a normal short. Funding rate payments apply from ADL moment."
 msgstr "Position is kept as a normal short. Funding rate payments apply from ADL moment."
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Low leverage and long tenure protect you from ADL. You are in the loyalty tier."
+msgstr "Low leverage and long tenure protect you from ADL. You are in the loyalty tier."
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSpreadRow.tsx
 msgid "Collateral spread"
 msgstr "Collateral spread"
@@ -3460,6 +3540,10 @@ msgstr "Trigger price"
 #: src/components/AbFlagsSettings/AbFlagsSettings.tsx
 msgid "No AB flags"
 msgstr "No AB flags"
+
+#: src/pages/Status/components/BufferGauges.tsx
+msgid "Junior TrancheVault not configured for this deployment."
+msgstr "Junior TrancheVault not configured for this deployment."
 
 #: src/pages/UiPage/UiPage.tsx
 msgid "Line heights"
@@ -3661,6 +3745,10 @@ msgstr "Funds claimed"
 msgid "Missing claim params. Retry in a few seconds"
 msgstr "Missing claim params. Retry in a few seconds"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Full leaderboard requires Subgraph"
+msgstr "Full leaderboard requires Subgraph"
+
 #: src/domain/synthetics/positions/utils.ts
 msgid "Trigger"
 msgstr "Trigger"
@@ -3810,6 +3898,10 @@ msgstr "GMX V2 data analytics within Telegram"
 msgid "Runs entirely on public chains"
 msgstr "Runs entirely on public chains"
 
+#: src/pages/Status/components/OIStats.tsx
+msgid "Current"
+msgstr "Current"
+
 #: src/domain/synthetics/orders/utils.tsx
 msgid "May lack liquidity for parts of this order when triggered"
 msgstr "May lack liquidity for parts of this order when triggered"
@@ -3819,6 +3911,10 @@ msgstr "May lack liquidity for parts of this order when triggered"
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdrawing…"
 msgstr "Withdrawing…"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Protected (30d+)"
+msgstr "Protected (30d+)"
 
 #: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Rebasing balance synced"
@@ -3989,6 +4085,10 @@ msgstr "Copin"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Funding fee"
 msgstr "Funding fee"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "System Status: Normal"
+msgstr "System Status: Normal"
 
 #: src/components/MetricsDebugSettings/MetricsDebugSettings.tsx
 #: src/components/OrderItem/TwapOrdersList/TwapOrdersList.tsx
@@ -4261,6 +4361,10 @@ msgstr "How do I get started on GMX?"
 msgid "Acceptable price"
 msgstr "Acceptable price"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "ADL Score"
+msgstr "ADL Score"
+
 #: src/components/OldSubaccountWithdraw/OldSubaccountWithdraw.tsx
 msgid "Withdrawing from subaccount..."
 msgstr "Withdrawing from subaccount..."
@@ -4292,6 +4396,10 @@ msgstr "20s"
 msgid "Virtual market ID"
 msgstr "Virtual market ID"
 
+#: src/pages/Status/components/BufferGauges.tsx
+msgid "Junior Buffer (PAYOUT Tranche)"
+msgstr "Junior Buffer (PAYOUT Tranche)"
+
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/components/PositionEditor/PositionEditorAdvancedRows.tsx
 #: src/components/PositionSeller/PositionSellerAdvancedDisplayRows.tsx
@@ -4300,7 +4408,10 @@ msgstr "Virtual market ID"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
+#: src/pages/Status/components/AdlLeaderboard.tsx
+#: src/pages/Status/components/AdlLeaderboard.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "Leverage"
@@ -4344,6 +4455,10 @@ msgstr "WIN/LOSS"
 #: src/components/OldSubaccountWithdraw/OldSubaccountWithdraw.tsx
 msgid "Withdrawing..."
 msgstr "Withdrawing..."
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Phase 3 · Trade ADL"
+msgstr "Phase 3 · Trade ADL"
 
 #: src/components/Claims/ClaimsHistory.tsx
 msgid "No claims match the selected filters"
@@ -4604,6 +4719,10 @@ msgstr "<0>Invalid permit signature. Try again</0>"
 msgid "Positive factor"
 msgstr "Positive factor"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "High leverage increases ADL priority. Reduce leverage or hold longer to improve protection."
+msgstr "High leverage increases ADL priority. Reduce leverage or hold longer to improve protection."
+
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 msgid "Full position close"
 msgstr "Full position close"
@@ -4738,6 +4857,10 @@ msgstr "Edit {0}"
 #: src/components/GmxAccountModal/InsufficientWntBanner.tsx
 msgid "<0>Buy</0> {wrappedNativeTokenSymbol}."
 msgstr "<0>Buy</0> {wrappedNativeTokenSymbol}."
+
+#: src/pages/Status/components/ProtocolCommitmentBanner.tsx
+msgid "This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 7 (contract termination) rather than increasing costs for existing users. The 7-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order."
+msgstr "This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 7 (contract termination) rather than increasing costs for existing users. The 7-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order."
 
 #: src/pages/Admin/AdminPage.tsx
 #: src/pages/Admin/AdminPage.tsx
@@ -4877,6 +5000,10 @@ msgstr "v:"
 #: src/components/PoolSelector2/PoolSelector2.tsx
 msgid "{formattedNetRate} / 1H"
 msgstr "{formattedNetRate} / 1H"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "No active hedge (short) position in this vault."
+msgstr "No active hedge (short) position in this vault."
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
@@ -5239,6 +5366,10 @@ msgstr "Terms and conditions"
 msgid "TVL (SUPPLY)"
 msgstr "TVL (SUPPLY)"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Hedge Protection Status"
+msgstr "Hedge Protection Status"
+
 #: src/components/PositionSeller/CollateralDestinationDialog.tsx
 msgid "Update Default Destination"
 msgstr "Update Default Destination"
@@ -5509,6 +5640,10 @@ msgstr "Set TP/SL"
 msgid "Max {MAX_REFERRAL_CODE_LENGTH} characters"
 msgstr "Max {MAX_REFERRAL_CODE_LENGTH} characters"
 
+#: src/pages/Status/components/OIStats.tsx
+msgid "OI Utilization"
+msgstr "OI Utilization"
+
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Convert to Paid-Short"
 msgstr "Convert to Paid-Short"
@@ -5668,6 +5803,10 @@ msgstr "Permits testing"
 #: src/pages/ParseTransaction/ParseTransaction.tsx
 msgid "Invalid transaction"
 msgstr "Invalid transaction"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Hedge Protection Status (Phase 4 ADL)"
+msgstr "Hedge Protection Status (Phase 4 ADL)"
 
 #: src/components/TradeboxPoolWarnings/TradeboxPoolWarnings.tsx
 msgid "Insufficient liquidity in {0} pool. Select a different pool."
@@ -5951,6 +6090,10 @@ msgstr "Settings"
 msgid "Increase request cancelled"
 msgstr "Increase request cancelled"
 
+#: src/pages/Status/components/BufferGauges.tsx
+msgid "Remaining capacity"
+msgstr "Remaining capacity"
+
 #: src/pages/UiPage/UiPage.tsx
 msgid "leading-1"
 msgstr "leading-1"
@@ -6186,6 +6329,14 @@ msgstr "Trade page"
 #: src/pages/Dashboard/OverviewCard.tsx
 msgid "Botanix"
 msgstr "Botanix"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Short (hedge) positions"
+msgstr "Short (hedge) positions"
+
+#: src/pages/Status/components/OIStats.tsx
+msgid "FR cost / buffered yield"
+msgstr "FR cost / buffered yield"
 
 #: src/components/GmSwap/GmFees/GmFees.tsx
 #: src/components/TradeBox/TradeBoxRows/PriceImpactFeesRow.tsx
@@ -6766,6 +6917,10 @@ msgstr "Failed to claim price impact rebates"
 msgid "Paste hex error data to decode"
 msgstr "Paste hex error data to decode"
 
+#: src/pages/Status/components/OIStats.tsx
+msgid "Hedge Inventory"
+msgstr "Hedge Inventory"
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Min collateral"
 msgstr "Min collateral"
@@ -6893,6 +7048,10 @@ msgstr "Execution price didn't meet acceptable price"
 msgid "Position would be liquidatable"
 msgstr "Position would be liquidatable"
 
+#: src/pages/Status/components/BufferGauges.tsx
+msgid "LP Boost"
+msgstr "LP Boost"
+
 #: landing/src/pages/Home/SocialSection/SocialSection.tsx
 #: src/components/Footer/constants.tsx
 msgid "Media kit"
@@ -6935,6 +7094,10 @@ msgstr "Estimated time to liquidation"
 msgid "Mark price for the liquidation"
 msgstr "Mark price for the liquidation"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "New ({ageDays}d)"
+msgstr "New ({ageDays}d)"
+
 #: src/components/GmList/GmTokensTotalBalanceInfo.tsx
 msgid "Projected from last {daysConsidered} days' APY"
 msgstr "Projected from last {daysConsidered} days' APY"
@@ -6946,6 +7109,10 @@ msgstr "Settling position fees..."
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "GMX announcements and updates"
 msgstr "GMX announcements and updates"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Mode A (Auto-Close) ⚠"
+msgstr "Mode A (Auto-Close) ⚠"
 
 #: src/components/TPSLModal/AddTPSLModal.tsx
 msgid "Edit TP/SL size"
@@ -7243,6 +7410,10 @@ msgstr "RPC debug"
 msgid "No items yet"
 msgstr "No items yet"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Protocol Defense Status"
+msgstr "Protocol Defense Status"
+
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Trade with confidence"
 msgstr "Trade with confidence"
@@ -7343,6 +7514,10 @@ msgstr "Insufficient gas balance"
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "V1 rebates"
 msgstr "V1 rebates"
+
+#: src/pages/Status/components/OIStats.tsx
+msgid "Hedge FR (Shorts perspective)"
+msgstr "Hedge FR (Shorts perspective)"
 
 #: src/components/GmSwap/GmSwapBox/GmSwapBoxHeader.tsx
 msgid "Sell GLV"
@@ -7478,6 +7653,7 @@ msgstr "Version:"
 
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/BridgeModal/BridgeOutModal.tsx
+#: src/pages/Status/components/BufferGauges.tsx
 msgid "Available"
 msgstr "Available"
 
@@ -7552,6 +7728,10 @@ msgstr "Bond Protocol"
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "Withdrawing {0} to {1} is not supported"
 msgstr "Withdrawing {0} to {1} is not supported"
+
+#: src/pages/Status/StatusPage.tsx
+msgid "Protocol Status"
+msgstr "Protocol Status"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Back to Hedge"
@@ -7637,6 +7817,10 @@ msgstr "ENTRY PRICE"
 msgid "Display PnL after fees"
 msgstr "Display PnL after fees"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode A ⚠"
+msgstr "Mode A ⚠"
+
 #: src/components/PositionDropdown/PositionDropdown.tsx
 msgid "Share position"
 msgstr "Share position"
@@ -7713,6 +7897,10 @@ msgstr "Project"
 #: src/components/TVChart/ChartHeader.tsx
 msgid "24h low"
 msgstr "24h low"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Low leverage and long tenure protect you. You are in the loyalty tier."
+msgstr "Low leverage and long tenure protect you. You are in the loyalty tier."
 
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX from TraderJoe"
@@ -7984,6 +8172,14 @@ msgstr "Maximum actions before reauthorization required"
 msgid "GMX risk monitoring"
 msgstr "GMX risk monitoring"
 
+#: src/pages/Status/components/OIStats.tsx
+msgid "Vault Yield APR"
+msgstr "Vault Yield APR"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "High ADL risk. Reduce leverage or hold position longer to improve protection."
+msgstr "High ADL risk. Reduce leverage or hold position longer to improve protection."
+
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "Minimum capital used of {0} required to qualify for rankings"
 msgstr "Minimum capital used of {0} required to qualify for rankings"
@@ -8110,6 +8306,10 @@ msgstr "Order exceeds max leverage. Click to auto-adjust."
 #: src/components/TradeBox/hooks/useTradeButtonState.tsx
 msgid "No swap path available"
 msgstr "No swap path available"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Mode B (Convert)"
+msgstr "Mode B (Convert)"
 
 #: src/components/TradeHistory/keys.ts
 msgid "Execute Stop-Loss"
@@ -8270,6 +8470,10 @@ msgstr "Insufficient pool liquidity"
 msgid "No opportunities on Botanix yet"
 msgstr "No opportunities on Botanix yet"
 
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "Low ADL risk. Your position has low leverage or minimal unrealized profit."
+msgstr "Low ADL risk. Your position has low leverage or minimal unrealized profit."
+
 #: landing/src/pages/Home/SocialSection/SocialSlider.tsx
 msgid "<0><1>#GMX V2</1>'s OI looks great</0><2>GMX V2 > GMX V1 + Kwenta + Polynomial</2><3>Check more: <4>https://tradao.xyz/#/open-interest</4></3>"
 msgstr "<0><1>#GMX V2</1>'s OI looks great</0><2>GMX V2 > GMX V1 + Kwenta + Polynomial</2><3>Check more: <4>https://tradao.xyz/#/open-interest</4></3>"
@@ -8389,6 +8593,10 @@ msgstr "less than a minute"
 #: src/components/SideNav/SideNav.tsx
 msgid "Ecosystem"
 msgstr "Ecosystem"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "3. Mode (Auto-Close first)"
+msgstr "3. Mode (Auto-Close first)"
 
 #: src/pages/PriceImpactRebatesStats/PriceImpactRebatesStats.tsx
 msgid "Next"
@@ -9248,6 +9456,10 @@ msgstr "V2 rebates"
 msgid "Select asset to deposit"
 msgstr "Select asset to deposit"
 
+#: src/pages/Status/components/BufferGauges.tsx
+msgid "Phase 2-5"
+msgstr "Phase 2-5"
+
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Max GM buyable amount reached"
 msgstr "Max GM buyable amount reached"
@@ -9489,6 +9701,10 @@ msgstr "What is GLV exactly?"
 msgid "Download"
 msgstr "Download"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "ADL Mode"
+msgstr "ADL Mode"
+
 #: src/pages/RpcDebug/parts.tsx
 msgid "Up"
 msgstr "Up"
@@ -9612,6 +9828,10 @@ msgstr "Performance and chart data are based on UTC times"
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useGmSwapSubmitState.tsx
 msgid "Sell {operationTokenSymbol}"
 msgstr "Sell {operationTokenSymbol}"
+
+#: src/pages/Status/StatusPage.tsx
+msgid "Trade ADL in progress for {elapsed}. Long positions with high leverage × profit are being force-closed."
+msgstr "Trade ADL in progress for {elapsed}. Long positions with high leverage × profit are being force-closed."
 
 #: src/components/SettingsModal/DisplaySettings.tsx
 msgid "When on, leverage is set manually and determines margin and position size. When off, margin and size are set freely, and leverage is derived."
@@ -10895,6 +11115,10 @@ msgstr "Status"
 msgid "Somewhat unimportant text, but still readable"
 msgstr "Somewhat unimportant text, but still readable"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Consider reducing leverage to improve your ADL protection ranking."
+msgstr "Consider reducing leverage to improve your ADL protection ranking."
+
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "30s"
 msgstr "30s"
@@ -10998,6 +11222,10 @@ msgstr "Acceptable price impact"
 #: src/components/PositionEditor/usePositionEditorButtonState.tsx
 msgid "Reduce withdrawal to match the max. <0>Read more</0>.<1/><2/><3>Set max withdrawal</3>"
 msgstr "Reduce withdrawal to match the max. <0>Read more</0>.<1/><2/><3>Set max withdrawal</3>"
+
+#: src/pages/Status/components/AdlLeaderboard.tsx
+msgid "ADL Priority Factors (Hedge Mode):"
+msgstr "ADL Priority Factors (Hedge Mode):"
 
 #: src/components/GmList/GmList.tsx
 #: src/components/GmList/GmList.tsx
@@ -11274,6 +11502,10 @@ msgstr "Pool USD short"
 msgid "{0} orders not updated, limit reached"
 msgstr "{0} orders not updated, limit reached"
 
+#: src/pages/Status/components/BufferGauges.tsx
+msgid "Phase 2-4"
+msgstr "Phase 2-4"
+
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "Proportional stored impact"
 msgstr "Proportional stored impact"
@@ -11289,6 +11521,10 @@ msgstr "EIP-4844, 20-27 Mar"
 #: src/pages/Hedge/HedgePage.tsx
 msgid "Vault APY"
 msgstr "Vault APY"
+
+#: src/pages/Status/components/OIStats.tsx
+msgid "+ve = shorts receive payment"
+msgstr "+ve = shorts receive payment"
 
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Save on costs"
@@ -11315,6 +11551,10 @@ msgstr "No markets found"
 #: src/pages/Portfolio/PortfolioPage.tsx
 msgid "利回り"
 msgstr "利回り"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Step {defenseStep}:"
+msgstr "Step {defenseStep}:"
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Insufficient collateral. Need more"
@@ -11550,6 +11790,10 @@ msgstr "Copy link"
 msgid "Referral code created"
 msgstr "Referral code created"
 
+#: src/pages/Status/components/BufferGauges.tsx
+msgid "Internal Buffers"
+msgstr "Internal Buffers"
+
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Funds bridging to..."
@@ -11569,6 +11813,10 @@ msgstr "Funds bridging to..."
 #: src/components/Referrals/JoinReferralCode.tsx
 msgid "Network fee"
 msgstr "Network fee"
+
+#: src/pages/Status/StatusPage.tsx
+msgid "Real-time solvency dashboard. 7-step defense sequence transparency."
+msgstr "Real-time solvency dashboard. 7-step defense sequence transparency."
 
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivated"

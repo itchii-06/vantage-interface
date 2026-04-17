@@ -12,6 +12,7 @@
  */
 
 import { t } from "@lingui/macro";
+import { formatDistanceToNow } from "date-fns";
 import { Contract, formatEther, parseEther, parseUnits } from "ethers";
 import { useEffect, useMemo, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
@@ -390,6 +391,77 @@ function DeltaNeutralBox({ symbol, rwaAmount, spotPriceUsd, sizeDeltaUsd }: Delt
 }
 
 // ---------------------------------------------------------------------------
+// HedgeSafetyDashboard — ADL protection status for this position
+// ---------------------------------------------------------------------------
+
+type HedgeSafetyDashboardProps = {
+  sizeUsd: number;
+  collateralUsd: number;
+  openedAtMs: number;
+  shouldConvertOnADL: boolean;
+};
+
+function HedgeSafetyDashboard({ sizeUsd, collateralUsd, openedAtMs, shouldConvertOnADL }: HedgeSafetyDashboardProps) {
+  const lev = collateralUsd > 0 ? sizeUsd / collateralUsd : 0;
+  const ageMs = Date.now() - openedAtMs;
+  const ageDays = Math.floor(ageMs / 86_400_000);
+  const loyaltyLabel = openedAtMs > 0 ? formatDistanceToNow(new Date(openedAtMs), { addSuffix: false }) : "—";
+
+  const risk: "low" | "warning" | "high" = lev >= 5 ? "high" : lev >= 3 || ageDays < 7 ? "warning" : "low";
+
+  const BADGE: Record<string, string> = {
+    low: "bg-green-900/60 text-green-400 border border-green-700",
+    warning: "bg-yellow-900/60 text-yellow-400 border border-yellow-700",
+    high: "bg-red-900/60 text-red-400 border border-red-700",
+  };
+  const LABEL: Record<string, string> = { low: "Safe", warning: "Warning", high: "High Risk" };
+
+  return (
+    <div className="mb-16 rounded-4 border border-stroke-primary bg-slate-900/40 p-16">
+      <div className="mb-12 flex items-center justify-between">
+        <span className="text-12 font-medium text-slate-400">{t`Hedge Protection Status (Phase 4 ADL)`}</span>
+        <span className={`rounded-full px-10 py-3 text-11 font-medium ${BADGE[risk]}`}>{LABEL[risk]}</span>
+      </div>
+
+      <div className="grid grid-cols-3 gap-12 text-center">
+        <div>
+          <p className="text-10 text-slate-500">{t`Leverage`}</p>
+          <p
+            className={`text-13 font-medium ${lev >= 5 ? "text-red-400" : lev >= 3 ? "text-yellow-400" : "text-green-400"}`}
+          >
+            {lev.toFixed(1)}×
+          </p>
+        </div>
+        <div>
+          <p className="text-10 text-slate-500">{t`Loyalty Timer`}</p>
+          <p
+            className={`text-13 font-medium ${ageDays >= 30 ? "text-green-400" : ageDays >= 7 ? "text-yellow-400" : "text-red-400"}`}
+          >
+            {loyaltyLabel}
+          </p>
+        </div>
+        <div>
+          <p className="text-10 text-slate-500">{t`ADL Mode`}</p>
+          <p className={`text-13 font-medium ${shouldConvertOnADL ? "text-slate-400" : "text-orange-400"}`}>
+            {shouldConvertOnADL ? t`Mode B` : t`Mode A ⚠`}
+          </p>
+        </div>
+      </div>
+
+      {risk === "low" && (
+        <p className="mt-10 text-11 text-green-700">{t`Low leverage and long tenure protect you. You are in the loyalty tier.`}</p>
+      )}
+      {risk === "warning" && (
+        <p className="text-yellow-700 mt-10 text-11">{t`Consider reducing leverage to improve your ADL protection ranking.`}</p>
+      )}
+      {risk === "high" && (
+        <p className="mt-10 text-11 text-red-700">{t`High leverage increases ADL priority. Reduce leverage or hold longer to improve protection.`}</p>
+      )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // CurrentPositionPanel — Section 4
 // ---------------------------------------------------------------------------
 
@@ -676,15 +748,23 @@ export default function HedgeDetailPage() {
 
               {/* Position details */}
               {pageData.userPosition ? (
-                <CurrentPositionPanel
-                  symbol={cfg.symbol}
-                  spotPriceUsd={spotPriceUsd}
-                  sizeUsd={pageData.userPosition.sizeUsd}
-                  collateralUsd={pageData.userPosition.collateralUsd}
-                  averagePrice={pageData.userPosition.averagePrice}
-                  collateralToken={pageData.userPosition.collateralToken}
-                  shouldConvertOnADL={pageData.userPosition.shouldConvertOnADL}
-                />
+                <>
+                  <HedgeSafetyDashboard
+                    sizeUsd={pageData.userPosition.sizeUsd}
+                    collateralUsd={pageData.userPosition.collateralUsd}
+                    openedAtMs={0}
+                    shouldConvertOnADL={pageData.userPosition.shouldConvertOnADL}
+                  />
+                  <CurrentPositionPanel
+                    symbol={cfg.symbol}
+                    spotPriceUsd={spotPriceUsd}
+                    sizeUsd={pageData.userPosition.sizeUsd}
+                    collateralUsd={pageData.userPosition.collateralUsd}
+                    averagePrice={pageData.userPosition.averagePrice}
+                    collateralToken={pageData.userPosition.collateralToken}
+                    shouldConvertOnADL={pageData.userPosition.shouldConvertOnADL}
+                  />
+                </>
               ) : (
                 <p className="text-13 text-slate-500">{t`No open short position. Use the form above to open one.`}</p>
               )}
