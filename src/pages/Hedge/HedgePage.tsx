@@ -13,7 +13,10 @@ import { formatEther } from "ethers";
 import { useHistory } from "react-router-dom";
 
 import { useHedgeList } from "domain/vantage/hedge/useHedgeList";
-import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL } from "domain/vantage/vaults/vaultConfig";
+import { useStatusPageData } from "domain/vantage/solvency/useStatusPageData";
+import { VAULT_CONFIGS, ASSET_TYPE_COLOR, ASSET_TYPE_LABEL } from "domain/vantage/vaults/vaultConfig";
+import { useChainId } from "lib/chains";
+import { SolvencyBadge } from "pages/Status/components/SolvencySpeedometer";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
@@ -44,9 +47,13 @@ function apyColor(apy: number | null): string {
 // Component
 // ---------------------------------------------------------------------------
 
+const PRIMARY_CFG = VAULT_CONFIGS.find((v) => v.assetType !== "stable") ?? VAULT_CONFIGS[0];
+
 export default function HedgePage() {
   const history = useHistory();
+  const { chainId } = useChainId();
   const items = useHedgeList();
+  const { defenseStep } = useStatusPageData(chainId, PRIMARY_CFG);
 
   return (
     <div className="w-full">
@@ -62,6 +69,9 @@ export default function HedgePage() {
           <p className="text-body-medium mt-4 text-slate-400">
             {t`Delta-neutral strategy: earn RWA yield + short funding rate with zero price exposure.`}
           </p>
+          <div className="mt-10">
+            <SolvencyBadge defenseStep={defenseStep} />
+          </div>
         </div>
 
         {/* Table */}

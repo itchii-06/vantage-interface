@@ -3875,5 +3875,44 @@
     ],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "juniorDeficitAbsorbed",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "_usdAmount", "type": "uint256" }],
+    "name": "absorbFRDeficit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "_usdAmount", "type": "uint256" }],
+    "name": "restoreJuniorCapacity",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": false, "internalType": "uint256", "name": "usdAmount", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "totalAbsorbed", "type": "uint256" }
+    ],
+    "name": "FRDeficitAbsorbed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": false, "internalType": "uint256", "name": "usdAmount", "type": "uint256" },
+      { "indexed": false, "internalType": "uint256", "name": "remainingAbsorbed", "type": "uint256" }
+    ],
+    "name": "JuniorCapacityRestored",
+    "type": "event"
   }
 ]

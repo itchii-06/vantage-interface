@@ -22,6 +22,7 @@ const NAV_ITEMS = [
   { key: "trade", label: "Trade", to: "/trade" },
   { key: "vaults", label: "Vaults", to: "/vaults" },
   { key: "portfolio", label: "Portfolio", to: "/portfolio" },
+  { key: "status", label: "Status", to: "/status" },
 ] as const;
 
 export function AppNav() {
