@@ -3,14 +3,11 @@ import { motion } from "framer-motion";
 import { useCountUp } from "./hooks/useCountUp";
 
 const COLORS = {
-  bg: "#07070F",
-  bgCard: "#0E0E1C",
-  borderSubtle: "rgba(255,255,255,0.07)",
-  neonYellow: "#F5E642",
-  neonPink: "#FF3CAC",
-  neonCyan: "#3CF7FF",
+  bg: "#000000",
+  bgCard: "#0C0C0C",
+  border: "rgba(255,255,255,0.1)",
   textPrimary: "#FFFFFF",
-  textMuted: "#6B6B99",
+  textMuted: "#888888",
 };
 
 interface StatItemProps {
@@ -24,14 +21,14 @@ const STAT_CONTAINER_STYLE: React.CSSProperties = {
   textAlign: "center",
   padding: "20px 32px",
   background: COLORS.bgCard,
-  borderRadius: "16px",
-  border: `1px solid ${COLORS.borderSubtle}`,
+  borderRadius: "4px",
+  border: `1px solid ${COLORS.border}`,
   minWidth: "140px",
 };
 
 const STAT_VALUE_STYLE: React.CSSProperties = {
   fontSize: "28px",
-  fontWeight: 800,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   letterSpacing: "-1px",
   display: "block",
@@ -66,53 +63,6 @@ const STATS: StatItemProps[] = [
   { target: 142, format: "integer", label: "Positions Protected" },
 ];
 
-const BLOB_ANIMATE_REPEAT_TYPE = "reverse" as const;
-
-const BLOB_BASE: React.CSSProperties = {
-  position: "absolute",
-  borderRadius: "50%",
-  pointerEvents: "none",
-};
-
-const BLOBS = [
-  {
-    style: {
-      ...BLOB_BASE,
-      width: 600,
-      height: 600,
-      background: "radial-gradient(ellipse at center, rgba(245,230,66,0.18) 0%, transparent 70%)",
-      top: "5%",
-      left: "5%",
-    } as React.CSSProperties,
-    animate: { x: [0, 40, -20, 0], y: [0, -30, 50, 0] },
-    transition: { duration: 18, repeat: Infinity, repeatType: BLOB_ANIMATE_REPEAT_TYPE, ease: "easeInOut" },
-  },
-  {
-    style: {
-      ...BLOB_BASE,
-      width: 500,
-      height: 500,
-      background: "radial-gradient(ellipse at center, rgba(255,60,172,0.15) 0%, transparent 70%)",
-      top: "20%",
-      right: "5%",
-    } as React.CSSProperties,
-    animate: { x: [0, -50, 20, 0], y: [0, 40, -30, 0] },
-    transition: { duration: 22, repeat: Infinity, repeatType: BLOB_ANIMATE_REPEAT_TYPE, ease: "easeInOut" },
-  },
-  {
-    style: {
-      ...BLOB_BASE,
-      width: 400,
-      height: 400,
-      background: "radial-gradient(ellipse at center, rgba(60,247,255,0.12) 0%, transparent 70%)",
-      bottom: "10%",
-      left: "30%",
-    } as React.CSSProperties,
-    animate: { x: [0, 30, -40, 0], y: [0, -20, 30, 0] },
-    transition: { duration: 15, repeat: Infinity, repeatType: BLOB_ANIMATE_REPEAT_TYPE, ease: "easeInOut" },
-  },
-];
-
 const SECTION_STYLE: React.CSSProperties = {
   position: "relative",
   minHeight: "100vh",
@@ -139,20 +89,24 @@ const BADGE_STYLE: React.CSSProperties = {
   display: "inline-flex",
   alignItems: "center",
   gap: "8px",
-  background: "rgba(245,230,66,0.1)",
-  border: "1px solid rgba(245,230,66,0.3)",
-  borderRadius: "100px",
+  background: "rgba(255,255,255,0.06)",
+  border: `1px solid ${COLORS.border}`,
+  borderRadius: "4px",
   padding: "6px 16px",
   marginBottom: "28px",
 };
 
 const HEADLINE_STYLE: React.CSSProperties = {
   fontSize: "clamp(42px, 7vw, 80px)",
-  fontWeight: 900,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   lineHeight: 1.0,
   letterSpacing: "-3px",
   marginBottom: "24px",
+};
+
+const HEDGED_SPAN_STYLE: React.CSSProperties = {
+  color: COLORS.textMuted,
 };
 
 const SUBTEXT_STYLE: React.CSSProperties = {
@@ -172,12 +126,12 @@ const CTA_ROW_STYLE: React.CSSProperties = {
 };
 
 const PRIMARY_BTN_STYLE: React.CSSProperties = {
-  background: COLORS.neonYellow,
-  color: "#07070F",
-  fontWeight: 800,
+  background: "#FFFFFF",
+  color: "#000000",
+  fontWeight: 600,
   fontSize: "16px",
   padding: "14px 32px",
-  borderRadius: "12px",
+  borderRadius: "4px",
   border: "none",
   cursor: "pointer",
   textDecoration: "none",
@@ -188,11 +142,11 @@ const PRIMARY_BTN_STYLE: React.CSSProperties = {
 const SECONDARY_BTN_STYLE: React.CSSProperties = {
   background: "transparent",
   color: COLORS.textPrimary,
-  fontWeight: 600,
+  fontWeight: 500,
   fontSize: "16px",
   padding: "14px 32px",
-  borderRadius: "12px",
-  border: `1px solid ${COLORS.borderSubtle}`,
+  borderRadius: "4px",
+  border: `1px solid ${COLORS.border}`,
   cursor: "pointer",
   textDecoration: "none",
   display: "inline-block",
@@ -206,18 +160,11 @@ const STATS_GRID_STYLE: React.CSSProperties = {
 };
 
 const BADGE_LABEL_STYLE: React.CSSProperties = {
-  color: COLORS.neonYellow,
+  color: COLORS.textPrimary,
   fontSize: "11px",
-  fontWeight: 700,
+  fontWeight: 600,
   letterSpacing: "1.5px",
   textTransform: "uppercase",
-};
-
-const GRADIENT_TEXT_STYLE: React.CSSProperties = {
-  background: `linear-gradient(90deg, ${COLORS.neonYellow} 0%, ${COLORS.neonPink} 60%)`,
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
 };
 
 const HERO_BADGE_INITIAL = { opacity: 0, y: 30 };
@@ -243,11 +190,6 @@ const HERO_STATS_TRANSITION = { duration: 0.5, delay: 0.5, ease: "easeOut" };
 export function Hero() {
   return (
     <section style={SECTION_STYLE}>
-      {/* Mesh gradient blobs */}
-      {BLOBS.map((blob, i) => (
-        <motion.div key={i} style={blob.style} animate={blob.animate} transition={blob.transition} />
-      ))}
-
       <div style={INNER_STYLE}>
         <motion.div initial={HERO_BADGE_INITIAL} animate={HERO_BADGE_ANIMATE} transition={HERO_BADGE_TRANSITION}>
           <div style={BADGE_STYLE}>
@@ -261,7 +203,7 @@ export function Hero() {
           animate={HERO_H1_ANIMATE}
           transition={HERO_H1_TRANSITION}
         >
-          Earn RWA Yield. <span style={GRADIENT_TEXT_STYLE}>Perfectly Hedged.</span>
+          Earn RWA Yield. <span style={HEDGED_SPAN_STYLE}>Perfectly Hedged.</span>
         </motion.h1>
 
         <motion.p
@@ -285,11 +227,9 @@ export function Hero() {
             style={PRIMARY_BTN_STYLE}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-              (e.currentTarget as HTMLElement).style.boxShadow = `0 8px 32px rgba(245,230,66,0.4)`;
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-              (e.currentTarget as HTMLElement).style.boxShadow = "none";
             }}
           >
             Start Earning →
@@ -298,10 +238,10 @@ export function Hero() {
             href="#vaults"
             style={SECONDARY_BTN_STYLE}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.25)";
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.3)";
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = COLORS.borderSubtle;
+              (e.currentTarget as HTMLElement).style.borderColor = COLORS.border;
             }}
           >
             Explore Vaults

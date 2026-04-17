@@ -575,10 +575,6 @@ msgstr "未实现费用"
 msgid "Max slippage precision is 0.01%"
 msgstr "最大滑点精度为 0.01%"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "LP Management"
-#~ msgstr ""
-
 #: landing/src/pages/Home/SocialSection/SocialSection.tsx
 msgid "Join"
 msgstr "加入"
@@ -3127,11 +3123,6 @@ msgstr "复制地址"
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr "与 Uniswap V2 风格基准相比的预计年化回报。<0/><1/>注意：短期数据可能无法反映长期表现。<2/><3/><4>在 Dune 上查看详细数据</4>。"
 
-#: src/pages/Admin/AdminPage.tsx
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "Disabled"
-#~ msgstr ""
-
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Long profit positions"
 msgstr ""
@@ -3526,10 +3517,6 @@ msgstr "兑换价格影响过高"
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "可在 {minutesText}{seconds}s 后取消"
-
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "No cap"
-#~ msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -4075,10 +4062,6 @@ msgstr "提取并解除 GMX 锁定"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Copin"
 msgstr "Copin"
-
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
-#~ msgstr ""
 
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
@@ -11664,10 +11647,6 @@ msgstr "此网络不支持智能钱包"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Lent position impact pool amount"
 msgstr "借出的仓位影响池金额"
-
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Est. VLP received"
-#~ msgstr ""
 
 #: src/domain/synthetics/orders/utils.tsx
 msgid "short"

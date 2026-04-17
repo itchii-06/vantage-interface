@@ -575,10 +575,6 @@ msgstr "Нереализованные комиссии"
 msgid "Max slippage precision is 0.01%"
 msgstr "Максимальная точность проскальзывания — 0,01%"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "LP Management"
-#~ msgstr ""
-
 #: landing/src/pages/Home/SocialSection/SocialSection.tsx
 msgid "Join"
 msgstr "Присоединиться"
@@ -3127,11 +3123,6 @@ msgstr "Копировать адрес"
 msgid "Projected yearly return vs. a Uniswap V2-style benchmark.<0/><1/>Note: Short timeframes may not reflect long-term performance.<2/><3/><4>View detailed stats on Dune</4>."
 msgstr "Прогнозируемая годовая доходность по сравнению с бенчмарком в стиле Uniswap V2.<0/><1/>Примечание: короткие временные периоды могут не отражать долгосрочную доходность.<2/><3/><4>Подробная статистика на Dune</4>."
 
-#: src/pages/Admin/AdminPage.tsx
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "Disabled"
-#~ msgstr ""
-
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Long profit positions"
 msgstr ""
@@ -3526,10 +3517,6 @@ msgstr "Высокое влияние на цену при обмене"
 #: src/domain/synthetics/orders/useDisabledCancelMarketOrderMessage.ts
 msgid "Cancellable in {minutesText}{seconds}s"
 msgstr "Отмена доступна через {minutesText}{seconds}с"
-
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "No cap"
-#~ msgstr ""
 
 #: src/components/OrderItem/OrderItem.tsx
 #: src/components/TradeBox/TradeBox.tsx
@@ -4075,10 +4062,6 @@ msgstr "Вывести и снять резервирование GMX"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Copin"
 msgstr "Copin"
-
-#: src/pages/Admin/AdminPage.tsx
-#~ msgid "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 means no restriction."
-#~ msgstr ""
 
 #: src/components/ClaimModal/ClaimModal.tsx
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
@@ -11664,10 +11647,6 @@ msgstr "Смарт-кошельки не поддерживаются в это�
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Lent position impact pool amount"
 msgstr "Сумма, предоставленная из пула влияния на цену позиций"
-
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Est. VLP received"
-#~ msgstr ""
 
 #: src/domain/synthetics/orders/utils.tsx
 msgid "short"

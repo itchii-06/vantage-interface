@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 
 const COLORS = {
-  bg: "#07070F",
-  borderSubtle: "rgba(255,255,255,0.07)",
-  neonYellow: "#F5E642",
+  bg: "#000000",
+  border: "rgba(255,255,255,0.1)",
   textPrimary: "#FFFFFF",
-  textMuted: "#6B6B99",
+  textMuted: "#888888",
 };
 
 const NAV_STYLE: React.CSSProperties = {
@@ -14,9 +13,9 @@ const NAV_STYLE: React.CSSProperties = {
   left: 0,
   right: 0,
   zIndex: 100,
-  background: "rgba(7,7,15,0.85)",
+  background: "rgba(0,0,0,0.85)",
   backdropFilter: "blur(20px)",
-  borderBottom: `1px solid ${COLORS.borderSubtle}`,
+  borderBottom: `1px solid ${COLORS.border}`,
 };
 
 const INNER_STYLE: React.CSSProperties = {
@@ -39,30 +38,30 @@ const LOGO_STYLE: React.CSSProperties = {
 const LOGO_MARK_STYLE: React.CSSProperties = {
   width: "32px",
   height: "32px",
-  borderRadius: "8px",
-  background: `linear-gradient(135deg, ${COLORS.neonYellow} 0%, #FF3CAC 100%)`,
+  borderRadius: "4px",
+  background: "#FFFFFF",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontWeight: 800,
+  fontWeight: 600,
   fontSize: "14px",
-  color: "#07070F",
+  color: "#000000",
 };
 
 const LOGO_TEXT_STYLE: React.CSSProperties = {
   fontSize: "18px",
-  fontWeight: 800,
+  fontWeight: 600,
   color: COLORS.textPrimary,
   letterSpacing: "-0.5px",
 };
 
 const LAUNCH_BTN_STYLE: React.CSSProperties = {
-  background: COLORS.neonYellow,
-  color: "#07070F",
-  fontWeight: 700,
+  background: "#FFFFFF",
+  color: "#000000",
+  fontWeight: 600,
   fontSize: "14px",
   padding: "10px 20px",
-  borderRadius: "10px",
+  borderRadius: "4px",
   border: "none",
   cursor: "pointer",
   textDecoration: "none",
