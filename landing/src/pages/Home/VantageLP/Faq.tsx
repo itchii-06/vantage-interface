@@ -171,16 +171,6 @@ const INNER_STYLE: React.CSSProperties = {
   margin: "0 auto",
 };
 
-const LABEL_STYLE: React.CSSProperties = {
-  display: "inline-block",
-  fontSize: "11px",
-  fontWeight: 600,
-  color: COLORS.textMuted,
-  letterSpacing: "2px",
-  textTransform: "uppercase",
-  marginBottom: "16px",
-};
-
 const HEADING_STYLE: React.CSSProperties = {
   fontSize: "clamp(28px, 4vw, 44px)",
   fontWeight: 600,
@@ -210,7 +200,6 @@ export function Faq() {
           viewport={FAQ_HEADER_VIEWPORT}
           transition={FAQ_HEADER_TRANSITION}
         >
-          <span style={LABEL_STYLE}>FAQ</span>
           <h2 style={HEADING_STYLE}>Common Questions</h2>
         </motion.div>
 

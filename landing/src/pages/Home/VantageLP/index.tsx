@@ -22,7 +22,6 @@ export function VantageLP() {
       <Ticker />
       <Vaults />
       <HowItWorks />
-      <Ticker />
       <Faq />
       <Footer />
     </div>

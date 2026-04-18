@@ -290,16 +290,6 @@ const INNER_STYLE: React.CSSProperties = {
   margin: "0 auto",
 };
 
-const LABEL_STYLE: React.CSSProperties = {
-  display: "inline-block",
-  fontSize: "11px",
-  fontWeight: 600,
-  color: COLORS.textMuted,
-  letterSpacing: "2px",
-  textTransform: "uppercase",
-  marginBottom: "16px",
-};
-
 const HEADING_STYLE: React.CSSProperties = {
   fontSize: "clamp(32px, 5vw, 52px)",
   fontWeight: 600,
@@ -335,7 +325,6 @@ export function Vaults() {
           viewport={VAULTS_HEADER_VIEWPORT}
           transition={VAULTS_HEADER_TRANSITION}
         >
-          <span style={LABEL_STYLE}>Live Vaults</span>
           <h2 style={HEADING_STYLE}>Pick Your Strategy</h2>
           <p style={SUB_STYLE}>Each vault is actively hedged with a perpetual short.</p>
         </motion.div>

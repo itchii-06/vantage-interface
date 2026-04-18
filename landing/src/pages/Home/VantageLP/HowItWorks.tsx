@@ -1,5 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, type ReactNode } from "react";
+
+import { ShieldIcon, ShortIcon, YieldTokenIcon } from "./MergeIcons";
+import { BoltIcon, UnlockIcon, SparkleIcon, DropletIcon, DiamondIcon, ChartUpIcon } from "./StepIcons";
 
 const COLORS = {
   bg: "#000000",
@@ -11,7 +14,7 @@ const COLORS = {
 
 interface Step {
   number: string;
-  icon: string;
+  icon: ReactNode;
   title: string;
   description: string;
   animationProps: {
@@ -28,7 +31,7 @@ const STEP_ANIM = {
 const STEPS: Step[] = [
   {
     number: "01",
-    icon: "⚡",
+    icon: <BoltIcon />,
     title: "Dominate Risk with Minimal Capital",
     description:
       "10x leverage lets you deploy maximum interest rate hedging with a fraction of the capital. Small position, massive protection.",
@@ -36,7 +39,7 @@ const STEPS: Step[] = [
   },
   {
     number: "02",
-    icon: "🔓",
+    icon: <UnlockIcon />,
     title: "Break Free from Funding Rates",
     description:
       "Yield-bearing token earnings offset your short's FR payments. Maintain your hedge at near-zero ongoing cost — indefinitely.",
@@ -44,7 +47,7 @@ const STEPS: Step[] = [
   },
   {
     number: "03",
-    icon: "✨",
+    icon: <SparkleIcon />,
     title: "Earn While You Hedge",
     description:
       "Your backend assets keep generating yield while the short runs. A dual-yield structure that attacks and defends simultaneously.",
@@ -52,7 +55,7 @@ const STEPS: Step[] = [
   },
   {
     number: "04",
-    icon: "💧",
+    icon: <DropletIcon />,
     title: "LP 2.0: Liquidity That Never Loses",
     description:
       "A next-generation LP model that stays profitable even in bull markets. Delta-neutral design protects LP returns in every market condition.",
@@ -60,7 +63,7 @@ const STEPS: Step[] = [
   },
   {
     number: "05",
-    icon: "💎",
+    icon: <DiamondIcon />,
     title: "Put Your Margin to Work",
     description:
       "Yield-bearing tokens deposited as collateral keep earning while they secure your position. Nothing sits idle — ultimate capital efficiency.",
@@ -68,7 +71,7 @@ const STEPS: Step[] = [
   },
   {
     number: "06",
-    icon: "📈",
+    icon: <ChartUpIcon />,
     title: "Trade Interest Rate Futures",
     description:
       "Go long or short on future funding rates. Lock in your expected yield today, or speculate on where rates are headed — the first on-chain IR futures market.",
@@ -88,13 +91,9 @@ const CARD_BASE_STYLE: React.CSSProperties = {
 const ICON_WRAP_STYLE: React.CSSProperties = {
   width: "60px",
   height: "60px",
-  borderRadius: "4px",
-  background: "rgba(255,255,255,0.04)",
-  border: "1px solid rgba(255,255,255,0.08)",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontSize: "28px",
   margin: "0 auto 20px",
 };
 
@@ -183,7 +182,7 @@ const MERGE_STAGE_STYLE: React.CSSProperties = {
   position: "relative",
   width: "100%",
   maxWidth: "600px",
-  height: "160px",
+  height: "320px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -194,23 +193,19 @@ const MERGE_ICON_BASE: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  gap: "8px",
+  gap: "4px",
 };
 
 const MERGE_ICON_BOX: React.CSSProperties = {
-  width: "80px",
-  height: "80px",
-  borderRadius: "4px",
-  background: COLORS.bgCard,
-  border: `1px solid ${COLORS.border}`,
+  width: "256px",
+  height: "256px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontSize: "36px",
 };
 
 const MERGE_ICON_LABEL: React.CSSProperties = {
-  fontSize: "11px",
+  fontSize: "18px",
   fontWeight: 600,
   color: COLORS.textMuted,
   letterSpacing: "1px",
@@ -218,39 +213,13 @@ const MERGE_ICON_LABEL: React.CSSProperties = {
 };
 
 const SHIELD_BOX_STYLE: React.CSSProperties = {
-  width: "96px",
-  height: "96px",
+  width: "256px",
+  height: "256px",
   borderRadius: "4px",
-  background: COLORS.bgCard,
-  border: `1px solid rgba(255,255,255,0.25)`,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontSize: "44px",
-};
-
-const MERGE_DIVIDER_STYLE: React.CSSProperties = {
-  marginTop: "48px",
-  width: "1px",
-  height: "40px",
-  background: "linear-gradient(to bottom, rgba(255,255,255,0.15), transparent)",
-};
-
-const MERGE_RESULT_STYLE: React.CSSProperties = {
-  marginTop: "16px",
-  textAlign: "center",
-};
-
-const MERGE_RESULT_TITLE_STYLE: React.CSSProperties = {
-  fontSize: "18px",
-  fontWeight: 600,
-  color: COLORS.textPrimary,
-  marginBottom: "4px",
-};
-
-const MERGE_RESULT_DESC_STYLE: React.CSSProperties = {
-  fontSize: "14px",
-  color: COLORS.textMuted,
+  fontSize: "88px",
 };
 
 function MergeAnimation() {
@@ -258,7 +227,7 @@ function MergeAnimation() {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.6", "end 0.5"],
+    offset: ["start 0.4", "end 0.3"],
   });
 
   // RWA slides from left (-180px) to center (0)
@@ -270,10 +239,6 @@ function MergeAnimation() {
   // Shield fades in + scales up after merge
   const shieldOpacity = useTransform(scrollYProgress, [0.5, 0.75], [0, 1]);
   const shieldScale = useTransform(scrollYProgress, [0.5, 0.75], [0.6, 1]);
-  // Result text fades in
-  const resultOpacity = useTransform(scrollYProgress, [0.65, 0.85], [0, 1]);
-  const resultY = useTransform(scrollYProgress, [0.65, 0.85], [16, 0]);
-
   const rwaIconStyle = useMemo(
     () => ({ ...MERGE_ICON_BASE, left: "50%" as const, translateX: "-50%", x: rwaX, opacity: bothOpacity }),
     [rwaX, bothOpacity]
@@ -292,11 +257,6 @@ function MergeAnimation() {
     }),
     [shieldOpacity, shieldScale]
   );
-  const resultMotionStyle = useMemo(
-    () => ({ ...MERGE_RESULT_STYLE, opacity: resultOpacity, y: resultY }),
-    [resultOpacity, resultY]
-  );
-
   return (
     <div ref={ref} style={MERGE_SECTION_STYLE}>
       <span style={MERGE_LABEL_STYLE}>The Magic</span>
@@ -305,29 +265,28 @@ function MergeAnimation() {
       <div style={MERGE_STAGE_STYLE}>
         {/* Yield Token icon — slides from left */}
         <motion.div style={rwaIconStyle}>
-          <div style={MERGE_ICON_BOX}>💰</div>
+          <div style={MERGE_ICON_BOX}>
+            <YieldTokenIcon size={134} />
+          </div>
           <span style={MERGE_ICON_LABEL}>Yield Token APY</span>
         </motion.div>
 
         {/* Short icon — slides from right */}
         <motion.div style={shortIconStyle}>
-          <div style={MERGE_ICON_BOX}>📉</div>
+          <div style={MERGE_ICON_BOX}>
+            <ShortIcon size={134} />
+          </div>
           <span style={MERGE_ICON_LABEL}>Short Funding</span>
         </motion.div>
 
         {/* Shield — appears at center after merge */}
         <motion.div style={shieldIconStyle}>
-          <div style={SHIELD_BOX_STYLE}>🛡️</div>
+          <div style={SHIELD_BOX_STYLE}>
+            <ShieldIcon size={163} />
+          </div>
           <span style={MERGE_ICON_LABEL}>Protection & FR Income</span>
         </motion.div>
       </div>
-
-      <div style={MERGE_DIVIDER_STYLE} />
-
-      <motion.div style={resultMotionStyle}>
-        <div style={MERGE_RESULT_TITLE_STYLE}>Delta-Neutral Yield</div>
-        <div style={MERGE_RESULT_DESC_STYLE}>Price risk cancelled. Native yield stays.</div>
-      </motion.div>
     </div>
   );
 }
@@ -382,52 +341,10 @@ const GRID_STYLE: React.CSSProperties = {
   gap: "24px",
 };
 
-const TRUST_ROW_STYLE: React.CSSProperties = {
-  marginTop: "64px",
-  padding: "28px 32px",
-  background: "rgba(255,255,255,0.03)",
-  borderRadius: "4px",
-  border: `1px solid ${COLORS.border}`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "32px",
-  flexWrap: "wrap",
-  textAlign: "center",
-};
-
-const TRUST_ITEM_STYLE: React.CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: "8px",
-};
-
-const TRUST_ICON_STYLE: React.CSSProperties = {
-  fontSize: "18px",
-};
-
-const TRUST_LABEL_STYLE: React.CSSProperties = {
-  fontSize: "14px",
-  fontWeight: 500,
-  color: COLORS.textMuted,
-};
-
 const HEADER_INITIAL = { opacity: 0, y: 24 };
 const HEADER_WHILE_IN_VIEW = { opacity: 1, y: 0 };
 const HEADER_VIEWPORT = { once: true };
 const HEADER_TRANSITION = { duration: 0.5, ease: "easeOut" };
-
-const TRUST_ROW_INITIAL = { opacity: 0, y: 20 };
-const TRUST_ROW_WHILE_IN_VIEW = { opacity: 1, y: 0 };
-const TRUST_ROW_VIEWPORT = { once: true };
-const TRUST_ROW_TRANSITION = { duration: 0.5, ease: "easeOut" };
-
-const TRUST_ITEMS = [
-  { icon: "🔒", label: "Non-Custodial" },
-  { icon: "⚡", label: "Automated Rebalancing" },
-  { icon: "📊", label: "On-Chain Transparency" },
-  { icon: "🌐", label: "24/7 Protection" },
-];
 
 export function HowItWorks() {
   return (
@@ -455,22 +372,6 @@ export function HowItWorks() {
 
         {/* Scroll-driven merge animation */}
         <MergeAnimation />
-
-        {/* Trust row */}
-        <motion.div
-          style={TRUST_ROW_STYLE}
-          initial={TRUST_ROW_INITIAL}
-          whileInView={TRUST_ROW_WHILE_IN_VIEW}
-          viewport={TRUST_ROW_VIEWPORT}
-          transition={TRUST_ROW_TRANSITION}
-        >
-          {TRUST_ITEMS.map((item) => (
-            <div key={item.label} style={TRUST_ITEM_STYLE}>
-              <span style={TRUST_ICON_STYLE}>{item.icon}</span>
-              <span style={TRUST_LABEL_STYLE}>{item.label}</span>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

@@ -102,7 +102,7 @@ const BADGE_STYLE: React.CSSProperties = {
   gap: "8px",
   background: "rgba(255,255,255,0.06)",
   border: `1px solid ${COLORS.border}`,
-  borderRadius: "4px",
+  borderRadius: "9999px",
   padding: "6px 16px",
   marginBottom: "28px",
   backdropFilter: "blur(4px)",
