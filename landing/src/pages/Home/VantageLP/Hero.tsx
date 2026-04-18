@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 
 import { useCountUp } from "./hooks/useCountUp";
 import { WaveformBackground } from "./WaveformBackground";
+import { useLocale } from "../../../contexts/LocaleContext";
 
 const COLORS = {
   bg: "#000000",
@@ -60,10 +61,10 @@ function StatItem({ target, format, label, decimals, isLast }: StatItemProps) {
   );
 }
 
-const STATS: StatItemProps[] = [
-  { target: 12.4, format: "dollar-M", label: "Total Value Locked", decimals: 1 },
-  { target: 3, format: "integer", label: "Active Vaults" },
-  { target: 142, format: "integer", label: "Positions Protected" },
+const STAT_TARGETS: Pick<StatItemProps, "target" | "format" | "decimals">[] = [
+  { target: 12.4, format: "dollar-M", decimals: 1 },
+  { target: 3, format: "integer" },
+  { target: 142, format: "integer" },
 ];
 
 const SECTION_STYLE: React.CSSProperties = {
@@ -201,6 +202,15 @@ const HERO_STATS_ANIMATE = { opacity: 1, y: 0 };
 const HERO_STATS_TRANSITION = { duration: 0.5, delay: 0.5, ease: "easeOut" };
 
 export function Hero() {
+  const { locale } = useLocale();
+  const { hero } = locale;
+
+  const stats = [
+    { ...STAT_TARGETS[0], label: hero.stats.tvl },
+    { ...STAT_TARGETS[1], label: hero.stats.activeVaults },
+    { ...STAT_TARGETS[2], label: hero.stats.positionsProtected },
+  ];
+
   return (
     <section style={SECTION_STYLE}>
       {/* Background animated waveform — visualizes the "neutralize volatility" thesis. */}
@@ -210,7 +220,7 @@ export function Hero() {
       <div style={INNER_STYLE}>
         <motion.div initial={HERO_BADGE_INITIAL} animate={HERO_BADGE_ANIMATE} transition={HERO_BADGE_TRANSITION}>
           <div style={BADGE_STYLE}>
-            <span style={BADGE_LABEL_STYLE}>Perp Hedge DEX</span>
+            <span style={BADGE_LABEL_STYLE}>{hero.badge}</span>
           </div>
         </motion.div>
 
@@ -220,7 +230,7 @@ export function Hero() {
           animate={HERO_H1_ANIMATE}
           transition={HERO_H1_TRANSITION}
         >
-          Neutralize Interest Rate Hikes
+          {hero.headline}
         </motion.h1>
 
         <motion.p
@@ -229,8 +239,7 @@ export function Hero() {
           animate={HERO_P_ANIMATE}
           transition={HERO_P_TRANSITION}
         >
-          Protect your earnings with the power of yield-bearing tokens. B Cellar is the world's first perp hedge DEX,
-          securing your returns and your portfolio.
+          {hero.subtext}
         </motion.p>
 
         <motion.div
@@ -249,7 +258,7 @@ export function Hero() {
               (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
             }}
           >
-            Launch App ↗
+            {hero.ctaPrimary}
           </a>
           <a
             href="https://docs.vantage.finance"
@@ -263,7 +272,7 @@ export function Hero() {
               (e.currentTarget as HTMLElement).style.borderColor = COLORS.border;
             }}
           >
-            Docs
+            {hero.ctaSecondary}
           </a>
         </motion.div>
       </div>
@@ -275,8 +284,8 @@ export function Hero() {
         animate={HERO_STATS_ANIMATE}
         transition={HERO_STATS_TRANSITION}
       >
-        {STATS.map((stat, i) => (
-          <StatItem key={i} {...stat} isLast={i === STATS.length - 1} />
+        {stats.map((stat, i) => (
+          <StatItem key={i} {...stat} isLast={i === stats.length - 1} />
         ))}
       </motion.div>
     </section>

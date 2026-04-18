@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
 
+import { useLocale } from "../../../contexts/LocaleContext";
+
 const COLORS = {
   bg: "#000000",
   bgCard: "#0C0C0C",
@@ -14,33 +16,6 @@ interface FaqItem {
   question: string;
   answer: string;
 }
-
-const FAQ_ITEMS: FaqItem[] = [
-  {
-    question: "What is delta-neutral hedging?",
-    answer: `It is a strategy designed to cancel out price fluctuations of an asset so you can focus purely on earning or hedging specific risks—like interest rates. By holding a position that moves inversely to your asset (e.g., holding a token while opening an equivalent short position), your net "Delta" becomes zero. This means you remain unaffected by market price swings while B Cellar focuses on neutralizing your funding rate costs.`,
-  },
-  {
-    question: "How do you hedge?",
-    answer: `It’s simple and seamless. You deposit your yield-bearing tokens as collateral and select "Hedge Mode." With up to 10x leverage, you can protect a large amount of value with a fraction of the capital. B Cellar’s engine then automatically uses the yield from our Yield-bearing pools to offset your funding rates, creating a "set-and-forget" shield for your portfolio.`,
-  },
-  {
-    question: "Can a hedge be closed at any time?",
-    answer: `Absolutely. Your assets are never locked. You have full control to close your hedge, adjust your leverage, or withdraw your collateral at any moment. B Cellar is built on the principles of DeFi—meaning complete liquidity and 24/7 access to your funds without any paperwork or waiting periods.`,
-  },
-  {
-    question: `Where does the "magic" yield come from to offset the FR?`,
-    answer: `Our Liquidity Pools are backed by high-quality yield-bearing assets (like stETH/Treasuries). The steady earnings from these assets are redirected to cover the funding costs of hedge-users.`,
-  },
-  {
-    question: "What happens if the market becomes extremely volatile?",
-    answer: `B Cellar employs a multi-layered defense sequence, including a Reserve Fund and a Junior Vault buffer. In extreme black-swan events, we prioritize protecting low-leverage, long-term hedgers to ensure system stability.`,
-  },
-  {
-    question: "How is B Cellar different from GMX or Hyperliquid?",
-    answer: `While other DEXs focus on speculation with high fluctuating costs, B Cellar is a purpose-built "Interest Rate Infrastructure" that uses asset yields to neutralize trading costs.`,
-  },
-];
 
 const ROW_HEADER_STYLE: React.CSSProperties = {
   padding: "20px 24px",
@@ -191,6 +166,9 @@ const FAQ_HEADER_VIEWPORT = { once: true };
 const FAQ_HEADER_TRANSITION = { duration: 0.5, ease: "easeOut" };
 
 export function Faq() {
+  const { locale } = useLocale();
+  const { faq } = locale;
+
   return (
     <section id="faq" style={SECTION_STYLE}>
       <div style={INNER_STYLE}>
@@ -200,11 +178,11 @@ export function Faq() {
           viewport={FAQ_HEADER_VIEWPORT}
           transition={FAQ_HEADER_TRANSITION}
         >
-          <h2 style={HEADING_STYLE}>Common Questions</h2>
+          <h2 style={HEADING_STYLE}>{faq.heading}</h2>
         </motion.div>
 
         <div style={LIST_STYLE}>
-          {FAQ_ITEMS.map((item, i) => (
+          {faq.items.map((item: FaqItem, i: number) => (
             <FaqRow key={i} item={item} index={i} />
           ))}
         </div>

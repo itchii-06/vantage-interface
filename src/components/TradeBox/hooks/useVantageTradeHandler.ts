@@ -14,8 +14,8 @@
 
 import { useCallback } from "react";
 
-import { useVantageTrade } from "domain/vantage/trade/useVantageTrade";
 import { useVantageApproval } from "domain/vantage/trade/useVantageApproval";
+import { useVantageTrade } from "domain/vantage/trade/useVantageTrade";
 import { validateDecreasePosition, validateIncreasePosition } from "domain/vantage/trade/utils";
 import { helperToast } from "lib/helperToast";
 
@@ -81,7 +81,7 @@ export function useVantageTradeHandler({
   const vantageApproval = useVantageApproval(chainId, fromToken?.address);
 
   const handleVantageTrade = useCallback(async (): Promise<void> => {
-    if (!account || !fromToken || !toToken || !markPrice) return;
+    if (!account || !fromToken || !toToken || markPrice === undefined) return;
 
     // Convert GMX 1e30 → Vantage 1e18
     const vantagePriceMark = markPrice / PRECISION_DIVISOR;

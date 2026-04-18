@@ -15,11 +15,11 @@
 import { t } from "@lingui/macro";
 import { useCallback } from "react";
 
+import { usePendingTxns } from "context/PendingTxnsContext/PendingTxnsContext";
+import { useRouter } from "hooks/useVantageContracts";
 import { pushSuccessNotification } from "lib/contracts/notifications";
 import { helperToast } from "lib/helperToast";
 import useWallet from "lib/wallets/useWallet";
-import { useRouter } from "hooks/useVantageContracts";
-import { usePendingTxns } from "context/PendingTxnsContext/PendingTxnsContext";
 
 import type { DecreasePositionParams, IncreasePositionParams } from "./types";
 import { calcAcceptablePrice } from "./utils";
@@ -54,10 +54,7 @@ export function useVantageTrade(chainId: number) {
         );
 
         helperToast.info(t`Transaction submitted`);
-        setPendingTxns((prev) => [
-          ...prev,
-          { hash: tx.hash, message: t`Opening position...` },
-        ]);
+        setPendingTxns((prev) => [...prev, { hash: tx.hash, message: t`Opening position...` }]);
 
         const receipt = await tx.wait();
         if (receipt) {
@@ -94,10 +91,7 @@ export function useVantageTrade(chainId: number) {
         );
 
         helperToast.info(t`Transaction submitted`);
-        setPendingTxns((prev) => [
-          ...prev,
-          { hash: tx.hash, message: t`Closing position...` },
-        ]);
+        setPendingTxns((prev) => [...prev, { hash: tx.hash, message: t`Closing position...` }]);
 
         const receipt = await tx.wait();
         if (receipt) {

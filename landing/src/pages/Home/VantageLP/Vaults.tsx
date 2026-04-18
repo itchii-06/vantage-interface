@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 
+import { useLocale } from "../../../contexts/LocaleContext";
+
 const COLORS = {
   bg: "#000000",
   bgCard: "#0C0C0C",
@@ -22,34 +24,10 @@ interface VaultData {
   capacity: number; // 0-100
 }
 
-const VAULTS: VaultData[] = [
-  {
-    name: "mBUIDL",
-    type: "Money Market RWA",
-    icon: "B",
-    vaultApy: 5.2,
-    fundingRate: 3.6,
-    netApy: 8.8,
-    capacity: 68,
-  },
-  {
-    name: "mUSDY",
-    type: "Yield-Bearing Stablecoin",
-    icon: "U",
-    vaultApy: 6.1,
-    fundingRate: 2.4,
-    netApy: 8.5,
-    capacity: 45,
-  },
-  {
-    name: "mRWA",
-    type: "Diversified RWA Basket",
-    icon: "R",
-    vaultApy: 4.8,
-    fundingRate: 5.2,
-    netApy: 10.0,
-    capacity: 32,
-  },
+const VAULTS_BASE: Omit<VaultData, "type">[] = [
+  { name: "mBUIDL", icon: "B", vaultApy: 5.2, fundingRate: 3.6, netApy: 8.8, capacity: 68 },
+  { name: "mUSDY", icon: "U", vaultApy: 6.1, fundingRate: 2.4, netApy: 8.5, capacity: 45 },
+  { name: "mRWA", icon: "R", vaultApy: 4.8, fundingRate: 5.2, netApy: 10.0, capacity: 32 },
 ];
 
 const CARD_METRIC_LABEL_STYLE: React.CSSProperties = {
@@ -169,7 +147,21 @@ const CARD_BADGE_STYLE: React.CSSProperties = {
   letterSpacing: "0.3px",
 };
 
-function VaultCard({ vault, index }: { vault: VaultData; index: number }) {
+function VaultCard({
+  vault,
+  index,
+  metrics,
+  capacity,
+  filled,
+  cta,
+}: {
+  vault: VaultData;
+  index: number;
+  metrics: { vaultApy: string; fundingRate: string; netApy: string };
+  capacity: string;
+  filled: string;
+  cta: string;
+}) {
   const [hovered, setHovered] = useState(false);
 
   const cardStyle = useMemo(
@@ -241,23 +233,26 @@ function VaultCard({ vault, index }: { vault: VaultData; index: number }) {
       {/* Metrics grid */}
       <div style={CARD_METRICS_GRID_STYLE}>
         <div>
-          <div style={CARD_METRIC_LABEL_STYLE}>Vault APY</div>
+          <div style={CARD_METRIC_LABEL_STYLE}>{metrics.vaultApy}</div>
           <div style={CARD_VAULT_APY_STYLE}>{vault.vaultApy.toFixed(1)}%</div>
         </div>
         <div>
-          <div style={CARD_METRIC_LABEL_STYLE}>Funding Rate</div>
+          <div style={CARD_METRIC_LABEL_STYLE}>{metrics.fundingRate}</div>
           <div style={CARD_FUNDING_RATE_STYLE}>+{vault.fundingRate.toFixed(1)}%</div>
         </div>
         <div>
-          <div style={CARD_METRIC_LABEL_STYLE}>Net APY</div>
+          <div style={CARD_METRIC_LABEL_STYLE}>{metrics.netApy}</div>
           <div style={CARD_NET_APY_STYLE}>+{vault.netApy.toFixed(1)}%</div>
         </div>
       </div>
 
       {/* Capacity bar */}
       <div style={CARD_CAPACITY_ROW_STYLE}>
-        <span style={CARD_CAPACITY_LABEL_STYLE}>Capacity</span>
-        <span style={CARD_CAPACITY_VALUE_STYLE}>{vault.capacity}% filled</span>
+        <span style={CARD_CAPACITY_LABEL_STYLE}>{capacity}</span>
+        <span style={CARD_CAPACITY_VALUE_STYLE}>
+          {vault.capacity}
+          {filled}
+        </span>
       </div>
       <div style={CARD_PROGRESS_BG_STYLE}>
         <div style={progressFillStyle} />
@@ -274,7 +269,7 @@ function VaultCard({ vault, index }: { vault: VaultData; index: number }) {
           (e.currentTarget as HTMLElement).style.opacity = "1";
         }}
       >
-        Zap &amp; Deposit →
+        {cta}
       </a>
     </motion.div>
   );
@@ -316,6 +311,11 @@ const VAULTS_HEADER_VIEWPORT = { once: true };
 const VAULTS_HEADER_TRANSITION = { duration: 0.5, ease: "easeOut" };
 
 export function Vaults() {
+  const { locale } = useLocale();
+  const { vaults } = locale;
+
+  const vaultList: VaultData[] = VAULTS_BASE.map((v, i) => ({ ...v, type: vaults.vaultTypes[i] }));
+
   return (
     <section id="vaults" style={SECTION_STYLE}>
       <div style={INNER_STYLE}>
@@ -325,13 +325,21 @@ export function Vaults() {
           viewport={VAULTS_HEADER_VIEWPORT}
           transition={VAULTS_HEADER_TRANSITION}
         >
-          <h2 style={HEADING_STYLE}>Pick Your Strategy</h2>
-          <p style={SUB_STYLE}>Each vault is actively hedged with a perpetual short.</p>
+          <h2 style={HEADING_STYLE}>{vaults.heading}</h2>
+          <p style={SUB_STYLE}>{vaults.sub}</p>
         </motion.div>
 
         <div style={GRID_STYLE}>
-          {VAULTS.map((vault, i) => (
-            <VaultCard key={vault.name} vault={vault} index={i} />
+          {vaultList.map((vault, i) => (
+            <VaultCard
+              key={vault.name}
+              vault={vault}
+              index={i}
+              metrics={vaults.metrics}
+              capacity={vaults.capacity}
+              filled={vaults.filled}
+              cta={vaults.cta}
+            />
           ))}
         </div>
       </div>

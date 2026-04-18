@@ -16,8 +16,8 @@
 import { useCallback, useState } from "react";
 import { maxUint256 } from "viem";
 
-import { approveTokens } from "domain/tokens/approveTokens";
 import { useTokensAllowanceData } from "domain/synthetics/tokens/useTokenAllowanceData";
+import { approveTokens } from "domain/tokens/approveTokens";
 import useWallet from "lib/wallets/useWallet";
 import type { AnyChainId } from "sdk/configs/chains";
 import { getVantageContractAddress } from "vantage/contracts";

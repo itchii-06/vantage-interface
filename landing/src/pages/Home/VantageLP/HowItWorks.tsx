@@ -3,6 +3,7 @@ import { useRef, useMemo, type ReactNode } from "react";
 
 import { ShieldIcon, ShortIcon, YieldTokenIcon } from "./MergeIcons";
 import { BoltIcon, UnlockIcon, SparkleIcon, DropletIcon, DiamondIcon, ChartUpIcon } from "./StepIcons";
+import { useLocale } from "../../../contexts/LocaleContext";
 
 const COLORS = {
   bg: "#000000",
@@ -12,14 +13,12 @@ const COLORS = {
   textMuted: "#888888",
 };
 
-interface Step {
+interface StepIcon {
   number: string;
   icon: ReactNode;
-  title: string;
-  description: string;
   animationProps: {
-    initial: { opacity: number; x?: number; y?: number; scale?: number };
-    whileInView: { opacity: number; x?: number; y?: number; scale?: number };
+    initial: { opacity: number; y: number };
+    whileInView: { opacity: number; y: number };
   };
 }
 
@@ -28,55 +27,13 @@ const STEP_ANIM = {
   whileInView: { opacity: 1, y: 0 },
 };
 
-const STEPS: Step[] = [
-  {
-    number: "01",
-    icon: <BoltIcon />,
-    title: "Dominate Risk with Minimal Capital",
-    description:
-      "10x leverage lets you deploy maximum interest rate hedging with a fraction of the capital. Small position, massive protection.",
-    animationProps: STEP_ANIM,
-  },
-  {
-    number: "02",
-    icon: <UnlockIcon />,
-    title: "Break Free from Funding Rates",
-    description:
-      "Yield-bearing token earnings offset your short's FR payments. Maintain your hedge at near-zero ongoing cost — indefinitely.",
-    animationProps: STEP_ANIM,
-  },
-  {
-    number: "03",
-    icon: <SparkleIcon />,
-    title: "Earn While You Hedge",
-    description:
-      "Your backend assets keep generating yield while the short runs. A dual-yield structure that attacks and defends simultaneously.",
-    animationProps: STEP_ANIM,
-  },
-  {
-    number: "04",
-    icon: <DropletIcon />,
-    title: "LP 2.0: Liquidity That Never Loses",
-    description:
-      "A next-generation LP model that stays profitable even in bull markets. Delta-neutral design protects LP returns in every market condition.",
-    animationProps: STEP_ANIM,
-  },
-  {
-    number: "05",
-    icon: <DiamondIcon />,
-    title: "Put Your Margin to Work",
-    description:
-      "Yield-bearing tokens deposited as collateral keep earning while they secure your position. Nothing sits idle — ultimate capital efficiency.",
-    animationProps: STEP_ANIM,
-  },
-  {
-    number: "06",
-    icon: <ChartUpIcon />,
-    title: "Trade Interest Rate Futures",
-    description:
-      "Go long or short on future funding rates. Lock in your expected yield today, or speculate on where rates are headed — the first on-chain IR futures market.",
-    animationProps: STEP_ANIM,
-  },
+const STEP_ICONS: StepIcon[] = [
+  { number: "01", icon: <BoltIcon />, animationProps: STEP_ANIM },
+  { number: "02", icon: <UnlockIcon />, animationProps: STEP_ANIM },
+  { number: "03", icon: <SparkleIcon />, animationProps: STEP_ANIM },
+  { number: "04", icon: <DropletIcon />, animationProps: STEP_ANIM },
+  { number: "05", icon: <DiamondIcon />, animationProps: STEP_ANIM },
+  { number: "06", icon: <ChartUpIcon />, animationProps: STEP_ANIM },
 ];
 
 const CARD_BASE_STYLE: React.CSSProperties = {
@@ -115,7 +72,17 @@ const DESC_STYLE: React.CSSProperties = {
 
 const CARD_VIEWPORT = { once: true };
 
-function StepCard({ step, index }: { step: Step; index: number }) {
+function StepCard({
+  stepIcon,
+  title,
+  description,
+  index,
+}: {
+  stepIcon: StepIcon;
+  title: string;
+  description: string;
+  index: number;
+}) {
   const accentLineStyle = useMemo(
     () => ({
       position: "absolute" as const,
@@ -133,15 +100,15 @@ function StepCard({ step, index }: { step: Step; index: number }) {
   return (
     <motion.div
       style={CARD_BASE_STYLE}
-      initial={step.animationProps.initial}
-      whileInView={step.animationProps.whileInView}
+      initial={stepIcon.animationProps.initial}
+      whileInView={stepIcon.animationProps.whileInView}
       viewport={CARD_VIEWPORT}
       transition={cardTransition}
     >
       <div style={accentLineStyle} />
-      <div style={ICON_WRAP_STYLE}>{step.icon}</div>
-      <div style={TITLE_STYLE}>{step.title}</div>
-      <p style={DESC_STYLE}>{step.description}</p>
+      <div style={ICON_WRAP_STYLE}>{stepIcon.icon}</div>
+      <div style={TITLE_STYLE}>{title}</div>
+      <p style={DESC_STYLE}>{description}</p>
     </motion.div>
   );
 }
@@ -222,7 +189,19 @@ const SHIELD_BOX_STYLE: React.CSSProperties = {
   fontSize: "88px",
 };
 
-function MergeAnimation() {
+function MergeAnimation({
+  label,
+  heading,
+  yieldTokenLabel,
+  shortLabel,
+  shieldLabel,
+}: {
+  label: string;
+  heading: string;
+  yieldTokenLabel: string;
+  shortLabel: string;
+  shieldLabel: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -239,6 +218,7 @@ function MergeAnimation() {
   // Shield fades in + scales up after merge
   const shieldOpacity = useTransform(scrollYProgress, [0.5, 0.75], [0, 1]);
   const shieldScale = useTransform(scrollYProgress, [0.5, 0.75], [0.6, 1]);
+
   const rwaIconStyle = useMemo(
     () => ({ ...MERGE_ICON_BASE, left: "50%" as const, translateX: "-50%", x: rwaX, opacity: bothOpacity }),
     [rwaX, bothOpacity]
@@ -257,10 +237,11 @@ function MergeAnimation() {
     }),
     [shieldOpacity, shieldScale]
   );
+
   return (
     <div ref={ref} style={MERGE_SECTION_STYLE}>
-      <span style={MERGE_LABEL_STYLE}>The Magic</span>
-      <h3 style={MERGE_HEADING_STYLE}>Yield Token APY + Short Funding → Full Protection & Funding Income</h3>
+      <span style={MERGE_LABEL_STYLE}>{label}</span>
+      <h3 style={MERGE_HEADING_STYLE}>{heading}</h3>
 
       <div style={MERGE_STAGE_STYLE}>
         {/* Yield Token icon — slides from left */}
@@ -268,7 +249,7 @@ function MergeAnimation() {
           <div style={MERGE_ICON_BOX}>
             <YieldTokenIcon size={134} />
           </div>
-          <span style={MERGE_ICON_LABEL}>Yield Token APY</span>
+          <span style={MERGE_ICON_LABEL}>{yieldTokenLabel}</span>
         </motion.div>
 
         {/* Short icon — slides from right */}
@@ -276,7 +257,7 @@ function MergeAnimation() {
           <div style={MERGE_ICON_BOX}>
             <ShortIcon size={134} />
           </div>
-          <span style={MERGE_ICON_LABEL}>Short Funding</span>
+          <span style={MERGE_ICON_LABEL}>{shortLabel}</span>
         </motion.div>
 
         {/* Shield — appears at center after merge */}
@@ -284,7 +265,7 @@ function MergeAnimation() {
           <div style={SHIELD_BOX_STYLE}>
             <ShieldIcon size={163} />
           </div>
-          <span style={MERGE_ICON_LABEL}>Protection & FR Income</span>
+          <span style={MERGE_ICON_LABEL}>{shieldLabel}</span>
         </motion.div>
       </div>
     </div>
@@ -347,6 +328,9 @@ const HEADER_VIEWPORT = { once: true };
 const HEADER_TRANSITION = { duration: 0.5, ease: "easeOut" };
 
 export function HowItWorks() {
+  const { locale } = useLocale();
+  const { howItWorks } = locale;
+
   return (
     <section id="how-it-works" style={SECTION_STYLE}>
       <div style={INNER_STYLE}>
@@ -357,21 +341,31 @@ export function HowItWorks() {
           viewport={HEADER_VIEWPORT}
           transition={HEADER_TRANSITION}
         >
-          <span style={LABEL_STYLE}>Why B Cellar</span>
-          <h2 style={HEADING_STYLE}>Built Different</h2>
-          <p style={SUB_STYLE}>
-            Six structural advantages that make B Cellar the most capital-efficient hedging protocol.
-          </p>
+          <span style={LABEL_STYLE}>{howItWorks.label}</span>
+          <h2 style={HEADING_STYLE}>{howItWorks.heading}</h2>
+          <p style={SUB_STYLE}>{howItWorks.sub}</p>
         </motion.div>
 
         <div style={GRID_STYLE}>
-          {STEPS.map((step, i) => (
-            <StepCard key={step.number} step={step} index={i} />
+          {STEP_ICONS.map((stepIcon, i) => (
+            <StepCard
+              key={stepIcon.number}
+              stepIcon={stepIcon}
+              title={howItWorks.steps[i].title}
+              description={howItWorks.steps[i].description}
+              index={i}
+            />
           ))}
         </div>
 
         {/* Scroll-driven merge animation */}
-        <MergeAnimation />
+        <MergeAnimation
+          label={howItWorks.merge.label}
+          heading={howItWorks.merge.heading}
+          yieldTokenLabel={howItWorks.merge.yieldTokenLabel}
+          shortLabel={howItWorks.merge.shortLabel}
+          shieldLabel={howItWorks.merge.shieldLabel}
+        />
       </div>
     </section>
   );

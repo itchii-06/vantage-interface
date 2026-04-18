@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 
+import { useLocale } from "../../../contexts/LocaleContext";
+
 const COLORS = {
   bg: "#000000",
   border: "rgba(255,255,255,0.1)",
@@ -110,6 +112,9 @@ const FOOTER_VIEWPORT = { once: true };
 const FOOTER_TRANSITION = { duration: 0.5, ease: "easeOut" };
 
 export function Footer() {
+  const { locale } = useLocale();
+  const { footer } = locale;
+
   return (
     <footer style={SECTION_STYLE}>
       <motion.div
@@ -141,10 +146,8 @@ export function Footer() {
       </motion.div>
 
       <div style={COPYRIGHT_STYLE}>
-        <span style={COPYRIGHT_TEXT_STYLE}>© 2026 B Cellar Finance. All rights reserved.</span>
-        <span style={DISCLAIMER_STYLE}>
-          DeFi involves risk. Past yields are not indicative of future results. Not financial advice.
-        </span>
+        <span style={COPYRIGHT_TEXT_STYLE}>{footer.copyright}</span>
+        <span style={DISCLAIMER_STYLE}>{footer.disclaimer}</span>
       </div>
 
       <div style={GIANT_WRAPPER_STYLE}>

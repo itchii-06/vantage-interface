@@ -1,8 +1,8 @@
-import React, { type ReactNode } from "react";
+import React, { useMemo, type ReactNode } from "react";
 
-import useWallet from "lib/wallets/useWallet";
-import { useVantagePositions } from "domain/vantage/positions/useVantagePositions";
 import { useVantageAccountSummary } from "domain/vantage/positions/useVantageAccountSummary";
+import { useVantagePositions } from "domain/vantage/positions/useVantagePositions";
+import useWallet from "lib/wallets/useWallet";
 
 import { VantageContext } from "./VantageContext";
 
@@ -43,20 +43,28 @@ export function VantageContextProvider({ children, chainId }: Props) {
     refetch: refetchSummary,
   } = useVantageAccountSummary(account, chainId);
 
-  return (
-    <VantageContext.Provider
-      value={{
-        positions,
-        isPositionsLoading,
-        summary,
-        isSummaryLoading,
-        positionsError,
-        summaryError,
-        refetchPositions,
-        refetchSummary,
-      }}
-    >
-      {children}
-    </VantageContext.Provider>
+  const value = useMemo(
+    () => ({
+      positions,
+      isPositionsLoading,
+      summary,
+      isSummaryLoading,
+      positionsError,
+      summaryError,
+      refetchPositions,
+      refetchSummary,
+    }),
+    [
+      positions,
+      isPositionsLoading,
+      summary,
+      isSummaryLoading,
+      positionsError,
+      summaryError,
+      refetchPositions,
+      refetchSummary,
+    ]
   );
+
+  return <VantageContext.Provider value={value}>{children}</VantageContext.Provider>;
 }

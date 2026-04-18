@@ -5,6 +5,7 @@ import { HowItWorks } from "./HowItWorks";
 import { Nav } from "./Nav";
 import { Ticker } from "./Ticker";
 import { Vaults } from "./Vaults";
+import { LocaleProvider } from "../../../contexts/LocaleContext";
 
 const PAGE_STYLE: React.CSSProperties = {
   background: "#000000",
@@ -16,14 +17,16 @@ const PAGE_STYLE: React.CSSProperties = {
 
 export function VantageLP() {
   return (
-    <div style={PAGE_STYLE}>
-      <Nav />
-      <Hero />
-      <Ticker />
-      <Vaults />
-      <HowItWorks />
-      <Faq />
-      <Footer />
-    </div>
+    <LocaleProvider>
+      <div style={PAGE_STYLE}>
+        <Nav />
+        <Hero />
+        <Ticker />
+        <Vaults />
+        <HowItWorks />
+        <Faq />
+        <Footer />
+      </div>
+    </LocaleProvider>
   );
 }

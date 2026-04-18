@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 
+import { useLocale } from "../../../contexts/LocaleContext";
+
 const COLORS = {
   bg: "#000000",
   border: "rgba(255,255,255,0.1)",
@@ -69,11 +71,47 @@ const NAV_LINK_STYLE: React.CSSProperties = {
   fontWeight: 500,
 };
 
+const LANG_TOGGLE_STYLE: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  gap: "2px",
+  background: "rgba(255,255,255,0.06)",
+  borderRadius: "9999px",
+  padding: "2px",
+  border: `1px solid ${COLORS.border}`,
+};
+
+const LANG_BTN_STYLE: React.CSSProperties = {
+  background: "transparent",
+  border: "none",
+  color: COLORS.textMuted,
+  fontSize: "12px",
+  fontWeight: 600,
+  padding: "4px 10px",
+  borderRadius: "9999px",
+  cursor: "pointer",
+  letterSpacing: "0.5px",
+};
+
+const LANG_BTN_ACTIVE_STYLE: React.CSSProperties = {
+  background: "rgba(255,255,255,0.15)",
+  border: "none",
+  color: COLORS.textPrimary,
+  fontSize: "12px",
+  fontWeight: 600,
+  padding: "4px 10px",
+  borderRadius: "9999px",
+  cursor: "pointer",
+  letterSpacing: "0.5px",
+};
+
 const NAV_INITIAL = { y: -64, opacity: 0 };
 const NAV_ANIMATE = { y: 0, opacity: 1 };
 const NAV_TRANSITION = { duration: 0.5, ease: "easeOut" };
 
 export function Nav() {
+  const { locale, lang, setLang } = useLocale();
+
   return (
     <motion.nav style={NAV_STYLE} initial={NAV_INITIAL} animate={NAV_ANIMATE} transition={NAV_TRANSITION}>
       <div style={INNER_STYLE}>
@@ -83,21 +121,31 @@ export function Nav() {
 
         <nav style={NAV_LINKS_STYLE}>
           <a href="/#/hedge" style={NAV_LINK_STYLE}>
-            Hedge
+            {locale.nav.hedge}
           </a>
           <a href="/#/trade" style={NAV_LINK_STYLE}>
-            Trade
+            {locale.nav.trade}
           </a>
-          <a href="/#/trade" style={NAV_LINK_STYLE}>
-            Docs
+          <a href="https://docs.vantage.finance" style={NAV_LINK_STYLE}>
+            {locale.nav.docs}
           </a>
+
+          <div style={LANG_TOGGLE_STYLE}>
+            <button style={lang === "en" ? LANG_BTN_ACTIVE_STYLE : LANG_BTN_STYLE} onClick={() => setLang("en")}>
+              EN
+            </button>
+            <button style={lang === "ja" ? LANG_BTN_ACTIVE_STYLE : LANG_BTN_STYLE} onClick={() => setLang("ja")}>
+              JA
+            </button>
+          </div>
+
           <a
             href="/#/trade"
             style={LAUNCH_BTN_STYLE}
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.opacity = "0.85")}
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.opacity = "1")}
           >
-            Launch App
+            {locale.nav.launchApp}
           </a>
         </nav>
       </div>

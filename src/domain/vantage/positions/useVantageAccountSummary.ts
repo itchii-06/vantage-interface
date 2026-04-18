@@ -13,8 +13,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import { getVantageContractAddress } from "vantage/contracts";
 import { useVault, useVaultReader } from "hooks/useVantageContracts";
+import { getVantageContractAddress } from "vantage/contracts";
 
 import type { VantageAccountSummary } from "./types";
 
@@ -25,10 +25,7 @@ type UseVantageAccountSummaryResult = {
   refetch: () => void;
 };
 
-export function useVantageAccountSummary(
-  account: string | undefined,
-  chainId: number
-): UseVantageAccountSummaryResult {
+export function useVantageAccountSummary(account: string | undefined, chainId: number): UseVantageAccountSummaryResult {
   const [summary, setSummary] = useState<VantageAccountSummary | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | undefined>(undefined);
@@ -66,11 +63,7 @@ export function useVantageAccountSummary(
           if (cancelled) return;
 
           try {
-            const raw = await vaultReader.getUserAccountSummary(
-              vaultAddress,
-              account!,
-              collateralToken
-            );
+            const raw = await vaultReader.getUserAccountSummary(vaultAddress, account!, collateralToken);
 
             totalCollateralUsd += raw.totalCollateralUsd;
             totalPositionValueUsd += raw.totalPositionValueUsd;
