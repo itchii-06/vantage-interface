@@ -79,9 +79,9 @@ const SECTION_STYLE: React.CSSProperties = {
 const INNER_STYLE: React.CSSProperties = {
   position: "relative",
   zIndex: 2,
-  maxWidth: "800px",
+  maxWidth: "1920px",
   margin: "0 auto",
-  padding: "0 24px",
+  padding: "0 40px",
   textAlign: "center",
 };
 
@@ -105,10 +105,6 @@ const HEADLINE_STYLE: React.CSSProperties = {
   marginBottom: "24px",
 };
 
-const HEDGED_SPAN_STYLE: React.CSSProperties = {
-  color: COLORS.textMuted,
-};
-
 const SUBTEXT_STYLE: React.CSSProperties = {
   fontSize: "18px",
   color: COLORS.textMuted,
@@ -126,12 +122,12 @@ const CTA_ROW_STYLE: React.CSSProperties = {
 };
 
 const PRIMARY_BTN_STYLE: React.CSSProperties = {
-  background: "#FFFFFF",
+  background: "#ecff3e",
   color: "#000000",
   fontWeight: 600,
   fontSize: "16px",
   padding: "14px 32px",
-  borderRadius: "4px",
+  borderRadius: "9999px",
   border: "none",
   cursor: "pointer",
   textDecoration: "none",
@@ -145,8 +141,8 @@ const SECONDARY_BTN_STYLE: React.CSSProperties = {
   fontWeight: 500,
   fontSize: "16px",
   padding: "14px 32px",
-  borderRadius: "4px",
-  border: `1px solid ${COLORS.border}`,
+  borderRadius: "9999px",
+  border: "1px solid rgba(255,255,255,0.4)",
   cursor: "pointer",
   textDecoration: "none",
   display: "inline-block",
@@ -193,7 +189,7 @@ export function Hero() {
       <div style={INNER_STYLE}>
         <motion.div initial={HERO_BADGE_INITIAL} animate={HERO_BADGE_ANIMATE} transition={HERO_BADGE_TRANSITION}>
           <div style={BADGE_STYLE}>
-            <span style={BADGE_LABEL_STYLE}>Delta-Neutral RWA Yield</span>
+            <span style={BADGE_LABEL_STYLE}>Perp Hedge DEX</span>
           </div>
         </motion.div>
 
@@ -203,7 +199,7 @@ export function Hero() {
           animate={HERO_H1_ANIMATE}
           transition={HERO_H1_TRANSITION}
         >
-          Earn RWA Yield. <span style={HEDGED_SPAN_STYLE}>Perfectly Hedged.</span>
+          Neutralize Interest Rate Hikes
         </motion.h1>
 
         <motion.p
@@ -212,8 +208,8 @@ export function Hero() {
           animate={HERO_P_ANIMATE}
           transition={HERO_P_TRANSITION}
         >
-          Vantage combines real-world asset yields with automated delta-neutral hedging — so you earn consistently
-          regardless of market direction.
+          Protect your earnings with the power of yield-bearing tokens. B Cellar is the world's first perp hedge DEX,
+          securing your returns and your portfolio.
         </motion.p>
 
         <motion.div
@@ -232,10 +228,12 @@ export function Hero() {
               (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
             }}
           >
-            Start Earning →
+            Launch App ↗
           </a>
           <a
-            href="#vaults"
+            href="https://docs.vantage.finance"
+            target="_blank"
+            rel="noopener noreferrer"
             style={SECONDARY_BTN_STYLE}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.3)";
@@ -244,7 +242,7 @@ export function Hero() {
               (e.currentTarget as HTMLElement).style.borderColor = COLORS.border;
             }}
           >
-            Explore Vaults
+            Docs
           </a>
         </motion.div>
 

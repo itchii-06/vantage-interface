@@ -19,9 +19,9 @@ const NAV_STYLE: React.CSSProperties = {
 };
 
 const INNER_STYLE: React.CSSProperties = {
-  maxWidth: "1200px",
+  maxWidth: "1920px",
   margin: "0 auto",
-  padding: "0 24px",
+  padding: "0 40px",
   height: "64px",
   display: "flex",
   alignItems: "center",
@@ -35,33 +35,19 @@ const LOGO_STYLE: React.CSSProperties = {
   textDecoration: "none",
 };
 
-const LOGO_MARK_STYLE: React.CSSProperties = {
-  width: "32px",
-  height: "32px",
-  borderRadius: "4px",
-  background: "#FFFFFF",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontWeight: 600,
-  fontSize: "14px",
-  color: "#000000",
-};
-
-const LOGO_TEXT_STYLE: React.CSSProperties = {
-  fontSize: "18px",
-  fontWeight: 600,
-  color: COLORS.textPrimary,
-  letterSpacing: "-0.5px",
+const LOGO_IMG_STYLE: React.CSSProperties = {
+  height: "22px",
+  width: "auto",
+  display: "block",
 };
 
 const LAUNCH_BTN_STYLE: React.CSSProperties = {
-  background: "#FFFFFF",
+  background: "#ecff3e",
   color: "#000000",
   fontWeight: 600,
   fontSize: "14px",
   padding: "10px 20px",
-  borderRadius: "4px",
+  borderRadius: "9999px",
   border: "none",
   cursor: "pointer",
   textDecoration: "none",
@@ -92,16 +78,18 @@ export function Nav() {
     <motion.nav style={NAV_STYLE} initial={NAV_INITIAL} animate={NAV_ANIMATE} transition={NAV_TRANSITION}>
       <div style={INNER_STYLE}>
         <a href="/#/" style={LOGO_STYLE}>
-          <div style={LOGO_MARK_STYLE}>V</div>
-          <span style={LOGO_TEXT_STYLE}>Vantage</span>
+          <img src="/logo-w.svg" alt="B Cellar" style={LOGO_IMG_STYLE} />
         </a>
 
         <nav style={NAV_LINKS_STYLE}>
-          <a href="/#/vaults" style={NAV_LINK_STYLE}>
-            Vaults
+          <a href="/#/hedge" style={NAV_LINK_STYLE}>
+            Hedge
           </a>
           <a href="/#/trade" style={NAV_LINK_STYLE}>
             Trade
+          </a>
+          <a href="/#/trade" style={NAV_LINK_STYLE}>
+            Docs
           </a>
           <a
             href="/#/trade"

@@ -18,23 +18,27 @@ interface FaqItem {
 const FAQ_ITEMS: FaqItem[] = [
   {
     question: "What is delta-neutral hedging?",
-    answer:
-      "Delta-neutral hedging means holding positions whose combined price exposure nets to zero. In Vantage, we pair your long RWA holding with a precisely sized perpetual short. If the underlying asset drops 10%, your short gains approximately the same amount, so your capital remains protected. You still collect the RWA's native yield and any positive funding rates earned from holding the short.",
+    answer: `It is a strategy designed to cancel out price fluctuations of an asset so you can focus purely on earning or hedging specific risks—like interest rates. By holding a position that moves inversely to your asset (e.g., holding a token while opening an equivalent short position), your net "Delta" becomes zero. This means you remain unaffected by market price swings while B Cellar focuses on neutralizing your funding rate costs.`,
   },
   {
-    question: "How does the vault earn yield?",
-    answer:
-      "Vaults earn from two complementary sources: (1) the native yield of the real-world asset — such as BlackRock money market fund accruals on mBUIDL — and (2) the funding rate paid by leveraged longs on the perpetual exchange. When market sentiment is bullish and funding rates are positive, short holders receive periodic payments. The combined yield is distributed continuously to vault depositors.",
+    question: "How do you hedge?",
+    answer: `It’s simple and seamless. You deposit your yield-bearing tokens as collateral and select "Hedge Mode." With up to 10x leverage, you can protect a large amount of value with a fraction of the capital. B Cellar’s engine then automatically uses the yield from our Yield-bearing pools to offset your funding rates, creating a "set-and-forget" shield for your portfolio.`,
   },
   {
-    question: "Can I withdraw anytime?",
-    answer:
-      "Yes. Withdrawals are non-custodial and can be initiated at any time. When you withdraw, the protocol automatically unwinds the corresponding short position and returns your principal plus accrued yield. During periods of extreme market volatility, there may be a short execution delay to ensure orderly unwinding, but there are no lock-up periods or withdrawal gates under normal conditions.",
+    question: "Can a hedge be closed at any time?",
+    answer: `Absolutely. Your assets are never locked. You have full control to close your hedge, adjust your leverage, or withdraw your collateral at any moment. B Cellar is built on the principles of DeFi—meaning complete liquidity and 24/7 access to your funds without any paperwork or waiting periods.`,
   },
   {
-    question: "What are the risks?",
-    answer:
-      "Key risks include: (1) Smart contract risk — audited code, but on-chain bugs can never be fully eliminated. (2) Oracle risk — price feeds could temporarily diverge, affecting hedge precision. (3) Extreme funding rate reversal — if funding turns sharply negative, net APY may decrease temporarily. (4) RWA issuer risk — the underlying asset's issuer could face regulatory or operational issues. We mitigate these through multi-oracle price feeds, insurance fund reserves, and circuit-breaker mechanisms.",
+    question: `Where does the "magic" yield come from to offset the FR?`,
+    answer: `Our Liquidity Pools are backed by high-quality yield-bearing assets (like stETH/Treasuries). The steady earnings from these assets are redirected to cover the funding costs of hedge-users.`,
+  },
+  {
+    question: "What happens if the market becomes extremely volatile?",
+    answer: `B Cellar employs a multi-layered defense sequence, including a Reserve Fund and a Junior Vault buffer. In extreme black-swan events, we prioritize protecting low-leverage, long-term hedgers to ensure system stability.`,
+  },
+  {
+    question: "How is B Cellar different from GMX or Hyperliquid?",
+    answer: `While other DEXs focus on speculation with high fluctuating costs, B Cellar is a purpose-built "Interest Rate Infrastructure" that uses asset yields to neutralize trading costs.`,
   },
 ];
 
@@ -159,11 +163,11 @@ function FaqRow({ item, index }: { item: FaqItem; index: number }) {
 
 const SECTION_STYLE: React.CSSProperties = {
   background: COLORS.bg,
-  padding: "100px 24px",
+  padding: "100px 40px",
 };
 
 const INNER_STYLE: React.CSSProperties = {
-  maxWidth: "760px",
+  maxWidth: "1920px",
   margin: "0 auto",
 };
 

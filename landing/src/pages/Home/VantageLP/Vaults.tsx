@@ -73,11 +73,11 @@ const CARD_BTN_STYLE: React.CSSProperties = {
   display: "block",
   width: "100%",
   padding: "13px",
-  background: "#FFFFFF",
+  background: "#ecff3e",
   color: "#000000",
   fontWeight: 600,
   fontSize: "15px",
-  borderRadius: "4px",
+  borderRadius: "9999px",
   border: "none",
   cursor: "pointer",
   textDecoration: "none",
@@ -282,11 +282,11 @@ function VaultCard({ vault, index }: { vault: VaultData; index: number }) {
 
 const SECTION_STYLE: React.CSSProperties = {
   background: COLORS.bg,
-  padding: "100px 24px",
+  padding: "100px 40px",
 };
 
 const INNER_STYLE: React.CSSProperties = {
-  maxWidth: "1100px",
+  maxWidth: "1920px",
   margin: "0 auto",
 };
 
@@ -337,7 +337,7 @@ export function Vaults() {
         >
           <span style={LABEL_STYLE}>Live Vaults</span>
           <h2 style={HEADING_STYLE}>Pick Your Strategy</h2>
-          <p style={SUB_STYLE}>Each vault is backed by real-world assets and actively hedged with a perpetual short.</p>
+          <p style={SUB_STYLE}>Each vault is actively hedged with a perpetual short.</p>
         </motion.div>
 
         <div style={GRID_STYLE}>

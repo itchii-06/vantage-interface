@@ -11,17 +11,17 @@ const LINKS = [
   { label: "Docs", href: "https://docs.vantage.finance" },
   { label: "GitHub", href: "https://github.com/vantage-finance" },
   { label: "Discord", href: "https://discord.gg/vantage" },
-  { label: "Twitter", href: "https://twitter.com/vantage_fi" },
+  { label: "X", href: "https://twitter.com/vantage_fi" },
 ];
 
 const SECTION_STYLE: React.CSSProperties = {
   background: COLORS.bg,
   borderTop: `1px solid ${COLORS.border}`,
-  padding: "48px 24px",
+  padding: "48px 40px",
 };
 
 const INNER_STYLE: React.CSSProperties = {
-  maxWidth: "1100px",
+  maxWidth: "1920px",
   margin: "0 auto",
   display: "flex",
   alignItems: "center",
@@ -37,24 +37,10 @@ const LOGO_STYLE: React.CSSProperties = {
   textDecoration: "none",
 };
 
-const LOGO_MARK_STYLE: React.CSSProperties = {
-  width: "30px",
-  height: "30px",
-  borderRadius: "4px",
-  background: "#FFFFFF",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontWeight: 600,
-  fontSize: "13px",
-  color: "#000000",
-};
-
-const LOGO_TEXT_STYLE: React.CSSProperties = {
-  fontSize: "16px",
-  fontWeight: 600,
-  color: COLORS.textPrimary,
-  letterSpacing: "-0.4px",
+const LOGO_IMG_STYLE: React.CSSProperties = {
+  height: "48px",
+  width: "auto",
+  display: "block",
 };
 
 const RIGHT_STYLE: React.CSSProperties = {
@@ -77,7 +63,7 @@ const COPYRIGHT_STYLE: React.CSSProperties = {
   paddingTop: "24px",
   borderTop: `1px solid ${COLORS.border}`,
   marginTop: "8px",
-  maxWidth: "1100px",
+  maxWidth: "1920px",
   margin: "24px auto 0",
   display: "flex",
   alignItems: "center",
@@ -114,8 +100,7 @@ export function Footer() {
         transition={FOOTER_TRANSITION}
       >
         <a href="/#/" style={LOGO_STYLE}>
-          <div style={LOGO_MARK_STYLE}>V</div>
-          <span style={LOGO_TEXT_STYLE}>Vantage</span>
+          <img src="/icon.svg" alt="B Cellar" style={LOGO_IMG_STYLE} />
         </a>
 
         <div style={RIGHT_STYLE}>
@@ -136,7 +121,7 @@ export function Footer() {
       </motion.div>
 
       <div style={COPYRIGHT_STYLE}>
-        <span style={COPYRIGHT_TEXT_STYLE}>© 2025 Vantage Finance. All rights reserved.</span>
+        <span style={COPYRIGHT_TEXT_STYLE}>© 2026 B Cellar Finance. All rights reserved.</span>
         <span style={DISCLAIMER_STYLE}>
           DeFi involves risk. Past yields are not indicative of future results. Not financial advice.
         </span>

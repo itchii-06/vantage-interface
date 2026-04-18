@@ -15,44 +15,64 @@ interface Step {
   title: string;
   description: string;
   animationProps: {
-    initial: { opacity: number; x?: number; scale?: number };
-    whileInView: { opacity: number; x?: number; scale?: number };
+    initial: { opacity: number; x?: number; y?: number; scale?: number };
+    whileInView: { opacity: number; x?: number; y?: number; scale?: number };
   };
 }
+
+const STEP_ANIM = {
+  initial: { opacity: 0, y: 40 },
+  whileInView: { opacity: 1, y: 0 },
+};
 
 const STEPS: Step[] = [
   {
     number: "01",
-    icon: "🏦",
-    title: "Deposit RWA",
+    icon: "⚡",
+    title: "Dominate Risk with Minimal Capital",
     description:
-      "Deposit your real-world asset tokens — like mBUIDL, mUSDY, or mRWA — directly into the vault. Your principal is securely custodied on-chain.",
-    animationProps: {
-      initial: { opacity: 0, x: -60 },
-      whileInView: { opacity: 1, x: 0 },
-    },
+      "10x leverage lets you deploy maximum interest rate hedging with a fraction of the capital. Small position, massive protection.",
+    animationProps: STEP_ANIM,
   },
   {
     number: "02",
-    icon: "↕",
-    title: "Short Opens Automatically",
+    icon: "🔓",
+    title: "Break Free from Funding Rates",
     description:
-      "The protocol automatically opens a corresponding short position using funding-rate arbitrage — neutralizing any price exposure on your deposited asset.",
-    animationProps: {
-      initial: { opacity: 0, x: 60 },
-      whileInView: { opacity: 1, x: 0 },
-    },
+      "Yield-bearing token earnings offset your short's FR payments. Maintain your hedge at near-zero ongoing cost — indefinitely.",
+    animationProps: STEP_ANIM,
   },
   {
     number: "03",
-    icon: "🛡️",
-    title: "Earn Delta-Neutral Yield",
+    icon: "✨",
+    title: "Earn While You Hedge",
     description:
-      "You collect the RWA's native yield plus positive funding rates — with zero directional risk. Withdraw anytime as conditions update.",
-    animationProps: {
-      initial: { opacity: 0, scale: 0.85 },
-      whileInView: { opacity: 1, scale: 1 },
-    },
+      "Your backend assets keep generating yield while the short runs. A dual-yield structure that attacks and defends simultaneously.",
+    animationProps: STEP_ANIM,
+  },
+  {
+    number: "04",
+    icon: "💧",
+    title: "LP 2.0: Liquidity That Never Loses",
+    description:
+      "A next-generation LP model that stays profitable even in bull markets. Delta-neutral design protects LP returns in every market condition.",
+    animationProps: STEP_ANIM,
+  },
+  {
+    number: "05",
+    icon: "💎",
+    title: "Put Your Margin to Work",
+    description:
+      "Yield-bearing tokens deposited as collateral keep earning while they secure your position. Nothing sits idle — ultimate capital efficiency.",
+    animationProps: STEP_ANIM,
+  },
+  {
+    number: "06",
+    icon: "📈",
+    title: "Trade Interest Rate Futures",
+    description:
+      "Go long or short on future funding rates. Lock in your expected yield today, or speculate on where rates are headed — the first on-chain IR futures market.",
+    animationProps: STEP_ANIM,
   },
 ];
 
@@ -75,7 +95,7 @@ const ICON_WRAP_STYLE: React.CSSProperties = {
   alignItems: "center",
   justifyContent: "center",
   fontSize: "28px",
-  marginBottom: "20px",
+  margin: "0 auto 20px",
 };
 
 const TITLE_STYLE: React.CSSProperties = {
@@ -84,12 +104,14 @@ const TITLE_STYLE: React.CSSProperties = {
   color: COLORS.textPrimary,
   letterSpacing: "-0.5px",
   marginBottom: "12px",
+  textAlign: "center",
 };
 
 const DESC_STYLE: React.CSSProperties = {
   fontSize: "15px",
   color: COLORS.textMuted,
   lineHeight: 1.65,
+  textAlign: "center",
 };
 
 const CARD_VIEWPORT = { once: true };
@@ -107,19 +129,6 @@ function StepCard({ step, index }: { step: Step; index: number }) {
     []
   );
 
-  const stepNumStyle = useMemo(
-    () => ({
-      fontSize: "11px",
-      fontWeight: 600,
-      color: COLORS.textMuted,
-      letterSpacing: "2px",
-      textTransform: "uppercase" as const,
-      marginBottom: "16px",
-      display: "block",
-    }),
-    []
-  );
-
   const cardTransition = useMemo(() => ({ duration: 0.6, delay: index * 0.15, ease: "easeOut" }), [index]);
 
   return (
@@ -131,7 +140,6 @@ function StepCard({ step, index }: { step: Step; index: number }) {
       transition={cardTransition}
     >
       <div style={accentLineStyle} />
-      <span style={stepNumStyle}>Step {step.number}</span>
       <div style={ICON_WRAP_STYLE}>{step.icon}</div>
       <div style={TITLE_STYLE}>{step.title}</div>
       <p style={DESC_STYLE}>{step.description}</p>
@@ -250,7 +258,7 @@ function MergeAnimation() {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "end 0.6"],
+    offset: ["start 0.6", "end 0.5"],
   });
 
   // RWA slides from left (-180px) to center (0)
@@ -292,25 +300,25 @@ function MergeAnimation() {
   return (
     <div ref={ref} style={MERGE_SECTION_STYLE}>
       <span style={MERGE_LABEL_STYLE}>The Magic</span>
-      <h3 style={MERGE_HEADING_STYLE}>RWA Yield + Short Funding → Full Protection</h3>
+      <h3 style={MERGE_HEADING_STYLE}>Yield Token APY + Short Funding → Full Protection & Funding Income</h3>
 
       <div style={MERGE_STAGE_STYLE}>
-        {/* RWA icon — slides from left */}
+        {/* Yield Token icon — slides from left */}
         <motion.div style={rwaIconStyle}>
-          <div style={MERGE_ICON_BOX}>🏦</div>
-          <span style={MERGE_ICON_LABEL}>RWA</span>
+          <div style={MERGE_ICON_BOX}>💰</div>
+          <span style={MERGE_ICON_LABEL}>Yield Token APY</span>
         </motion.div>
 
         {/* Short icon — slides from right */}
         <motion.div style={shortIconStyle}>
           <div style={MERGE_ICON_BOX}>📉</div>
-          <span style={MERGE_ICON_LABEL}>Short</span>
+          <span style={MERGE_ICON_LABEL}>Short Funding</span>
         </motion.div>
 
         {/* Shield — appears at center after merge */}
         <motion.div style={shieldIconStyle}>
           <div style={SHIELD_BOX_STYLE}>🛡️</div>
-          <span style={MERGE_ICON_LABEL}>Protected</span>
+          <span style={MERGE_ICON_LABEL}>Protection & FR Income</span>
         </motion.div>
       </div>
 
@@ -330,11 +338,11 @@ function MergeAnimation() {
 
 const SECTION_STYLE: React.CSSProperties = {
   background: COLORS.bg,
-  padding: "100px 24px",
+  padding: "100px 40px",
 };
 
 const INNER_STYLE: React.CSSProperties = {
-  maxWidth: "1100px",
+  maxWidth: "1920px",
   margin: "0 auto",
 };
 
@@ -370,7 +378,7 @@ const SUB_STYLE: React.CSSProperties = {
 
 const GRID_STYLE: React.CSSProperties = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+  gridTemplateColumns: "repeat(3, 1fr)",
   gap: "24px",
 };
 
@@ -432,9 +440,11 @@ export function HowItWorks() {
           viewport={HEADER_VIEWPORT}
           transition={HEADER_TRANSITION}
         >
-          <span style={LABEL_STYLE}>How It Works</span>
-          <h2 style={HEADING_STYLE}>Three Simple Steps</h2>
-          <p style={SUB_STYLE}>Fully automated from deposit to yield — no manual hedging required.</p>
+          <span style={LABEL_STYLE}>Why B Cellar</span>
+          <h2 style={HEADING_STYLE}>Built Different</h2>
+          <p style={SUB_STYLE}>
+            Six structural advantages that make B Cellar the most capital-efficient hedging protocol.
+          </p>
         </motion.div>
 
         <div style={GRID_STYLE}>
