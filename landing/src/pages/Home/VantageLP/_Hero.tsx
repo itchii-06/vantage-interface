@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 
 import { useCountUp } from "./hooks/useCountUp";
-import { WaveformBackground } from "./WaveformBackground";
 
 const COLORS = {
   bg: "#000000",
@@ -25,7 +24,6 @@ const STAT_CONTAINER_STYLE: React.CSSProperties = {
   borderRadius: "4px",
   border: `1px solid ${COLORS.border}`,
   minWidth: "140px",
-  backdropFilter: "blur(2px)",
 };
 
 const STAT_VALUE_STYLE: React.CSSProperties = {
@@ -78,15 +76,6 @@ const SECTION_STYLE: React.CSSProperties = {
   paddingBottom: "80px",
 };
 
-// Vignette to keep Hero copy readable on top of the bright waveform.
-const VIGNETTE_STYLE: React.CSSProperties = {
-  position: "absolute",
-  inset: 0,
-  zIndex: 1,
-  pointerEvents: "none",
-  background: "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 70%)",
-};
-
 const INNER_STYLE: React.CSSProperties = {
   position: "relative",
   zIndex: 2,
@@ -105,7 +94,6 @@ const BADGE_STYLE: React.CSSProperties = {
   borderRadius: "4px",
   padding: "6px 16px",
   marginBottom: "28px",
-  backdropFilter: "blur(4px)",
 };
 
 const HEADLINE_STYLE: React.CSSProperties = {
@@ -115,7 +103,6 @@ const HEADLINE_STYLE: React.CSSProperties = {
   lineHeight: 1.0,
   letterSpacing: "-3px",
   marginBottom: "24px",
-  textShadow: "0 2px 24px rgba(0,0,0,0.6)",
 };
 
 const SUBTEXT_STYLE: React.CSSProperties = {
@@ -124,7 +111,6 @@ const SUBTEXT_STYLE: React.CSSProperties = {
   lineHeight: 1.6,
   maxWidth: "560px",
   margin: "0 auto 40px auto",
-  textShadow: "0 1px 12px rgba(0,0,0,0.6)",
 };
 
 const CTA_ROW_STYLE: React.CSSProperties = {
@@ -200,10 +186,6 @@ const HERO_STATS_TRANSITION = { duration: 0.5, delay: 0.5, ease: "easeOut" };
 export function Hero() {
   return (
     <section style={SECTION_STYLE}>
-      {/* Background animated waveform — visualizes the "neutralize volatility" thesis. */}
-      <WaveformBackground color="#ecff3e" amplitude={0.1} bloom={0.5} />
-      <div style={VIGNETTE_STYLE} />
-
       <div style={INNER_STYLE}>
         <motion.div initial={HERO_BADGE_INITIAL} animate={HERO_BADGE_ANIMATE} transition={HERO_BADGE_TRANSITION}>
           <div style={BADGE_STYLE}>
