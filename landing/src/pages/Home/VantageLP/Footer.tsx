@@ -17,7 +17,27 @@ const LINKS = [
 const SECTION_STYLE: React.CSSProperties = {
   background: COLORS.bg,
   borderTop: `1px solid ${COLORS.border}`,
-  padding: "48px 40px",
+  padding: "48px 40px 0",
+  overflow: "hidden",
+};
+
+const GIANT_WRAPPER_STYLE: React.CSSProperties = {
+  height: "18vw",
+  overflow: "hidden",
+  marginTop: "40px",
+  marginLeft: "calc(-40px - 5vw)",
+};
+
+const GIANT_TEXT_STYLE: React.CSSProperties = {
+  display: "block",
+  fontSize: "clamp(192px, 33.6vw, 672px)",
+  fontWeight: 500,
+  color: "rgba(255,255,255,0.07)",
+  lineHeight: 0.82,
+  letterSpacing: "-0.02em",
+  whiteSpace: "nowrap",
+  userSelect: "none",
+  pointerEvents: "none",
 };
 
 const INNER_STYLE: React.CSSProperties = {
@@ -53,7 +73,7 @@ const RIGHT_STYLE: React.CSSProperties = {
 const LINK_STYLE: React.CSSProperties = {
   color: COLORS.textMuted,
   textDecoration: "none",
-  fontSize: "14px",
+  fontSize: "16px",
   fontWeight: 500,
   transition: "color 0.15s",
 };
@@ -125,6 +145,10 @@ export function Footer() {
         <span style={DISCLAIMER_STYLE}>
           DeFi involves risk. Past yields are not indicative of future results. Not financial advice.
         </span>
+      </div>
+
+      <div style={GIANT_WRAPPER_STYLE}>
+        <span style={GIANT_TEXT_STYLE}>BCELLAR</span>
       </div>
     </footer>
   );

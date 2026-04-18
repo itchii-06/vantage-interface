@@ -66,7 +66,7 @@ const CARD_PROGRESS_BG_STYLE: React.CSSProperties = {
   borderRadius: "2px",
   height: "6px",
   overflow: "hidden",
-  marginBottom: "20px",
+  marginBottom: "32px",
 };
 
 const CARD_BTN_STYLE: React.CSSProperties = {
@@ -130,9 +130,9 @@ const CARD_FUNDING_RATE_STYLE: React.CSSProperties = {
 };
 
 const CARD_NET_APY_STYLE: React.CSSProperties = {
-  fontSize: "26px",
+  fontSize: "18px",
   fontWeight: 600,
-  color: COLORS.green,
+  color: "#ecff3e",
   letterSpacing: "-1px",
 };
 
@@ -206,7 +206,7 @@ function VaultCard({ vault, index }: { vault: VaultData; index: number }) {
       height: "100%",
       borderRadius: "2px",
       width: `${vault.capacity}%`,
-      background: "#FFFFFF",
+      background: "#ecff3e",
       transition: "width 0.8s ease",
     }),
     [vault.capacity]

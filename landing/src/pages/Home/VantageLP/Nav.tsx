@@ -65,7 +65,7 @@ const NAV_LINKS_STYLE: React.CSSProperties = {
 const NAV_LINK_STYLE: React.CSSProperties = {
   color: COLORS.textMuted,
   textDecoration: "none",
-  fontSize: "14px",
+  fontSize: "16px",
   fontWeight: 500,
 };
 

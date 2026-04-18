@@ -16,45 +16,46 @@ interface StatItemProps {
   format: "dollar-M" | "percent" | "integer";
   label: string;
   decimals?: number;
+  isLast?: boolean;
 }
 
-const STAT_CONTAINER_STYLE: React.CSSProperties = {
-  textAlign: "center",
-  padding: "20px 32px",
-  background: COLORS.bgCard,
-  borderRadius: "4px",
-  border: `1px solid ${COLORS.border}`,
-  minWidth: "140px",
-  backdropFilter: "blur(2px)",
+const STAT_CELL_STYLE: React.CSSProperties = {
+  flex: 1,
+  padding: "28px 40px",
+  borderRight: `1px solid ${COLORS.border}`,
 };
 
-const STAT_VALUE_STYLE: React.CSSProperties = {
-  fontSize: "28px",
-  fontWeight: 600,
-  color: COLORS.textPrimary,
-  letterSpacing: "-1px",
+const STAT_CELL_LAST_STYLE: React.CSSProperties = {
+  flex: 1,
+  padding: "28px 40px",
+};
+
+const STAT_NUM_STYLE: React.CSSProperties = {
+  fontSize: "32px",
+  fontWeight: 400,
+  color: "#FFFFFF",
+  letterSpacing: "-2px",
+  lineHeight: 1,
+  display: "block",
+  marginBottom: "8px",
+};
+
+const STAT_LBL_STYLE: React.CSSProperties = {
+  fontSize: "18px",
+  color: "#888888",
+  fontWeight: 400,
   display: "block",
 };
 
-const STAT_LABEL_STYLE: React.CSSProperties = {
-  fontSize: "12px",
-  color: COLORS.textMuted,
-  fontWeight: 500,
-  marginTop: "4px",
-  display: "block",
-  textTransform: "uppercase",
-  letterSpacing: "1px",
-};
-
-function StatItem({ target, format, label, decimals }: StatItemProps) {
+function StatItem({ target, format, label, decimals, isLast }: StatItemProps) {
   const { display, elementRef } = useCountUp({ target, format, decimals, duration: 1600 });
 
   return (
-    <div style={STAT_CONTAINER_STYLE}>
-      <span ref={elementRef as React.RefObject<HTMLSpanElement>} style={STAT_VALUE_STYLE}>
+    <div style={isLast ? STAT_CELL_LAST_STYLE : STAT_CELL_STYLE}>
+      <span ref={elementRef as React.RefObject<HTMLSpanElement>} style={STAT_NUM_STYLE}>
         {display}
       </span>
-      <span style={STAT_LABEL_STYLE}>{label}</span>
+      <span style={STAT_LBL_STYLE}>{label}</span>
     </div>
   );
 }
@@ -75,7 +76,7 @@ const SECTION_STYLE: React.CSSProperties = {
   justifyContent: "center",
   overflow: "hidden",
   paddingTop: "80px",
-  paddingBottom: "80px",
+  paddingBottom: "140px",
 };
 
 // Vignette to keep Hero copy readable on top of the bright waveform.
@@ -131,7 +132,6 @@ const CTA_ROW_STYLE: React.CSSProperties = {
   display: "flex",
   gap: "16px",
   justifyContent: "center",
-  marginBottom: "72px",
   flexWrap: "wrap",
 };
 
@@ -162,16 +162,19 @@ const SECONDARY_BTN_STYLE: React.CSSProperties = {
   display: "inline-block",
 };
 
-const STATS_GRID_STYLE: React.CSSProperties = {
+const STATS_STRIP_STYLE: React.CSSProperties = {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  zIndex: 2,
   display: "flex",
-  gap: "16px",
-  justifyContent: "center",
-  flexWrap: "wrap",
+  borderTop: `1px solid ${COLORS.border}`,
 };
 
 const BADGE_LABEL_STYLE: React.CSSProperties = {
   color: COLORS.textPrimary,
-  fontSize: "11px",
+  fontSize: "14px",
   fontWeight: 600,
   letterSpacing: "1.5px",
   textTransform: "uppercase",
@@ -263,18 +266,19 @@ export function Hero() {
             Docs
           </a>
         </motion.div>
-
-        <motion.div
-          style={STATS_GRID_STYLE}
-          initial={HERO_STATS_INITIAL}
-          animate={HERO_STATS_ANIMATE}
-          transition={HERO_STATS_TRANSITION}
-        >
-          {STATS.map((stat, i) => (
-            <StatItem key={i} {...stat} />
-          ))}
-        </motion.div>
       </div>
+
+      {/* Stats strip — full width, anchored to section bottom */}
+      <motion.div
+        style={STATS_STRIP_STYLE}
+        initial={HERO_STATS_INITIAL}
+        animate={HERO_STATS_ANIMATE}
+        transition={HERO_STATS_TRANSITION}
+      >
+        {STATS.map((stat, i) => (
+          <StatItem key={i} {...stat} isLast={i === STATS.length - 1} />
+        ))}
+      </motion.div>
     </section>
   );
 }
