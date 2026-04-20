@@ -4,14 +4,7 @@ import { useRef, useMemo, type ReactNode } from "react";
 import { ShieldIcon, ShortIcon, YieldTokenIcon } from "./MergeIcons";
 import { BoltIcon, UnlockIcon, SparkleIcon, DropletIcon, DiamondIcon, ChartUpIcon } from "./StepIcons";
 import { useLocale } from "../../../contexts/LocaleContext";
-
-const COLORS = {
-  bg: "#000000",
-  bgCard: "#0C0C0C",
-  border: "rgba(255,255,255,0.1)",
-  textPrimary: "#FFFFFF",
-  textMuted: "#888888",
-};
+import { COLORS } from "../../../styles/vantageTheme";
 
 interface StepIcon {
   number: string;
@@ -37,7 +30,7 @@ const STEP_ICONS: StepIcon[] = [
 ];
 
 const CARD_BASE_STYLE: React.CSSProperties = {
-  background: COLORS.bgCard,
+  background: COLORS.base,
   borderRadius: "4px",
   border: `1px solid ${COLORS.border}`,
   padding: "36px 32px",
@@ -65,7 +58,7 @@ const TITLE_STYLE: React.CSSProperties = {
 
 const DESC_STYLE: React.CSSProperties = {
   fontSize: "15px",
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   lineHeight: 1.65,
   textAlign: "center",
 };
@@ -130,7 +123,7 @@ const MERGE_SECTION_STYLE: React.CSSProperties = {
 const MERGE_LABEL_STYLE: React.CSSProperties = {
   fontSize: "11px",
   fontWeight: 600,
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   letterSpacing: "2px",
   textTransform: "uppercase",
   marginBottom: "12px",
@@ -174,7 +167,7 @@ const MERGE_ICON_BOX: React.CSSProperties = {
 const MERGE_ICON_LABEL: React.CSSProperties = {
   fontSize: "18px",
   fontWeight: 600,
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   letterSpacing: "1px",
   textTransform: "uppercase",
 };
@@ -295,7 +288,7 @@ const LABEL_STYLE: React.CSSProperties = {
   display: "inline-block",
   fontSize: "11px",
   fontWeight: 600,
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   letterSpacing: "2px",
   textTransform: "uppercase",
   marginBottom: "16px",
@@ -311,7 +304,7 @@ const HEADING_STYLE: React.CSSProperties = {
 
 const SUB_STYLE: React.CSSProperties = {
   fontSize: "17px",
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   maxWidth: "480px",
   margin: "0 auto",
 };

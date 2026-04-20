@@ -82,13 +82,13 @@ code {
 }
 
 :root {
-  --main-bg-color: var(--color-slate-950);
+  --main-bg-color: var(--color-black);
   --dark-blue: var(--color-slate-900);
   --dark-blue-bg: var(--color-slate-900);
   --dark-blue-accent: var(--color-slate-100);
-  --primary-btn-bg: var(--color-blue-600);
-  --primary-btn-hover: var(--color-blue-400);
-  --primary-btn-active: color-mix(in srgb, var(--color-blue-300), var(--color-blue-400) 90%);
+  --primary-btn-bg: var(--color-yellow-500);
+  --primary-btn-hover: var(--color-yellow-300);
+  --primary-btn-active: color-mix(in srgb, var(--color-yellow-300), var(--color-yellow-400) 90%);
   --dark-blue-hover: var(--color-cold-blue-900);
   --dark-blue-border: var(--color-gray-800);
   --dark-blue-active: var(--color-cold-blue-700);

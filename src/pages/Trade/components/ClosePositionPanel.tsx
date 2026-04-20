@@ -17,8 +17,6 @@ import { DEFAULT_SLIPPAGE_BPS } from "domain/vantage/trade/usePositionRouterTrad
 import type { SpreadData } from "domain/vantage/trade/useSpread";
 import { calcAcceptablePrice } from "domain/vantage/trade/utils";
 
-import Button from "components/Button/Button";
-
 import { SpreadBadge } from "./SpreadBadge";
 
 type Props = {
@@ -82,7 +80,7 @@ export function ClosePositionPanel({ position, spread, trade, requests, account,
       <SpreadBadge spread={spread} />
 
       {/* Position summary */}
-      <div className="rounded-4 border border-stroke-primary bg-cold-blue-900 px-16 py-12 text-12">
+      <div className="rounded-4 border border-vantage-border bg-vantage-base px-16 py-12 text-12">
         <div className="mb-8 font-semibold text-white">{position.isLong ? t`Long` : t`Short`}</div>
         <div className="flex justify-between text-slate-400">
           <span>{t`Size`}</span>
@@ -118,16 +116,14 @@ export function ClosePositionPanel({ position, spread, trade, requests, account,
           step={1}
           value={closePct}
           onChange={(e) => setClosePct(Number(e.target.value))}
-          className="w-full accent-blue-500"
+          className="w-full accent-[#ecff3e]"
         />
         <div className="mt-2 flex justify-between text-11 text-slate-500">
           {[25, 50, 75, 100].map((p) => (
             <button
               key={p}
               onClick={() => setClosePct(p)}
-              className={`px-6 py-2 text-11 transition-colors ${
-                closePct === p ? "text-blue-400" : "hover:text-slate-300 text-slate-500"
-              }`}
+              className={`px-6 py-2 text-11 transition-colors ${closePct === p ? "text-vantage-accent" : "text-vantage-text-secondary"}`}
             >
               {p}%
             </button>
@@ -148,9 +144,7 @@ export function ClosePositionPanel({ position, spread, trade, requests, account,
           <button
             key={bps}
             onClick={() => setSlippageBps(bps)}
-            className={`rounded-4 px-10 py-4 transition-colors ${
-              slippageBps === bps ? "bg-blue-600 text-white" : "bg-cold-blue-900 text-slate-400 hover:text-white"
-            }`}
+            className={`rounded-4 px-10 py-4 transition-colors ${slippageBps === bps ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
           >
             {bps / 100}%
           </button>
@@ -172,13 +166,20 @@ export function ClosePositionPanel({ position, spread, trade, requests, account,
       </div>
 
       {/* Submit */}
-      <Button variant="primary" className="w-full" onClick={handleClose} disabled={isSubmitting || sizeDelta === 0n}>
+      <button
+        onClick={handleClose}
+        disabled={isSubmitting || sizeDelta === 0n}
+        className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${isSubmitting || sizeDelta === 0n ? "bg-[#334155] text-[#94a3b8]" : "bg-vantage-accent text-black"}`}
+      >
         {isSubmitting ? t`Submitting…` : closePct === 100 ? t`Close Position` : t`Reduce Position (${closePct}%)`}
-      </Button>
+      </button>
 
-      <Button variant="secondary" className="w-full" onClick={onClose}>
+      <button
+        onClick={onClose}
+        className="w-full rounded-4 border border-vantage-border py-14 text-15 font-medium text-vantage-text-secondary transition-colors hover:text-white"
+      >
         {t`Cancel`}
-      </Button>
+      </button>
     </div>
   );
 }

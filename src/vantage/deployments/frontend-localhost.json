@@ -10,6 +10,7 @@
     "Router": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
     "PositionRouter": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
     "OrderBook": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+    "HedgeController": "0x8198f5d8F8CfFE8f9C413d98a0A55aEB8ab9FbB7",
     "VaultReader": "0xc6e7DF5E7b4f2A278906862b61205850344D4e7d",
     "MockPriceFeed": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
     "tokens": {
@@ -18,24 +19,24 @@
       "WETH": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
     },
     "mockRWA": {
-      "Rebasing": "0x998abeb3E57409262aE5b751f60747921B33613E",
-      "PriceShare": "0x70e0bA845a1A0F2DA3359C97E0285013525FFC49",
-      "Direct": "0x4826533B4897376654Bb4d4AD88B7faFD0C98528"
+      "Rebasing": "0x70e0bA845a1A0F2DA3359C97E0285013525FFC49",
+      "PriceShare": "0x4826533B4897376654Bb4d4AD88B7faFD0C98528",
+      "Direct": "0x99bbA657f2BbC93c02D617f8bA121cB8Fc104Acf"
     },
     "mockRWAVaults": {
-      "Rebasing": "0x9d4454B023096f34B160D6B654540c56A1F81688",
-      "PriceShare": "0x36C02dA8a0983159322a80FFE9F24b1acfF8B570",
-      "Direct": "0x4c5859f0F772848b2D91F1D83E2Fe57935348029"
+      "Rebasing": "0x5eb3Bc0a489C5A8288765d2336659EbCA68FCd00",
+      "PriceShare": "0x809d550fca64d94Bd9F66E60752A544199cfAC3D",
+      "Direct": "0x1291Be112d480055DaFd8a610b7d1e203891C274"
     },
     "mockRWALPTokens": {
-      "Rebasing": "0x5f3f1dBD7B74C6B46e8c44f98792A1dAf8d69154",
-      "PriceShare": "0x7969c5eD335650692Bc04293B07F5BF2e7A673C0",
-      "Direct": "0x1429859428C0aBc9C2C47C8Ee9FBaf82cFA0F20f"
-    },
-    "mockRWALPManagers": {
       "Rebasing": "0xb7278A61aa25c888815aFC32Ad3cC52fF24fE575",
       "PriceShare": "0x7bc06c482DEAd17c0e297aFbC32f6e63d3846650",
       "Direct": "0xB0D4afd8879eD9F52b28595d31B441D079B2Ca07"
+    },
+    "mockRWALPManagers": {
+      "Rebasing": "0xCD8a1C3ba11CF5ECfa6267617243239504a98d90",
+      "PriceShare": "0xc351628EB244ec633d5f21fBD6621e1a683B1181",
+      "Direct": "0x162A433068F51e18b7d13932F27e66a3f99E6890"
     }
   },
   "abis": {
@@ -113,6 +114,43 @@
         "inputs": [
           {
             "internalType": "uint256",
+            "name": "projected",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "cap",
+            "type": "uint256"
+          }
+        ],
+        "name": "HedgeCapExceeded",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "HedgeDisabledError",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "leverage",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "threshold",
+            "type": "uint256"
+          }
+        ],
+        "name": "HighLeverageLocked",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
             "name": "actual",
             "type": "uint256"
           },
@@ -160,6 +198,17 @@
       {
         "inputs": [
           {
+            "internalType": "bytes32",
+            "name": "key",
+            "type": "bytes32"
+          }
+        ],
+        "name": "NotAHedgePosition",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
             "internalType": "address",
             "name": "owner",
             "type": "address"
@@ -199,6 +248,37 @@
         "inputs": [
           {
             "internalType": "uint256",
+            "name": "dropAt",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "delay",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "current",
+            "type": "uint256"
+          }
+        ],
+        "name": "SoftDeleveragingNotReady",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "SolvencyNotInDeficit",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "SolvencyStillInDeficit",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
             "name": "earliest",
             "type": "uint256"
           },
@@ -209,6 +289,22 @@
           }
         ],
         "name": "TimelockNotExpired",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "projected",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "cap",
+            "type": "uint256"
+          }
+        ],
+        "name": "TradeCapExceeded",
         "type": "error"
       },
       {
@@ -302,6 +398,25 @@
           }
         ],
         "name": "AssetRegistrySet",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "hedgeCapBps",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "tradeCapBps",
+            "type": "uint256"
+          }
+        ],
+        "name": "AumCapsUpdated",
         "type": "event"
       },
       {
@@ -453,6 +568,56 @@
           {
             "indexed": false,
             "internalType": "bool",
+            "name": "isHighLeverageLocked",
+            "type": "bool"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isPremiumSurgeActive",
+            "type": "bool"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isLPBoostActive",
+            "type": "bool"
+          }
+        ],
+        "name": "DefenseModeUpdated",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "frVolatilityFactorBps",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "maxDynamicBufferBps",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "slippageToleranceBps",
+            "type": "uint256"
+          }
+        ],
+        "name": "DynamicBufferParamsUpdated",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "bool",
             "name": "enabled",
             "type": "bool"
           }
@@ -551,6 +716,25 @@
         "anonymous": false,
         "inputs": [
           {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "shortCostRateWad",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          }
+        ],
+        "name": "FRObservationRecorded",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
             "indexed": true,
             "internalType": "address",
             "name": "token",
@@ -619,6 +803,142 @@
           }
         ],
         "name": "ForcedClose",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "bytes32",
+            "name": "positionKey",
+            "type": "bytes32"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "indexToken",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "size",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "remainingHedgedNotional",
+            "type": "uint256"
+          }
+        ],
+        "name": "HedgeADLTerminated",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "bytes32",
+            "name": "positionKey",
+            "type": "bytes32"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "indexToken",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "size",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "remainingHedgedNotional",
+            "type": "uint256"
+          }
+        ],
+        "name": "HedgeConverted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "lowBps",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "highBps",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "lowLeverageX",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "highLeverageX",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "reserveSplitBps",
+            "type": "uint256"
+          }
+        ],
+        "name": "HedgePremiumParamsUpdated",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "bytes32",
+            "name": "positionKey",
+            "type": "bytes32"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "premiumUsd",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "reserveUsd",
+            "type": "uint256"
+          }
+        ],
+        "name": "HedgePremiumSettled",
         "type": "event"
       },
       {
@@ -701,6 +1021,31 @@
           {
             "indexed": true,
             "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "usdAmount",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "totalBoostPoolUsd",
+            "type": "uint256"
+          }
+        ],
+        "name": "LPBoostDistributed",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
             "name": "lpManager",
             "type": "address"
           }
@@ -773,6 +1118,25 @@
           }
         ],
         "name": "LiquidatePosition",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isHedge",
+            "type": "bool"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "newMax",
+            "type": "uint256"
+          }
+        ],
+        "name": "MaxLeverageUpdated",
         "type": "event"
       },
       {
@@ -1025,6 +1389,31 @@
         "anonymous": false,
         "inputs": [
           {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "bufferedYield",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "totalCost",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isDisabled",
+            "type": "bool"
+          }
+        ],
+        "name": "ProtocolSolvencyChecked",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
             "indexed": true,
             "internalType": "address",
             "name": "token",
@@ -1113,6 +1502,55 @@
         "anonymous": false,
         "inputs": [
           {
+            "indexed": true,
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "collateralToken",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "indexToken",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isLong",
+            "type": "bool"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "size",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "receiver",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amountOut",
+            "type": "uint256"
+          }
+        ],
+        "name": "RedemptionADLExecuted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
             "indexed": false,
             "internalType": "uint8",
             "name": "level",
@@ -1120,6 +1558,31 @@
           }
         ],
         "name": "RequiredKYCLevelSet",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          }
+        ],
+        "name": "ReserveFundWithdrawn",
         "type": "event"
       },
       {
@@ -1139,6 +1602,25 @@
           }
         ],
         "name": "RouterSet",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "oldBps",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "newBps",
+            "type": "uint256"
+          }
+        ],
+        "name": "SafetyBufferUpdated",
         "type": "event"
       },
       {
@@ -1214,6 +1696,106 @@
           }
         ],
         "name": "ShortfallSettled",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "bytes32",
+            "name": "positionKey",
+            "type": "bytes32"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "size",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "cumulativeReduced",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "remainingHedgedNotional",
+            "type": "uint256"
+          }
+        ],
+        "name": "SoftDeleveraged",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "bytes32",
+            "name": "positionKey",
+            "type": "bytes32"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "size",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "newTotalHedgedNotional",
+            "type": "uint256"
+          }
+        ],
+        "name": "SoftLockRestored",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "totalCost",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "totalYield",
+            "type": "uint256"
+          }
+        ],
+        "name": "SolvencyDropRecorded",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "totalCost",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "totalYield",
+            "type": "uint256"
+          }
+        ],
+        "name": "SolvencyRecovered",
         "type": "event"
       },
       {
@@ -1366,6 +1948,31 @@
           }
         ],
         "name": "YieldAccumulatorSet",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "oldContrib",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "newContrib",
+            "type": "uint256"
+          }
+        ],
+        "name": "YieldCacheRefreshed",
         "type": "event"
       },
       {
@@ -1651,6 +2258,19 @@
         "type": "function"
       },
       {
+        "inputs": [],
+        "name": "cachedStakedYieldUsdWad",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [
           {
             "internalType": "address",
@@ -1661,6 +2281,19 @@
         "name": "checkCompliance",
         "outputs": [],
         "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_indexToken",
+            "type": "address"
+          }
+        ],
+        "name": "checkProtocolSolvency",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
       },
       {
@@ -1821,6 +2454,24 @@
         "type": "function"
       },
       {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_usdAmount",
+            "type": "uint256"
+          }
+        ],
+        "name": "distributeLPBoost",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
         "inputs": [],
         "name": "emergencyMode",
         "outputs": [
@@ -1831,6 +2482,39 @@
           }
         ],
         "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_account",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_collateralToken",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_indexToken",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isLong",
+            "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_receiver",
+            "type": "address"
+          }
+        ],
+        "name": "executeHedgeADL",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
       },
       {
@@ -1854,6 +2538,24 @@
             "type": "uint256"
           }
         ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32[]",
+            "name": "sortedKeys",
+            "type": "bytes32[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "requiredReductionUsd",
+            "type": "uint256"
+          }
+        ],
+        "name": "executeSoftDeleveraging",
+        "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
       },
@@ -1917,6 +2619,45 @@
             "type": "address"
           }
         ],
+        "name": "forceCloseForRedemption",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "amountOut",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_account",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_collateralToken",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_indexToken",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isLong",
+            "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_receiver",
+            "type": "address"
+          }
+        ],
         "name": "forceClosePosition",
         "outputs": [
           {
@@ -1926,6 +2667,32 @@
           }
         ],
         "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "frObservationInterval",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "frVolatilityFactorBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
         "type": "function"
       },
       {
@@ -1959,6 +2726,34 @@
           {
             "internalType": "uint256",
             "name": "aum",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "getAllocationStatus",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "currentHedgeOI",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxHedgeOI",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "currentTradeOI",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxTradeOI",
             "type": "uint256"
           }
         ],
@@ -2090,6 +2885,38 @@
         "type": "function"
       },
       {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "_key",
+            "type": "bytes32"
+          }
+        ],
+        "name": "getPositionPriority",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "getRequiredBuffer",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "bufferBps",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [],
         "name": "getTotalOI",
         "outputs": [
@@ -2129,6 +2956,97 @@
         "type": "function"
       },
       {
+        "inputs": [],
+        "name": "hedgeCapBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "hedgeMaxLeverage",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "hedgePremiumHighBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "hedgePremiumHighLeverageX",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "hedgePremiumLowBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "hedgePremiumLowLeverageX",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "highLeverageLockThreshold",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [
           {
             "internalType": "address",
@@ -2159,11 +3077,66 @@
             "internalType": "uint256",
             "name": "_collateralDelta",
             "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isHedge",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "_convertOnADL",
+            "type": "bool"
           }
         ],
         "name": "increasePosition",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "isHedgeDisabled",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "isHedgePosition",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "isHighLeverageLocked",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
         "type": "function"
       },
       {
@@ -2175,6 +3148,19 @@
           }
         ],
         "name": "isKeeper",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "isLPBoostActive",
         "outputs": [
           {
             "internalType": "bool",
@@ -2199,6 +3185,19 @@
         "type": "function"
       },
       {
+        "inputs": [],
+        "name": "isPremiumSurgeActive",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [
           {
             "internalType": "address",
@@ -2207,6 +3206,25 @@
           }
         ],
         "name": "isRouter",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "isSoftLockedPosition",
         "outputs": [
           {
             "internalType": "bool",
@@ -2258,6 +3276,25 @@
       {
         "inputs": [
           {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "lastPremiumSettledAt",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
             "internalType": "address",
             "name": "_account",
             "type": "address"
@@ -2289,6 +3326,25 @@
         "type": "function"
       },
       {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "lpBoostPool",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [],
         "name": "lpManager",
         "outputs": [
@@ -2296,6 +3352,19 @@
             "internalType": "address",
             "name": "",
             "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "maxDynamicBufferBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
           }
         ],
         "stateMutability": "view",
@@ -2317,6 +3386,25 @@
       {
         "inputs": [],
         "name": "maxStalenessSpreadBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "openedAt",
         "outputs": [
           {
             "internalType": "uint256",
@@ -2505,6 +3593,25 @@
             "type": "bytes32"
           }
         ],
+        "name": "positionSurgeBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
         "name": "positions",
         "outputs": [
           {
@@ -2541,6 +3648,19 @@
             "internalType": "int256",
             "name": "entryFundingRate",
             "type": "int256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "premiumReserveSplitBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
           }
         ],
         "stateMutability": "view",
@@ -2713,6 +3833,19 @@
         "type": "function"
       },
       {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          }
+        ],
+        "name": "refreshYieldCache",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
         "inputs": [],
         "name": "renounceOwnership",
         "outputs": [],
@@ -2740,7 +3873,52 @@
             "type": "address"
           }
         ],
+        "name": "reserveFund",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
         "name": "reservedAmounts",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32[]",
+            "name": "keys",
+            "type": "bytes32[]"
+          }
+        ],
+        "name": "restoreSoftDeleveraging",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "safetyBufferBps",
         "outputs": [
           {
             "internalType": "uint256",
@@ -2767,12 +3945,76 @@
       {
         "inputs": [
           {
+            "internalType": "uint256",
+            "name": "_hedgeCapBps",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_tradeCapBps",
+            "type": "uint256"
+          }
+        ],
+        "name": "setAumCaps",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
             "internalType": "address",
             "name": "_registry",
             "type": "address"
           }
         ],
         "name": "setComplianceRegistry",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bool",
+            "name": "_highLevLocked",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "_premiumSurge",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "_lpBoost",
+            "type": "bool"
+          }
+        ],
+        "name": "setDefenseMode",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_frVolatilityFactorBps",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_maxDynamicBufferBps",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_slippageToleranceBps",
+            "type": "uint256"
+          }
+        ],
+        "name": "setDynamicBufferParams",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -2806,6 +4048,65 @@
       {
         "inputs": [
           {
+            "internalType": "uint256",
+            "name": "_seconds",
+            "type": "uint256"
+          }
+        ],
+        "name": "setFrObservationInterval",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_lowBps",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_highBps",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_lowLeverageX",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_highLeverageX",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_reserveSplitBps",
+            "type": "uint256"
+          }
+        ],
+        "name": "setHedgePremiumParams",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_threshold",
+            "type": "uint256"
+          }
+        ],
+        "name": "setHighLeverageLockThreshold",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
             "internalType": "address",
             "name": "keeper",
             "type": "address"
@@ -2830,6 +4131,24 @@
           }
         ],
         "name": "setLPManager",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bool",
+            "name": "_isHedge",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_max",
+            "type": "uint256"
+          }
+        ],
+        "name": "setMaxLeverage",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -2921,6 +4240,32 @@
         "inputs": [
           {
             "internalType": "uint256",
+            "name": "_bps",
+            "type": "uint256"
+          }
+        ],
+        "name": "setSafetyBufferBps",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_seconds",
+            "type": "uint256"
+          }
+        ],
+        "name": "setSoftDeleveragingDelay",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
             "name": "_rateBps",
             "type": "uint256"
           },
@@ -2931,6 +4276,19 @@
           }
         ],
         "name": "setStalenessPenalty",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_multiplierBps",
+            "type": "uint256"
+          }
+        ],
+        "name": "setSurgePremiumMultiplier",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -3047,8 +4405,79 @@
         "type": "function"
       },
       {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "shouldConvertOnADL",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "slippageToleranceBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "softDeleveragingDelay",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "solvencyDropAt",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [],
         "name": "stalenessPenaltyRateBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "surgePremiumMultiplierBps",
         "outputs": [
           {
             "internalType": "uint256",
@@ -3183,6 +4612,19 @@
         "type": "function"
       },
       {
+        "inputs": [],
+        "name": "totalHedgedNotional",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [
           {
             "internalType": "address",
@@ -3261,6 +4703,32 @@
           }
         ],
         "name": "totalShortSize",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "tradeCapBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "tradeMaxLeverage",
         "outputs": [
           {
             "internalType": "uint256",
@@ -3391,6 +4859,29 @@
         "type": "function"
       },
       {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_amountUsd",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "_recipient",
+            "type": "address"
+          }
+        ],
+        "name": "withdrawReserveFund",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
         "inputs": [],
         "name": "yieldAccumulator",
         "outputs": [
@@ -3440,6 +4931,53 @@
         "type": "constructor"
       },
       {
+        "inputs": [],
+        "name": "ClaimNotAvailable",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "earliest",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "current",
+            "type": "uint256"
+          }
+        ],
+        "name": "EpochNotReady",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "available",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "required",
+            "type": "uint256"
+          }
+        ],
+        "name": "InsufficientIdleLiquidity",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "InvalidCancelAmount",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NoRedemptionPending",
+        "type": "error"
+      },
+      {
         "inputs": [
           {
             "internalType": "address",
@@ -3462,6 +5000,21 @@
         "type": "error"
       },
       {
+        "inputs": [],
+        "name": "RedemptionAlreadyPending",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ReentrancyGuardReentrantCall",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "UsdcTokenNotSet",
+        "type": "error"
+      },
+      {
         "inputs": [
           {
             "internalType": "uint256",
@@ -3475,6 +5028,11 @@
           }
         ],
         "name": "WithdrawalBlockedByOI",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ZeroShares",
         "type": "error"
       },
       {
@@ -3512,6 +5070,25 @@
           }
         ],
         "name": "AddLiquidity",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "keeper",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "enabled",
+            "type": "bool"
+          }
+        ],
+        "name": "KeeperSet",
         "type": "event"
       },
       {
@@ -3562,6 +5139,100 @@
             "type": "address"
           },
           {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "shares",
+            "type": "uint256"
+          }
+        ],
+        "name": "RedemptionCancelled",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "uint256",
+            "name": "epochId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "usdcAmount",
+            "type": "uint256"
+          }
+        ],
+        "name": "RedemptionClaimed",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "uint256",
+            "name": "epochId",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "pricePerShare",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "totalSharesBurned",
+            "type": "uint256"
+          }
+        ],
+        "name": "RedemptionEpochExecuted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "shares",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "epochId",
+            "type": "uint256"
+          }
+        ],
+        "name": "RedemptionRequested",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          },
+          {
             "indexed": true,
             "internalType": "address",
             "name": "token",
@@ -3582,6 +5253,19 @@
         ],
         "name": "RemoveLiquidity",
         "type": "event"
+      },
+      {
+        "inputs": [],
+        "name": "ADL_BUFFER_BPS",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
       },
       {
         "inputs": [],
@@ -3648,8 +5332,208 @@
         "type": "function"
       },
       {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          }
+        ],
+        "name": "addLiquidityFor",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "shares",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "shares",
+            "type": "uint256"
+          }
+        ],
+        "name": "cancelRedeem",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "claimRedeemedFunds",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "usdcAmount",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "currentEpochId",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "epochPricePerShare",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "collateralToken",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "indexToken",
+                "type": "address"
+              },
+              {
+                "internalType": "bool",
+                "name": "isLong",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct LPManager.PositionRef[]",
+            "name": "tradeRefs",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "collateralToken",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "indexToken",
+                "type": "address"
+              },
+              {
+                "internalType": "bool",
+                "name": "isLong",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct LPManager.PositionRef[]",
+            "name": "hedgeRefs",
+            "type": "tuple[]"
+          }
+        ],
+        "name": "executeRedemptionEpoch",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
         "inputs": [],
         "name": "getSharePrice",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "isKeeper",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "isRouter",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "lastEpochTimestamp",
         "outputs": [
           {
             "internalType": "uint256",
@@ -3700,6 +5584,43 @@
         "type": "function"
       },
       {
+        "inputs": [],
+        "name": "redemptionCycleDuration",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "redemptionRequests",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "shares",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "epochId",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [
           {
             "internalType": "uint256",
@@ -3738,6 +5659,94 @@
       {
         "inputs": [
           {
+            "internalType": "uint256",
+            "name": "shares",
+            "type": "uint256"
+          }
+        ],
+        "name": "requestRedeem",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "keeper",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "enabled",
+            "type": "bool"
+          }
+        ],
+        "name": "setKeeper",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "duration",
+            "type": "uint256"
+          }
+        ],
+        "name": "setRedemptionCycleDuration",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "router",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "enabled",
+            "type": "bool"
+          }
+        ],
+        "name": "setRouter",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          }
+        ],
+        "name": "setUsdcToken",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "totalPendingShares",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
             "internalType": "address",
             "name": "newOwner",
             "type": "address"
@@ -3746,6 +5755,19 @@
         "name": "transferOwnership",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "usdcToken",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
         "type": "function"
       },
       {
@@ -6725,6 +8747,25 @@
         "inputs": [
           {
             "internalType": "address",
+            "name": "asset",
+            "type": "address"
+          }
+        ],
+        "name": "getEffectiveYieldBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
             "name": "",
             "type": "address"
           }
@@ -7710,6 +9751,65 @@
       {
         "inputs": [
           {
+            "internalType": "address",
+            "name": "_account",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_collateralToken",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_indexToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_amountIn",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_sizeDelta",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isLong",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_acceptablePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isHedge",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "_convertOnADL",
+            "type": "bool"
+          }
+        ],
+        "name": "createIncreasePositionFor",
+        "outputs": [
+          {
+            "internalType": "bytes32",
+            "name": "requestKey",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
             "internalType": "bytes32",
             "name": "",
             "type": "bytes32"
@@ -7898,6 +9998,60 @@
       {
         "inputs": [
           {
+            "internalType": "address",
+            "name": "_account",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_indexToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_sizeDelta",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isLong",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_acceptablePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_executionFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isHedge",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "_convertOnADL",
+            "type": "bool"
+          }
+        ],
+        "name": "increasePositionETHFor",
+        "outputs": [
+          {
+            "internalType": "bytes32",
+            "name": "requestKey",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
             "internalType": "bytes32",
             "name": "",
             "type": "bytes32"
@@ -7957,7 +10111,17 @@
           },
           {
             "internalType": "bool",
+            "name": "isHedge",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
             "name": "isNativeETH",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "convertOnADL",
             "type": "bool"
           }
         ],
@@ -7992,6 +10156,25 @@
           }
         ],
         "name": "isKeeper",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "isRouter",
         "outputs": [
           {
             "internalType": "bool",
@@ -8104,6 +10287,24 @@
           }
         ],
         "name": "setIsKeeper",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_router",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isRouter",
+            "type": "bool"
+          }
+        ],
+        "name": "setIsRouter",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -8891,6 +11092,769 @@
         ],
         "stateMutability": "view",
         "type": "function"
+      }
+    ],
+    "HedgeController": [
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_lpManager",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_positionRouter",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          }
+        ],
+        "name": "OwnableInvalidOwner",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          }
+        ],
+        "name": "OwnableUnauthorizedAccount",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "ReentrancyGuardReentrantCall",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          }
+        ],
+        "name": "SafeERC20FailedOperation",
+        "type": "error"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "bytes32",
+            "name": "posKey",
+            "type": "bytes32"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "taxTokens",
+            "type": "uint256"
+          }
+        ],
+        "name": "HedgeExitTaxCharged",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "bytes32",
+            "name": "posKey",
+            "type": "bytes32"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "taxAmount",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "sizeDelta",
+            "type": "uint256"
+          }
+        ],
+        "name": "HedgeExited",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "rwaToken",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "rwaAmount",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bytes32",
+            "name": "shortRequestKey",
+            "type": "bytes32"
+          }
+        ],
+        "name": "ManagedHedgeCreated",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "previousOwner",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "indexToken",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "sizeDelta",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bytes32",
+            "name": "shortRequestKey",
+            "type": "bytes32"
+          }
+        ],
+        "name": "SelfCustodyHedgeCreated",
+        "type": "event"
+      },
+      {
+        "inputs": [],
+        "name": "baseTaxBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "posKey",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "address",
+            "name": "collateralToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sizeDelta",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "collateralDelta",
+            "type": "uint256"
+          }
+        ],
+        "name": "calculateExitTax",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "taxTokens",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "rwaToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rwaAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "collateralToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "collateralAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "indexToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sizeDelta",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "acceptablePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "executionFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isHedge",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "_convertOnADL",
+            "type": "bool"
+          }
+        ],
+        "name": "createManagedHedge",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "rwaToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "rwaAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "indexToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sizeDelta",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "acceptablePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "executionFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isHedge",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "_convertOnADL",
+            "type": "bool"
+          }
+        ],
+        "name": "createManagedHedgeETH",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "collateralToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "collateralAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "indexToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sizeDelta",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "acceptablePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "executionFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isHedge",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "_convertOnADL",
+            "type": "bool"
+          }
+        ],
+        "name": "createSelfCustodyHedge",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "indexToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sizeDelta",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "acceptablePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "executionFee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isHedge",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "_convertOnADL",
+            "type": "bool"
+          }
+        ],
+        "name": "createSelfCustodyHedgeETH",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "collateralToken",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "indexToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "collateralDelta",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "sizeDelta",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "isLong",
+            "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "receiver",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "acceptablePrice",
+            "type": "uint256"
+          }
+        ],
+        "name": "exitHedge",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "hedgeOpenedAt",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "lpManager",
+        "outputs": [
+          {
+            "internalType": "contract ILPManager",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "maxTaxBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "minHedgeDuration",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "positionIsHedge",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "positionRouter",
+        "outputs": [
+          {
+            "internalType": "contract IPositionRouter",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "positionTracked",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "rescueETH",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "rescueTokens",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_bps",
+            "type": "uint256"
+          }
+        ],
+        "name": "setBaseTaxBps",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_bps",
+            "type": "uint256"
+          }
+        ],
+        "name": "setMaxTaxBps",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_duration",
+            "type": "uint256"
+          }
+        ],
+        "name": "setMinHedgeDuration",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_treasury",
+            "type": "address"
+          }
+        ],
+        "name": "setTreasury",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_vault",
+            "type": "address"
+          }
+        ],
+        "name": "setVault",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_weth",
+            "type": "address"
+          }
+        ],
+        "name": "setWeth",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "newOwner",
+            "type": "address"
+          }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "treasury",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "vault",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "weth",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "stateMutability": "payable",
+        "type": "receive"
       }
     ],
     "VaultReader": [

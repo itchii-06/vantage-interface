@@ -32,7 +32,7 @@ export function AppNav() {
 
   return (
     <div className="flex items-center gap-24">
-      <Link to="/" className="flex items-center gap-8 px-4">
+      <Link to="/" className="flex items-center gap-8 pl-4">
         <img src={logoIcon} alt="Logo" className="w-88" />
       </Link>
 
@@ -43,8 +43,8 @@ export function AppNav() {
             <Link
               key={key}
               to={to}
-              className={`px-14 py-8 text-14 font-medium transition-colors ${
-                isActive ? "text-white" : "text-slate-400 hover:text-white"
+              className={`px-14 py-8 text-16 font-medium transition-colors ${
+                isActive ? "text-white" : "text-vantage-text-secondary hover:text-white"
               }`}
             >
               {t`${label}`}
@@ -56,8 +56,8 @@ export function AppNav() {
         <div className="relative" ref={moreRef}>
           <button
             onClick={() => setIsMoreOpen((o) => !o)}
-            className={`flex items-center gap-4 px-14 py-8 text-14 font-medium transition-colors ${
-              isMoreOpen ? "text-white" : "text-slate-400 hover:text-white"
+            className={`flex items-center gap-4 px-14 py-8 text-16 font-medium transition-colors ${
+              isMoreOpen ? "text-white" : "text-vantage-text-secondary hover:text-white"
             }`}
           >
             {t`More`}
@@ -69,19 +69,12 @@ export function AppNav() {
               {/* Backdrop — closes dropdown on outside click */}
               <div className="fixed inset-0 z-40" onClick={() => setIsMoreOpen(false)} />
 
-              <div className="absolute left-0 top-full z-50 mt-4 min-w-[160px] overflow-hidden rounded-4 border border-stroke-primary bg-cold-blue-900 shadow-xl">
-                <Link
-                  to="/stats"
-                  onClick={() => setIsMoreOpen(false)}
-                  className="block px-16 py-10 text-14 text-slate-400 transition-colors hover:bg-slate-800/50 hover:text-white"
-                >
-                  {t`Stats`}
-                </Link>
+              <div className="black absolute left-0 top-full z-50 mt-4 min-w-[160px] overflow-hidden rounded-4 border border-stroke-primary shadow-xl">
                 <a
                   href={DOCS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block px-16 py-10 text-14 text-slate-400 transition-colors hover:bg-slate-800/50 hover:text-white"
+                  className="block px-16 py-10 text-16 text-slate-400 transition-colors hover:bg-slate-800/50 hover:text-white"
                 >
                   {t`Docs`}
                 </a>

@@ -45,6 +45,11 @@ const MOCK_PRICE_FEED = (localhostDeployment.addresses as { MockPriceFeed?: stri
 const USDC_ADDRESS = (localhostDeployment.addresses as { tokens?: { USDC?: string } }).tokens?.USDC ?? "";
 const POLL_MS = 15_000;
 
+// Static style objects (module-level to avoid new objects on each render)
+const STYLE_ACCENT_BG_08 = { background: "rgba(236,255,62,0.08)" } as const;
+const STYLE_ACCENT_BG_12 = { background: "rgba(236,255,62,0.12)" } as const;
+const STYLE_ACCENT_BG_18 = { background: "rgba(236,255,62,0.18)" } as const;
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -161,38 +166,38 @@ function HedgeStatusBar({
   const capacityBarStyle = hedgeCapacityPct !== null ? { width: `${Math.min(100, hedgeCapacityPct)}%` } : undefined;
 
   return (
-    <div className="bg-cold-blue-950 mb-24 rounded-4 border border-stroke-primary p-20">
+    <div className="mb-24 rounded-4 border border-vantage-border bg-vantage-base p-20">
       <div className="grid grid-cols-2 gap-16 sm:grid-cols-4">
         {/* Current price */}
         <div>
-          <div className="text-11 text-slate-500">
+          <div className="text-14 text-slate-500">
             {symbol} {t`Price`}
           </div>
           <div className="mt-4 text-15 font-semibold text-white">
             {spotPriceUsd !== null ? `$${spotPriceUsd.toFixed(4)}` : "—"}
           </div>
-          <div className="mt-2 text-11 text-slate-500">{t`Oracle price`}</div>
+          <div className="mt-2 text-14 text-slate-500">{t`Oracle price`}</div>
         </div>
 
         {/* TVL Protected */}
         <div>
-          <div className="text-11 text-slate-500">{t`TVL Protected`}</div>
+          <div className="text-14 text-slate-500">{t`TVL Protected`}</div>
           <div className="mt-4 text-15 font-semibold text-white">{fmtUsd(vaultAumUsd, 0)}</div>
-          <div className="mt-2 text-11 text-slate-500">{t`Vault AUM`}</div>
+          <div className="mt-2 text-14 text-slate-500">{t`Vault AUM`}</div>
         </div>
 
         {/* Remaining hedge capacity */}
         <div>
-          <div className="text-11 text-slate-500">{t`Remaining Capacity`}</div>
+          <div className="text-14 text-slate-500">{t`Remaining Capacity`}</div>
           <div className="mt-4 text-15 font-semibold text-white">{fmtUsd(remainingCapacityUsd, 0)}</div>
           {usedPct !== null && (
             <div className="mt-6">
-              <div className="text-10 mb-2 flex justify-between text-slate-500">
+              <div className="mb-2 flex justify-between text-14 text-slate-500">
                 <span>{t`Used`}</span>
                 <span>{usedPct.toFixed(1)}%</span>
               </div>
               <div className="h-4 w-full overflow-hidden rounded-full bg-slate-700">
-                <div className="bg-indigo-500 h-full rounded-full transition-all" style={progressBarStyle} />
+                <div className="h-full rounded-full bg-vantage-accent transition-all" style={progressBarStyle} />
               </div>
             </div>
           )}
@@ -200,10 +205,10 @@ function HedgeStatusBar({
 
         {/* System Status (Safety Buffer Lock) */}
         <div className="flex flex-col">
-          <div className="text-11 text-slate-500">{t`System Status`}</div>
+          <div className="text-14 text-slate-500">{t`System Status`}</div>
           <div className="mt-4">
             <span
-              className={`inline-flex items-center gap-5 rounded-full px-8 py-3 text-12 font-semibold ${sc.bg} ${sc.text}`}
+              className={`inline-flex items-center gap-5 rounded-full px-8 py-3 text-14 font-semibold ${sc.bg} ${sc.text}`}
             >
               <span className={`h-6 w-6 rounded-full ${sc.dot}`} />
               {sc.label}
@@ -211,7 +216,7 @@ function HedgeStatusBar({
           </div>
           {hedgeCapacityPct !== null && (
             <div className="mt-6">
-              <div className="text-10 mb-2 flex justify-between text-slate-500">
+              <div className="mb-2 flex justify-between text-14 text-slate-500">
                 <span>{t`FR / Buffered Yield`}</span>
                 <span>{hedgeCapacityPct.toFixed(0)}%</span>
               </div>
@@ -221,7 +226,7 @@ function HedgeStatusBar({
             </div>
           )}
           {systemStatus === "healthy" && netApyBps !== null && netApyBps > 0 && (
-            <div className="mt-4 text-11 text-green-500">{t`You are being paid to hedge`}</div>
+            <div className="mt-4 text-14 text-green-500">{t`You are being paid to hedge`}</div>
           )}
 
           {/* Dynamic Buffer indicator (Issue #179) */}
@@ -243,7 +248,7 @@ function HedgeStatusBar({
                     }
                     handle={
                       <div
-                        className={`inline-flex cursor-help items-center gap-5 rounded-full px-8 py-3 text-11 font-medium ${
+                        className={`inline-flex cursor-help items-center gap-5 rounded-full px-8 py-3 text-14 font-medium ${
                           isSpiked ? "bg-orange-900/30 text-orange-300" : "bg-slate-800 text-slate-400"
                         }`}
                       >
@@ -417,7 +422,7 @@ function HedgeSafetyDashboard({ sizeUsd, collateralUsd, openedAtMs, shouldConver
   const LABEL: Record<string, string> = { low: "Safe", warning: "Warning", high: "High Risk" };
 
   return (
-    <div className="mb-16 rounded-4 border border-stroke-primary bg-slate-900/40 p-16">
+    <div className="mb-16 rounded-4 border border-vantage-border bg-vantage-base p-16">
       <div className="mb-12 flex items-center justify-between">
         <span className="text-12 font-medium text-slate-400">{t`Hedge Protection Status (Phase 4 ADL)`}</span>
         <span className={`rounded-full px-10 py-3 text-11 font-medium ${BADGE[risk]}`}>{LABEL[risk]}</span>
@@ -493,7 +498,7 @@ function CurrentPositionPanel({
       <div className="mb-12 flex items-center justify-between">
         <div className="text-12 font-medium text-slate-400">{t`Position`}</div>
         <div className="flex gap-8">
-          <button className="hover:border-indigo-500 rounded-4 border border-stroke-primary px-12 py-6 text-12 text-slate-400 transition-colors hover:text-white">
+          <button className="rounded-4 border border-vantage-border px-12 py-6 text-12 text-vantage-text-secondary transition-colors hover:text-white">
             {t`Increase`}
           </button>
           <button className="border-red-800/50 rounded-4 border px-12 py-6 text-12 text-red-400 transition-colors hover:bg-red-900/20">
@@ -537,7 +542,7 @@ function CurrentPositionPanel({
       <div className="mt-14 flex items-center gap-8">
         <span className="text-11 text-slate-500">{t`ADL Mode:`}</span>
         {shouldConvertOnADL ? (
-          <span className="bg-blue-900/40 rounded-full px-10 py-3 text-11 font-medium text-blue-300">
+          <span className="rounded-full px-10 py-3 text-11 font-medium text-vantage-accent" style={STYLE_ACCENT_BG_12}>
             {t`Mode B — Convert to Paid-Short`}
           </span>
         ) : (
@@ -597,13 +602,13 @@ export default function HedgeDetailPage() {
 
   if (!cfg || !cfg.tokenAddress || !cfg.vaultAddress) {
     return (
-      <div className="w-full">
-        <div className="border-b border-stroke-primary px-16 py-8">
+      <div className="min-h-screen w-full bg-vantage-bg">
+        <div className="border-b border-b-vantage-border px-16 py-8">
           <AppHeader leftContent={<AppNav />} />
         </div>
-        <div className="mt-48 text-center text-slate-400">
+        <div className="mt-48 text-center text-vantage-text-secondary">
           <p>{t`Asset not found.`}</p>
-          <button onClick={() => history.push("/hedge")} className="text-indigo-400 mt-8 text-14 underline">
+          <button onClick={() => history.push("/hedge")} className="mt-8 text-14 text-vantage-accent underline">
             {t`Back to Hedge`}
           </button>
         </div>
@@ -656,9 +661,9 @@ export default function HedgeDetailPage() {
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <div className="w-full">
+    <div className="min-h-screen w-full bg-vantage-bg">
       {/* Header */}
-      <div className="border-b border-stroke-primary px-16 py-8">
+      <div className="border-b border-b-vantage-border px-16 py-8">
         <AppHeader leftContent={<AppNav />} />
       </div>
 
@@ -702,12 +707,12 @@ export default function HedgeDetailPage() {
           {/* Left column: Price Chart + Summary + Current Position */}
           <div className="flex flex-col gap-24">
             {/* Price Chart */}
-            <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-24">
+            <div className="rounded-4 border border-vantage-border bg-vantage-base p-24">
               <div className="mb-16">
                 <h2 className="text-16 font-semibold text-white">
                   {cfg.symbol} {t`Price`}
                 </h2>
-                <p className="mt-2 text-12 text-slate-400">
+                <p className="mt-2 text-14 text-slate-400">
                   {t`This is the price you're hedging against. A short position offsets any drop.`}
                 </p>
               </div>
@@ -721,11 +726,11 @@ export default function HedgeDetailPage() {
             </div>
 
             {/* Current Position (includes Status) */}
-            <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-24">
-              <h3 className="mb-16 text-15 font-semibold text-white">{t`Current Position`}</h3>
+            <div className="rounded-4 border border-vantage-border bg-vantage-base p-24">
+              <h3 className="mb-16 text-16 font-semibold text-white">{t`Current Position`}</h3>
 
               {/* Status: Yield vs Funding */}
-              <div className="mb-20 border-b border-stroke-primary pb-20">
+              <div className="mb-20 border-b border-b-vantage-border pb-20">
                 <div className="mb-12 text-12 font-medium text-slate-400">{t`Status`}</div>
                 <YieldMeter
                   yieldAprBps={pageData.yieldAprBps}
@@ -772,46 +777,33 @@ export default function HedgeDetailPage() {
           </div>
 
           {/* Right: Action Panel */}
-          <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-24">
+          <div className="rounded-4 border border-vantage-border bg-vantage-base p-24">
             {/* Mode badge */}
             <div className="mb-20 flex items-center gap-8">
-              <span className="bg-indigo-600 rounded-full py-4 pl-0 pr-12 text-15 font-semibold text-white">
-                {t`Open New Hedge`}
-              </span>
+              <span className="rounded-full py-4 pl-0 pr-12 text-16 font-semibold">{t`Open New Hedge`}</span>
               <p className="text-12 text-slate-500">{t`LP Deposit + Short in one transaction`}</p>
             </div>
 
             {/* Margin token toggle */}
             <div className="mb-16">
               <div className="mb-8 text-12 text-slate-400">{t`Short Margin`}</div>
-              <div className="flex rounded-4 border border-stroke-primary">
-                <button
-                  onClick={() => setMarginToken("usdc")}
-                  className={`flex-1 rounded-l-4 py-8 text-13 font-medium transition-colors ${
-                    marginToken === "usdc"
-                      ? "bg-slate-600 text-white"
-                      : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
-                  }`}
-                >
-                  USDC
-                </button>
-                <button
-                  onClick={() => setMarginToken("eth")}
-                  className={`flex-1 rounded-r-4 py-8 text-13 font-medium transition-colors ${
-                    marginToken === "eth"
-                      ? "bg-slate-600 text-white"
-                      : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
-                  }`}
-                >
-                  ETH
-                </button>
+              <div className="flex rounded-4 border border-vantage-border">
+                {(["usdc", "eth"] as HedgeMarginToken[]).map((token, i) => (
+                  <button
+                    key={token}
+                    onClick={() => setMarginToken(token)}
+                    className={`flex-1 py-8 text-13 font-medium transition-colors ${i === 0 ? "rounded-l-4" : "rounded-r-4"} ${marginToken === token ? "bg-vantage-accent text-black" : "text-vantage-text-secondary"}`}
+                  >
+                    {token.toUpperCase()}
+                  </button>
+                ))}
               </div>
             </div>
 
             {/* RWA Amount input */}
             <div className="mb-16">
               <label className="mb-6 block text-12 text-slate-400">
-                <span className="rounded bg-indigo-900/60 text-indigo-300 mr-6 px-6 py-1 text-11">
+                <span className="rounded mr-6 px-6 py-1 text-11 text-vantage-accent" style={STYLE_ACCENT_BG_12}>
                   ① {t`LP Deposit`}
                 </span>
                 {cfg.symbol} {t`Amount`}
@@ -819,7 +811,7 @@ export default function HedgeDetailPage() {
               <NumberInput
                 value={rwaAmountStr}
                 onValueChange={(e) => setRwaAmountStr(e.target.value)}
-                className="focus:border-indigo-500 w-full rounded-4 border border-stroke-primary bg-slate-800/60 px-12 py-10 text-14 text-white focus:outline-none"
+                className="w-full rounded-4 border border-[rgba(255,255,255,0.1)] bg-[#111111] px-12 py-10 text-14 text-white focus:outline-none"
                 placeholder="0.00"
               />
               <p className="mt-4 text-11 text-slate-500">
@@ -833,7 +825,7 @@ export default function HedgeDetailPage() {
               <NumberInput
                 value={leverageStr}
                 onValueChange={(e) => setLeverageStr(e.target.value)}
-                className="focus:border-indigo-500 w-full rounded-4 border border-stroke-primary bg-slate-800/60 px-12 py-10 text-14 text-white focus:outline-none"
+                className="w-full rounded-4 border border-[rgba(255,255,255,0.1)] bg-[#111111] px-12 py-10 text-14 text-white focus:outline-none"
                 placeholder="1"
               />
               <p className="mt-4 text-11 text-slate-500">{t`1× = delta-neutral. Higher = partial hedge.`}</p>
@@ -842,25 +834,21 @@ export default function HedgeDetailPage() {
             {/* ADL Mode toggle */}
             <div className="mb-16">
               <div className="mb-8 text-12 text-slate-400">{t`Emergency Behavior (ADL)`}</div>
-              <div className="flex rounded-4 border border-stroke-primary">
+              <div className="flex rounded-4 border border-vantage-border">
                 <button
                   onClick={() => setConvertOnADL(false)}
-                  className={`flex-1 rounded-l-4 py-8 text-12 font-medium transition-colors ${
-                    !convertOnADL ? "bg-slate-600 text-white" : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
-                  }`}
+                  className={`flex-1 rounded-l-4 py-8 text-12 font-medium transition-colors ${!convertOnADL ? "bg-vantage-accent text-black" : "text-vantage-text-secondary"}`}
                 >
                   {t`Close (Recommended)`}
                 </button>
                 <button
                   onClick={() => setConvertOnADL(true)}
-                  className={`flex-1 rounded-r-4 py-8 text-12 font-medium transition-colors ${
-                    convertOnADL ? "bg-blue-700 text-white" : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
-                  }`}
+                  className={`flex-1 rounded-r-4 py-8 text-12 font-medium transition-colors ${convertOnADL ? "bg-vantage-accent text-black" : "text-vantage-text-secondary"}`}
                 >
                   {t`Convert to Paid-Short`}
                 </button>
               </div>
-              <p className="mt-4 text-11 text-slate-500">
+              <p className="mt-5 text-12 text-slate-500">
                 {convertOnADL
                   ? t`Position is kept as a normal short. Funding rate payments apply from ADL moment.`
                   : t`Position is closed and margin is returned when ADL is triggered.`}
@@ -878,12 +866,17 @@ export default function HedgeDetailPage() {
                   <div className="text-11 font-medium uppercase tracking-wide text-slate-500">
                     {t`This transaction sends:`}
                   </div>
-                  <div className="bg-indigo-900/20 flex items-center justify-between rounded-4 px-10 py-8">
+                  <div className="flex items-center justify-between rounded-4 px-10 py-8" style={STYLE_ACCENT_BG_08}>
                     <div className="flex items-center gap-6">
-                      <span className="rounded bg-indigo-800/60 text-10 text-indigo-300 px-5 py-1 font-bold">①</span>
+                      <span
+                        className="rounded text-10 px-5 py-1 font-bold text-vantage-accent"
+                        style={STYLE_ACCENT_BG_18}
+                      >
+                        ①
+                      </span>
                       <span className="text-slate-300">{t`LP Deposit`}</span>
                     </div>
-                    <span className="text-indigo-300 font-semibold">
+                    <span className="font-semibold text-vantage-accent">
                       {rwaAmount > 0 ? `${rwaAmount} ${cfg.symbol}` : "—"}
                     </span>
                   </div>
@@ -945,19 +938,11 @@ export default function HedgeDetailPage() {
               <button
                 onClick={handleExecute}
                 disabled={!canExecute}
-                className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors ${
-                  canExecute
-                    ? "bg-indigo-600 hover:bg-indigo-500 text-white"
-                    : "cursor-not-allowed bg-slate-700 text-slate-500"
-                }`}
+                className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${canExecute ? "bg-vantage-accent text-black" : "bg-[#334155] text-[#64748b]"}`}
               >
                 {isSubmitting ? t`Submitting…` : t`Deposit ${cfg.symbol} + Open Short`}
               </button>
             )}
-
-            <p className="mt-12 text-center text-11 text-slate-600">
-              {t`Short position requests are executed by Keepers (GMX V1 two-step flow).`}
-            </p>
           </div>
         </div>
       </div>

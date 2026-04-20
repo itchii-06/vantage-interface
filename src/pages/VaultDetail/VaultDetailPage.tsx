@@ -33,6 +33,7 @@ import NumberInput from "components/NumberInput/NumberInput";
 
 const WAD = BigInt("1000000000000000000");
 const MAINNET_CHAIN_IDS = new Set([1, 42161, 8453]); // Ethereum, Arbitrum One, Base
+const ZAP_TOKEN_ACTIVE_STYLE = { background: "rgba(236,255,62,0.12)", border: "1px solid #ecff3e" } as const;
 
 function formatUsd(wad: bigint): string {
   const n = parseFloat(formatEther(wad));
@@ -78,7 +79,7 @@ function AumSparkline({ history }: { history: { aum: bigint }[] }) {
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full" preserveAspectRatio="none">
-      <polyline points={pts.join(" ")} fill="none" stroke={isPositive ? "#34d399" : "#f87171"} strokeWidth="2" />
+      <polyline points={pts.join(" ")} fill="none" stroke={isPositive ? "#ecff3e" : "#f87171"} strokeWidth="1" />
     </svg>
   );
 }
@@ -115,7 +116,10 @@ export default function VaultDetailPage() {
 
   // ── Button styles (must be before any early return) ─────────────────────────
   const approveBtnStyle = useMemo(
-    () => ({ backgroundColor: isSubmitting || actions.isApproving ? "#334155" : "#4f46e5" }),
+    () =>
+      isSubmitting || actions.isApproving
+        ? { background: "#334155", color: "#64748b" }
+        : { background: "#ecff3e", color: "#000000" },
     [isSubmitting, actions.isApproving]
   );
   const depositBtnStyle = useMemo(() => {
@@ -127,12 +131,15 @@ export default function VaultDetailPage() {
         /* leave 0n */
       }
     }
-    return { backgroundColor: amt === 0n || isSubmitting ? "#334155" : "#4f46e5" };
+    return amt === 0n || isSubmitting
+      ? { background: "#334155", color: "#64748b" }
+      : { background: "#ecff3e", color: "#000000" };
   }, [cfg, depositInput, isSubmitting]);
   const zapBtnStyle = useMemo(
-    () => ({
-      backgroundColor: !zapInput || parseFloat(zapInput) <= 0 || zapActions.isSubmitting ? "#334155" : "#4f46e5",
-    }),
+    () =>
+      !zapInput || parseFloat(zapInput) <= 0 || zapActions.isSubmitting
+        ? { background: "#334155", color: "#64748b" }
+        : { background: "#ecff3e", color: "#000000" },
     [zapInput, zapActions.isSubmitting]
   );
   const withdrawBtnStyle = useMemo(() => {
@@ -144,21 +151,26 @@ export default function VaultDetailPage() {
         /* leave 0n */
       }
     }
-    return { backgroundColor: shares === 0n || isSubmitting || shares > data.vlpBalance ? "#334155" : "#4f46e5" };
+    return shares === 0n || isSubmitting || shares > data.vlpBalance
+      ? { background: "#334155", color: "#64748b" }
+      : { background: "#ecff3e", color: "#000000" };
   }, [withdrawInput, isSubmitting, data.vlpBalance]);
 
   // ── Config missing guard ────────────────────────────────────────────────────
   if (!cfg) {
     return (
-      <div className="w-full">
-        <div className="border-b border-stroke-primary px-16 py-8">
+      <div className="min-h-screen w-full bg-vantage-bg">
+        <div className="border-b border-b-vantage-border px-16 py-8">
           <AppHeader leftContent={<AppNav />} />
         </div>
         <div className="mx-auto mt-40 max-w-[600px] px-16 text-center">
           <p className="text-16 text-slate-400">{t`Vault not found: ${address}`}</p>
-          <Button variant="secondary" size="medium" className="mt-16" onClick={() => history.push("/vaults")}>
+          <button
+            className="mt-16 rounded-4 border border-vantage-border bg-vantage-base px-20 py-10 text-14 font-medium text-vantage-text-primary transition-colors"
+            onClick={() => history.push("/vaults")}
+          >
             {t`← Back to Vaults`}
-          </Button>
+          </button>
         </div>
       </div>
     );
@@ -261,9 +273,9 @@ export default function VaultDetailPage() {
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
-    <div className="w-full">
+    <div className="min-h-screen w-full bg-vantage-bg">
       {/* Header */}
-      <div className="border-b border-stroke-primary px-16 py-8">
+      <div className="border-b border-b-vantage-border px-16 py-8">
         <AppHeader leftContent={<AppNav />} />
       </div>
 
@@ -282,7 +294,7 @@ export default function VaultDetailPage() {
           {/* ================================================================ */}
           <div className="space-y-20">
             {/* Header */}
-            <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+            <div className="rounded-4 border border-vantage-border bg-vantage-base p-20">
               <div className="mb-8 flex items-center gap-12">
                 <div className="flex h-40 w-40 items-center justify-center rounded-full bg-slate-700 text-16 font-bold text-white">
                   {cfg.symbol.slice(0, 2)}
@@ -305,7 +317,7 @@ export default function VaultDetailPage() {
             </div>
 
             {/* AUM Chart */}
-            <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+            <div className="rounded-4 border border-vantage-border bg-vantage-base p-20">
               <div className="mb-12 flex items-center justify-between">
                 <h2 className="text-14 font-semibold text-white">{t`AUM`}</h2>
                 <span className="text-13 text-slate-400">{t`Live (15s poll)`}</span>
@@ -314,7 +326,7 @@ export default function VaultDetailPage() {
             </div>
 
             {/* Stats */}
-            <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+            <div className="rounded-4 border border-vantage-border bg-vantage-base p-20">
               <h2 className="mb-16 text-14 font-semibold text-white">{t`Stats`}</h2>
               <div className="grid grid-cols-2 gap-16">
                 <StatRow label={t`Total AUM`} value={data.isLoading ? "—" : formatUsd(data.aum)} />
@@ -339,7 +351,7 @@ export default function VaultDetailPage() {
 
             {/* Transactions */}
             {account && txs.length > 0 && (
-              <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+              <div className="rounded-4 border border-vantage-border bg-vantage-base p-20">
                 <h2 className="mb-12 text-14 font-semibold text-white">{t`Transactions`}</h2>
                 <div className="space-y-8">
                   {txs.map((tx) => (
@@ -384,18 +396,14 @@ export default function VaultDetailPage() {
             )}
 
             {/* Deposit / Withdraw panel */}
-            <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
+            <div className="overflow-hidden rounded-4 border border-vantage-border bg-vantage-base">
               {/* Tab header */}
-              <div className="flex border-b border-stroke-primary">
+              <div className="flex border-b border-b-vantage-border">
                 {(["deposit", "zap", "withdraw"] as Tab[]).map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`flex-1 py-12 text-14 font-medium transition-colors ${
-                      activeTab === tab
-                        ? "border-b-2 border-blue-400 text-white"
-                        : "hover:text-slate-200 text-slate-400"
-                    }`}
+                    className={`flex-1 py-12 text-14 font-medium transition-colors ${activeTab === tab ? "border-b-2 border-b-vantage-accent text-vantage-text-primary" : "text-vantage-text-secondary"}`}
                   >
                     {tab === "deposit" ? t`Deposit` : tab === "zap" ? t`Zap In` : t`Withdraw`}
                   </button>
@@ -410,7 +418,7 @@ export default function VaultDetailPage() {
                       <label className="mb-6 block text-12 text-slate-400">
                         {t`Amount`} ({cfg.symbol})
                       </label>
-                      <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-12 py-10">
+                      <div className="flex items-center gap-8 rounded-4 border border-vantage-border bg-vantage-input px-12 py-10">
                         <NumberInput
                           value={depositInput}
                           onValueChange={(e: ChangeEvent<HTMLInputElement>) => setDepositInput(e.target.value)}
@@ -448,7 +456,7 @@ export default function VaultDetailPage() {
                       <button
                         disabled={isSubmitting || actions.isApproving}
                         onClick={() => actions.approve()}
-                        className="w-full rounded-4 py-14 text-15 font-semibold text-white transition-colors"
+                        className="w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed"
                         style={approveBtnStyle}
                       >
                         {actions.isApproving ? t`Approving…` : t`Approve ${cfg.symbol}`}
@@ -457,7 +465,7 @@ export default function VaultDetailPage() {
                       <button
                         disabled={depositAmount === 0n || isSubmitting}
                         onClick={handleDeposit}
-                        className="w-full rounded-4 py-14 text-15 font-semibold text-white transition-colors"
+                        className="w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed"
                         style={depositBtnStyle}
                       >
                         {isSubmitting ? t`Depositing…` : t`Deposit`}
@@ -479,11 +487,8 @@ export default function VaultDetailPage() {
                             setZapInput("");
                             setZapError(null);
                           }}
-                          className={`flex-1 rounded-4 border py-8 text-13 font-medium transition-colors ${
-                            zapToken.key === zt.key
-                              ? "bg-blue-900/40 border-blue-500 text-white"
-                              : "hover:text-slate-200 border-stroke-primary text-slate-400"
-                          }`}
+                          className={`flex-1 rounded-4 py-8 text-13 font-medium transition-colors ${zapToken.key === zt.key ? "text-vantage-text-primary" : "border border-vantage-border text-vantage-text-secondary"}`}
+                          style={zapToken.key === zt.key ? ZAP_TOKEN_ACTIVE_STYLE : undefined}
                         >
                           {zt.label}
                         </button>
@@ -495,7 +500,7 @@ export default function VaultDetailPage() {
                       <label className="mb-6 block text-12 text-slate-400">
                         {t`Amount`} ({zapToken.symbol})
                       </label>
-                      <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-12 py-10">
+                      <div className="flex items-center gap-8 rounded-4 border border-vantage-border bg-vantage-input px-12 py-10">
                         <NumberInput
                           value={zapInput}
                           onValueChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -511,7 +516,7 @@ export default function VaultDetailPage() {
                     </div>
 
                     {/* Info */}
-                    <div className="space-y-4 rounded-4 bg-slate-800/50 p-12 text-12 text-slate-400">
+                    <div className="space-y-4 rounded-4 bg-vantage-input p-12 text-12 text-slate-400">
                       <div className="flex justify-between">
                         <span>{t`Route`}</span>
                         <span className="text-white">
@@ -540,7 +545,7 @@ export default function VaultDetailPage() {
                       <button
                         disabled={!zapInput || parseFloat(zapInput) <= 0 || zapActions.isSubmitting}
                         onClick={handleZap}
-                        className="w-full rounded-4 py-14 text-15 font-semibold text-white transition-colors"
+                        className="w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed"
                         style={zapBtnStyle}
                       >
                         {zapActions.isSubmitting ? t`Zapping…` : t`Zap In`}
@@ -556,12 +561,12 @@ export default function VaultDetailPage() {
                       <div className="mb-6 flex justify-between">
                         <label className="text-12 text-slate-400">{t`VLP Amount`}</label>
                         {account && data.vlpBalance > 0n && (
-                          <button onClick={handleSetMaxWithdraw} className="text-12 text-blue-400 hover:text-blue-300">
+                          <button onClick={handleSetMaxWithdraw} className="text-12 text-vantage-accent">
                             {t`Max`}: {parseFloat(formatEther(data.vlpBalance)).toFixed(4)} VLP
                           </button>
                         )}
                       </div>
-                      <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-12 py-10">
+                      <div className="flex items-center gap-8 rounded-4 border border-vantage-border bg-vantage-input px-12 py-10">
                         <NumberInput
                           value={withdrawInput}
                           onValueChange={(e: ChangeEvent<HTMLInputElement>) => setWithdrawInput(e.target.value)}
@@ -600,7 +605,7 @@ export default function VaultDetailPage() {
                       <button
                         disabled={withdrawShares === 0n || isSubmitting || withdrawShares > data.vlpBalance}
                         onClick={handleWithdraw}
-                        className="w-full rounded-4 py-14 text-15 font-semibold text-white transition-colors"
+                        className="w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed"
                         style={withdrawBtnStyle}
                       >
                         {isSubmitting ? t`Withdrawing…` : t`Withdraw`}
@@ -617,7 +622,7 @@ export default function VaultDetailPage() {
 
             {/* My Position */}
             {account && data.vlpBalance > 0n && (
-              <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+              <div className="rounded-4 border border-vantage-border bg-vantage-base p-20">
                 <h2 className="mb-12 text-14 font-semibold text-white">{t`My Position`}</h2>
                 <div className="space-y-8 text-13">
                   <div className="flex justify-between">
@@ -639,7 +644,7 @@ export default function VaultDetailPage() {
                   {cfg.assetType === 2 && data.tokenPrice > WAD && (
                     <div className="flex justify-between">
                       <span className="text-slate-400">{t`Price Yield`}</span>
-                      <span className="text-blue-400">
+                      <span className="text-vantage-accent">
                         +{((parseFloat(formatEther(data.tokenPrice)) - 1) * 100).toFixed(2)}%
                       </span>
                     </div>
@@ -650,7 +655,7 @@ export default function VaultDetailPage() {
 
             {/* Debug panel (testnet only) */}
             {isTestnet && cfg.isMock && (
-              <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+              <div className="rounded-4 border border-vantage-border bg-vantage-base p-20">
                 <h2 className="text-slate-300 mb-12 text-13 font-semibold">{t`Debug Panel`}</h2>
                 <div className="flex flex-col gap-8">
                   {/* Mint tokens */}

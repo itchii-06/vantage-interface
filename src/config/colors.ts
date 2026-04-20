@@ -15,15 +15,15 @@ export const colors: ColorTree = {
     900: { light: "#E2E5FD", dark: "#1E223C" },
   },
   slate: {
-    100: { light: "#696D96", dark: "#a0a3c4" },
-    400: { light: "#9FA3BC", dark: "#BEC0DA" },
-    500: { light: "#C4C6D5", dark: "#646a8f" },
-    600: { light: "#D4D4E2", dark: "#363a59" },
-    700: { light: "#DADAE7", dark: "#22243a" },
-    750: { light: "#D4D6E2", dark: "#17182c" },
-    800: { light: "#EDEDF2", dark: "#1e2033" },
-    900: { light: "#FCFCFC", dark: "#121421" },
-    950: { light: "#EEEEF4", dark: "#090A14" },
+    100: { light: "#888888", dark: "#bbbbbb" },
+    400: { light: "#a3a3a3", dark: "#d1d1d1" },
+    500: { light: "#bcbcbc", dark: "#888888" },
+    600: { light: "#d4d4d4", dark: "#555555" },
+    700: { light: "#e0e0e0", dark: "#333333" },
+    750: { light: "#ebebeb", dark: "#262626" },
+    800: { light: "#f2f2f2", dark: "#1a1a1a" },
+    900: { light: "#fcfcfc", dark: "#121212" },
+    950: { light: "#f8f8f8", dark: "#0a0a0a" },
   },
   gray: {
     50: { light: "rgba(0, 0, 0, 0.95)", dark: "rgba(255, 255, 255, 0.95)", type: "rgba" },
@@ -39,9 +39,9 @@ export const colors: ColorTree = {
     950: { light: "rgba(0, 0, 0, 0.05)", dark: "rgba(255, 255, 255, 0.05)", type: "rgba" },
   },
   yellow: {
-    300: { light: "#FF9400", dark: "#ffe166" },
-    500: { light: "#f3b50c", dark: "#f3b50c" },
-    900: { light: "#FFF9D0", dark: "#2E2D29" },
+    300: { light: "#ecff3e", dark: "#f4ff82" }, // 鮮やかなベースアクセント
+    500: { light: "#d4e637", dark: "#ecff3e" }, // 少し落ち着かせた/反転用の基準色
+    900: { light: "#f9ffcf", dark: "#2a2e0a" }, // 最も薄い背景色・沈んだ色
   },
   red: {
     100: { light: "#EA2A46", dark: "#F9A4A5" },
@@ -63,11 +63,11 @@ export const colors: ColorTree = {
   white: { light: "#ffffff", dark: "#ffffff" },
   black: { light: "#000000", dark: "#000000" },
   button: {
-    secondary: { light: "#E0E0E8", dark: "#23263b" },
-    secondaryHover: { light: "#dadce8", dark: "#282d46" },
-    secondaryDisabled: { light: "#E0E0E8", dark: "#1e2033" },
-    primaryHover: { light: "#293ce4", dark: "#2a3de5" },
-    primaryActive: { light: "#2637ce", dark: "#2536cd" },
+    secondary: { light: "#E0E0E8", dark: "#ffffff0a" },
+    secondaryHover: { light: "#dadce8", dark: "#ffffff1a" },
+    secondaryDisabled: { light: "#E0E0E8", dark: "#c6c1c1b5" },
+    primaryHover: { light: "#d8ff00", dark: "#f2ff66" },
+    primaryActive: { light: "#bdde00", dark: "#e5ff00" },
   },
   fill: {
     surfaceElevated50: { light: "#EDEDF280", dark: "#1E203380" },
@@ -78,10 +78,10 @@ export const colors: ColorTree = {
   },
   typography: {
     primary: { light: "#000000", dark: "#ffffff" },
-    secondary: { light: "#696D96", dark: "#a0a3c4" },
-    inactive: { light: "#C4C4D5", dark: "#3E4361" },
+    secondary: { light: "#888888", dark: "#888888" },
+    inactive: { light: "#C4C4D5", dark: "#545a5e" },
   },
   stroke: {
-    primary: { light: "#D4D4E2", dark: "#363a59" },
+    primary: { light: "#D4D4E2", dark: "#585858ff" },
   },
 };

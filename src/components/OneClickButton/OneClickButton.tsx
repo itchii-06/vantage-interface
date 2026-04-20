@@ -33,7 +33,12 @@ export function OneClickButton({ openSettings }: { openSettings: () => void }) {
 
   return (
     <div className={cx("relative", { "z-[1002]": isElevated })}>
-      <Button variant="secondary" size="controlled" onClick={handleToggleSettings} className="size-32 !p-0 md:size-40">
+      <Button
+        variant="secondary"
+        size="controlled"
+        onClick={handleToggleSettings}
+        className="size-32 !bg-vantage-base !p-0 md:size-40"
+      >
         <OneClickIcon className="size-20 p-0" />
       </Button>
     </div>

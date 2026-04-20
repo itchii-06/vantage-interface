@@ -9,7 +9,7 @@ export const ja: LocaleData = {
   },
   hero: {
     badge: "Perp Hedge DEX",
-    headline: "金利上昇リスクを無力化する",
+    headline: "金利上昇リスクをなくす",
     subtext:
       "利回り生成トークンの力でリターンを守る。B Cellarは世界初のPerpHedgeDEXとして、あなたの収益とポートフォリオを保護します。",
     ctaPrimary: "アプリを起動 ↗",

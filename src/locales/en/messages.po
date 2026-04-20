@@ -234,6 +234,10 @@ msgstr "RPC monitoring"
 msgid "(rebated)"
 msgstr "(rebated)"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Hover over the chart to see candle details"
+msgstr "Hover over the chart to see candle details"
+
 #: src/components/PositionShare/PositionShare.tsx
 msgid "Show rPnL amounts"
 msgstr "Show rPnL amounts"
@@ -689,6 +693,7 @@ msgstr "Order execution price"
 msgid "Insufficient liquidity in any {0}/USD pool"
 msgstr "Insufficient liquidity in any {0}/USD pool"
 
+#: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Open"
 msgstr "Open"
@@ -812,7 +817,6 @@ msgstr "Negative value: traders pay funding"
 msgid "Transfer {nativeTokenSymbol} from other networks to {chainName}"
 msgstr "Transfer {nativeTokenSymbol} from other networks to {chainName}"
 
-#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Dashboard/DashboardV2.tsx
 #: src/pages/Dashboard/StatsCard.tsx
@@ -1113,8 +1117,8 @@ msgid "Unable to verify code availability on {0}. You can still create the code,
 msgstr "Unable to verify code availability on {0}. You can still create the code, but it may already be taken on those networks."
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
-msgstr "Short position requests are executed by Keepers (GMX V1 two-step flow)."
+#~ msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
+#~ msgstr "Short position requests are executed by Keepers (GMX V1 two-step flow)."
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Deposit completed"
@@ -7219,7 +7223,6 @@ msgstr "No opportunities match your holdings"
 msgid "Lend your tokens or borrow against them"
 msgstr "Lend your tokens or borrow against them"
 
-#: src/components/AppHeader/AppHeaderLogo.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "GMX logo"
@@ -9787,6 +9790,10 @@ msgstr "Referral discount"
 msgid "Threshold for decrease funding"
 msgstr "Threshold for decrease funding"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Low"
+msgstr "Low"
+
 #: src/domain/synthetics/fees/utils/index.ts
 msgid "Network fees are very high due to increased {chainName} network activity"
 msgstr "Network fees are very high due to increased {chainName} network activity"
@@ -11959,6 +11966,10 @@ msgstr "Selling..."
 msgid "Derivatives portfolio tracker"
 msgstr "Derivatives portfolio tracker"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "High"
+msgstr "High"
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Execution price didn't meet acceptable price. Order will fill when the condition is met."
 msgstr "Execution price didn't meet acceptable price. Order will fill when the condition is met."
@@ -11980,6 +11991,7 @@ msgstr "multiple asset classes"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Close"
 msgstr "Close"

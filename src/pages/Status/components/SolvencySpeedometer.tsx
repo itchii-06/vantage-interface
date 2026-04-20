@@ -121,7 +121,7 @@ export function SolvencyBadge({ defenseStep }: SolvencyBadgeProps) {
 
   if (defenseStep === 0) {
     return (
-      <div className="flex items-center gap-6 text-12 text-green-400">
+      <div className="flex items-center gap-6 text-16 text-green-400">
         <span className="h-6 w-6 rounded-full bg-green-500" />
         {t`System Status: Normal`}
       </div>

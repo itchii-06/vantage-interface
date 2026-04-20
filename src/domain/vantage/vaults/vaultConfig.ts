@@ -37,6 +37,8 @@ export interface VaultConfig {
   tokenDecimals: number;
   /** Whether this vault is a mock (testnet only) */
   isMock: boolean;
+  /** TradingView symbol used for the price chart (e.g. "BINANCE:BTCUSDT") */
+  tvSymbol: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -67,6 +69,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     lpTokenAddress: d.LPToken ?? "",
     tokenDecimals: 6,
     isMock: false,
+    tvSymbol: "BINANCE:BTCUSDT",
   },
   // ── mBUIDL (Rebasing) ────────────────────────────────────────────────────
   {
@@ -80,6 +83,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     lpTokenAddress: d.mockRWALPTokens?.Rebasing ?? "",
     tokenDecimals: 18,
     isMock: true,
+    tvSymbol: "BINANCE:BTCUSDT",
   },
   // ── mUSDY (PriceShare) ───────────────────────────────────────────────────
   {
@@ -93,6 +97,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     lpTokenAddress: d.mockRWALPTokens?.PriceShare ?? "",
     tokenDecimals: 18,
     isMock: true,
+    tvSymbol: "BINANCE:ETHUSD",
   },
   // ── mRWA (Direct) ────────────────────────────────────────────────────────
   {
@@ -106,12 +111,18 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     lpTokenAddress: d.mockRWALPTokens?.Direct ?? "",
     tokenDecimals: 18,
     isMock: true,
+    tvSymbol: "BINANCE:BTCUSDT",
   },
 ];
 
 /** Returns the VaultConfig for a given vault address (case-insensitive). */
 export function getVaultConfigByAddress(address: string): VaultConfig | undefined {
   return VAULT_CONFIGS.find((v) => v.vaultAddress.toLowerCase() === address.toLowerCase());
+}
+
+/** Returns the VaultConfig for a given token address (case-insensitive). */
+export function getVaultConfigByToken(tokenAddress: string): VaultConfig | undefined {
+  return VAULT_CONFIGS.find((v) => v.tokenAddress.toLowerCase() === tokenAddress.toLowerCase());
 }
 
 // ---------------------------------------------------------------------------

@@ -84,7 +84,7 @@ function TradersStats({ referralsData, traderTier, chainId, userReferralCodeStri
                   handle={t`Tier ${getTierIdDisplay(traderTier)}: ${currentTierDiscount}% discount`}
                   position="bottom"
                   variant="icon"
-                  handleClassName="text-body-small rounded-full bg-cold-blue-900 px-12 py-8 font-medium leading-[1.25] text-typography-primary"
+                  handleClassName="black text-body-small rounded-full px-12 py-8 font-medium leading-[1.25] text-typography-primary"
                   iconClassName="text-typography-secondary ml-4"
                   renderContent={() => (
                     <p className="text-typography-primary">

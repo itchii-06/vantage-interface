@@ -234,6 +234,10 @@ msgstr "RPCモニタリング"
 msgid "(rebated)"
 msgstr "(リベート済)"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Hover over the chart to see candle details"
+msgstr ""
+
 #: src/components/PositionShare/PositionShare.tsx
 msgid "Show rPnL amounts"
 msgstr "rPnL金額を表示"
@@ -689,6 +693,7 @@ msgstr "注文約定価格"
 msgid "Insufficient liquidity in any {0}/USD pool"
 msgstr "{0}/USDプールに流動性不足"
 
+#: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Open"
 msgstr ""
@@ -812,7 +817,6 @@ msgstr "マイナスの値：トレーダーがファンディングを支払い
 msgid "Transfer {nativeTokenSymbol} from other networks to {chainName}"
 msgstr "他のネットワークから{chainName}へ{nativeTokenSymbol}を送金"
 
-#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Dashboard/DashboardV2.tsx
 #: src/pages/Dashboard/StatsCard.tsx
@@ -1113,8 +1117,8 @@ msgid "Unable to verify code availability on {0}. You can still create the code,
 msgstr "{0}でコードの利用可能性を確認できません。コードは作成できますが、それらのネットワークでは既に使用されている可能性があります。"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
-msgstr ""
+#~ msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
+#~ msgstr ""
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Deposit completed"
@@ -4449,7 +4453,7 @@ msgstr "選択したフィルターに一致する請求がありません"
 
 #: src/lib/legacy.ts
 msgid "Decentralized perpetual exchange | GMX"
-msgstr "分散型パーペチュアル取引所 | GMX"
+msgstr ""
 
 #: src/components/Footer/constants.tsx
 msgid "V1"
@@ -7219,7 +7223,6 @@ msgstr "お持ちの資産に一致する機会はありません"
 msgid "Lend your tokens or borrow against them"
 msgstr "トークンを貸し出すか、それを担保に借り入れができます"
 
-#: src/components/AppHeader/AppHeaderLogo.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "GMX logo"
@@ -9787,6 +9790,10 @@ msgstr "リファラル割引"
 msgid "Threshold for decrease funding"
 msgstr "ファンディングレート低減の閾値"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Low"
+msgstr ""
+
 #: src/domain/synthetics/fees/utils/index.ts
 msgid "Network fees are very high due to increased {chainName} network activity"
 msgstr "{chainName}ネットワークの活動増加により、ネットワーク手数料が非常に高くなっています"
@@ -10872,7 +10879,7 @@ msgstr "PnLショート"
 
 #: src/components/Seo/SEO.tsx
 msgid "GMX | Decentralized perpetual exchange"
-msgstr "GMX | 分散型パーペチュアル取引所"
+msgstr ""
 
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "All assets"
@@ -11959,6 +11966,10 @@ msgstr "売却中..."
 msgid "Derivatives portfolio tracker"
 msgstr "デリバティブポートフォリオトラッカー"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "High"
+msgstr ""
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Execution price didn't meet acceptable price. Order will fill when the condition is met."
 msgstr "約定価格が許容価格を満たしませんでした。条件が満たされた時点で注文が約定します。"
@@ -11980,6 +11991,7 @@ msgstr "複数の資産クラス"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Close"
 msgstr "クローズ"

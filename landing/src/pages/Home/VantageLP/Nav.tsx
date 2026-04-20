@@ -1,13 +1,7 @@
 import { motion } from "framer-motion";
 
 import { useLocale } from "../../../contexts/LocaleContext";
-
-const COLORS = {
-  bg: "#000000",
-  border: "rgba(255,255,255,0.1)",
-  textPrimary: "#FFFFFF",
-  textMuted: "#888888",
-};
+import { COLORS } from "../../../styles/vantageTheme";
 
 const NAV_STYLE: React.CSSProperties = {
   position: "fixed",
@@ -65,7 +59,7 @@ const NAV_LINKS_STYLE: React.CSSProperties = {
 };
 
 const NAV_LINK_STYLE: React.CSSProperties = {
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   textDecoration: "none",
   fontSize: "16px",
   fontWeight: 500,
@@ -84,7 +78,7 @@ const LANG_TOGGLE_STYLE: React.CSSProperties = {
 const LANG_BTN_STYLE: React.CSSProperties = {
   background: "transparent",
   border: "none",
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   fontSize: "12px",
   fontWeight: 600,
   padding: "4px 10px",

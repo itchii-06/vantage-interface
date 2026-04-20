@@ -65,7 +65,7 @@ export const en: LocaleData = {
     badge: "Perp Hedge DEX",
     headline: "Neutralize Interest Rate Hikes",
     subtext:
-      "Protect your earnings with the power of yield-bearing tokens. B Cellar is the world's first perp hedge DEX, securing your returns and your portfolio.",
+      "Protect your earnings with the power of yield-bearing tokens. B Cellar is the world's first perpetual hedge DEX, securing your returns and your portfolio.",
     ctaPrimary: "Launch App ↗",
     ctaSecondary: "Docs",
     stats: {

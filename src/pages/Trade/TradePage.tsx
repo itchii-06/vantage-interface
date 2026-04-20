@@ -79,8 +79,8 @@ export default function TradePage() {
   }
 
   return (
-    <div className="w-full">
-      <div className="border-b border-stroke-primary px-16 py-8">
+    <div className="min-h-screen w-full bg-vantage-bg">
+      <div className="border-b border-b-vantage-border px-16 py-8">
         <AppHeader leftContent={<AppNav />} />
       </div>
       <div className="mt-16 px-16">
@@ -88,24 +88,24 @@ export default function TradePage() {
           {/* ── Left column ─────────────────────────────────────────────────────── */}
           <div className="flex min-w-0 flex-1 flex-col gap-12">
             {/* Market selector header */}
-            <div className="bg-cold-blue-950 flex items-center gap-16 rounded-4 border border-stroke-primary px-16 py-12">
+            <div className="flex items-center gap-16 rounded-4 border border-vantage-border bg-vantage-base px-16 py-12">
               {/* Dropdown trigger — same style as MarketSelector */}
               <div className="relative" ref={dropdownRef}>
                 <div
-                  className="group flex cursor-pointer items-center gap-4 whitespace-nowrap tracking-wide hover:text-blue-300"
+                  className="group flex cursor-pointer items-center gap-4 whitespace-nowrap tracking-wide hover:text-vantage-accent"
                   onClick={() => setIsMarketOpen((o) => !o)}
                 >
-                  <span className="text-20 font-bold text-white group-hover:text-blue-300">
+                  <span className="text-20 font-bold text-white group-hover:text-vantage-accent">
                     {selectedVault?.symbol ?? "—"}
                   </span>
-                  <ChevronDownIcon className="w-16 text-slate-400 group-hover:text-blue-300" />
+                  <ChevronDownIcon className="w-16 text-slate-400 group-hover:text-vantage-accent" />
                 </div>
 
                 {/* Dropdown list */}
                 {isMarketOpen && (
-                  <div className="absolute left-0 top-full z-50 mt-8 w-[280px] overflow-hidden rounded-4 border border-stroke-primary bg-cold-blue-900 shadow-xl">
+                  <div className="absolute left-0 top-full z-50 mt-8 w-[280px] overflow-hidden rounded-4 border border-vantage-border bg-vantage-base-hover shadow-xl">
                     {/* Header */}
-                    <div className="border-b border-stroke-primary px-16 py-10 text-12 font-medium text-slate-400">
+                    <div className="border-b border-b-vantage-border px-16 py-10 text-12 font-medium text-vantage-text-secondary">
                       {t`Select Market`}
                     </div>
                     {TRADEABLE_VAULTS.map((vault) => {
@@ -198,10 +198,10 @@ export default function TradePage() {
 
           {/* ── Right column: TradeBox ───────────────────────────────────────────── */}
           <div className="ml-12 w-[448px] flex-shrink-0">
-            <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
+            <div className="overflow-hidden rounded-4 border border-vantage-border bg-vantage-base">
               {/* Tab header */}
               {!selectedPosition && (
-                <div className="flex border-b border-stroke-primary">
+                <div className="flex border-b border-b-vantage-border">
                   <button
                     onClick={() => setActiveTab("long")}
                     className={`flex-1 py-14 text-14 font-semibold transition-colors ${

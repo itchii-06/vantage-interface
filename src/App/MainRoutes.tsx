@@ -112,10 +112,10 @@ export function MainRoutes({ openSettings: _openSettings }: { openSettings: () =
       <RedirectWithQuery exact from="/stake" to="/earn" />
       <RedirectWithQuery from="/v2" to="/trade" />
       <Route exact path="/">
-        <RedirectWithQuery to="/trade" />
+        <RedirectWithQuery to="/hedge" />
       </Route>
       <Route exact path="/v1">
-        <RedirectWithQuery to="/trade" />
+        <RedirectWithQuery to="/hedge" />
       </Route>
       <Route exact path="/price_impact_rebates_stats">
         <PriceImpactRebatesStatsPage />

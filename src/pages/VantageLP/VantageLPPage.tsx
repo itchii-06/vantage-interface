@@ -26,7 +26,6 @@ import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
-import Button from "components/Button/Button";
 import NumberInput from "components/NumberInput/NumberInput";
 
 // ---------------------------------------------------------------------------
@@ -36,6 +35,8 @@ import NumberInput from "components/NumberInput/NumberInput";
 const USDC_ADDRESS: string = localhostDeployment.addresses.tokens?.USDC ?? "";
 const USDC_DECIMALS = 6;
 const WAD = BigInt("1000000000000000000"); // 1e18
+const PENDING_CARD_STYLE = { background: "rgba(236,255,62,0.08)", border: "1px solid rgba(236,255,62,0.25)" } as const;
+const PENDING_TEXT_STYLE = { color: "rgba(236,255,62,0.7)" } as const;
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -180,8 +181,8 @@ export default function VantageLPPage() {
   // ---------------------------------------------------------------------------
 
   return (
-    <div className="w-full">
-      <div className="border-b border-stroke-primary px-16 py-8">
+    <div className="min-h-screen w-full bg-vantage-bg">
+      <div className="border-b border-b-vantage-border px-16 py-8">
         <AppHeader leftContent={<AppNav />} />
       </div>
 
@@ -190,13 +191,13 @@ export default function VantageLPPage() {
           {/* Header */}
           <div className="mb-16">
             <h1 className="text-h1">Portfolio</h1>
-            <p className="text-body-medium mt-4 text-slate-400">
+            <p className="text-body-medium mt-4 text-vantage-text-secondary">
               {t`Provide liquidity to earn yield from trades and RWA assets.`}
             </p>
           </div>
 
           {/* Stats row */}
-          <div className="bg-cold-blue-950 mb-20 grid grid-cols-3 gap-8 rounded-4 border border-stroke-primary p-16">
+          <div className="mb-20 grid grid-cols-3 gap-8 rounded-4 border border-vantage-border bg-vantage-base p-16">
             <div>
               <div className="mb-4 text-12 text-slate-400">{t`Share Price`}</div>
               <div className="text-16 font-bold">{lpData.isLoading ? "—" : `$${formatUsd(lpData.sharePrice)}`}</div>
@@ -218,7 +219,7 @@ export default function VantageLPPage() {
 
           {/* Redemption countdown */}
           {!lpData.isLoading && lpData.nextEpochTimestamp > 0n && (
-            <div className="text-slate-300 mb-16 rounded-4 border border-slate-600/40 bg-slate-800/30 px-16 py-12 text-13">
+            <div className="mb-16 rounded-4 border border-vantage-border bg-vantage-base px-16 py-12 text-13 text-vantage-text-secondary">
               <span className="text-slate-400">{t`Next redemption execution:`}</span>{" "}
               <span className="font-semibold tabular-nums text-white">{countdown}</span>
             </div>
@@ -226,9 +227,9 @@ export default function VantageLPPage() {
 
           {/* Pending redemption status */}
           {account && lpData.pendingShares > 0n && (
-            <div className="bg-blue-900/20 mb-16 rounded-4 border border-blue-600/40 px-16 py-12 text-13">
-              <div className="font-semibold text-blue-300">{t`Redemption pending — yield continues to accrue`}</div>
-              <div className="mt-4 text-12 text-blue-400">
+            <div className="mb-16 rounded-4 px-16 py-12 text-13" style={PENDING_CARD_STYLE}>
+              <div className="font-semibold text-vantage-accent">{t`Redemption pending — yield continues to accrue`}</div>
+              <div className="mt-4 text-12" style={PENDING_TEXT_STYLE}>
                 {formatVlp(lpData.pendingShares)} VLP ≈ ${pendingUsdFormatted}
               </div>
             </div>
@@ -243,15 +244,13 @@ export default function VantageLPPage() {
           )}
 
           {/* Tabs */}
-          <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
-            <div className="flex border-b border-stroke-primary">
+          <div className="overflow-hidden rounded-4 border border-vantage-border bg-vantage-base">
+            <div className="flex border-b border-b-vantage-border">
               {(["deposit", "withdraw"] as Tab[]).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`flex-1 py-12 text-14 font-medium transition-colors ${
-                    activeTab === tab ? "border-b-2 border-blue-400 text-white" : "hover:text-slate-200 text-slate-400"
-                  }`}
+                  className={`flex-1 py-12 text-14 font-medium transition-colors ${activeTab === tab ? "border-b-2 border-b-vantage-accent text-vantage-text-primary" : "text-vantage-text-secondary"}`}
                 >
                   {tab === "deposit" ? t`Deposit` : t`Withdraw`}
                 </button>
@@ -264,7 +263,7 @@ export default function VantageLPPage() {
                 <div className="flex flex-col gap-16">
                   <div>
                     <label className="mb-6 block text-12 text-slate-400">{t`Amount (USDC)`}</label>
-                    <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-12 py-10">
+                    <div className="flex items-center gap-8 rounded-4 border border-vantage-border bg-vantage-input px-12 py-10">
                       <NumberInput
                         value={depositInput}
                         onValueChange={(e: ChangeEvent<HTMLInputElement>) => setDepositInput(e.target.value)}
@@ -290,27 +289,23 @@ export default function VantageLPPage() {
                   )}
 
                   {!account ? (
-                    <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to deposit`}</div>
+                    <div className="py-8 text-center text-14 text-vantage-text-secondary">{t`Connect wallet to deposit`}</div>
                   ) : needsApproval ? (
-                    <Button
-                      variant="primary"
-                      size="medium"
+                    <button
                       disabled={depositAmountUSDC === 0n || isSubmitting || actions.isApproving}
                       onClick={() => actions.approve(USDC_ADDRESS)}
-                      className="w-full"
+                      className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${depositAmountUSDC === 0n || actions.isApproving ? "bg-[#334155] text-[#64748b]" : "bg-vantage-accent text-black"}`}
                     >
                       {actions.isApproving ? t`Approving…` : t`Approve USDC`}
-                    </Button>
+                    </button>
                   ) : (
-                    <Button
-                      variant="primary"
-                      size="medium"
+                    <button
                       disabled={depositAmountUSDC === 0n || isSubmitting}
                       onClick={handleDeposit}
-                      className="w-full"
+                      className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${depositAmountUSDC === 0n || isSubmitting ? "bg-[#334155] text-[#64748b]" : "bg-vantage-accent text-black"}`}
                     >
                       {isSubmitting ? t`Depositing…` : t`Deposit`}
-                    </Button>
+                    </button>
                   )}
                 </div>
               )}
@@ -322,12 +317,12 @@ export default function VantageLPPage() {
                     <div className="mb-6 flex justify-between">
                       <label className="text-12 text-slate-400">{t`VLP Amount`}</label>
                       {account && lpData.vlpBalance > 0n && (
-                        <button onClick={handleSetMaxWithdraw} className="text-12 text-blue-400 hover:text-blue-300">
+                        <button onClick={handleSetMaxWithdraw} className="text-12 text-vantage-accent">
                           {t`Max`}: {formatVlp(lpData.vlpBalance)}
                         </button>
                       )}
                     </div>
-                    <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-12 py-10">
+                    <div className="flex items-center gap-8 rounded-4 border border-vantage-border bg-vantage-input px-12 py-10">
                       <NumberInput
                         value={withdrawInput}
                         onValueChange={(e: ChangeEvent<HTMLInputElement>) => setWithdrawInput(e.target.value)}
@@ -359,11 +354,9 @@ export default function VantageLPPage() {
                   )}
 
                   {!account ? (
-                    <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to withdraw`}</div>
+                    <div className="py-8 text-center text-14 text-vantage-text-secondary">{t`Connect wallet to withdraw`}</div>
                   ) : (
-                    <Button
-                      variant="primary"
-                      size="medium"
+                    <button
                       disabled={
                         withdrawShares === 0n ||
                         isSubmitting ||
@@ -371,14 +364,14 @@ export default function VantageLPPage() {
                         withdrawShares > lpData.vlpBalance
                       }
                       onClick={handleWithdraw}
-                      className="w-full"
+                      className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${withdrawShares === 0n || isSubmitting || lpData.isWeekendLocked || withdrawShares > lpData.vlpBalance ? "bg-[#334155] text-[#64748b]" : "bg-vantage-accent text-black"}`}
                     >
                       {lpData.isWeekendLocked
                         ? t`Withdrawals restricted (weekend)`
                         : isSubmitting
                           ? t`Withdrawing…`
                           : t`Withdraw`}
-                    </Button>
+                    </button>
                   )}
 
                   {withdrawShares > lpData.vlpBalance && lpData.vlpBalance > 0n && (

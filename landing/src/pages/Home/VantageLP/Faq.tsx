@@ -2,15 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
 
 import { useLocale } from "../../../contexts/LocaleContext";
-
-const COLORS = {
-  bg: "#000000",
-  bgCard: "#0C0C0C",
-  bgCardHover: "#111111",
-  border: "rgba(255,255,255,0.1)",
-  textPrimary: "#FFFFFF",
-  textMuted: "#888888",
-};
+import { COLORS } from "../../../styles/vantageTheme";
 
 interface FaqItem {
   question: string;
@@ -36,7 +28,7 @@ const QUESTION_STYLE: React.CSSProperties = {
 const ANSWER_STYLE: React.CSSProperties = {
   padding: "0 24px 20px 24px",
   fontSize: "15px",
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   lineHeight: 1.7,
 };
 
@@ -59,7 +51,7 @@ function FaqRow({ item, index }: { item: FaqItem; index: number }) {
 
   const rowStyle = useMemo(
     () => ({
-      background: open ? COLORS.bgCardHover : COLORS.bgCard,
+      background: open ? COLORS.baseHover : COLORS.base,
       borderRadius: "4px",
       border: open ? `1px solid rgba(255,255,255,0.2)` : `1px solid ${COLORS.border}`,
       overflow: "hidden",
@@ -110,7 +102,7 @@ function FaqRow({ item, index }: { item: FaqItem; index: number }) {
           >
             <path
               d="M2 4.5L7 9.5L12 4.5"
-              stroke={open ? COLORS.textPrimary : COLORS.textMuted}
+              stroke={open ? COLORS.textPrimary : COLORS.textSecondary}
               strokeWidth="1.8"
               strokeLinecap="round"
               strokeLinejoin="round"

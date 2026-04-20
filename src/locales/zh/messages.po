@@ -234,6 +234,10 @@ msgstr "RPC 监控"
 msgid "(rebated)"
 msgstr "（已返还）"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Hover over the chart to see candle details"
+msgstr ""
+
 #: src/components/PositionShare/PositionShare.tsx
 msgid "Show rPnL amounts"
 msgstr "显示已实现 PnL 金额"
@@ -689,6 +693,7 @@ msgstr "订单成交价格"
 msgid "Insufficient liquidity in any {0}/USD pool"
 msgstr "所有 {0}/USD 池流动性不足"
 
+#: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Open"
 msgstr ""
@@ -812,7 +817,6 @@ msgstr "负值：交易者支付资金费用"
 msgid "Transfer {nativeTokenSymbol} from other networks to {chainName}"
 msgstr "从其他网络转账 {nativeTokenSymbol} 至 {chainName}"
 
-#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Dashboard/DashboardV2.tsx
 #: src/pages/Dashboard/StatsCard.tsx
@@ -1113,8 +1117,8 @@ msgid "Unable to verify code availability on {0}. You can still create the code,
 msgstr "无法在 {0} 上验证代码可用性。您仍可创建该代码，但在这些网络上可能已被占用。"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
-msgstr ""
+#~ msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
+#~ msgstr ""
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Deposit completed"
@@ -7219,7 +7223,6 @@ msgstr "没有与您持仓匹配的机会"
 msgid "Lend your tokens or borrow against them"
 msgstr "借出您的代币或以其为抵押进行借贷"
 
-#: src/components/AppHeader/AppHeaderLogo.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "GMX logo"
@@ -9787,6 +9790,10 @@ msgstr "推荐折扣"
 msgid "Threshold for decrease funding"
 msgstr "降低资金费率的阈值"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Low"
+msgstr ""
+
 #: src/domain/synthetics/fees/utils/index.ts
 msgid "Network fees are very high due to increased {chainName} network activity"
 msgstr "由于 {chainName} 网络活动增加，网络费用非常高"
@@ -11959,6 +11966,10 @@ msgstr "正在卖出..."
 msgid "Derivatives portfolio tracker"
 msgstr "衍生品投资组合追踪器"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "High"
+msgstr ""
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Execution price didn't meet acceptable price. Order will fill when the condition is met."
 msgstr "成交价格未达到可接受价格。订单将在满足条件时成交。"
@@ -11980,6 +11991,7 @@ msgstr "多个资产类别"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Close"
 msgstr "关闭"

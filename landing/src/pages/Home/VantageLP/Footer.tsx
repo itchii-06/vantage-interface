@@ -1,13 +1,7 @@
 import { motion } from "framer-motion";
 
 import { useLocale } from "../../../contexts/LocaleContext";
-
-const COLORS = {
-  bg: "#000000",
-  border: "rgba(255,255,255,0.1)",
-  textPrimary: "#FFFFFF",
-  textMuted: "#888888",
-};
+import { COLORS } from "../../../styles/vantageTheme";
 
 const LINKS = [
   { label: "Docs", href: "https://docs.vantage.finance" },
@@ -73,7 +67,7 @@ const RIGHT_STYLE: React.CSSProperties = {
 };
 
 const LINK_STYLE: React.CSSProperties = {
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   textDecoration: "none",
   fontSize: "16px",
   fontWeight: 500,
@@ -96,7 +90,7 @@ const COPYRIGHT_STYLE: React.CSSProperties = {
 
 const COPYRIGHT_TEXT_STYLE: React.CSSProperties = {
   fontSize: "13px",
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
 };
 
 const DISCLAIMER_STYLE: React.CSSProperties = {
@@ -137,7 +131,7 @@ export function Footer() {
               rel="noopener noreferrer"
               style={LINK_STYLE}
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = COLORS.textPrimary)}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = COLORS.textMuted)}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = COLORS.textSecondary)}
             >
               {link.label}
             </a>

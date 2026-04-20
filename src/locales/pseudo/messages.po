@@ -234,6 +234,10 @@ msgstr ""
 msgid "(rebated)"
 msgstr ""
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Hover over the chart to see candle details"
+msgstr ""
+
 #: src/components/PositionShare/PositionShare.tsx
 msgid "Show rPnL amounts"
 msgstr ""
@@ -689,6 +693,7 @@ msgstr ""
 msgid "Insufficient liquidity in any {0}/USD pool"
 msgstr ""
 
+#: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Open"
 msgstr ""
@@ -812,7 +817,6 @@ msgstr ""
 msgid "Transfer {nativeTokenSymbol} from other networks to {chainName}"
 msgstr ""
 
-#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Dashboard/DashboardV2.tsx
 #: src/pages/Dashboard/StatsCard.tsx
@@ -1113,8 +1117,8 @@ msgid "Unable to verify code availability on {0}. You can still create the code,
 msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
-msgstr ""
+#~ msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
+#~ msgstr ""
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Deposit completed"
@@ -7219,7 +7223,6 @@ msgstr ""
 msgid "Lend your tokens or borrow against them"
 msgstr ""
 
-#: src/components/AppHeader/AppHeaderLogo.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "GMX logo"
@@ -9787,6 +9790,10 @@ msgstr ""
 msgid "Threshold for decrease funding"
 msgstr ""
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Low"
+msgstr ""
+
 #: src/domain/synthetics/fees/utils/index.ts
 msgid "Network fees are very high due to increased {chainName} network activity"
 msgstr ""
@@ -11959,6 +11966,10 @@ msgstr ""
 msgid "Derivatives portfolio tracker"
 msgstr ""
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "High"
+msgstr ""
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Execution price didn't meet acceptable price. Order will fill when the condition is met."
 msgstr ""
@@ -11980,6 +11991,7 @@ msgstr ""
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Close"
 msgstr ""

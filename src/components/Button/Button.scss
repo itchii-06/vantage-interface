@@ -21,8 +21,9 @@
 
   &.primary {
     background: var(--primary-btn-bg);
-    color: var(--color-white);
-    border-radius: 8px;
+    color: var(--color-black);
+    border-radius: 12px;
+    font-weight: 600;
 
     &:not([disabled]):hover {
       background-color: var(--color-button-primaryHover);
@@ -35,8 +36,8 @@
 
   &.primary-action {
     background: var(--primary-btn-bg);
-    color: var(--color-white);
-    border-radius: 8px;
+    color: var(--color-black);
+    border-radius: 12px;
     min-height: 40px;
     line-height: normal;
 
@@ -51,7 +52,7 @@
 
   &.secondary {
     background: var(--color-button-secondary);
-    border-radius: 8px;
+    border-radius: 12px;
     color: var(--color-typography-secondary);
     position: relative;
     letter-spacing: 0;
@@ -85,7 +86,7 @@
 
   &.ghost {
     background-color: transparent;
-    border-radius: 8px;
+    border-radius: 12px;
     color: var(--color-slate-100);
     position: relative;
     letter-spacing: 0;

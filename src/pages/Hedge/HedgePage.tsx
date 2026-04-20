@@ -17,6 +17,7 @@ import { useStatusPageData } from "domain/vantage/solvency/useStatusPageData";
 import { VAULT_CONFIGS, ASSET_TYPE_COLOR, ASSET_TYPE_LABEL } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import { SolvencyBadge } from "pages/Status/components/SolvencySpeedometer";
+import { COLORS } from "styles/vantageTheme";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
@@ -56,9 +57,9 @@ export default function HedgePage() {
   const { defenseStep } = useStatusPageData(chainId, PRIMARY_CFG);
 
   return (
-    <div className="w-full">
+    <div className="min-h-screen w-full bg-vantage-bg">
       {/* Header */}
-      <div className="border-b border-stroke-primary px-16 py-8">
+      <div className="border-b border-b-vantage-border px-16 py-8">
         <AppHeader leftContent={<AppNav />} />
       </div>
 
@@ -66,7 +67,7 @@ export default function HedgePage() {
         {/* Page title */}
         <div className="mb-24">
           <h1 className="text-h1">{t`Hedge`}</h1>
-          <p className="text-body-medium mt-4 text-slate-400">
+          <p className="text-body-medium mt-4 text-16 text-vantage-text-secondary">
             {t`Delta-neutral strategy: earn RWA yield + short funding rate with zero price exposure.`}
           </p>
           <div className="mt-10">
@@ -75,9 +76,9 @@ export default function HedgePage() {
         </div>
 
         {/* Table */}
-        <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
+        <div className="overflow-hidden rounded-4 border border-vantage-border bg-vantage-base">
           {/* Table header */}
-          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-12 text-12 text-slate-400">
+          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border px-20 py-12 text-14 text-vantage-text-secondary">
             <div>{t`Asset`}</div>
             <div className="text-right">{t`Vault APY`}</div>
             <div className="text-right">{t`Managed Net APY`}</div>
@@ -90,7 +91,9 @@ export default function HedgePage() {
             <div
               key={item.key}
               onClick={() => history.push(`/hedge/${item.key}`)}
-              className="grid cursor-pointer grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-16 last:border-0 hover:bg-slate-800/40"
+              className="grid cursor-pointer grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border px-20 py-16 transition-colors last:border-0"
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = COLORS.baseHover)}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
             >
               {/* Asset */}
               <div className="flex items-center gap-12">
@@ -98,9 +101,9 @@ export default function HedgePage() {
                   {item.symbol.slice(0, 2)}
                 </div>
                 <div>
-                  <div className="text-15 font-semibold text-white">{item.symbol}</div>
+                  <div className="text-16 font-semibold text-white">{item.symbol}</div>
                   <div className="mt-2 flex items-center gap-6">
-                    <span className="text-12 text-slate-400">{item.name}</span>
+                    <span className="text-14 text-slate-400">{item.name}</span>
                     <span className={`text-10 rounded-full px-6 py-1 font-medium ${ASSET_TYPE_COLOR[item.assetType]}`}>
                       {ASSET_TYPE_LABEL[item.assetType]}
                     </span>

@@ -46,7 +46,7 @@ export function AddressDropdownWithoutMultichain({ account }: { account: string 
       {({ open }) => (
         <>
           <Menu.Button as="div">
-            <Button variant="secondary" className="flex items-center gap-8 px-15 pr-12">
+            <Button variant="secondary" className="flex items-center gap-8 !bg-vantage-base px-15 pr-12">
               <Avatar size={isMobile ? 16 : 24} ensName={ensName} address={account} />
 
               <span className="text-body-medium font-medium text-typography-primary">

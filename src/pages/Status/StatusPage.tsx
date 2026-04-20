@@ -167,7 +167,7 @@ export default function StatusPage() {
         <AppHeader leftContent={<AppNav />} />
       </div>
 
-      <div className="mx-auto mt-24 max-w-[1200px] space-y-20 px-16 pb-40">
+      <div className="mt-24 space-y-20 px-16 pb-40">
         {/* Page title */}
         <div>
           <h1 className="text-h1">{t`Protocol Status`}</h1>

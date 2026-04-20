@@ -2,17 +2,7 @@ import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 
 import { useLocale } from "../../../contexts/LocaleContext";
-
-const COLORS = {
-  bg: "#000000",
-  bgCard: "#0C0C0C",
-  bgCardHover: "#111111",
-  border: "rgba(255,255,255,0.1)",
-  borderHover: "rgba(255,255,255,0.25)",
-  textPrimary: "#FFFFFF",
-  textMuted: "#888888",
-  green: "#22C55E",
-};
+import { COLORS } from "../../../styles/vantageTheme";
 
 interface VaultData {
   name: string;
@@ -32,7 +22,7 @@ const VAULTS_BASE: Omit<VaultData, "type">[] = [
 
 const CARD_METRIC_LABEL_STYLE: React.CSSProperties = {
   fontSize: "11px",
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   fontWeight: 500,
   textTransform: "uppercase",
   letterSpacing: "0.8px",
@@ -116,13 +106,13 @@ const CARD_NET_APY_STYLE: React.CSSProperties = {
 
 const CARD_CAPACITY_LABEL_STYLE: React.CSSProperties = {
   fontSize: "11px",
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   fontWeight: 500,
 };
 
 const CARD_CAPACITY_VALUE_STYLE: React.CSSProperties = {
   fontSize: "11px",
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   fontWeight: 500,
 };
 
@@ -143,7 +133,7 @@ const CARD_BADGE_STYLE: React.CSSProperties = {
   padding: "3px 10px",
   fontSize: "11px",
   fontWeight: 500,
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   letterSpacing: "0.3px",
 };
 
@@ -166,7 +156,7 @@ function VaultCard({
 
   const cardStyle = useMemo(
     () => ({
-      background: hovered ? COLORS.bgCardHover : COLORS.bgCard,
+      background: hovered ? COLORS.baseHover : COLORS.base,
       borderRadius: "4px",
       border: hovered ? `1px solid ${COLORS.borderHover}` : `1px solid ${COLORS.border}`,
       padding: "28px",
@@ -295,7 +285,7 @@ const HEADING_STYLE: React.CSSProperties = {
 
 const SUB_STYLE: React.CSSProperties = {
   fontSize: "17px",
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   marginBottom: "56px",
 };
 

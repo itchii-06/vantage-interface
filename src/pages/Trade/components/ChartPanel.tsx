@@ -74,33 +74,22 @@ export function ChartPanel({ chainId, indexToken, vaultAddress }: Props) {
   const allFunding = useMemo(() => [...historicalFunding, ...realtimeFunding], [historicalFunding, realtimeFunding]);
 
   return (
-    <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary p-16">
+    <div className="overflow-hidden rounded-4 border border-vantage-border bg-vantage-base p-16">
       {/* Tab bar */}
-      <div className="mb-16 flex items-center gap-0 border-b border-stroke-primary">
-        <button
-          onClick={() => setActiveTab("price")}
-          className={`mr-16 pb-10 text-13 font-medium transition-colors ${
-            activeTab === "price" ? "border-b-2 border-blue-400 text-blue-400" : "text-slate-400 hover:text-white"
-          }`}
-        >
-          {t`Price`}
-        </button>
-        <button
-          onClick={() => setActiveTab("oi")}
-          className={`mr-16 pb-10 text-13 font-medium transition-colors ${
-            activeTab === "oi" ? "border-b-2 border-blue-400 text-blue-400" : "text-slate-400 hover:text-white"
-          }`}
-        >
-          {t`OI`}
-        </button>
-        <button
-          onClick={() => setActiveTab("funding")}
-          className={`mr-16 pb-10 text-13 font-medium transition-colors ${
-            activeTab === "funding" ? "border-b-2 border-blue-400 text-blue-400" : "text-slate-400 hover:text-white"
-          }`}
-        >
-          {t`Funding Rate`}
-        </button>
+      <div className="mb-16 flex items-center gap-0 border-b border-b-vantage-border">
+        {(["price", "oi", "funding"] as Tab[]).map((tab) => {
+          const label = tab === "price" ? t`Price` : tab === "oi" ? t`OI` : t`Funding Rate`;
+          const isActive = activeTab === tab;
+          return (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`mr-16 pb-10 text-13 font-medium transition-colors ${isActive ? "border-b-2 border-b-vantage-accent text-vantage-accent" : "text-vantage-text-secondary"}`}
+            >
+              {label}
+            </button>
+          );
+        })}
 
         {/* Realtime indicator */}
         <div className="ml-auto flex items-center gap-6 pb-10 text-11 text-slate-500">

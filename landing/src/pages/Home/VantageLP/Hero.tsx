@@ -3,14 +3,7 @@ import { motion } from "framer-motion";
 import { useCountUp } from "./hooks/useCountUp";
 import { WaveformBackground } from "./WaveformBackground";
 import { useLocale } from "../../../contexts/LocaleContext";
-
-const COLORS = {
-  bg: "#000000",
-  bgCard: "#0C0C0C",
-  border: "rgba(255,255,255,0.1)",
-  textPrimary: "#FFFFFF",
-  textMuted: "#888888",
-};
+import { COLORS } from "../../../styles/vantageTheme";
 
 interface StatItemProps {
   target: number;
@@ -122,7 +115,7 @@ const HEADLINE_STYLE: React.CSSProperties = {
 
 const SUBTEXT_STYLE: React.CSSProperties = {
   fontSize: "18px",
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
   lineHeight: 1.6,
   maxWidth: "560px",
   margin: "0 auto 40px auto",

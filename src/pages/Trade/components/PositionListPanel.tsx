@@ -107,7 +107,7 @@ export function PositionListPanel({ positions, isLoading, selectedKey, onSelect 
                 className={`rounded-4 px-10 py-4 text-12 font-medium transition-colors ${
                   isSelected
                     ? "bg-blue-600 text-white"
-                    : "text-slate-300 bg-cold-blue-900 hover:bg-blue-700 hover:text-white"
+                    : "text-slate-300 bg-vantage-base hover:bg-blue-700 hover:text-white"
                 }`}
               >
                 {isSelected ? t`閉じる` : t`詳細`}

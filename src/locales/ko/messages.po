@@ -234,6 +234,10 @@ msgstr "RPC 모니터링"
 msgid "(rebated)"
 msgstr "(리베이트 적용)"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Hover over the chart to see candle details"
+msgstr ""
+
 #: src/components/PositionShare/PositionShare.tsx
 msgid "Show rPnL amounts"
 msgstr "실현 PnL 금액 표시"
@@ -689,6 +693,7 @@ msgstr "주문 체결가"
 msgid "Insufficient liquidity in any {0}/USD pool"
 msgstr "{0}/USD 풀에 유동성 부족"
 
+#: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Open"
 msgstr ""
@@ -812,7 +817,6 @@ msgstr "음수 값: 트레이더가 펀딩을 지불합니다"
 msgid "Transfer {nativeTokenSymbol} from other networks to {chainName}"
 msgstr "다른 네트워크에서 {chainName}으로 {nativeTokenSymbol}을 전송합니다"
 
-#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Dashboard/DashboardV2.tsx
 #: src/pages/Dashboard/StatsCard.tsx
@@ -1113,8 +1117,8 @@ msgid "Unable to verify code availability on {0}. You can still create the code,
 msgstr "{0}에서 코드 가용성을 확인할 수 없습니다. 코드를 생성할 수는 있으나, 해당 네트워크에서 이미 사용 중일 수 있습니다."
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
-msgstr ""
+#~ msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
+#~ msgstr ""
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Deposit completed"
@@ -7219,7 +7223,6 @@ msgstr "보유 자산과 일치하는 기회가 없습니다"
 msgid "Lend your tokens or borrow against them"
 msgstr "토큰을 대출하거나 담보로 차입하십시오"
 
-#: src/components/AppHeader/AppHeaderLogo.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "GMX logo"
@@ -9787,6 +9790,10 @@ msgstr "추천 할인"
 msgid "Threshold for decrease funding"
 msgstr "펀딩 감소 임계값"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "Low"
+msgstr ""
+
 #: src/domain/synthetics/fees/utils/index.ts
 msgid "Network fees are very high due to increased {chainName} network activity"
 msgstr "{chainName} 네트워크 활동 증가로 인해 네트워크 수수료가 매우 높습니다"
@@ -11959,6 +11966,10 @@ msgstr "매도 중..."
 msgid "Derivatives portfolio tracker"
 msgstr "파생상품 포트폴리오 트래커"
 
+#: src/pages/Trade/components/PriceChart.tsx
+msgid "High"
+msgstr ""
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Execution price didn't meet acceptable price. Order will fill when the condition is met."
 msgstr "체결가가 허용 가격을 충족하지 못했습니다. 조건이 충족되면 주문이 체결됩니다."
@@ -11980,6 +11991,7 @@ msgstr "다중 자산 클래스"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
+#: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Close"
 msgstr "종료"

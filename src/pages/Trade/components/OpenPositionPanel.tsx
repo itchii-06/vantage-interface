@@ -204,7 +204,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
 
   const feeEth = parseFloat(formatEther(trade.minExecutionFee)).toFixed(5);
 
-  const approveBtnStyle = useMemo(() => ({ backgroundColor: isApproving ? "#334155" : "#4f46e5" }), [isApproving]);
+  const approveBtnCls = isApproving ? "bg-[#334155] text-[#94a3b8]" : "bg-vantage-accent text-black";
 
   return (
     <div className="flex flex-col gap-12">
@@ -217,11 +217,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
           <button
             key={opt.label}
             onClick={() => setUseNativeEth(opt.isNative)}
-            className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${
-              useNativeEth === opt.isNative
-                ? "bg-blue-600 text-white"
-                : "bg-cold-blue-900 text-slate-400 hover:text-white"
-            }`}
+            className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${useNativeEth === opt.isNative ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
           >
             {opt.label}
           </button>
@@ -229,7 +225,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
       </div>
 
       {/* Size input */}
-      <div className="rounded-4 border border-stroke-primary bg-cold-blue-900 px-16 py-12">
+      <div className="rounded-4 border border-vantage-border bg-vantage-input px-16 py-12">
         <div className="mb-4 flex items-center justify-between text-12 text-slate-400">
           <span>{t`Size`}</span>
           <span>{useNativeEth ? "ETH" : "USDC"}</span>
@@ -260,7 +256,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
           step={1}
           value={leverage}
           onChange={(e) => setLeverage(Number(e.target.value))}
-          className="w-full accent-blue-500"
+          className="w-full accent-[#ecff3e]"
         />
         <div className="mt-2 flex justify-between text-11 text-slate-500">
           <span>1×</span>
@@ -281,11 +277,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
                 setSlippageBps(bps);
                 setCustomSlippage("");
               }}
-              className={`rounded-4 px-10 py-5 text-12 transition-colors ${
-                !customSlippage && slippageBps === bps
-                  ? "bg-blue-600 text-white"
-                  : "bg-cold-blue-900 text-slate-400 hover:text-white"
-              }`}
+              className={`rounded-4 px-10 py-5 text-12 transition-colors ${!customSlippage && slippageBps === bps ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
             >
               {bps / 100}%
             </button>
@@ -296,7 +288,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
             placeholder={t`Custom %`}
             value={customSlippage}
             onChange={(e) => setCustomSlippage(e.target.value)}
-            className="w-20 rounded-4 border border-stroke-primary bg-cold-blue-900 px-8 py-5 text-12 text-white outline-none placeholder:text-slate-600"
+            className="w-20 rounded-4 border border-vantage-border bg-vantage-input px-8 py-5 text-12 text-white outline-none placeholder:text-slate-600"
           />
         </div>
       </div>
@@ -338,10 +330,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
         <button
           onClick={handleApprove}
           disabled={isApproving}
-          className={`w-full rounded-4 py-14 text-15 font-semibold text-white transition-colors ${
-            isApproving ? "cursor-not-allowed text-slate-500" : ""
-          }`}
-          style={approveBtnStyle}
+          className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${approveBtnCls}`}
         >
           {isApproving ? t`Approving…` : t`Approve USDC`}
         </button>

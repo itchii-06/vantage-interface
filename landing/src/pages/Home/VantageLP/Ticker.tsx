@@ -1,12 +1,6 @@
 import { useMemo } from "react";
 
-const COLORS = {
-  bg: "#000000",
-  border: "rgba(255,255,255,0.1)",
-  green: "#22C55E",
-  textMuted: "#888888",
-  textPrimary: "#FFFFFF",
-};
+import { COLORS } from "../../../styles/vantageTheme";
 
 const EVENTS = [
   { text: "mBUIDL Vault: +5.2% APY", icon: "✓", color: COLORS.textPrimary },
@@ -42,7 +36,7 @@ const TICKER_ITEM_STYLE: React.CSSProperties = {
 const TICKER_TEXT_STYLE: React.CSSProperties = {
   fontSize: "13px",
   fontWeight: 500,
-  color: COLORS.textMuted,
+  color: COLORS.textSecondary,
 };
 
 const TICKER_SEP_STYLE: React.CSSProperties = {

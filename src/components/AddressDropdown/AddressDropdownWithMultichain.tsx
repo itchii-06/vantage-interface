@@ -69,7 +69,7 @@ export function AddressDropdownWithMultichain({ account }: Props) {
         variant="secondary"
         type="button"
         size="controlled"
-        className={cx("h-32 md:h-40", {
+        className={cx("h-32 !bg-vantage-base md:h-40", {
           "!py-4 !pl-12 !pr-4": shouldShowDepositButton && !isMobile,
           "!py-0 !pl-12 !pr-0": shouldShowDepositButton && isMobile,
         })}

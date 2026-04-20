@@ -186,6 +186,21 @@ export default {
     colors: colors,
     screens: defaultConfig.theme.screens,
     extend: {
+      colors: {
+        vantage: {
+          bg: "#000000",
+          base: "#0C0C0C",
+          "base-hover": "#111111",
+          input: "#111111",
+          accent: "#ecff3e",
+          green: "#22C55E",
+          "text-primary": "#FFFFFF",
+          "text-secondary": "#888888",
+          "text-tertiary": "#545a5e",
+          border: "rgba(255,255,255,0.1)",
+          "border-hover": "rgba(255,255,255,0.25)",
+        },
+      },
       fontFamily: {
         sans: ["TTHoves", "sans-serif"],
         mono: ["TTHovesMono", "monospace"],
