@@ -76,7 +76,7 @@ export function OIStats({
   const capBarStyle = useMemo(() => ({ width: `${capFill}%` }), [capFill]);
 
   return (
-    <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+    <div className="rounded-4 border-b border-b-vantage-border bg-vantage-base p-20">
       <h2 className="mb-16 text-15 font-semibold text-white">{t`Hedge Inventory`}</h2>
 
       <div className="space-y-20">
@@ -92,7 +92,7 @@ export function OIStats({
               style={oiBarStyle}
             />
           </div>
-          <div className="mt-6 flex justify-between text-11 text-slate-500">
+          <div className="mt-6 flex justify-between text-12 text-slate-500">
             <span>
               {t`Current`}: {fmtUsd(totalShortUsd)}
             </span>
@@ -108,7 +108,7 @@ export function OIStats({
         <div className="flex items-center justify-between">
           <div>
             <p className="text-13 text-slate-400">{t`Hedge FR (Shorts perspective)`}</p>
-            <p className="mt-2 text-11 text-slate-600">{t`+ve = shorts receive payment`}</p>
+            <p className="mt-2 text-12 text-slate-600">{t`+ve = shorts receive payment`}</p>
           </div>
           <span
             className={`text-15 font-medium ${
@@ -134,7 +134,7 @@ export function OIStats({
           <div className="mb-8 flex items-center justify-between">
             <div>
               <span className="text-13 text-slate-400">{t`Hedge Capacity Used`}</span>
-              <p className="mt-2 text-11 text-slate-600">{t`FR cost / buffered yield`}</p>
+              <p className="mt-2 text-12 text-slate-600">{t`FR cost / buffered yield`}</p>
             </div>
             <span className={`text-15 font-medium ${capacityColor(hedgeCapacityPct)}`}>{fmtPct(hedgeCapacityPct)}</span>
           </div>

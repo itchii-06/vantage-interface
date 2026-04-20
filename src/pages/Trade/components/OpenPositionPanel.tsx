@@ -27,6 +27,8 @@ import TokenAbi from "sdk/abis/Token";
 import { getVantageContractAddress } from "vantage/contracts";
 import { AssetRegistry__factory, Vault__factory } from "vantage/types";
 
+import { VantageLeverageSlider } from "components/VantageLeverageSlider/VantageLeverageSlider";
+
 import { SpreadBadge } from "./SpreadBadge";
 
 // Tokens available for trade on localhost
@@ -225,8 +227,8 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
       </div>
 
       {/* Size input */}
-      <div className="rounded-4 border border-vantage-border bg-vantage-input px-16 py-12">
-        <div className="mb-4 flex items-center justify-between text-12 text-slate-400">
+      <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
+        <div className="mb-2 flex items-center justify-between text-12 text-slate-400">
           <span>{t`Size`}</span>
           <span>{useNativeEth ? "ETH" : "USDC"}</span>
         </div>
@@ -236,39 +238,19 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
           placeholder="0.00"
           value={collateralInput}
           onChange={(e) => setCollateralInput(e.target.value)}
-          className="bg-transparent w-full text-20 font-semibold text-white outline-none placeholder:text-slate-600"
+          className="bg-transparent w-full pl-0 pr-12 text-[36px] font-semibold text-white outline-none placeholder:text-slate-600"
         />
         {collateralUsd > 0n && (
-          <div className="mt-4 text-12 text-slate-400">≈ ${parseFloat(formatEther(collateralUsd)).toFixed(2)} USD</div>
+          <div className="mt-2 text-12 text-slate-400">≈ ${parseFloat(formatEther(collateralUsd)).toFixed(2)} USD</div>
         )}
       </div>
 
       {/* Leverage slider */}
-      <div>
-        <div className="mb-6 flex items-center justify-between text-12">
-          <span className="text-slate-400">{t`Leverage`}</span>
-          <span className="font-semibold text-white">{leverage}×</span>
-        </div>
-        <input
-          type="range"
-          min={1}
-          max={50}
-          step={1}
-          value={leverage}
-          onChange={(e) => setLeverage(Number(e.target.value))}
-          className="w-full accent-[#ecff3e]"
-        />
-        <div className="mt-2 flex justify-between text-11 text-slate-500">
-          <span>1×</span>
-          <span>10×</span>
-          <span>25×</span>
-          <span>50×</span>
-        </div>
-      </div>
+      <VantageLeverageSlider value={leverage} onChange={setLeverage} max={50} />
 
       {/* Slippage */}
       <div>
-        <div className="mb-6 text-12 text-slate-400">{t`Slippage Tolerance`}</div>
+        <div className="mb-16 mt-8 text-12 text-slate-400">{t`Slippage Tolerance`}</div>
         <div className="flex items-center gap-6">
           {SLIPPAGE_PRESETS.map((bps) => (
             <button
@@ -294,7 +276,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
       </div>
 
       {/* Execution fee */}
-      <div className="flex items-center justify-between text-12">
+      <div className="mb-12 mt-8 flex items-center justify-between text-12">
         <span className="text-slate-400">{t`Execution Fee`}</span>
         <span className="text-slate-300">{feeEth} ETH</span>
       </div>
@@ -330,7 +312,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
         <button
           onClick={handleApprove}
           disabled={isApproving}
-          className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${approveBtnCls}`}
+          className={`w-full rounded-8 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${approveBtnCls}`}
         >
           {isApproving ? t`Approving…` : t`Approve USDC`}
         </button>
@@ -338,7 +320,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
         <button
           onClick={handleSubmit}
           disabled={isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError}
-          className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors ${
+          className={`w-full rounded-8 py-14 text-16 font-semibold transition-colors ${
             isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError
               ? "cursor-not-allowed bg-slate-700 text-slate-500"
               : isLong

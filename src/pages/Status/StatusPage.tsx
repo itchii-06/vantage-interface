@@ -25,6 +25,7 @@ import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
+import { VantagePageContainer } from "components/VantagePageContainer/VantagePageContainer";
 
 import { AdlLeaderboard } from "./components/AdlLeaderboard";
 import { BufferGauges } from "./components/BufferGauges";
@@ -140,7 +141,7 @@ function SolvencyDropBanner({ solvencyDropAt, defenseStep }: { solvencyDropAt: n
   const elapsed = formatDistanceToNow(dropDate, { addSuffix: false });
 
   return (
-    <div className="border-red-800 bg-red-950/40 flex items-center gap-10 rounded-4 border px-16 py-12">
+    <div className="bg-red-950/40 flex items-center gap-10 rounded-4 border px-16 py-12">
       <div className="h-8 w-8 flex-shrink-0 animate-pulse rounded-full bg-red-500" />
       <p className="text-red-300 text-13">
         {t`Trade ADL in progress for ${elapsed}. Long positions with high leverage × profit are being force-closed.`}
@@ -163,49 +164,46 @@ export default function StatusPage() {
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="border-b border-stroke-primary px-16 py-8">
+      <div className="border-b border-b-vantage-border px-16 py-8">
         <AppHeader leftContent={<AppNav />} />
       </div>
 
-      <div className="mt-24 space-y-20 px-16 pb-40">
-        {/* Page title */}
-        <div>
-          <h1 className="text-h1">{t`Protocol Status`}</h1>
-          <p className="text-body-medium mt-4 text-slate-400">
-            {t`Real-time solvency dashboard. 7-step defense sequence transparency.`}
-          </p>
+      <VantagePageContainer
+        title={t`Protocol Status`}
+        description={t`Real-time solvency dashboard. 7-step defense sequence transparency.`}
+      >
+        <div className="flex flex-col gap-20">
+          {/* Solvency drop banner (Phase 3+) */}
+          <SolvencyDropBanner solvencyDropAt={data.solvencyDropAt} defenseStep={data.defenseStep} />
+
+          {/* 7-Step Speedometer */}
+          <SolvencySpeedometer defenseStep={data.defenseStep} />
+
+          {/* Buffer Gauges + OI Stats */}
+          <div className="grid grid-cols-1 gap-20 lg:grid-cols-2">
+            <BufferGauges
+              reserveFundUsd={data.reserveFundUsd}
+              lpBoostPoolUsd={data.lpBoostPoolUsd}
+              juniorDeficitAbsorbed={data.juniorDeficitAbsorbed}
+              juniorAumUsd={data.juniorAumUsd}
+            />
+            <OIStats
+              totalShortUsd={data.totalShortUsd}
+              maxShortCapacityUsd={data.maxShortCapacityUsd}
+              oiUtilizationPct={data.oiUtilizationPct}
+              fundingRateBps={data.fundingRateBps}
+              yieldAprBps={data.yieldAprBps}
+              hedgeCapacityPct={data.hedgeCapacityPct}
+            />
+          </div>
+
+          {/* ADL Risk (user's own positions) */}
+          <AdlLeaderboard tradePosition={trade} hedgePosition={hedge} />
+
+          {/* Protocol Commitment */}
+          <ProtocolCommitmentBanner />
         </div>
-
-        {/* Solvency drop banner (Phase 3+) */}
-        <SolvencyDropBanner solvencyDropAt={data.solvencyDropAt} defenseStep={data.defenseStep} />
-
-        {/* 7-Step Speedometer */}
-        <SolvencySpeedometer defenseStep={data.defenseStep} />
-
-        {/* Buffer Gauges + OI Stats */}
-        <div className="grid grid-cols-1 gap-20 lg:grid-cols-2">
-          <BufferGauges
-            reserveFundUsd={data.reserveFundUsd}
-            lpBoostPoolUsd={data.lpBoostPoolUsd}
-            juniorDeficitAbsorbed={data.juniorDeficitAbsorbed}
-            juniorAumUsd={data.juniorAumUsd}
-          />
-          <OIStats
-            totalShortUsd={data.totalShortUsd}
-            maxShortCapacityUsd={data.maxShortCapacityUsd}
-            oiUtilizationPct={data.oiUtilizationPct}
-            fundingRateBps={data.fundingRateBps}
-            yieldAprBps={data.yieldAprBps}
-            hedgeCapacityPct={data.hedgeCapacityPct}
-          />
-        </div>
-
-        {/* ADL Risk (user's own positions) */}
-        <AdlLeaderboard tradePosition={trade} hedgePosition={hedge} />
-
-        {/* Protocol Commitment */}
-        <ProtocolCommitmentBanner />
-      </div>
+      </VantagePageContainer>
     </div>
   );
 }

@@ -1,11 +1,10 @@
 import cx from "classnames";
 import { useEffect, useState } from "react";
+import { BsFillGearFill } from "react-icons/bs";
 
 import { useSettings } from "context/SettingsContext/SettingsContextProvider";
 
 import Button from "components/Button/Button";
-
-import OneClickIcon from "img/ic_one_click.svg?react";
 
 const BACKDROP_ANIMATION_DURATION = 300;
 
@@ -39,7 +38,7 @@ export function OneClickButton({ openSettings }: { openSettings: () => void }) {
         onClick={handleToggleSettings}
         className="size-32 !bg-vantage-base !p-0 md:size-40"
       >
-        <OneClickIcon className="size-20 p-0" />
+        <BsFillGearFill className="size-16 p-0" />
       </Button>
     </div>
   );

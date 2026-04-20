@@ -95,7 +95,7 @@ export default function TradePage() {
                   className="group flex cursor-pointer items-center gap-4 whitespace-nowrap tracking-wide hover:text-vantage-accent"
                   onClick={() => setIsMarketOpen((o) => !o)}
                 >
-                  <span className="text-20 font-bold text-white group-hover:text-vantage-accent">
+                  <span className="text-24 font-bold text-white group-hover:text-vantage-accent">
                     {selectedVault?.symbol ?? "—"}
                   </span>
                   <ChevronDownIcon className="w-16 text-slate-400 group-hover:text-vantage-accent" />
@@ -206,7 +206,7 @@ export default function TradePage() {
                     onClick={() => setActiveTab("long")}
                     className={`flex-1 py-14 text-14 font-semibold transition-colors ${
                       activeTab === "long"
-                        ? "border-b-2 border-green-400 text-green-400"
+                        ? "border-b-2 border-vantage-accent text-vantage-accent"
                         : "text-slate-400 hover:text-white"
                     }`}
                   >
@@ -216,7 +216,7 @@ export default function TradePage() {
                     onClick={() => setActiveTab("short")}
                     className={`flex-1 py-14 text-14 font-semibold transition-colors ${
                       activeTab === "short"
-                        ? "border-b-2 border-red-400 text-red-400"
+                        ? "border-b-2 border-vantage-accent text-vantage-accent"
                         : "text-slate-400 hover:text-white"
                     }`}
                   >

@@ -27,6 +27,7 @@ import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
 import Button from "components/Button/Button";
 import NumberInput from "components/NumberInput/NumberInput";
+import { VantagePageContainer } from "components/VantagePageContainer/VantagePageContainer";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -100,7 +101,7 @@ function HeroSection({ totalNetWorthUsd, totalProtectionUsd, avgHedgeRatio, netY
           : "text-red-400";
 
   return (
-    <div className="bg-cold-blue-950 mb-24 grid grid-cols-2 gap-0 rounded-4 border border-stroke-primary lg:grid-cols-4">
+    <div className="mb-24 grid grid-cols-2 gap-0 rounded-4 border-b border-b-vantage-border bg-vantage-base lg:grid-cols-4">
       {[
         {
           label: t`Total Net Worth`,
@@ -127,10 +128,13 @@ function HeroSection({ totalNetWorthUsd, totalProtectionUsd, avgHedgeRatio, netY
           valueClass: apyColor(netYieldApy),
         },
       ].map(({ label, value, sub, valueClass }, i) => (
-        <div key={i} className={`p-20 ${i < 3 ? "border-b border-stroke-primary lg:border-b-0 lg:border-r" : ""}`}>
-          <div className="text-11 text-slate-500">{label}</div>
+        <div
+          key={i}
+          className="flex flex-col gap-8 border-b border-b-vantage-border border-r-vantage-border bg-vantage-base p-20 lg:border-b-0 lg:border-r"
+        >
+          <div className="text-14 text-slate-500">{label}</div>
           <div className={`mt-6 text-15 font-semibold ${valueClass}`}>{value}</div>
-          <div className="mt-2 text-11 text-slate-500">{sub}</div>
+          <div className="mt-2 text-14 text-slate-500">{sub}</div>
         </div>
       ))}
     </div>
@@ -182,19 +186,19 @@ function SolvencyItem({ symbol, solvencyDropAt, isSoftLocked, yieldAprBps, fundi
       {/* Header */}
       <div className="mb-12 flex items-center justify-between">
         <div className="flex items-center gap-8">
-          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-slate-700 text-11 font-bold text-white">
+          <div className="flex h-28 w-28 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
             {symbol.slice(0, 2)}
           </div>
           <span className="text-13 font-semibold text-white">{symbol}</span>
         </div>
         <div className="flex items-center gap-8">
           {isSoftLocked && (
-            <span className="bg-amber-900/50 text-amber-300 rounded-full px-8 py-2 text-11 font-semibold">
+            <span className="bg-amber-900/50 text-amber-300 rounded-full px-8 py-2 text-14 font-semibold">
               {t`FR相殺停止中`}
             </span>
           )}
           {deficitDuration && (
-            <span className="text-11 text-slate-500">
+            <span className="text-14 text-slate-500">
               {deficitDuration}
               {t`前より赤字検知`}
             </span>
@@ -204,7 +208,7 @@ function SolvencyItem({ symbol, solvencyDropAt, isSoftLocked, yieldAprBps, fundi
 
       {/* Warning */}
       {isSoftLocked && (
-        <div className="text-amber-400/90 mb-12 text-12">
+        <div className="text-amber-400/90 mb-12 text-14">
           ⚠️ {t`システム収益保護のため、現在一時的にFR相殺が停止されています`}
         </div>
       )}
@@ -214,39 +218,39 @@ function SolvencyItem({ symbol, solvencyDropAt, isSoftLocked, yieldAprBps, fundi
         <div className="space-y-8">
           {/* Yield */}
           <div className="flex items-center gap-10">
-            <div className="w-[60px] text-right text-11 text-slate-400">{t`利回り`}</div>
+            <div className="w-[60px] text-right text-14 text-slate-400">{t`利回り`}</div>
             <div className="relative h-12 flex-1 overflow-hidden rounded-full bg-slate-700/50">
               <div className="h-full rounded-full bg-green-500 transition-all" style={yieldBarStyle} />
             </div>
-            <div className="w-[48px] text-right text-11 font-semibold text-green-400">
+            <div className="w-[48px] text-right text-14 font-semibold text-green-400">
               {(yieldBps / 100).toFixed(2)}%
             </div>
           </div>
           {/* FR cost */}
           <div className="flex items-center gap-10">
-            <div className="w-[60px] text-right text-11 text-slate-400">{t`FRコスト`}</div>
+            <div className="w-[60px] text-right text-14 text-slate-400">{t`FRコスト`}</div>
             <div className="relative h-12 flex-1 overflow-hidden rounded-full bg-slate-700/50">
               <div className="h-full rounded-full bg-red-500 transition-all" style={costBarStyle} />
             </div>
-            <div className="w-[48px] text-right text-11 font-semibold text-red-400">
+            <div className="w-[48px] text-right text-14 font-semibold text-red-400">
               {costBps !== null ? (costBps / 100).toFixed(2) : "—"}%
             </div>
           </div>
           {/* Ratio */}
           {solvencyRatio !== null && (
             <div className="border-t border-slate-700/60 pt-8">
-              <div className="flex items-center justify-between text-12">
+              <div className="flex items-center justify-between text-14">
                 <span className="text-slate-400">{t`ソルベンシー比率`}</span>
                 <div className="flex items-center gap-8">
                   <span className={`font-semibold ${solvencyRatio >= 1 ? "text-green-400" : "text-red-400"}`}>
                     {solvencyRatio.toFixed(2)}×
                   </span>
-                  <span className={`text-11 ${solvencyRatio >= 1 ? "text-green-500/70" : "text-red-500/70"}`}>
+                  <span className={`text-14 ${solvencyRatio >= 1 ? "text-green-500/70" : "text-red-500/70"}`}>
                     {solvencyRatio >= 1 ? t`（健全）` : t`（赤字）`}
                   </span>
                 </div>
               </div>
-              <div className="mt-6 text-11 text-slate-500">
+              <div className="mt-6 text-14 text-slate-500">
                 {solvencyRatio < 1
                   ? t`RWA利回りがFRコストを下回っているため、ヘッジのFR相殺が一時停止されています。ソルベンシー回復後に自動的に復元されます。`
                   : t`ソルベンシーは回復しています。ポジションの復元を待っています。`}
@@ -267,7 +271,7 @@ function SolvencySection({ items }: SolvencySectionProps) {
 
   return (
     <div className="mb-24">
-      <h2 className="mb-12 text-14 font-semibold text-white">{t`プロトコル・ソルベンシー`}</h2>
+      <h2 className="mb-12 text-16 font-bold text-white">{t`プロトコル・ソルベンシー`}</h2>
       <div className="space-y-12">
         {activeItems.map((h) => (
           <SolvencyItem
@@ -337,10 +341,10 @@ function HedgeSection({ items, hasAccount }: HedgeSectionProps) {
 
   return (
     <div className="mb-24">
-      <h2 className="mb-12 text-14 font-semibold text-white">{t`Hedge Positions`}</h2>
-      <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
+      <h2 className="mb-12 text-16 font-bold text-white">{t`Hedge Positions`}</h2>
+      <div className="overflow-hidden rounded-4 border-b border-b-vantage-border bg-vantage-base">
         {/* Header */}
-        <div className="grid grid-cols-[2fr_3fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-10 text-11 text-slate-500">
+        <div className="grid grid-cols-[2fr_3fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border bg-vantage-base px-20 py-10 text-14 text-slate-500">
           <div>{t`Asset`}</div>
           <div>{t`Balance (LP ↔ Short)`}</div>
           <div className="text-right">{t`Spread`}</div>
@@ -364,11 +368,11 @@ function HedgeSection({ items, hasAccount }: HedgeSectionProps) {
             return (
               <div
                 key={h.key}
-                className="grid grid-cols-[2fr_3fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-16 last:border-0"
+                className="grid grid-cols-[2fr_3fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border bg-vantage-base px-20 py-16 last:border-0"
               >
                 {/* Asset */}
                 <div className="flex items-center gap-10">
-                  <div className="flex h-32 w-32 items-center justify-center rounded-full bg-slate-700 text-12 font-bold text-white">
+                  <div className="flex h-32 w-32 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
                     {h.symbol.slice(0, 2)}
                   </div>
                   <span className="text-14 font-semibold text-white">{h.symbol}</span>
@@ -379,7 +383,7 @@ function HedgeSection({ items, hasAccount }: HedgeSectionProps) {
                   {hasPosition ? (
                     <BalancerBar lpUsd={lpUsd} shortUsd={shortUsd} />
                   ) : (
-                    <span className="text-12 text-slate-500">—</span>
+                    <span className="text-14 text-slate-500">—</span>
                   )}
                 </div>
 
@@ -389,11 +393,11 @@ function HedgeSection({ items, hasAccount }: HedgeSectionProps) {
                 {/* Status */}
                 <div className="text-right">
                   {h.isSoftLocked ? (
-                    <span className="bg-amber-900/40 text-amber-300 rounded-full px-8 py-2 text-11">{t`FR停止中`}</span>
+                    <span className="bg-amber-900/40 text-amber-300 rounded-full px-8 py-2 text-14">{t`FR停止中`}</span>
                   ) : hasPosition ? (
-                    <span className="rounded-full bg-green-900/40 px-8 py-2 text-11 text-green-400">{t`Active`}</span>
+                    <span className="rounded-full bg-green-900/40 px-8 py-2 text-14 text-green-400">{t`Active`}</span>
                   ) : (
-                    <span className="text-11 text-slate-500">—</span>
+                    <span className="text-14 text-slate-500">—</span>
                   )}
                 </div>
               </div>
@@ -414,10 +418,10 @@ type TradingSectionProps = { positions: VantagePosition[]; hasAccount: boolean }
 function TradingSection({ positions, hasAccount }: TradingSectionProps) {
   return (
     <div className="mb-24">
-      <h2 className="mb-12 text-14 font-semibold text-white">{t`Trading Positions`}</h2>
-      <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
+      <h2 className="mb-12 text-16 font-bold text-white">{t`Trading Positions`}</h2>
+      <div className="overflow-hidden rounded-4 border-b border-b-vantage-border bg-vantage-base">
         {/* Header */}
-        <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-10 text-11 text-slate-500">
+        <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border bg-vantage-base px-20 py-10 text-14 text-slate-500">
           <div>{t`Asset`}</div>
           <div className="text-right">{t`Side`}</div>
           <div className="text-right">{t`Size`}</div>
@@ -438,11 +442,11 @@ function TradingSection({ positions, hasAccount }: TradingSectionProps) {
             return (
               <div
                 key={p.key}
-                className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-14 last:border-0"
+                className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border bg-vantage-base px-20 py-14 last:border-0"
               >
                 {/* Asset */}
                 <div className="flex items-center gap-10">
-                  <div className="flex h-28 w-28 items-center justify-center rounded-full bg-slate-700 text-11 font-bold text-white">
+                  <div className="flex h-28 w-28 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
                     {p.indexToken.slice(2, 4).toUpperCase()}
                   </div>
                   <span className="text-13 font-medium text-white">
@@ -452,7 +456,7 @@ function TradingSection({ positions, hasAccount }: TradingSectionProps) {
                 {/* Side */}
                 <div className="text-right">
                   <span
-                    className={`rounded-full px-8 py-2 text-11 font-semibold ${
+                    className={`rounded-full px-8 py-2 text-14 font-semibold ${
                       p.isLong ? "bg-green-900/40 text-green-400" : "bg-red-900/40 text-red-400"
                     }`}
                   >
@@ -483,10 +487,10 @@ type VaultLpSectionProps = { items: VaultLpItem[]; hasAccount: boolean };
 function VaultLpSection({ items, hasAccount }: VaultLpSectionProps) {
   return (
     <div className="mb-24">
-      <h2 className="mb-12 text-14 font-semibold text-white">{t`Vault LP`}</h2>
-      <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
+      <h2 className="mb-12 text-16 font-bold text-white">{t`Vault LP`}</h2>
+      <div className="overflow-hidden rounded-4 border-b border-b-vantage-border bg-vantage-base">
         {/* Header */}
-        <div className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-10 text-11 text-slate-500">
+        <div className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border bg-vantage-base px-20 py-10 text-14 text-slate-500">
           <div>{t`Vault`}</div>
           <div className="text-right">{t`My Liquidity`}</div>
           <div className="text-right">{t`APY`}</div>
@@ -496,16 +500,16 @@ function VaultLpSection({ items, hasAccount }: VaultLpSectionProps) {
         {items.map((v) => (
           <div
             key={v.key}
-            className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-14 last:border-0"
+            className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border bg-vantage-base px-20 py-14 last:border-0"
           >
             {/* Vault */}
             <div className="flex items-center gap-10">
-              <div className="flex h-32 w-32 items-center justify-center rounded-full bg-slate-700 text-12 font-bold text-white">
+              <div className="flex h-32 w-32 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
                 {v.symbol.slice(0, 2)}
               </div>
               <div>
                 <div className="text-13 font-semibold text-white">{v.symbol}</div>
-                <div className="text-11 text-slate-500">{v.name}</div>
+                <div className="text-14 text-slate-500">{v.name}</div>
               </div>
             </div>
 
@@ -518,7 +522,7 @@ function VaultLpSection({ items, hasAccount }: VaultLpSectionProps) {
               ) : v.usdValue > 0n ? (
                 <div>
                   <div className="text-13 font-semibold text-white">{fmtUsdWad(v.usdValue)}</div>
-                  <div className="text-11 text-slate-500">{parseFloat(formatEther(v.vlpBalance)).toFixed(4)} VLP</div>
+                  <div className="text-14 text-slate-500">{parseFloat(formatEther(v.vlpBalance)).toFixed(4)} VLP</div>
                 </div>
               ) : (
                 <span className="text-13 text-slate-500">—</span>
@@ -609,7 +613,7 @@ function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAcco
 
   return (
     <div className="mb-24">
-      <h2 className="mb-12 text-14 font-semibold text-white">{t`LP Withdrawal`}</h2>
+      <h2 className="mb-12 text-16 font-bold text-white">{t`LP Withdrawal`}</h2>
 
       {/* Redemption countdown */}
       {!lpData.isLoading && lpData.nextEpochTimestamp > 0n && (
@@ -623,26 +627,26 @@ function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAcco
       {hasAccount && lpData.pendingShares > 0n && (
         <div className="bg-blue-900/20 mb-10 rounded-4 border border-blue-600/40 px-14 py-10 text-13">
           <div className="font-semibold text-blue-300">{t`Redemption pending — yield continues to accrue`}</div>
-          <div className="mt-2 text-12 text-blue-400">
+          <div className="mt-2 text-14 text-blue-400">
             {parseFloat(formatEther(lpData.pendingShares)).toFixed(4)} VLP ≈ ${pendingUsdFormatted}
           </div>
         </div>
       )}
 
       {/* Withdraw form */}
-      <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
-        <div className="border-b border-stroke-primary px-16 py-10 text-13 font-medium text-white">
+      <div className="overflow-hidden rounded-4 border-b border-b-vantage-border bg-vantage-base">
+        <div className="border-b border-b-vantage-border bg-vantage-base px-16 py-10 text-13 font-medium text-white">
           {t`Withdraw VLP`}
         </div>
         <div className="p-16">
           <div className="flex flex-col gap-12">
             <div>
               <div className="mb-4 flex justify-between">
-                <label className="text-11 text-slate-400">{t`VLP Amount`}</label>
+                <label className="text-14 text-slate-400">{t`VLP Amount`}</label>
                 {hasAccount && lpData.vlpBalance > 0n && (
                   <button
                     onClick={() => setWithdrawInput(formatEther(lpData.vlpBalance))}
-                    className="text-11 text-blue-400 hover:text-blue-300"
+                    className="text-14 text-blue-400 hover:text-blue-300"
                   >
                     {t`Max`}: {parseFloat(formatEther(lpData.vlpBalance)).toFixed(4)}
                   </button>
@@ -656,11 +660,11 @@ function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAcco
                   maxDecimals={18}
                   className="bg-transparent flex-1 text-14 text-white outline-none"
                 />
-                <span className="text-12 text-slate-400">VLP</span>
+                <span className="text-14 text-slate-400">VLP</span>
               </div>
             </div>
             {withdrawShares > 0n && (
-              <div className="flex justify-between text-12 text-slate-400">
+              <div className="flex justify-between text-14 text-slate-400">
                 <span>{t`Est. USDC received`}</span>
                 <span className="text-white">
                   {parseFloat(formatUnits(estimatedUsdcOut, LP_USDC_DECIMALS)).toFixed(2)} USDC
@@ -668,10 +672,10 @@ function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAcco
               </div>
             )}
             {withdrawShares > lpData.vlpBalance && lpData.vlpBalance > 0n && (
-              <div className="text-11 text-red-400">{t`Exceeds your VLP balance`}</div>
+              <div className="text-14 text-red-400">{t`Exceeds your VLP balance`}</div>
             )}
             {!hasAccount ? (
-              <div className="text-center text-12 text-slate-500">{t`Connect wallet to withdraw`}</div>
+              <div className="text-center text-14 text-slate-500">{t`Connect wallet to withdraw`}</div>
             ) : (
               <Button
                 variant="primary"
@@ -705,19 +709,14 @@ export default function PortfolioPage() {
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="border-b border-stroke-primary px-16 py-8">
+      <div className="border-b border-b-vantage-border bg-vantage-base px-16 py-8">
         <AppHeader leftContent={<AppNav />} />
       </div>
 
-      <div className="mt-24 px-16 pb-40">
-        {/* Title */}
-        <div className="mb-24">
-          <h1 className="text-h1">{t`Portfolio`}</h1>
-          <p className="text-body-medium mt-4 text-slate-400">
-            {t`Your delta-neutral positions, trade history, and LP status across all vaults.`}
-          </p>
-        </div>
-
+      <VantagePageContainer
+        title={t`Portfolio`}
+        description={t`Your delta-neutral positions, trade history, and LP status across all vaults.`}
+      >
         {/* ① Hero: Global Stats */}
         <HeroSection
           totalNetWorthUsd={globalStats.totalNetWorthUsd}
@@ -742,10 +741,10 @@ export default function PortfolioPage() {
         <LpManagementSection chainId={chainId} hasAccount={!!account} />
 
         {/* Disclaimer */}
-        <p className="mt-8 text-center text-11 text-slate-600">
+        <p className="mt-8 text-center text-14 text-slate-600">
           {t`Wallet balances are not included in Total Net Worth. Net Yield is annualized; past rates are not indicative of future returns.`}
         </p>
-      </div>
+      </VantagePageContainer>
     </div>
   );
 }

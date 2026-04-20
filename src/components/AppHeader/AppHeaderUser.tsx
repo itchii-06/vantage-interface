@@ -26,9 +26,12 @@ export function AppHeaderUser({ openSettings, menuToggle }: Props) {
 
   if (!active || !account) {
     return (
-      <div className="flex items-center gap-8">
+      <div className="flex items-center">
         {openConnectModal ? (
           <>
+            <OneClickButton openSettings={openSettings} />
+            <NetworkDropdown chainId={visualChainId} networkOptions={NETWORK_OPTIONS} />
+            {menuToggle ? menuToggle : null}
             <ConnectWalletButton
               onClick={() => {
                 sendUserAnalyticsConnectWalletClickEvent("Header");
@@ -37,9 +40,6 @@ export function AppHeaderUser({ openSettings, menuToggle }: Props) {
             >
               <Trans>Connect wallet</Trans>
             </ConnectWalletButton>
-            <OneClickButton openSettings={openSettings} />
-            <NetworkDropdown chainId={visualChainId} networkOptions={NETWORK_OPTIONS} />
-            {menuToggle ? menuToggle : null}
           </>
         ) : null}
       </div>
@@ -47,13 +47,13 @@ export function AppHeaderUser({ openSettings, menuToggle }: Props) {
   }
 
   return (
-    <div className="flex items-center gap-8">
-      <div data-qa="user-address">
-        <AddressDropdown account={account} />
-      </div>
+    <div className="flex items-center">
       <OneClickButton openSettings={openSettings} />
       <NetworkDropdown chainId={visualChainId} networkOptions={NETWORK_OPTIONS} />
       {menuToggle ? menuToggle : null}
+      <div data-qa="user-address">
+        <AddressDropdown account={account} />
+      </div>
     </div>
   );
 }

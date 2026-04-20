@@ -33,7 +33,6 @@ import NumberInput from "components/NumberInput/NumberInput";
 
 const WAD = BigInt("1000000000000000000");
 const MAINNET_CHAIN_IDS = new Set([1, 42161, 8453]); // Ethereum, Arbitrum One, Base
-const ZAP_TOKEN_ACTIVE_STYLE = { background: "rgba(236,255,62,0.12)", border: "1px solid #ecff3e" } as const;
 
 function formatUsd(wad: bigint): string {
   const n = parseFloat(formatEther(wad));
@@ -415,18 +414,18 @@ export default function VaultDetailPage() {
                 {activeTab === "deposit" && (
                   <div className="flex flex-col gap-16">
                     <div>
-                      <label className="mb-6 block text-12 text-slate-400">
-                        {t`Amount`} ({cfg.symbol})
-                      </label>
-                      <div className="flex items-center gap-8 rounded-4 border border-vantage-border bg-vantage-input px-12 py-10">
+                      <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
+                        <div className="mb-2 flex items-center justify-between text-12 text-slate-400">
+                          <span>{t`Amount`}</span>
+                          <span>{cfg.symbol}</span>
+                        </div>
                         <NumberInput
                           value={depositInput}
                           onValueChange={(e: ChangeEvent<HTMLInputElement>) => setDepositInput(e.target.value)}
                           placeholder="0.00"
                           maxDecimals={cfg.tokenDecimals}
-                          className="bg-transparent flex-1 text-16 text-white outline-none"
+                          className="bg-transparent w-full text-[36px] font-semibold text-white outline-none placeholder:text-slate-600"
                         />
-                        <span className="text-14 font-medium text-slate-400">{cfg.symbol}</span>
                       </div>
                       {account && (
                         <div className="mt-4 text-12 text-slate-500">
@@ -487,8 +486,7 @@ export default function VaultDetailPage() {
                             setZapInput("");
                             setZapError(null);
                           }}
-                          className={`flex-1 rounded-4 py-8 text-13 font-medium transition-colors ${zapToken.key === zt.key ? "text-vantage-text-primary" : "border border-vantage-border text-vantage-text-secondary"}`}
-                          style={zapToken.key === zt.key ? ZAP_TOKEN_ACTIVE_STYLE : undefined}
+                          className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${zapToken.key === zt.key ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
                         >
                           {zt.label}
                         </button>
@@ -497,10 +495,11 @@ export default function VaultDetailPage() {
 
                     {/* Amount input */}
                     <div>
-                      <label className="mb-6 block text-12 text-slate-400">
-                        {t`Amount`} ({zapToken.symbol})
-                      </label>
-                      <div className="flex items-center gap-8 rounded-4 border border-vantage-border bg-vantage-input px-12 py-10">
+                      <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
+                        <div className="mb-2 flex items-center justify-between text-12 text-slate-400">
+                          <span>{t`Amount`}</span>
+                          <span>{zapToken.symbol}</span>
+                        </div>
                         <NumberInput
                           value={zapInput}
                           onValueChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -509,9 +508,8 @@ export default function VaultDetailPage() {
                           }}
                           placeholder="0.00"
                           maxDecimals={zapToken.decimals}
-                          className="bg-transparent flex-1 text-16 text-white outline-none"
+                          className="bg-transparent w-full text-[36px] font-semibold text-white outline-none placeholder:text-slate-600"
                         />
-                        <span className="text-14 font-medium text-slate-400">{zapToken.symbol}</span>
                       </div>
                     </div>
 
@@ -558,23 +556,22 @@ export default function VaultDetailPage() {
                 {activeTab === "withdraw" && (
                   <div className="flex flex-col gap-16">
                     <div>
-                      <div className="mb-6 flex justify-between">
-                        <label className="text-12 text-slate-400">{t`VLP Amount`}</label>
-                        {account && data.vlpBalance > 0n && (
-                          <button onClick={handleSetMaxWithdraw} className="text-12 text-vantage-accent">
-                            {t`Max`}: {parseFloat(formatEther(data.vlpBalance)).toFixed(4)} VLP
-                          </button>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-8 rounded-4 border border-vantage-border bg-vantage-input px-12 py-10">
+                      <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
+                        <div className="mb-2 flex items-center justify-between text-12 text-slate-400">
+                          <span>{t`VLP Amount`}</span>
+                          {account && data.vlpBalance > 0n && (
+                            <button onClick={handleSetMaxWithdraw} className="text-12 text-vantage-accent">
+                              {t`Max`}: {parseFloat(formatEther(data.vlpBalance)).toFixed(4)} VLP
+                            </button>
+                          )}
+                        </div>
                         <NumberInput
                           value={withdrawInput}
                           onValueChange={(e: ChangeEvent<HTMLInputElement>) => setWithdrawInput(e.target.value)}
                           placeholder="0.000000"
                           maxDecimals={18}
-                          className="bg-transparent flex-1 text-16 text-white outline-none"
+                          className="bg-transparent w-full text-[36px] font-semibold text-white outline-none placeholder:text-slate-600"
                         />
-                        <span className="text-14 font-medium text-slate-400">VLP</span>
                       </div>
                       {account && (
                         <div className="mt-4 text-12 text-slate-500">

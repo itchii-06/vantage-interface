@@ -1116,10 +1116,6 @@ msgstr "前より赤字検知"
 msgid "Unable to verify code availability on {0}. You can still create the code, but it may already be taken on those networks."
 msgstr "Unable to verify code availability on {0}. You can still create the code, but it may already be taken on those networks."
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
-#~ msgstr "Short position requests are executed by Keepers (GMX V1 two-step flow)."
-
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Deposit completed"
 msgstr "Deposit completed"
@@ -4402,12 +4398,12 @@ msgstr "Junior Buffer (PAYOUT Tranche)"
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
+#: src/components/VantageLeverageSlider/VantageLeverageSlider.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Status/components/AdlLeaderboard.tsx
 #: src/pages/Status/components/AdlLeaderboard.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "Leverage"
 
@@ -4458,10 +4454,6 @@ msgstr "Phase 3 · Trade ADL"
 #: src/components/Claims/ClaimsHistory.tsx
 msgid "No claims match the selected filters"
 msgstr "No claims match the selected filters"
-
-#: src/lib/legacy.ts
-#~ msgid "Decentralized perpetual exchange | GMX"
-#~ msgstr "Decentralized perpetual exchange | GMX"
 
 #: src/components/Footer/constants.tsx
 msgid "V1"
@@ -8730,8 +8722,8 @@ msgid "Notifications"
 msgstr "Notifications"
 
 #: src/pages/Hedge/HedgePage.tsx
-msgid "Managed Net APY"
-msgstr "Managed Net APY"
+#~ msgid "Managed Net APY"
+#~ msgstr "Managed Net APY"
 
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Trading mode"
@@ -10690,8 +10682,8 @@ msgid "Trigger price above liquidation price"
 msgstr "Trigger price above liquidation price"
 
 #: src/pages/Hedge/HedgePage.tsx
-msgid "Self-Custody APY"
-msgstr "Self-Custody APY"
+#~ msgid "Self-Custody APY"
+#~ msgstr "Self-Custody APY"
 
 #: src/components/GmxAccountModal/TransferDetailsView.tsx
 msgid "Repeat transaction"
@@ -10884,10 +10876,6 @@ msgstr "LIQUIDITY LONG"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "PnL short"
 msgstr "PnL short"
-
-#: src/components/Seo/SEO.tsx
-#~ msgid "GMX | Decentralized perpetual exchange"
-#~ msgstr "GMX | Decentralized perpetual exchange"
 
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "All assets"

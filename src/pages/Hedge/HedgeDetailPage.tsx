@@ -34,6 +34,7 @@ import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
 import NumberInput from "components/NumberInput/NumberInput";
 import Tooltip from "components/Tooltip/Tooltip";
+import { VantagePageContainer } from "components/VantagePageContainer/VantagePageContainer";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -667,7 +668,7 @@ export default function HedgeDetailPage() {
         <AppHeader leftContent={<AppNav />} />
       </div>
 
-      <div className="mt-24 px-16 pb-40">
+      <VantagePageContainer>
         {/* Back link + title */}
         <button
           onClick={() => history.push("/hedge")}
@@ -787,12 +788,12 @@ export default function HedgeDetailPage() {
             {/* Margin token toggle */}
             <div className="mb-16">
               <div className="mb-8 text-12 text-slate-400">{t`Short Margin`}</div>
-              <div className="flex rounded-4 border border-vantage-border">
-                {(["usdc", "eth"] as HedgeMarginToken[]).map((token, i) => (
+              <div className="flex gap-8">
+                {(["usdc", "eth"] as HedgeMarginToken[]).map((token) => (
                   <button
                     key={token}
                     onClick={() => setMarginToken(token)}
-                    className={`flex-1 py-8 text-13 font-medium transition-colors ${i === 0 ? "rounded-l-4" : "rounded-r-4"} ${marginToken === token ? "bg-vantage-accent text-black" : "text-vantage-text-secondary"}`}
+                    className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${marginToken === token ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
                   >
                     {token.toUpperCase()}
                   </button>
@@ -802,18 +803,22 @@ export default function HedgeDetailPage() {
 
             {/* RWA Amount input */}
             <div className="mb-16">
-              <label className="mb-6 block text-12 text-slate-400">
-                <span className="rounded mr-6 px-6 py-1 text-11 text-vantage-accent" style={STYLE_ACCENT_BG_12}>
-                  ① {t`LP Deposit`}
-                </span>
-                {cfg.symbol} {t`Amount`}
-              </label>
-              <NumberInput
-                value={rwaAmountStr}
-                onValueChange={(e) => setRwaAmountStr(e.target.value)}
-                className="w-full rounded-4 border border-[rgba(255,255,255,0.1)] bg-[#111111] px-12 py-10 text-14 text-white focus:outline-none"
-                placeholder="0.00"
-              />
+              <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
+                <div className="mb-2 flex items-center gap-6 text-12 text-slate-400">
+                  <span className="rounded px-6 py-1 text-11 text-vantage-accent" style={STYLE_ACCENT_BG_12}>
+                    ① {t`LP Deposit`}
+                  </span>
+                  <span>
+                    {cfg.symbol} {t`Amount`}
+                  </span>
+                </div>
+                <NumberInput
+                  value={rwaAmountStr}
+                  onValueChange={(e) => setRwaAmountStr(e.target.value)}
+                  className="bg-transparent w-full text-[36px] font-semibold text-white outline-none placeholder:text-slate-600"
+                  placeholder="0.00"
+                />
+              </div>
               <p className="mt-4 text-11 text-slate-500">
                 {t`Deposited to the LP Vault. You receive VLP shares in return.`}
               </p>
@@ -821,13 +826,18 @@ export default function HedgeDetailPage() {
 
             {/* Leverage input */}
             <div className="mb-16">
-              <label className="mb-6 block text-12 text-slate-400">{t`Leverage`}</label>
-              <NumberInput
-                value={leverageStr}
-                onValueChange={(e) => setLeverageStr(e.target.value)}
-                className="w-full rounded-4 border border-[rgba(255,255,255,0.1)] bg-[#111111] px-12 py-10 text-14 text-white focus:outline-none"
-                placeholder="1"
-              />
+              <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
+                <div className="mb-2 flex items-center justify-between text-12 text-slate-400">
+                  <span>{t`Leverage`}</span>
+                  <span>×</span>
+                </div>
+                <NumberInput
+                  value={leverageStr}
+                  onValueChange={(e) => setLeverageStr(e.target.value)}
+                  className="bg-transparent w-full text-[36px] font-semibold text-white outline-none placeholder:text-slate-600"
+                  placeholder="1"
+                />
+              </div>
               <p className="mt-4 text-11 text-slate-500">{t`1× = delta-neutral. Higher = partial hedge.`}</p>
             </div>
 
@@ -945,7 +955,7 @@ export default function HedgeDetailPage() {
             )}
           </div>
         </div>
-      </div>
+      </VantagePageContainer>
     </div>
   );
 }

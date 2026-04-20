@@ -67,7 +67,7 @@ export function BufferGauges({
   const juniorRemainingUsd = juniorAumUsd !== null ? Math.max(0, juniorAumUsd - (juniorDeficitAbsorbed ?? 0)) : null;
 
   return (
-    <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+    <div className="rounded-4 border-b border-b-vantage-border bg-vantage-base p-20">
       <h2 className="mb-16 text-15 font-semibold text-white">{t`Internal Buffers`}</h2>
 
       <div className="space-y-20">
@@ -76,12 +76,12 @@ export function BufferGauges({
           <div className="mb-8 flex items-center justify-between">
             <div>
               <span className="text-slate-300 text-13 font-medium">{t`Reserve Fund`}</span>
-              <span className="ml-8 text-11 text-slate-500">{t`Phase 2-4`}</span>
+              <span className="ml-8 text-12 text-slate-500">{t`Phase 2-4`}</span>
             </div>
             <span className="text-13 text-white">{fmtUsd(reserveFundUsd)}</span>
           </div>
           <GaugeBar fill={reserveAvailFill} color="bg-blue-500" />
-          <div className="mt-6 flex items-center justify-between text-11 text-slate-500">
+          <div className="mt-6 flex items-center justify-between text-12 text-slate-500">
             <span>
               {t`Available`}: {fmtUsd(reserveFundUsd)}
             </span>
@@ -101,12 +101,12 @@ export function BufferGauges({
           <div className="mb-8 flex items-center justify-between">
             <div>
               <span className="text-slate-300 text-13 font-medium">{t`Junior Buffer (PAYOUT Tranche)`}</span>
-              <span className="ml-8 text-11 text-slate-500">{t`Phase 2-5`}</span>
+              <span className="ml-8 text-12 text-slate-500">{t`Phase 2-5`}</span>
             </div>
             <span className="text-13 text-white">{juniorAumUsd !== null ? fmtUsd(juniorAumUsd) : "—"}</span>
           </div>
           <GaugeBar fill={juniorAbsorbedFill} color="bg-orange-500" />
-          <div className="mt-6 flex items-center justify-between text-11 text-slate-500">
+          <div className="mt-6 flex items-center justify-between text-12 text-slate-500">
             <span>
               {t`Absorbed`}: {fmtUsd(juniorDeficitAbsorbed)}
             </span>
@@ -115,7 +115,7 @@ export function BufferGauges({
             </span>
           </div>
           {juniorVaultAbsent(juniorAumUsd, juniorDeficitAbsorbed) && (
-            <p className="mt-8 text-11 text-slate-600">{t`Junior TrancheVault not configured for this deployment.`}</p>
+            <p className="mt-8 text-12 text-slate-600">{t`Junior TrancheVault not configured for this deployment.`}</p>
           )}
         </div>
       </div>

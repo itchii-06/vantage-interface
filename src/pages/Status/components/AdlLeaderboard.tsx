@@ -115,7 +115,7 @@ function TradeAdlPanel({ pos }: { pos: TradePositionSummary | null }) {
     <div className="space-y-12">
       <div className="flex items-center justify-between">
         <span className="text-12 text-slate-400">{t`Profit Extraction Risk`}</span>
-        <span className={`rounded-full px-10 py-3 text-11 font-medium ${RISK_BADGE[risk]}`}>{RISK_LABEL[risk]}</span>
+        <span className={`rounded-full px-10 py-3 text-12 font-medium ${RISK_BADGE[risk]}`}>{RISK_LABEL[risk]}</span>
       </div>
 
       <div className="grid grid-cols-3 gap-12 rounded-4 bg-slate-900/60 px-16 py-12 text-center">
@@ -136,7 +136,7 @@ function TradeAdlPanel({ pos }: { pos: TradePositionSummary | null }) {
         </div>
       </div>
 
-      <p className="text-11 text-slate-500">
+      <p className="text-12 text-slate-500">
         {t`ADL Score`}: {score.toFixed(0)} (Leverage × Profit).{" "}
         {risk === "high"
           ? t`Your position carries high leverage with significant profit — among the most likely ADL candidates.`
@@ -162,7 +162,7 @@ function HedgeAdlPanel({ pos }: { pos: HedgePositionSummary | null }) {
     <div className="space-y-12">
       <div className="flex items-center justify-between">
         <span className="text-12 text-slate-400">{t`Hedge Protection Status`}</span>
-        <span className={`rounded-full px-10 py-3 text-11 font-medium ${RISK_BADGE[risk]}`}>{RISK_LABEL[risk]}</span>
+        <span className={`rounded-full px-10 py-3 text-12 font-medium ${RISK_BADGE[risk]}`}>{RISK_LABEL[risk]}</span>
       </div>
 
       <div className="grid grid-cols-3 gap-12 rounded-4 bg-slate-900/60 px-16 py-12 text-center">
@@ -186,20 +186,20 @@ function HedgeAdlPanel({ pos }: { pos: HedgePositionSummary | null }) {
 
       {/* ADL Priority explanation */}
       <div className="space-y-6 rounded-4 bg-slate-900/60 px-16 py-12">
-        <p className="text-11 font-medium text-slate-400">{t`ADL Priority Factors (Hedge Mode):`}</p>
-        <div className="flex items-center justify-between text-11">
+        <p className="text-12 font-medium text-slate-400">{t`ADL Priority Factors (Hedge Mode):`}</p>
+        <div className="flex items-center justify-between text-12">
           <span className="text-slate-500">{t`1. Leverage (higher = first)`}</span>
           <span className={lev >= 5 ? "text-red-400" : lev >= 3 ? "text-yellow-400" : "text-green-400"}>
             {fmtLev(lev)}
           </span>
         </div>
-        <div className="flex items-center justify-between text-11">
+        <div className="flex items-center justify-between text-12">
           <span className="text-slate-500">{t`2. Entry recency (newer = first)`}</span>
           <span className={ageDays < 7 ? "text-red-400" : ageDays < 30 ? "text-yellow-400" : "text-green-400"}>
             {ageDays >= 30 ? t`Protected (30d+)` : ageDays >= 7 ? t`${ageDays} days` : t`New (${ageDays}d)`}
           </span>
         </div>
-        <div className="flex items-center justify-between text-11">
+        <div className="flex items-center justify-between text-12">
           <span className="text-slate-500">{t`3. Mode (Auto-Close first)`}</span>
           <span className={!pos.shouldConvertOnADL ? "text-orange-400" : "text-slate-400"}>
             {pos.shouldConvertOnADL ? t`Mode B (Convert)` : t`Mode A (Auto-Close) ⚠`}
@@ -208,11 +208,11 @@ function HedgeAdlPanel({ pos }: { pos: HedgePositionSummary | null }) {
       </div>
 
       {risk === "low" ? (
-        <p className="text-11 text-green-600">{t`Low leverage and long tenure protect you from ADL. You are in the loyalty tier.`}</p>
+        <p className="text-12 text-green-600">{t`Low leverage and long tenure protect you from ADL. You are in the loyalty tier.`}</p>
       ) : risk === "warning" ? (
-        <p className="text-yellow-600 text-11">{t`High leverage or recent entry increases ADL risk. Consider reducing leverage.`}</p>
+        <p className="text-yellow-600 text-12">{t`High leverage or recent entry increases ADL risk. Consider reducing leverage.`}</p>
       ) : (
-        <p className="text-red-600 text-11">{t`High ADL risk. Reduce leverage or hold position longer to improve protection.`}</p>
+        <p className="text-red-600 text-12">{t`High ADL risk. Reduce leverage or hold position longer to improve protection.`}</p>
       )}
     </div>
   );
@@ -229,10 +229,10 @@ interface AdlLeaderboardProps {
 
 export function AdlLeaderboard({ tradePosition, hedgePosition }: AdlLeaderboardProps) {
   return (
-    <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+    <div className="rounded-4  border-b border-b-vantage-border bg-vantage-base p-20">
       <div className="mb-16 flex items-center justify-between">
         <h2 className="text-15 font-semibold text-white">{t`Your ADL Risk`}</h2>
-        <span className="text-11 text-slate-600">{t`Full leaderboard requires Subgraph`}</span>
+        <span className="text-12 text-slate-600">{t`Full leaderboard requires Subgraph`}</span>
       </div>
 
       <div className="grid grid-cols-1 gap-20 lg:grid-cols-2">

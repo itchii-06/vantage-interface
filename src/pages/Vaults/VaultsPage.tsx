@@ -17,9 +17,11 @@ import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
 import { useVaultList } from "domain/vantage/vaults/useVaultList";
 import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
 import useWallet from "lib/wallets/useWallet";
+import { COLORS } from "styles/vantageTheme";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
+import { VantagePageContainer } from "components/VantagePageContainer/VantagePageContainer";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -87,21 +89,15 @@ export default function VaultsPage() {
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="border-b border-stroke-primary px-16 py-8">
+      <div className="border-b border-b-vantage-border px-16 py-8">
         <AppHeader leftContent={<AppNav />} />
       </div>
 
-      <div className="mt-24 px-16">
-        {/* Page title */}
-        <div className="mb-24">
-          <h1 className="text-h1">{t`Vaults`}</h1>
-          <p className="text-body-medium mt-4 text-slate-400">{t`Provide liquidity to earn yield from RWA assets.`}</p>
-        </div>
-
+      <VantagePageContainer title={t`Vaults`} description={t`Provide liquidity to earn yield from RWA assets.`}>
         {/* Table */}
-        <div className="bg-cold-blue-950 overflow-hidden rounded-4 border border-stroke-primary">
+        <div className="overflow-hidden rounded-4 border-b border-b-vantage-border bg-vantage-base">
           {/* Table header */}
-          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-0 border-b border-stroke-primary px-20 py-12 text-12 text-slate-400">
+          <div className="grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-0 border-b border-b-vantage-border px-20 py-12 text-12 text-vantage-text-secondary">
             <div>{t`Asset`}</div>
             <div
               className={`cursor-pointer select-none text-right transition-colors hover:text-white ${sortKey === "aum" ? "text-white" : ""}`}
@@ -126,16 +122,18 @@ export default function VaultsPage() {
               <div
                 key={item.key}
                 onClick={() => item.vaultAddress && history.push(`/vaults/${item.vaultAddress}`)}
-                className="grid cursor-pointer grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-stroke-primary px-20 py-16 transition-colors last:border-0 hover:bg-slate-800/40"
+                className="grid cursor-pointer grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border px-20 py-16 transition-colors last:border-0 hover:bg-slate-800/40"
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = COLORS.baseHover)}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
               >
                 {/* Asset */}
                 <div className="flex items-center gap-12">
-                  <div className="flex h-36 w-36 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
+                  <div className="flex h-56 w-56 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
                     {item.symbol.slice(0, 2)}
                   </div>
                   <div>
-                    <div className="text-15 font-semibold text-white">{item.symbol}</div>
-                    <div className="text-12 text-slate-400">{item.name}</div>
+                    <div className="text-16 font-semibold text-white">{item.symbol}</div>
+                    <div className="text-14 text-vantage-text-secondary">{item.name}</div>
                   </div>
                 </div>
 
@@ -182,7 +180,7 @@ export default function VaultsPage() {
 
           {/* Empty state */}
           {items.length === 0 && (
-            <div className="py-40 text-center text-14 text-slate-400">
+            <div className="py-40 text-center text-14 text-vantage-text-secondary">
               {t`No vaults configured. Deploy contracts first.`}
             </div>
           )}
@@ -192,7 +190,7 @@ export default function VaultsPage() {
         {!account && (
           <p className="mt-16 text-center text-13 text-slate-500">{t`Connect your wallet to see your deposits.`}</p>
         )}
-      </div>
+      </VantagePageContainer>
     </div>
   );
 }

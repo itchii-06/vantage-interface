@@ -56,7 +56,7 @@ export function SolvencySpeedometer({ defenseStep }: SolvencySpeedometerProps) {
   const meta = STEP_META[defenseStep];
 
   return (
-    <div className="bg-cold-blue-950 rounded-4 border border-stroke-primary p-20">
+    <div className="rounded-4 border-b border-b-vantage-border bg-vantage-base p-20">
       <div className="mb-16 flex items-center justify-between">
         <h2 className="text-15 font-semibold text-white">{t`Protocol Defense Status`}</h2>
         <span className={`rounded-full px-10 py-4 text-12 font-medium ${BADGE_COLORS[meta.severity]}`}>

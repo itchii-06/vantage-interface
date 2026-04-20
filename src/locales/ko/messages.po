@@ -1116,10 +1116,6 @@ msgstr ""
 msgid "Unable to verify code availability on {0}. You can still create the code, but it may already be taken on those networks."
 msgstr "{0}에서 코드 가용성을 확인할 수 없습니다. 코드를 생성할 수는 있으나, 해당 네트워크에서 이미 사용 중일 수 있습니다."
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
-#~ msgstr ""
-
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Deposit completed"
 msgstr "입금 완료"
@@ -4402,12 +4398,12 @@ msgstr ""
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
+#: src/components/VantageLeverageSlider/VantageLeverageSlider.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Status/components/AdlLeaderboard.tsx
 #: src/pages/Status/components/AdlLeaderboard.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "레버리지"
 
@@ -8726,8 +8722,8 @@ msgid "Notifications"
 msgstr "알림"
 
 #: src/pages/Hedge/HedgePage.tsx
-msgid "Managed Net APY"
-msgstr ""
+#~ msgid "Managed Net APY"
+#~ msgstr ""
 
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Trading mode"
@@ -10686,8 +10682,8 @@ msgid "Trigger price above liquidation price"
 msgstr "조건가가 청산가보다 높습니다"
 
 #: src/pages/Hedge/HedgePage.tsx
-msgid "Self-Custody APY"
-msgstr ""
+#~ msgid "Self-Custody APY"
+#~ msgstr ""
 
 #: src/components/GmxAccountModal/TransferDetailsView.tsx
 msgid "Repeat transaction"

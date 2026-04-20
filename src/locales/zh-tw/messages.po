@@ -1116,10 +1116,6 @@ msgstr ""
 msgid "Unable to verify code availability on {0}. You can still create the code, but it may already be taken on those networks."
 msgstr "無法在 {0} 上驗證代碼是否可用。您仍然可以建立代碼，但該代碼在這些網路上可能已被使用。"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Short position requests are executed by Keepers (GMX V1 two-step flow)."
-#~ msgstr ""
-
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Deposit completed"
 msgstr "存入完成"
@@ -4402,12 +4398,12 @@ msgstr ""
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
+#: src/components/VantageLeverageSlider/VantageLeverageSlider.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Status/components/AdlLeaderboard.tsx
 #: src/pages/Status/components/AdlLeaderboard.tsx
-#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Leverage"
 msgstr "槓桿"
 
@@ -8726,8 +8722,8 @@ msgid "Notifications"
 msgstr "通知"
 
 #: src/pages/Hedge/HedgePage.tsx
-msgid "Managed Net APY"
-msgstr ""
+#~ msgid "Managed Net APY"
+#~ msgstr ""
 
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Trading mode"
@@ -10686,8 +10682,8 @@ msgid "Trigger price above liquidation price"
 msgstr "觸發價格高於清算價格"
 
 #: src/pages/Hedge/HedgePage.tsx
-msgid "Self-Custody APY"
-msgstr ""
+#~ msgid "Self-Custody APY"
+#~ msgstr ""
 
 #: src/components/GmxAccountModal/TransferDetailsView.tsx
 msgid "Repeat transaction"

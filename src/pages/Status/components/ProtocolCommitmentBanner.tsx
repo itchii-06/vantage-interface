@@ -9,7 +9,7 @@ import { t } from "@lingui/macro";
 
 export function ProtocolCommitmentBanner() {
   return (
-    <div className="border-blue-900/40 bg-blue-950/30 rounded-4 border px-20 py-16">
+    <div className="rounded-4 border-b border-b-vantage-border bg-vantage-base px-20 py-16">
       <div className="flex items-start gap-12">
         <div className="mt-2 h-8 w-8 flex-shrink-0 rounded-full bg-blue-500" />
         <div>
