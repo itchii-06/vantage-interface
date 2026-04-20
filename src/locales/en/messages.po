@@ -2212,6 +2212,10 @@ msgstr "Max positive factor"
 msgid "{failedTrackersCount} / {totalActiveTrackersCount} active trackers failed ({totalTrackersCount} total)"
 msgstr "{failedTrackersCount} / {totalActiveTrackersCount} active trackers failed ({totalTrackersCount} total)"
 
+#: src/lib/legacy.ts
+msgid "Decentralized perpetual hedge exchange | GMX"
+msgstr "Decentralized perpetual hedge exchange | GMX"
+
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Bridge out failed"
 msgstr "Bridge out failed"
@@ -4262,6 +4266,10 @@ msgstr "T"
 msgid "TVL includes GMX staked, GLP pool, GM pools, and position collateral"
 msgstr "TVL includes GMX staked, GLP pool, GM pools, and position collateral"
 
+#: src/components/Seo/SEO.tsx
+msgid "B Cellar | Decentralized perpetual hedge exchange"
+msgstr "B Cellar | Decentralized perpetual hedge exchange"
+
 #: src/lib/contracts/callContract.tsx
 msgid "Transaction completed"
 msgstr "Transaction completed"
@@ -4452,8 +4460,8 @@ msgid "No claims match the selected filters"
 msgstr "No claims match the selected filters"
 
 #: src/lib/legacy.ts
-msgid "Decentralized perpetual exchange | GMX"
-msgstr "Decentralized perpetual exchange | GMX"
+#~ msgid "Decentralized perpetual exchange | GMX"
+#~ msgstr "Decentralized perpetual exchange | GMX"
 
 #: src/components/Footer/constants.tsx
 msgid "V1"
@@ -10878,8 +10886,8 @@ msgid "PnL short"
 msgstr "PnL short"
 
 #: src/components/Seo/SEO.tsx
-msgid "GMX | Decentralized perpetual exchange"
-msgstr "GMX | Decentralized perpetual exchange"
+#~ msgid "GMX | Decentralized perpetual exchange"
+#~ msgstr "GMX | Decentralized perpetual exchange"
 
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "All assets"

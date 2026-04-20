@@ -1,7 +1,7 @@
 {
-  "short_name": "GMX",
-  "name": "GMX",
-  "description": "Trade spot or perpetual with up to 100x leverage directly from your wallet.",
+  "short_name": "B Cellar",
+  "name": "B Cellar",
+  "description": "Trade spot or perpetual hedge with up to 10x leverage directly from your wallet.",
   "iconPath": "logo.png",
   "icons": [
     {
@@ -12,6 +12,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#2d42fc",
+  "theme_color": "#2d42fc ",
   "background_color": "#ffffff"
 }

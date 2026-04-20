@@ -2212,6 +2212,10 @@ msgstr "최대 양수 팩터"
 msgid "{failedTrackersCount} / {totalActiveTrackersCount} active trackers failed ({totalTrackersCount} total)"
 msgstr "{failedTrackersCount} / {totalActiveTrackersCount} 활성 트래커 실패 (총 {totalTrackersCount}개)"
 
+#: src/lib/legacy.ts
+msgid "Decentralized perpetual hedge exchange | GMX"
+msgstr "탈중앙화 무기한 거래소 | GMX"
+
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Bridge out failed"
 msgstr "브릿지 아웃 실패"
@@ -4262,6 +4266,10 @@ msgstr "T"
 msgid "TVL includes GMX staked, GLP pool, GM pools, and position collateral"
 msgstr "TVL에는 GMX 스테이킹, GLP 풀, GM 풀, 포지션 담보가 포함됩니다"
 
+#: src/components/Seo/SEO.tsx
+msgid "B Cellar | Decentralized perpetual hedge exchange"
+msgstr "B Cellar | 탈중앙화 무기한 거래소"
+
 #: src/lib/contracts/callContract.tsx
 msgid "Transaction completed"
 msgstr "트랜잭션이 완료되었습니다"
@@ -4450,10 +4458,6 @@ msgstr ""
 #: src/components/Claims/ClaimsHistory.tsx
 msgid "No claims match the selected filters"
 msgstr "선택한 필터와 일치하는 수령이 없습니다"
-
-#: src/lib/legacy.ts
-msgid "Decentralized perpetual exchange | GMX"
-msgstr "탈중앙화 무기한 거래소 | GMX"
 
 #: src/components/Footer/constants.tsx
 msgid "V1"
@@ -10876,10 +10880,6 @@ msgstr "LIQUIDITY LONG"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "PnL short"
 msgstr "PnL 숏"
-
-#: src/components/Seo/SEO.tsx
-msgid "GMX | Decentralized perpetual exchange"
-msgstr "GMX | 탈중앙화 무기한 거래소"
 
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "All assets"

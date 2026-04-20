@@ -2212,6 +2212,10 @@ msgstr "Facteur positif maximum"
 msgid "{failedTrackersCount} / {totalActiveTrackersCount} active trackers failed ({totalTrackersCount} total)"
 msgstr "{failedTrackersCount} / {totalActiveTrackersCount} trackers actifs en échec ({totalTrackersCount} au total)"
 
+#: src/lib/legacy.ts
+msgid "Decentralized perpetual hedge exchange | GMX"
+msgstr "Plateforme d'échange perpétuel décentralisée | GMX"
+
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Bridge out failed"
 msgstr "Transfert sortant échoué"
@@ -4262,6 +4266,10 @@ msgstr "T"
 msgid "TVL includes GMX staked, GLP pool, GM pools, and position collateral"
 msgstr "La TVL inclut les GMX stakés, le pool GLP, les pools GM et la garantie des positions"
 
+#: src/components/Seo/SEO.tsx
+msgid "B Cellar | Decentralized perpetual hedge exchange"
+msgstr "B Cellar | Plateforme d'échange perpétuel décentralisée"
+
 #: src/lib/contracts/callContract.tsx
 msgid "Transaction completed"
 msgstr "Transaction terminée"
@@ -4450,10 +4458,6 @@ msgstr ""
 #: src/components/Claims/ClaimsHistory.tsx
 msgid "No claims match the selected filters"
 msgstr "Aucune réclamation ne correspond aux filtres sélectionnés"
-
-#: src/lib/legacy.ts
-msgid "Decentralized perpetual exchange | GMX"
-msgstr "Plateforme d'échange perpétuel décentralisée | GMX"
 
 #: src/components/Footer/constants.tsx
 msgid "V1"
@@ -10876,10 +10880,6 @@ msgstr "LIQUIDITÉ LONG"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "PnL short"
 msgstr "PnL short"
-
-#: src/components/Seo/SEO.tsx
-msgid "GMX | Decentralized perpetual exchange"
-msgstr "GMX | Plateforme d'échange perpétuel décentralisée"
 
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "All assets"

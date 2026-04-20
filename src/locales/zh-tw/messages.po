@@ -2212,6 +2212,10 @@ msgstr "最大正向因子"
 msgid "{failedTrackersCount} / {totalActiveTrackersCount} active trackers failed ({totalTrackersCount} total)"
 msgstr "{failedTrackersCount} / {totalActiveTrackersCount} 個活躍追蹤器失敗（共 {totalTrackersCount} 個）"
 
+#: src/lib/legacy.ts
+msgid "Decentralized perpetual hedge exchange | GMX"
+msgstr "去中心化永續合約交易所 | GMX"
+
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Bridge out failed"
 msgstr "橋接轉出失敗"
@@ -4262,6 +4266,10 @@ msgstr "T"
 msgid "TVL includes GMX staked, GLP pool, GM pools, and position collateral"
 msgstr "TVL 包括已質押的 GMX、GLP 池、GM 池和倉位抵押品"
 
+#: src/components/Seo/SEO.tsx
+msgid "B Cellar | Decentralized perpetual hedge exchange"
+msgstr "B Cellar | 去中心化永續合約交易所"
+
 #: src/lib/contracts/callContract.tsx
 msgid "Transaction completed"
 msgstr "交易完成"
@@ -4450,10 +4458,6 @@ msgstr ""
 #: src/components/Claims/ClaimsHistory.tsx
 msgid "No claims match the selected filters"
 msgstr "沒有符合所選篩選條件的領取記錄"
-
-#: src/lib/legacy.ts
-msgid "Decentralized perpetual exchange | GMX"
-msgstr "去中心化永續合約交易所 | GMX"
 
 #: src/components/Footer/constants.tsx
 msgid "V1"
@@ -10876,10 +10880,6 @@ msgstr "做多流動性"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "PnL short"
 msgstr "做空 PnL"
-
-#: src/components/Seo/SEO.tsx
-msgid "GMX | Decentralized perpetual exchange"
-msgstr "GMX | 去中心化永續合約交易所"
 
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "All assets"

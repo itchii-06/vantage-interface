@@ -608,7 +608,7 @@ export function getStakingProcessedData(
 }
 
 export function getPageTitle(data) {
-  const title = t`Decentralized perpetual exchange | GMX`;
+  const title = t`Decentralized perpetual hedge exchange | GMX`;
   return `${data} | ${title}`;
 }
 

@@ -2212,6 +2212,10 @@ msgstr ""
 msgid "{failedTrackersCount} / {totalActiveTrackersCount} active trackers failed ({totalTrackersCount} total)"
 msgstr ""
 
+#: src/lib/legacy.ts
+msgid "Decentralized perpetual hedge exchange | GMX"
+msgstr ""
+
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Bridge out failed"
 msgstr ""
@@ -4262,6 +4266,10 @@ msgstr ""
 msgid "TVL includes GMX staked, GLP pool, GM pools, and position collateral"
 msgstr ""
 
+#: src/components/Seo/SEO.tsx
+msgid "B Cellar | Decentralized perpetual hedge exchange"
+msgstr ""
+
 #: src/lib/contracts/callContract.tsx
 msgid "Transaction completed"
 msgstr ""
@@ -4449,10 +4457,6 @@ msgstr ""
 
 #: src/components/Claims/ClaimsHistory.tsx
 msgid "No claims match the selected filters"
-msgstr ""
-
-#: src/lib/legacy.ts
-msgid "Decentralized perpetual exchange | GMX"
 msgstr ""
 
 #: src/components/Footer/constants.tsx
@@ -10875,10 +10879,6 @@ msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "PnL short"
-msgstr ""
-
-#: src/components/Seo/SEO.tsx
-msgid "GMX | Decentralized perpetual exchange"
 msgstr ""
 
 #: src/components/GmxAccountModal/MainView.tsx
