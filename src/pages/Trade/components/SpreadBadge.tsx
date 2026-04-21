@@ -23,7 +23,7 @@ export function SpreadBadge({ spread }: { spread: SpreadData }) {
     spread.spreadBps < 10 ? "text-green-400" : spread.spreadBps < 50 ? "text-yellow-400" : "text-red-400";
 
   return (
-    <div className="flex items-center justify-between rounded-4 border border-stroke-primary bg-vantage-base px-12 py-8 text-12">
+    <div className="flex items-center justify-between rounded-4 border-b border-b-vantage-border bg-vantage-base px-12 py-8 text-12">
       <div className="flex gap-16">
         <span>
           <span className="text-slate-400">{t`Bid`} </span>

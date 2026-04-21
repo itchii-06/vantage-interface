@@ -10,7 +10,7 @@
 import { t } from "@lingui/macro";
 import { formatEther, formatUnits, parseUnits } from "ethers";
 import { ChangeEvent, useMemo, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 
 import { useVaultActions } from "domain/vantage/vaults/useVaultActions";
 import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
@@ -92,12 +92,13 @@ type Tab = "deposit" | "zap" | "withdraw";
 export default function VaultDetailPage() {
   const { address } = useParams<{ address: string }>();
   const history = useHistory();
+  const location = useLocation<{ tab?: Tab }>();
   const { account } = useWallet();
   const { chainId } = useChainId();
 
   const cfg = getVaultConfigByAddress(address);
 
-  const [activeTab, setActiveTab] = useState<Tab>("deposit");
+  const [activeTab, setActiveTab] = useState<Tab>(location.state?.tab ?? "deposit");
   const [depositInput, setDepositInput] = useState("");
   const [withdrawInput, setWithdrawInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -293,25 +294,23 @@ export default function VaultDetailPage() {
           {/* ================================================================ */}
           <div className="space-y-20">
             {/* Header */}
-            <div className="rounded-4 border border-vantage-border bg-vantage-base p-20">
-              <div className="mb-8 flex items-center gap-12">
-                <div className="flex h-40 w-40 items-center justify-center rounded-full bg-slate-700 text-16 font-bold text-white">
-                  {cfg.symbol.slice(0, 2)}
-                </div>
-                <div>
-                  <div className="flex items-center gap-8">
-                    <h1 className="text-20 font-bold text-white">{cfg.symbol}</h1>
-                    <span className={`rounded-full px-8 py-2 text-11 font-medium ${ASSET_TYPE_COLOR[cfg.assetType]}`}>
-                      {ASSET_TYPE_LABEL[cfg.assetType]}
+            <div className="mb-4 flex items-center gap-12">
+              <div className="flex h-40 w-40 items-center justify-center rounded-full bg-slate-700 text-16 font-bold text-white">
+                {cfg.symbol.slice(0, 2)}
+              </div>
+              <div>
+                <div className="flex items-center gap-8">
+                  <h1 className="text-h1">{cfg.symbol}</h1>
+                  <span className={`rounded-full px-8 py-2 text-11 font-medium ${ASSET_TYPE_COLOR[cfg.assetType]}`}>
+                    {ASSET_TYPE_LABEL[cfg.assetType]}
+                  </span>
+                  {cfg.assetType === 1 && (
+                    <span className="bg-emerald-900/40 text-emerald-400 animate-pulse rounded-full px-8 py-2 text-11">
+                      {t`Auto-growing`}
                     </span>
-                    {cfg.assetType === 1 && (
-                      <span className="bg-emerald-900/40 text-emerald-400 animate-pulse rounded-full px-8 py-2 text-11">
-                        {t`Auto-growing`}
-                      </span>
-                    )}
-                  </div>
-                  <div className="mt-2 text-13 text-slate-400">{cfg.name}</div>
+                  )}
                 </div>
+                <p className="text-13 text-slate-400">{cfg.name}</p>
               </div>
             </div>
 
@@ -326,7 +325,7 @@ export default function VaultDetailPage() {
 
             {/* Stats */}
             <div className="rounded-4 border border-vantage-border bg-vantage-base p-20">
-              <h2 className="mb-16 text-14 font-semibold text-white">{t`Stats`}</h2>
+              <h2 className="mb-16 text-16 font-semibold text-white">{t`Stats`}</h2>
               <div className="grid grid-cols-2 gap-16">
                 <StatRow label={t`Total AUM`} value={data.isLoading ? "—" : formatUsd(data.aum)} />
                 <StatRow
@@ -738,8 +737,8 @@ function StatRow({ label, value, highlight }: { label: string; value: string; hi
   const color = highlight === "red" ? "text-red-400" : highlight === "green" ? "text-emerald-400" : "text-white";
   return (
     <div>
-      <div className="mb-2 text-12 text-slate-400">{label}</div>
-      <div className={`text-14 font-semibold ${color}`}>{value}</div>
+      <div className="mb-2 text-14 text-vantage-text-secondary">{label}</div>
+      <div className={`text-16 font-semibold ${color}`}>{value}</div>
     </div>
   );
 }

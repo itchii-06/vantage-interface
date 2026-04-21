@@ -317,8 +317,8 @@ msgid "Dynamically allocates liquidity to highest-utilized markets, maximizing c
 msgstr "Asigna liquidez dinámicamente a los mercados de mayor utilización, maximizando la eficiencia del capital y el rendimiento"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "FR Risk Defense — How it works"
-msgstr ""
+#~ msgid "FR Risk Defense — How it works"
+#~ msgstr ""
 
 #: src/components/ExpressTradingOutOfGasBanner/ExpressTradingOutOfGasBanner.tsx
 #: src/components/TradeBox/ExpressTradingWarningCard.tsx
@@ -656,7 +656,6 @@ msgstr ""
 
 #: src/pages/AccountDashboard/HistoricalLists.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
-#: src/pages/Trade/TradePage.tsx
 msgid "Positions"
 msgstr "Posiciones"
 
@@ -698,7 +697,6 @@ msgid "Insufficient liquidity in any {0}/USD pool"
 msgstr "Liquidez insuficiente en cualquier pool {0}/USD"
 
 #: src/pages/Trade/components/PriceChart.tsx
-#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "Open"
 msgstr ""
 
@@ -722,6 +720,10 @@ msgstr "No"
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "..."
 msgstr "..."
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Required Margin (Auto-Calculated)"
+msgstr ""
 
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Classic"
@@ -1050,7 +1052,6 @@ msgstr "La precisión máxima del buffer de comisión de red es 0.01%"
 msgid "DeltaPrime"
 msgstr "DeltaPrime"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "h"
 msgstr ""
@@ -1641,7 +1642,6 @@ msgstr "Misiones y recompensas onchain"
 msgid "Tokens"
 msgstr "Tokens"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Connect wallet to withdraw"
@@ -1859,8 +1859,8 @@ msgid "Protocol Commitment — No Surprise Rate Hikes"
 msgstr ""
 
 #: src/pages/Portfolio/PortfolioPage.tsx
-msgid "Restricted (weekend)"
-msgstr ""
+#~ msgid "Restricted (weekend)"
+#~ msgstr ""
 
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
@@ -2267,6 +2267,10 @@ msgstr "Error de cambio"
 msgid "Claim failed"
 msgstr "Error al reclamar"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "不足しています"
+msgstr ""
+
 #: src/pages/Dashboard/OverviewCard.tsx
 msgid "Total value of tokens in GM pools"
 msgstr "Valor total de los tokens en los pools de GM"
@@ -2421,7 +2425,6 @@ msgstr "Nivel {0}: {currentRebatePercentage}% de reembolso"
 msgid "No swap path found"
 msgstr "No se encontró ruta de intercambio"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "LP Deposit"
 msgstr ""
@@ -2605,7 +2608,6 @@ msgstr "Máx. {0} fuera"
 msgid "No assets available for deposit"
 msgstr "No hay activos disponibles para depositar"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "s"
 msgstr ""
@@ -2718,7 +2720,6 @@ msgstr "GM transfiriendo a..."
 msgid "Deactivate 1CT"
 msgstr "Desactivar 1CT"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Redemption pending — yield continues to accrue"
 msgstr ""
@@ -2815,7 +2816,6 @@ msgstr "{txnTypeText} {0} orden para"
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Status/components/OIStats.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
@@ -2919,6 +2919,7 @@ msgid "Size"
 msgstr "Tamaño"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/TradePage.tsx
 msgid "Current Position"
 msgstr ""
 
@@ -2979,6 +2980,10 @@ msgstr "Mercados GM"
 #: src/pages/DebugOracleKeeper/parts.tsx
 msgid "Tickers simulation"
 msgstr "Simulación de tickers"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "FR Payment Response"
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 #: src/components/Errors/getContractErrorToastContent.tsx
@@ -3345,8 +3350,8 @@ msgid "Ask"
 msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Position is kept as a normal short. Funding rate payments apply from ADL moment."
-msgstr ""
+#~ msgid "Position is kept as a normal short. Funding rate payments apply from ADL moment."
+#~ msgstr ""
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Low leverage and long tenure protect you from ADL. You are in the loyalty tier."
@@ -3777,7 +3782,6 @@ msgstr "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam enim e
 msgid "Fees (including swap)"
 msgstr "Comisiones (incluido intercambio)"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "d"
 msgstr ""
@@ -3901,7 +3905,6 @@ msgstr ""
 msgid "May lack liquidity for parts of this order when triggered"
 msgstr "Puede haber liquidez insuficiente para partes de esta orden cuando se ejecute"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdrawing…"
@@ -3954,7 +3957,6 @@ msgstr "Hilo de trabajo"
 msgid "Failed to update orders"
 msgstr "Error al actualizar las órdenes"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Ready to execute"
 msgstr ""
@@ -4054,6 +4056,10 @@ msgstr "Capacidad máxima:"
 #: src/components/GmList/PerformanceLabel.tsx
 msgid "Ann. performance"
 msgstr "Rend. anualizado"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "残高が"
+msgstr ""
 
 #: src/domain/vantage/trade/useVantageTrade.ts
 msgid "Closing position..."
@@ -4633,6 +4639,10 @@ msgstr "APAL. MED."
 msgid "Enter a new ratio or allowed slippage"
 msgstr "Ingresa una nueva proporción o deslizamiento permitido"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Risk Management"
+msgstr ""
+
 #: src/domain/synthetics/orders/createWrapOrUnwrapTxn.ts
 #: src/domain/synthetics/orders/createWrapOrUnwrapTxn.ts
 msgid "Swap submitted"
@@ -4659,6 +4669,10 @@ msgstr "Datos de {chainName}"
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "No liquidation price. Collateral covers any losses."
 msgstr "Sin precio de liquidación. La garantía cubre cualquier pérdida."
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Position closes automatically and margin is returned when ADL is triggered."
+msgstr ""
 
 #: src/pages/UiPage/UiPage.tsx
 #: src/pages/UiPage/UiPage.tsx
@@ -4720,6 +4734,10 @@ msgstr "Cierre total de posición"
 #: src/components/TradeHistory/keys.ts
 msgid "Create Stop-Loss"
 msgstr "Crear Stop-Loss"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "How much do you want to hedge?"
+msgstr ""
 
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Direction"
@@ -4821,6 +4839,10 @@ msgstr "Reclamando..."
 msgid "<0><1>@GMX_IO</1> enters into a Data Partnership with Token Terminal. GMX is a leading permissionless perpetual exchange built on <2>@Arbitrum</2> and <3>@Avax</3>.</0><4>The protocol serves as a foundational liquidity baselayer for multichain DeFi.</4><5>With ~$280 billion in notional trading volume and counting, GMX recognized the need for reliable and data-driven stakeholder reporting.</5>"
 msgstr "<0><1>@GMX_IO</1> establece una asociación de datos con Token Terminal. GMX es una plataforma de intercambio perpetuo sin permisos líder, construida sobre <2>@Arbitrum</2> y <3>@Avax</3>.</0><4>El protocolo sirve como capa base de liquidez fundamental para DeFi multicadena.</4><5>Con aproximadamente 280 000 millones de dólares en volumen de negociación nocional y en aumento, GMX reconoció la necesidad de informes fiables y basados en datos para las partes interesadas.</5>"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Insufficient Balance"
+msgstr ""
+
 #: src/components/Earn/AdditionalOpportunities/OpportunityFilters.tsx
 #: src/components/GmxAccountModal/AvailableToTradeAssetsView.tsx
 #: src/components/TokenSelector/MultichainMarketTokenSelector.tsx
@@ -4911,8 +4933,8 @@ msgid "No tokens matched"
 msgstr "No hay tokens coincidentes"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
-msgid "Est. USDC received"
-msgstr ""
+#~ msgid "Est. USDC received"
+#~ msgstr ""
 
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Error sending permit for {0}: {1}"
@@ -5489,7 +5511,6 @@ msgstr "La posición sería liquidada inmediatamente tras la ejecución. Intente
 msgid "Create TP/SL"
 msgstr "Crear TP/SL"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Short Margin"
 msgstr ""
@@ -6401,8 +6422,8 @@ msgid "GMX (Portuguese)"
 msgstr "GMX (Portugués)"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Oracle Price"
-msgstr ""
+#~ msgid "Oracle Price"
+#~ msgstr ""
 
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -6687,6 +6708,10 @@ msgstr "Todo el tiempo"
 msgid "Stay safe from <0/> liquidations"
 msgstr "Protéjase de las <0/> liquidaciones"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Auto-Close"
+msgstr ""
+
 #: src/components/HighPriceImpactOrFeesWarningCard/HighPriceImpactOrFeesWarningCard.tsx
 msgid "High net price impact"
 msgstr "Alto impacto neto en el precio"
@@ -6876,6 +6901,10 @@ msgstr "UTILIZACIÓN"
 msgid "No liquidity available for increasing longs at<0/>this size. Max long size: {0}<1/><2/>No price impact. Single execution price for<3/>decreasing shorts at this size."
 msgstr "No hay liquidez disponible para aumentar largos a<0/>este tamaño. Tamaño máximo largo: {0}<1/><2/>Sin impacto en el precio. Precio de ejecución único para<3/>reducir cortos a este tamaño."
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Keep position open as a standard short. FR payments will apply from the ADL moment onward."
+msgstr ""
+
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/Referrals/Referrals.tsx
 #: src/pages/Referrals/Referrals.tsx
@@ -7048,8 +7077,8 @@ msgid "Media kit"
 msgstr "Kit de medios"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
-msgid "Exceeds your VLP balance"
-msgstr ""
+#~ msgid "Exceeds your VLP balance"
+#~ msgstr ""
 
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 msgid "$ 0.00"
@@ -7415,6 +7444,10 @@ msgstr "El receptor tiene GMX/GLP en staking"
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 msgid "Win rate"
 msgstr "Tasa de victoria"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "What happens when funding rate is triggered?"
+msgstr ""
 
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Insufficient liquidity to execute order at trigger price"
@@ -7843,8 +7876,8 @@ msgid "90d"
 msgstr "90d"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
-msgid "LP Withdrawal"
-msgstr ""
+#~ msgid "LP Withdrawal"
+#~ msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "({0} days ago)"
@@ -7881,6 +7914,10 @@ msgstr "Ver transacción"
 #: src/components/TenderlySettings/TenderlySettings.tsx
 msgid "Project"
 msgstr "Proyecto"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Protection Target"
+msgstr ""
 
 #: src/components/TVChart/ChartHeader.tsx
 #: src/components/TVChart/ChartHeader.tsx
@@ -8259,6 +8296,7 @@ msgstr "{formattedNetRate} / 1h"
 #: src/components/GmSwap/GmSwapBox/GmShiftBox/GmShiftBox.tsx
 #: src/components/GmxAccountModal/MainView.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/PoolsDetails/PoolsDetailsHeader.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
@@ -8476,7 +8514,6 @@ msgstr "Las órdenes TP/SL se cancelan automáticamente al cerrar la posición. 
 msgid "fees"
 msgstr "comisiones"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "m"
 msgstr ""
@@ -8680,8 +8717,8 @@ msgid "{0}ms"
 msgstr "{0}ms"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Position is closed and margin is returned when ADL is triggered."
-msgstr ""
+#~ msgid "Position is closed and margin is returned when ADL is triggered."
+#~ msgstr ""
 
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/BridgeModal/BridgeInModal.tsx
@@ -8732,6 +8769,7 @@ msgstr "Notificaciones"
 msgid "Trading mode"
 msgstr "Modo de trading"
 
+#: src/pages/Trade/components/UnifiedPositionList.tsx
 #: src/pages/Trade/TradePage.tsx
 msgid "Back"
 msgstr ""
@@ -9560,7 +9598,6 @@ msgid "Events for account:"
 msgstr "Eventos de la cuenta:"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
-#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "閉じる"
 msgstr ""
 
@@ -9942,6 +9979,10 @@ msgstr "Historial de operaciones"
 #: src/pages/PoolsDetails/PoolsDetails.tsx
 msgid "Exposure to backing tokens"
 msgstr "Exposición a los tokens de respaldo"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Defense escalates only when the previous phase is insufficient. Phase 0 covers the vast majority of market conditions."
+msgstr ""
 
 #: src/domain/vantage/trade/usePositionRouterTrade.ts
 msgid "Request submitted — waiting for Keeper execution"
@@ -10336,8 +10377,8 @@ msgid "Claim price impact rebates"
 msgstr "Reclamar reembolsos por impacto en el precio"
 
 #: src/pages/Portfolio/PortfolioPage.tsx
-msgid "Next redemption:"
-msgstr ""
+#~ msgid "Next redemption:"
+#~ msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Fulfilling shift request..."
@@ -11057,8 +11098,8 @@ msgid "to toggle its filtering. To use this debug tool on swap, stay on MARKET G
 msgstr "para alternar su filtrado. Para utilizar esta herramienta de depuración en intercambio, permanezca en la pestaña MARKET GRAPH y cambie a intercambio. La configuración se guarda en el almacenamiento local; no olvide borrarla cuando termine."
 
 #: src/pages/Portfolio/PortfolioPage.tsx
-msgid "Withdraw VLP"
-msgstr ""
+#~ msgid "Withdraw VLP"
+#~ msgstr ""
 
 #: src/pages/AccountEvents/AccountEvents.tsx
 #: src/pages/AccountEvents/AccountEvents.tsx
@@ -11170,6 +11211,10 @@ msgstr "VALOR NETO"
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Vaults"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Leverage & Margin"
 msgstr ""
 
 #: src/pages/VantageLP/VantageLPPage.tsx
@@ -11394,7 +11439,6 @@ msgstr "Cantidad máxima de reserva excedida"
 msgid "Unknown order"
 msgstr "Orden desconocida"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "VLP Amount"
@@ -11671,7 +11715,6 @@ msgid "Save tier"
 msgstr "Guardar nivel"
 
 #: src/pages/Trade/components/PositionListPanel.tsx
-#: src/pages/Trade/components/UnifiedPositionList.tsx
 msgid "詳細"
 msgstr ""
 
@@ -11985,7 +12028,6 @@ msgstr "múltiples clases de activos"
 #: src/components/TradeInfoIcon/TradeInfoIcon.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 #: src/pages/Trade/components/UnifiedPositionList.tsx
@@ -12009,8 +12051,12 @@ msgid "Enter a referral code to get fee discounts"
 msgstr "Introduzca un código de referido para obtener descuentos en las comisiones"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Emergency Behavior (ADL)"
+msgid "Margin Token"
 msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#~ msgid "Emergency Behavior (ADL)"
+#~ msgstr ""
 
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "General performance details"

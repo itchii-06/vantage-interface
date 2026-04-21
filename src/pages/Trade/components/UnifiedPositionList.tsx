@@ -58,7 +58,6 @@ function PendingBadge({ confirming }: { confirming?: boolean }) {
 // ─── column layout ───────────────────────────────────────────────────────────
 
 const GRID = "grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr_auto] items-center";
-const HEADER_CELL = "text-11 text-slate-400";
 
 // ─── props ───────────────────────────────────────────────────────────────────
 
@@ -116,15 +115,15 @@ export function UnifiedPositionList({
   const isEmpty = !isLoading && positions.length === 0 && visibleRequests.length === 0;
 
   return (
-    <div className="overflow-hidden rounded-4 border border-stroke-primary">
+    <div className="overflow-hidden rounded-4 border border-vantage-border bg-vantage-base">
       {/* Header */}
-      <div className={`bg-cold-blue-950 border-b border-stroke-primary px-16 py-10 ${GRID}`}>
-        <div className={HEADER_CELL}>{t`Market`}</div>
-        <div className={`${HEADER_CELL} text-right`}>{t`Side`}</div>
-        <div className={`${HEADER_CELL} text-right`}>{t`Size`}</div>
-        <div className={`${HEADER_CELL} text-right`}>{t`Liq. Price`}</div>
-        <div className={`${HEADER_CELL} text-right`}>{t`Health`}</div>
-        <div className={`${HEADER_CELL} text-right`}>{t`PnL`}</div>
+      <div className={`border-b border-b-vantage-border px-16 py-10 ${GRID}`}>
+        <div className="text-12 font-medium text-slate-400">{t`Market`}</div>
+        <div className="text-right text-12 font-medium text-slate-400">{t`Side`}</div>
+        <div className="text-right text-12 font-medium text-slate-400">{t`Size`}</div>
+        <div className="text-right text-12 font-medium text-slate-400">{t`Liq. Price`}</div>
+        <div className="text-right text-12 font-medium text-slate-400">{t`Health`}</div>
+        <div className="text-right text-12 font-medium text-slate-400">{t`PnL`}</div>
         <div />
       </div>
 
@@ -161,21 +160,26 @@ function PendingRow({
   const confirming = req.status === "executed";
 
   return (
-    <div className={`border-b border-stroke-primary px-16 py-12 text-13 last:border-0 ${GRID}`}>
+    <div className={`border-b border-b-vantage-border px-16 py-14 last:border-0 ${GRID}`}>
       {/* Market */}
-      <div className="flex flex-col gap-2">
-        <span className="font-medium text-white">{shortenAddr(req.indexToken)}</span>
+      <div className="flex flex-col gap-4">
+        <span className="text-13 font-semibold text-white">{shortenAddr(req.indexToken)}</span>
         <PendingBadge confirming={confirming} />
       </div>
 
       {/* Side */}
-      <div className={`text-right font-medium ${req.isLong ? "text-green-400" : "text-red-400"}`}>
-        {req.isLong ? t`Long` : t`Short`}
-        <div className="text-10 font-normal text-slate-500">{req.type === "increase" ? t`Open` : t`Close`}</div>
+      <div className="flex justify-end">
+        <span
+          className={`rounded-full px-8 py-2 text-12 font-semibold ${
+            req.isLong ? "bg-green-900/40 text-green-400" : "bg-red-900/40 text-red-400"
+          }`}
+        >
+          {req.isLong ? t`Long` : t`Short`}
+        </span>
       </div>
 
       {/* Size */}
-      <div className="text-right text-white">{formatVantageUsd(req.sizeDelta)}</div>
+      <div className="text-right text-13 font-semibold text-white">{formatVantageUsd(req.sizeDelta)}</div>
 
       {/* Liq. Price — skeleton */}
       <div className="flex justify-end">
@@ -197,7 +201,7 @@ function PendingRow({
         {req.status === "pending" ? (
           <button
             onClick={() => onCancel(req.requestKey, req.type)}
-            className="rounded-4 px-10 py-4 text-12 text-slate-400 transition-colors hover:bg-slate-700 hover:text-white"
+            className="rounded-4 border border-vantage-border px-12 py-6 text-12 text-vantage-text-secondary transition-colors hover:border-slate-500 hover:text-white"
           >
             {t`Cancel`}
           </button>
@@ -237,52 +241,67 @@ function ActiveRow({
 
   return (
     <div
-      className={`border-b border-stroke-primary px-16 py-12 text-13 transition-colors last:border-0 ${GRID} ${
-        isSelected ? "bg-blue-900/20 ring-1 ring-inset ring-blue-600" : "hover:bg-slate-800/40"
+      className={`border-b border-b-vantage-border px-16 py-14 transition-colors last:border-0 ${GRID} ${
+        isSelected ? "bg-[rgba(236,255,62,0.04)]" : "hover:bg-slate-800/30"
       }`}
     >
       {/* Market */}
-      <div className="font-medium text-white">{shortenAddr(pos.indexToken)}</div>
+      <div className="flex flex-col gap-2">
+        <span className="text-13 font-semibold text-white">{shortenAddr(pos.indexToken)}</span>
+        <span className="text-11 text-slate-500">{leverageLabel(pos.size, pos.collateral)}</span>
+      </div>
 
       {/* Side */}
-      <div className={`text-right font-medium ${pos.isLong ? "text-green-400" : "text-red-400"}`}>
-        {pos.isLong ? t`Long` : t`Short`}
-        <div className="text-10 font-normal text-slate-500">{leverageLabel(pos.size, pos.collateral)}</div>
+      <div className="flex justify-end">
+        <span
+          className={`rounded-full px-8 py-2 text-12 font-semibold ${
+            pos.isLong ? "bg-green-900/40 text-green-400" : "bg-red-900/40 text-red-400"
+          }`}
+        >
+          {pos.isLong ? t`Long` : t`Short`}
+        </span>
       </div>
 
       {/* Size */}
-      <div className="text-right text-white">{formatVantageUsd(pos.size)}</div>
+      <div className="text-right text-13 font-semibold text-white">{formatVantageUsd(pos.size)}</div>
 
       {/* Liq. Price */}
-      <div className="text-slate-300 text-right">{liqPriceDisplay}</div>
+      <div className="text-right text-13 text-slate-400">{liqPriceDisplay}</div>
 
       {/* Health */}
       <div className="text-right">
         {health ? (
-          <span className={`font-medium ${health.colorClass} ${health.blink ? "animate-pulse" : ""}`}>
+          <span className={`text-13 font-semibold ${health.colorClass} ${health.blink ? "animate-pulse" : ""}`}>
             {health.label}
           </span>
         ) : (
-          <span className="text-slate-500">—</span>
+          <span className="text-13 text-slate-500">—</span>
         )}
       </div>
 
       {/* PnL */}
-      <div className={`text-right font-medium ${pnlColor}`}>
+      <div className={`text-right text-13 font-semibold ${pnlColor}`}>
         {pnlSign}
         {formatVantageUsd(pos.pendingPnl < 0n ? -pos.pendingPnl : pos.pendingPnl)}
       </div>
 
       {/* Action */}
       <div className="pl-12">
-        <button
-          onClick={() => onSelect(isSelected ? null : pos.key)}
-          className={`rounded-4 px-10 py-4 text-12 font-medium transition-colors ${
-            isSelected ? "bg-blue-600 text-white" : "text-slate-300 bg-vantage-base hover:bg-blue-700 hover:text-white"
-          }`}
-        >
-          {isSelected ? t`閉じる` : t`詳細`}
-        </button>
+        {isSelected ? (
+          <button
+            onClick={() => onSelect(null)}
+            className="rounded-4 border border-vantage-border px-12 py-6 text-12 text-vantage-text-secondary transition-colors hover:border-slate-500 hover:text-white"
+          >
+            {t`Back`}
+          </button>
+        ) : (
+          <button
+            onClick={() => onSelect(pos.key)}
+            className="border-red-800/50 rounded-4 border px-12 py-6 text-12 text-red-400 transition-colors hover:bg-red-900/20"
+          >
+            {t`Close`}
+          </button>
+        )}
       </div>
     </div>
   );

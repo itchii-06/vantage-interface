@@ -11,22 +11,23 @@
  */
 
 import { t } from "@lingui/macro";
-import { formatEther, formatUnits, parseUnits } from "ethers";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { Contract, formatEther } from "ethers";
+import { useEffect, useMemo, useState } from "react";
+import { useHistory } from "react-router-dom";
 
-import { useVantageLPActions } from "domain/vantage/lp/useVantageLPActions";
-import { useVantageLPData } from "domain/vantage/lp/useVantageLPData";
 import { usePortfolioData } from "domain/vantage/portfolio/usePortfolioData";
 import type { HedgePortfolioItem, VaultLpItem } from "domain/vantage/portfolio/usePortfolioData";
 import type { VantagePosition } from "domain/vantage/positions/types";
+import { VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
+import { getProvider } from "lib/rpc";
 import useWallet from "lib/wallets/useWallet";
+import type { HedgePositionSummary } from "pages/Status/components/AdlLeaderboard";
+import VaultAbi from "vantage/abis/Vault.json";
 import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
-import Button from "components/Button/Button";
-import NumberInput from "components/NumberInput/NumberInput";
 import { VantagePageContainer } from "components/VantagePageContainer/VantagePageContainer";
 
 // ---------------------------------------------------------------------------
@@ -34,8 +35,63 @@ import { VantagePageContainer } from "components/VantagePageContainer/VantagePag
 // ---------------------------------------------------------------------------
 
 const LP_USDC_ADDRESS: string = (localhostDeployment.addresses as { tokens?: { USDC?: string } }).tokens?.USDC ?? "";
-const LP_USDC_DECIMALS = 6;
-const LP_WAD = BigInt("1000000000000000000"); // 1e18
+
+const POLL_MS = 15_000;
+const USDC_ADDRESS = LP_USDC_ADDRESS;
+const PRIMARY_CFG = VAULT_CONFIGS.find((v) => v.assetType !== "stable" && v.vaultAddress) ?? VAULT_CONFIGS[0];
+
+// ---------------------------------------------------------------------------
+// useUserPositions — fetches hedge (short) ADL data for the primary vault
+// ---------------------------------------------------------------------------
+
+interface UserPositions {
+  hedge: HedgePositionSummary | null;
+}
+
+function useUserPositions(chainId: number, account: string | undefined): UserPositions {
+  const [positions, setPositions] = useState<UserPositions>({ hedge: null });
+
+  useEffect(() => {
+    if (!account || !PRIMARY_CFG.vaultAddress || !PRIMARY_CFG.tokenAddress || !USDC_ADDRESS) return;
+
+    const provider = getProvider(undefined, chainId);
+    const vault = new Contract(PRIMARY_CFG.vaultAddress, VaultAbi, provider);
+    let cancelled = false;
+
+    async function poll() {
+      try {
+        const tokenAddr = PRIMARY_CFG.tokenAddress;
+        const shortKey: string = await vault.getPositionKey(account, USDC_ADDRESS, tokenAddr, false);
+
+        const [shortPos, shouldConvertOnADL] = await Promise.all([
+          vault.positions(shortKey),
+          vault.shouldConvertOnADL(shortKey).catch(() => false) as Promise<boolean>,
+        ]);
+
+        let hedge: HedgePositionSummary | null = null;
+        if (BigInt(shortPos.size) > 0n) {
+          const sizeUsd = parseFloat(formatEther(shortPos.size));
+          const collateralUsd = parseFloat(formatEther(shortPos.collateral));
+          const openedAtMs = Number(shortPos.lastIncreasedTime ?? 0) * 1_000;
+          hedge = { sizeUsd, collateralUsd, openedAtMs, shouldConvertOnADL };
+        }
+
+        if (!cancelled) setPositions({ hedge });
+      } catch {
+        // leave previous data intact
+      }
+    }
+
+    poll();
+    const timer = setInterval(poll, POLL_MS);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [chainId, account]);
+
+  return positions;
+}
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -289,6 +345,49 @@ function SolvencySection({ items }: SolvencySectionProps) {
 }
 
 // ---------------------------------------------------------------------------
+// ADL Risk helpers
+// ---------------------------------------------------------------------------
+
+type AdlRiskLevel = "high" | "warning" | "low";
+
+const ADL_RISK_BADGE_CLS: Record<AdlRiskLevel, string> = {
+  high: "bg-red-900/50 text-red-400 border border-red-700/50",
+  warning: "bg-yellow-900/50 text-yellow-400 border border-yellow-700/50",
+  low: "bg-green-900/50 text-green-400 border border-green-700/50",
+};
+const ADL_RISK_LABEL: Record<AdlRiskLevel, string> = {
+  high: "ADL High",
+  warning: "ADL Warning",
+  low: "ADL Low",
+};
+
+function AdlRiskBadge({ level }: { level: AdlRiskLevel }) {
+  return (
+    <span className={`mt-4 inline-block rounded-full px-8 py-2 text-11 font-medium ${ADL_RISK_BADGE_CLS[level]}`}>
+      {ADL_RISK_LABEL[level]}
+    </span>
+  );
+}
+
+function calcHedgeAdlRisk(sizeUsd: number, collateralUsd: number, openedAtMs: number): AdlRiskLevel {
+  const lev = collateralUsd > 0 ? sizeUsd / collateralUsd : 0;
+  const ageDays = (Date.now() - openedAtMs) / 86_400_000;
+  if (lev >= 5) return "high";
+  if (lev >= 3 || ageDays < 7) return "warning";
+  return "low";
+}
+
+function calcTradeAdlRisk(size: bigint, collateral: bigint, pendingPnl: bigint, isLong: boolean): AdlRiskLevel | null {
+  if (!isLong || collateral === 0n) return null;
+  const lev = parseFloat(formatEther(size)) / parseFloat(formatEther(collateral));
+  const pnlUsd = parseFloat(formatEther(pendingPnl));
+  const sizeUsd = parseFloat(formatEther(size));
+  if (lev >= 5 && pnlUsd > 0) return "high";
+  if (lev >= 3 || pnlUsd > sizeUsd * 0.1) return "warning";
+  return "low";
+}
+
+// ---------------------------------------------------------------------------
 // Hedge Positions section — Balancer bar
 // ---------------------------------------------------------------------------
 
@@ -334,9 +433,14 @@ function BalancerBar({ lpUsd, shortUsd }: BalancerBarProps) {
   );
 }
 
-type HedgeSectionProps = { items: HedgePortfolioItem[]; hasAccount: boolean };
+type HedgeSectionProps = {
+  items: HedgePortfolioItem[];
+  hasAccount: boolean;
+  adlHedge?: HedgePositionSummary | null;
+  primaryVaultKey?: string;
+};
 
-function HedgeSection({ items, hasAccount }: HedgeSectionProps) {
+function HedgeSection({ items, hasAccount, adlHedge, primaryVaultKey }: HedgeSectionProps) {
   const hasAny = items.some((h) => h.lpUsdValue > 0n || h.shortSizeUsd !== null);
 
   return (
@@ -391,13 +495,18 @@ function HedgeSection({ items, hasAccount }: HedgeSectionProps) {
                 <div className={`text-right text-13 font-semibold ${apyColor(spread)}`}>{fmtApy(spread)}</div>
 
                 {/* Status */}
-                <div className="text-right">
+                <div className="flex flex-col items-end gap-4">
                   {h.isSoftLocked ? (
                     <span className="bg-amber-900/40 text-amber-300 rounded-full px-8 py-2 text-14">{t`FR停止中`}</span>
                   ) : hasPosition ? (
                     <span className="rounded-full bg-green-900/40 px-8 py-2 text-14 text-green-400">{t`Active`}</span>
                   ) : (
                     <span className="text-14 text-slate-500">—</span>
+                  )}
+                  {h.key === primaryVaultKey && adlHedge && shortUsd > 0 && (
+                    <AdlRiskBadge
+                      level={calcHedgeAdlRisk(adlHedge.sizeUsd, adlHedge.collateralUsd, adlHedge.openedAtMs)}
+                    />
                   )}
                 </div>
               </div>
@@ -439,6 +548,7 @@ function TradingSection({ positions, hasAccount }: TradingSectionProps) {
         ) : (
           positions.map((p) => {
             const pnl = fmtPnl(p.pendingPnl);
+            const adlRisk = calcTradeAdlRisk(p.size, p.collateral, p.pendingPnl, p.isLong);
             return (
               <div
                 key={p.key}
@@ -467,8 +577,11 @@ function TradingSection({ positions, hasAccount }: TradingSectionProps) {
                 <div className="text-right text-13 text-white">{fmtUsdWad(p.size)}</div>
                 {/* Leverage */}
                 <div className="text-right text-13 text-slate-400">{fmtLeverage(p.size, p.collateral)}</div>
-                {/* PnL */}
-                <div className={`text-right text-13 font-semibold ${pnl.cls}`}>{pnl.text}</div>
+                {/* PnL + ADL risk */}
+                <div className="flex flex-col items-end gap-4">
+                  <span className={`text-13 font-semibold ${pnl.cls}`}>{pnl.text}</span>
+                  {adlRisk && <AdlRiskBadge level={adlRisk} />}
+                </div>
               </div>
             );
           })
@@ -485,212 +598,80 @@ function TradingSection({ positions, hasAccount }: TradingSectionProps) {
 type VaultLpSectionProps = { items: VaultLpItem[]; hasAccount: boolean };
 
 function VaultLpSection({ items, hasAccount }: VaultLpSectionProps) {
+  const history = useHistory();
+
+  function goToWithdraw(vaultAddress: string) {
+    history.push({ pathname: `/vaults/${vaultAddress}`, state: { tab: "withdraw" } });
+  }
+
   return (
     <div className="mb-24">
       <h2 className="mb-12 text-16 font-bold text-white">{t`Vault LP`}</h2>
       <div className="overflow-hidden rounded-4 border-b border-b-vantage-border bg-vantage-base">
         {/* Header */}
-        <div className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border bg-vantage-base px-20 py-10 text-14 text-slate-500">
+        <div className="grid grid-cols-[2fr_1fr_1fr_1fr_100px] items-center gap-0 border-b border-b-vantage-border bg-vantage-base px-20 py-10 text-14 text-slate-500">
           <div>{t`Vault`}</div>
           <div className="text-right">{t`My Liquidity`}</div>
           <div className="text-right">{t`APY`}</div>
           <div className="text-right">{t`Vault AUM`}</div>
+          <div />
         </div>
 
-        {items.map((v) => (
-          <div
-            key={v.key}
-            className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border bg-vantage-base px-20 py-14 last:border-0"
-          >
-            {/* Vault */}
-            <div className="flex items-center gap-10">
-              <div className="flex h-32 w-32 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
-                {v.symbol.slice(0, 2)}
-              </div>
-              <div>
-                <div className="text-13 font-semibold text-white">{v.symbol}</div>
-                <div className="text-14 text-slate-500">{v.name}</div>
-              </div>
-            </div>
-
-            {/* My Liquidity */}
-            <div className="text-right">
-              {!hasAccount ? (
-                <span className="text-13 text-slate-500">—</span>
-              ) : v.isLoading ? (
-                <span className="text-13 text-slate-500">…</span>
-              ) : v.usdValue > 0n ? (
-                <div>
-                  <div className="text-13 font-semibold text-white">{fmtUsdWad(v.usdValue)}</div>
-                  <div className="text-14 text-slate-500">{parseFloat(formatEther(v.vlpBalance)).toFixed(4)} VLP</div>
+        {items.map((v) => {
+          const vaultAddress = VAULT_CONFIGS.find((c) => c.key === v.key)?.vaultAddress ?? "";
+          const hasLiquidity = hasAccount && v.usdValue > 0n;
+          return (
+            <div
+              key={v.key}
+              className="grid grid-cols-[2fr_1fr_1fr_1fr_100px] items-center gap-0 border-b border-b-vantage-border bg-vantage-base px-20 py-14 last:border-0"
+            >
+              {/* Vault */}
+              <div className="flex items-center gap-10">
+                <div className="flex h-48 w-48 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
+                  {v.symbol.slice(0, 2)}
                 </div>
-              ) : (
-                <span className="text-13 text-slate-500">—</span>
-              )}
-            </div>
+                <div>
+                  <div className="text-16 font-semibold text-white">{v.symbol}</div>
+                  <div className="text-14 text-slate-500">{v.name}</div>
+                </div>
+              </div>
 
-            {/* APY */}
-            <div className={`text-right text-13 font-semibold ${apyColor(v.apy)}`}>{fmtApy(v.apy)}</div>
-
-            {/* AUM */}
-            <div className="text-right text-13 text-white">{v.isLoading ? "…" : fmtUsdWad(v.aum)}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// LP Management section (Issue #181 — Monthly Redemption)
-// ---------------------------------------------------------------------------
-
-function LpManagementSection({ chainId, hasAccount }: { chainId: number; hasAccount: boolean }) {
-  const lpData = useVantageLPData();
-  const actions = useVantageLPActions(chainId);
-
-  const [withdrawInput, setWithdrawInput] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [countdown, setCountdown] = useState("");
-
-  useEffect(() => {
-    if (lpData.nextEpochTimestamp === 0n) return;
-    function tick() {
-      const nowSec = BigInt(Math.floor(Date.now() / 1000));
-      const remaining = lpData.nextEpochTimestamp > nowSec ? lpData.nextEpochTimestamp - nowSec : 0n;
-      if (remaining === 0n) {
-        setCountdown(t`Ready to execute`);
-        return;
-      }
-      const days = remaining / 86400n;
-      const hours = (remaining % 86400n) / 3600n;
-      const mins = (remaining % 3600n) / 60n;
-      const secs = remaining % 60n;
-      setCountdown(
-        `${days}${t`d`} ${String(hours).padStart(2, "0")}${t`h`} ${String(mins).padStart(2, "0")}${t`m`} ${String(secs).padStart(2, "0")}${t`s`}`
-      );
-    }
-    tick();
-    const id = setInterval(tick, 1000);
-    return () => clearInterval(id);
-  }, [lpData.nextEpochTimestamp]);
-
-  const withdrawShares = useMemo(() => {
-    try {
-      if (!withdrawInput || parseFloat(withdrawInput) <= 0) return 0n;
-      return parseUnits(withdrawInput, 18);
-    } catch {
-      return 0n;
-    }
-  }, [withdrawInput]);
-
-  const estimatedUsdcOut =
-    withdrawShares > 0n && lpData.sharePrice > 0n
-      ? (withdrawShares * lpData.sharePrice) / LP_WAD / BigInt(10 ** (18 - LP_USDC_DECIMALS))
-      : 0n;
-
-  const pendingUsdFormatted = useMemo(
-    () =>
-      lpData.pendingUsdValue > 0n
-        ? parseFloat(formatEther(lpData.pendingUsdValue)).toLocaleString("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-        : "0.00",
-    [lpData.pendingUsdValue]
-  );
-
-  async function handleWithdraw() {
-    if (withdrawShares === 0n) return;
-    setIsSubmitting(true);
-    try {
-      await actions.withdraw(withdrawShares, LP_USDC_ADDRESS);
-      setWithdrawInput("");
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
-
-  return (
-    <div className="mb-24">
-      <h2 className="mb-12 text-16 font-bold text-white">{t`LP Withdrawal`}</h2>
-
-      {/* Redemption countdown */}
-      {!lpData.isLoading && lpData.nextEpochTimestamp > 0n && (
-        <div className="text-slate-300 mb-10 rounded-4 border border-slate-600/40 bg-slate-800/30 px-14 py-10 text-13">
-          <span className="text-slate-400">{t`Next redemption:`}</span>{" "}
-          <span className="font-semibold tabular-nums text-white">{countdown}</span>
-        </div>
-      )}
-
-      {/* Pending redemption status */}
-      {hasAccount && lpData.pendingShares > 0n && (
-        <div className="bg-blue-900/20 mb-10 rounded-4 border border-blue-600/40 px-14 py-10 text-13">
-          <div className="font-semibold text-blue-300">{t`Redemption pending — yield continues to accrue`}</div>
-          <div className="mt-2 text-14 text-blue-400">
-            {parseFloat(formatEther(lpData.pendingShares)).toFixed(4)} VLP ≈ ${pendingUsdFormatted}
-          </div>
-        </div>
-      )}
-
-      {/* Withdraw form */}
-      <div className="overflow-hidden rounded-4 border-b border-b-vantage-border bg-vantage-base">
-        <div className="border-b border-b-vantage-border bg-vantage-base px-16 py-10 text-13 font-medium text-white">
-          {t`Withdraw VLP`}
-        </div>
-        <div className="p-16">
-          <div className="flex flex-col gap-12">
-            <div>
-              <div className="mb-4 flex justify-between">
-                <label className="text-14 text-slate-400">{t`VLP Amount`}</label>
-                {hasAccount && lpData.vlpBalance > 0n && (
-                  <button
-                    onClick={() => setWithdrawInput(formatEther(lpData.vlpBalance))}
-                    className="text-14 text-blue-400 hover:text-blue-300"
-                  >
-                    {t`Max`}: {parseFloat(formatEther(lpData.vlpBalance)).toFixed(4)}
-                  </button>
+              {/* My Liquidity */}
+              <div className="text-right">
+                {!hasAccount ? (
+                  <span className="text-13 text-slate-500">—</span>
+                ) : v.isLoading ? (
+                  <span className="text-13 text-slate-500">…</span>
+                ) : v.usdValue > 0n ? (
+                  <div>
+                    <div className="text-13 font-semibold text-white">{fmtUsdWad(v.usdValue)}</div>
+                    <div className="text-14 text-slate-500">{parseFloat(formatEther(v.vlpBalance)).toFixed(4)} VLP</div>
+                  </div>
+                ) : (
+                  <span className="text-13 text-slate-500">—</span>
                 )}
               </div>
-              <div className="flex items-center gap-8 rounded-4 border border-stroke-primary bg-slate-800 px-10 py-8">
-                <NumberInput
-                  value={withdrawInput}
-                  onValueChange={(e: ChangeEvent<HTMLInputElement>) => setWithdrawInput(e.target.value)}
-                  placeholder="0.0000"
-                  maxDecimals={18}
-                  className="bg-transparent flex-1 text-14 text-white outline-none"
-                />
-                <span className="text-14 text-slate-400">VLP</span>
+
+              {/* APY */}
+              <div className={`text-right text-13 font-semibold ${apyColor(v.apy)}`}>{fmtApy(v.apy)}</div>
+
+              {/* AUM */}
+              <div className="text-right text-13 text-white">{v.isLoading ? "…" : fmtUsdWad(v.aum)}</div>
+
+              {/* Withdraw button */}
+              <div className="flex justify-end">
+                {hasLiquidity && vaultAddress ? (
+                  <button
+                    onClick={() => goToWithdraw(vaultAddress)}
+                    className="rounded-4 border border-vantage-border px-12 py-6 text-12 text-vantage-text-secondary transition-colors hover:border-slate-500 hover:text-white"
+                  >
+                    {t`Withdraw`}
+                  </button>
+                ) : null}
               </div>
             </div>
-            {withdrawShares > 0n && (
-              <div className="flex justify-between text-14 text-slate-400">
-                <span>{t`Est. USDC received`}</span>
-                <span className="text-white">
-                  {parseFloat(formatUnits(estimatedUsdcOut, LP_USDC_DECIMALS)).toFixed(2)} USDC
-                </span>
-              </div>
-            )}
-            {withdrawShares > lpData.vlpBalance && lpData.vlpBalance > 0n && (
-              <div className="text-14 text-red-400">{t`Exceeds your VLP balance`}</div>
-            )}
-            {!hasAccount ? (
-              <div className="text-center text-14 text-slate-500">{t`Connect wallet to withdraw`}</div>
-            ) : (
-              <Button
-                variant="primary"
-                size="medium"
-                disabled={
-                  withdrawShares === 0n || isSubmitting || lpData.isWeekendLocked || withdrawShares > lpData.vlpBalance
-                }
-                onClick={handleWithdraw}
-                className="w-full"
-              >
-                {lpData.isWeekendLocked ? t`Restricted (weekend)` : isSubmitting ? t`Withdrawing…` : t`Withdraw`}
-              </Button>
-            )}
-          </div>
-        </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -705,6 +686,7 @@ export default function PortfolioPage() {
   const { chainId } = useChainId();
 
   const { globalStats, hedgeItems, vaultLpItems, allPositions } = usePortfolioData(chainId, account ?? undefined);
+  const { hedge: adlHedge } = useUserPositions(chainId, account ?? undefined);
 
   return (
     <div className="w-full">
@@ -729,16 +711,13 @@ export default function PortfolioPage() {
         <SolvencySection items={hedgeItems} />
 
         {/* ③ Hedge Positions */}
-        <HedgeSection items={hedgeItems} hasAccount={!!account} />
+        <HedgeSection items={hedgeItems} hasAccount={!!account} adlHedge={adlHedge} primaryVaultKey={PRIMARY_CFG.key} />
 
         {/* ④ Trading Terminal */}
         <TradingSection positions={allPositions} hasAccount={!!account} />
 
         {/* ⑤ Vault LP Status */}
         <VaultLpSection items={vaultLpItems} hasAccount={!!account} />
-
-        {/* ⑥ LP Management */}
-        <LpManagementSection chainId={chainId} hasAccount={!!account} />
 
         {/* Disclaimer */}
         <p className="mt-8 text-center text-14 text-slate-600">

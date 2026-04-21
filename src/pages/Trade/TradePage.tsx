@@ -83,7 +83,7 @@ export default function TradePage() {
       <div className="border-b border-b-vantage-border px-16 py-8">
         <AppHeader leftContent={<AppNav />} />
       </div>
-      <div className="mt-16 px-16">
+      <div className="mt-16 px-16 pb-[64px]">
         <div className="flex min-h-0 gap-0 lg:items-start">
           {/* ── Left column ─────────────────────────────────────────────────────── */}
           <div className="flex min-w-0 flex-1 flex-col gap-12">
@@ -173,13 +173,13 @@ export default function TradePage() {
             {/* Unified position list */}
             <div>
               <div className="mb-10 flex items-center justify-between">
-                <h2 className="text-14 font-semibold text-white">{t`Positions`}</h2>
+                <h2 className="text-14 font-semibold text-white">{t`Current Position`}</h2>
                 <button onClick={refetch} className="hover:text-slate-300 text-12 text-slate-500">
                   {t`Refresh`}
                 </button>
               </div>
               {!account ? (
-                <div className="rounded-4 border border-stroke-primary py-24 text-center text-13 text-slate-400">
+                <div className="rounded-4 border-b border-b-vantage-border py-24 text-center text-13 text-slate-400">
                   {t`Connect wallet to see positions`}
                 </div>
               ) : (

@@ -39,9 +39,9 @@ export function PendingRequestsPanel({ requests, onCancel }: Props) {
   const hasCompleted = list.some((r) => r.status !== "pending");
 
   return (
-    <div className="flex flex-col gap-0 overflow-hidden rounded-4 border border-stroke-primary">
+    <div className="flex flex-col gap-0 overflow-hidden rounded-4 border-b border-b-vantage-border">
       {/* Header */}
-      <div className="bg-cold-blue-950 flex items-center justify-between border-b border-stroke-primary px-16 py-10">
+      <div className="flex items-center justify-between border-b border-stroke-primary bg-vantage-base px-16 py-10">
         <span className="text-slate-300 text-12 font-semibold">{t`Pending Requests`}</span>
         {hasCompleted && (
           <button onClick={clearCompleted} className="hover:text-slate-300 text-11 text-slate-500">

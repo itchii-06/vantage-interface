@@ -101,7 +101,7 @@ export interface StepMeta {
 export const STEP_META: Record<DefenseStep, StepMeta> = {
   0: {
     label: "Normal",
-    phase: "—",
+    phase: "Phase 0 · Normal",
     description: "Protocol operating normally. No defense measures active.",
     severity: "normal",
   },

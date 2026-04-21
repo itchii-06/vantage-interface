@@ -34,9 +34,10 @@ const BADGE_COLORS: Record<string, string> = {
   critical: "bg-red-900/60 text-red-400 border border-red-700",
 };
 
-const STEPS = [1, 2, 3, 4, 5, 6, 7] as const;
+const STEPS = [0, 1, 2, 3, 4, 5, 6, 7] as const;
 
 const STEP_SHORT: Record<number, string> = {
+  0: "FR Offset",
   1: "LP Boost",
   2: "Lev Lock",
   3: "Surge",
@@ -69,13 +70,14 @@ export function SolvencySpeedometer({ defenseStep }: SolvencySpeedometerProps) {
       {/* Step bar */}
       <div className="mb-12 flex gap-4">
         {STEPS.map((step) => {
-          const isActive = step <= defenseStep && defenseStep > 0;
+          const isActive = step === 0 ? defenseStep === 0 : step <= defenseStep && defenseStep > 0;
           const isCurrent = step === defenseStep;
+          const barColor = step === 0 ? "bg-[#ecff3e]" : STEP_COLORS[defenseStep];
           return (
             <div key={step} className="flex-1">
               <div
                 className={`h-6 w-full rounded-full transition-all ${
-                  isActive ? STEP_COLORS[defenseStep] : "bg-slate-800"
+                  isActive ? barColor : "bg-slate-800"
                 } ${isCurrent ? "ring-2 ring-white/30 ring-offset-1 ring-offset-slate-950" : ""}`}
               />
             </div>
@@ -98,17 +100,8 @@ export function SolvencySpeedometer({ defenseStep }: SolvencySpeedometerProps) {
         ))}
       </div>
 
-      {/* Current status description */}
-      <div className="rounded-4 bg-slate-900/60 px-16 py-12">
-        <p className="text-12 text-slate-400">
-          <span className="text-slate-300 font-medium">{meta.phase}</span>
-          {meta.phase !== "—" && " · "}
-          {meta.description}
-        </p>
-      </div>
-
       {/* FR risk defense explainer (collapsible) */}
-      <FrDefenseExplainer />
+      <FrDefenseExplainer defenseStep={defenseStep} />
     </div>
   );
 }

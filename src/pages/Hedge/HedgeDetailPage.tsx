@@ -13,7 +13,7 @@
 
 import { t } from "@lingui/macro";
 import { formatDistanceToNow } from "date-fns";
-import { Contract, formatEther, parseEther, parseUnits } from "ethers";
+import { Contract, formatEther, formatUnits, parseEther, parseUnits } from "ethers";
 import { useEffect, useMemo, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -42,6 +42,11 @@ import { VantagePageContainer } from "components/VantagePageContainer/VantagePag
 // ---------------------------------------------------------------------------
 
 const ETH_PRICE_USD = 2000;
+
+const ERC20_BALANCE_ABI = [
+  "function balanceOf(address owner) view returns (uint256)",
+  "function decimals() view returns (uint8)",
+] as const;
 
 const MOCK_PRICE_FEED = (localhostDeployment.addresses as { MockPriceFeed?: string }).MockPriceFeed ?? "";
 const USDC_ADDRESS = (localhostDeployment.addresses as { tokens?: { USDC?: string } }).tokens?.USDC ?? "";
@@ -100,6 +105,64 @@ function useRwaSpotPrice(tokenAddress: string | undefined): number | null {
   }, [chainId, tokenAddress]);
 
   return price;
+}
+
+// ---------------------------------------------------------------------------
+// useWalletBalances — fetches RWA, USDC, and native ETH balances
+// ---------------------------------------------------------------------------
+
+interface WalletBalances {
+  rwaBalance: number | null;
+  usdcBalance: number | null;
+  ethBalance: number | null;
+}
+
+function useWalletBalances(chainId: number, account: string | undefined, rwaToken: string | undefined): WalletBalances {
+  const [balances, setBalances] = useState<WalletBalances>({
+    rwaBalance: null,
+    usdcBalance: null,
+    ethBalance: null,
+  });
+
+  useEffect(() => {
+    if (!account || !rwaToken) return;
+
+    const provider = getProvider(undefined, chainId);
+    let cancelled = false;
+
+    async function poll() {
+      try {
+        const rwaContract = new Contract(rwaToken!, ERC20_BALANCE_ABI, provider);
+        const usdcContract = USDC_ADDRESS ? new Contract(USDC_ADDRESS, ERC20_BALANCE_ABI, provider) : null;
+
+        const [rwaRaw, rwaDecimals, ethRaw] = await Promise.all([
+          rwaContract.balanceOf(account),
+          rwaContract.decimals().catch(() => 18),
+          provider.getBalance(account!),
+        ]);
+        const usdcRaw: bigint = usdcContract ? await usdcContract.balanceOf(account).catch(() => 0n) : 0n;
+
+        if (!cancelled) {
+          setBalances({
+            rwaBalance: parseFloat(formatUnits(rwaRaw, rwaDecimals)),
+            usdcBalance: parseFloat(formatUnits(usdcRaw, 6)),
+            ethBalance: parseFloat(formatEther(ethRaw)),
+          });
+        }
+      } catch {
+        // leave previous values intact
+      }
+    }
+
+    poll();
+    const timer = setInterval(poll, POLL_MS);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [chainId, account, rwaToken]);
+
+  return balances;
 }
 
 // ---------------------------------------------------------------------------
@@ -582,6 +645,9 @@ export default function HedgeDetailPage() {
   // Oracle spot price
   const spotPriceUsd = useRwaSpotPrice(cfg?.tokenAddress);
 
+  // Wallet balances
+  const walletBalances = useWalletBalances(chainId, account ?? undefined, cfg?.tokenAddress);
+
   // Price ticks for chart
   const priceTicks = usePriceTicker(chainId, cfg?.tokenAddress ?? "", cfg?.vaultAddress);
 
@@ -649,7 +715,23 @@ export default function HedgeDetailPage() {
     await execute(mode, marginToken, params, convertOnADL);
   }
 
-  const canExecute = account && !isSubmitting && rwaAmount > 0 && !pageData.isHedgeDisabled;
+  // Balance validation
+  const rwaShortfall =
+    account && walletBalances.rwaBalance !== null && rwaAmount > 0
+      ? Math.max(0, rwaAmount - walletBalances.rwaBalance)
+      : 0;
+  const marginShortfall =
+    account && marginToken === "usdc" && walletBalances.usdcBalance !== null
+      ? Math.max(0, requiredCollateralUsd - walletBalances.usdcBalance)
+      : account && marginToken === "eth" && walletBalances.ethBalance !== null
+        ? Math.max(0, requiredCollateralEth - walletBalances.ethBalance)
+        : 0;
+  const rwaShortfallUsd = rwaShortfall * price;
+  const marginShortfallUsd = marginToken === "usdc" ? marginShortfall : marginShortfall * ETH_PRICE_USD;
+  const totalShortfallUsd = rwaShortfallUsd + marginShortfallUsd;
+  const hasInsufficientBalance = !!account && rwaAmount > 0 && totalShortfallUsd > 0.001;
+
+  const canExecute = account && !isSubmitting && rwaAmount > 0 && !pageData.isHedgeDisabled && !hasInsufficientBalance;
 
   // Compute display values for Safety Buffer warning banner
   const frPct = pageData.fundingRateBps !== null ? (Math.abs(pageData.fundingRateBps) / 100).toFixed(2) : null;
@@ -777,40 +859,36 @@ export default function HedgeDetailPage() {
             </div>
           </div>
 
-          {/* Right: Action Panel */}
+          {/* Right: Action Panel — Step-based Calculator */}
           <div className="rounded-4 border border-vantage-border bg-vantage-base p-24">
-            {/* Mode badge */}
-            <div className="mb-20 flex items-center gap-8">
-              <span className="rounded-full py-4 pl-0 pr-12 text-16 font-semibold">{t`Open New Hedge`}</span>
-              <p className="text-12 text-slate-500">{t`LP Deposit + Short in one transaction`}</p>
+            {/* Header */}
+            <div className="mb-24">
+              <h2 className="text-16 font-semibold text-white">{t`Open New Hedge`}</h2>
+              <p className="mt-4 text-12 text-slate-500">{t`LP Deposit + Short in one transaction`}</p>
             </div>
 
-            {/* Margin token toggle */}
-            <div className="mb-16">
-              <div className="mb-8 text-12 text-slate-400">{t`Short Margin`}</div>
-              <div className="flex gap-8">
-                {(["usdc", "eth"] as HedgeMarginToken[]).map((token) => (
-                  <button
-                    key={token}
-                    onClick={() => setMarginToken(token)}
-                    className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${marginToken === token ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
-                  >
-                    {token.toUpperCase()}
-                  </button>
-                ))}
+            {/* ── Step 1: Protection Target ─────────────────────────── */}
+            <div className="mb-24">
+              <div className="mb-14 flex items-center gap-10">
+                <div className="flex h-22 w-22 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#ecff3e] to-[#a3e635] text-11 font-bold text-black">
+                  1
+                </div>
+                <div>
+                  <div className="text-13 font-semibold text-white">{t`Protection Target`}</div>
+                  <div className="text-11 text-slate-500">{t`How much do you want to hedge?`}</div>
+                </div>
               </div>
-            </div>
 
-            {/* RWA Amount input */}
-            <div className="mb-16">
-              <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
-                <div className="mb-2 flex items-center gap-6 text-12 text-slate-400">
-                  <span className="rounded px-6 py-1 text-11 text-vantage-accent" style={STYLE_ACCENT_BG_12}>
-                    ① {t`LP Deposit`}
-                  </span>
-                  <span>
+              <div className="rounded-4 border border-vantage-border bg-vantage-input px-16 py-12">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="text-11 text-slate-400">
                     {cfg.symbol} {t`Amount`}
                   </span>
+                  {account && walletBalances.rwaBalance !== null && (
+                    <span className={`text-11 ${rwaShortfall > 0 ? "text-red-400" : "text-slate-500"}`}>
+                      {t`Balance`}: {walletBalances.rwaBalance.toFixed(4)} {cfg.symbol}
+                    </span>
+                  )}
                 </div>
                 <NumberInput
                   value={rwaAmountStr}
@@ -818,53 +896,161 @@ export default function HedgeDetailPage() {
                   className="bg-transparent w-full text-[36px] font-semibold text-white outline-none placeholder:text-slate-600"
                   placeholder="0.00"
                 />
+                {rwaAmount > 0 && spotPriceUsd !== null && (
+                  <div className="mt-6 text-12 text-slate-400">
+                    {rwaAmount} {cfg.symbol}{" "}
+                    <span className="text-slate-300">
+                      (≈ ${(rwaAmount * spotPriceUsd).toLocaleString("en-US", { maximumFractionDigits: 2 })})
+                    </span>
+                  </div>
+                )}
               </div>
-              <p className="mt-4 text-11 text-slate-500">
+              <p className="mt-6 text-11 text-slate-500">
                 {t`Deposited to the LP Vault. You receive VLP shares in return.`}
               </p>
             </div>
 
-            {/* Leverage input */}
-            <div className="mb-16">
-              <VantageLeverageSlider value={leverage} onChange={setLeverage} max={10} />
-              <p className="mt-4 text-11 text-slate-500">{t`1× = delta-neutral. Higher = partial hedge.`}</p>
+            {/* Divider */}
+            <div className="mb-24 border-t border-slate-700/40" />
+
+            {/* ── Step 2: Risk Management ───────────────────────────── */}
+            <div
+              className={`mb-24 transition-opacity duration-200 ${rwaAmount === 0 ? "pointer-events-none opacity-35" : ""}`}
+            >
+              <div className="mb-14 flex items-center gap-10">
+                <div
+                  className={`flex h-22 w-22 shrink-0 items-center justify-center rounded-full text-11 font-bold transition-colors duration-200 ${rwaAmount > 0 ? "bg-gradient-to-br from-[#ecff3e] to-[#a3e635] text-black" : "bg-slate-700 text-slate-400"}`}
+                >
+                  2
+                </div>
+                <div>
+                  <div
+                    className={`text-13 font-semibold transition-colors duration-200 ${rwaAmount > 0 ? "text-white" : "text-slate-500"}`}
+                  >{t`Risk Management`}</div>
+                  <div className="text-11 text-slate-500">{t`Leverage & Margin`}</div>
+                </div>
+              </div>
+
+              {/* Margin token selector */}
+              <div className="mb-14">
+                <div className="mb-6 text-11 text-slate-400">{t`Margin Token`}</div>
+                <div className="flex gap-8">
+                  {(["usdc", "eth"] as HedgeMarginToken[]).map((token) => (
+                    <button
+                      key={token}
+                      onClick={() => setMarginToken(token)}
+                      className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${marginToken === token ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
+                    >
+                      {token.toUpperCase()}
+                      {account && token === "usdc" && walletBalances.usdcBalance !== null && (
+                        <span className="text-10 ml-6 opacity-60">${walletBalances.usdcBalance.toFixed(0)}</span>
+                      )}
+                      {account && token === "eth" && walletBalances.ethBalance !== null && (
+                        <span className="text-10 ml-6 opacity-60">{walletBalances.ethBalance.toFixed(3)}</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Leverage slider */}
+              <div className="mb-14">
+                <VantageLeverageSlider value={leverage} onChange={setLeverage} max={10} />
+                <p className="mt-4 text-11 text-slate-500">{t`1× = delta-neutral. Higher = partial hedge.`}</p>
+              </div>
+
+              {/* Auto-calculated margin */}
+              <div className="rounded-4 border border-slate-700/40 bg-slate-800/30 p-14">
+                <div className="mb-8 text-11 font-medium uppercase tracking-wide text-slate-500">
+                  {t`Required Margin (Auto-Calculated)`}
+                </div>
+                <div className="flex items-end justify-between gap-8">
+                  <div>
+                    <div className="text-22 font-semibold text-white">
+                      {marginToken === "usdc"
+                        ? `${requiredCollateralUsd > 0 ? requiredCollateralUsd.toFixed(2) : "0.00"} USDC`
+                        : `${requiredCollateralEth > 0 ? requiredCollateralEth.toFixed(6) : "0.000000"} ETH`}
+                    </div>
+                    <div className="mt-2 text-11 text-slate-500">
+                      = {cfg.symbol} × {spotPriceUsd !== null ? `$${spotPriceUsd.toFixed(2)}` : "price"} ÷ {leverage}×
+                    </div>
+                  </div>
+                  {account && (
+                    <div
+                      className={`shrink-0 text-right text-11 ${marginShortfall > 0 ? "text-red-400" : "text-green-400"}`}
+                    >
+                      {marginToken === "usdc" && walletBalances.usdcBalance !== null && (
+                        <>
+                          {marginShortfall > 0 ? "✗" : "✓"} ${walletBalances.usdcBalance.toFixed(2)}
+                        </>
+                      )}
+                      {marginToken === "eth" && walletBalances.ethBalance !== null && (
+                        <>
+                          {marginShortfall > 0 ? "✗" : "✓"} {walletBalances.ethBalance.toFixed(4)} ETH
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Insufficient balance error */}
+                {hasInsufficientBalance && (
+                  <div className="mt-10 rounded-4 bg-red-900/30 px-10 py-8 text-12 text-red-400">
+                    {t`残高が`} ${totalShortfallUsd.toFixed(2)} {t`不足しています`}
+                  </div>
+                )}
+              </div>
             </div>
 
-            {/* ADL Mode toggle */}
-            <div className="my-20">
-              <div className="mb-8 text-12 text-slate-400">{t`Emergency Behavior (ADL)`}</div>
+            {/* Divider */}
+            <div className="mb-24 border-t border-slate-700/40" />
+
+            {/* ── Step 3: Emergency Behavior (ADL) ─────────────────── */}
+            <div
+              className={`mb-20 transition-opacity duration-200 ${rwaAmount === 0 ? "pointer-events-none opacity-35" : ""}`}
+            >
+              <div className="mb-14 flex items-center gap-10">
+                <div
+                  className={`flex h-22 w-22 shrink-0 items-center justify-center rounded-full text-11 font-bold transition-colors duration-200 ${rwaAmount > 0 ? "bg-gradient-to-br from-[#ecff3e] to-[#a3e635] text-black" : "bg-slate-700 text-slate-400"}`}
+                >
+                  3
+                </div>
+                <div>
+                  <div
+                    className={`text-13 font-semibold transition-colors duration-200 ${rwaAmount > 0 ? "text-white" : "text-slate-500"}`}
+                  >{t`FR Payment Response`}</div>
+                  <div className="text-11 text-slate-500">{t`What happens when funding rate is triggered?`}</div>
+                </div>
+              </div>
+
               <div className="flex rounded-4 border border-vantage-border">
                 <button
                   onClick={() => setConvertOnADL(false)}
-                  className={`flex-1 rounded-l-4 py-8 text-12 font-medium transition-colors ${!convertOnADL ? "bg-vantage-accent text-black" : "text-vantage-text-secondary"}`}
+                  className={`flex-1 rounded-l-4 py-10 text-12 font-medium transition-colors ${!convertOnADL ? "bg-vantage-accent text-black" : "text-vantage-text-secondary"}`}
                 >
-                  {t`Close`}
+                  {t`Auto-Close`}
                 </button>
                 <button
                   onClick={() => setConvertOnADL(true)}
-                  className={`flex-1 rounded-r-4 py-8 text-12 font-medium transition-colors ${convertOnADL ? "bg-vantage-accent text-black" : "text-vantage-text-secondary"}`}
+                  className={`flex-1 rounded-r-4 py-10 text-12 font-medium transition-colors ${convertOnADL ? "bg-vantage-accent text-black" : "text-vantage-text-secondary"}`}
                 >
                   {t`Convert to Paid-Short`}
                 </button>
               </div>
-              <p className="mt-5 text-12 text-slate-500">
+              <p className="leading-relaxed mt-8 rounded-4 bg-slate-800/40 px-12 py-8 text-11 text-slate-400">
                 {convertOnADL
-                  ? t`Position is kept as a normal short. Funding rate payments apply from ADL moment.`
-                  : t`Position is closed and margin is returned when ADL is triggered.`}
+                  ? t`Keep position open as a standard short. FR payments will apply from the ADL moment onward.`
+                  : t`Position closes automatically and margin is returned when ADL is triggered.`}
               </p>
             </div>
 
-            {/* Calculated amounts */}
-            {spotPriceUsd !== null && (
+            {/* Transaction summary */}
+            {spotPriceUsd !== null && rwaAmount > 0 && (
               <div className="mb-16 rounded-4 bg-slate-800/40 p-14 text-13">
-                <div className="flex justify-between">
-                  <span className="text-slate-400">{t`Oracle Price`}</span>
-                  <span className="text-white">${spotPriceUsd.toFixed(4)}</span>
+                <div className="mb-8 text-11 font-medium uppercase tracking-wide text-slate-500">
+                  {t`This transaction sends:`}
                 </div>
-                <div className="mt-10 space-y-6 border-t border-slate-700/60 pt-10">
-                  <div className="text-11 font-medium uppercase tracking-wide text-slate-500">
-                    {t`This transaction sends:`}
-                  </div>
+                <div className="space-y-6">
                   <div className="flex items-center justify-between rounded-4 px-10 py-8" style={STYLE_ACCENT_BG_08}>
                     <div className="flex items-center gap-6">
                       <span
@@ -876,7 +1062,7 @@ export default function HedgeDetailPage() {
                       <span className="text-slate-300">{t`LP Deposit`}</span>
                     </div>
                     <span className="font-semibold text-vantage-accent">
-                      {rwaAmount > 0 ? `${rwaAmount} ${cfg.symbol}` : "—"}
+                      {rwaAmount} {cfg.symbol}
                     </span>
                   </div>
                   <div className="flex items-center justify-between rounded-4 bg-slate-700/30 px-10 py-8">
@@ -891,8 +1077,6 @@ export default function HedgeDetailPage() {
                     </span>
                   </div>
                 </div>
-
-                {/* Delta Neutral explanation — below "This transaction sends:" */}
                 <div className="mt-12">
                   <DeltaNeutralBox
                     symbol={cfg.symbol}
@@ -940,9 +1124,13 @@ export default function HedgeDetailPage() {
               <button
                 onClick={handleExecute}
                 disabled={!canExecute}
-                className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${canExecute ? "bg-vantage-accent text-black" : "bg-[#334155] text-[#64748b]"}`}
+                className={`w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${canExecute ? "bg-gradient-to-r from-[#ecff3e] to-[#a3e635] text-black" : "bg-[#334155] text-[#64748b]"}`}
               >
-                {isSubmitting ? t`Submitting…` : t`Deposit ${cfg.symbol} + Open Short`}
+                {isSubmitting
+                  ? t`Submitting…`
+                  : hasInsufficientBalance
+                    ? t`Insufficient Balance`
+                    : t`Deposit ${cfg.symbol} + Open Short`}
               </button>
             )}
           </div>

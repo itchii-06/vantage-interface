@@ -39,9 +39,9 @@ type Props = {
 
 export function PositionListPanel({ positions, isLoading, selectedKey, onSelect }: Props) {
   return (
-    <div className="overflow-hidden rounded-4 border border-stroke-primary">
+    <div className="overflow-hidden rounded-4 border-b border-b-vantage-border">
       {/* Header */}
-      <div className="bg-cold-blue-950 grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr_auto] border-b border-stroke-primary px-16 py-10 text-11 text-slate-400">
+      <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr_1fr_1fr_auto] border-b border-stroke-primary bg-vantage-base px-16 py-10 text-11 text-slate-400">
         <div>{t`Market`}</div>
         <div className="text-right">{t`Side`}</div>
         <div className="text-right">{t`Size`}</div>
