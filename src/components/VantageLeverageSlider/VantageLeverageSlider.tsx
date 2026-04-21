@@ -59,7 +59,7 @@ export function VantageLeverageSlider({ value, onChange, min = 1, max = 50 }: Pr
         <div className="mt-10 flex-1">
           <div className="relative top-11 h-[20px]">
             {/* Gray background track — inset by thumbRadius(10px) each side */}
-            <div className="pointer-events-none absolute left-10 right-10 top-1/2 h-[4px] -translate-y-1/2 overflow-hidden rounded-full bg-[#334155]">
+            <div className="pointer-events-none absolute left-10 right-14 top-1/2 h-[4px] -translate-y-1/2 overflow-hidden rounded-full bg-[#334155]">
               {/* Accent fill: 0% at min → 100% at max */}
               <div className="h-full bg-vantage-accent" style={fillStyle} />
             </div>

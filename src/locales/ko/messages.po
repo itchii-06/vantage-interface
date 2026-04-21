@@ -316,6 +316,10 @@ msgstr "포지션에 대한 가상 재고"
 msgid "Dynamically allocates liquidity to highest-utilized markets, maximizing capital efficiency and yield"
 msgstr "가장 활발한 시장에 유동성을 동적으로 배분하여 자본 효율성과 수익률을 극대화합니다"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "FR Risk Defense — How it works"
+msgstr ""
+
 #: src/components/ExpressTradingOutOfGasBanner/ExpressTradingOutOfGasBanner.tsx
 #: src/components/TradeBox/ExpressTradingWarningCard.tsx
 msgid "Buy {gasPaymentTokensText}"
@@ -4399,7 +4403,6 @@ msgstr ""
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/VantageLeverageSlider/VantageLeverageSlider.tsx
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Status/components/AdlLeaderboard.tsx
@@ -11471,10 +11474,6 @@ msgstr "텍스트 색상"
 msgid "7d"
 msgstr "7일"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Close (Recommended)"
-msgstr ""
-
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Token permit"
 msgstr "토큰 허가"
@@ -11985,6 +11984,7 @@ msgstr "다중 자산 클래스"
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeInfoIcon/TradeInfoIcon.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/PriceChart.tsx

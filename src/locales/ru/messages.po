@@ -316,6 +316,10 @@ msgstr "Виртуальный инвентарь для позиций"
 msgid "Dynamically allocates liquidity to highest-utilized markets, maximizing capital efficiency and yield"
 msgstr "Динамически распределяет ликвидность на наиболее востребованные рынки, максимизируя эффективность капитала и доходность"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "FR Risk Defense — How it works"
+msgstr ""
+
 #: src/components/ExpressTradingOutOfGasBanner/ExpressTradingOutOfGasBanner.tsx
 #: src/components/TradeBox/ExpressTradingWarningCard.tsx
 msgid "Buy {gasPaymentTokensText}"
@@ -4399,7 +4403,6 @@ msgstr ""
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/VantageLeverageSlider/VantageLeverageSlider.tsx
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Status/components/AdlLeaderboard.tsx
@@ -11471,10 +11474,6 @@ msgstr "Цвета текста"
 msgid "7d"
 msgstr "7д"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Close (Recommended)"
-msgstr ""
-
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Token permit"
 msgstr "Разрешение токена"
@@ -11985,6 +11984,7 @@ msgstr "множество классов активов"
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeInfoIcon/TradeInfoIcon.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/PriceChart.tsx

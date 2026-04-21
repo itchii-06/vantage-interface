@@ -450,7 +450,10 @@ export default function VaultDetailPage() {
                     )}
 
                     {!account ? (
-                      <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to deposit`}</div>
+                      <button
+                        disabled
+                        className="w-full cursor-not-allowed rounded-4 border border-vantage-border py-14 text-15 font-semibold text-slate-500"
+                      >{t`Connect wallet to deposit`}</button>
                     ) : needsApproval ? (
                       <button
                         disabled={isSubmitting || actions.isApproving}
@@ -538,7 +541,10 @@ export default function VaultDetailPage() {
                     )}
 
                     {!account ? (
-                      <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to zap in`}</div>
+                      <button
+                        disabled
+                        className="w-full cursor-not-allowed rounded-4 border border-vantage-border py-14 text-15 font-semibold text-slate-500"
+                      >{t`Connect wallet to zap in`}</button>
                     ) : (
                       <button
                         disabled={!zapInput || parseFloat(zapInput) <= 0 || zapActions.isSubmitting}
@@ -597,7 +603,10 @@ export default function VaultDetailPage() {
                     )}
 
                     {!account ? (
-                      <div className="py-8 text-center text-14 text-slate-400">{t`Connect wallet to withdraw`}</div>
+                      <button
+                        disabled
+                        className="w-full cursor-not-allowed rounded-4 border border-vantage-border py-14 text-15 font-semibold text-slate-500"
+                      >{t`Connect wallet to withdraw`}</button>
                     ) : (
                       <button
                         disabled={withdrawShares === 0n || isSubmitting || withdrawShares > data.vlpBalance}

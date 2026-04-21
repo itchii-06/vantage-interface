@@ -316,6 +316,10 @@ msgstr "Virtual inventory for positions"
 msgid "Dynamically allocates liquidity to highest-utilized markets, maximizing capital efficiency and yield"
 msgstr "Dynamically allocates liquidity to highest-utilized markets, maximizing capital efficiency and yield"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "FR Risk Defense — How it works"
+msgstr "FR Risk Defense — How it works"
+
 #: src/components/ExpressTradingOutOfGasBanner/ExpressTradingOutOfGasBanner.tsx
 #: src/components/TradeBox/ExpressTradingWarningCard.tsx
 msgid "Buy {gasPaymentTokensText}"
@@ -4399,7 +4403,6 @@ msgstr "Junior Buffer (PAYOUT Tranche)"
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/TradeBox/TradeBoxRows/AdvancedDisplayRows.tsx
 #: src/components/VantageLeverageSlider/VantageLeverageSlider.tsx
-#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 #: src/pages/Status/components/AdlLeaderboard.tsx
@@ -11472,8 +11475,8 @@ msgid "7d"
 msgstr "7d"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Close (Recommended)"
-msgstr "Close (Recommended)"
+#~ msgid "Close (Recommended)"
+#~ msgstr "Close (Recommended)"
 
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Token permit"
@@ -11985,6 +11988,7 @@ msgstr "multiple asset classes"
 #: src/components/TradeBox/TradeBox.tsx
 #: src/components/TradeInfoIcon/TradeInfoIcon.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/PriceChart.tsx

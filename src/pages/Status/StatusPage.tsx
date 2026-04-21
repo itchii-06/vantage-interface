@@ -176,25 +176,28 @@ export default function StatusPage() {
           {/* Solvency drop banner (Phase 3+) */}
           <SolvencyDropBanner solvencyDropAt={data.solvencyDropAt} defenseStep={data.defenseStep} />
 
-          {/* 7-Step Speedometer */}
-          <SolvencySpeedometer defenseStep={data.defenseStep} />
+          {/* 2-column layout */}
+          <div className="grid grid-cols-1 items-start gap-20 lg:grid-cols-2">
+            {/* Left: Protocol Defense Status */}
+            <SolvencySpeedometer defenseStep={data.defenseStep} />
 
-          {/* Buffer Gauges + OI Stats */}
-          <div className="grid grid-cols-1 gap-20 lg:grid-cols-2">
-            <BufferGauges
-              reserveFundUsd={data.reserveFundUsd}
-              lpBoostPoolUsd={data.lpBoostPoolUsd}
-              juniorDeficitAbsorbed={data.juniorDeficitAbsorbed}
-              juniorAumUsd={data.juniorAumUsd}
-            />
-            <OIStats
-              totalShortUsd={data.totalShortUsd}
-              maxShortCapacityUsd={data.maxShortCapacityUsd}
-              oiUtilizationPct={data.oiUtilizationPct}
-              fundingRateBps={data.fundingRateBps}
-              yieldAprBps={data.yieldAprBps}
-              hedgeCapacityPct={data.hedgeCapacityPct}
-            />
+            {/* Right: Internal Buffers → Hedge Inventory */}
+            <div className="flex flex-col gap-20">
+              <BufferGauges
+                reserveFundUsd={data.reserveFundUsd}
+                lpBoostPoolUsd={data.lpBoostPoolUsd}
+                juniorDeficitAbsorbed={data.juniorDeficitAbsorbed}
+                juniorAumUsd={data.juniorAumUsd}
+              />
+              <OIStats
+                totalShortUsd={data.totalShortUsd}
+                maxShortCapacityUsd={data.maxShortCapacityUsd}
+                oiUtilizationPct={data.oiUtilizationPct}
+                fundingRateBps={data.fundingRateBps}
+                yieldAprBps={data.yieldAprBps}
+                hedgeCapacityPct={data.hedgeCapacityPct}
+              />
+            </div>
           </div>
 
           {/* ADL Risk (user's own positions) */}

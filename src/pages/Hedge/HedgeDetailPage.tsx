@@ -34,6 +34,7 @@ import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
 import NumberInput from "components/NumberInput/NumberInput";
 import Tooltip from "components/Tooltip/Tooltip";
+import { VantageLeverageSlider } from "components/VantageLeverageSlider/VantageLeverageSlider";
 import { VantagePageContainer } from "components/VantagePageContainer/VantagePageContainer";
 
 // ---------------------------------------------------------------------------
@@ -571,7 +572,7 @@ export default function HedgeDetailPage() {
   const mode: HedgeMode = "managed";
   const [marginToken, setMarginToken] = useState<HedgeMarginToken>("usdc");
   const [rwaAmountStr, setRwaAmountStr] = useState("");
-  const [leverageStr, setLeverageStr] = useState("1");
+  const [leverage, setLeverage] = useState(1);
   const [convertOnADL, setConvertOnADL] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
   const [timeFrame, setTimeFrame] = useState<TimeFrame>("1h");
@@ -588,7 +589,6 @@ export default function HedgeDetailPage() {
   const pageData = useHedgePageData(chainId, cfg, account ?? undefined);
 
   const rwaAmount = parseFloat(rwaAmountStr) || 0;
-  const leverage = Math.max(1, parseFloat(leverageStr) || 1);
 
   const price = spotPriceUsd ?? 0;
   const sizeDeltaUsd = rwaAmount * price;
@@ -597,7 +597,7 @@ export default function HedgeDetailPage() {
 
   useEffect(() => {
     setValidationError(null);
-  }, [rwaAmountStr, leverageStr, marginToken]);
+  }, [rwaAmountStr, leverage, marginToken]);
 
   // ── Not found ──────────────────────────────────────────────────────────────
 
@@ -826,30 +826,19 @@ export default function HedgeDetailPage() {
 
             {/* Leverage input */}
             <div className="mb-16">
-              <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
-                <div className="mb-2 flex items-center justify-between text-12 text-slate-400">
-                  <span>{t`Leverage`}</span>
-                  <span>×</span>
-                </div>
-                <NumberInput
-                  value={leverageStr}
-                  onValueChange={(e) => setLeverageStr(e.target.value)}
-                  className="bg-transparent w-full text-[36px] font-semibold text-white outline-none placeholder:text-slate-600"
-                  placeholder="1"
-                />
-              </div>
+              <VantageLeverageSlider value={leverage} onChange={setLeverage} max={10} />
               <p className="mt-4 text-11 text-slate-500">{t`1× = delta-neutral. Higher = partial hedge.`}</p>
             </div>
 
             {/* ADL Mode toggle */}
-            <div className="mb-16">
+            <div className="my-20">
               <div className="mb-8 text-12 text-slate-400">{t`Emergency Behavior (ADL)`}</div>
               <div className="flex rounded-4 border border-vantage-border">
                 <button
                   onClick={() => setConvertOnADL(false)}
                   className={`flex-1 rounded-l-4 py-8 text-12 font-medium transition-colors ${!convertOnADL ? "bg-vantage-accent text-black" : "text-vantage-text-secondary"}`}
                 >
-                  {t`Close (Recommended)`}
+                  {t`Close`}
                 </button>
                 <button
                   onClick={() => setConvertOnADL(true)}
@@ -941,9 +930,12 @@ export default function HedgeDetailPage() {
 
             {/* Execute button */}
             {!account ? (
-              <div className="rounded-4 bg-slate-700/50 py-14 text-center text-14 text-slate-400">
+              <button
+                disabled
+                className="w-full cursor-not-allowed rounded-4 border border-vantage-border py-14 text-15 font-semibold text-slate-500"
+              >
                 {t`Connect wallet to hedge`}
-              </div>
+              </button>
             ) : (
               <button
                 onClick={handleExecute}

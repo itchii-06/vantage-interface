@@ -10,6 +10,8 @@ import { t } from "@lingui/macro";
 import type { DefenseStep } from "domain/vantage/solvency/getDefenseStep";
 import { STEP_META } from "domain/vantage/solvency/getDefenseStep";
 
+import { FrDefenseExplainer } from "./FrDefenseExplainer";
+
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -104,6 +106,9 @@ export function SolvencySpeedometer({ defenseStep }: SolvencySpeedometerProps) {
           {meta.description}
         </p>
       </div>
+
+      {/* FR risk defense explainer (collapsible) */}
+      <FrDefenseExplainer />
     </div>
   );
 }
