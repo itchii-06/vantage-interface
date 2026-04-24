@@ -53,6 +53,13 @@ export interface UserPosition {
 }
 
 export interface HedgePageData {
+  /**
+   * Whether the collateral token is YIELD_BEARING in AssetRegistry (Issue #201).
+   * true  → Mode A: yield earned offsets hedge premium (show "Yield + Premium Offset" UI)
+   * false → Mode B: premium-only cost (show "Premium Only" UI)
+   * undefined → loading (assetType not yet fetched)
+   */
+  isYieldBearing: boolean | undefined;
   /** Vault total AUM in USD (WAD) */
   vaultAumUsd: number | null;
   /** Total open short size for this token in USD */
@@ -105,6 +112,7 @@ export interface HedgePageData {
 }
 
 const EMPTY: HedgePageData = {
+  isYieldBearing: undefined,
   vaultAumUsd: null,
   totalShortUsd: null,
   maxShortCapacityUsd: null,
@@ -162,15 +170,18 @@ export function useHedgePageData(
         const totalLongRaw: bigint = await vault.totalLongSize(tokenAddr);
         const totalShortUsd = parseFloat(formatEther(totalShortRaw));
 
-        // ── 3. Max short capacity from AssetRegistry ────────────────────────
+        // ── 3. Max short capacity + assetType from AssetRegistry ───────────
         let maxShortCapacityUsd: number | null = null;
         let remainingCapacityUsd: number | null = null;
+        let isYieldBearing: boolean | undefined = undefined;
         if (assetReg) {
           const assetData = await assetReg.assets(tokenAddr);
           // maxGlobalShortSize is stored in 1e30; divide by 1e12 to get WAD
           const maxShortWad: bigint = BigInt(assetData.maxGlobalShortSize) / 10n ** 12n;
           maxShortCapacityUsd = parseFloat(formatEther(maxShortWad));
           remainingCapacityUsd = Math.max(0, maxShortCapacityUsd - totalShortUsd);
+          // AssetType: 0 = SPOT (Mode B), 1 = YIELD_BEARING (Mode A)
+          isYieldBearing = Number(assetData.assetType) === 1;
         }
 
         // ── 4. Yield APR ────────────────────────────────────────────────────
@@ -276,6 +287,7 @@ export function useHedgePageData(
 
         if (!cancelled) {
           setData({
+            isYieldBearing,
             vaultAumUsd,
             totalShortUsd,
             maxShortCapacityUsd,

@@ -17,7 +17,7 @@
  * the most critical phase even when multiple phases overlap.
  */
 
-export type DefenseStep = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type DefenseStep = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 
 export interface DefenseStepInput {
   isLPBoostActive: boolean;
@@ -142,6 +142,18 @@ export const STEP_META: Record<DefenseStep, StepMeta> = {
     severity: "danger",
   },
   7: {
+    label: "Hedge ADL",
+    phase: "Phase 3 · Final Defense",
+    description: "Some hedge positions being force-closed. Protocol exercising last-resort termination.",
+    severity: "critical",
+  },
+  8: {
+    label: "Trade ADL",
+    phase: "Phase 3 · Enforcement",
+    description: "High-profit long positions being force-closed to reduce FR obligations.",
+    severity: "danger",
+  },
+  9: {
     label: "Hedge ADL",
     phase: "Phase 3 · Final Defense",
     description: "Some hedge positions being force-closed. Protocol exercising last-resort termination.",

@@ -316,10 +316,6 @@ msgstr "Virtueller Bestand für Positionen"
 msgid "Dynamically allocates liquidity to highest-utilized markets, maximizing capital efficiency and yield"
 msgstr "Verteilt Liquidität dynamisch auf die am stärksten genutzten Märkte und maximiert so Kapitaleffizienz und Rendite"
 
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-#~ msgid "FR Risk Defense — How it works"
-#~ msgstr ""
-
 #: src/components/ExpressTradingOutOfGasBanner/ExpressTradingOutOfGasBanner.tsx
 #: src/components/TradeBox/ExpressTradingWarningCard.tsx
 msgid "Buy {gasPaymentTokensText}"
@@ -460,6 +456,10 @@ msgstr "Doppeltes {indexSymbol}-Exposure durch Position und Sicherheit. Höherer
 #: src/components/MultichainBalanceTooltip/MultichainBalanceTooltip.tsx
 msgid "GMX Account balance"
 msgstr "GMX Account Guthaben"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "High-yield junior LP (USDC) profits absorb the deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
+msgstr ""
 
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "Best swap path"
@@ -662,6 +662,10 @@ msgstr "Positionen"
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Incentives, airdrops, and prizes will appear here"
 msgstr "Anreize, Airdrops und Preise werden hier angezeigt"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Reserve Fund Utilization"
+msgstr ""
 
 #: src/components/NetworkFeeRow/NetworkFeeRow.tsx
 msgid "Max network fee includes fees for additional orders. Refunded in full if they don't trigger and are canceled. <0>Read more</0>."
@@ -887,6 +891,10 @@ msgstr "Lorem ipsum dolor"
 msgid "Buy GMX on centralized exchanges"
 msgstr "GMX auf zentralen Börsen kaufen"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "New Entry Restriction"
+msgstr ""
+
 #: src/components/NpsModal/NpsModal.tsx
 msgid "Share for follow-up questions"
 msgstr "Für Rückfragen teilen"
@@ -906,6 +914,10 @@ msgstr "Die Website ist eine von der Community bereitgestellte Instanz des Open-
 msgid "Total PnL (realized + unrealized) after fees and price impact"
 msgstr "Gesamter PnL (realisiert + unrealisiert) nach Gebühren und Preiseinfluss"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode A — Yield-Bearing"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Funding decrease factor"
 msgstr "Finanzierungsabnahmefaktor"
@@ -921,6 +933,10 @@ msgstr "In Liquidität"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 msgid "システム収益保護のため、現在一時的にFR相殺が停止されています"
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Last line of defense. Some hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency and protocol halt — rather than raising costs retroactively."
 msgstr ""
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
@@ -1016,6 +1032,14 @@ msgstr "Gebührenwerte werden bei Erhalt berechnet. Ohne Anreize."
 #: src/pages/Pools/Pools.tsx
 msgid "TVL in vaults and pools"
 msgstr "TVL in Vaults und Pools"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode B — Stablecoin"
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Reserve fund temporarily boosts LP rewards to attract new RWA deposits and expand pool capacity."
+msgstr ""
 
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Clear completed"
@@ -1166,6 +1190,10 @@ msgstr "MARKT"
 #: src/components/Referrals/TradersStats.tsx
 msgid "Active referral code"
 msgstr "Aktiver Empfehlungscode"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 1–3"
+msgstr ""
 
 #: src/components/UserIncentiveDistribution/ClaimableDistribution.tsx
 msgid "View breakdown"
@@ -1634,6 +1662,11 @@ msgstr "One-Click-Trading ist deaktiviert. Zeitlimit abgelaufen."
 msgid "Session generation failed"
 msgstr "Sitzungserstellung fehlgeschlagen"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 2 · Internal Buffer"
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Onchain quests and rewards"
 msgstr "Onchain-Quests und Belohnungen"
@@ -1858,10 +1891,6 @@ msgstr "Fehlgeschlagen"
 msgid "Protocol Commitment — No Surprise Rate Hikes"
 msgstr ""
 
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Restricted (weekend)"
-#~ msgstr ""
-
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "No fee"
@@ -1872,6 +1901,7 @@ msgid "Swap liquidity may be insufficient when order triggers"
 msgstr "Die Tauschliquidität kann bei Auslösung der Order unzureichend sein"
 
 #: src/pages/Status/components/BufferGauges.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "Reserve Fund"
 msgstr ""
 
@@ -1997,6 +2027,10 @@ msgstr "Schlüssel"
 #: src/pages/Earn/EarnPageLayout.tsx
 msgid "Distributions"
 msgstr "Verteilungen"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Senior LP yield will be used to make FR payments"
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max profit limit reached. Current: {pnlToPoolFactorText}, max: {maxPnlFactorText}"
@@ -2398,6 +2432,10 @@ msgstr "GMX (Chinesisch)"
 msgid "Search"
 msgstr "Suchen"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode B — Premium Only"
+msgstr ""
+
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Existing position in WETH-USDC pool but lacks liquidity for this order"
 msgstr "Bestehende Position im WETH-USDC Pool, aber unzureichende Liquidität für diese Order"
@@ -2409,6 +2447,10 @@ msgstr "Gebühren für die Vergangenheit"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Max open interest {directionLabel}"
 msgstr "Maximales Open Interest {directionLabel}"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "No yield earned. Hedge cost = funding rate only."
+msgstr ""
 
 #: src/domain/synthetics/orders/cancelOrdersTxn.ts
 msgid "{ordersText} cancellation failed"
@@ -2506,6 +2548,10 @@ msgstr ""
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Consider reducing leverage to lower your ADL priority."
+msgstr ""
+
+#: src/components/SettingsModal/LanguageSettings.tsx
+msgid "Select your preferred language"
 msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
@@ -2646,6 +2692,10 @@ msgstr "Open-Interest-Reservefaktor Longs"
 #: src/context/TokensFavoritesContext/TokensFavoritesContextProvider.tsx
 msgid "Layer 2"
 msgstr "Layer 2"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Normal Operation"
+msgstr ""
 
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
@@ -2939,6 +2989,10 @@ msgstr "GMTrade (ehemals GMX Solana) wird auf einer anderen Website gehostet und
 msgid "Token categories"
 msgstr "Tokenkategorien"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Normal"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "You have not traded during the selected period"
 msgstr "Sie haben im ausgewählten Zeitraum nicht gehandelt"
@@ -3169,6 +3223,10 @@ msgstr "Ungültige Verringerungsgröße"
 msgid "It's just a wrap"
 msgstr "Es ist nur ein Wrap"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "High-Lev Lock"
+msgstr ""
+
 #: landing/src/pages/Home/SocialSection/SocialSection.tsx
 msgid "Subscribe"
 msgstr "Abonnieren"
@@ -3348,10 +3406,6 @@ msgstr ""
 #: src/pages/Trade/components/SpreadBadge.tsx
 msgid "Ask"
 msgstr ""
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Position is kept as a normal short. Funding rate payments apply from ADL moment."
-#~ msgstr ""
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Low leverage and long tenure protect you from ADL. You are in the loyalty tier."
@@ -3569,6 +3623,10 @@ msgstr "Dune Analytics für GMX"
 msgid "Pending borrowing fees from all open positions"
 msgstr "Ausstehende Leihgebühren aus allen offenen Positionen"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Surge"
+msgstr ""
+
 #: src/components/TVChartContainer/useChartContextMenu.ts
 msgid "Set Long Take Profit @ {0}"
 msgstr ""
@@ -3644,6 +3702,10 @@ msgstr "Marktgraph"
 #: src/components/Referrals/referralsHelper.ts
 msgid "Only letters, numbers, and underscores allowed"
 msgstr "Nur Buchstaben, Zahlen und Unterstriche erlaubt"
+
+#: src/pages/Status/StatusPage.tsx
+msgid "Real-time solvency dashboard. 8-step defense sequence transparency."
+msgstr ""
 
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Trade from your wallet"
@@ -3839,6 +3901,10 @@ msgstr "<0>Solana-Unterstützung</0><1>Botanix-Unterstützung</1><2>GMX Express<
 msgid "Funds are now in your GMX Account"
 msgstr "Die Mittel befinden sich jetzt in Ihrem GMX Account"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Junior Vault Buffer"
+msgstr ""
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Insufficient liquidity. Order will fill when liquidity is available."
 msgstr "Unzureichende Liquidität. Die Order wird ausgeführt, sobald Liquidität verfügbar ist."
@@ -3945,6 +4011,10 @@ msgstr "Min. Sicherheitsfaktor OI Short"
 msgid "Failed TWAP Swap part"
 msgstr "Fehlgeschlagener TWAP-Tauschteil"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Phase 1 — Prevention"
+msgstr ""
+
 #: src/pages/Dashboard/OverviewCard.tsx
 msgid "Annualized data based on the past 7 days"
 msgstr "Annualisierte Daten basierend auf den letzten 7 Tagen"
@@ -4002,6 +4072,10 @@ msgstr "Handeln Sie in großem Umfang, ohne sich über dünne Orderbücher oder 
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Safety buffer is at its base level ({basePct}%). Market conditions are stable — no FR spike adjustment active."
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Your staking yield offsets the hedge premium. Net cost may be positive."
 msgstr ""
 
 #: src/components/Claims/SettleAccruedCard.tsx
@@ -4111,6 +4185,7 @@ msgid "Express Trading is unavailable with the network's native token {0}. Consi
 msgstr "Express Trading ist mit dem nativen Token des Netzwerks {0} nicht verfügbar. Erwägen Sie stattdessen die Verwendung von {1}."
 
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "Trade"
@@ -4297,8 +4372,18 @@ msgstr "GMX-Feedback teilen"
 msgid "Withdraw failed"
 msgstr "Abhebung fehlgeschlagen"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Hedge ADL"
+msgstr ""
+
 #: src/pages/Admin/AdminPage.tsx
 msgid "Saving…"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "This token earns no yield. Hedge cost = funding rate only."
 msgstr ""
 
 #. chainname balance
@@ -4532,6 +4617,10 @@ msgstr "Regeln lesen"
 msgid "Source chain supports single token only"
 msgstr "Quellchain unterstützt nur einzelne Token"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Users pay zero fees for perpetual hedging, thanks to the Yield Token FR Offset mechanism."
+msgstr ""
+
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 #: src/components/TVChart/ChartHeader.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
@@ -4635,9 +4724,17 @@ msgstr "Fehlende Beanspruchungsparameter. Versuchen Sie es in wenigen Sekunden e
 msgid "AVG. LEV."
 msgstr "DURCHSCHN. HEB."
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Detecting mode…"
+msgstr ""
+
 #: src/components/OrderEditor/OrderEditor.tsx
 msgid "Enter a new ratio or allowed slippage"
 msgstr "Gib ein neues Verhältnis oder zulässiges Slippage ein"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "ADL for Hedge-Shorts"
+msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Risk Management"
@@ -4783,6 +4880,12 @@ msgstr "Marktdaten werden geladen..."
 msgid "{longOrShort} positions do not pay a funding fee or a borrow fee"
 msgstr "{longOrShort}-Positionen zahlen weder eine Finanzierungsgebühr noch eine Leihgebühr"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 1 · Prevention"
+msgstr ""
+
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "in {0}"
 msgstr "in {0}"
@@ -4799,6 +4902,7 @@ msgstr ""
 msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "Preiseinflussrückvergütungen aufgelaufen. Nach 5 Tagen beanspruchbar. <0>Mehr erfahren</0>."
 
+#: src/components/AppNav/AppNav.tsx
 #: src/pages/Earn/EarnPageLayout.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Portfolio"
@@ -4870,10 +4974,6 @@ msgstr "{0} bearbeiten"
 msgid "<0>Buy</0> {wrappedNativeTokenSymbol}."
 msgstr "<0>Kaufe</0> {wrappedNativeTokenSymbol}."
 
-#: src/pages/Status/components/ProtocolCommitmentBanner.tsx
-msgid "This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 7 (contract termination) rather than increasing costs for existing users. The 7-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order."
-msgstr ""
-
 #: src/pages/Admin/AdminPage.tsx
 #: src/pages/Admin/AdminPage.tsx
 #: src/pages/Admin/AdminPage.tsx
@@ -4915,6 +5015,10 @@ msgstr "Rückvergütungsverteilungsverlauf"
 msgid "Active orders"
 msgstr "Aktive Orders"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Jr Buffer"
+msgstr ""
+
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "Depositing to Avalanche is disabled. Trade directly from your Avalanche wallet."
 msgstr "Einzahlungen auf Avalanche sind deaktiviert. Handeln Sie direkt über Ihr Avalanche-Wallet."
@@ -4931,10 +5035,6 @@ msgstr "Markt auswählen"
 #: src/components/TokenSelector/TokenSelector.tsx
 msgid "No tokens matched"
 msgstr "Keine Tokens passen"
-
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Est. USDC received"
-#~ msgstr ""
 
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Error sending permit for {0}: {1}"
@@ -5172,6 +5272,14 @@ msgstr "Externe Swaps fehlschlagen lassen"
 msgid "Withdraw"
 msgstr "Abheben"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "High-leverage (5×+) new hedges are locked. Once the OI cap is reached, all new entries are frozen."
+msgstr ""
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 0 · Normal"
+msgstr ""
+
 #: src/components/TradeHistory/keys.ts
 msgid "Update Stop Market"
 msgstr "Stop Market aktualisieren"
@@ -5218,6 +5326,11 @@ msgstr ""
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shift request sent"
 msgstr "Shift-Anfrage gesendet"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Safe"
+msgstr ""
 
 #: src/components/AcceptablePriceImpactInputRow/AcceptablePriceImpactInputRow.tsx
 msgid "Current impact: {0}. Add 0.30% buffer for better order execution."
@@ -5404,6 +5517,7 @@ msgid "Positive funding fees"
 msgstr "Positive Finanzierungsgebühren"
 
 #: src/pages/Admin/AdminPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/FundingRateChart.tsx
 #: src/pages/Trade/components/OIChart.tsx
 msgid "Loading…"
@@ -5412,6 +5526,11 @@ msgstr ""
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Funds will appear in your GMX Account soon"
 msgstr "Das Guthaben wird in Kürze in Ihrem GMX Account erscheinen"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 3 · Final Defense"
+msgstr ""
 
 #: src/components/InterviewToast/InterviewToast.tsx
 msgid "Join an anonymous one-on-one chat to share your GMX liquidity provider experience"
@@ -5484,6 +5603,11 @@ msgstr "Bestehende Limitorder im WETH-USDC Pool.<0>Zum WETH-USDC Pool wechseln</
 msgid "GM: {0}"
 msgstr "GM: {0}"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Senior Yield"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Pool max long USD for deposit"
 msgstr "Maximaler Long-USD-Betrag des Pools für Einzahlung"
@@ -5550,6 +5674,10 @@ msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Mode A — Auto-Terminate"
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "System working as intended"
 msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
@@ -5910,6 +6038,14 @@ msgstr ""
 msgid "Shifting only available on {chainNames} or {lastChainName}. Switch networks to continue."
 msgstr "Verschiebung nur verfügbar auf {chainNames} oder {lastChainName}. Wechseln Sie das Netzwerk, um fortzufahren."
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "The protocol stability fund covers FR shortfalls using surplus accumulated from past profits."
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Supply-Side Incentive"
+msgstr ""
+
 #: src/components/TradeBox/hooks/useTradeButtonState.tsx
 msgid "No swap path available. <0>Swap {0} to {swapToTokenSymbol}</0>, then to {1}."
 msgstr "Kein Tauschpfad verfügbar. <0>Tausche {0} zu {swapToTokenSymbol}</0>, dann zu {1}."
@@ -5938,6 +6074,11 @@ msgstr "AUSFÜHRUNGSPREIS"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "spinner"
 msgstr "Ladeanimation"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 3 · Enforcement"
+msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Unknown sell GM order"
@@ -6319,6 +6460,10 @@ msgstr "Anzahl der Teile"
 msgid "No open orders"
 msgstr "Keine offenen Orders"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Premium Surge"
+msgstr ""
+
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Insufficient liquidity. Available: {availableLiquidityText}"
 msgstr "Unzureichende Liquidität. Verfügbar: {availableLiquidityText}"
@@ -6378,6 +6523,10 @@ msgstr ""
 msgid "Airdrop"
 msgstr "Airdrop"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 7–8"
+msgstr ""
+
 #: src/components/ModalViews/RedirectModal.tsx
 msgid "Launch app"
 msgstr "App starten"
@@ -6420,10 +6569,6 @@ msgstr "{gasPaymentTokensText} einzahlen"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "GMX (Portuguese)"
 msgstr "GMX (Portugiesisch)"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Oracle Price"
-#~ msgstr ""
 
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -7068,6 +7213,8 @@ msgid "Position would be liquidatable"
 msgstr "Position wäre liquidierbar"
 
 #: src/pages/Status/components/BufferGauges.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "LP Boost"
 msgstr ""
 
@@ -7075,10 +7222,6 @@ msgstr ""
 #: src/components/Footer/constants.tsx
 msgid "Media kit"
 msgstr "Medienpaket"
-
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Exceeds your VLP balance"
-#~ msgstr ""
 
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 msgid "$ 0.00"
@@ -7462,6 +7605,10 @@ msgstr "GMX trading stats"
 msgid "High leverage increases liquidation risk"
 msgstr "Hoher Hebel erhöht das Liquidationsrisiko"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Junior Buffer"
+msgstr ""
+
 #: src/components/Errors/errorToasts.tsx
 msgid "Invalid signature.<0/><1/>Try a different wallet provider or switch to Classic or One-Click Trading in <2>settings</2>"
 msgstr "Ungültige Signatur.<0/><1/>Versuchen Sie einen anderen Wallet-Anbieter oder wechseln Sie zu Classic Trading oder One-Click Trading in den <2>Einstellungen</2>"
@@ -7835,6 +7982,12 @@ msgstr "Zusammenfassung"
 msgid "ENTRY PRICE"
 msgstr "EINSTIEGSPREIS"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Trade ADL"
+msgstr ""
+
 #: src/components/SettingsModal/DisplaySettings.tsx
 msgid "Display PnL after fees"
 msgstr "PnL nach Gebühren anzeigen"
@@ -7874,10 +8027,6 @@ msgstr "Positionsgebührenfaktor (negativer PI)"
 #: src/components/DateRangeSelect/DateRangeSelect.tsx
 msgid "90d"
 msgstr "90T"
-
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "LP Withdrawal"
-#~ msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "({0} days ago)"
@@ -7968,6 +8117,10 @@ msgstr "Maximalbetrag überschritten"
 
 #: src/pages/Admin/AdminPage.tsx
 msgid "Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded."
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode A — Yield + Premium Offset"
 msgstr ""
 
 #: src/components/PositionSeller/CollateralDestinationDialog.tsx
@@ -8093,6 +8246,10 @@ msgstr "Limit-Erhöhung"
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "Transferring..."
 msgstr "Übertragung läuft..."
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Reserve"
+msgstr ""
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Sell {gmOrGlvLabel} failed."
@@ -8716,10 +8873,6 @@ msgstr "Nicht gestakt"
 msgid "{0}ms"
 msgstr "{0}ms"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Position is closed and margin is returned when ADL is triggered."
-#~ msgstr ""
-
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -8760,10 +8913,6 @@ msgstr "x"
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "Notifications"
 msgstr "Benachrichtigungen"
-
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Managed Net APY"
-#~ msgstr ""
 
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Trading mode"
@@ -8996,6 +9145,11 @@ msgstr "Protokoll-Analytik"
 msgid "Show positions on chart"
 msgstr "Positionen im Chart anzeigen"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Detecting collateral mode…"
+msgstr ""
+
+#: src/components/AppNav/AppNav.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgePage.tsx
@@ -9336,6 +9490,10 @@ msgstr "Erhalten"
 msgid "Execution Fee"
 msgstr ""
 
+#: src/pages/Status/components/ProtocolCommitmentBanner.tsx
+msgid "This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 7 (contract termination) rather than increasing costs for existing users. The 8-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order."
+msgstr ""
+
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Liquidity removed"
@@ -9383,6 +9541,10 @@ msgstr "Anzahl der Trader, die Ihren Empfehlungscode verwenden"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Max reserved {directionLabel}"
 msgstr "Max. reserviert {directionLabel}"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "ADL for Long Profits"
+msgstr ""
 
 #: src/components/TradeHistory/TradeHistory.tsx
 msgid "Realized PnL after fees and net price impact"
@@ -9683,6 +9845,10 @@ msgstr "GMX-Belohnungen:"
 msgid "Wallet trading only on these networks"
 msgstr "Nur Wallet-Trading auf diesen Netzwerken"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Entry premiums rise only for incoming users. All existing hedge positions are unaffected."
+msgstr ""
+
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 msgid "Trigger Price"
 msgstr "Auslösepreis"
@@ -9714,6 +9880,10 @@ msgstr "Keine Quell-Token-Adresse"
 #: src/pages/RpcDebug/parts.tsx
 msgid "Large account"
 msgstr "Großes Konto"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Phase 3 — Last Resort"
+msgstr ""
 
 #: src/components/GmSwap/GmFees/GmFees.tsx
 msgid "Shift fee"
@@ -9906,6 +10076,10 @@ msgstr "{0} Token für Vesting reserviert"
 #: src/components/Errors/ErrorBoundary.tsx
 msgid "Something went wrong"
 msgstr "Etwas ist schiefgelaufen"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "FR Offset"
+msgstr ""
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Freeze"
@@ -10376,10 +10550,6 @@ msgstr "Die Position kann allein durch Gebühren (Finanzierung + Leihgebühren) 
 msgid "Claim price impact rebates"
 msgstr "Preiseinfluss-Rabatte beanspruchen"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Next redemption:"
-#~ msgstr ""
-
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Fulfilling shift request..."
 msgstr "Shift-Anfrage wird ausgeführt…"
@@ -10712,6 +10882,10 @@ msgstr "Erhalten Sie Benachrichtigungen und Ankündigungen von GMX, um über Ihr
 msgid "{gmOrGlvLabel} bought successfully, but bridge to Base failed. Your funds are safe in your GMX Account. Retry the bridge or go to the {indexName} pool to withdraw your GM tokens."
 msgstr "{gmOrGlvLabel} erfolgreich gekauft, aber die Bridge zu Base ist fehlgeschlagen. Ihre Mittel sind sicher in Ihrem GMX Account. Versuchen Sie die Bridge erneut oder gehen Sie zum {indexName}-Pool, um Ihre GM-Token abzuheben."
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 4–5"
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a yield-optimizing crypto-index token that:"
 msgstr "GLV (GMX Liquidity Vaults) ist die verbesserte Version von GLP in GMX V2. Es ist ein renditeoptimierender Kryptoindextoken, der:"
@@ -10724,10 +10898,6 @@ msgstr "{0} Token wurden aus den {1} für das Vesting eingezahlten esGMX in GMX 
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Trigger price above liquidation price"
 msgstr "Auslösepreis über dem Liquidationspreis"
-
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Self-Custody APY"
-#~ msgstr ""
 
 #: src/components/GmxAccountModal/TransferDetailsView.tsx
 msgid "Repeat transaction"
@@ -10974,6 +11144,10 @@ msgstr "Seite neu laden"
 msgid "Order won't execute: trigger price beyond liquidation price"
 msgstr "Order wird nicht ausgeführt: Auslösepreis jenseits des Liquidationspreises"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Phase 2 — Internal Defense"
+msgstr ""
+
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settling..."
 msgstr "Abrechnung..."
@@ -11042,6 +11216,10 @@ msgstr "Finanzierungsgebühren beanspruchen"
 msgid "Token permit testing"
 msgstr "Token-Permit-Tests"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Lev Lock"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGmxModal.tsx
 msgid "Buy GMX directly"
 msgstr "GMX direkt kaufen"
@@ -11097,10 +11275,6 @@ msgstr "Empfehlungscode aktualisiert"
 msgid "to toggle its filtering. To use this debug tool on swap, stay on MARKET GRAPH tab and switch to swap. Settings are saved in local storage; don't forget to clear it when done."
 msgstr "um die Filterung umzuschalten. Um dieses Debug-Tool für Tauschen zu verwenden, bleiben Sie auf dem MARKET GRAPH Tab und wechseln Sie zu Tauschen. Einstellungen werden im lokalen Speicher gespeichert; vergessen Sie nicht, diesen nach Abschluss zu leeren."
 
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Withdraw VLP"
-#~ msgstr ""
-
 #: src/pages/AccountEvents/AccountEvents.tsx
 #: src/pages/AccountEvents/AccountEvents.tsx
 msgid "Account events"
@@ -11134,6 +11308,7 @@ msgstr "Kaufen Sie APE auf Arbitrum mit <0>Camelot</0>"
 msgid "Depositing..."
 msgstr "Wird eingezahlt…"
 
+#: src/components/AppNav/AppNav.tsx
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
@@ -11192,6 +11367,10 @@ msgstr "Adresse kopiert"
 msgid "<0>Delegate your undelegated {0} GMX DAO</0>voting power before claiming."
 msgstr "<0>Delegiere deine nicht delegierte {0} GMX DAO</0> Stimmkraft vor dem Beanspruchen."
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "New Entry Premium Surge"
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/ClaimableAmounts.tsx
 msgid "Claim funds"
 msgstr "Mittel einlösen"
@@ -11208,6 +11387,7 @@ msgstr "Empfehlungscode generieren"
 msgid "NET VALUE"
 msgstr "NETTOWERT"
 
+#: src/components/AppNav/AppNav.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Vaults"
@@ -11375,6 +11555,7 @@ msgstr "EREIGNIS"
 msgid "Distribution"
 msgstr "Verteilung"
 
+#: src/components/SettingsModal/SettingsModal.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/SideNav/LanguageNavItem.tsx
@@ -11388,6 +11569,10 @@ msgstr "{idleSeconds}s"
 #: src/pages/Actions/ActionsRouter.tsx
 msgid "GMX V1 actions"
 msgstr "GMX V1 Aktionen"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Highly profitable speculative long positions are force-closed, directly reducing the outstanding FR obligation."
+msgstr ""
 
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "GLV vaults:"
@@ -11493,10 +11678,6 @@ msgstr "Dashboards"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Leftover collateral below {0} USD"
 msgstr "Verbleibendes Kollateral unter {0} USD"
-
-#: src/components/AppNav/AppNav.tsx
-msgid "{label}"
-msgstr ""
 
 #: src/domain/synthetics/positions/utils.ts
 msgid "trigger"
@@ -11838,10 +12019,6 @@ msgstr "Guthaben wird übertragen nach..."
 msgid "Network fee"
 msgstr "Netzwerkgebühr"
 
-#: src/pages/Status/StatusPage.tsx
-msgid "Real-time solvency dashboard. 7-step defense sequence transparency."
-msgstr ""
-
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivated"
 msgstr "Deaktiviert"
@@ -12053,10 +12230,6 @@ msgstr "Geben Sie einen Empfehlungscode ein, um Gebührenrabatte zu erhalten"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Margin Token"
 msgstr ""
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Emergency Behavior (ADL)"
-#~ msgstr ""
 
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "General performance details"

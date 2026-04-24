@@ -316,10 +316,6 @@ msgstr "倉位虛擬庫存"
 msgid "Dynamically allocates liquidity to highest-utilized markets, maximizing capital efficiency and yield"
 msgstr "動態將流動性分配至使用率最高的市場，最大化資金效率與收益"
 
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-#~ msgid "FR Risk Defense — How it works"
-#~ msgstr ""
-
 #: src/components/ExpressTradingOutOfGasBanner/ExpressTradingOutOfGasBanner.tsx
 #: src/components/TradeBox/ExpressTradingWarningCard.tsx
 msgid "Buy {gasPaymentTokensText}"
@@ -460,6 +456,10 @@ msgstr "倉位和抵押品帶來雙重 {indexSymbol} 曝險。清算價格高於
 #: src/components/MultichainBalanceTooltip/MultichainBalanceTooltip.tsx
 msgid "GMX Account balance"
 msgstr "GMX Account 餘額"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "High-yield junior LP (USDC) profits absorb the deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
+msgstr ""
 
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "Best swap path"
@@ -662,6 +662,10 @@ msgstr "倉位"
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Incentives, airdrops, and prizes will appear here"
 msgstr "獎勵、空投和獎品將顯示在這裡"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Reserve Fund Utilization"
+msgstr ""
 
 #: src/components/NetworkFeeRow/NetworkFeeRow.tsx
 msgid "Max network fee includes fees for additional orders. Refunded in full if they don't trigger and are canceled. <0>Read more</0>."
@@ -887,6 +891,10 @@ msgstr "Lorem ipsum dolor"
 msgid "Buy GMX on centralized exchanges"
 msgstr "在中心化交易所購買 GMX"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "New Entry Restriction"
+msgstr ""
+
 #: src/components/NpsModal/NpsModal.tsx
 msgid "Share for follow-up questions"
 msgstr "分享以便後續問題聯繫"
@@ -906,6 +914,10 @@ msgstr "本網站是開源 <0>GMX 前端</0>的社群部署實例，託管於分
 msgid "Total PnL (realized + unrealized) after fees and price impact"
 msgstr "扣除費用及價格影響後的總 PnL（已實現 + 未實現）"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode A — Yield-Bearing"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Funding decrease factor"
 msgstr "資金遞減因子"
@@ -921,6 +933,10 @@ msgstr "流動性"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 msgid "システム収益保護のため、現在一時的にFR相殺が停止されています"
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Last line of defense. Some hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency and protocol halt — rather than raising costs retroactively."
 msgstr ""
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
@@ -1016,6 +1032,14 @@ msgstr "費用數值在賺取時計算。不包含獎勵。"
 #: src/pages/Pools/Pools.tsx
 msgid "TVL in vaults and pools"
 msgstr "金庫與池中的 TVL"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode B — Stablecoin"
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Reserve fund temporarily boosts LP rewards to attract new RWA deposits and expand pool capacity."
+msgstr ""
 
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Clear completed"
@@ -1166,6 +1190,10 @@ msgstr "市場"
 #: src/components/Referrals/TradersStats.tsx
 msgid "Active referral code"
 msgstr "使用中的推薦碼"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 1–3"
+msgstr ""
 
 #: src/components/UserIncentiveDistribution/ClaimableDistribution.tsx
 msgid "View breakdown"
@@ -1634,6 +1662,11 @@ msgstr "One-Click Trading 已停用。時間限制已到期。"
 msgid "Session generation failed"
 msgstr "工作階段產生失敗"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 2 · Internal Buffer"
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Onchain quests and rewards"
 msgstr "鏈上任務與獎勵"
@@ -1858,10 +1891,6 @@ msgstr "失敗"
 msgid "Protocol Commitment — No Surprise Rate Hikes"
 msgstr ""
 
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Restricted (weekend)"
-#~ msgstr ""
-
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 msgid "No fee"
@@ -1872,6 +1901,7 @@ msgid "Swap liquidity may be insufficient when order triggers"
 msgstr "訂單觸發時兌換流動性可能不足"
 
 #: src/pages/Status/components/BufferGauges.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "Reserve Fund"
 msgstr ""
 
@@ -1997,6 +2027,10 @@ msgstr "金鑰"
 #: src/pages/Earn/EarnPageLayout.tsx
 msgid "Distributions"
 msgstr "分配"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Senior LP yield will be used to make FR payments"
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max profit limit reached. Current: {pnlToPoolFactorText}, max: {maxPnlFactorText}"
@@ -2398,6 +2432,10 @@ msgstr "GMX（中文）"
 msgid "Search"
 msgstr "搜尋"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode B — Premium Only"
+msgstr ""
+
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Existing position in WETH-USDC pool but lacks liquidity for this order"
 msgstr "WETH-USDC 池中有現有倉位，但此訂單的流動性不足"
@@ -2409,6 +2447,10 @@ msgstr "過去的費用"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Max open interest {directionLabel}"
 msgstr "最大未平倉量 {directionLabel}"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "No yield earned. Hedge cost = funding rate only."
+msgstr ""
 
 #: src/domain/synthetics/orders/cancelOrdersTxn.ts
 msgid "{ordersText} cancellation failed"
@@ -2506,6 +2548,10 @@ msgstr ""
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Consider reducing leverage to lower your ADL priority."
+msgstr ""
+
+#: src/components/SettingsModal/LanguageSettings.tsx
+msgid "Select your preferred language"
 msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
@@ -2646,6 +2692,10 @@ msgstr "做多未平倉量儲備因子"
 #: src/context/TokensFavoritesContext/TokensFavoritesContextProvider.tsx
 msgid "Layer 2"
 msgstr "Layer 2"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Normal Operation"
+msgstr ""
 
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
@@ -2939,6 +2989,10 @@ msgstr "GMTrade（前身為 GMX Solana）託管在另一個網站上，由不同
 msgid "Token categories"
 msgstr "代幣類別"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Normal"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "You have not traded during the selected period"
 msgstr "您在所選期間內未進行任何交易"
@@ -3169,6 +3223,10 @@ msgstr "無效的減少規模"
 msgid "It's just a wrap"
 msgstr "這只是一個包裝操作"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "High-Lev Lock"
+msgstr ""
+
 #: landing/src/pages/Home/SocialSection/SocialSection.tsx
 msgid "Subscribe"
 msgstr "訂閱"
@@ -3348,10 +3406,6 @@ msgstr ""
 #: src/pages/Trade/components/SpreadBadge.tsx
 msgid "Ask"
 msgstr ""
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Position is kept as a normal short. Funding rate payments apply from ADL moment."
-#~ msgstr ""
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Low leverage and long tenure protect you from ADL. You are in the loyalty tier."
@@ -3569,6 +3623,10 @@ msgstr "Dune Analytics for GMX"
 msgid "Pending borrowing fees from all open positions"
 msgstr "所有未平倉倉位的待結算借貸費用"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Surge"
+msgstr ""
+
 #: src/components/TVChartContainer/useChartContextMenu.ts
 msgid "Set Long Take Profit @ {0}"
 msgstr ""
@@ -3644,6 +3702,10 @@ msgstr "市場圖表"
 #: src/components/Referrals/referralsHelper.ts
 msgid "Only letters, numbers, and underscores allowed"
 msgstr "僅允許字母、數字和底線"
+
+#: src/pages/Status/StatusPage.tsx
+msgid "Real-time solvency dashboard. 8-step defense sequence transparency."
+msgstr ""
 
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Trade from your wallet"
@@ -3839,6 +3901,10 @@ msgstr "<0>Solana 支援</0><1>Botanix 支援</1><2>GMX Express</2>"
 msgid "Funds are now in your GMX Account"
 msgstr "資金已存入您的 GMX Account"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Junior Vault Buffer"
+msgstr ""
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Insufficient liquidity. Order will fill when liquidity is available."
 msgstr "流動性不足。當流動性可用時將執行訂單。"
@@ -3945,6 +4011,10 @@ msgstr "做空未平倉量最低抵押品因子"
 msgid "Failed TWAP Swap part"
 msgstr "TWAP 兌換部分失敗"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Phase 1 — Prevention"
+msgstr ""
+
 #: src/pages/Dashboard/OverviewCard.tsx
 msgid "Annualized data based on the past 7 days"
 msgstr "年化數據基於過去 7 天"
@@ -4002,6 +4072,10 @@ msgstr "大規模交易，無需擔憂薄弱的訂單簿或滑點"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Safety buffer is at its base level ({basePct}%). Market conditions are stable — no FR spike adjustment active."
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Your staking yield offsets the hedge premium. Net cost may be positive."
 msgstr ""
 
 #: src/components/Claims/SettleAccruedCard.tsx
@@ -4111,6 +4185,7 @@ msgid "Express Trading is unavailable with the network's native token {0}. Consi
 msgstr "Express Trading 不支援網路原生代幣 {0}。請考慮改用 {1}。"
 
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
+#: src/components/AppNav/AppNav.tsx
 #: src/components/SideNav/SideNav.tsx
 #: src/pages/SyntheticsPage/SyntheticsPage.tsx
 msgid "Trade"
@@ -4297,8 +4372,18 @@ msgstr "分享 GMX 意見回饋"
 msgid "Withdraw failed"
 msgstr "提取失敗"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Hedge ADL"
+msgstr ""
+
 #: src/pages/Admin/AdminPage.tsx
 msgid "Saving…"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "This token earns no yield. Hedge cost = funding rate only."
 msgstr ""
 
 #. chainname balance
@@ -4532,6 +4617,10 @@ msgstr "閱讀規則"
 msgid "Source chain supports single token only"
 msgstr "來源鏈僅支援單一代幣"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Users pay zero fees for perpetual hedging, thanks to the Yield Token FR Offset mechanism."
+msgstr ""
+
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 #: src/components/TVChart/ChartHeader.tsx
 #: src/pages/Dashboard/OverviewCard.tsx
@@ -4635,9 +4724,17 @@ msgstr "缺少領取參數，請稍後重試"
 msgid "AVG. LEV."
 msgstr "平均槓桿"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Detecting mode…"
+msgstr ""
+
 #: src/components/OrderEditor/OrderEditor.tsx
 msgid "Enter a new ratio or allowed slippage"
 msgstr "請輸入新比例或允許的滑點"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "ADL for Hedge-Shorts"
+msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Risk Management"
@@ -4783,6 +4880,12 @@ msgstr "正在載入市場資料..."
 msgid "{longOrShort} positions do not pay a funding fee or a borrow fee"
 msgstr "{longOrShort} 倉位不需支付資金費率或借貸費用"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 1 · Prevention"
+msgstr ""
+
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "in {0}"
 msgstr "於 {0}"
@@ -4799,6 +4902,7 @@ msgstr ""
 msgid "Price impact rebates accrued. Claimable after 5 days. <0>Read more</0>."
 msgstr "價格影響回饋已累積，5 天後可領取。<0>閱讀更多</0>。"
 
+#: src/components/AppNav/AppNav.tsx
 #: src/pages/Earn/EarnPageLayout.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Portfolio"
@@ -4870,10 +4974,6 @@ msgstr "編輯 {0}"
 msgid "<0>Buy</0> {wrappedNativeTokenSymbol}."
 msgstr "<0>買入</0> {wrappedNativeTokenSymbol}。"
 
-#: src/pages/Status/components/ProtocolCommitmentBanner.tsx
-msgid "This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 7 (contract termination) rather than increasing costs for existing users. The 7-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order."
-msgstr ""
-
 #: src/pages/Admin/AdminPage.tsx
 #: src/pages/Admin/AdminPage.tsx
 #: src/pages/Admin/AdminPage.tsx
@@ -4915,6 +5015,10 @@ msgstr "回饋分配歷史"
 msgid "Active orders"
 msgstr "進行中的訂單"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Jr Buffer"
+msgstr ""
+
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "Depositing to Avalanche is disabled. Trade directly from your Avalanche wallet."
 msgstr "已停用存入 Avalanche 功能。請直接從您的 Avalanche 錢包進行交易。"
@@ -4931,10 +5035,6 @@ msgstr "選擇市場"
 #: src/components/TokenSelector/TokenSelector.tsx
 msgid "No tokens matched"
 msgstr "沒有符合的代幣"
-
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Est. USDC received"
-#~ msgstr ""
 
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Error sending permit for {0}: {1}"
@@ -5172,6 +5272,14 @@ msgstr "強制外部兌換失敗"
 msgid "Withdraw"
 msgstr "提取"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "High-leverage (5×+) new hedges are locked. Once the OI cap is reached, all new entries are frozen."
+msgstr ""
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 0 · Normal"
+msgstr ""
+
 #: src/components/TradeHistory/keys.ts
 msgid "Update Stop Market"
 msgstr "更新止損市價單"
@@ -5218,6 +5326,11 @@ msgstr ""
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shift request sent"
 msgstr "轉移請求已發送"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Safe"
+msgstr ""
 
 #: src/components/AcceptablePriceImpactInputRow/AcceptablePriceImpactInputRow.tsx
 msgid "Current impact: {0}. Add 0.30% buffer for better order execution."
@@ -5404,6 +5517,7 @@ msgid "Positive funding fees"
 msgstr "正向資金費用"
 
 #: src/pages/Admin/AdminPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/FundingRateChart.tsx
 #: src/pages/Trade/components/OIChart.tsx
 msgid "Loading…"
@@ -5412,6 +5526,11 @@ msgstr ""
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Funds will appear in your GMX Account soon"
 msgstr "資金將很快顯示在您的 GMX Account 中"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 3 · Final Defense"
+msgstr ""
 
 #: src/components/InterviewToast/InterviewToast.tsx
 msgid "Join an anonymous one-on-one chat to share your GMX liquidity provider experience"
@@ -5484,6 +5603,11 @@ msgstr "WETH-USDC 池中有現有限價單。<0>切換至 WETH-USDC 池</0>"
 msgid "GM: {0}"
 msgstr "GM: {0}"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Senior Yield"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Pool max long USD for deposit"
 msgstr "池做多 USD 存入上限"
@@ -5550,6 +5674,10 @@ msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Mode A — Auto-Terminate"
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "System working as intended"
 msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
@@ -5910,6 +6038,14 @@ msgstr ""
 msgid "Shifting only available on {chainNames} or {lastChainName}. Switch networks to continue."
 msgstr "Shifting 僅適用於 {chainNames} 或 {lastChainName}。請切換網路以繼續。"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "The protocol stability fund covers FR shortfalls using surplus accumulated from past profits."
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Supply-Side Incentive"
+msgstr ""
+
 #: src/components/TradeBox/hooks/useTradeButtonState.tsx
 msgid "No swap path available. <0>Swap {0} to {swapToTokenSymbol}</0>, then to {1}."
 msgstr "無可用兌換路徑。<0>將 {0} 兌換為 {swapToTokenSymbol}</0>，再兌換為 {1}。"
@@ -5938,6 +6074,11 @@ msgstr "成交價格"
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "spinner"
 msgstr "載入中"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 3 · Enforcement"
+msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Unknown sell GM order"
@@ -6319,6 +6460,10 @@ msgstr "分割數量"
 msgid "No open orders"
 msgstr "沒有未結訂單"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Premium Surge"
+msgstr ""
+
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Insufficient liquidity. Available: {availableLiquidityText}"
 msgstr "流動性不足。可用：{availableLiquidityText}"
@@ -6378,6 +6523,10 @@ msgstr ""
 msgid "Airdrop"
 msgstr "空投"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 7–8"
+msgstr ""
+
 #: src/components/ModalViews/RedirectModal.tsx
 msgid "Launch app"
 msgstr "啟動應用程式"
@@ -6420,10 +6569,6 @@ msgstr "存入 {gasPaymentTokensText}"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "GMX (Portuguese)"
 msgstr "GMX（葡萄牙語）"
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Oracle Price"
-#~ msgstr ""
 
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -7068,6 +7213,8 @@ msgid "Position would be liquidatable"
 msgstr "倉位將面臨清算"
 
 #: src/pages/Status/components/BufferGauges.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "LP Boost"
 msgstr ""
 
@@ -7075,10 +7222,6 @@ msgstr ""
 #: src/components/Footer/constants.tsx
 msgid "Media kit"
 msgstr "媒體素材包"
-
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Exceeds your VLP balance"
-#~ msgstr ""
 
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 msgid "$ 0.00"
@@ -7462,6 +7605,10 @@ msgstr "GMX 交易統計"
 msgid "High leverage increases liquidation risk"
 msgstr "高槓桿會增加清算風險"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Junior Buffer"
+msgstr ""
+
 #: src/components/Errors/errorToasts.tsx
 msgid "Invalid signature.<0/><1/>Try a different wallet provider or switch to Classic or One-Click Trading in <2>settings</2>"
 msgstr "無效簽名。<0/><1/>請嘗試其他錢包供應商，或在<2>設定</2>中切換至 Classic 或 One-Click Trading"
@@ -7835,6 +7982,12 @@ msgstr "摘要"
 msgid "ENTRY PRICE"
 msgstr "入場價格"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Trade ADL"
+msgstr ""
+
 #: src/components/SettingsModal/DisplaySettings.tsx
 msgid "Display PnL after fees"
 msgstr "顯示扣除費用後的 PnL"
@@ -7874,10 +8027,6 @@ msgstr "倉位手續費因子（負向 PI）"
 #: src/components/DateRangeSelect/DateRangeSelect.tsx
 msgid "90d"
 msgstr "90天"
-
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "LP Withdrawal"
-#~ msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "({0} days ago)"
@@ -7968,6 +8117,10 @@ msgstr "超過最大數量"
 
 #: src/pages/Admin/AdminPage.tsx
 msgid "Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded."
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Mode A — Yield + Premium Offset"
 msgstr ""
 
 #: src/components/PositionSeller/CollateralDestinationDialog.tsx
@@ -8093,6 +8246,10 @@ msgstr "Limit Increase"
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "Transferring..."
 msgstr "轉帳中..."
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Reserve"
+msgstr ""
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Sell {gmOrGlvLabel} failed."
@@ -8716,10 +8873,6 @@ msgstr "未質押"
 msgid "{0}ms"
 msgstr "{0}ms"
 
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Position is closed and margin is returned when ADL is triggered."
-#~ msgstr ""
-
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/BridgeModal/BridgeInModal.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
@@ -8760,10 +8913,6 @@ msgstr "x"
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "Notifications"
 msgstr "通知"
-
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Managed Net APY"
-#~ msgstr ""
 
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Trading mode"
@@ -8996,6 +9145,11 @@ msgstr "協議分析"
 msgid "Show positions on chart"
 msgstr "在圖表上顯示倉位"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Detecting collateral mode…"
+msgstr ""
+
+#: src/components/AppNav/AppNav.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Hedge/HedgePage.tsx
@@ -9336,6 +9490,10 @@ msgstr "收到"
 msgid "Execution Fee"
 msgstr ""
 
+#: src/pages/Status/components/ProtocolCommitmentBanner.tsx
+msgid "This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 7 (contract termination) rather than increasing costs for existing users. The 8-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order."
+msgstr ""
+
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Liquidity removed"
@@ -9383,6 +9541,10 @@ msgstr "使用您推薦碼的交易者數量"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Max reserved {directionLabel}"
 msgstr "最大保留 {directionLabel}"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "ADL for Long Profits"
+msgstr ""
 
 #: src/components/TradeHistory/TradeHistory.tsx
 msgid "Realized PnL after fees and net price impact"
@@ -9683,6 +9845,10 @@ msgstr "GMX 獎勵："
 msgid "Wallet trading only on these networks"
 msgstr "僅在這些網路上使用錢包交易"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Entry premiums rise only for incoming users. All existing hedge positions are unaffected."
+msgstr ""
+
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 msgid "Trigger Price"
 msgstr "觸發價格"
@@ -9714,6 +9880,10 @@ msgstr "無來源代幣地址"
 #: src/pages/RpcDebug/parts.tsx
 msgid "Large account"
 msgstr "大型帳戶"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Phase 3 — Last Resort"
+msgstr ""
 
 #: src/components/GmSwap/GmFees/GmFees.tsx
 msgid "Shift fee"
@@ -9906,6 +10076,10 @@ msgstr "{0} 代幣已保留用於歸屬"
 #: src/components/Errors/ErrorBoundary.tsx
 msgid "Something went wrong"
 msgstr "發生錯誤"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "FR Offset"
+msgstr ""
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Freeze"
@@ -10376,10 +10550,6 @@ msgstr "倉位可能僅因費用（資金費用 + 借貸費用）而被清算，
 msgid "Claim price impact rebates"
 msgstr "領取價格影響回饋"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Next redemption:"
-#~ msgstr ""
-
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Fulfilling shift request..."
 msgstr "正在處理轉換請求..."
@@ -10712,6 +10882,10 @@ msgstr "獲取 GMX 的提醒和公告，隨時掌握您的交易、清算風險�
 msgid "{gmOrGlvLabel} bought successfully, but bridge to Base failed. Your funds are safe in your GMX Account. Retry the bridge or go to the {indexName} pool to withdraw your GM tokens."
 msgstr "{gmOrGlvLabel} 買入成功，但橋接至 Base 失敗。您的資金安全存放在您的 GMX Account 中。請重試橋接，或前往 {indexName} 池提取您的 GM 代幣。"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 4–5"
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a yield-optimizing crypto-index token that:"
 msgstr "GLV（GMX Liquidity Vaults）是 GMX V2 對 GLP 的改良版本。這是一種收益優化的加密指數代幣，能夠："
@@ -10724,10 +10898,6 @@ msgstr "{0} 個代幣已從存入歸屬期的 {1} esGMX 轉換為 GMX。"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Trigger price above liquidation price"
 msgstr "觸發價格高於清算價格"
-
-#: src/pages/Hedge/HedgePage.tsx
-#~ msgid "Self-Custody APY"
-#~ msgstr ""
 
 #: src/components/GmxAccountModal/TransferDetailsView.tsx
 msgid "Repeat transaction"
@@ -10974,6 +11144,10 @@ msgstr "重新載入頁面"
 msgid "Order won't execute: trigger price beyond liquidation price"
 msgstr "訂單將不會執行：觸發價格超過清算價格"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Phase 2 — Internal Defense"
+msgstr ""
+
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settling..."
 msgstr "結算中..."
@@ -11042,6 +11216,10 @@ msgstr "領取資金費用"
 msgid "Token permit testing"
 msgstr "代幣許可測試"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Lev Lock"
+msgstr ""
+
 #: src/pages/BuyGMX/BuyGmxModal.tsx
 msgid "Buy GMX directly"
 msgstr "直接購買 GMX"
@@ -11097,10 +11275,6 @@ msgstr "推薦碼已更新"
 msgid "to toggle its filtering. To use this debug tool on swap, stay on MARKET GRAPH tab and switch to swap. Settings are saved in local storage; don't forget to clear it when done."
 msgstr "以切換其篩選。若要在兌換上使用此除錯工具，請停留在 MARKET GRAPH 分頁並切換至兌換。設定儲存於本機儲存空間中，完成後請記得清除。"
 
-#: src/pages/Portfolio/PortfolioPage.tsx
-#~ msgid "Withdraw VLP"
-#~ msgstr ""
-
 #: src/pages/AccountEvents/AccountEvents.tsx
 #: src/pages/AccountEvents/AccountEvents.tsx
 msgid "Account events"
@@ -11134,6 +11308,7 @@ msgstr "透過 <0>Camelot</0> 在 Arbitrum 上購買 APE"
 msgid "Depositing..."
 msgstr "存入中..."
 
+#: src/components/AppNav/AppNav.tsx
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
@@ -11192,6 +11367,10 @@ msgstr "地址已複製"
 msgid "<0>Delegate your undelegated {0} GMX DAO</0>voting power before claiming."
 msgstr "<0>在領取前，請將您未委託的 {0} GMX DAO</0>投票權進行委託。"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "New Entry Premium Surge"
+msgstr ""
+
 #: src/components/UserIncentiveDistribution/ClaimableAmounts.tsx
 msgid "Claim funds"
 msgstr "領取資金"
@@ -11208,6 +11387,7 @@ msgstr "產生推薦碼"
 msgid "NET VALUE"
 msgstr "淨值"
 
+#: src/components/AppNav/AppNav.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Vaults"
@@ -11375,6 +11555,7 @@ msgstr "事件"
 msgid "Distribution"
 msgstr "分配"
 
+#: src/components/SettingsModal/SettingsModal.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/SideNav/BottomMenuSection.tsx
 #: src/components/SideNav/LanguageNavItem.tsx
@@ -11388,6 +11569,10 @@ msgstr "{idleSeconds}s"
 #: src/pages/Actions/ActionsRouter.tsx
 msgid "GMX V1 actions"
 msgstr "GMX V1 操作"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Highly profitable speculative long positions are force-closed, directly reducing the outstanding FR obligation."
+msgstr ""
 
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "GLV vaults:"
@@ -11493,10 +11678,6 @@ msgstr "儀表板"
 #: src/domain/synthetics/trade/utils/validation.ts
 msgid "Leftover collateral below {0} USD"
 msgstr "剩餘抵押品低於 {0} USD"
-
-#: src/components/AppNav/AppNav.tsx
-msgid "{label}"
-msgstr ""
 
 #: src/domain/synthetics/positions/utils.ts
 msgid "trigger"
@@ -11838,10 +12019,6 @@ msgstr "資金正在跨鏈至..."
 msgid "Network fee"
 msgstr "網路費用"
 
-#: src/pages/Status/StatusPage.tsx
-msgid "Real-time solvency dashboard. 7-step defense sequence transparency."
-msgstr ""
-
 #: src/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivated"
 msgstr "已停用"
@@ -12053,10 +12230,6 @@ msgstr "輸入推薦碼以獲得手續費折扣"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Margin Token"
 msgstr ""
-
-#: src/pages/Hedge/HedgeDetailPage.tsx
-#~ msgid "Emergency Behavior (ADL)"
-#~ msgstr ""
 
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "General performance details"

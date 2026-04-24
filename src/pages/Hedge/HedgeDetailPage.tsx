@@ -731,7 +731,10 @@ export default function HedgeDetailPage() {
   const totalShortfallUsd = rwaShortfallUsd + marginShortfallUsd;
   const hasInsufficientBalance = !!account && rwaAmount > 0 && totalShortfallUsd > 0.001;
 
-  const canExecute = account && !isSubmitting && rwaAmount > 0 && !pageData.isHedgeDisabled && !hasInsufficientBalance;
+  // Also block submit while assetType is loading (Issue #201: prevents mode-ambiguous tx)
+  const isModeLoading = pageData.isYieldBearing === undefined;
+  const canExecute =
+    account && !isSubmitting && rwaAmount > 0 && !pageData.isHedgeDisabled && !hasInsufficientBalance && !isModeLoading;
 
   // Compute display values for Safety Buffer warning banner
   const frPct = pageData.fundingRateBps !== null ? (Math.abs(pageData.fundingRateBps) / 100).toFixed(2) : null;
@@ -814,12 +817,34 @@ export default function HedgeDetailPage() {
 
               {/* Status: Yield vs Funding */}
               <div className="mb-20 border-b border-b-vantage-border pb-20">
-                <div className="mb-12 text-12 font-medium text-slate-400">{t`Status`}</div>
+                <div className="mb-12 flex items-center justify-between">
+                  <div className="text-12 font-medium text-slate-400">{t`Status`}</div>
+                  {/* Mode badge (Issue #201) — derived from AssetRegistry.assetType */}
+                  {pageData.isYieldBearing === undefined ? (
+                    <span className="animate-pulse rounded-full bg-slate-700 px-10 py-3 text-11 text-slate-500">
+                      {t`Loading…`}
+                    </span>
+                  ) : pageData.isYieldBearing ? (
+                    <span className="rounded-full bg-green-900/40 px-10 py-3 text-11 font-medium text-green-400">
+                      {t`Mode A — Yield + Premium Offset`}
+                    </span>
+                  ) : (
+                    <span className="rounded-full bg-slate-700/60 px-10 py-3 text-11 font-medium text-slate-400">
+                      {t`Mode B — Premium Only`}
+                    </span>
+                  )}
+                </div>
                 <YieldMeter
-                  yieldAprBps={pageData.yieldAprBps}
+                  yieldAprBps={pageData.isYieldBearing ? pageData.yieldAprBps : 0}
                   fundingRateBps={pageData.fundingRateBps}
-                  netApyBps={pageData.netApyBps}
+                  netApyBps={pageData.isYieldBearing ? pageData.netApyBps : pageData.fundingRateBps}
                 />
+                {/* Mode B explanation */}
+                {pageData.isYieldBearing === false && (
+                  <p className="mt-10 text-11 text-slate-500">
+                    {t`This token earns no yield. Hedge cost = funding rate only.`}
+                  </p>
+                )}
               </div>
 
               {/* Soft-lock warning (Issue #180) */}
@@ -908,6 +933,27 @@ export default function HedgeDetailPage() {
               <p className="mt-6 text-11 text-slate-500">
                 {t`Deposited to the LP Vault. You receive VLP shares in return.`}
               </p>
+
+              {/* Mode indicator (Issue #201) — auto-detected from AssetRegistry */}
+              <div className="mt-10">
+                {pageData.isYieldBearing === undefined ? (
+                  <div className="animate-pulse rounded-4 bg-slate-800/40 px-12 py-8 text-11 text-slate-500">
+                    {t`Detecting collateral mode…`}
+                  </div>
+                ) : pageData.isYieldBearing ? (
+                  <div className="rounded-4 bg-green-900/20 px-12 py-8 text-11 text-green-400">
+                    ✦ {t`Mode A — Yield-Bearing`}
+                    <span className="ml-6 text-green-600">
+                      {t`Your staking yield offsets the hedge premium. Net cost may be positive.`}
+                    </span>
+                  </div>
+                ) : (
+                  <div className="rounded-4 bg-slate-800/40 px-12 py-8 text-11 text-slate-400">
+                    ○ {t`Mode B — Stablecoin`}
+                    <span className="ml-6 text-slate-500">{t`No yield earned. Hedge cost = funding rate only.`}</span>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Divider */}
@@ -1128,9 +1174,11 @@ export default function HedgeDetailPage() {
               >
                 {isSubmitting
                   ? t`Submitting…`
-                  : hasInsufficientBalance
-                    ? t`Insufficient Balance`
-                    : t`Deposit ${cfg.symbol} + Open Short`}
+                  : isModeLoading
+                    ? t`Detecting mode…`
+                    : hasInsufficientBalance
+                      ? t`Insufficient Balance`
+                      : t`Deposit ${cfg.symbol} + Open Short`}
               </button>
             )}
           </div>
