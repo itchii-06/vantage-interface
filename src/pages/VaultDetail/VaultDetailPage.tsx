@@ -17,7 +17,12 @@ import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
 import { useVaultDetail } from "domain/vantage/vaults/useVaultDetail";
 import { useVaultTxHistory } from "domain/vantage/vaults/useVaultTxHistory";
 import { useZapInActions } from "domain/vantage/vaults/useZapInActions";
-import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, getVaultConfigByAddress } from "domain/vantage/vaults/vaultConfig";
+import {
+  ASSET_TYPE_COLOR,
+  ASSET_TYPE_LABEL,
+  TRANCHE_META,
+  getVaultConfigByAddress,
+} from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
 import { ZAP_TOKENS, ZapTokenConfig, resolvePoolFee } from "vantage/config/zapTokens";
@@ -299,8 +304,13 @@ export default function VaultDetailPage() {
                 {cfg.symbol.slice(0, 2)}
               </div>
               <div>
-                <div className="flex items-center gap-8">
+                <div className="flex flex-wrap items-center gap-8">
                   <h1 className="text-h1">{cfg.symbol}</h1>
+                  <span
+                    className={`rounded-full px-8 py-2 text-11 font-medium ${TRANCHE_META[cfg.trancheType].badgeClass}`}
+                  >
+                    {TRANCHE_META[cfg.trancheType].shortLabel} · {TRANCHE_META[cfg.trancheType].riskLabel}
+                  </span>
                   <span className={`rounded-full px-8 py-2 text-11 font-medium ${ASSET_TYPE_COLOR[cfg.assetType]}`}>
                     {ASSET_TYPE_LABEL[cfg.assetType]}
                   </span>
@@ -310,7 +320,7 @@ export default function VaultDetailPage() {
                     </span>
                   )}
                 </div>
-                <p className="text-13 text-slate-400">{cfg.name}</p>
+                <p className="mt-4 text-13 text-slate-400">{TRANCHE_META[cfg.trancheType].description}</p>
               </div>
             </div>
 
