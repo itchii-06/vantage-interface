@@ -4,7 +4,7 @@
  * Protocol Solvency Dashboard.
  * Route: /status
  *
- * Shows the 7-step FR risk defense sequence in real-time.
+ * Shows the 8-step FR risk defense sequence in real-time.
  * Per-user ADL risk indicators have moved to /portfolio.
  */
 
@@ -70,7 +70,7 @@ export default function StatusPage() {
 
       <VantagePageContainer
         title={t`Protocol Status`}
-        description={t`Real-time solvency dashboard. 7-step defense sequence transparency.`}
+        description={t`Real-time solvency dashboard. 8-step defense sequence transparency.`}
       >
         <div className="flex flex-col gap-20">
           {/* Solvency drop banner (Phase 3+) */}

@@ -7,7 +7,8 @@
  * Menu: Logo | Hedge | Trade | Vaults | Portfolio | More ▾ (Stats / Docs)
  */
 
-import { t } from "@lingui/macro";
+import { msg, t } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -18,15 +19,16 @@ import logoIcon from "img/logo-w.svg";
 const DOCS_URL = "https://docs.vantage.finance";
 
 const NAV_ITEMS = [
-  { key: "hedge", label: "Hedge", to: "/hedge" },
-  { key: "trade", label: "Trade", to: "/trade" },
-  { key: "vaults", label: "Vaults", to: "/vaults" },
-  { key: "portfolio", label: "Portfolio", to: "/portfolio" },
-  { key: "status", label: "Status", to: "/status" },
+  { key: "hedge", label: msg`Hedge`, to: "/hedge" },
+  { key: "trade", label: msg`Trade`, to: "/trade" },
+  { key: "vaults", label: msg`Vaults`, to: "/vaults" },
+  { key: "portfolio", label: msg`Portfolio`, to: "/portfolio" },
+  { key: "status", label: msg`Status`, to: "/status" },
 ] as const;
 
 export function AppNav() {
   const { pathname } = useLocation();
+  const { _ } = useLingui();
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +49,7 @@ export function AppNav() {
                 isActive ? "text-white" : "text-vantage-text-secondary hover:text-white"
               }`}
             >
-              {t`${label}`}
+              {_(label)}
             </Link>
           );
         })}

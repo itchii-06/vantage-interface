@@ -17,14 +17,15 @@ import Tabs from "components/Tabs/Tabs";
 
 import { DebugSettings } from "./DebugSettings";
 import { DisplaySettings } from "./DisplaySettings";
+import { LanguageSettings } from "./LanguageSettings";
 import { TradingMode } from "./shared";
 import { TradingSettings } from "./TradingSettings";
 
-let SETTINGS_TABS: ("trading" | "display" | "debug")[] = [];
+let SETTINGS_TABS: ("trading" | "display" | "language" | "debug")[] = [];
 if (isDevelopment()) {
-  SETTINGS_TABS = ["trading", "display", "debug"];
+  SETTINGS_TABS = ["trading", "display", "language", "debug"];
 } else {
-  SETTINGS_TABS = ["trading", "display"];
+  SETTINGS_TABS = ["trading", "display", "language"];
 }
 
 type SettingsTab = (typeof SETTINGS_TABS)[number];
@@ -32,6 +33,7 @@ type SettingsTab = (typeof SETTINGS_TABS)[number];
 const TAB_LABELS = {
   trading: msg`Trading settings`,
   display: msg`Display settings`,
+  language: msg`Language`,
   debug: msg`Debug settings`,
 };
 
@@ -263,6 +265,9 @@ export function SettingsModal({
           </TabWrapper>
           <TabWrapper tab="display" activeTab={activeTab}>
             <DisplaySettings />
+          </TabWrapper>
+          <TabWrapper tab="language" activeTab={activeTab}>
+            <LanguageSettings />
           </TabWrapper>
           <TabWrapper tab="debug" activeTab={activeTab}>
             <DebugSettings isSettingsVisible={isSettingsVisible} />
