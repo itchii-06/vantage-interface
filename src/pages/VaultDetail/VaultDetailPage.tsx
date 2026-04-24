@@ -20,7 +20,7 @@ import { useZapInActions } from "domain/vantage/vaults/useZapInActions";
 import {
   ASSET_TYPE_COLOR,
   ASSET_TYPE_LABEL,
-  TRANCHE_META,
+  getTrancheMeta,
   getVaultConfigByAddress,
 } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
@@ -307,9 +307,9 @@ export default function VaultDetailPage() {
                 <div className="flex flex-wrap items-center gap-8">
                   <h1 className="text-h1">{cfg.symbol}</h1>
                   <span
-                    className={`rounded-full px-8 py-2 text-11 font-medium ${TRANCHE_META[cfg.trancheType].badgeClass}`}
+                    className={`rounded-full px-8 py-2 text-11 font-medium ${getTrancheMeta()[cfg.trancheType].badgeClass}`}
                   >
-                    {TRANCHE_META[cfg.trancheType].shortLabel} · {TRANCHE_META[cfg.trancheType].riskLabel}
+                    {getTrancheMeta()[cfg.trancheType].shortLabel} · {getTrancheMeta()[cfg.trancheType].riskLabel}
                   </span>
                   <span className={`rounded-full px-8 py-2 text-11 font-medium ${ASSET_TYPE_COLOR[cfg.assetType]}`}>
                     {ASSET_TYPE_LABEL[cfg.assetType]}
@@ -320,7 +320,7 @@ export default function VaultDetailPage() {
                     </span>
                   )}
                 </div>
-                <p className="mt-4 text-13 text-slate-400">{TRANCHE_META[cfg.trancheType].description}</p>
+                <p className="mt-4 text-13 text-slate-400">{getTrancheMeta()[cfg.trancheType].description}</p>
               </div>
             </div>
 

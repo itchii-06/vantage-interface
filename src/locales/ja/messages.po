@@ -1430,7 +1430,7 @@ msgstr "ストップロス"
 
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "No vaults in this category."
-msgstr "このカテゴリにボルトはありません。"
+msgstr "このカテゴリにボールトはありません。"
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Transactions"
@@ -5065,8 +5065,8 @@ msgid "possibilities in total"
 msgstr "パターン（合計）"
 
 #: src/pages/Vaults/VaultsPage.tsx
-msgid "{0}s"
-msgstr "{0}"
+#~ msgid "{0}s"
+#~ msgstr "{0}"
 
 #: src/components/TradeBox/TradeBoxRows/NextStoredImpactRows.tsx
 msgid "Price impact is stored when you increase a position and applied when you decrease. <0>Read more</0>."
@@ -6523,6 +6523,10 @@ msgstr "価格への影響 / 手数料"
 msgid "GMX proposals"
 msgstr "GMX提案"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Junior Vaults"
+msgstr "ジュニアボールト一覧"
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Total pending rewards"
 msgstr "未請求報酬合計"
@@ -6634,6 +6638,10 @@ msgstr "増加中..."
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Insufficient liquidity for pay-to-collateral swap at trigger price"
 msgstr "トリガー価格での支払トークンから担保へのスワップに必要な流動性不足"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Captures all residual yield after Senior allocations, enabling higher APY potential. Acts as the first-loss layer — absorbs FR deficits before Senior LPs are affected."
+msgstr "シニアへの分配後の残余利回りをすべて獲得します。高いAPYポテンシャルを実現しつつ、ファースト・ロス・レイヤーとしてFR赤字をシニアLPより先に吸収します。"
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Fewer details"
@@ -7780,9 +7788,10 @@ msgstr "<0>マーケットグループ</0><1>ネット建玉</1>"
 msgid "Transfer submitted"
 msgstr "送金が送信されました"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Junior Vault"
-msgstr "ジュニアボルト"
+msgstr "ジュニアボールト"
 
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/lpTxn/useDepositTransactions.tsx
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/lpTxn/useDepositTransactions.tsx
@@ -8090,7 +8099,7 @@ msgstr "プロジェクト"
 
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Choose your risk-return profile: Senior vaults offer stability, Junior captures higher yield."
-msgstr "リスク・リターン特性を選択してください：シニアボルトは安定性を提供し、ジュニアボルトは高い利回りを追求します。"
+msgstr "リスク・リターン特性を選択してください：シニアボールトは安定性を提供し、ジュニアボールトは高い利回りを追求します。"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Protection Target"
@@ -8797,6 +8806,10 @@ msgstr "提出"
 msgid "Claimed"
 msgstr "受け取り完了"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "High Reward"
+msgstr "高リワード"
+
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Connect wallet to trade"
 msgstr "ウォレットを接続してトレード"
@@ -9086,6 +9099,10 @@ msgstr "担保受け取り可能までの遅延"
 msgid "Debug controls"
 msgstr "デバッグコントロール"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Low Risk"
+msgstr "低リスク"
+
 #: src/pages/LeaderboardPage/components/LeaderboardNavigation.tsx
 msgid "Concluded"
 msgstr "終了"
@@ -9130,9 +9147,10 @@ msgstr "Jones DAO"
 msgid "Failed to download trade history CSV"
 msgstr "取引履歴CSVのダウンロードに失敗しました"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Senior Vaults"
-msgstr "シニアボルト"
+msgstr "シニアボールト"
 
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
@@ -9344,6 +9362,10 @@ msgstr ""
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Price impact"
 msgstr "価格への影響"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Senior Vault"
+msgstr "シニアボールト"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Estimated USDC received"
@@ -10056,6 +10078,10 @@ msgstr "総投資額"
 #: src/domain/synthetics/userFeedback/utils.ts
 msgid "What did you like most?"
 msgstr "最も良かった点は何ですか？"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Receives priority yield distribution from protocol revenue. In the event of a loss, Junior capital absorbs the deficit first, providing a higher safety cushion."
+msgstr "プロトコル収益から優先的に利回り分配を受けます。損失が発生した場合、ジュニア資本が先に赤字を吸収するため、より高い安全性を確保できます。"
 
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "Performance and chart data are based on UTC times"
@@ -11527,6 +11553,10 @@ msgstr "受け取りパラメータが利用できません。数秒後に再試
 msgid "Read details"
 msgstr "詳細を読む"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Senior"
+msgstr "シニア"
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "GMX trading chat"
 msgstr "GMX trading chat"
@@ -11767,6 +11797,10 @@ msgstr "フェーズ2-4"
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "Proportional stored impact"
 msgstr "比例配分された蓄積インパクト"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Junior"
+msgstr "ジュニア"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Rage Trade"

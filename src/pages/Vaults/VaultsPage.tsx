@@ -14,13 +14,13 @@ import { useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
-import { useVaultList } from "domain/vantage/vaults/useVaultList";
 import { type VaultListItem } from "domain/vantage/vaults/useVaultList";
+import { useVaultList } from "domain/vantage/vaults/useVaultList";
 import {
   ASSET_TYPE_COLOR,
   ASSET_TYPE_LABEL,
-  TRANCHE_META,
   VAULT_CONFIGS,
+  getTrancheMeta,
   type TrancheType,
 } from "domain/vantage/vaults/vaultConfig";
 import useWallet from "lib/wallets/useWallet";
@@ -182,9 +182,9 @@ function VaultTable({ items, apyByKey, account, sortKey, sortDir, onSort, onRowC
                 <div className="flex items-center gap-8">
                   <div className="text-16 font-semibold text-white">{item.symbol}</div>
                   <span
-                    className={`rounded-full px-8 py-1 text-11 font-medium ${TRANCHE_META[item.trancheType].badgeClass}`}
+                    className={`rounded-full px-8 py-1 text-11 font-medium ${getTrancheMeta()[item.trancheType].badgeClass}`}
                   >
-                    {TRANCHE_META[item.trancheType].shortLabel} · {TRANCHE_META[item.trancheType].riskLabel}
+                    {getTrancheMeta()[item.trancheType].shortLabel} · {getTrancheMeta()[item.trancheType].riskLabel}
                   </span>
                 </div>
                 <div className="text-14 text-vantage-text-secondary">{item.name}</div>
@@ -260,7 +260,7 @@ function TrancheSection({
   onSort,
   onRowClick,
 }: TrancheSectionProps) {
-  const meta = TRANCHE_META[tranche];
+  const meta = getTrancheMeta()[tranche];
   const icon = tranche === "senior" ? "🛡️" : "🚀";
   const borderClass = tranche === "senior" ? "border-l-indigo-500" : "border-l-amber-500";
 
@@ -272,7 +272,7 @@ function TrancheSection({
           <span className="text-20">{icon}</span>
           <div>
             <h2 className="text-16 font-bold text-white">
-              {t`${meta.label}s`} <span className="ml-4 text-14 font-normal text-slate-400">({meta.riskLabel})</span>
+              {meta.labelPlural} <span className="ml-4 text-14 font-normal text-slate-400">({meta.riskLabel})</span>
             </h2>
             <p className="leading-relaxed mt-2 text-13 text-slate-400">{meta.description}</p>
           </div>

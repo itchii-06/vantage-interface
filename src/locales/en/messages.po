@@ -5065,8 +5065,8 @@ msgid "possibilities in total"
 msgstr "possibilities in total"
 
 #: src/pages/Vaults/VaultsPage.tsx
-msgid "{0}s"
-msgstr "{0}s"
+#~ msgid "{0}s"
+#~ msgstr "{0}s"
 
 #: src/components/TradeBox/TradeBoxRows/NextStoredImpactRows.tsx
 msgid "Price impact is stored when you increase a position and applied when you decrease. <0>Read more</0>."
@@ -6523,6 +6523,10 @@ msgstr "Price impact / fees"
 msgid "GMX proposals"
 msgstr "GMX proposals"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Junior Vaults"
+msgstr "Junior Vaults"
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Total pending rewards"
 msgstr "Total pending rewards"
@@ -6634,6 +6638,10 @@ msgstr "Increasing..."
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Insufficient liquidity for pay-to-collateral swap at trigger price"
 msgstr "Insufficient liquidity for pay-to-collateral swap at trigger price"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Captures all residual yield after Senior allocations, enabling higher APY potential. Acts as the first-loss layer — absorbs FR deficits before Senior LPs are affected."
+msgstr "Captures all residual yield after Senior allocations, enabling higher APY potential. Acts as the first-loss layer — absorbs FR deficits before Senior LPs are affected."
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Fewer details"
@@ -7780,6 +7788,7 @@ msgstr "<0>Market groups</0><1>Net open interest</1>"
 msgid "Transfer submitted"
 msgstr "Transfer submitted"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Junior Vault"
 msgstr "Junior Vault"
@@ -8797,6 +8806,10 @@ msgstr "Submit"
 msgid "Claimed"
 msgstr "Claimed"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "High Reward"
+msgstr "High Reward"
+
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Connect wallet to trade"
 msgstr "Connect wallet to trade"
@@ -9086,6 +9099,10 @@ msgstr "Claimable collateral delay"
 msgid "Debug controls"
 msgstr "Debug controls"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Low Risk"
+msgstr "Low Risk"
+
 #: src/pages/LeaderboardPage/components/LeaderboardNavigation.tsx
 msgid "Concluded"
 msgstr "Concluded"
@@ -9130,6 +9147,7 @@ msgstr "Jones DAO"
 msgid "Failed to download trade history CSV"
 msgstr "Failed to download trade history CSV"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Senior Vaults"
 msgstr "Senior Vaults"
@@ -9344,6 +9362,10 @@ msgstr "Set AUM allocation caps for hedge and trade OI per vault. Cap = 0 (Unlim
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Price impact"
 msgstr "Price impact"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Senior Vault"
+msgstr "Senior Vault"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Estimated USDC received"
@@ -10056,6 +10078,10 @@ msgstr "Total investment value"
 #: src/domain/synthetics/userFeedback/utils.ts
 msgid "What did you like most?"
 msgstr "What did you like most?"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Receives priority yield distribution from protocol revenue. In the event of a loss, Junior capital absorbs the deficit first, providing a higher safety cushion."
+msgstr "Receives priority yield distribution from protocol revenue. In the event of a loss, Junior capital absorbs the deficit first, providing a higher safety cushion."
 
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "Performance and chart data are based on UTC times"
@@ -11527,6 +11553,10 @@ msgstr "Claim parameters unavailable. Retry in a few seconds"
 msgid "Read details"
 msgstr "Read details"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Senior"
+msgstr "Senior"
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "GMX trading chat"
 msgstr "GMX trading chat"
@@ -11767,6 +11797,10 @@ msgstr "Phase 2-4"
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "Proportional stored impact"
 msgstr "Proportional stored impact"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Junior"
+msgstr "Junior"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Rage Trade"

@@ -5065,8 +5065,8 @@ msgid "possibilities in total"
 msgstr "种可能的路径"
 
 #: src/pages/Vaults/VaultsPage.tsx
-msgid "{0}s"
-msgstr ""
+#~ msgid "{0}s"
+#~ msgstr ""
 
 #: src/components/TradeBox/TradeBoxRows/NextStoredImpactRows.tsx
 msgid "Price impact is stored when you increase a position and applied when you decrease. <0>Read more</0>."
@@ -6523,6 +6523,10 @@ msgstr "价格影响 / 费用"
 msgid "GMX proposals"
 msgstr "GMX 提案"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Junior Vaults"
+msgstr ""
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Total pending rewards"
 msgstr "待领取奖励总额"
@@ -6634,6 +6638,10 @@ msgstr "正在加仓..."
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Insufficient liquidity for pay-to-collateral swap at trigger price"
 msgstr "在触发价格下，支付代币转换为抵押品的流动性不足"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Captures all residual yield after Senior allocations, enabling higher APY potential. Acts as the first-loss layer — absorbs FR deficits before Senior LPs are affected."
+msgstr ""
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Fewer details"
@@ -7780,6 +7788,7 @@ msgstr "<0>市场分组</0><1>净未平仓量</1>"
 msgid "Transfer submitted"
 msgstr "转账已提交"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Junior Vault"
 msgstr ""
@@ -8797,6 +8806,10 @@ msgstr "提交"
 msgid "Claimed"
 msgstr "已领取"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "High Reward"
+msgstr ""
+
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Connect wallet to trade"
 msgstr ""
@@ -9086,6 +9099,10 @@ msgstr "可领取抵押品延迟"
 msgid "Debug controls"
 msgstr "调试控制"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Low Risk"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardNavigation.tsx
 msgid "Concluded"
 msgstr "已结束"
@@ -9130,6 +9147,7 @@ msgstr "Jones DAO"
 msgid "Failed to download trade history CSV"
 msgstr "交易历史 CSV 下载失败"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Senior Vaults"
 msgstr ""
@@ -9344,6 +9362,10 @@ msgstr ""
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Price impact"
 msgstr "价格影响"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Senior Vault"
+msgstr ""
 
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Estimated USDC received"
@@ -10056,6 +10078,10 @@ msgstr "总投资价值"
 #: src/domain/synthetics/userFeedback/utils.ts
 msgid "What did you like most?"
 msgstr "您最喜欢哪些方面？"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Receives priority yield distribution from protocol revenue. In the event of a loss, Junior capital absorbs the deficit first, providing a higher safety cushion."
+msgstr ""
 
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "Performance and chart data are based on UTC times"
@@ -11527,6 +11553,10 @@ msgstr "领取参数不可用。请在几秒后重试"
 msgid "Read details"
 msgstr "查看详情"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Senior"
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "GMX trading chat"
 msgstr "GMX trading chat"
@@ -11767,6 +11797,10 @@ msgstr ""
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "Proportional stored impact"
 msgstr "比例储存影响"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Junior"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Rage Trade"

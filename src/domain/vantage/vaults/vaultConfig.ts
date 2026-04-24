@@ -8,6 +8,8 @@
  * remains network-agnostic. For localhost these come from frontend-localhost.json.
  */
 
+import { t } from "@lingui/macro";
+
 import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
 // ---------------------------------------------------------------------------
@@ -24,30 +26,34 @@ export type TrancheType = "senior" | "junior";
 
 export interface TrancheMeta {
   label: string;
+  labelPlural: string;
   shortLabel: string;
   riskLabel: string;
   badgeClass: string;
   description: string;
 }
 
-export const TRANCHE_META: Record<TrancheType, TrancheMeta> = {
-  senior: {
-    label: "Senior Vault",
-    shortLabel: "Senior",
-    riskLabel: "Low Risk",
-    badgeClass: "bg-indigo-900/60 text-indigo-300 border border-indigo-700",
-    description:
-      "Receives priority yield distribution from protocol revenue. In the event of a loss, Junior capital absorbs the deficit first, providing a higher safety cushion.",
-  },
-  junior: {
-    label: "Junior Vault",
-    shortLabel: "Junior",
-    riskLabel: "High Reward",
-    badgeClass: "bg-amber-900/60 text-amber-300 border border-amber-700",
-    description:
-      "Captures all residual yield after Senior allocations, enabling higher APY potential. Acts as the first-loss layer — absorbs FR deficits before Senior LPs are affected.",
-  },
-};
+/** Returns tranche display metadata with all strings translated via Lingui. */
+export function getTrancheMeta(): Record<TrancheType, TrancheMeta> {
+  return {
+    senior: {
+      label: t`Senior Vault`,
+      labelPlural: t`Senior Vaults`,
+      shortLabel: t`Senior`,
+      riskLabel: t`Low Risk`,
+      badgeClass: "bg-indigo-900/60 text-indigo-300 border border-indigo-700",
+      description: t`Receives priority yield distribution from protocol revenue. In the event of a loss, Junior capital absorbs the deficit first, providing a higher safety cushion.`,
+    },
+    junior: {
+      label: t`Junior Vault`,
+      labelPlural: t`Junior Vaults`,
+      shortLabel: t`Junior`,
+      riskLabel: t`High Reward`,
+      badgeClass: "bg-amber-900/60 text-amber-300 border border-amber-700",
+      description: t`Captures all residual yield after Senior allocations, enabling higher APY potential. Acts as the first-loss layer — absorbs FR deficits before Senior LPs are affected.`,
+    },
+  };
+}
 
 export interface VaultConfig {
   /** Unique key used in URLs and as React key */

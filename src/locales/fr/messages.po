@@ -5065,8 +5065,8 @@ msgid "possibilities in total"
 msgstr "possibilités au total"
 
 #: src/pages/Vaults/VaultsPage.tsx
-msgid "{0}s"
-msgstr ""
+#~ msgid "{0}s"
+#~ msgstr ""
 
 #: src/components/TradeBox/TradeBoxRows/NextStoredImpactRows.tsx
 msgid "Price impact is stored when you increase a position and applied when you decrease. <0>Read more</0>."
@@ -6523,6 +6523,10 @@ msgstr "Impact sur le prix / frais"
 msgid "GMX proposals"
 msgstr "GMX proposals"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Junior Vaults"
+msgstr ""
+
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "Total pending rewards"
 msgstr "Total des récompenses en attente"
@@ -6634,6 +6638,10 @@ msgstr "Augmentation..."
 #: src/domain/synthetics/orders/utils.tsx
 msgid "Insufficient liquidity for pay-to-collateral swap at trigger price"
 msgstr "Liquidité insuffisante pour l'échange paiement-garantie au prix de déclenchement"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Captures all residual yield after Senior allocations, enabling higher APY potential. Acts as the first-loss layer — absorbs FR deficits before Senior LPs are affected."
+msgstr ""
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Fewer details"
@@ -7780,6 +7788,7 @@ msgstr "<0>Groupes de marchés</0><1>Positions ouvertes nettes</1>"
 msgid "Transfer submitted"
 msgstr "Transfert soumis"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Junior Vault"
 msgstr ""
@@ -8797,6 +8806,10 @@ msgstr "Soumettre"
 msgid "Claimed"
 msgstr "Récupéré"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "High Reward"
+msgstr ""
+
 #: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Connect wallet to trade"
 msgstr ""
@@ -9086,6 +9099,10 @@ msgstr "Délai de récupération de la garantie"
 msgid "Debug controls"
 msgstr "Contrôles de débogage"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Low Risk"
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardNavigation.tsx
 msgid "Concluded"
 msgstr "Conclu"
@@ -9130,6 +9147,7 @@ msgstr "Jones DAO"
 msgid "Failed to download trade history CSV"
 msgstr "Échec du téléchargement du CSV de l'historique des transactions"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
 #: src/pages/Vaults/VaultsPage.tsx
 msgid "Senior Vaults"
 msgstr ""
@@ -9344,6 +9362,10 @@ msgstr ""
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Price impact"
 msgstr "Impact sur le prix"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Senior Vault"
+msgstr ""
 
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "Estimated USDC received"
@@ -10056,6 +10078,10 @@ msgstr "Valeur totale de l'investissement"
 #: src/domain/synthetics/userFeedback/utils.ts
 msgid "What did you like most?"
 msgstr "Qu'avez-vous le plus apprécié ?"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Receives priority yield distribution from protocol revenue. In the event of a loss, Junior capital absorbs the deficit first, providing a higher safety cushion."
+msgstr ""
 
 #: src/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "Performance and chart data are based on UTC times"
@@ -11527,6 +11553,10 @@ msgstr "Paramètres de récupération indisponibles. Réessayez dans quelques se
 msgid "Read details"
 msgstr "Lire les détails"
 
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Senior"
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "GMX trading chat"
 msgstr "GMX trading chat"
@@ -11767,6 +11797,10 @@ msgstr ""
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "Proportional stored impact"
 msgstr "Impact stocké proportionnel"
+
+#: src/domain/vantage/vaults/vaultConfig.ts
+msgid "Junior"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Rage Trade"
