@@ -856,6 +856,10 @@ msgstr "Loading positions…"
 msgid "View details"
 msgstr "View details"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Senior: \"Always gets served first at the buffet.\" Junior: \"Gets whatever is left — but more of it, faster.\""
+msgstr "Senior: \"Always gets served first at the buffet.\" Junior: \"Gets whatever is left — but more of it, faster.\""
+
 #: src/pages/Admin/AdminPage.tsx
 msgid "Hedge OI"
 msgstr "Hedge OI"
@@ -1424,6 +1428,10 @@ msgstr "Liquidity only available on {chainNames}. Switch networks to continue."
 msgid "Stop-Loss"
 msgstr "Stop-Loss"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "No vaults in this category."
+msgstr "No vaults in this category."
+
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Transactions"
 msgstr "Transactions"
@@ -1890,6 +1898,10 @@ msgstr "Failed"
 #: src/pages/Status/components/ProtocolCommitmentBanner.tsx
 msgid "Protocol Commitment — No Surprise Rate Hikes"
 msgstr "Protocol Commitment — No Surprise Rate Hikes"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "RWA yield + Trading fees"
+msgstr "RWA yield + Trading fees"
 
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
@@ -5052,6 +5064,10 @@ msgstr "Price change to liquidation"
 msgid "possibilities in total"
 msgstr "possibilities in total"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "{0}s"
+msgstr "{0}s"
+
 #: src/components/TradeBox/TradeBoxRows/NextStoredImpactRows.tsx
 msgid "Price impact is stored when you increase a position and applied when you decrease. <0>Read more</0>."
 msgstr "Price impact is stored when you increase a position and applied when you decrease. <0>Read more</0>."
@@ -5927,6 +5943,10 @@ msgstr "Max lendable impact factor for withdrawals"
 msgid "Reduce Position ({closePct}%)"
 msgstr "Reduce Position ({closePct}%)"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Lower risk · Stable yield"
+msgstr "Lower risk · Stable yield"
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/ClaimModal.tsx
 msgid "Claim completed"
 msgstr "Claim completed"
@@ -6651,6 +6671,10 @@ msgstr "Pools that provide liquidity to specific GMX markets. Supports single-as
 msgid "Max funding factor"
 msgstr "Max funding factor"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Receives yield first. Junior capital cushions any losses."
+msgstr "Receives yield first. Junior capital cushions any losses."
+
 #: src/components/GmSwap/GmSwapBox/GmSwapWarningsRow.tsx
 #: src/pages/UiPage/BannerTest.tsx
 msgid "High price impact"
@@ -6685,10 +6709,6 @@ msgstr "This is the price you're hedging against. A short position offsets any d
 #: src/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
 msgid "Decreased"
 msgstr "Decreased"
-
-#: src/pages/Vaults/VaultsPage.tsx
-msgid "Provide liquidity to earn yield from RWA assets."
-msgstr "Provide liquidity to earn yield from RWA assets."
 
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "Earns fees from liquidity provision across GMX V2 markets"
@@ -6908,10 +6928,6 @@ msgstr "Short liq."
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Liquidation fee"
 msgstr "Liquidation fee"
-
-#: src/pages/Vaults/VaultsPage.tsx
-msgid "No vaults configured. Deploy contracts first."
-msgstr "No vaults configured. Deploy contracts first."
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Swap impact exponent"
@@ -7139,6 +7155,10 @@ msgstr "Loading..."
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 msgid "Trade now"
 msgstr "Trade now"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Priority Layer"
+msgstr "Priority Layer"
 
 #: src/components/TradeHistory/TradeHistoryRow/TradeHistoryRow.tsx
 msgid "Share"
@@ -7760,6 +7780,10 @@ msgstr "<0>Market groups</0><1>Net open interest</1>"
 msgid "Transfer submitted"
 msgstr "Transfer submitted"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Junior Vault"
+msgstr "Junior Vault"
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/lpTxn/useDepositTransactions.tsx
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/lpTxn/useDepositTransactions.tsx
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/lpTxn/useWithdrawalTransactions.tsx
@@ -8064,6 +8088,10 @@ msgstr "View transaction"
 msgid "Project"
 msgstr "Project"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Choose your risk-return profile: Senior vaults offer stability, Junior captures higher yield."
+msgstr "Choose your risk-return profile: Senior vaults offer stability, Junior captures higher yield."
+
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Protection Target"
 msgstr "Protection Target"
@@ -8273,6 +8301,10 @@ msgstr "DEX aggregator"
 #: src/components/NetworkDropdown/NetworkDropdown.tsx
 msgid "Trade via GMX Account using Arbitrum liquidity. Wallet trading also available on Arbitrum."
 msgstr "Trade via GMX Account using Arbitrum liquidity. Wallet trading also available on Arbitrum."
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Protocol Revenue"
+msgstr "Protocol Revenue"
 
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "({0} of {1})"
@@ -9097,6 +9129,10 @@ msgstr "Jones DAO"
 #: src/components/TradeHistory/useDownloadAsCsv.tsx
 msgid "Failed to download trade history CSV"
 msgstr "Failed to download trade history CSV"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Senior Vaults"
+msgstr "Senior Vaults"
 
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
@@ -10114,6 +10150,10 @@ msgstr "Min margin per part: {0}"
 msgid "Hedge Cap"
 msgstr "Hedge Cap"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Captures residual yield after Senior. Absorbs FR deficits first."
+msgstr "Captures residual yield after Senior. Absorbs FR deficits first."
+
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx
 msgid "FAILURES"
@@ -10410,6 +10450,10 @@ msgstr "Distribution history for claimed rebates and airdrops"
 #: src/domain/synthetics/orders/getPositionOrderError.tsx
 msgid "Enter a new amount or price"
 msgstr "Enter a new amount or price"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Higher APY · First-loss layer"
+msgstr "Higher APY · First-loss layer"
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Stake {tokenSymbol}"
@@ -10893,6 +10937,10 @@ msgstr "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a y
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "{0} tokens converted to GMX from the {1} esGMX deposited for vesting."
 msgstr "{0} tokens converted to GMX from the {1} esGMX deposited for vesting."
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Performance Layer"
+msgstr "Performance Layer"
 
 #: src/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/domain/synthetics/trade/utils/validation.ts
@@ -12288,6 +12336,10 @@ msgstr "No decentralized exchanges available"
 #: src/components/Errors/errorToasts.tsx
 msgid "Enable <0>Express Trading</0> in settings for better reliability.<1/><2/>Or increase the max network fee buffer {bufferText} in {settingsLink}"
 msgstr "Enable <0>Express Trading</0> in settings for better reliability.<1/><2/>Or increase the max network fee buffer {bufferText} in {settingsLink}"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Tranche Structure"
+msgstr "Tranche Structure"
 
 #: src/components/OrderEditor/OrderEditor.tsx
 msgid "Enter a ratio"

@@ -16,6 +16,39 @@ import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
 export type AssetTypeId = 0 | 1 | 2 | "stable";
 
+// ---------------------------------------------------------------------------
+// Tranche types
+// ---------------------------------------------------------------------------
+
+export type TrancheType = "senior" | "junior";
+
+export interface TrancheMeta {
+  label: string;
+  shortLabel: string;
+  riskLabel: string;
+  badgeClass: string;
+  description: string;
+}
+
+export const TRANCHE_META: Record<TrancheType, TrancheMeta> = {
+  senior: {
+    label: "Senior Vault",
+    shortLabel: "Senior",
+    riskLabel: "Low Risk",
+    badgeClass: "bg-indigo-900/60 text-indigo-300 border border-indigo-700",
+    description:
+      "Receives priority yield distribution from protocol revenue. In the event of a loss, Junior capital absorbs the deficit first, providing a higher safety cushion.",
+  },
+  junior: {
+    label: "Junior Vault",
+    shortLabel: "Junior",
+    riskLabel: "High Reward",
+    badgeClass: "bg-amber-900/60 text-amber-300 border border-amber-700",
+    description:
+      "Captures all residual yield after Senior allocations, enabling higher APY potential. Acts as the first-loss layer — absorbs FR deficits before Senior LPs are affected.",
+  },
+};
+
 export interface VaultConfig {
   /** Unique key used in URLs and as React key */
   key: string;
@@ -25,6 +58,12 @@ export interface VaultConfig {
   symbol: string;
   /** Asset type: 1=Rebasing, 2=PriceShare, 0=Direct, "stable"=USDC */
   assetType: AssetTypeId;
+  /**
+   * Tranche classification:
+   *   senior — RWA vaults receiving priority yield distribution.
+   *   junior — USDC vault acting as first-loss layer for FR deficit.
+   */
+  trancheType: TrancheType;
   /** Vault contract address */
   vaultAddress: string;
   /** Underlying token address */
@@ -57,12 +96,13 @@ const d = localhostDeployment.addresses as {
 };
 
 export const VAULT_CONFIGS: VaultConfig[] = [
-  // ── USDC (stable) ────────────────────────────────────────────────────────
+  // ── USDC (stable / Junior) ───────────────────────────────────────────────
   {
     key: "usdc",
     name: "USDC Vault",
     symbol: "USDC",
     assetType: "stable",
+    trancheType: "junior",
     vaultAddress: d.Vault ?? "",
     tokenAddress: d.tokens?.USDC ?? "",
     lpManagerAddress: d.LPManager ?? "",
@@ -71,12 +111,13 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     isMock: false,
     tvSymbol: "BINANCE:BTCUSDT",
   },
-  // ── mBUIDL (Rebasing) ────────────────────────────────────────────────────
+  // ── mBUIDL (Rebasing / Senior) ───────────────────────────────────────────
   {
     key: "mBUIDL",
     name: "mBUIDL Vault",
     symbol: "mBUIDL",
     assetType: 1,
+    trancheType: "senior",
     vaultAddress: d.mockRWAVaults?.Rebasing ?? "",
     tokenAddress: d.mockRWA?.Rebasing ?? "",
     lpManagerAddress: d.mockRWALPManagers?.Rebasing ?? "",
@@ -85,12 +126,13 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     isMock: true,
     tvSymbol: "BINANCE:BTCUSDT",
   },
-  // ── mUSDY (PriceShare) ───────────────────────────────────────────────────
+  // ── mUSDY (PriceShare / Senior) ──────────────────────────────────────────
   {
     key: "mUSDY",
     name: "mUSDY Vault",
     symbol: "mUSDY",
     assetType: 2,
+    trancheType: "senior",
     vaultAddress: d.mockRWAVaults?.PriceShare ?? "",
     tokenAddress: d.mockRWA?.PriceShare ?? "",
     lpManagerAddress: d.mockRWALPManagers?.PriceShare ?? "",
@@ -99,12 +141,13 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     isMock: true,
     tvSymbol: "BINANCE:ETHUSD",
   },
-  // ── mRWA (Direct) ────────────────────────────────────────────────────────
+  // ── mRWA (Direct / Senior) ───────────────────────────────────────────────
   {
     key: "mRWA",
     name: "mRWA Vault",
     symbol: "mRWA",
     assetType: 0,
+    trancheType: "senior",
     vaultAddress: d.mockRWAVaults?.Direct ?? "",
     tokenAddress: d.mockRWA?.Direct ?? "",
     lpManagerAddress: d.mockRWALPManagers?.Direct ?? "",

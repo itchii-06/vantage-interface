@@ -856,6 +856,10 @@ msgstr "ポジションを読み込み中…"
 msgid "View details"
 msgstr "詳細を表示"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Senior: \"Always gets served first at the buffet.\" Junior: \"Gets whatever is left — but more of it, faster.\""
+msgstr ""
+
 #: src/pages/Admin/AdminPage.tsx
 msgid "Hedge OI"
 msgstr ""
@@ -1424,6 +1428,10 @@ msgstr "流動性は {chainNames} でのみ利用可能です。続行するに�
 msgid "Stop-Loss"
 msgstr "ストップロス"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "No vaults in this category."
+msgstr ""
+
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Transactions"
 msgstr "トランザクション"
@@ -1890,6 +1898,10 @@ msgstr "失敗"
 #: src/pages/Status/components/ProtocolCommitmentBanner.tsx
 msgid "Protocol Commitment — No Surprise Rate Hikes"
 msgstr "プロトコルの約束 — 予告なき金利引き上げはしない"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "RWA yield + Trading fees"
+msgstr ""
 
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
@@ -5052,6 +5064,10 @@ msgstr "清算までの価格変動"
 msgid "possibilities in total"
 msgstr "パターン（合計）"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "{0}s"
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/NextStoredImpactRows.tsx
 msgid "Price impact is stored when you increase a position and applied when you decrease. <0>Read more</0>."
 msgstr "価格への影響はポジションを増加する際に蓄積され、減少する際に適用されます。<0>詳細はこちら</0>。"
@@ -5927,6 +5943,10 @@ msgstr "出金の最大貸出可能インパクトファクター"
 msgid "Reduce Position ({closePct}%)"
 msgstr "ポジションを縮小（{closePct}%）"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Lower risk · Stable yield"
+msgstr ""
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/ClaimModal.tsx
 msgid "Claim completed"
 msgstr "受け取りが完了しました"
@@ -6651,6 +6671,10 @@ msgstr "特定のGMX市場に流動性を提供するプールです。単一ア
 msgid "Max funding factor"
 msgstr "最大ファンディングファクター"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Receives yield first. Junior capital cushions any losses."
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmSwapWarningsRow.tsx
 #: src/pages/UiPage/BannerTest.tsx
 msgid "High price impact"
@@ -6685,10 +6709,6 @@ msgstr "これはヘッジ対象の価格です。ショートポジションが
 #: src/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
 msgid "Decreased"
 msgstr "減額しました"
-
-#: src/pages/Vaults/VaultsPage.tsx
-msgid "Provide liquidity to earn yield from RWA assets."
-msgstr "RWA資産からの利回りを得るために流動性を提供してください。"
 
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "Earns fees from liquidity provision across GMX V2 markets"
@@ -6908,10 +6928,6 @@ msgstr "ショート流動性"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Liquidation fee"
 msgstr "清算手数料"
-
-#: src/pages/Vaults/VaultsPage.tsx
-msgid "No vaults configured. Deploy contracts first."
-msgstr "Vaultが設定されていません。まずコントラクトをデプロイしてください。"
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Swap impact exponent"
@@ -7139,6 +7155,10 @@ msgstr "ロード中..."
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 msgid "Trade now"
 msgstr "今すぐ取引"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Priority Layer"
+msgstr ""
 
 #: src/components/TradeHistory/TradeHistoryRow/TradeHistoryRow.tsx
 msgid "Share"
@@ -7760,6 +7780,10 @@ msgstr "<0>マーケットグループ</0><1>ネット建玉</1>"
 msgid "Transfer submitted"
 msgstr "送金が送信されました"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Junior Vault"
+msgstr ""
+
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/lpTxn/useDepositTransactions.tsx
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/lpTxn/useDepositTransactions.tsx
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/lpTxn/useWithdrawalTransactions.tsx
@@ -8064,6 +8088,10 @@ msgstr "トランザクションを表示"
 msgid "Project"
 msgstr "プロジェクト"
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Choose your risk-return profile: Senior vaults offer stability, Junior captures higher yield."
+msgstr ""
+
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Protection Target"
 msgstr "保護対象"
@@ -8273,6 +8301,10 @@ msgstr "DEXアグリゲーター"
 #: src/components/NetworkDropdown/NetworkDropdown.tsx
 msgid "Trade via GMX Account using Arbitrum liquidity. Wallet trading also available on Arbitrum."
 msgstr "Arbitrumの流動性を利用し、GMX Account経由で取引できます。Arbitrumではウォレットからの直接取引も可能です。"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Protocol Revenue"
+msgstr ""
 
 #: src/components/TradeFeesRow/TradeFeesRow.tsx
 msgid "({0} of {1})"
@@ -9097,6 +9129,10 @@ msgstr "Jones DAO"
 #: src/components/TradeHistory/useDownloadAsCsv.tsx
 msgid "Failed to download trade history CSV"
 msgstr "取引履歴CSVのダウンロードに失敗しました"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Senior Vaults"
+msgstr ""
 
 #: src/components/OrderEditor/OrderEditor.tsx
 #: src/components/PositionEditor/PositionEditor.tsx
@@ -10114,6 +10150,10 @@ msgstr "パートあたりの最小証拠金：{0}"
 msgid "Hedge Cap"
 msgstr ""
 
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Captures residual yield after Senior. Absorbs FR deficits first."
+msgstr ""
+
 #: src/pages/DebugOracleKeeper/parts.tsx
 #: src/pages/RpcDebug/parts.tsx
 msgid "FAILURES"
@@ -10410,6 +10450,10 @@ msgstr "受け取り済みリベートおよびエアドロップの配布履歴
 #: src/domain/synthetics/orders/getPositionOrderError.tsx
 msgid "Enter a new amount or price"
 msgstr "新しい金額または価格を入力してください"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Higher APY · First-loss layer"
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Stake {tokenSymbol}"
@@ -10893,6 +10937,10 @@ msgstr "GLV (GMX Liquidity Vaults) はGMX V2におけるGLPの改良版です。
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "{0} tokens converted to GMX from the {1} esGMX deposited for vesting."
 msgstr "ベスティング用に預け入れた{1} esGMXのうち、{0}トークンがGMXに変換されました。"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Performance Layer"
+msgstr ""
 
 #: src/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/domain/synthetics/trade/utils/validation.ts
@@ -12288,6 +12336,10 @@ msgstr "利用可能な分散型取引所はありません"
 #: src/components/Errors/errorToasts.tsx
 msgid "Enable <0>Express Trading</0> in settings for better reliability.<1/><2/>Or increase the max network fee buffer {bufferText} in {settingsLink}"
 msgstr "信頼性を向上させるには設定で<0>Express Trading</0>を有効にしてください。<1/><2/>または{settingsLink}で最大ネットワーク手数料バッファ{bufferText}を引き上げてください"
+
+#: src/pages/Vaults/VaultsPage.tsx
+msgid "Tranche Structure"
+msgstr ""
 
 #: src/components/OrderEditor/OrderEditor.tsx
 msgid "Enter a ratio"
