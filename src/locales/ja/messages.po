@@ -458,8 +458,8 @@ msgid "GMX Account balance"
 msgstr "GMX Account残高"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "High-yield junior LP (USDC) profits absorb the deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
-msgstr "高利回りジュニアLP（USDC）の利益が赤字を吸収し、シニアLP（RWA）とヘッジユーザーのコストを守ります。"
+#~ msgid "High-yield junior LP (USDC) profits absorb the deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
+#~ msgstr "高利回りジュニアLP（USDC）の利益が赤字を吸収し、シニアLP（RWA）とヘッジユーザーのコストを守ります。"
 
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "Best swap path"
@@ -940,8 +940,8 @@ msgid "システム収益保護のため、現在一時的にFR相殺が停止�
 msgstr "システム収益保護のため、現在一時的にFR相殺が停止されています"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Last line of defense. Some hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency and protocol halt — rather than raising costs retroactively."
-msgstr "最終防衛ライン。LPの支払い不能とプロトコル停止を防ぐため、一部のヘッジショートが強制クローズ（または有料ショートに転換）されます。コストの遡及引き上げは行いません。"
+#~ msgid "Last line of defense. Some hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency and protocol halt — rather than raising costs retroactively."
+#~ msgstr "最終防衛ライン。LPの支払い不能とプロトコル停止を防ぐため、一部のヘッジショートが強制クローズ（または有料ショートに転換）されます。コストの遡及引き上げは行いません。"
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "You have a shortfall debt of {0}. This will be settled when the insurance fund is sufficient."
@@ -1042,8 +1042,8 @@ msgid "Mode B — Stablecoin"
 msgstr ""
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Reserve fund temporarily boosts LP rewards to attract new RWA deposits and expand pool capacity."
-msgstr "準備基金がLP報酬を一時的に引き上げ、新規RWA預入を誘致してプール容量を拡大します。"
+#~ msgid "Reserve fund temporarily boosts LP rewards to attract new RWA deposits and expand pool capacity."
+#~ msgstr "準備基金がLP報酬を一時的に引き上げ、新規RWA預入を誘致してプール容量を拡大します。"
 
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Clear completed"
@@ -1253,6 +1253,10 @@ msgstr "スワップ手数料係数（マイナスPI）"
 #: src/pages/Trade/components/ChartPanel.tsx
 msgid "OI"
 msgstr "建玉（OI）"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Up to 50% of junior LP principal is used to absorb the deficit. Once this cap is reached, the protocol escalates to Phase 3 ADL. This burden will decrease as protocol reserves grow."
+msgstr "ジュニアLPの元本の最大50%まで赤字補填に充てられます。この上限に達するとPhase 3（ADL）へ移行します。プロトコルの準備金が積み上がるにつれ、この負担は段階的に軽減される予定です。"
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Claimable balance"
@@ -1672,8 +1676,8 @@ msgstr "セッションの生成に失敗しました"
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
-msgid "Phase 2 · Internal Buffer"
-msgstr "フェーズ2 · 内部バッファー"
+#~ msgid "Phase 2 · Internal Buffer"
+#~ msgstr "フェーズ2 · 内部バッファー"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Onchain quests and rewards"
@@ -2041,8 +2045,8 @@ msgid "Distributions"
 msgstr "分配"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Senior LP yield will be used to make FR payments"
-msgstr "シニアLP利回りがFR支払いに充当されます"
+#~ msgid "Senior LP yield will be used to make FR payments"
+#~ msgstr "シニアLP利回りがFR支払いに充当されます"
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max profit limit reached. Current: {pnlToPoolFactorText}, max: {maxPnlFactorText}"
@@ -2909,6 +2913,10 @@ msgstr "GMXの改善にご協力ください。セキュリティのため、こ
 msgid "Slippage"
 msgstr "スリッページ"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Junior Principal"
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 msgid "Existing position uses {0} collateral. This order won't apply to it. <0>Switch to {1} collateral</0>"
 msgstr "既存のポジションは{0}担保を使用しています。この注文は適用されません。<0>{1}担保に切り替える</0>"
@@ -3214,6 +3222,10 @@ msgstr "リファラルコードを作成"
 #: src/components/GmList/GmList.tsx
 msgid "BALANCE"
 msgstr "残高"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Last line of defense. Hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency. Priority: highest leverage first, then most recently opened (LIFO), then auto-terminate mode."
+msgstr "最終防衛線。LPの破綻を防ぐため、ヘッジショートを強制クローズ（または有料ショートへ転換）します。優先順位：高レバレッジ順 → 直近オープン順（LIFO） → 自動解約モード。"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "GMX market token price chart"
@@ -3715,10 +3727,6 @@ msgstr "マーケットグラフ"
 msgid "Only letters, numbers, and underscores allowed"
 msgstr "英字、数字、アンダースコアのみ使用可能です"
 
-#: src/pages/Status/StatusPage.tsx
-msgid "Real-time solvency dashboard. 8-step defense sequence transparency."
-msgstr "リアルタイムのソルベンシーダッシュボード。8段階防衛シーケンスの透明性確保。"
-
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Trade from your wallet"
 msgstr "ウォレットから取引"
@@ -3916,34 +3924,6 @@ msgstr "資金が GMX Account に入金されました"
 #: src/pages/Status/components/FrDefenseExplainer.tsx
 msgid "Junior Vault Buffer"
 msgstr "ジュニアVaultバッファー"
-
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "High-yield junior LP (USDC) profits absorb the FR deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
-msgstr "高利回りのジュニアLP（USDC）の利益でFR赤字を吸収し、シニアLP（RWA）とヘッジユーザーのコストを守ります。"
-
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Senior Vault Yield"
-msgstr "シニアVault利回り"
-
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Yield earned by senior LP (RWA) deposits is routed to cover the remaining FR shortfall."
-msgstr "シニアLP（RWA）のデポジットが生む利回りをFR不足の補填に充てます。"
-
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Junior Vault Principal (up to 50%)"
-msgstr "ジュニアVault元本（最大50%まで）"
-
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Up to 50% of junior LP principal is used to absorb the deficit. Once this cap is reached, the protocol escalates to Phase 3 ADL. This burden will decrease as protocol reserves grow."
-msgstr "ジュニアLPの元本の最大50%まで赤字補填に充てられます。この上限に達するとPhase 3（ADL）へ移行します。プロトコルの準備金が積み上がるにつれ、この負担は段階的に軽減される予定です。"
-
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Steps 4–7"
-msgstr "ステップ4–7"
-
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Steps 8–9"
-msgstr "ステップ8–9"
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Insufficient liquidity. Order will fill when liquidity is available."
@@ -4414,7 +4394,6 @@ msgstr "出金に失敗しました"
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
-#: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "Hedge ADL"
 msgstr "ヘッジADL"
 
@@ -4748,6 +4727,10 @@ msgstr "ユーザーをコピー"
 msgid "Realized swap impact"
 msgstr "実現スワップインパクト"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Senior Vault Yield"
+msgstr "シニアVault利回り"
+
 #: src/components/SettingsModal/DisplaySettings.tsx
 msgid "Break down net price impact"
 msgstr "価格への影響の内訳を表示"
@@ -4775,10 +4758,6 @@ msgstr "新しい比率または許容スリッページを入力"
 #: src/pages/Status/components/FrDefenseExplainer.tsx
 msgid "ADL for Hedge-Shorts"
 msgstr "ヘッジショートへのADL"
-
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Last line of defense. Hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency. Priority: highest leverage first, then most recently opened (LIFO), then auto-terminate mode."
-msgstr "最終防衛線。LPの破綻を防ぐため、ヘッジショートを強制クローズ（または有料ショートへ転換）します。優先順位：高レバレッジ順 → 直近オープン順（LIFO） → 自動解約モード。"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Risk Management"
@@ -5160,6 +5139,13 @@ msgstr "v:"
 #: src/components/PoolSelector2/PoolSelector2.tsx
 msgid "{formattedNetRate} / 1H"
 msgstr "{formattedNetRate} / 1H"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 2 · Internal Defense"
+msgstr ""
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "No active hedge (short) position in this vault."
@@ -5577,8 +5563,8 @@ msgstr "まもなくGMX Accountに資金が反映されます"
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
-msgid "Phase 3 · Final Defense"
-msgstr "フェーズ3 · 最終防衛"
+#~ msgid "Phase 3 · Final Defense"
+#~ msgstr "フェーズ3 · 最終防衛"
 
 #: src/components/InterviewToast/InterviewToast.tsx
 msgid "Join an anonymous one-on-one chat to share your GMX liquidity provider experience"
@@ -5651,7 +5637,6 @@ msgstr "WETH-USDCプールに既存の指値注文があります。<0>WETH-USDC
 msgid "GM: {0}"
 msgstr "GM: {0}"
 
-#: src/pages/Status/components/FrDefenseExplainer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "Senior Yield"
 msgstr "シニア利回り"
@@ -5937,6 +5922,10 @@ msgstr "マーケット増額失敗"
 msgid "Liq. Price"
 msgstr "清算価格"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Yield earned by senior LP (RWA) deposits is routed to cover the remaining FR shortfall."
+msgstr "シニアLP（RWA）のデポジットが生む利回りをFR不足の補填に充てます。"
+
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "LEV."
 msgstr "LEV."
@@ -5958,6 +5947,10 @@ msgstr "最大レート ロング"
 #: src/components/TPSLModal/TPSLInputRow.tsx
 msgid "SL price"
 msgstr "ストップロス価格"
+
+#: src/pages/Status/StatusPage.tsx
+msgid "Real-time solvency dashboard. 9-step defense sequence transparency."
+msgstr "リアルタイムのソルベンシーダッシュボード。9段階防衛シーケンスの透明性確保。"
 
 #: src/components/SwitchToSettlementChain/SwitchToSettlementChainWarning.tsx
 msgid "Staking only available on {chainNames}. Switch networks to continue."
@@ -6129,8 +6122,8 @@ msgstr "読み込み中"
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
-msgid "Phase 3 · Enforcement"
-msgstr "フェーズ3 · 強制執行"
+#~ msgid "Phase 3 · Enforcement"
+#~ msgstr "フェーズ3 · 強制執行"
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Unknown sell GM order"
@@ -6259,6 +6252,10 @@ msgstr "請求可能"
 #: src/components/TwapRows/TwapRows.tsx
 msgid "Executes {numberOfParts} {0} {type} orders of {1} each over the next {2} for {3}"
 msgstr "{3} で {2} にわたり、{1} ずつの {0} {type} 注文を {numberOfParts} 回実行します"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Junior Vault Principal (up to 50%)"
+msgstr "ジュニアVault元本（最大50%まで）"
 
 #: landing/src/pages/Home/HeaderMenu/HeaderMenu.tsx
 #: src/components/AppNav/AppNav.tsx
@@ -6567,6 +6564,10 @@ msgstr "未請求報酬合計"
 msgid "Price impact rebates from closing are claimable in the Claims tab. <0>Read more</0>."
 msgstr "クローズ時の価格への影響リベートは「Claims」タブで請求できます。<0>詳細を見る</0>。"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 4–7"
+msgstr "ステップ4–7"
+
 #: src/components/PositionEditor/usePositionEditorButtonState.tsx
 msgid "Order failed"
 msgstr "注文失敗"
@@ -6578,10 +6579,6 @@ msgstr "残高（LP ↔ ショート）"
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Airdrop"
 msgstr "エアドロップ"
-
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Steps 8–9"
-msgstr "ステップ8–9"
 
 #: src/components/ModalViews/RedirectModal.tsx
 msgid "Launch app"
@@ -7899,6 +7896,10 @@ msgstr "スワップ利益手数料"
 msgid "Solv Finance"
 msgstr "Solv Finance"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 8–9"
+msgstr "ステップ8–9"
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/ClaimModal.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Claim submitted"
@@ -8047,7 +8048,6 @@ msgstr "サマリー"
 msgid "ENTRY PRICE"
 msgstr "ENTRY PRICE"
 
-#: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "Trade ADL"
@@ -9274,6 +9274,10 @@ msgstr "GMXアカウント内のガス用の{tokensText}が不足しています
 msgid "No trades during selected period"
 msgstr "選択期間中の取引はありません"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Highly profitable speculative long positions are force-closed to directly reduce the FR obligation. Priority: Trade Mode positions first, then highest pnl-per-collateral."
+msgstr "FR支払い義務を削減するため、含み益の大きい投機ロングを強制クローズします。優先順位：トレードモードのポジション優先 → 証拠金対比利益率（PnL/担保）降順。"
+
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max pool capacity reached"
 msgstr "プールの最大容量に達しました"
@@ -9580,10 +9584,6 @@ msgstr "受取"
 msgid "Execution Fee"
 msgstr "実行手数料"
 
-#: src/pages/Status/components/ProtocolCommitmentBanner.tsx
-msgid "This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 7 (contract termination) rather than increasing costs for existing users. The 8-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order."
-msgstr "このプロトコルはファンディングレートを遡って引き上げることはしません。システムがヘッジ費用を賄えなくなった場合、既存ユーザーのコストを増加させる代わりにステップ7（契約終了）を実行します。上記の8段階防衛シーケンスが公開コミットされた完全なフレームワークであり、この順序の外で何かが起こることはありません。"
-
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Liquidity removed"
@@ -9635,10 +9635,6 @@ msgstr "最大予約済み {directionLabel}"
 #: src/pages/Status/components/FrDefenseExplainer.tsx
 msgid "ADL for Long Profits"
 msgstr "ロング利益へのADL"
-
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Highly profitable speculative long positions are force-closed to directly reduce the FR obligation. Priority: Trade Mode positions first, then highest pnl-per-collateral."
-msgstr "FR支払い義務を削減するため、含み益の大きい投機ロングを強制クローズします。優先順位：トレードモードのポジション優先 → 証拠金対比利益率（PnL/担保）降順。"
 
 #: src/components/TradeHistory/TradeHistory.tsx
 msgid "Realized PnL after fees and net price impact"
@@ -9844,6 +9840,10 @@ msgstr "無効なEthereumアドレスです"
 msgid "Unable to verify code availability on {0}. You can still create the code, but it may already be taken on that network."
 msgstr "{0}でのコードの利用可否を確認できませんでした。コードの作成は可能ですが、そのネットワークでは既に使用されている可能性があります。"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "High-yield junior LP (USDC) profits absorb the FR deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
+msgstr "高利回りのジュニアLP（USDC）の利益でFR赤字を吸収し、シニアLP（RWA）とヘッジユーザーのコストを守ります。"
+
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/TradersStats.tsx
 msgid "Rebates"
@@ -9940,6 +9940,10 @@ msgid "Wallet trading only on these networks"
 msgstr "これらのネットワークではウォレット取引のみ利用可能です"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "The stability fund temporarily boosts LP rewards to attract new RWA deposits and expand pool capacity."
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
 msgid "Entry premiums rise only for incoming users. All existing hedge positions are unaffected."
 msgstr "新規ユーザーのみエントリープレミアムが上昇します。既存のヘッジポジションは一切影響を受けません。"
 
@@ -10014,6 +10018,11 @@ msgstr "レイヤー1"
 #: landing/src/pages/Home/SocialSection/SocialSlider.tsx
 msgid "<0>With a 75.5% majority vote, GMX has selected LayerZero as its messaging partner for multichain expansion! The integration brings GMX:</0><1><2>The ability to expand to 125+ chains</2><3>Full ownership of all contracts and security</3><4>Fast, zero-slippage transfers</4><5>Battle-tested rails already trusted by billions of dollars in assets and hundreds of applications... <6>see more</6></5></1>"
 msgstr "<0>75.5%の多数決でGMXはマルチチェーン拡張のメッセージングパートナーとしてLayerZeroを選択！統合によりGMXに：</0><1><2>125+チェーンへの拡張能力</2><3>すべてのコントラクトとセキュリティの完全所有</3><4>高速、ゼロスリッページ転送</4><5>数十億ドルの資産と数百のアプリケーションで信頼されたバトルテスト済みレール... <6>もっと見る</6></5></1>"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 3 · Last Resort"
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Staking..."
@@ -10176,8 +10185,8 @@ msgid "Something went wrong"
 msgstr "エラーが発生しました"
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
-msgid "FR Offset"
-msgstr "FR相殺"
+#~ msgid "FR Offset"
+#~ msgstr "FR相殺"
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Freeze"
@@ -10988,10 +10997,6 @@ msgstr "GMXからのアラートとお知らせを受け取り、取引や清算
 msgid "{gmOrGlvLabel} bought successfully, but bridge to Base failed. Your funds are safe in your GMX Account. Retry the bridge or go to the {indexName} pool to withdraw your GM tokens."
 msgstr "{gmOrGlvLabel}の購入は完了しましたが、Baseへのブリッジに失敗しました。資金はGMX Accountに安全に保管されています。ブリッジを再試行するか、{indexName}プールに移動してGMトークンを出金してください。"
 
-#: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Steps 4–7"
-msgstr "ステップ4–7"
-
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a yield-optimizing crypto-index token that:"
 msgstr "GLV (GMX Liquidity Vaults) はGMX V2におけるGLPの改良版です。利回りを最適化する暗号資産インデックストークンであり:"
@@ -11228,6 +11233,10 @@ msgstr "経過時間"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Sign transactions off-chain. Premium RPCs ensure reliability during network congestion.<0/><1/>Gas payments in {gasPaymentTokensText}."
 msgstr "オフチェーンでトランザクションに署名します。プレミアムRPCがネットワーク混雑時の信頼性を確保します。<0/><1/>Gas支払い: {gasPaymentTokensText}。"
+
+#: src/pages/Status/components/ProtocolCommitmentBanner.tsx
+msgid "This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 9 (Hedge ADL) rather than increasing costs for existing users. The 9-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order."
+msgstr "このプロトコルはファンディングレートを遡って引き上げることはしません。システムがヘッジ費用を賄えなくなった場合、既存ユーザーのコストを増加させる代わりにステップ9（ヘッジADL）を実行します。上記の9段階防衛シーケンスが公開コミットされた完全なフレームワークであり、この順序の外で何かが起こることはありません。"
 
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX from Uniswap or directly on GMX (select Arbitrum)"
@@ -11685,8 +11694,8 @@ msgid "GMX V1 actions"
 msgstr "GMX V1 アクション"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Highly profitable speculative long positions are force-closed, directly reducing the outstanding FR obligation."
-msgstr "含み益の大きい投機的ロングポジションが強制クローズされ、未払いのFR債務が直接削減されます。"
+#~ msgid "Highly profitable speculative long positions are force-closed, directly reducing the outstanding FR obligation."
+#~ msgstr "含み益の大きい投機的ロングポジションが強制クローズされ、未払いのFR債務が直接削減されます。"
 
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "GLV vaults:"
@@ -11850,6 +11859,10 @@ msgstr "EIP-4844、3月20-27日"
 msgid "Vault APY"
 msgstr "Vault APY"
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Sr Yield"
+msgstr ""
+
 #: src/pages/Status/components/OIStats.tsx
 msgid "+ve = shorts receive payment"
 msgstr "正 = ショートが受取"
@@ -11883,6 +11896,10 @@ msgstr "利回り"
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "Step {defenseStep}:"
 msgstr "ステップ {defenseStep}:"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Jr Principal"
+msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Insufficient collateral. Need more"

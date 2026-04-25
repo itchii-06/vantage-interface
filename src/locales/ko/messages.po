@@ -458,8 +458,8 @@ msgid "GMX Account balance"
 msgstr "GMX Account 잔액"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "High-yield junior LP (USDC) profits absorb the deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
-msgstr ""
+#~ msgid "High-yield junior LP (USDC) profits absorb the deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
+#~ msgstr ""
 
 #: src/components/DebugMarketGraph/DebugMarketGraph.tsx
 msgid "Best swap path"
@@ -940,8 +940,8 @@ msgid "システム収益保護のため、現在一時的にFR相殺が停止�
 msgstr ""
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Last line of defense. Some hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency and protocol halt — rather than raising costs retroactively."
-msgstr ""
+#~ msgid "Last line of defense. Some hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency and protocol halt — rather than raising costs retroactively."
+#~ msgstr ""
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "You have a shortfall debt of {0}. This will be settled when the insurance fund is sufficient."
@@ -1042,8 +1042,8 @@ msgid "Mode B — Stablecoin"
 msgstr ""
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Reserve fund temporarily boosts LP rewards to attract new RWA deposits and expand pool capacity."
-msgstr ""
+#~ msgid "Reserve fund temporarily boosts LP rewards to attract new RWA deposits and expand pool capacity."
+#~ msgstr ""
 
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Clear completed"
@@ -1252,6 +1252,10 @@ msgstr "스왑 수수료 계수 (음의 PI)"
 
 #: src/pages/Trade/components/ChartPanel.tsx
 msgid "OI"
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Up to 50% of junior LP principal is used to absorb the deficit. Once this cap is reached, the protocol escalates to Phase 3 ADL. This burden will decrease as protocol reserves grow."
 msgstr ""
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
@@ -1672,8 +1676,8 @@ msgstr "세션 생성 실패"
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
-msgid "Phase 2 · Internal Buffer"
-msgstr ""
+#~ msgid "Phase 2 · Internal Buffer"
+#~ msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Onchain quests and rewards"
@@ -2041,8 +2045,8 @@ msgid "Distributions"
 msgstr "분배"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Senior LP yield will be used to make FR payments"
-msgstr ""
+#~ msgid "Senior LP yield will be used to make FR payments"
+#~ msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max profit limit reached. Current: {pnlToPoolFactorText}, max: {maxPnlFactorText}"
@@ -2909,6 +2913,10 @@ msgstr "GMX 개선에 도움을 주십시오. 보안을 위해 먼저 연락드�
 msgid "Slippage"
 msgstr ""
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Junior Principal"
+msgstr ""
+
 #: src/components/TradeBox/TradeBoxRows/CollateralSelectorField.tsx
 msgid "Existing position uses {0} collateral. This order won't apply to it. <0>Switch to {1} collateral</0>"
 msgstr "기존 포지션이 {0} 담보를 사용합니다. 이 주문은 해당 포지션에 적용되지 않습니다. <0>{1} 담보로 전환</0>"
@@ -3214,6 +3222,10 @@ msgstr "추천 코드 생성"
 #: src/components/GmList/GmList.tsx
 msgid "BALANCE"
 msgstr "잔액"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Last line of defense. Hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency. Priority: highest leverage first, then most recently opened (LIFO), then auto-terminate mode."
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "GMX market token price chart"
@@ -3714,10 +3726,6 @@ msgstr "마켓 그래프"
 #: src/components/Referrals/referralsHelper.ts
 msgid "Only letters, numbers, and underscores allowed"
 msgstr "영문자, 숫자, 밑줄만 허용됩니다"
-
-#: src/pages/Status/StatusPage.tsx
-msgid "Real-time solvency dashboard. 8-step defense sequence transparency."
-msgstr ""
 
 #: landing/src/pages/Home/HeroSection/Features.tsx
 msgid "Trade from your wallet"
@@ -4386,7 +4394,6 @@ msgstr "출금에 실패했습니다"
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
-#: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "Hedge ADL"
 msgstr ""
 
@@ -4719,6 +4726,10 @@ msgstr "사용자 복사"
 #: src/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
 msgid "Realized swap impact"
 msgstr "실현된 스왑 영향"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Senior Vault Yield"
+msgstr ""
 
 #: src/components/SettingsModal/DisplaySettings.tsx
 msgid "Break down net price impact"
@@ -5128,6 +5139,13 @@ msgstr "v:"
 #: src/components/PoolSelector2/PoolSelector2.tsx
 msgid "{formattedNetRate} / 1H"
 msgstr "{formattedNetRate} / 1H"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 2 · Internal Defense"
+msgstr ""
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "No active hedge (short) position in this vault."
@@ -5545,8 +5563,8 @@ msgstr "자금이 곧 GMX Account에 입금됩니다"
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
-msgid "Phase 3 · Final Defense"
-msgstr ""
+#~ msgid "Phase 3 · Final Defense"
+#~ msgstr ""
 
 #: src/components/InterviewToast/InterviewToast.tsx
 msgid "Join an anonymous one-on-one chat to share your GMX liquidity provider experience"
@@ -5619,7 +5637,6 @@ msgstr "WETH-USDC 풀에 기존 지정가 주문이 있습니다.<0>WETH-USDC �
 msgid "GM: {0}"
 msgstr "GM: {0}"
 
-#: src/pages/Status/components/FrDefenseExplainer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "Senior Yield"
 msgstr ""
@@ -5905,6 +5922,10 @@ msgstr "시장 증가 실패"
 msgid "Liq. Price"
 msgstr ""
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Yield earned by senior LP (RWA) deposits is routed to cover the remaining FR shortfall."
+msgstr ""
+
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "LEV."
 msgstr "레버리지"
@@ -5926,6 +5947,10 @@ msgstr "최대 비율 롱"
 #: src/components/TPSLModal/TPSLInputRow.tsx
 msgid "SL price"
 msgstr "손절매 가격"
+
+#: src/pages/Status/StatusPage.tsx
+msgid "Real-time solvency dashboard. 9-step defense sequence transparency."
+msgstr ""
 
 #: src/components/SwitchToSettlementChain/SwitchToSettlementChainWarning.tsx
 msgid "Staking only available on {chainNames}. Switch networks to continue."
@@ -6097,8 +6122,8 @@ msgstr "로딩 중"
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
-msgid "Phase 3 · Enforcement"
-msgstr ""
+#~ msgid "Phase 3 · Enforcement"
+#~ msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Unknown sell GM order"
@@ -6227,6 +6252,10 @@ msgstr "수령가능"
 #: src/components/TwapRows/TwapRows.tsx
 msgid "Executes {numberOfParts} {0} {type} orders of {1} each over the next {2} for {3}"
 msgstr "다음 {2} 동안 {3}에 대해 각 {1}의 {0} {type} 주문을 {numberOfParts}건 체결합니다"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Junior Vault Principal (up to 50%)"
+msgstr ""
 
 #: landing/src/pages/Home/HeaderMenu/HeaderMenu.tsx
 #: src/components/AppNav/AppNav.tsx
@@ -6535,6 +6564,10 @@ msgstr "총 미청구 보상"
 msgid "Price impact rebates from closing are claimable in the Claims tab. <0>Read more</0>."
 msgstr "포지션 종료 시 발생한 가격 영향 리베이트는 청구 탭에서 수령할 수 있습니다. <0>자세히 보기</0>."
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 4–7"
+msgstr ""
+
 #: src/components/PositionEditor/usePositionEditorButtonState.tsx
 msgid "Order failed"
 msgstr "주문 실패"
@@ -6548,8 +6581,8 @@ msgid "Airdrop"
 msgstr "에어드랍"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Steps 7–8"
-msgstr ""
+#~ msgid "Steps 7–8"
+#~ msgstr ""
 
 #: src/components/ModalViews/RedirectModal.tsx
 msgid "Launch app"
@@ -7867,6 +7900,10 @@ msgstr "스왑 수익 수수료"
 msgid "Solv Finance"
 msgstr "Solv Finance"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 8–9"
+msgstr ""
+
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/ClaimModal.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
 msgid "Claim submitted"
@@ -8015,7 +8052,6 @@ msgstr "요약"
 msgid "ENTRY PRICE"
 msgstr "ENTRY PRICE"
 
-#: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "Trade ADL"
@@ -9242,6 +9278,10 @@ msgstr "GMX 계정의 가스용 {tokensText}가 부족합니다. <0>{tokensText}
 msgid "No trades during selected period"
 msgstr "선택한 기간 동안 거래 내역이 없습니다"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Highly profitable speculative long positions are force-closed to directly reduce the FR obligation. Priority: Trade Mode positions first, then highest pnl-per-collateral."
+msgstr ""
+
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Max pool capacity reached"
 msgstr "최대 풀 용량에 도달했습니다"
@@ -9548,10 +9588,6 @@ msgstr "수령"
 msgid "Execution Fee"
 msgstr ""
 
-#: src/pages/Status/components/ProtocolCommitmentBanner.tsx
-msgid "This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 7 (contract termination) rather than increasing costs for existing users. The 8-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order."
-msgstr ""
-
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Liquidity removed"
@@ -9808,6 +9844,10 @@ msgstr "유효하지 않은 Ethereum 주소"
 msgid "Unable to verify code availability on {0}. You can still create the code, but it may already be taken on that network."
 msgstr "{0}에서 코드 사용 가능 여부를 확인할 수 없습니다. 코드를 생성할 수는 있지만, 해당 네트워크에서 이미 사용 중일 수 있습니다."
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "High-yield junior LP (USDC) profits absorb the FR deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/TradersStats.tsx
 msgid "Rebates"
@@ -9904,6 +9944,10 @@ msgid "Wallet trading only on these networks"
 msgstr "해당 네트워크에서는 지갑 거래만 가능합니다"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "The stability fund temporarily boosts LP rewards to attract new RWA deposits and expand pool capacity."
+msgstr ""
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
 msgid "Entry premiums rise only for incoming users. All existing hedge positions are unaffected."
 msgstr ""
 
@@ -9978,6 +10022,11 @@ msgstr "레이어 1"
 #: landing/src/pages/Home/SocialSection/SocialSlider.tsx
 msgid "<0>With a 75.5% majority vote, GMX has selected LayerZero as its messaging partner for multichain expansion! The integration brings GMX:</0><1><2>The ability to expand to 125+ chains</2><3>Full ownership of all contracts and security</3><4>Fast, zero-slippage transfers</4><5>Battle-tested rails already trusted by billions of dollars in assets and hundreds of applications... <6>see more</6></5></1>"
 msgstr "<0>75.5% 다수 투표로 GMX는 멀티체인 확장을 위한 메시징 파트너로 LayerZero를 선택했습니다! 이 통합은 GMX에:</0><1><2>125+ 체인으로 확장 능력</2><3>모든 계약 및 보안의 완전 소유권</3><4>빠르고 제로 슬리피지 전송</4><5>수십억 달러 자산과 수백 개 애플리케이션에서 이미 신뢰받는 전투 테스트된 레일... <6>더 보기</6></5></1>"
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Phase 3 · Last Resort"
+msgstr ""
 
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/StakeModal.tsx
 msgid "Staking..."
@@ -10140,8 +10189,8 @@ msgid "Something went wrong"
 msgstr "문제가 발생했습니다"
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
-msgid "FR Offset"
-msgstr ""
+#~ msgid "FR Offset"
+#~ msgstr ""
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Freeze"
@@ -10953,8 +11002,8 @@ msgid "{gmOrGlvLabel} bought successfully, but bridge to Base failed. Your funds
 msgstr "{gmOrGlvLabel} 구매에 성공했으나 Base로의 브릿지가 실패했습니다. 자금은 GMX Account에 안전하게 보관되어 있습니다. 브릿지를 재시도하거나 {indexName} 풀로 이동하여 GM 토큰을 출금하십시오."
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Steps 4–5"
-msgstr ""
+#~ msgid "Steps 4–5"
+#~ msgstr ""
 
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a yield-optimizing crypto-index token that:"
@@ -11192,6 +11241,10 @@ msgstr "경과 시간"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Sign transactions off-chain. Premium RPCs ensure reliability during network congestion.<0/><1/>Gas payments in {gasPaymentTokensText}."
 msgstr "오프체인으로 거래에 서명합니다. 프리미엄 RPC가 네트워크 혼잡 시 안정성을 보장합니다.<0/><1/>Gas 결제는 {gasPaymentTokensText}로 이루어집니다."
+
+#: src/pages/Status/components/ProtocolCommitmentBanner.tsx
+msgid "This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 9 (Hedge ADL) rather than increasing costs for existing users. The 9-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order."
+msgstr ""
 
 #: src/pages/BuyGMX/BuyGMX.tsx
 msgid "Buy GMX from Uniswap or directly on GMX (select Arbitrum)"
@@ -11649,8 +11702,8 @@ msgid "GMX V1 actions"
 msgstr "GMX V1 액션"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Highly profitable speculative long positions are force-closed, directly reducing the outstanding FR obligation."
-msgstr ""
+#~ msgid "Highly profitable speculative long positions are force-closed, directly reducing the outstanding FR obligation."
+#~ msgstr ""
 
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "GLV vaults:"
@@ -11814,6 +11867,10 @@ msgstr "EIP-4844, 3월 20-27일"
 msgid "Vault APY"
 msgstr ""
 
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Sr Yield"
+msgstr ""
+
 #: src/pages/Status/components/OIStats.tsx
 msgid "+ve = shorts receive payment"
 msgstr ""
@@ -11846,6 +11903,10 @@ msgstr ""
 
 #: src/pages/Status/components/SolvencySpeedometer.tsx
 msgid "Step {defenseStep}:"
+msgstr ""
+
+#: src/pages/Status/components/SolvencySpeedometer.tsx
+msgid "Jr Principal"
 msgstr ""
 
 #: src/components/Errors/getContractErrorToastContent.tsx

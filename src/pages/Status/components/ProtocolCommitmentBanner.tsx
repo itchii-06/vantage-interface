@@ -2,7 +2,7 @@
  * ProtocolCommitmentBanner.tsx
  *
  * Permanent transparency declaration: explains the protocol's no-surprise-rate-hike
- * policy and that Step 7 (Hedge ADL) is the last resort rather than fee escalation.
+ * policy and that Step 8 (Hedge ADL) is the last resort rather than fee escalation.
  */
 
 import { t } from "@lingui/macro";
@@ -15,7 +15,7 @@ export function ProtocolCommitmentBanner() {
         <div>
           <p className="text-16 font-semibold text-blue-300">{t`Protocol Commitment — No Surprise Rate Hikes`}</p>
           <p className="leading-relaxed mt-10 text-12 text-slate-400">
-            {t`This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 7 (contract termination) rather than increasing costs for existing users. The 8-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order.`}
+            {t`This protocol does not raise funding rates retroactively. If the system can no longer sustain hedge payments, it executes Step 9 (Hedge ADL) rather than increasing costs for existing users. The 9-step defense sequence above is the complete, publicly committed framework — nothing will happen outside this order.`}
           </p>
         </div>
       </div>
