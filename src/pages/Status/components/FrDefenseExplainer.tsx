@@ -2,8 +2,14 @@
  * FrDefenseExplainer.tsx
  *
  * Collapsible accordion inside Protocol Defense Status.
- * Explains the 4-phase / 8-step FR risk management sequence
+ * Explains the 4-phase / 9-step FR risk management sequence
  * so first-time users understand how the protocol protects them.
+ *
+ * Step mapping (matches SolvencySpeedometer / getDefenseStep):
+ *   Phase 0 (Normal):     Step 0
+ *   Phase 1 (Prevention): Steps 1–3
+ *   Phase 2 (Internal):   Steps 4–7
+ *   Phase 3 (ADL):        Steps 8–9
  */
 
 import type { MessageDescriptor } from "@lingui/core";
@@ -60,7 +66,7 @@ const PHASES: Phase[] = [
         num: 1,
         icon: null,
         title: msg`Supply-Side Incentive`,
-        desc: msg`Reserve fund temporarily boosts LP rewards to attract new RWA deposits and expand pool capacity.`,
+        desc: msg`The stability fund temporarily boosts LP rewards to attract new RWA deposits and expand pool capacity.`,
       },
       {
         num: 2,
@@ -78,8 +84,8 @@ const PHASES: Phase[] = [
   },
   {
     label: msg`Phase 2 — Internal Defense`,
-    subLabel: msg`Steps 4–5`,
-    activeRange: [4, 5],
+    subLabel: msg`Steps 4–7`,
+    activeRange: [4, 7],
     bg: "bg-orange-950/20",
     titleColor: "text-orange-400",
     badgeClass: "border border-orange-700/60 bg-orange-900/50 text-orange-300",
@@ -87,42 +93,48 @@ const PHASES: Phase[] = [
       {
         num: 4,
         icon: null,
-        title: msg`Reserve Fund Utilization`,
-        desc: msg`The protocol stability fund covers FR shortfalls using surplus accumulated from past profits.`,
+        title: msg`Junior Vault Buffer`,
+        desc: msg`High-yield junior LP (USDC) profits absorb the FR deficit, shielding senior LPs (RWA) and maintaining hedge user costs.`,
       },
       {
         num: 5,
         icon: null,
-        title: msg`Junior Vault Buffer`,
-        desc: msg`High-yield junior LP (USDC) profits absorb the deficit, shielding senior LPs (RWA) and maintaining hedge user costs.`,
+        title: msg`Senior Vault Yield`,
+        desc: msg`Yield earned by senior LP (RWA) deposits is routed to cover the remaining FR shortfall.`,
       },
       {
         num: 6,
         icon: null,
-        title: msg`Senior Yield`,
-        desc: msg`Senior LP yield will be used to make FR payments`,
+        title: msg`Reserve Fund Utilization`,
+        desc: msg`The protocol stability fund covers FR shortfalls using surplus accumulated from past profits.`,
+      },
+      {
+        num: 7,
+        icon: null,
+        title: msg`Junior Vault Principal (up to 50%)`,
+        desc: msg`Up to 50% of junior LP principal is used to absorb the deficit. Once this cap is reached, the protocol escalates to Phase 3 ADL. This burden will decrease as protocol reserves grow.`,
       },
     ],
   },
   {
     label: msg`Phase 3 — Last Resort`,
-    subLabel: msg`Steps 7–8`,
-    activeRange: [7, 8],
+    subLabel: msg`Steps 8–9`,
+    activeRange: [8, 9],
     bg: "bg-red-950/20",
     titleColor: "text-red-400",
     badgeClass: "border border-red-700/60 bg-red-900/50 text-red-300",
     steps: [
       {
-        num: 7,
-        icon: null,
-        title: msg`ADL for Long Profits`,
-        desc: msg`Highly profitable speculative long positions are force-closed, directly reducing the outstanding FR obligation.`,
-      },
-      {
         num: 8,
         icon: null,
+        title: msg`ADL for Long Profits`,
+        desc: msg`Highly profitable speculative long positions are force-closed to directly reduce the FR obligation. Priority: Trade Mode positions first, then highest pnl-per-collateral.`,
+      },
+      {
+        num: 9,
+        icon: null,
         title: msg`ADL for Hedge-Shorts`,
-        desc: msg`Last line of defense. Some hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency and protocol halt — rather than raising costs retroactively.`,
+        desc: msg`Last line of defense. Hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency. Priority: highest leverage first, then most recently opened (LIFO), then auto-terminate mode.`,
       },
     ],
   },

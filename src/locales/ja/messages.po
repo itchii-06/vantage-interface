@@ -3917,6 +3917,34 @@ msgstr "資金が GMX Account に入金されました"
 msgid "Junior Vault Buffer"
 msgstr "ジュニアVaultバッファー"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "High-yield junior LP (USDC) profits absorb the FR deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
+msgstr "高利回りのジュニアLP（USDC）の利益でFR赤字を吸収し、シニアLP（RWA）とヘッジユーザーのコストを守ります。"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Senior Vault Yield"
+msgstr "シニアVault利回り"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Yield earned by senior LP (RWA) deposits is routed to cover the remaining FR shortfall."
+msgstr "シニアLP（RWA）のデポジットが生む利回りをFR不足の補填に充てます。"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Junior Vault Principal (up to 50%)"
+msgstr "ジュニアVault元本（最大50%まで）"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Up to 50% of junior LP principal is used to absorb the deficit. Once this cap is reached, the protocol escalates to Phase 3 ADL. This burden will decrease as protocol reserves grow."
+msgstr "ジュニアLPの元本の最大50%まで赤字補填に充てられます。この上限に達するとPhase 3（ADL）へ移行します。プロトコルの準備金が積み上がるにつれ、この負担は段階的に軽減される予定です。"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 4–7"
+msgstr "ステップ4–7"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Steps 8–9"
+msgstr "ステップ8–9"
+
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Insufficient liquidity. Order will fill when liquidity is available."
 msgstr "流動性不足です。流動性が確保され次第、注文が約定されます。"
@@ -4747,6 +4775,10 @@ msgstr "新しい比率または許容スリッページを入力"
 #: src/pages/Status/components/FrDefenseExplainer.tsx
 msgid "ADL for Hedge-Shorts"
 msgstr "ヘッジショートへのADL"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Last line of defense. Hedge shorts are force-closed (or converted to paid-shorts) to prevent LP insolvency. Priority: highest leverage first, then most recently opened (LIFO), then auto-terminate mode."
+msgstr "最終防衛線。LPの破綻を防ぐため、ヘッジショートを強制クローズ（または有料ショートへ転換）します。優先順位：高レバレッジ順 → 直近オープン順（LIFO） → 自動解約モード。"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Risk Management"
@@ -6548,8 +6580,8 @@ msgid "Airdrop"
 msgstr "エアドロップ"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Steps 7–8"
-msgstr "ステップ7–8"
+msgid "Steps 8–9"
+msgstr "ステップ8–9"
 
 #: src/components/ModalViews/RedirectModal.tsx
 msgid "Launch app"
@@ -9604,6 +9636,10 @@ msgstr "最大予約済み {directionLabel}"
 msgid "ADL for Long Profits"
 msgstr "ロング利益へのADL"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Highly profitable speculative long positions are force-closed to directly reduce the FR obligation. Priority: Trade Mode positions first, then highest pnl-per-collateral."
+msgstr "FR支払い義務を削減するため、含み益の大きい投機ロングを強制クローズします。優先順位：トレードモードのポジション優先 → 証拠金対比利益率（PnL/担保）降順。"
+
 #: src/components/TradeHistory/TradeHistory.tsx
 msgid "Realized PnL after fees and net price impact"
 msgstr "手数料および価格への影響（ネット）控除後の確定損益"
@@ -10953,8 +10989,8 @@ msgid "{gmOrGlvLabel} bought successfully, but bridge to Base failed. Your funds
 msgstr "{gmOrGlvLabel}の購入は完了しましたが、Baseへのブリッジに失敗しました。資金はGMX Accountに安全に保管されています。ブリッジを再試行するか、{indexName}プールに移動してGMトークンを出金してください。"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Steps 4–5"
-msgstr "ステップ4–5"
+msgid "Steps 4–7"
+msgstr "ステップ4–7"
 
 #: src/components/UserIncentiveDistribution/AboutGlpIncident.tsx
 msgid "GLV (GMX Liquidity Vaults) is GMX V2's improved version of GLP. It's a yield-optimizing crypto-index token that:"
