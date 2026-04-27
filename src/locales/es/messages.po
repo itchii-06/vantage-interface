@@ -167,6 +167,10 @@ msgstr "<0>Multichain</0><1>Soporte MegaETH</1><2>Liquidez justo a tiempo</2>"
 msgid "Create TWAP Swap"
 msgstr "Crear Intercambio TWAP"
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Physical USDC balance is below Payout Capacity. Layer 2: awaiting RevenueStore emergency refill by the protocol team."
+msgstr ""
+
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
@@ -650,6 +654,10 @@ msgstr ""
 msgid "Additional opportunities"
 msgstr "Oportunidades adicionales"
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "ADL or RevenueStore refill may be triggered."
+msgstr ""
+
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Avg Entry"
 msgstr ""
@@ -695,6 +703,10 @@ msgstr "V1 airdrop"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Order execution price"
 msgstr "Precio de ejecución de la orden"
+
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "The Vault's payout capacity (Junior AUM) is below the total unrealised profit in the market. Profitable positions — prioritised by leverage × profit — may be force-closed by the ADL keeper to restore solvency."
+msgstr ""
 
 #: src/components/TradeboxPoolWarnings/TradeboxPoolWarnings.tsx
 msgid "Insufficient liquidity in any {0}/USD pool"
@@ -1246,6 +1258,10 @@ msgstr "Saldo de Gas insuficiente. Deposite más ETH."
 msgid "Creating order"
 msgstr ""
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "ADL may be active"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Swap fee factor (negative PI)"
 msgstr "Factor de comisión de intercambio (PI negativo)"
@@ -1261,6 +1277,10 @@ msgstr ""
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Claimable balance"
 msgstr "Saldo reclamable"
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Junior AUM — logical payout ceiling"
+msgstr ""
 
 #: src/components/TenderlySettings/TenderlySettings.tsx
 msgid "xxxx-xxxx-xxxx"
@@ -2719,6 +2739,10 @@ msgstr ""
 msgid "Approving…"
 msgstr ""
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Total Liquidity (USDC)"
+msgstr ""
+
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Allow {0} spending"
 msgstr "Permitir gasto de {0}"
@@ -2924,6 +2948,10 @@ msgstr "La posición existente utiliza garantía {0}. Esta orden no se aplicará
 #: src/pages/Referrals/Referrals.tsx
 msgid "Affiliates"
 msgstr "Afiliados"
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Physical USDC in Vault (Senior + Junior combined)"
+msgstr ""
 
 #: src/pages/RpcDebug/parts.tsx
 msgid "Global network"
@@ -4008,6 +4036,10 @@ msgstr ""
 msgid "What makes GMX more cost-efficient than other perpetual platforms?"
 msgstr "¿Qué hace a GMX más eficiente en costos que otras plataformas perpetuas?"
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Outstanding Risk (OI)"
+msgstr ""
+
 #: src/pages/AccountDashboard/dailyAndCumulativePnLDebug.tsx
 #: src/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
@@ -4026,6 +4058,10 @@ msgstr "Parte de TWAP fallida"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Min collateral factor OI short"
 msgstr "Factor mínimo de garantía OI corto"
+
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "Coverage ratio"
+msgstr ""
 
 #: src/components/TradeHistory/keys.ts
 msgid "Failed TWAP Swap part"
@@ -4636,6 +4672,10 @@ msgstr "Lee las reglas"
 msgid "Source chain supports single token only"
 msgstr "La cadena de origen solo admite un único token"
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "ADL Risk"
+msgstr ""
+
 #: src/pages/Status/components/FrDefenseExplainer.tsx
 msgid "Users pay zero fees for perpetual hedging, thanks to the Yield Token FR Offset mechanism."
 msgstr ""
@@ -4767,6 +4807,10 @@ msgstr ""
 #: src/domain/synthetics/orders/createWrapOrUnwrapTxn.ts
 msgid "Swap submitted"
 msgstr "Intercambio enviado"
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "OI growing relative to payout capacity. Monitor closely."
+msgstr ""
 
 #: src/components/PositionSeller/rows/AllowedSlippageRow.tsx
 #: src/components/TradeBox/TradeBoxRows/AllowedSlippageRow.tsx
@@ -5460,6 +5504,10 @@ msgstr "Interés abierto {directionLabel}"
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount exceeds your VLP balance"
+msgstr ""
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Health Factor (Payout Capacity / Outstanding Risk)"
 msgstr ""
 
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useTokensToApprove.tsx
@@ -7047,6 +7095,10 @@ msgstr "Garantía ({0})"
 msgid "Real-time rants about GMX trades"
 msgstr "Comentarios en tiempo real sobre operaciones en GMX"
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Waterfall Payout Health"
+msgstr ""
+
 #: src/components/TradeBox/hooks/useCollateralInTooltipContent.tsx
 msgid "Mixed exposure: Short {indexSymbol} + long {collateralSymbol} collateral. Liquidation price varies with {collateralSymbol} price."
 msgstr "Exposición mixta: corto {indexSymbol} + garantía largo {collateralSymbol}. El precio de liquidación varía con el precio de {collateralSymbol}."
@@ -7877,6 +7929,10 @@ msgstr "Activar intercambios externos"
 msgid "Sum of short position sizes"
 msgstr ""
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "Total OI (proxy)"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "BORROWING FEES"
 msgstr "COMISIONES DE PRÉSTAMO"
@@ -8656,6 +8712,10 @@ msgstr "Garantía de entrada"
 msgid "EVENT NAME"
 msgstr "NOMBRE DEL EVENTO"
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "Outstanding Risk"
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Compass Labs GM token dashboard"
 msgstr "Panel de tokens GM de Compass Labs"
@@ -8695,6 +8755,10 @@ msgstr "Tamaño mínimo de posición: {0}"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
 #: src/components/Stake/GMXAprTooltip.tsx
 msgid "27% of protocol fees are accumulating in the Treasury and will be distributed when GMX reaches $90. Your share is based on staking power (duration × amount staked)."
+msgstr ""
+
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "Junior AUM"
 msgstr ""
 
 #: src/pages/RpcDebug/parts.tsx
@@ -9526,6 +9590,10 @@ msgstr "VOLUMEN TOTAL"
 msgid "Live (15s poll)"
 msgstr ""
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "Payout capacity covers outstanding risk. Your profitable position is not at risk of ADL at this time."
+msgstr ""
+
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Enable One-Click Trading"
 msgstr "Activar trading con One-Click"
@@ -9546,6 +9614,10 @@ msgstr "El tamaño de la posición excede el interés abierto disponible. Delta:
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Yes"
 msgstr "Sí"
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Max potential payout if all positions close in profit"
+msgstr ""
 
 #: src/components/PositionDropdown/PositionDropdown.tsx
 msgid "Increase size (TWAP)"
@@ -10107,6 +10179,7 @@ msgstr "Descuento por referencia"
 msgid "Threshold for decrease funding"
 msgstr "Umbral para reducción de financiación"
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 msgid "Low"
 msgstr ""
@@ -10161,6 +10234,11 @@ msgstr "Perfectswap"
 #: src/components/PositionShare/PositionShareCard.tsx
 msgid "Referral code"
 msgstr "Código de referencia"
+
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Payout Capacity"
+msgstr ""
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -10947,6 +11025,10 @@ msgstr "Todas las ganancias se reinvierten automáticamente"
 #: src/components/PositionItem/PositionItem.tsx
 msgid "Use the TP/SL button to set TP/SL orders."
 msgstr "Utilice el botón TP/SL para establecer órdenes TP/SL."
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Junior LP view"
+msgstr ""
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
@@ -12324,6 +12406,7 @@ msgstr "Vendiendo..."
 msgid "Derivatives portfolio tracker"
 msgstr "Rastreador de cartera de derivados"
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 msgid "High"
 msgstr ""

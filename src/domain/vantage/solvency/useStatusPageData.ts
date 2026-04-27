@@ -82,6 +82,16 @@ export interface StatusPageData {
   fundingRateBps: number | null;
   hedgeCapacityPct: number | null;
   safetyBufferBps: number | null;
+
+  // ── Waterfall Payout solvency (Issue #216) ────────────────────────────────
+  /** Physical USDC held in the Vault (Senior + Junior combined). "Total Liquidity". */
+  waterfallTotalBalance: number | null;
+  /** Junior (PAYOUT) TrancheVault effective AUM — the logical payout ceiling. "Payout Capacity". */
+  waterfallPayoutCapacity: number | null;
+  /** totalGlobalOI proxy — conservative upper bound of outstanding payout obligations. "Outstanding Risk". */
+  waterfallNetUPnL: number | null;
+  /** juniorAUM < netUPnL — Vault cannot cover all unrealised profits. Triggers ADL. */
+  waterfallIsCritical: boolean;
 }
 
 const EMPTY: StatusPageData = {
@@ -103,6 +113,10 @@ const EMPTY: StatusPageData = {
   fundingRateBps: null,
   hedgeCapacityPct: null,
   safetyBufferBps: null,
+  waterfallTotalBalance: null,
+  waterfallPayoutCapacity: null,
+  waterfallNetUPnL: null,
+  waterfallIsCritical: false,
 };
 
 // ---------------------------------------------------------------------------
@@ -237,7 +251,22 @@ export function useStatusPageData(chainId: number, cfg: VaultConfig | undefined)
             bufferedYieldBps > 0 ? (shortCostBps / bufferedYieldBps) * 100 : shortCostBps > 0 ? 100 : 0;
         }
 
-        // ── 7. Derive current defense step ──────────────────────────────────
+        // ── 7. Waterfall Payout solvency (Issue #216) ──────────────────────
+        let waterfallTotalBalance: number | null = null;
+        let waterfallPayoutCapacity: number | null = null;
+        let waterfallNetUPnL: number | null = null;
+        let waterfallIsCritical = false;
+        try {
+          const [tbRaw, jaRaw, nuRaw, ic] = await vault.getLiquidityStatus();
+          waterfallTotalBalance = parseFloat(formatEther(tbRaw));
+          waterfallPayoutCapacity = parseFloat(formatEther(jaRaw));
+          waterfallNetUPnL = parseFloat(formatEther(nuRaw));
+          waterfallIsCritical = Boolean(ic);
+        } catch {
+          // getLiquidityStatus not yet deployed — degrade gracefully.
+        }
+
+        // ── 8. Derive current defense step ──────────────────────────────────
         const defenseStep = getDefenseStep({
           isLPBoostActive,
           isHighLeverageLocked,
@@ -268,6 +297,10 @@ export function useStatusPageData(chainId: number, cfg: VaultConfig | undefined)
             fundingRateBps,
             hedgeCapacityPct,
             safetyBufferBps,
+            waterfallTotalBalance,
+            waterfallPayoutCapacity,
+            waterfallNetUPnL,
+            waterfallIsCritical,
           });
         }
       } catch {

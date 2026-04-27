@@ -24,6 +24,8 @@ import { BufferGauges } from "./components/BufferGauges";
 import { OIStats } from "./components/OIStats";
 import { ProtocolCommitmentBanner } from "./components/ProtocolCommitmentBanner";
 import { SolvencySpeedometer } from "./components/SolvencySpeedometer";
+import { WaterfallAdlRisk } from "./components/WaterfallAdlRisk";
+import { WaterfallHealthWidget } from "./components/WaterfallHealthWidget";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -101,6 +103,24 @@ export default function StatusPage() {
                 hedgeCapacityPct={data.hedgeCapacityPct}
               />
             </div>
+          </div>
+
+          {/* Waterfall Payout solvency row (Issue #216) */}
+          <div className="grid grid-cols-1 items-start gap-20 lg:grid-cols-2">
+            {/* Junior LP: Health Factor */}
+            <WaterfallHealthWidget
+              totalBalance={data.waterfallTotalBalance}
+              payoutCapacity={data.waterfallPayoutCapacity}
+              netUPnL={data.waterfallNetUPnL}
+              isCritical={data.waterfallIsCritical}
+            />
+
+            {/* Trader: ADL Risk Indicator */}
+            <WaterfallAdlRisk
+              payoutCapacity={data.waterfallPayoutCapacity}
+              netUPnL={data.waterfallNetUPnL}
+              isCritical={data.waterfallIsCritical}
+            />
           </div>
         </div>
       </VantagePageContainer>

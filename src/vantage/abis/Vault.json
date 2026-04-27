@@ -3140,6 +3140,34 @@
   },
   {
     "inputs": [],
+    "name": "getLiquidityStatus",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "totalBalance",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "juniorAUM",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "netUPnL",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isCritical",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "totalGlobalOI",
     "outputs": [
       {

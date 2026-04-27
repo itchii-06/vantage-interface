@@ -167,6 +167,10 @@ msgstr "<0>多鏈</0><1>MegaETH 支援</1><2>即時流動性</2>"
 msgid "Create TWAP Swap"
 msgstr "建立 TWAP 兌換"
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Physical USDC balance is below Payout Capacity. Layer 2: awaiting RevenueStore emergency refill by the protocol team."
+msgstr ""
+
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
@@ -650,6 +654,10 @@ msgstr ""
 msgid "Additional opportunities"
 msgstr "更多機會"
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "ADL or RevenueStore refill may be triggered."
+msgstr ""
+
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Avg Entry"
 msgstr ""
@@ -695,6 +703,10 @@ msgstr "V1 空投"
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Order execution price"
 msgstr "訂單成交價格"
+
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "The Vault's payout capacity (Junior AUM) is below the total unrealised profit in the market. Profitable positions — prioritised by leverage × profit — may be force-closed by the ADL keeper to restore solvency."
+msgstr ""
 
 #: src/components/TradeboxPoolWarnings/TradeboxPoolWarnings.tsx
 msgid "Insufficient liquidity in any {0}/USD pool"
@@ -1246,6 +1258,10 @@ msgstr "Gas 餘額不足。請存入更多 ETH。"
 msgid "Creating order"
 msgstr ""
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "ADL may be active"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Swap fee factor (negative PI)"
 msgstr "兌換手續費因子（負價格影響）"
@@ -1261,6 +1277,10 @@ msgstr ""
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Claimable balance"
 msgstr "可領取餘額"
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Junior AUM — logical payout ceiling"
+msgstr ""
 
 #: src/components/TenderlySettings/TenderlySettings.tsx
 msgid "xxxx-xxxx-xxxx"
@@ -2719,6 +2739,10 @@ msgstr ""
 msgid "Approving…"
 msgstr ""
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Total Liquidity (USDC)"
+msgstr ""
+
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Allow {0} spending"
 msgstr "授權 {0} 支出"
@@ -2924,6 +2948,10 @@ msgstr "現有倉位使用 {0} 抵押品。此訂單將不會套用於該倉位�
 #: src/pages/Referrals/Referrals.tsx
 msgid "Affiliates"
 msgstr "推廣夥伴"
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Physical USDC in Vault (Senior + Junior combined)"
+msgstr ""
 
 #: src/pages/RpcDebug/parts.tsx
 msgid "Global network"
@@ -4008,6 +4036,10 @@ msgstr ""
 msgid "What makes GMX more cost-efficient than other perpetual platforms?"
 msgstr "為什麼 GMX 比其他永續合約平台更具成本效益？"
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Outstanding Risk (OI)"
+msgstr ""
+
 #: src/pages/AccountDashboard/dailyAndCumulativePnLDebug.tsx
 #: src/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
@@ -4026,6 +4058,10 @@ msgstr "TWAP 部分失敗"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Min collateral factor OI short"
 msgstr "做空未平倉量最低抵押品因子"
+
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "Coverage ratio"
+msgstr ""
 
 #: src/components/TradeHistory/keys.ts
 msgid "Failed TWAP Swap part"
@@ -4636,6 +4672,10 @@ msgstr "閱讀規則"
 msgid "Source chain supports single token only"
 msgstr "來源鏈僅支援單一代幣"
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "ADL Risk"
+msgstr ""
+
 #: src/pages/Status/components/FrDefenseExplainer.tsx
 msgid "Users pay zero fees for perpetual hedging, thanks to the Yield Token FR Offset mechanism."
 msgstr ""
@@ -4767,6 +4807,10 @@ msgstr ""
 #: src/domain/synthetics/orders/createWrapOrUnwrapTxn.ts
 msgid "Swap submitted"
 msgstr "兌換已提交"
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "OI growing relative to payout capacity. Monitor closely."
+msgstr ""
 
 #: src/components/PositionSeller/rows/AllowedSlippageRow.tsx
 #: src/components/TradeBox/TradeBoxRows/AllowedSlippageRow.tsx
@@ -5460,6 +5504,10 @@ msgstr "未平倉量 {directionLabel}"
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Amount exceeds your VLP balance"
+msgstr ""
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Health Factor (Payout Capacity / Outstanding Risk)"
 msgstr ""
 
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useTokensToApprove.tsx
@@ -7047,6 +7095,10 @@ msgstr "抵押品（{0}）"
 msgid "Real-time rants about GMX trades"
 msgstr "關於 GMX 交易的即時評論"
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Waterfall Payout Health"
+msgstr ""
+
 #: src/components/TradeBox/hooks/useCollateralInTooltipContent.tsx
 msgid "Mixed exposure: Short {indexSymbol} + long {collateralSymbol} collateral. Liquidation price varies with {collateralSymbol} price."
 msgstr "混合曝險：做空 {indexSymbol} + 做多 {collateralSymbol} 抵押品。清算價格隨 {collateralSymbol} 價格變動。"
@@ -7877,6 +7929,10 @@ msgstr "啟用外部兌換"
 msgid "Sum of short position sizes"
 msgstr ""
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "Total OI (proxy)"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "BORROWING FEES"
 msgstr "借款費用"
@@ -8656,6 +8712,10 @@ msgstr "轉入抵押品"
 msgid "EVENT NAME"
 msgstr "事件名稱"
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "Outstanding Risk"
+msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Compass Labs GM token dashboard"
 msgstr "Compass Labs GM 代幣儀表板"
@@ -8695,6 +8755,10 @@ msgstr "最小倉位大小：{0}"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/GmxAssetCard.tsx
 #: src/components/Stake/GMXAprTooltip.tsx
 msgid "27% of protocol fees are accumulating in the Treasury and will be distributed when GMX reaches $90. Your share is based on staking power (duration × amount staked)."
+msgstr ""
+
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "Junior AUM"
 msgstr ""
 
 #: src/pages/RpcDebug/parts.tsx
@@ -9526,6 +9590,10 @@ msgstr "TOTAL VOLUME"
 msgid "Live (15s poll)"
 msgstr ""
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "Payout capacity covers outstanding risk. Your profitable position is not at risk of ADL at this time."
+msgstr ""
+
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Enable One-Click Trading"
 msgstr "啟用 One-Click Trading"
@@ -9546,6 +9614,10 @@ msgstr "倉位規模超過可用未平倉量。差額：{usdDeltaText}，最大 
 #: src/components/SettingsModal/RpcDebugSettings.tsx
 msgid "Yes"
 msgstr "是"
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Max potential payout if all positions close in profit"
+msgstr ""
 
 #: src/components/PositionDropdown/PositionDropdown.tsx
 msgid "Increase size (TWAP)"
@@ -10107,6 +10179,7 @@ msgstr "推薦折扣"
 msgid "Threshold for decrease funding"
 msgstr "降低資金費率門檻"
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 msgid "Low"
 msgstr ""
@@ -10161,6 +10234,11 @@ msgstr "Perfectswap"
 #: src/components/PositionShare/PositionShareCard.tsx
 msgid "Referral code"
 msgstr "推薦碼"
+
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Payout Capacity"
+msgstr ""
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -10947,6 +11025,10 @@ msgstr "所有收益自動複利"
 #: src/components/PositionItem/PositionItem.tsx
 msgid "Use the TP/SL button to set TP/SL orders."
 msgstr "使用 TP/SL 按鈕設定 TP/SL 訂單。"
+
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Junior LP view"
+msgstr ""
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
@@ -12324,6 +12406,7 @@ msgstr "賣出中..."
 msgid "Derivatives portfolio tracker"
 msgstr "衍生品投資組合追蹤器"
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 msgid "High"
 msgstr ""
