@@ -620,6 +620,10 @@ msgstr "롱 OI"
 msgid "Net Yield"
 msgstr ""
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "High Risk"
+msgstr ""
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Traders referred on Avalanche"
 msgstr "Avalanche에서 추천된 트레이더"
@@ -9204,6 +9208,7 @@ msgid "Debug controls"
 msgstr "디버그 제어"
 
 #: src/domain/vantage/vaults/vaultConfig.ts
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "Low Risk"
 msgstr ""
 
@@ -10183,7 +10188,6 @@ msgstr "추천 할인"
 msgid "Threshold for decrease funding"
 msgstr "펀딩 감소 임계값"
 
-#: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 msgid "Low"
 msgstr ""
@@ -12415,7 +12419,6 @@ msgstr "매도 중..."
 msgid "Derivatives portfolio tracker"
 msgstr "파생상품 포트폴리오 트래커"
 
-#: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 msgid "High"
 msgstr ""

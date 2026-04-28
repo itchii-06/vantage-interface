@@ -620,6 +620,10 @@ msgstr "Long OI"
 msgid "Net Yield"
 msgstr "Net Yield"
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "High Risk"
+msgstr "High Risk"
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Traders referred on Avalanche"
 msgstr "Traders referred on Avalanche"
@@ -9204,6 +9208,7 @@ msgid "Debug controls"
 msgstr "Debug controls"
 
 #: src/domain/vantage/vaults/vaultConfig.ts
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "Low Risk"
 msgstr "Low Risk"
 
@@ -10183,7 +10188,6 @@ msgstr "Referral discount"
 msgid "Threshold for decrease funding"
 msgstr "Threshold for decrease funding"
 
-#: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 msgid "Low"
 msgstr "Low"
@@ -12415,7 +12419,6 @@ msgstr "Selling..."
 msgid "Derivatives portfolio tracker"
 msgstr "Derivatives portfolio tracker"
 
-#: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 msgid "High"
 msgstr "High"

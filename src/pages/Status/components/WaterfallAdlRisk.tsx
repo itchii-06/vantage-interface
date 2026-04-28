@@ -48,11 +48,11 @@ export function WaterfallAdlRisk({ payoutCapacity, netUPnL, isCritical }: Waterf
         {/* Risk badge */}
         {isCritical ? (
           <span className="rounded-full border border-red-700 bg-red-900/60 px-12 py-4 text-13 font-semibold text-red-400">
-            {t`High`}
+            {t`High Risk`}
           </span>
         ) : (
           <span className="rounded-full border border-green-700 bg-green-900/60 px-12 py-4 text-13 font-semibold text-green-400">
-            {t`Low`}
+            {t`Low Risk`}
           </span>
         )}
       </div>

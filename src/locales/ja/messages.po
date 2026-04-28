@@ -620,6 +620,10 @@ msgstr "ロングOI"
 msgid "Net Yield"
 msgstr "ネット利回り"
 
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
+msgid "High Risk"
+msgstr "高リスク"
+
 #: src/components/Referrals/AffiliatesStats.tsx
 msgid "Traders referred on Avalanche"
 msgstr "Avalancheで紹介されたトレーダー"
@@ -9200,6 +9204,7 @@ msgid "Debug controls"
 msgstr "デバッグコントロール"
 
 #: src/domain/vantage/vaults/vaultConfig.ts
+#: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "Low Risk"
 msgstr "低リスク"
 
@@ -10179,7 +10184,6 @@ msgstr "リファラル割引"
 msgid "Threshold for decrease funding"
 msgstr "ファンディングレート低減の閾値"
 
-#: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 msgid "Low"
 msgstr "安値"
@@ -12407,7 +12411,6 @@ msgstr "売却中..."
 msgid "Derivatives portfolio tracker"
 msgstr "デリバティブポートフォリオトラッカー"
 
-#: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Trade/components/PriceChart.tsx
 msgid "High"
 msgstr "高値"
