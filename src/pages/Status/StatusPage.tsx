@@ -102,25 +102,20 @@ export default function StatusPage() {
                 yieldAprBps={data.yieldAprBps}
                 hedgeCapacityPct={data.hedgeCapacityPct}
               />
+              {/* Junior LP: Health Factor */}
+              <WaterfallHealthWidget
+                totalBalance={data.waterfallTotalBalance}
+                payoutCapacity={data.waterfallPayoutCapacity}
+                netUPnL={data.waterfallNetUPnL}
+                isCritical={data.waterfallIsCritical}
+              />
+              {/* Trader: ADL Risk Indicator */}
+              <WaterfallAdlRisk
+                payoutCapacity={data.waterfallPayoutCapacity}
+                netUPnL={data.waterfallNetUPnL}
+                isCritical={data.waterfallIsCritical}
+              />
             </div>
-          </div>
-
-          {/* Waterfall Payout solvency row (Issue #216) */}
-          <div className="grid grid-cols-1 items-start gap-20 lg:grid-cols-2">
-            {/* Junior LP: Health Factor */}
-            <WaterfallHealthWidget
-              totalBalance={data.waterfallTotalBalance}
-              payoutCapacity={data.waterfallPayoutCapacity}
-              netUPnL={data.waterfallNetUPnL}
-              isCritical={data.waterfallIsCritical}
-            />
-
-            {/* Trader: ADL Risk Indicator */}
-            <WaterfallAdlRisk
-              payoutCapacity={data.waterfallPayoutCapacity}
-              netUPnL={data.waterfallNetUPnL}
-              isCritical={data.waterfallIsCritical}
-            />
           </div>
         </div>
       </VantagePageContainer>

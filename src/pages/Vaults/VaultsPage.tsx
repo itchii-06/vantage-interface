@@ -262,12 +262,11 @@ function TrancheSection({
 }: TrancheSectionProps) {
   const meta = getTrancheMeta()[tranche];
   const icon = tranche === "senior" ? "🛡️" : "🚀";
-  const borderClass = tranche === "senior" ? "border-l-indigo-500" : "border-l-amber-500";
 
   return (
     <div className="mb-28">
       {/* Section header */}
-      <div className={`mb-12 border-l-4 pl-12 ${borderClass}`}>
+      <div className={`mb-12 pl-12`}>
         <div className="flex items-center gap-10">
           <span className="text-20">{icon}</span>
           <div>
