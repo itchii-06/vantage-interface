@@ -4228,6 +4228,10 @@ msgstr ""
 msgid "Liquidation price changes with fees and collateral value."
 msgstr ""
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Critical"
+msgstr ""
+
 #: src/components/Errors/LowGasPaymentTokenBalanceWarning.tsx
 msgid "Low {symbol} balance. This amount leaves little for future fees on {0}"
 msgstr ""
@@ -10973,6 +10977,10 @@ msgstr ""
 msgid "Avoid price wicks with transparent, sub-second Chainlink price feeds tailor-made for GMX"
 msgstr ""
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Warning"
+msgstr ""
+
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Your funds are safe and remain in your wallet."
 msgstr ""
@@ -12258,6 +12266,7 @@ msgid "Join an anonymous one-on-one chat to share your experience"
 msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Healthy"
 msgstr ""
 

@@ -4228,6 +4228,10 @@ msgstr "{0}"
 msgid "Liquidation price changes with fees and collateral value."
 msgstr "清算價格會隨費用和抵押品價值變動。"
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Critical"
+msgstr ""
+
 #: src/components/Errors/LowGasPaymentTokenBalanceWarning.tsx
 msgid "Low {symbol} balance. This amount leaves little for future fees on {0}"
 msgstr ""
@@ -10973,6 +10977,10 @@ msgstr "我可以在 GMX 上構建或將其整合到我的 DeFi 應用程式中�
 msgid "Avoid price wicks with transparent, sub-second Chainlink price feeds tailor-made for GMX"
 msgstr "透過 Chainlink 為 GMX 量身打造的透明、亞秒級價格饋送，避免價格插針"
 
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
+msgid "Warning"
+msgstr ""
+
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Your funds are safe and remain in your wallet."
 msgstr "您的資金安全無虞，仍保留在您的錢包中。"
@@ -12258,6 +12266,7 @@ msgid "Join an anonymous one-on-one chat to share your experience"
 msgstr "加入匿名一對一對話，分享您的使用體驗"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Healthy"
 msgstr ""
 

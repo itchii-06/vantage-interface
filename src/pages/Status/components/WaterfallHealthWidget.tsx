@@ -39,21 +39,18 @@ function healthLevel(pct: number | null, isCritical: boolean): HealthLevel {
   return "healthy";
 }
 
-const HEALTH_CONFIG: Record<HealthLevel, { label: string; labelClass: string; barColor: string; bgClass: string }> = {
+const HEALTH_CONFIG: Record<HealthLevel, { labelClass: string; barColor: string; bgClass: string }> = {
   healthy: {
-    label: "Healthy",
     labelClass: "text-green-400",
     barColor: "bg-green-500",
     bgClass: "bg-green-900/20 border-green-800/40",
   },
   warning: {
-    label: "Warning",
     labelClass: "text-yellow-400",
     barColor: "bg-yellow-500",
     bgClass: "bg-yellow-900/20 border-yellow-800/40",
   },
   critical: {
-    label: "Critical",
     labelClass: "text-red-400",
     barColor: "bg-red-500",
     bgClass: "bg-red-900/20 border-red-800/40",
@@ -84,6 +81,8 @@ export function WaterfallHealthWidget({
 
   const level = healthLevel(healthPct, isCritical);
   const cfg = HEALTH_CONFIG[level];
+
+  const levelLabel = level === "healthy" ? t`Healthy` : level === "warning" ? t`Warning` : t`Critical`;
 
   const barFill = Math.min(100, Math.max(0, healthPct ?? 0));
   const barStyle = useMemo(() => ({ width: `${barFill}%` }), [barFill]);
@@ -120,7 +119,7 @@ export function WaterfallHealthWidget({
                   : "border border-red-700 bg-red-900/60 text-red-400"
             }`}
           >
-            {cfg.label}
+            {levelLabel}
           </span>
           {level === "critical" && (
             <span className="text-12 text-red-400">{t`ADL or RevenueStore refill may be triggered.`}</span>
