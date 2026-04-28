@@ -169,7 +169,7 @@ msgstr "TWAPスワップを作成"
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Physical USDC balance is below Payout Capacity. Layer 2: awaiting RevenueStore emergency refill by the protocol team."
-msgstr ""
+msgstr "物理USDC残高がペイアウト上限を下回っています。レイヤー2：プロトコルチームによるRevenueStore緊急補充を待機中。"
 
 #: src/components/GmxAccountModal/DepositView.tsx
 #: src/components/GmxAccountModal/WithdrawalView.tsx
@@ -656,7 +656,7 @@ msgstr "追加の機会"
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "ADL or RevenueStore refill may be triggered."
-msgstr ""
+msgstr "ADLまたはRevenueStore補充がトリガーされる可能性があります。"
 
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 msgid "Avg Entry"
@@ -706,7 +706,7 @@ msgstr "注文約定価格"
 
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "The Vault's payout capacity (Junior AUM) is below the total unrealised profit in the market. Profitable positions — prioritised by leverage × profit — may be force-closed by the ADL keeper to restore solvency."
-msgstr ""
+msgstr "Vaultのペイアウト上限（Junior AUM）が市場全体の含み益合計を下回っています。含み益ポジション（レバレッジ×利益で優先順位付け）がADL Keeperによって強制クローズされる可能性があります。"
 
 #: src/components/TradeboxPoolWarnings/TradeboxPoolWarnings.tsx
 msgid "Insufficient liquidity in any {0}/USD pool"
@@ -1260,7 +1260,7 @@ msgstr ""
 
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "ADL may be active"
-msgstr ""
+msgstr "ADLが発動中の可能性があります"
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Swap fee factor (negative PI)"
@@ -1280,7 +1280,7 @@ msgstr "請求可能な残高"
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Junior AUM — logical payout ceiling"
-msgstr ""
+msgstr "Junior AUM — ペイアウト上限"
 
 #: src/components/TenderlySettings/TenderlySettings.tsx
 msgid "xxxx-xxxx-xxxx"
@@ -2741,7 +2741,7 @@ msgstr "承認中…"
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Total Liquidity (USDC)"
-msgstr ""
+msgstr "総流動性（USDC）"
 
 #: src/components/GmxAccountModal/DepositView.tsx
 msgid "Allow {0} spending"
@@ -2951,7 +2951,7 @@ msgstr "アフィリエイト"
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Physical USDC in Vault (Senior + Junior combined)"
-msgstr ""
+msgstr "Vault内の物理USDC（Senior + Junior 合計）"
 
 #: src/pages/RpcDebug/parts.tsx
 msgid "Global network"
@@ -4038,7 +4038,7 @@ msgstr "GMXが他のパーペチュアルプラットフォームよりコスト
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Outstanding Risk (OI)"
-msgstr ""
+msgstr "未決済リスク（OI）"
 
 #: src/pages/AccountDashboard/dailyAndCumulativePnLDebug.tsx
 #: src/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
@@ -4061,7 +4061,7 @@ msgstr "最小担保係数 OI ショート"
 
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "Coverage ratio"
-msgstr ""
+msgstr "カバレッジ比率"
 
 #: src/components/TradeHistory/keys.ts
 msgid "Failed TWAP Swap part"
@@ -4230,7 +4230,7 @@ msgstr "清算価格は手数料および担保価値に応じて変動します
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Critical"
-msgstr ""
+msgstr "危機的"
 
 #: src/components/Errors/LowGasPaymentTokenBalanceWarning.tsx
 msgid "Low {symbol} balance. This amount leaves little for future fees on {0}"
@@ -4678,7 +4678,7 @@ msgstr "ソースチェーンは単一トークンのみ対応しています"
 
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "ADL Risk"
-msgstr ""
+msgstr "ADLリスク"
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
 msgid "Users pay zero fees for perpetual hedging, thanks to the Yield Token FR Offset mechanism."
@@ -4814,7 +4814,7 @@ msgstr "スワップを送信しました"
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "OI growing relative to payout capacity. Monitor closely."
-msgstr ""
+msgstr "OIがペイアウト上限に対して拡大しています。注意して監視してください。"
 
 #: src/components/PositionSeller/rows/AllowedSlippageRow.tsx
 #: src/components/TradeBox/TradeBoxRows/AllowedSlippageRow.tsx
@@ -5512,7 +5512,7 @@ msgstr "VLP残高を超えています"
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Health Factor (Payout Capacity / Outstanding Risk)"
-msgstr ""
+msgstr "健全性指標（ペイアウト上限 / 未決済リスク）"
 
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useTokensToApprove.tsx
 #: src/components/GmSwap/GmSwapBox/GmDepositWithdrawalBox/useTokensToApprove.tsx
@@ -7097,7 +7097,7 @@ msgstr "GMXの取引に関するリアルタイムの実況"
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Waterfall Payout Health"
-msgstr ""
+msgstr "ウォーターフォール支払健全性"
 
 #: src/components/TradeBox/hooks/useCollateralInTooltipContent.tsx
 msgid "Mixed exposure: Short {indexSymbol} + long {collateralSymbol} collateral. Liquidation price varies with {collateralSymbol} price."
@@ -7931,7 +7931,7 @@ msgstr "ショートポジションサイズの合計"
 
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "Total OI (proxy)"
-msgstr ""
+msgstr "総OI（推計）"
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "BORROWING FEES"
@@ -8714,7 +8714,7 @@ msgstr "イベント名"
 
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "Outstanding Risk"
-msgstr ""
+msgstr "未決済リスク"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Compass Labs GM token dashboard"
@@ -8759,7 +8759,7 @@ msgstr ""
 
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "Junior AUM"
-msgstr ""
+msgstr "Junior AUM"
 
 #: src/pages/RpcDebug/parts.tsx
 msgid "Down"
@@ -9592,7 +9592,7 @@ msgstr "ライブ（15秒更新）"
 
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "Payout capacity covers outstanding risk. Your profitable position is not at risk of ADL at this time."
-msgstr ""
+msgstr "ペイアウト上限は未決済リスクをカバーしています。現時点では収益ポジションにADLリスクはありません。"
 
 #: src/components/GmxAccountModal/DepositStatusView.tsx
 msgid "Enable One-Click Trading"
@@ -9617,7 +9617,7 @@ msgstr "はい"
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Max potential payout if all positions close in profit"
-msgstr ""
+msgstr "全ポジションが利益確定した場合の最大ペイアウト額"
 
 #: src/components/PositionDropdown/PositionDropdown.tsx
 msgid "Increase size (TWAP)"
@@ -10238,7 +10238,7 @@ msgstr "リファラルコード"
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Payout Capacity"
-msgstr ""
+msgstr "ペイアウト上限"
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
 #: src/components/TradeHistory/TradeHistoryRow/utils/position.ts
@@ -10975,7 +10975,7 @@ msgstr "GMX向けに設計された透明性の高いサブセカンドChainlink
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Your funds are safe and remain in your wallet."
@@ -11032,7 +11032,7 @@ msgstr "TP/SLボタンを使用してTP/SL注文を設定してください。"
 
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "Junior LP view"
-msgstr ""
+msgstr "Junior LP向け"
 
 #: src/components/TVChartContainer/TVChartContainer.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
