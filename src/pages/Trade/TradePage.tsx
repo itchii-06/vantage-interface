@@ -16,6 +16,7 @@ import { useVantagePositions } from "domain/vantage/positions/useVantagePosition
 import { usePositionRequests } from "domain/vantage/trade/usePositionRequests";
 import { usePositionRouterTrade } from "domain/vantage/trade/usePositionRouterTrade";
 import { useSpread } from "domain/vantage/trade/useSpread";
+import { useJuniorVaultLiquidity } from "domain/vantage/useJuniorVaultLiquidity";
 import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
@@ -64,6 +65,7 @@ export default function TradePage() {
   const trade = usePositionRouterTrade();
   const requests = usePositionRequests();
   const spread = useSpread(indexToken || undefined);
+  const { hasLiquidity } = useJuniorVaultLiquidity(chainId);
   const selectedPosition = positions.find((p) => p.key === selectedPositionKey) ?? null;
   const isLong = activeTab === "long";
 
@@ -240,6 +242,7 @@ export default function TradePage() {
                     trade={trade}
                     requests={requests}
                     onSuccess={() => setTimeout(refetch, 2000)}
+                    noLiquidity={!hasLiquidity}
                   />
                 )}
               </div>

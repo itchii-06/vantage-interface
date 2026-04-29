@@ -65,6 +65,10 @@ msgstr ""
 msgid "REFERRAL CODE"
 msgstr ""
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "No liquidity in the payout vault. An LP deposit is required before trading can begin."
+msgstr ""
+
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Profit Extraction Risk"
 msgstr ""
@@ -2049,6 +2053,10 @@ msgstr ""
 
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "You have esGMX tokens in the Affiliate vault. Withdraw them to transfer to the new account."
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "No Payout Liquidity"
 msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
@@ -10409,6 +10417,11 @@ msgstr ""
 msgid "Why is the claim in GLV tokens?"
 msgstr ""
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "No Liquidity"
+msgstr ""
+
 #: src/components/TVChartContainer/StaticLine.tsx
 #: src/components/TVChartContainer/StaticLine.tsx
 msgid "Show size in USD"
@@ -10995,6 +11008,10 @@ msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "HoudiniSwap"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "The payout vault (Junior) has no USDC deposits. Hedge positions cannot be opened until an LP deposit is made."
 msgstr ""
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx

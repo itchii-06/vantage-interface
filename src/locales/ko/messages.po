@@ -65,6 +65,10 @@ msgstr "또는 <0>chainlist.org</0>를 통해 지갑의 RPC를 업데이트하�
 msgid "REFERRAL CODE"
 msgstr "추천 코드"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "No liquidity in the payout vault. An LP deposit is required before trading can begin."
+msgstr ""
+
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Profit Extraction Risk"
 msgstr ""
@@ -2050,6 +2054,10 @@ msgstr "차입 수수료 / 일"
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "You have esGMX tokens in the Affiliate vault. Withdraw them to transfer to the new account."
 msgstr "Affiliate 볼트에 esGMX 토큰이 있습니다. 새 계정으로 전송하려면 출금하십시오."
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "No Payout Liquidity"
+msgstr ""
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sending buy request..."
@@ -10409,6 +10417,11 @@ msgstr "주문 키:"
 msgid "Why is the claim in GLV tokens?"
 msgstr "청구가 GLV 토큰으로 되는 이유는 무엇인가요?"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "No Liquidity"
+msgstr ""
+
 #: src/components/TVChartContainer/StaticLine.tsx
 #: src/components/TVChartContainer/StaticLine.tsx
 msgid "Show size in USD"
@@ -10996,6 +11009,10 @@ msgstr "시장 스왑 실패"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "HoudiniSwap"
 msgstr "후디니스왑"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "The payout vault (Junior) has no USDC deposits. Hedge positions cannot be opened until an LP deposit is made."
+msgstr ""
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Bridge in failed"

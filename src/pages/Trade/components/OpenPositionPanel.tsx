@@ -47,9 +47,20 @@ type Props = {
   trade: PositionRouterTradeResult;
   requests: UsePositionRequestsResult;
   onSuccess?: () => void;
+  /** True when JuniorTrancheVault has no USDC — trades would revert on-chain. */
+  noLiquidity?: boolean;
 };
 
-export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread, trade, requests, onSuccess }: Props) {
+export function OpenPositionPanel({
+  isLong,
+  indexToken,
+  collateralToken,
+  spread,
+  trade,
+  requests,
+  onSuccess,
+  noLiquidity,
+}: Props) {
   const { account, signer } = useWallet();
   const { chainId } = useChainId();
   const provider = useMemo(() => getProvider(undefined, chainId), [chainId]);
@@ -305,13 +316,20 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
         </div>
       )}
 
+      {/* No liquidity warning */}
+      {noLiquidity && (
+        <div className="rounded-4 border border-slate-600/40 bg-slate-800/60 px-12 py-8 text-12 text-slate-400">
+          {t`No liquidity in the payout vault. An LP deposit is required before trading can begin.`}
+        </div>
+      )}
+
       {/* CTA buttons */}
       {!account ? (
         <div className="py-8 text-center text-13 text-slate-400">{t`Connect wallet to trade`}</div>
       ) : needsApproval ? (
         <button
           onClick={handleApprove}
-          disabled={isApproving}
+          disabled={isApproving || !!noLiquidity}
           className={`w-full rounded-8 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${approveBtnCls}`}
         >
           {isApproving ? t`Approving…` : t`Approve USDC`}
@@ -319,9 +337,9 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
       ) : (
         <button
           onClick={handleSubmit}
-          disabled={isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError}
+          disabled={isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError || !!noLiquidity}
           className={`w-full rounded-8 py-14 text-16 font-semibold transition-colors ${
-            isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError
+            isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError || !!noLiquidity
               ? "cursor-not-allowed bg-slate-700 text-slate-500"
               : isLong
                 ? "bg-green-600 text-white hover:bg-green-500"
@@ -330,13 +348,15 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
         >
           {isSubmitting
             ? t`Submitting…`
-            : sizeDelta === 0n
-              ? isLong
-                ? t`Buy`
-                : t`Sell`
-              : isLong
-                ? `Buy ${parseFloat(formatEther(sizeDelta))} USDC`
-                : `Sell ${parseFloat(formatEther(sizeDelta))} USDC`}
+            : noLiquidity
+              ? t`No Liquidity`
+              : sizeDelta === 0n
+                ? isLong
+                  ? t`Buy`
+                  : t`Sell`
+                : isLong
+                  ? `Buy ${parseFloat(formatEther(sizeDelta))} USDC`
+                  : `Sell ${parseFloat(formatEther(sizeDelta))} USDC`}
         </button>
       )}
     </div>

@@ -65,6 +65,10 @@ msgstr "Or update your wallet's RPC via <0>chainlist.org</0>"
 msgid "REFERRAL CODE"
 msgstr "REFERRAL CODE"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "No liquidity in the payout vault. An LP deposit is required before trading can begin."
+msgstr "No liquidity in the payout vault. An LP deposit is required before trading can begin."
+
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Profit Extraction Risk"
 msgstr "Profit Extraction Risk"
@@ -2050,6 +2054,10 @@ msgstr "Borrow fee / day"
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 msgid "You have esGMX tokens in the Affiliate vault. Withdraw them to transfer to the new account."
 msgstr "You have esGMX tokens in the Affiliate vault. Withdraw them to transfer to the new account."
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "No Payout Liquidity"
+msgstr "No Payout Liquidity"
 
 #: src/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sending buy request..."
@@ -10409,6 +10417,11 @@ msgstr "Order key:"
 msgid "Why is the claim in GLV tokens?"
 msgstr "Why is the claim in GLV tokens?"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "No Liquidity"
+msgstr "No Liquidity"
+
 #: src/components/TVChartContainer/StaticLine.tsx
 #: src/components/TVChartContainer/StaticLine.tsx
 msgid "Show size in USD"
@@ -10996,6 +11009,10 @@ msgstr "Failed Market Swap"
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "HoudiniSwap"
 msgstr "HoudiniSwap"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "The payout vault (Junior) has no USDC deposits. Hedge positions cannot be opened until an LP deposit is made."
+msgstr "The payout vault (Junior) has no USDC deposits. Hedge positions cannot be opened until an LP deposit is made."
 
 #: src/domain/multichain/progress/MultichainTransferProgressView.tsx
 msgid "Bridge in failed"

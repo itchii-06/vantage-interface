@@ -22,6 +22,7 @@ import { usePriceTicker } from "domain/vantage/chart/usePriceTicker";
 import { useHedgeActions } from "domain/vantage/hedge/useHedgeActions";
 import type { HedgeMarginToken, HedgeMode } from "domain/vantage/hedge/useHedgeActions";
 import { useHedgePageData } from "domain/vantage/hedge/useHedgePageData";
+import { useJuniorVaultLiquidity } from "domain/vantage/useJuniorVaultLiquidity";
 import { VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import { getProvider } from "lib/rpc";
@@ -641,6 +642,7 @@ export default function HedgeDetailPage() {
   const [timeFrame, setTimeFrame] = useState<TimeFrame>("1h");
 
   const { isSubmitting, error: actionError, txHash, validate, execute } = useHedgeActions();
+  const { hasLiquidity } = useJuniorVaultLiquidity(chainId);
 
   // Oracle spot price
   const spotPriceUsd = useRwaSpotPrice(cfg?.tokenAddress);
@@ -734,7 +736,13 @@ export default function HedgeDetailPage() {
   // Also block submit while assetType is loading (Issue #201: prevents mode-ambiguous tx)
   const isModeLoading = pageData.isYieldBearing === undefined;
   const canExecute =
-    account && !isSubmitting && rwaAmount > 0 && !pageData.isHedgeDisabled && !hasInsufficientBalance && !isModeLoading;
+    account &&
+    !isSubmitting &&
+    rwaAmount > 0 &&
+    !pageData.isHedgeDisabled &&
+    !hasInsufficientBalance &&
+    !isModeLoading &&
+    hasLiquidity;
 
   // Compute display values for Safety Buffer warning banner
   const frPct = pageData.fundingRateBps !== null ? (Math.abs(pageData.fundingRateBps) / 100).toFixed(2) : null;
@@ -1146,6 +1154,16 @@ export default function HedgeDetailPage() {
               </div>
             )}
 
+            {/* No liquidity warning */}
+            {!hasLiquidity && (
+              <div className="mb-16 rounded-4 border border-slate-600/40 bg-slate-800/60 px-12 py-10 text-12 text-slate-400">
+                <div className="text-slate-300 mb-4 font-semibold">{t`No Payout Liquidity`}</div>
+                <div className="leading-relaxed">
+                  {t`The payout vault (Junior) has no USDC deposits. Hedge positions cannot be opened until an LP deposit is made.`}
+                </div>
+              </div>
+            )}
+
             {/* Safety Buffer Lock warning banner */}
             {pageData.isHedgeDisabled && (
               <div className="border-yellow-800/50 mb-16 rounded-4 border bg-yellow-900/20 px-12 py-10 text-12 text-yellow-300">
@@ -1174,11 +1192,13 @@ export default function HedgeDetailPage() {
               >
                 {isSubmitting
                   ? t`Submitting…`
-                  : isModeLoading
-                    ? t`Detecting mode…`
-                    : hasInsufficientBalance
-                      ? t`Insufficient Balance`
-                      : t`Deposit ${cfg.symbol} + Open Short`}
+                  : !hasLiquidity
+                    ? t`No Liquidity`
+                    : isModeLoading
+                      ? t`Detecting mode…`
+                      : hasInsufficientBalance
+                        ? t`Insufficient Balance`
+                        : t`Deposit ${cfg.symbol} + Open Short`}
               </button>
             )}
           </div>
