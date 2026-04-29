@@ -17,7 +17,6 @@ import {
   useOrderBook,
   usePositionRouter,
   useRouter,
-  useSharedPayoutHub,
   useUniversalPriceLogic,
   useVault,
   useVaultFactory,
@@ -87,13 +86,13 @@ function captureHook<T>(hook: () => T, onResult: (value: T) => void, onError?: (
 
 describe("getVantageContractAddress", () => {
   it("returns the address for a known chain and contract", () => {
-    const addr = getVantageContractAddress(ARBITRUM_SEPOLIA, "Vault");
+    const addr = getVantageContractAddress(ARBITRUM_SEPOLIA, "JuniorTrancheVault");
     expect(typeof addr).toBe("string");
     expect(addr).toMatch(/^0x/);
   });
 
   it("throws for an unknown chainId", () => {
-    expect(() => getVantageContractAddress(1, "Vault")).toThrow(
+    expect(() => getVantageContractAddress(1, "JuniorTrancheVault")).toThrow(
       "Vantage contracts not configured for chainId: 1"
     );
   });
@@ -129,7 +128,6 @@ describe("useVantageContracts", () => {
     ["usePositionRouter", usePositionRouter],
     ["useYieldAccumulator", useYieldAccumulator],
     ["useYieldAwarePriceFeed", useYieldAwarePriceFeed],
-    ["useSharedPayoutHub", useSharedPayoutHub],
     ["useComplianceRegistry", useComplianceRegistry],
     ["useAssetRegistry", useAssetRegistry],
     ["useMultiOracleMiddleware", useMultiOracleMiddleware],

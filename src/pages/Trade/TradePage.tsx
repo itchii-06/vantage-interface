@@ -16,7 +16,6 @@ import { useVantagePositions } from "domain/vantage/positions/useVantagePosition
 import { usePositionRequests } from "domain/vantage/trade/usePositionRequests";
 import { usePositionRouterTrade } from "domain/vantage/trade/usePositionRouterTrade";
 import { useSpread } from "domain/vantage/trade/useSpread";
-import { useHubHealth } from "domain/vantage/useHubHealth";
 import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
@@ -65,8 +64,6 @@ export default function TradePage() {
   const trade = usePositionRouterTrade();
   const requests = usePositionRequests();
   const spread = useSpread(indexToken || undefined);
-  const hubHealth = useHubHealth(chainId, vaultAddress);
-
   const selectedPosition = positions.find((p) => p.key === selectedPositionKey) ?? null;
   const isLong = activeTab === "long";
 
@@ -149,21 +146,6 @@ export default function TradePage() {
 
             {/* Chart */}
             {indexToken && <ChartPanel chainId={chainId} indexToken={indexToken} vaultAddress={vaultAddress} />}
-
-            {/* ADL risk banner */}
-            {hubHealth && hubHealth.status !== "healthy" && (
-              <div
-                className={`rounded-4 border px-14 py-10 text-13 ${
-                  hubHealth.status === "danger"
-                    ? "border-red-500/40 bg-red-500/10 text-red-400"
-                    : "text-yellow-400 border-yellow-500/40 bg-yellow-500/10"
-                }`}
-              >
-                {hubHealth.status === "danger"
-                  ? t`ADL is active — profitable positions may be force-closed to restore Hub solvency. Cover ratio: ${(hubHealth.coverRatioBps / 100).toFixed(0)}%`
-                  : t`Hub balance is low — ADL may trigger soon. Cover ratio: ${(hubHealth.coverRatioBps / 100).toFixed(0)}%`}
-              </div>
-            )}
 
             {/* Redemption ADL risk notice */}
             <div className="rounded-4 border border-slate-600/30 bg-slate-700/10 px-14 py-10 text-13 text-slate-400">

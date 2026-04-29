@@ -119,7 +119,7 @@ export function OpenPositionPanel({ isLong, indexToken, collateralToken, spread,
       return;
     }
     const ZERO_ADDR = "0x0000000000000000000000000000000000000000";
-    const vaultAddr = getVantageContractAddress(chainId, "Vault");
+    const vaultAddr = getVantageContractAddress(chainId, "JuniorTrancheVault");
     const registryAddr = getVantageContractAddress(chainId, "AssetRegistry");
     if (!vaultAddr || vaultAddr === ZERO_ADDR || !registryAddr || registryAddr === ZERO_ADDR) return;
 

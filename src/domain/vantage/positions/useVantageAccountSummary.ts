@@ -49,7 +49,7 @@ export function useVantageAccountSummary(account: string | undefined, chainId: n
       setError(undefined);
 
       try {
-        const vaultAddress = getVantageContractAddress(chainId, "Vault");
+        const vaultAddress = getVantageContractAddress(chainId, "JuniorTrancheVault");
         const assets: string[] = await vault.getPositionAssets();
 
         // Accumulate summaries across all collateral tokens

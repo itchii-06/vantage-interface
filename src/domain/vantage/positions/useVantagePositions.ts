@@ -64,7 +64,7 @@ export function useVantagePositions(
     }
 
     const provider = getProvider(undefined, chainId);
-    const resolvedVaultAddress = vaultAddress ?? getVantageContractAddress(chainId, "Vault");
+    const resolvedVaultAddress = vaultAddress ?? getVantageContractAddress(chainId, "JuniorTrancheVault");
     const vault = Vault__factory.connect(resolvedVaultAddress, provider);
 
     // VaultReader may not be deployed on all networks (e.g. localhost).

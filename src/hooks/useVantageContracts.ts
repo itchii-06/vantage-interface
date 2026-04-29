@@ -36,7 +36,6 @@ import {
   OrderBook__factory,
   PositionRouter__factory,
   Router__factory,
-  SharedPayoutHub__factory,
   UniversalPriceLogic__factory,
   VaultFactory__factory,
   VaultReader__factory,
@@ -55,7 +54,6 @@ import type {
   OrderBook,
   PositionRouter,
   Router,
-  SharedPayoutHub,
   UniversalPriceLogic,
   Vault,
   VaultFactory,
@@ -122,11 +120,8 @@ function useVantageContract<T>(
 // ---------------------------------------------------------------------------
 
 /** Typed hook for Vault contract. */
-export function useVault(
-  runnerOverride?: ContractRunner,
-  chainId: number = DEFAULT_SETTLEMENT_CHAIN_ID
-): Vault {
-  return useVantageContract(Vault__factory, "Vault", chainId, runnerOverride);
+export function useVault(runnerOverride?: ContractRunner, chainId: number = DEFAULT_SETTLEMENT_CHAIN_ID): Vault {
+  return useVantageContract(Vault__factory, "JuniorTrancheVault", chainId, runnerOverride);
 }
 
 /** Typed hook for VaultFactory contract. */
@@ -154,18 +149,12 @@ export function useLPManager(
 }
 
 /** Typed hook for LPToken contract. */
-export function useLPToken(
-  runnerOverride?: ContractRunner,
-  chainId: number = DEFAULT_SETTLEMENT_CHAIN_ID
-): LPToken {
+export function useLPToken(runnerOverride?: ContractRunner, chainId: number = DEFAULT_SETTLEMENT_CHAIN_ID): LPToken {
   return useVantageContract(LPToken__factory, "LPToken", chainId, runnerOverride);
 }
 
 /** Typed hook for Router contract. */
-export function useRouter(
-  runnerOverride?: ContractRunner,
-  chainId: number = DEFAULT_SETTLEMENT_CHAIN_ID
-): Router {
+export function useRouter(runnerOverride?: ContractRunner, chainId: number = DEFAULT_SETTLEMENT_CHAIN_ID): Router {
   return useVantageContract(Router__factory, "Router", chainId, runnerOverride);
 }
 
@@ -199,14 +188,6 @@ export function useYieldAwarePriceFeed(
   chainId: number = DEFAULT_SETTLEMENT_CHAIN_ID
 ): YieldAwarePriceFeed {
   return useVantageContract(YieldAwarePriceFeed__factory, "YieldAwarePriceFeed", chainId, runnerOverride);
-}
-
-/** Typed hook for SharedPayoutHub contract. */
-export function useSharedPayoutHub(
-  runnerOverride?: ContractRunner,
-  chainId: number = DEFAULT_SETTLEMENT_CHAIN_ID
-): SharedPayoutHub {
-  return useVantageContract(SharedPayoutHub__factory, "SharedPayoutHub", chainId, runnerOverride);
 }
 
 /** Typed hook for ComplianceRegistry contract. */

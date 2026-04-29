@@ -47,7 +47,7 @@ export function useSpread(tokenAddress: string | undefined): SpreadData {
       return;
     }
 
-    const vaultAddress = getVantageContractAddress(chainId, "Vault");
+    const vaultAddress = getVantageContractAddress(chainId, "JuniorTrancheVault");
     const vault = new Contract(vaultAddress, VaultAbi, provider);
 
     async function fetch() {

@@ -3591,8 +3591,8 @@ msgid "GLV vaults"
 msgstr "GLV 볼트"
 
 #: src/pages/Trade/TradePage.tsx
-msgid "Hub balance is low — ADL may trigger soon. Cover ratio: {0}%"
-msgstr ""
+#~ msgid "Hub balance is low — ADL may trigger soon. Cover ratio: {0}%"
+#~ msgstr ""
 
 #: src/pages/BuyGMX/BuyGMX.tsx
 #: src/pages/BuyGMX/BuyGMX.tsx
@@ -10867,8 +10867,8 @@ msgid "Limit price"
 msgstr "지정가"
 
 #: src/pages/Trade/TradePage.tsx
-msgid "ADL is active — profitable positions may be force-closed to restore Hub solvency. Cover ratio: {0}%"
-msgstr ""
+#~ msgid "ADL is active — profitable positions may be force-closed to restore Hub solvency. Cover ratio: {0}%"
+#~ msgstr ""
 
 #: src/components/UserIncentiveDistribution/ClaimableAmounts.tsx
 msgid "Select at least one distribution to claim"

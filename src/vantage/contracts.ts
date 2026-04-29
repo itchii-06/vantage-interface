@@ -6,7 +6,7 @@
  *
  * Usage:
  *   import { getVantageContractAddress } from "vantage/contracts";
- *   const addr = getVantageContractAddress(chainId, "Vault");
+ *   const addr = getVantageContractAddress(chainId, "JuniorTrancheVault");
  */
 
 import { ARBITRUM, ARBITRUM_SEPOLIA } from "config/chains";
@@ -32,14 +32,12 @@ import {
   ARBITRUM_SEPOLIA_ORDER_BOOK,
   ARBITRUM_SEPOLIA_POSITION_ROUTER,
   ARBITRUM_SEPOLIA_ROUTER,
-  ARBITRUM_SEPOLIA_SHARED_PAYOUT_HUB,
   ARBITRUM_SEPOLIA_UNIVERSAL_PRICE_LOGIC,
   ARBITRUM_SEPOLIA_VAULT,
   ARBITRUM_SEPOLIA_VAULT_FACTORY,
   ARBITRUM_SEPOLIA_VAULT_READER,
   ARBITRUM_SEPOLIA_YIELD_ACCUMULATOR,
   ARBITRUM_SEPOLIA_YIELD_AWARE_PRICE_FEED,
-  ARBITRUM_SHARED_PAYOUT_HUB,
   ARBITRUM_UNIVERSAL_PRICE_LOGIC,
   ARBITRUM_VAULT,
   ARBITRUM_VAULT_FACTORY,
@@ -66,9 +64,8 @@ export type VantageContractName =
   | "OrderBook"
   | "PositionRouter"
   | "Router"
-  | "SharedPayoutHub"
   | "UniversalPriceLogic"
-  | "Vault"
+  | "JuniorTrancheVault"
   | "VaultFactory"
   | "VaultReader"
   | "YieldAccumulator"
@@ -95,9 +92,8 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     OrderBook: ARBITRUM_ORDER_BOOK,
     PositionRouter: ARBITRUM_POSITION_ROUTER,
     Router: ARBITRUM_ROUTER,
-    SharedPayoutHub: ARBITRUM_SHARED_PAYOUT_HUB,
     UniversalPriceLogic: ARBITRUM_UNIVERSAL_PRICE_LOGIC,
-    Vault: ARBITRUM_VAULT,
+    JuniorTrancheVault: ARBITRUM_VAULT,
     VaultFactory: ARBITRUM_VAULT_FACTORY,
     VaultReader: ARBITRUM_VAULT_READER,
     YieldAccumulator: ARBITRUM_YIELD_ACCUMULATOR,
@@ -116,9 +112,8 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     OrderBook: localhostDeployment.addresses.OrderBook ?? ZERO,
     PositionRouter: localhostDeployment.addresses.PositionRouter ?? ZERO,
     Router: localhostDeployment.addresses.Router ?? ZERO,
-    SharedPayoutHub: localhostDeployment.addresses.SharedPayoutHub ?? ZERO,
     UniversalPriceLogic: ZERO,
-    Vault: localhostDeployment.addresses.Vault ?? ZERO,
+    JuniorTrancheVault: (localhostDeployment.addresses as { JuniorTrancheVault?: string }).JuniorTrancheVault ?? ZERO,
     VaultFactory: ZERO,
     VaultReader: (localhostDeployment.addresses as { VaultReader?: string }).VaultReader ?? ZERO,
     YieldAccumulator: localhostDeployment.addresses.YieldAccumulator ?? ZERO,
@@ -137,9 +132,8 @@ const VANTAGE_CONTRACTS: Record<number, VantageAddressMap> = {
     OrderBook: ARBITRUM_SEPOLIA_ORDER_BOOK,
     PositionRouter: ARBITRUM_SEPOLIA_POSITION_ROUTER,
     Router: ARBITRUM_SEPOLIA_ROUTER,
-    SharedPayoutHub: ARBITRUM_SEPOLIA_SHARED_PAYOUT_HUB,
     UniversalPriceLogic: ARBITRUM_SEPOLIA_UNIVERSAL_PRICE_LOGIC,
-    Vault: ARBITRUM_SEPOLIA_VAULT,
+    JuniorTrancheVault: ARBITRUM_SEPOLIA_VAULT,
     VaultFactory: ARBITRUM_SEPOLIA_VAULT_FACTORY,
     VaultReader: ARBITRUM_SEPOLIA_VAULT_READER,
     YieldAccumulator: ARBITRUM_SEPOLIA_YIELD_ACCUMULATOR,

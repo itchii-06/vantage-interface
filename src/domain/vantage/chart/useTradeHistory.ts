@@ -41,7 +41,7 @@ export function useTradeHistory(chainId: number, indexToken: string, vaultAddres
       setIsLoading(true);
       try {
         const provider = getProvider(undefined, chainId);
-        const vaultAddr = vaultAddress ?? getVantageContractAddress(chainId, "Vault");
+        const vaultAddr = vaultAddress ?? getVantageContractAddress(chainId, "JuniorTrancheVault");
         const vault = Vault__factory.connect(vaultAddr, provider);
 
         // --- Trade events (IncreasePosition + DecreasePosition) ---

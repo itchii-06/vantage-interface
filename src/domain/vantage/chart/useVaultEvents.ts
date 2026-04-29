@@ -53,7 +53,7 @@ export function useVaultEvents(
     const wsUrl = getWsUrl(chainId);
     if (!wsUrl || !indexToken) return;
 
-    const vaultAddr = vaultAddress ?? getVantageContractAddress(chainId, "Vault");
+    const vaultAddr = vaultAddress ?? getVantageContractAddress(chainId, "JuniorTrancheVault");
     if (!vaultAddr || vaultAddr === "0x0000000000000000000000000000000000000000") return;
 
     let provider: WebSocketProvider | null = null;

@@ -91,7 +91,7 @@ export interface VaultConfig {
 // ---------------------------------------------------------------------------
 
 const d = localhostDeployment.addresses as {
-  Vault?: string;
+  JuniorTrancheVault?: string;
   LPManager?: string;
   LPToken?: string;
   tokens?: Record<string, string>;
@@ -109,7 +109,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     symbol: "USDC",
     assetType: "stable",
     trancheType: "junior",
-    vaultAddress: d.Vault ?? "",
+    vaultAddress: d.JuniorTrancheVault ?? "",
     tokenAddress: d.tokens?.USDC ?? "",
     lpManagerAddress: d.LPManager ?? "",
     lpTokenAddress: d.LPToken ?? "",

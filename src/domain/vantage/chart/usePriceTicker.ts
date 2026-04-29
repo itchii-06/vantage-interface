@@ -27,7 +27,7 @@ export function usePriceTicker(chainId: number, indexToken: string, vaultAddress
   useEffect(() => {
     if (!indexToken) return;
 
-    const resolvedVaultAddress = vaultAddress ?? getVantageContractAddress(chainId, "Vault");
+    const resolvedVaultAddress = vaultAddress ?? getVantageContractAddress(chainId, "JuniorTrancheVault");
     if (!resolvedVaultAddress || resolvedVaultAddress === ZERO) return;
 
     const provider = getProvider(undefined, chainId);
