@@ -142,6 +142,16 @@ export function useVantagePositions(
                 }
               }
 
+              // Fetch per-index adapter binding (Issue #225).
+              // Cast to any: positionAdapter is not yet in the generated Vault typechain.
+              let priceAdapter = ZERO;
+              try {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                priceAdapter = await (vault as any).positionAdapter(key);
+              } catch {
+                // positionAdapter not available on older deployments — default to zero address
+              }
+
               openPositions.push({
                 key: key as string,
                 account: account!,
@@ -156,6 +166,7 @@ export function useVantagePositions(
                 pendingPnl,
                 currentPrice,
                 maintenanceMarginBps,
+                priceAdapter,
               });
             }
           }

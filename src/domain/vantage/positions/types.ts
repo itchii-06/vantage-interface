@@ -28,6 +28,12 @@ export type VantagePosition = {
   currentPrice: bigint;
   /** Maintenance margin in basis points from AssetRegistry (e.g. 100 = 1%). 0 if registry unavailable. */
   maintenanceMarginBps: bigint;
+  /**
+   * Price adapter bound to this position via Vault.positionAdapter(key).
+   * address(0) when opened through the standard increasePosition path.
+   * Set for Interest Prism positions opened via increasePositionWithAdapter (Issue #225).
+   */
+  priceAdapter: string;
 };
 
 export type VantageAccountSummary = {

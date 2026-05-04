@@ -37,8 +37,16 @@ const d = localhostDeployment.addresses as {
 };
 const USDC_ADDRESS = d.tokens?.USDC ?? "";
 
-// Vault configs that have a valid tokenAddress (tradeable markets)
-const TRADEABLE_VAULTS = VAULT_CONFIGS.filter((v) => v.tokenAddress && v.vaultAddress && v.assetType !== "stable");
+// Vault configs that have a valid tokenAddress (tradeable markets).
+// For Interest Prism vaults, only include the "price" axis as the representative market entry;
+// the axis tabs (Price / Yield / Total) are shown inside OpenPositionPanel.
+const TRADEABLE_VAULTS = VAULT_CONFIGS.filter(
+  (v) =>
+    v.tokenAddress &&
+    v.vaultAddress &&
+    v.assetType !== "stable" &&
+    (v.prismAxis === undefined || v.prismAxis === "price")
+);
 
 export default function TradePage() {
   const { account } = useWallet();
@@ -243,6 +251,7 @@ export default function TradePage() {
                     requests={requests}
                     onSuccess={() => setTimeout(refetch, 2000)}
                     noLiquidity={!hasLiquidity}
+                    vaultConfig={selectedVault}
                   />
                 )}
               </div>

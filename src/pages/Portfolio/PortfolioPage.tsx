@@ -345,6 +345,19 @@ function SolvencySection({ items }: SolvencySectionProps) {
 }
 
 // ---------------------------------------------------------------------------
+// Prism axis label helper (Issue #225/#227)
+// ---------------------------------------------------------------------------
+
+const ZERO_ADDR = "0x0000000000000000000000000000000000000000";
+
+function getPrismAxisLabel(adapterAddress: string): string | null {
+  if (!adapterAddress || adapterAddress === ZERO_ADDR) return null;
+  const cfg = VAULT_CONFIGS.find((v) => v.adapterAddress?.toLowerCase() === adapterAddress.toLowerCase());
+  if (!cfg?.prismAxis) return null;
+  return { price: "Price", yield: "Yield", total: "Total" }[cfg.prismAxis] ?? null;
+}
+
+// ---------------------------------------------------------------------------
 // ADL Risk helpers
 // ---------------------------------------------------------------------------
 
@@ -559,9 +572,18 @@ function TradingSection({ positions, hasAccount }: TradingSectionProps) {
                   <div className="flex h-28 w-28 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
                     {p.indexToken.slice(2, 4).toUpperCase()}
                   </div>
-                  <span className="text-13 font-medium text-white">
-                    {p.indexToken.slice(0, 6)}…{p.indexToken.slice(-4)}
-                  </span>
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-6">
+                      <span className="text-13 font-medium text-white">
+                        {p.indexToken.slice(0, 6)}…{p.indexToken.slice(-4)}
+                      </span>
+                      {getPrismAxisLabel(p.priceAdapter) && (
+                        <span className="bg-indigo-900/50 text-10 text-indigo-300 rounded-full px-6 py-1 font-medium">
+                          {getPrismAxisLabel(p.priceAdapter)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
                 {/* Side */}
                 <div className="text-right">

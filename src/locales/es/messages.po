@@ -1891,6 +1891,7 @@ msgstr "Dirección del afiliado:"
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 #: src/pages/Pools/PoolsTimeRangeFilter.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Total"
 msgstr "Total"
 
@@ -3307,6 +3308,10 @@ msgstr ""
 msgid "Decentralized finance dashboard"
 msgstr "Panel de finanzas descentralizadas"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Index"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Pending PnL from all open positions"
 msgstr "PnL pendiente de todas las posiciones abiertas"
@@ -3891,6 +3896,10 @@ msgstr ""
 #: src/components/SideNav/BottomMenuSection.tsx
 msgid "Collapse"
 msgstr "Contraer"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Index Capacity"
+msgstr ""
 
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Banners"
@@ -5899,6 +5908,10 @@ msgstr "Trading sin interrupciones"
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 msgid "from your wallet"
 msgstr "desde tu billetera"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Base Fee"
+msgstr ""
 
 #: src/components/Earn/Portfolio/RecommendedAssets/RecommendedAssets.tsx
 msgid "Explore more"
@@ -8262,6 +8275,10 @@ msgstr "Superado el importe máximo"
 
 #: src/pages/Admin/AdminPage.tsx
 msgid "Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded."
+msgstr ""
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Skew Adjustment"
 msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
@@ -11716,6 +11733,10 @@ msgstr "Parámetros de reclamación no disponibles. Reintente en unos segundos"
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Read details"
 msgstr "Leer detalles"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Estimated Fee"
+msgstr ""
 
 #: src/domain/vantage/vaults/vaultConfig.ts
 msgid "Senior"

@@ -95,6 +95,12 @@ export interface VaultConfig {
    * When set, vaultAddress / lpManagerAddress / lpTokenAddress are empty strings.
    */
   prismAxis?: "price" | "yield" | "total";
+  /**
+   * Price adapter address for per-index skew tracking (Issue #225/#227).
+   * Set on Prism axis configs to route increasePositionWithAdapter calls.
+   * Undefined on standard configs (no adapter binding).
+   */
+  adapterAddress?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -199,7 +205,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     symbol: "sUSDe_P",
     assetType: 2,
     trancheType: "senior",
-    vaultAddress: "",
+    vaultAddress: d.JuniorTrancheVault ?? "",
     tokenAddress: d.prismTokens?.Price ?? "",
     lpManagerAddress: "",
     lpTokenAddress: "",
@@ -207,6 +213,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     isMock: true,
     tvSymbol: "BINANCE:BTCUSDT",
     prismAxis: "price",
+    adapterAddress: d.prismAdapters?.benchmarkOracle ?? "",
   },
   {
     key: "sUSDe_Yield",
@@ -214,7 +221,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     symbol: "sUSDe_Y",
     assetType: 2,
     trancheType: "senior",
-    vaultAddress: "",
+    vaultAddress: d.JuniorTrancheVault ?? "",
     tokenAddress: d.prismTokens?.Yield ?? "",
     lpManagerAddress: "",
     lpTokenAddress: "",
@@ -222,6 +229,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     isMock: true,
     tvSymbol: "BINANCE:BTCUSDT",
     prismAxis: "yield",
+    adapterAddress: d.prismAdapters?.interestRateAdapter ?? "",
   },
   {
     key: "sUSDe_Total",
@@ -229,7 +237,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     symbol: "sUSDe_T",
     assetType: 2,
     trancheType: "senior",
-    vaultAddress: "",
+    vaultAddress: d.JuniorTrancheVault ?? "",
     tokenAddress: d.prismTokens?.Total ?? "",
     lpManagerAddress: "",
     lpTokenAddress: "",
@@ -237,6 +245,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     isMock: true,
     tvSymbol: "BINANCE:BTCUSDT",
     prismAxis: "total",
+    adapterAddress: d.prismAdapters?.totalReturnAdapter ?? "",
   },
 ];
 

@@ -17,11 +17,22 @@ import { useEffect, useRef } from "react";
 import type { VantagePosition } from "domain/vantage/positions/types";
 import { calcHealthBps, calcLiquidationPrice, formatVantageUsd } from "domain/vantage/positions/utils";
 import type { PositionRequest, UsePositionRequestsResult } from "domain/vantage/trade/usePositionRequests";
+import { VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
 function shortenAddr(addr: string) {
   return `${addr.slice(0, 6)}…${addr.slice(-4)}`;
+}
+
+const ZERO_ADDR = "0x0000000000000000000000000000000000000000";
+
+/** Returns the prism axis label for a given adapter address, or null if not a prism position. */
+function getPrismAxisLabel(adapterAddress: string): string | null {
+  if (!adapterAddress || adapterAddress === ZERO_ADDR) return null;
+  const cfg = VAULT_CONFIGS.find((v) => v.adapterAddress?.toLowerCase() === adapterAddress.toLowerCase());
+  if (!cfg?.prismAxis) return null;
+  return { price: "Price", yield: "Yield", total: "Total" }[cfg.prismAxis] ?? null;
 }
 
 function leverageLabel(size: bigint, collateral: bigint): string {
@@ -247,7 +258,14 @@ function ActiveRow({
     >
       {/* Market */}
       <div className="flex flex-col gap-2">
-        <span className="text-13 font-semibold text-white">{shortenAddr(pos.indexToken)}</span>
+        <div className="flex items-center gap-6">
+          <span className="text-13 font-semibold text-white">{shortenAddr(pos.indexToken)}</span>
+          {getPrismAxisLabel(pos.priceAdapter) && (
+            <span className="bg-indigo-900/50 text-10 text-indigo-300 rounded-full px-6 py-1 font-medium">
+              {getPrismAxisLabel(pos.priceAdapter)}
+            </span>
+          )}
+        </div>
         <span className="text-11 text-slate-500">{leverageLabel(pos.size, pos.collateral)}</span>
       </div>
 
