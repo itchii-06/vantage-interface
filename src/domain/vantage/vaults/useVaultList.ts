@@ -19,6 +19,10 @@ import VaultAbi from "vantage/abis/Vault.json";
 
 import { VAULT_CONFIGS, type VaultConfig } from "./vaultConfig";
 
+// Prism axis variants (sUSDe_Price/Yield/Total) are display-only for Trade/Hedge pages.
+// Vaults page shows only real LP deposit destinations.
+const VAULT_LIST_CONFIGS = VAULT_CONFIGS.filter((v) => !v.prismAxis);
+
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -44,7 +48,7 @@ export function useVaultList(): VaultListItem[] {
   const provider = useMemo(() => getProvider(undefined, chainId), [chainId]);
 
   const buildInitial = (): VaultListItem[] =>
-    VAULT_CONFIGS.map((cfg) => ({
+    VAULT_LIST_CONFIGS.map((cfg) => ({
       ...cfg,
       aum: 0n,
       sharePrice: WAD,
@@ -57,7 +61,7 @@ export function useVaultList(): VaultListItem[] {
 
   const fetchAll = useCallback(async () => {
     const results = await Promise.all(
-      VAULT_CONFIGS.map(async (cfg): Promise<VaultListItem> => {
+      VAULT_LIST_CONFIGS.map(async (cfg): Promise<VaultListItem> => {
         try {
           const vault = new Contract(cfg.vaultAddress, VaultAbi, provider);
           const lpManager = new Contract(cfg.lpManagerAddress, LPManagerAbi, provider);
