@@ -430,6 +430,42 @@ const _abi = [
         type: "address",
       },
       {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "absorbFRDeficitFromSeniorYield",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "authorizedJuniorVault",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
         internalType: "address",
         name: "",
         type: "address",
@@ -474,6 +510,25 @@ const _abi = [
   {
     inputs: [],
     name: "getAUM",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "getAbsorbableYield",
     outputs: [
       {
         internalType: "uint256",
@@ -588,10 +643,39 @@ const _abi = [
         name: "",
         type: "uint256",
       },
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
     ],
     name: "increasePosition",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "isJuniorCapReached",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "pure",
     type: "function",
   },
   {
@@ -649,19 +733,6 @@ const _abi = [
   {
     inputs: [],
     name: "lpManager",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "pure",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "payoutHub",
     outputs: [
       {
         internalType: "address",
@@ -748,6 +819,19 @@ const _abi = [
       },
     ],
     stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "setAuthorizedJuniorVault",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {

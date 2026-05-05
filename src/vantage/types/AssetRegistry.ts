@@ -74,6 +74,9 @@ export declare namespace AssetRegistry {
     requiresWeekendLock: boolean;
     fundingRateFactor: BigNumberish;
     maxFundingRate: BigNumberish;
+    borrowingExponent: BigNumberish;
+    borrowingMultiplier: BigNumberish;
+    borrowingBaseRate: BigNumberish;
   };
 
   export type AssetRiskInfoStructOutput = [
@@ -86,6 +89,9 @@ export declare namespace AssetRegistry {
     requiresWeekendLock: boolean,
     fundingRateFactor: bigint,
     maxFundingRate: bigint,
+    borrowingExponent: bigint,
+    borrowingMultiplier: bigint,
+    borrowingBaseRate: bigint,
   ] & {
     maxLeverage: bigint;
     maxGlobalLongSize: bigint;
@@ -96,6 +102,9 @@ export declare namespace AssetRegistry {
     requiresWeekendLock: boolean;
     fundingRateFactor: bigint;
     maxFundingRate: bigint;
+    borrowingExponent: bigint;
+    borrowingMultiplier: bigint;
+    borrowingBaseRate: bigint;
   };
 
   export type RiskParamsStruct = {
@@ -141,6 +150,8 @@ export interface AssetRegistryInterface extends Interface {
       | "getAllAssets"
       | "getAssetInfo"
       | "getAssetRiskInfo"
+      | "getAssetType"
+      | "getBorrowingParams"
       | "getFundingParams"
       | "getMinLegalUnit"
       | "getRequiresWeekendLock"
@@ -151,6 +162,8 @@ export interface AssetRegistryInterface extends Interface {
       | "pendingOwner"
       | "registerAsset"
       | "renounceOwnership"
+      | "setAnnualYield"
+      | "setBorrowingParams"
       | "setComplianceAdapter"
       | "setEnabled"
       | "setFundingParams"
@@ -172,6 +185,7 @@ export interface AssetRegistryInterface extends Interface {
       | "AssetConfigUpdated"
       | "AssetEnabled"
       | "AssetRegistered"
+      | "BorrowingParamsUpdated"
       | "ComplianceAdapterSet"
       | "FundingParamsUpdated"
       | "MarketStatusChanged"
@@ -197,6 +211,8 @@ export interface AssetRegistryInterface extends Interface {
   encodeFunctionData(functionFragment: "getAllAssets", values?: undefined): string;
   encodeFunctionData(functionFragment: "getAssetInfo", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getAssetRiskInfo", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getAssetType", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getBorrowingParams", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getFundingParams", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getMinLegalUnit", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getRequiresWeekendLock", values: [AddressLike]): string;
@@ -218,6 +234,11 @@ export interface AssetRegistryInterface extends Interface {
     ]
   ): string;
   encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "setAnnualYield", values: [AddressLike, BigNumberish, BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "setBorrowingParams",
+    values: [AddressLike, BigNumberish, BigNumberish, BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "setComplianceAdapter", values: [AddressLike, AddressLike]): string;
   encodeFunctionData(functionFragment: "setEnabled", values: [AddressLike, boolean]): string;
   encodeFunctionData(functionFragment: "setFundingParams", values: [AddressLike, BigNumberish, BigNumberish]): string;
@@ -253,6 +274,8 @@ export interface AssetRegistryInterface extends Interface {
   decodeFunctionResult(functionFragment: "getAllAssets", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAssetInfo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAssetRiskInfo", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getAssetType", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getBorrowingParams", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getFundingParams", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getMinLegalUnit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getRequiresWeekendLock", data: BytesLike): Result;
@@ -263,6 +286,8 @@ export interface AssetRegistryInterface extends Interface {
   decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "registerAsset", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setAnnualYield", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setBorrowingParams", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setComplianceAdapter", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setEnabled", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setFundingParams", data: BytesLike): Result;
@@ -314,6 +339,26 @@ export namespace AssetRegisteredEvent {
     asset: string;
     assetType: bigint;
     priceFeed: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace BorrowingParamsUpdatedEvent {
+  export type InputTuple = [
+    asset: AddressLike,
+    exponent: BigNumberish,
+    multiplier: BigNumberish,
+    baseRate: BigNumberish,
+  ];
+  export type OutputTuple = [asset: string, exponent: bigint, multiplier: bigint, baseRate: bigint];
+  export interface OutputObject {
+    asset: string;
+    exponent: bigint;
+    multiplier: bigint;
+    baseRate: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -519,6 +564,9 @@ export interface AssetRegistry extends BaseContract {
         bigint,
         bigint,
         bigint,
+        bigint,
+        bigint,
+        bigint,
       ] & {
         assetType: bigint;
         priceFeed: string;
@@ -538,6 +586,9 @@ export interface AssetRegistry extends BaseContract {
         minLegalUnit: bigint;
         fundingRateFactor: bigint;
         maxFundingRate: bigint;
+        borrowingExponent: bigint;
+        borrowingMultiplier: bigint;
+        borrowingBaseRate: bigint;
       },
     ],
     "view"
@@ -550,6 +601,20 @@ export interface AssetRegistry extends BaseContract {
   getAssetInfo: TypedContractMethod<[asset: AddressLike], [AssetRegistry.AssetInfoStructOutput], "view">;
 
   getAssetRiskInfo: TypedContractMethod<[asset: AddressLike], [AssetRegistry.AssetRiskInfoStructOutput], "view">;
+
+  getAssetType: TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+
+  getBorrowingParams: TypedContractMethod<
+    [asset: AddressLike],
+    [
+      [bigint, bigint, bigint] & {
+        exponent: bigint;
+        multiplier: bigint;
+        baseRate: bigint;
+      },
+    ],
+    "view"
+  >;
 
   getFundingParams: TypedContractMethod<
     [asset: AddressLike],
@@ -586,6 +651,18 @@ export interface AssetRegistry extends BaseContract {
   >;
 
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
+
+  setAnnualYield: TypedContractMethod<
+    [asset: AddressLike, rawPrice: BigNumberish, newYieldBps: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  setBorrowingParams: TypedContractMethod<
+    [asset: AddressLike, exponent: BigNumberish, multiplier: BigNumberish, baseRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
 
   setComplianceAdapter: TypedContractMethod<[asset: AddressLike, adapter: AddressLike], [void], "nonpayable">;
 
@@ -660,6 +737,9 @@ export interface AssetRegistry extends BaseContract {
         bigint,
         bigint,
         bigint,
+        bigint,
+        bigint,
+        bigint,
       ] & {
         assetType: bigint;
         priceFeed: string;
@@ -679,6 +759,9 @@ export interface AssetRegistry extends BaseContract {
         minLegalUnit: bigint;
         fundingRateFactor: bigint;
         maxFundingRate: bigint;
+        borrowingExponent: bigint;
+        borrowingMultiplier: bigint;
+        borrowingBaseRate: bigint;
       },
     ],
     "view"
@@ -691,6 +774,18 @@ export interface AssetRegistry extends BaseContract {
   getFunction(
     nameOrSignature: "getAssetRiskInfo"
   ): TypedContractMethod<[asset: AddressLike], [AssetRegistry.AssetRiskInfoStructOutput], "view">;
+  getFunction(nameOrSignature: "getAssetType"): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getBorrowingParams"): TypedContractMethod<
+    [asset: AddressLike],
+    [
+      [bigint, bigint, bigint] & {
+        exponent: bigint;
+        multiplier: bigint;
+        baseRate: bigint;
+      },
+    ],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "getFundingParams"
   ): TypedContractMethod<
@@ -721,6 +816,16 @@ export interface AssetRegistry extends BaseContract {
     "nonpayable"
   >;
   getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setAnnualYield"
+  ): TypedContractMethod<[asset: AddressLike, rawPrice: BigNumberish, newYieldBps: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setBorrowingParams"
+  ): TypedContractMethod<
+    [asset: AddressLike, exponent: BigNumberish, multiplier: BigNumberish, baseRate: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "setComplianceAdapter"
   ): TypedContractMethod<[asset: AddressLike, adapter: AddressLike], [void], "nonpayable">;
@@ -780,6 +885,13 @@ export interface AssetRegistry extends BaseContract {
     AssetRegisteredEvent.InputTuple,
     AssetRegisteredEvent.OutputTuple,
     AssetRegisteredEvent.OutputObject
+  >;
+  getEvent(
+    key: "BorrowingParamsUpdated"
+  ): TypedContractEvent<
+    BorrowingParamsUpdatedEvent.InputTuple,
+    BorrowingParamsUpdatedEvent.OutputTuple,
+    BorrowingParamsUpdatedEvent.OutputObject
   >;
   getEvent(
     key: "ComplianceAdapterSet"
@@ -877,6 +989,17 @@ export interface AssetRegistry extends BaseContract {
       AssetRegisteredEvent.InputTuple,
       AssetRegisteredEvent.OutputTuple,
       AssetRegisteredEvent.OutputObject
+    >;
+
+    "BorrowingParamsUpdated(address,uint256,uint256,uint256)": TypedContractEvent<
+      BorrowingParamsUpdatedEvent.InputTuple,
+      BorrowingParamsUpdatedEvent.OutputTuple,
+      BorrowingParamsUpdatedEvent.OutputObject
+    >;
+    BorrowingParamsUpdated: TypedContractEvent<
+      BorrowingParamsUpdatedEvent.InputTuple,
+      BorrowingParamsUpdatedEvent.OutputTuple,
+      BorrowingParamsUpdatedEvent.OutputObject
     >;
 
     "ComplianceAdapterSet(address,address)": TypedContractEvent<

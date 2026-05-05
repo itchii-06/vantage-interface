@@ -22,27 +22,15 @@ import type {
 } from "./common";
 
 export interface IYieldAccumulatorInterface extends Interface {
-  getFunction(
-    nameOrSignature: "getAccumulatedYield" | "updateYield"
-  ): FunctionFragment;
+  getFunction(nameOrSignature: "getAccumulatedYield" | "getEffectiveYieldBps" | "updateYield"): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "getAccumulatedYield",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateYield",
-    values: [AddressLike, BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: "getAccumulatedYield", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getEffectiveYieldBps", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "updateYield", values: [AddressLike, BigNumberish]): string;
 
-  decodeFunctionResult(
-    functionFragment: "getAccumulatedYield",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateYield",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "getAccumulatedYield", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getEffectiveYieldBps", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "updateYield", data: BytesLike): Result;
 }
 
 export interface IYieldAccumulator extends BaseContract {
@@ -62,58 +50,35 @@ export interface IYieldAccumulator extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
-  getAccumulatedYield: TypedContractMethod<
-    [asset: AddressLike],
-    [bigint],
-    "view"
-  >;
+  getAccumulatedYield: TypedContractMethod<[asset: AddressLike], [bigint], "view">;
 
-  updateYield: TypedContractMethod<
-    [asset: AddressLike, rawPrice: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  getEffectiveYieldBps: TypedContractMethod<[asset: AddressLike], [bigint], "view">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  updateYield: TypedContractMethod<[asset: AddressLike, rawPrice: BigNumberish], [void], "nonpayable">;
 
-  getFunction(
-    nameOrSignature: "getAccumulatedYield"
-  ): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
+
+  getFunction(nameOrSignature: "getAccumulatedYield"): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getEffectiveYieldBps"): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "updateYield"
-  ): TypedContractMethod<
-    [asset: AddressLike, rawPrice: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[asset: AddressLike, rawPrice: BigNumberish], [void], "nonpayable">;
 
   filters: {};
 }

@@ -359,6 +359,65 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "_account",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_collateralToken",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_indexToken",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_amountIn",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_sizeDelta",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_isLong",
+        type: "bool",
+      },
+      {
+        internalType: "uint256",
+        name: "_acceptablePrice",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_isHedge",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "_convertOnADL",
+        type: "bool",
+      },
+    ],
+    name: "createIncreasePositionFor",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "requestKey",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "bytes32",
         name: "",
         type: "bytes32",
@@ -547,6 +606,60 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "_account",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_indexToken",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_sizeDelta",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_isLong",
+        type: "bool",
+      },
+      {
+        internalType: "uint256",
+        name: "_acceptablePrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_executionFee",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_isHedge",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "_convertOnADL",
+        type: "bool",
+      },
+    ],
+    name: "increasePositionETHFor",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "requestKey",
+        type: "bytes32",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "bytes32",
         name: "",
         type: "bytes32",
@@ -606,7 +719,17 @@ const _abi = [
       },
       {
         internalType: "bool",
+        name: "isHedge",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
         name: "isNativeETH",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "convertOnADL",
         type: "bool",
       },
     ],
@@ -641,6 +764,25 @@ const _abi = [
       },
     ],
     name: "isKeeper",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "isRouter",
     outputs: [
       {
         internalType: "bool",
@@ -753,6 +895,24 @@ const _abi = [
       },
     ],
     name: "setIsKeeper",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_router",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "_isRouter",
+        type: "bool",
+      },
+    ],
+    name: "setIsRouter",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

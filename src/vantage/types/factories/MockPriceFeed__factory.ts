@@ -7,6 +7,31 @@ import type { MockPriceFeed, MockPriceFeedInterface } from "../MockPriceFeed";
 
 const _abi = [
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "price",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "timestamp",
+        type: "uint256",
+      },
+    ],
+    name: "PriceUpdated",
+    type: "event",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -239,10 +264,7 @@ export class MockPriceFeed__factory {
   static createInterface(): MockPriceFeedInterface {
     return new Interface(_abi) as MockPriceFeedInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): MockPriceFeed {
+  static connect(address: string, runner?: ContractRunner | null): MockPriceFeed {
     return new Contract(address, _abi, runner) as unknown as MockPriceFeed;
   }
 }

@@ -326,6 +326,25 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "getEffectiveYieldBps",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
         name: "",
         type: "address",
       },

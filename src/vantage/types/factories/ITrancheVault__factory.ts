@@ -84,6 +84,19 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
+        indexed: true,
+        internalType: "address",
+        name: "seniorVault",
+        type: "address",
+      },
+    ],
+    name: "AuthorizedSeniorVaultSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: false,
         internalType: "bool",
         name: "active",
@@ -91,6 +104,63 @@ const _abi = [
       },
     ],
     name: "CircuitBreakerSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "totalAbsorbed",
+        type: "uint256",
+      },
+    ],
+    name: "FRDeficitAbsorbed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "totalAbsorbed",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "cap",
+        type: "uint256",
+      },
+    ],
+    name: "JuniorCapReached",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "remainingAbsorbed",
+        type: "uint256",
+      },
+    ],
+    name: "JuniorCapacityRestored",
     type: "event",
   },
   {
@@ -217,6 +287,32 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "usdAmount",
+        type: "uint256",
+      },
+    ],
+    name: "absorbFRDeficit",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "authorizedSeniorVault",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "lp",
         type: "address",
@@ -251,6 +347,29 @@ const _abi = [
     name: "clearWithdrawalRequest",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getCapStatus",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "absorbed",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "cap",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "isReached",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -301,6 +420,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "juniorDeficitAbsorbed",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -333,6 +465,19 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "maxAbsorbBps",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -351,6 +496,32 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "usdAmount",
+        type: "uint256",
+      },
+    ],
+    name: "restoreCapacityFromSenior",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "usdAmount",
+        type: "uint256",
+      },
+    ],
+    name: "restoreJuniorCapacity",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "revenueStore",
     outputs: [
@@ -361,6 +532,32 @@ const _abi = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "seniorVault",
+        type: "address",
+      },
+    ],
+    name: "setAuthorizedSeniorVault",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "bps",
+        type: "uint256",
+      },
+    ],
+    name: "setMaxAbsorbBps",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {

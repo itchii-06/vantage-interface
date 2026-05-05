@@ -410,6 +410,42 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
+        name: "juniorVault",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "usdAmount",
+        type: "uint256",
+      },
+    ],
+    name: "absorbFRDeficitFromSeniorYield",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "authorizedJuniorVault",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
         name: "_account",
         type: "address",
       },
@@ -463,6 +499,25 @@ const _abi = [
   {
     inputs: [],
     name: "getAUM",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+    ],
+    name: "getAbsorbableYield",
     outputs: [
       {
         internalType: "uint256",
@@ -577,10 +632,39 @@ const _abi = [
         name: "_collateralDelta",
         type: "uint256",
       },
+      {
+        internalType: "bool",
+        name: "_isHedge",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "_convertOnADL",
+        type: "bool",
+      },
     ],
     name: "increasePosition",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "juniorVault",
+        type: "address",
+      },
+    ],
+    name: "isJuniorCapReached",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -638,19 +722,6 @@ const _abi = [
   {
     inputs: [],
     name: "lpManager",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "payoutHub",
     outputs: [
       {
         internalType: "address",
@@ -737,6 +808,19 @@ const _abi = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "juniorVault",
+        type: "address",
+      },
+    ],
+    name: "setAuthorizedJuniorVault",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {

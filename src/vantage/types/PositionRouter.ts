@@ -30,15 +30,18 @@ export interface PositionRouterInterface extends Interface {
       | "cancelIncreasePosition"
       | "createDecreasePosition"
       | "createIncreasePosition"
+      | "createIncreasePositionFor"
       | "decreasePositionRequests"
       | "decreasePositionsIndex"
       | "executeDecreasePosition"
       | "executeIncreasePosition"
       | "gov"
       | "increasePositionETH"
+      | "increasePositionETHFor"
       | "increasePositionRequests"
       | "increasePositionsIndex"
       | "isKeeper"
+      | "isRouter"
       | "maxTimeDelay"
       | "minBlockDelayKeeper"
       | "minExecutionFee"
@@ -46,6 +49,7 @@ export interface PositionRouterInterface extends Interface {
       | "setDelayValues"
       | "setGov"
       | "setIsKeeper"
+      | "setIsRouter"
       | "setMinExecutionFee"
       | "vault"
       | "weth"
@@ -71,6 +75,10 @@ export interface PositionRouterInterface extends Interface {
     functionFragment: "createIncreasePosition",
     values: [AddressLike, AddressLike, BigNumberish, BigNumberish, boolean, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "createIncreasePositionFor",
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, BigNumberish, boolean, BigNumberish, boolean, boolean]
+  ): string;
   encodeFunctionData(functionFragment: "decreasePositionRequests", values: [BytesLike]): string;
   encodeFunctionData(functionFragment: "decreasePositionsIndex", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "executeDecreasePosition", values: [BytesLike, AddressLike]): string;
@@ -80,9 +88,14 @@ export interface PositionRouterInterface extends Interface {
     functionFragment: "increasePositionETH",
     values: [AddressLike, BigNumberish, boolean, BigNumberish, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "increasePositionETHFor",
+    values: [AddressLike, AddressLike, BigNumberish, boolean, BigNumberish, BigNumberish, boolean, boolean]
+  ): string;
   encodeFunctionData(functionFragment: "increasePositionRequests", values: [BytesLike]): string;
   encodeFunctionData(functionFragment: "increasePositionsIndex", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "isKeeper", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "isRouter", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "maxTimeDelay", values?: undefined): string;
   encodeFunctionData(functionFragment: "minBlockDelayKeeper", values?: undefined): string;
   encodeFunctionData(functionFragment: "minExecutionFee", values?: undefined): string;
@@ -90,6 +103,7 @@ export interface PositionRouterInterface extends Interface {
   encodeFunctionData(functionFragment: "setDelayValues", values: [BigNumberish, BigNumberish, BigNumberish]): string;
   encodeFunctionData(functionFragment: "setGov", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "setIsKeeper", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setIsRouter", values: [AddressLike, boolean]): string;
   encodeFunctionData(functionFragment: "setMinExecutionFee", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "vault", values?: undefined): string;
   encodeFunctionData(functionFragment: "weth", values?: undefined): string;
@@ -98,15 +112,18 @@ export interface PositionRouterInterface extends Interface {
   decodeFunctionResult(functionFragment: "cancelIncreasePosition", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "createDecreasePosition", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "createIncreasePosition", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "createIncreasePositionFor", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decreasePositionRequests", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decreasePositionsIndex", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "executeDecreasePosition", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "executeIncreasePosition", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "gov", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "increasePositionETH", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "increasePositionETHFor", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "increasePositionRequests", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "increasePositionsIndex", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isKeeper", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isRouter", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "maxTimeDelay", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "minBlockDelayKeeper", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "minExecutionFee", data: BytesLike): Result;
@@ -114,6 +131,7 @@ export interface PositionRouterInterface extends Interface {
   decodeFunctionResult(functionFragment: "setDelayValues", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setGov", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setIsKeeper", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setIsRouter", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setMinExecutionFee", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "vault", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "weth", data: BytesLike): Result;
@@ -316,6 +334,22 @@ export interface PositionRouter extends BaseContract {
     "payable"
   >;
 
+  createIncreasePositionFor: TypedContractMethod<
+    [
+      _account: AddressLike,
+      _collateralToken: AddressLike,
+      _indexToken: AddressLike,
+      _amountIn: BigNumberish,
+      _sizeDelta: BigNumberish,
+      _isLong: boolean,
+      _acceptablePrice: BigNumberish,
+      _isHedge: boolean,
+      _convertOnADL: boolean,
+    ],
+    [string],
+    "payable"
+  >;
+
   decreasePositionRequests: TypedContractMethod<
     [arg0: BytesLike],
     [
@@ -356,10 +390,25 @@ export interface PositionRouter extends BaseContract {
     "payable"
   >;
 
+  increasePositionETHFor: TypedContractMethod<
+    [
+      _account: AddressLike,
+      _indexToken: AddressLike,
+      _sizeDelta: BigNumberish,
+      _isLong: boolean,
+      _acceptablePrice: BigNumberish,
+      _executionFee: BigNumberish,
+      _isHedge: boolean,
+      _convertOnADL: boolean,
+    ],
+    [string],
+    "payable"
+  >;
+
   increasePositionRequests: TypedContractMethod<
     [arg0: BytesLike],
     [
-      [string, string, string, bigint, bigint, boolean, bigint, bigint, bigint, bigint, boolean] & {
+      [string, string, string, bigint, bigint, boolean, bigint, bigint, bigint, bigint, boolean, boolean, boolean] & {
         account: string;
         collateralToken: string;
         indexToken: string;
@@ -370,7 +419,9 @@ export interface PositionRouter extends BaseContract {
         blockNumber: bigint;
         blockTime: bigint;
         executionFee: bigint;
+        isHedge: boolean;
         isNativeETH: boolean;
+        convertOnADL: boolean;
       },
     ],
     "view"
@@ -379,6 +430,8 @@ export interface PositionRouter extends BaseContract {
   increasePositionsIndex: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   isKeeper: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
+  isRouter: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
   maxTimeDelay: TypedContractMethod<[], [bigint], "view">;
 
@@ -397,6 +450,8 @@ export interface PositionRouter extends BaseContract {
   setGov: TypedContractMethod<[_gov: AddressLike], [void], "nonpayable">;
 
   setIsKeeper: TypedContractMethod<[_keeper: AddressLike, _isKeeper: boolean], [void], "nonpayable">;
+
+  setIsRouter: TypedContractMethod<[_router: AddressLike, _isRouter: boolean], [void], "nonpayable">;
 
   setMinExecutionFee: TypedContractMethod<[_minExecutionFee: BigNumberish], [void], "nonpayable">;
 
@@ -433,6 +488,23 @@ export interface PositionRouter extends BaseContract {
       _sizeDelta: BigNumberish,
       _isLong: boolean,
       _acceptablePrice: BigNumberish,
+    ],
+    [string],
+    "payable"
+  >;
+  getFunction(
+    nameOrSignature: "createIncreasePositionFor"
+  ): TypedContractMethod<
+    [
+      _account: AddressLike,
+      _collateralToken: AddressLike,
+      _indexToken: AddressLike,
+      _amountIn: BigNumberish,
+      _sizeDelta: BigNumberish,
+      _isLong: boolean,
+      _acceptablePrice: BigNumberish,
+      _isHedge: boolean,
+      _convertOnADL: boolean,
     ],
     [string],
     "payable"
@@ -477,10 +549,26 @@ export interface PositionRouter extends BaseContract {
     [string],
     "payable"
   >;
+  getFunction(
+    nameOrSignature: "increasePositionETHFor"
+  ): TypedContractMethod<
+    [
+      _account: AddressLike,
+      _indexToken: AddressLike,
+      _sizeDelta: BigNumberish,
+      _isLong: boolean,
+      _acceptablePrice: BigNumberish,
+      _executionFee: BigNumberish,
+      _isHedge: boolean,
+      _convertOnADL: boolean,
+    ],
+    [string],
+    "payable"
+  >;
   getFunction(nameOrSignature: "increasePositionRequests"): TypedContractMethod<
     [arg0: BytesLike],
     [
-      [string, string, string, bigint, bigint, boolean, bigint, bigint, bigint, bigint, boolean] & {
+      [string, string, string, bigint, bigint, boolean, bigint, bigint, bigint, bigint, boolean, boolean, boolean] & {
         account: string;
         collateralToken: string;
         indexToken: string;
@@ -491,13 +579,16 @@ export interface PositionRouter extends BaseContract {
         blockNumber: bigint;
         blockTime: bigint;
         executionFee: bigint;
+        isHedge: boolean;
         isNativeETH: boolean;
+        convertOnADL: boolean;
       },
     ],
     "view"
   >;
   getFunction(nameOrSignature: "increasePositionsIndex"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(nameOrSignature: "isKeeper"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "isRouter"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
   getFunction(nameOrSignature: "maxTimeDelay"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "minBlockDelayKeeper"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "minExecutionFee"): TypedContractMethod<[], [bigint], "view">;
@@ -513,6 +604,9 @@ export interface PositionRouter extends BaseContract {
   getFunction(
     nameOrSignature: "setIsKeeper"
   ): TypedContractMethod<[_keeper: AddressLike, _isKeeper: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setIsRouter"
+  ): TypedContractMethod<[_router: AddressLike, _isRouter: boolean], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setMinExecutionFee"
   ): TypedContractMethod<[_minExecutionFee: BigNumberish], [void], "nonpayable">;

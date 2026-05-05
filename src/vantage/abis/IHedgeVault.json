@@ -2,36 +2,25 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      }
-    ],
-    "name": "debtCeilings",
-    "outputs": [
-      {
         "internalType": "uint256",
-        "name": "",
+        "name": "positionId",
         "type": "uint256"
       }
     ],
-    "stateMutability": "view",
+    "name": "closePosition",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "receiver",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
-        "name": "amount",
+        "name": "positionId",
         "type": "uint256"
       }
     ],
-    "name": "requestPayout",
+    "name": "liquidate",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -40,37 +29,42 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_vault",
+        "name": "collateralToken",
         "type": "address"
       },
       {
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isModeA",
+        "type": "bool"
       }
     ],
-    "name": "settleProfit",
-    "outputs": [],
+    "name": "openPosition",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "positionId",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "vault",
-        "type": "address"
-      }
-    ],
-    "name": "vaultDebts",
-    "outputs": [
-      {
         "internalType": "uint256",
-        "name": "",
+        "name": "positionId",
         "type": "uint256"
       }
     ],
-    "stateMutability": "view",
+    "name": "settle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ]

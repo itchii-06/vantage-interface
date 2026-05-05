@@ -87,8 +87,6 @@ export interface VaultFactoryInterface extends Interface {
       | "createVault"
       | "deployedVaults"
       | "deployedVaultsCount"
-      | "finalizeVaultRegistration"
-      | "hub"
       | "owner"
       | "pendingOwner"
       | "renounceFactoryControl"
@@ -110,12 +108,10 @@ export interface VaultFactoryInterface extends Interface {
   encodeFunctionData(functionFragment: "assetRegistry", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "createVault",
-    values: [AddressLike, BigNumberish, AddressLike, AddressLike, BigNumberish, VaultFactory.AssetParamsStruct]
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, VaultFactory.AssetParamsStruct]
   ): string;
   encodeFunctionData(functionFragment: "deployedVaults", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "deployedVaultsCount", values?: undefined): string;
-  encodeFunctionData(functionFragment: "finalizeVaultRegistration", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "hub", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
   encodeFunctionData(functionFragment: "renounceFactoryControl", values?: undefined): string;
@@ -129,8 +125,6 @@ export interface VaultFactoryInterface extends Interface {
   decodeFunctionResult(functionFragment: "createVault", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "deployedVaults", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "deployedVaultsCount", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "finalizeVaultRegistration", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "hub", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "renounceFactoryControl", data: BytesLike): Result;
@@ -139,10 +133,9 @@ export interface VaultFactoryInterface extends Interface {
 }
 
 export namespace FactoryControlRenouncedEvent {
-  export type InputTuple = [newHubOwner: AddressLike, newRegistryOwner: AddressLike];
-  export type OutputTuple = [newHubOwner: string, newRegistryOwner: string];
+  export type InputTuple = [newRegistryOwner: AddressLike];
+  export type OutputTuple = [newRegistryOwner: string];
   export interface OutputObject {
-    newHubOwner: string;
     newRegistryOwner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
@@ -178,13 +171,12 @@ export namespace OwnershipTransferredEvent {
 }
 
 export namespace VaultCreatedEvent {
-  export type InputTuple = [vault: AddressLike, token: AddressLike, debtCeiling: BigNumberish, governance: AddressLike];
-  export type OutputTuple = [vault: string, token: string, debtCeiling: bigint, governance: string];
+  export type InputTuple = [vault: AddressLike, token: AddressLike, owner: AddressLike];
+  export type OutputTuple = [vault: string, token: string, owner: string];
   export interface OutputObject {
     vault: string;
     token: string;
-    debtCeiling: bigint;
-    governance: string;
+    owner: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -236,7 +228,6 @@ export interface VaultFactory extends BaseContract {
   createVault: TypedContractMethod<
     [
       token: AddressLike,
-      debtCeiling: BigNumberish,
       lpManager: AddressLike,
       complianceRegistry: AddressLike,
       requiredKYCLevel: BigNumberish,
@@ -249,10 +240,6 @@ export interface VaultFactory extends BaseContract {
   deployedVaults: TypedContractMethod<[arg0: BigNumberish], [string], "view">;
 
   deployedVaultsCount: TypedContractMethod<[], [bigint], "view">;
-
-  finalizeVaultRegistration: TypedContractMethod<[vault: AddressLike], [void], "nonpayable">;
-
-  hub: TypedContractMethod<[], [string], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
 
@@ -275,7 +262,6 @@ export interface VaultFactory extends BaseContract {
   ): TypedContractMethod<
     [
       token: AddressLike,
-      debtCeiling: BigNumberish,
       lpManager: AddressLike,
       complianceRegistry: AddressLike,
       requiredKYCLevel: BigNumberish,
@@ -286,10 +272,6 @@ export interface VaultFactory extends BaseContract {
   >;
   getFunction(nameOrSignature: "deployedVaults"): TypedContractMethod<[arg0: BigNumberish], [string], "view">;
   getFunction(nameOrSignature: "deployedVaultsCount"): TypedContractMethod<[], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "finalizeVaultRegistration"
-  ): TypedContractMethod<[vault: AddressLike], [void], "nonpayable">;
-  getFunction(nameOrSignature: "hub"): TypedContractMethod<[], [string], "view">;
   getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
   getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
   getFunction(nameOrSignature: "renounceFactoryControl"): TypedContractMethod<[], [void], "nonpayable">;
@@ -322,7 +304,7 @@ export interface VaultFactory extends BaseContract {
   ): TypedContractEvent<VaultCreatedEvent.InputTuple, VaultCreatedEvent.OutputTuple, VaultCreatedEvent.OutputObject>;
 
   filters: {
-    "FactoryControlRenounced(address,address)": TypedContractEvent<
+    "FactoryControlRenounced(address)": TypedContractEvent<
       FactoryControlRenouncedEvent.InputTuple,
       FactoryControlRenouncedEvent.OutputTuple,
       FactoryControlRenouncedEvent.OutputObject
@@ -355,7 +337,7 @@ export interface VaultFactory extends BaseContract {
       OwnershipTransferredEvent.OutputObject
     >;
 
-    "VaultCreated(address,address,uint256,address)": TypedContractEvent<
+    "VaultCreated(address,address,address)": TypedContractEvent<
       VaultCreatedEvent.InputTuple,
       VaultCreatedEvent.OutputTuple,
       VaultCreatedEvent.OutputObject

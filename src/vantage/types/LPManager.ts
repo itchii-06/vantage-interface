@@ -23,54 +23,151 @@ import type {
   TypedContractMethod,
 } from "./common";
 
+export declare namespace LPManager {
+  export type PositionRefStruct = {
+    account: AddressLike;
+    collateralToken: AddressLike;
+    indexToken: AddressLike;
+    isLong: boolean;
+  };
+
+  export type PositionRefStructOutput = [
+    account: string,
+    collateralToken: string,
+    indexToken: string,
+    isLong: boolean,
+  ] & {
+    account: string;
+    collateralToken: string;
+    indexToken: string;
+    isLong: boolean;
+  };
+}
+
 export interface LPManagerInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "ADL_BUFFER_BPS"
       | "PRICE_PRECISION"
       | "acceptLPTokenOwnership"
       | "acceptOwnership"
       | "acceptOwnershipOf"
       | "addLiquidity"
+      | "addLiquidityFor"
+      | "cancelRedeem"
+      | "claimRedeemedFunds"
+      | "currentEpochId"
+      | "epochPricePerShare"
+      | "executeRedemptionEpoch"
       | "getSharePrice"
+      | "isKeeper"
+      | "isRouter"
+      | "lastEpochTimestamp"
       | "lpToken"
       | "owner"
       | "pendingOwner"
+      | "redemptionCycleDuration"
+      | "redemptionRequests"
       | "removeLiquidity"
       | "renounceOwnership"
+      | "requestRedeem"
+      | "revenueStore"
+      | "setKeeper"
+      | "setRedemptionCycleDuration"
+      | "setRevenueStore"
+      | "setRouter"
+      | "setUsdcToken"
+      | "totalPendingShares"
       | "transferOwnership"
+      | "usdcToken"
       | "vault"
   ): FunctionFragment;
 
   getEvent(
-    nameOrSignatureOrTopic: "AddLiquidity" | "OwnershipTransferStarted" | "OwnershipTransferred" | "RemoveLiquidity"
+    nameOrSignatureOrTopic:
+      | "AddLiquidity"
+      | "KeeperSet"
+      | "OwnershipTransferStarted"
+      | "OwnershipTransferred"
+      | "RedemptionCancelled"
+      | "RedemptionClaimed"
+      | "RedemptionEpochExecuted"
+      | "RedemptionRequested"
+      | "RemoveLiquidity"
+      | "RevenueStoreSet"
   ): EventFragment;
 
+  encodeFunctionData(functionFragment: "ADL_BUFFER_BPS", values?: undefined): string;
   encodeFunctionData(functionFragment: "PRICE_PRECISION", values?: undefined): string;
   encodeFunctionData(functionFragment: "acceptLPTokenOwnership", values?: undefined): string;
   encodeFunctionData(functionFragment: "acceptOwnership", values?: undefined): string;
   encodeFunctionData(functionFragment: "acceptOwnershipOf", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "addLiquidity", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "addLiquidityFor", values: [AddressLike, BigNumberish, AddressLike]): string;
+  encodeFunctionData(functionFragment: "cancelRedeem", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "claimRedeemedFunds", values?: undefined): string;
+  encodeFunctionData(functionFragment: "currentEpochId", values?: undefined): string;
+  encodeFunctionData(functionFragment: "epochPricePerShare", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "executeRedemptionEpoch",
+    values: [LPManager.PositionRefStruct[], LPManager.PositionRefStruct[]]
+  ): string;
   encodeFunctionData(functionFragment: "getSharePrice", values?: undefined): string;
+  encodeFunctionData(functionFragment: "isKeeper", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "isRouter", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "lastEpochTimestamp", values?: undefined): string;
   encodeFunctionData(functionFragment: "lpToken", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(functionFragment: "pendingOwner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "redemptionCycleDuration", values?: undefined): string;
+  encodeFunctionData(functionFragment: "redemptionRequests", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "removeLiquidity", values: [BigNumberish, AddressLike, BigNumberish]): string;
   encodeFunctionData(functionFragment: "renounceOwnership", values?: undefined): string;
+  encodeFunctionData(functionFragment: "requestRedeem", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "revenueStore", values?: undefined): string;
+  encodeFunctionData(functionFragment: "setKeeper", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setRedemptionCycleDuration", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setRevenueStore", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setRouter", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setUsdcToken", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "totalPendingShares", values?: undefined): string;
   encodeFunctionData(functionFragment: "transferOwnership", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "usdcToken", values?: undefined): string;
   encodeFunctionData(functionFragment: "vault", values?: undefined): string;
 
+  decodeFunctionResult(functionFragment: "ADL_BUFFER_BPS", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "PRICE_PRECISION", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "acceptLPTokenOwnership", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "acceptOwnership", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "acceptOwnershipOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "addLiquidity", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "addLiquidityFor", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "cancelRedeem", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "claimRedeemedFunds", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "currentEpochId", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "epochPricePerShare", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "executeRedemptionEpoch", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getSharePrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isKeeper", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isRouter", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "lastEpochTimestamp", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lpToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "pendingOwner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "redemptionCycleDuration", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "redemptionRequests", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "removeLiquidity", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "requestRedeem", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "revenueStore", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setKeeper", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setRedemptionCycleDuration", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setRevenueStore", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setRouter", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setUsdcToken", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "totalPendingShares", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "usdcToken", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "vault", data: BytesLike): Result;
 }
 
@@ -89,6 +186,19 @@ export namespace AddLiquidityEvent {
     tokenAmount: bigint;
     usdValue: bigint;
     sharesMinted: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace KeeperSetEvent {
+  export type InputTuple = [keeper: AddressLike, enabled: boolean];
+  export type OutputTuple = [keeper: string, enabled: boolean];
+  export interface OutputObject {
+    keeper: string;
+    enabled: boolean;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -122,6 +232,61 @@ export namespace OwnershipTransferredEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace RedemptionCancelledEvent {
+  export type InputTuple = [user: AddressLike, shares: BigNumberish];
+  export type OutputTuple = [user: string, shares: bigint];
+  export interface OutputObject {
+    user: string;
+    shares: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RedemptionClaimedEvent {
+  export type InputTuple = [user: AddressLike, epochId: BigNumberish, usdcAmount: BigNumberish];
+  export type OutputTuple = [user: string, epochId: bigint, usdcAmount: bigint];
+  export interface OutputObject {
+    user: string;
+    epochId: bigint;
+    usdcAmount: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RedemptionEpochExecutedEvent {
+  export type InputTuple = [epochId: BigNumberish, pricePerShare: BigNumberish, totalSharesBurned: BigNumberish];
+  export type OutputTuple = [epochId: bigint, pricePerShare: bigint, totalSharesBurned: bigint];
+  export interface OutputObject {
+    epochId: bigint;
+    pricePerShare: bigint;
+    totalSharesBurned: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RedemptionRequestedEvent {
+  export type InputTuple = [user: AddressLike, shares: BigNumberish, epochId: BigNumberish];
+  export type OutputTuple = [user: string, shares: bigint, epochId: bigint];
+  export interface OutputObject {
+    user: string;
+    shares: bigint;
+    epochId: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace RemoveLiquidityEvent {
   export type InputTuple = [
     user: AddressLike,
@@ -135,6 +300,19 @@ export namespace RemoveLiquidityEvent {
     token: string;
     sharesBurned: bigint;
     tokenAmount: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RevenueStoreSetEvent {
+  export type InputTuple = [previous: AddressLike, next: AddressLike];
+  export type OutputTuple = [previous: string, next: string];
+  export interface OutputObject {
+    previous: string;
+    next: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -175,6 +353,8 @@ export interface LPManager extends BaseContract {
   listeners(eventName?: string): Promise<Array<Listener>>;
   removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
+  ADL_BUFFER_BPS: TypedContractMethod<[], [bigint], "view">;
+
   PRICE_PRECISION: TypedContractMethod<[], [bigint], "view">;
 
   acceptLPTokenOwnership: TypedContractMethod<[], [void], "nonpayable">;
@@ -185,13 +365,47 @@ export interface LPManager extends BaseContract {
 
   addLiquidity: TypedContractMethod<[token: AddressLike, amount: BigNumberish], [bigint], "nonpayable">;
 
+  addLiquidityFor: TypedContractMethod<
+    [token: AddressLike, amount: BigNumberish, recipient: AddressLike],
+    [bigint],
+    "nonpayable"
+  >;
+
+  cancelRedeem: TypedContractMethod<[shares: BigNumberish], [void], "nonpayable">;
+
+  claimRedeemedFunds: TypedContractMethod<[], [bigint], "nonpayable">;
+
+  currentEpochId: TypedContractMethod<[], [bigint], "view">;
+
+  epochPricePerShare: TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
+
+  executeRedemptionEpoch: TypedContractMethod<
+    [tradeRefs: LPManager.PositionRefStruct[], hedgeRefs: LPManager.PositionRefStruct[]],
+    [void],
+    "nonpayable"
+  >;
+
   getSharePrice: TypedContractMethod<[], [bigint], "view">;
+
+  isKeeper: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
+  isRouter: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+
+  lastEpochTimestamp: TypedContractMethod<[], [bigint], "view">;
 
   lpToken: TypedContractMethod<[], [string], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
 
   pendingOwner: TypedContractMethod<[], [string], "view">;
+
+  redemptionCycleDuration: TypedContractMethod<[], [bigint], "view">;
+
+  redemptionRequests: TypedContractMethod<
+    [arg0: AddressLike],
+    [[bigint, bigint] & { shares: bigint; epochId: bigint }],
+    "view"
+  >;
 
   removeLiquidity: TypedContractMethod<
     [shares: BigNumberish, token: AddressLike, _minOut: BigNumberish],
@@ -201,12 +415,31 @@ export interface LPManager extends BaseContract {
 
   renounceOwnership: TypedContractMethod<[], [void], "nonpayable">;
 
+  requestRedeem: TypedContractMethod<[shares: BigNumberish], [void], "nonpayable">;
+
+  revenueStore: TypedContractMethod<[], [string], "view">;
+
+  setKeeper: TypedContractMethod<[keeper: AddressLike, enabled: boolean], [void], "nonpayable">;
+
+  setRedemptionCycleDuration: TypedContractMethod<[duration: BigNumberish], [void], "nonpayable">;
+
+  setRevenueStore: TypedContractMethod<[store: AddressLike], [void], "nonpayable">;
+
+  setRouter: TypedContractMethod<[router: AddressLike, enabled: boolean], [void], "nonpayable">;
+
+  setUsdcToken: TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
+
+  totalPendingShares: TypedContractMethod<[], [bigint], "view">;
+
   transferOwnership: TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+
+  usdcToken: TypedContractMethod<[], [string], "view">;
 
   vault: TypedContractMethod<[], [string], "view">;
 
   getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
+  getFunction(nameOrSignature: "ADL_BUFFER_BPS"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "PRICE_PRECISION"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "acceptLPTokenOwnership"): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(nameOrSignature: "acceptOwnership"): TypedContractMethod<[], [void], "nonpayable">;
@@ -214,20 +447,59 @@ export interface LPManager extends BaseContract {
   getFunction(
     nameOrSignature: "addLiquidity"
   ): TypedContractMethod<[token: AddressLike, amount: BigNumberish], [bigint], "nonpayable">;
+  getFunction(
+    nameOrSignature: "addLiquidityFor"
+  ): TypedContractMethod<[token: AddressLike, amount: BigNumberish, recipient: AddressLike], [bigint], "nonpayable">;
+  getFunction(nameOrSignature: "cancelRedeem"): TypedContractMethod<[shares: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "claimRedeemedFunds"): TypedContractMethod<[], [bigint], "nonpayable">;
+  getFunction(nameOrSignature: "currentEpochId"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "epochPricePerShare"): TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "executeRedemptionEpoch"
+  ): TypedContractMethod<
+    [tradeRefs: LPManager.PositionRefStruct[], hedgeRefs: LPManager.PositionRefStruct[]],
+    [void],
+    "nonpayable"
+  >;
   getFunction(nameOrSignature: "getSharePrice"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "isKeeper"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "isRouter"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "lastEpochTimestamp"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "lpToken"): TypedContractMethod<[], [string], "view">;
   getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;
   getFunction(nameOrSignature: "pendingOwner"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "redemptionCycleDuration"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "redemptionRequests"
+  ): TypedContractMethod<[arg0: AddressLike], [[bigint, bigint] & { shares: bigint; epochId: bigint }], "view">;
   getFunction(
     nameOrSignature: "removeLiquidity"
   ): TypedContractMethod<[shares: BigNumberish, token: AddressLike, _minOut: BigNumberish], [bigint], "nonpayable">;
   getFunction(nameOrSignature: "renounceOwnership"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "requestRedeem"): TypedContractMethod<[shares: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "revenueStore"): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "setKeeper"
+  ): TypedContractMethod<[keeper: AddressLike, enabled: boolean], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setRedemptionCycleDuration"
+  ): TypedContractMethod<[duration: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setRevenueStore"): TypedContractMethod<[store: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setRouter"
+  ): TypedContractMethod<[router: AddressLike, enabled: boolean], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setUsdcToken"): TypedContractMethod<[token: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "totalPendingShares"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "transferOwnership"): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "usdcToken"): TypedContractMethod<[], [string], "view">;
   getFunction(nameOrSignature: "vault"): TypedContractMethod<[], [string], "view">;
 
   getEvent(
     key: "AddLiquidity"
   ): TypedContractEvent<AddLiquidityEvent.InputTuple, AddLiquidityEvent.OutputTuple, AddLiquidityEvent.OutputObject>;
+  getEvent(
+    key: "KeeperSet"
+  ): TypedContractEvent<KeeperSetEvent.InputTuple, KeeperSetEvent.OutputTuple, KeeperSetEvent.OutputObject>;
   getEvent(
     key: "OwnershipTransferStarted"
   ): TypedContractEvent<
@@ -243,11 +515,46 @@ export interface LPManager extends BaseContract {
     OwnershipTransferredEvent.OutputObject
   >;
   getEvent(
+    key: "RedemptionCancelled"
+  ): TypedContractEvent<
+    RedemptionCancelledEvent.InputTuple,
+    RedemptionCancelledEvent.OutputTuple,
+    RedemptionCancelledEvent.OutputObject
+  >;
+  getEvent(
+    key: "RedemptionClaimed"
+  ): TypedContractEvent<
+    RedemptionClaimedEvent.InputTuple,
+    RedemptionClaimedEvent.OutputTuple,
+    RedemptionClaimedEvent.OutputObject
+  >;
+  getEvent(
+    key: "RedemptionEpochExecuted"
+  ): TypedContractEvent<
+    RedemptionEpochExecutedEvent.InputTuple,
+    RedemptionEpochExecutedEvent.OutputTuple,
+    RedemptionEpochExecutedEvent.OutputObject
+  >;
+  getEvent(
+    key: "RedemptionRequested"
+  ): TypedContractEvent<
+    RedemptionRequestedEvent.InputTuple,
+    RedemptionRequestedEvent.OutputTuple,
+    RedemptionRequestedEvent.OutputObject
+  >;
+  getEvent(
     key: "RemoveLiquidity"
   ): TypedContractEvent<
     RemoveLiquidityEvent.InputTuple,
     RemoveLiquidityEvent.OutputTuple,
     RemoveLiquidityEvent.OutputObject
+  >;
+  getEvent(
+    key: "RevenueStoreSet"
+  ): TypedContractEvent<
+    RevenueStoreSetEvent.InputTuple,
+    RevenueStoreSetEvent.OutputTuple,
+    RevenueStoreSetEvent.OutputObject
   >;
 
   filters: {
@@ -261,6 +568,13 @@ export interface LPManager extends BaseContract {
       AddLiquidityEvent.OutputTuple,
       AddLiquidityEvent.OutputObject
     >;
+
+    "KeeperSet(address,bool)": TypedContractEvent<
+      KeeperSetEvent.InputTuple,
+      KeeperSetEvent.OutputTuple,
+      KeeperSetEvent.OutputObject
+    >;
+    KeeperSet: TypedContractEvent<KeeperSetEvent.InputTuple, KeeperSetEvent.OutputTuple, KeeperSetEvent.OutputObject>;
 
     "OwnershipTransferStarted(address,address)": TypedContractEvent<
       OwnershipTransferStartedEvent.InputTuple,
@@ -284,6 +598,50 @@ export interface LPManager extends BaseContract {
       OwnershipTransferredEvent.OutputObject
     >;
 
+    "RedemptionCancelled(address,uint256)": TypedContractEvent<
+      RedemptionCancelledEvent.InputTuple,
+      RedemptionCancelledEvent.OutputTuple,
+      RedemptionCancelledEvent.OutputObject
+    >;
+    RedemptionCancelled: TypedContractEvent<
+      RedemptionCancelledEvent.InputTuple,
+      RedemptionCancelledEvent.OutputTuple,
+      RedemptionCancelledEvent.OutputObject
+    >;
+
+    "RedemptionClaimed(address,uint256,uint256)": TypedContractEvent<
+      RedemptionClaimedEvent.InputTuple,
+      RedemptionClaimedEvent.OutputTuple,
+      RedemptionClaimedEvent.OutputObject
+    >;
+    RedemptionClaimed: TypedContractEvent<
+      RedemptionClaimedEvent.InputTuple,
+      RedemptionClaimedEvent.OutputTuple,
+      RedemptionClaimedEvent.OutputObject
+    >;
+
+    "RedemptionEpochExecuted(uint256,uint256,uint256)": TypedContractEvent<
+      RedemptionEpochExecutedEvent.InputTuple,
+      RedemptionEpochExecutedEvent.OutputTuple,
+      RedemptionEpochExecutedEvent.OutputObject
+    >;
+    RedemptionEpochExecuted: TypedContractEvent<
+      RedemptionEpochExecutedEvent.InputTuple,
+      RedemptionEpochExecutedEvent.OutputTuple,
+      RedemptionEpochExecutedEvent.OutputObject
+    >;
+
+    "RedemptionRequested(address,uint256,uint256)": TypedContractEvent<
+      RedemptionRequestedEvent.InputTuple,
+      RedemptionRequestedEvent.OutputTuple,
+      RedemptionRequestedEvent.OutputObject
+    >;
+    RedemptionRequested: TypedContractEvent<
+      RedemptionRequestedEvent.InputTuple,
+      RedemptionRequestedEvent.OutputTuple,
+      RedemptionRequestedEvent.OutputObject
+    >;
+
     "RemoveLiquidity(address,address,uint256,uint256)": TypedContractEvent<
       RemoveLiquidityEvent.InputTuple,
       RemoveLiquidityEvent.OutputTuple,
@@ -293,6 +651,17 @@ export interface LPManager extends BaseContract {
       RemoveLiquidityEvent.InputTuple,
       RemoveLiquidityEvent.OutputTuple,
       RemoveLiquidityEvent.OutputObject
+    >;
+
+    "RevenueStoreSet(address,address)": TypedContractEvent<
+      RevenueStoreSetEvent.InputTuple,
+      RevenueStoreSetEvent.OutputTuple,
+      RevenueStoreSetEvent.OutputObject
+    >;
+    RevenueStoreSet: TypedContractEvent<
+      RevenueStoreSetEvent.InputTuple,
+      RevenueStoreSetEvent.OutputTuple,
+      RevenueStoreSetEvent.OutputObject
     >;
   };
 }

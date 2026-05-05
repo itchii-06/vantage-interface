@@ -26,15 +26,24 @@ import type {
 export interface ITrancheVaultInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "absorbFRDeficit"
+      | "authorizedSeniorVault"
       | "checkWithdrawal"
       | "circuitBreakerActive"
       | "clearWithdrawalRequest"
+      | "getCapStatus"
       | "getEffectiveAUM"
       | "getWithdrawalRequest"
+      | "juniorDeficitAbsorbed"
       | "lastDepositTime"
       | "lockupPeriod"
+      | "maxAbsorbBps"
       | "notifyDeposit"
+      | "restoreCapacityFromSenior"
+      | "restoreJuniorCapacity"
       | "revenueStore"
+      | "setAuthorizedSeniorVault"
+      | "setMaxAbsorbBps"
       | "setWithdrawalRequest"
       | "totalPendingWithdrawalUsd"
       | "trancheManager"
@@ -45,7 +54,11 @@ export interface ITrancheVaultInterface extends Interface {
 
   getEvent(
     nameOrSignatureOrTopic:
+      | "AuthorizedSeniorVaultSet"
       | "CircuitBreakerSet"
+      | "FRDeficitAbsorbed"
+      | "JuniorCapReached"
+      | "JuniorCapacityRestored"
       | "LockupPeriodSet"
       | "RevenueStoreSet"
       | "TrancheManagerSet"
@@ -55,15 +68,24 @@ export interface ITrancheVaultInterface extends Interface {
       | "WithdrawalRatioLockBpsSet"
   ): EventFragment;
 
+  encodeFunctionData(functionFragment: "absorbFRDeficit", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "authorizedSeniorVault", values?: undefined): string;
   encodeFunctionData(functionFragment: "checkWithdrawal", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "circuitBreakerActive", values?: undefined): string;
   encodeFunctionData(functionFragment: "clearWithdrawalRequest", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getCapStatus", values?: undefined): string;
   encodeFunctionData(functionFragment: "getEffectiveAUM", values?: undefined): string;
   encodeFunctionData(functionFragment: "getWithdrawalRequest", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "juniorDeficitAbsorbed", values?: undefined): string;
   encodeFunctionData(functionFragment: "lastDepositTime", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "lockupPeriod", values?: undefined): string;
+  encodeFunctionData(functionFragment: "maxAbsorbBps", values?: undefined): string;
   encodeFunctionData(functionFragment: "notifyDeposit", values: [AddressLike, AddressLike]): string;
+  encodeFunctionData(functionFragment: "restoreCapacityFromSenior", values: [BigNumberish]): string;
+  encodeFunctionData(functionFragment: "restoreJuniorCapacity", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "revenueStore", values?: undefined): string;
+  encodeFunctionData(functionFragment: "setAuthorizedSeniorVault", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setMaxAbsorbBps", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "setWithdrawalRequest",
     values: [AddressLike, AddressLike, BigNumberish, BigNumberish]
@@ -74,15 +96,24 @@ export interface ITrancheVaultInterface extends Interface {
   encodeFunctionData(functionFragment: "withdrawalDelay", values?: undefined): string;
   encodeFunctionData(functionFragment: "withdrawalRatioLockBps", values?: undefined): string;
 
+  decodeFunctionResult(functionFragment: "absorbFRDeficit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "authorizedSeniorVault", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "checkWithdrawal", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "circuitBreakerActive", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "clearWithdrawalRequest", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getCapStatus", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getEffectiveAUM", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getWithdrawalRequest", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "juniorDeficitAbsorbed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lastDepositTime", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lockupPeriod", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "maxAbsorbBps", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "notifyDeposit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "restoreCapacityFromSenior", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "restoreJuniorCapacity", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "revenueStore", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setAuthorizedSeniorVault", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setMaxAbsorbBps", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setWithdrawalRequest", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "totalPendingWithdrawalUsd", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "trancheManager", data: BytesLike): Result;
@@ -91,11 +122,62 @@ export interface ITrancheVaultInterface extends Interface {
   decodeFunctionResult(functionFragment: "withdrawalRatioLockBps", data: BytesLike): Result;
 }
 
+export namespace AuthorizedSeniorVaultSetEvent {
+  export type InputTuple = [seniorVault: AddressLike];
+  export type OutputTuple = [seniorVault: string];
+  export interface OutputObject {
+    seniorVault: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace CircuitBreakerSetEvent {
   export type InputTuple = [active: boolean];
   export type OutputTuple = [active: boolean];
   export interface OutputObject {
     active: boolean;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace FRDeficitAbsorbedEvent {
+  export type InputTuple = [usdAmount: BigNumberish, totalAbsorbed: BigNumberish];
+  export type OutputTuple = [usdAmount: bigint, totalAbsorbed: bigint];
+  export interface OutputObject {
+    usdAmount: bigint;
+    totalAbsorbed: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace JuniorCapReachedEvent {
+  export type InputTuple = [totalAbsorbed: BigNumberish, cap: BigNumberish];
+  export type OutputTuple = [totalAbsorbed: bigint, cap: bigint];
+  export interface OutputObject {
+    totalAbsorbed: bigint;
+    cap: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace JuniorCapacityRestoredEvent {
+  export type InputTuple = [usdAmount: BigNumberish, remainingAbsorbed: BigNumberish];
+  export type OutputTuple = [usdAmount: bigint, remainingAbsorbed: bigint];
+  export interface OutputObject {
+    usdAmount: bigint;
+    remainingAbsorbed: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -225,11 +307,27 @@ export interface ITrancheVault extends BaseContract {
   listeners(eventName?: string): Promise<Array<Listener>>;
   removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
+  absorbFRDeficit: TypedContractMethod<[usdAmount: BigNumberish], [void], "nonpayable">;
+
+  authorizedSeniorVault: TypedContractMethod<[], [string], "view">;
+
   checkWithdrawal: TypedContractMethod<[lp: AddressLike], [void], "view">;
 
   circuitBreakerActive: TypedContractMethod<[], [boolean], "view">;
 
   clearWithdrawalRequest: TypedContractMethod<[lp: AddressLike], [void], "nonpayable">;
+
+  getCapStatus: TypedContractMethod<
+    [],
+    [
+      [bigint, bigint, boolean] & {
+        absorbed: bigint;
+        cap: bigint;
+        isReached: boolean;
+      },
+    ],
+    "view"
+  >;
 
   getEffectiveAUM: TypedContractMethod<[], [bigint], "view">;
 
@@ -246,13 +344,25 @@ export interface ITrancheVault extends BaseContract {
     "view"
   >;
 
+  juniorDeficitAbsorbed: TypedContractMethod<[], [bigint], "view">;
+
   lastDepositTime: TypedContractMethod<[lp: AddressLike], [bigint], "view">;
 
   lockupPeriod: TypedContractMethod<[], [bigint], "view">;
 
+  maxAbsorbBps: TypedContractMethod<[], [bigint], "view">;
+
   notifyDeposit: TypedContractMethod<[lp: AddressLike, token: AddressLike], [void], "nonpayable">;
 
+  restoreCapacityFromSenior: TypedContractMethod<[usdAmount: BigNumberish], [void], "nonpayable">;
+
+  restoreJuniorCapacity: TypedContractMethod<[usdAmount: BigNumberish], [void], "nonpayable">;
+
   revenueStore: TypedContractMethod<[], [string], "view">;
+
+  setAuthorizedSeniorVault: TypedContractMethod<[seniorVault: AddressLike], [void], "nonpayable">;
+
+  setMaxAbsorbBps: TypedContractMethod<[bps: BigNumberish], [void], "nonpayable">;
 
   setWithdrawalRequest: TypedContractMethod<
     [lp: AddressLike, token: AddressLike, amount: BigNumberish, executeAfter: BigNumberish],
@@ -272,9 +382,22 @@ export interface ITrancheVault extends BaseContract {
 
   getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
+  getFunction(nameOrSignature: "absorbFRDeficit"): TypedContractMethod<[usdAmount: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "authorizedSeniorVault"): TypedContractMethod<[], [string], "view">;
   getFunction(nameOrSignature: "checkWithdrawal"): TypedContractMethod<[lp: AddressLike], [void], "view">;
   getFunction(nameOrSignature: "circuitBreakerActive"): TypedContractMethod<[], [boolean], "view">;
   getFunction(nameOrSignature: "clearWithdrawalRequest"): TypedContractMethod<[lp: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "getCapStatus"): TypedContractMethod<
+    [],
+    [
+      [bigint, bigint, boolean] & {
+        absorbed: bigint;
+        cap: bigint;
+        isReached: boolean;
+      },
+    ],
+    "view"
+  >;
   getFunction(nameOrSignature: "getEffectiveAUM"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "getWithdrawalRequest"): TypedContractMethod<
     [lp: AddressLike],
@@ -288,12 +411,24 @@ export interface ITrancheVault extends BaseContract {
     ],
     "view"
   >;
+  getFunction(nameOrSignature: "juniorDeficitAbsorbed"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "lastDepositTime"): TypedContractMethod<[lp: AddressLike], [bigint], "view">;
   getFunction(nameOrSignature: "lockupPeriod"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "maxAbsorbBps"): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "notifyDeposit"
   ): TypedContractMethod<[lp: AddressLike, token: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "restoreCapacityFromSenior"
+  ): TypedContractMethod<[usdAmount: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "restoreJuniorCapacity"
+  ): TypedContractMethod<[usdAmount: BigNumberish], [void], "nonpayable">;
   getFunction(nameOrSignature: "revenueStore"): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "setAuthorizedSeniorVault"
+  ): TypedContractMethod<[seniorVault: AddressLike], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setMaxAbsorbBps"): TypedContractMethod<[bps: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setWithdrawalRequest"
   ): TypedContractMethod<
@@ -308,11 +443,39 @@ export interface ITrancheVault extends BaseContract {
   getFunction(nameOrSignature: "withdrawalRatioLockBps"): TypedContractMethod<[], [bigint], "view">;
 
   getEvent(
+    key: "AuthorizedSeniorVaultSet"
+  ): TypedContractEvent<
+    AuthorizedSeniorVaultSetEvent.InputTuple,
+    AuthorizedSeniorVaultSetEvent.OutputTuple,
+    AuthorizedSeniorVaultSetEvent.OutputObject
+  >;
+  getEvent(
     key: "CircuitBreakerSet"
   ): TypedContractEvent<
     CircuitBreakerSetEvent.InputTuple,
     CircuitBreakerSetEvent.OutputTuple,
     CircuitBreakerSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "FRDeficitAbsorbed"
+  ): TypedContractEvent<
+    FRDeficitAbsorbedEvent.InputTuple,
+    FRDeficitAbsorbedEvent.OutputTuple,
+    FRDeficitAbsorbedEvent.OutputObject
+  >;
+  getEvent(
+    key: "JuniorCapReached"
+  ): TypedContractEvent<
+    JuniorCapReachedEvent.InputTuple,
+    JuniorCapReachedEvent.OutputTuple,
+    JuniorCapReachedEvent.OutputObject
+  >;
+  getEvent(
+    key: "JuniorCapacityRestored"
+  ): TypedContractEvent<
+    JuniorCapacityRestoredEvent.InputTuple,
+    JuniorCapacityRestoredEvent.OutputTuple,
+    JuniorCapacityRestoredEvent.OutputObject
   >;
   getEvent(
     key: "LockupPeriodSet"
@@ -365,6 +528,17 @@ export interface ITrancheVault extends BaseContract {
   >;
 
   filters: {
+    "AuthorizedSeniorVaultSet(address)": TypedContractEvent<
+      AuthorizedSeniorVaultSetEvent.InputTuple,
+      AuthorizedSeniorVaultSetEvent.OutputTuple,
+      AuthorizedSeniorVaultSetEvent.OutputObject
+    >;
+    AuthorizedSeniorVaultSet: TypedContractEvent<
+      AuthorizedSeniorVaultSetEvent.InputTuple,
+      AuthorizedSeniorVaultSetEvent.OutputTuple,
+      AuthorizedSeniorVaultSetEvent.OutputObject
+    >;
+
     "CircuitBreakerSet(bool)": TypedContractEvent<
       CircuitBreakerSetEvent.InputTuple,
       CircuitBreakerSetEvent.OutputTuple,
@@ -374,6 +548,39 @@ export interface ITrancheVault extends BaseContract {
       CircuitBreakerSetEvent.InputTuple,
       CircuitBreakerSetEvent.OutputTuple,
       CircuitBreakerSetEvent.OutputObject
+    >;
+
+    "FRDeficitAbsorbed(uint256,uint256)": TypedContractEvent<
+      FRDeficitAbsorbedEvent.InputTuple,
+      FRDeficitAbsorbedEvent.OutputTuple,
+      FRDeficitAbsorbedEvent.OutputObject
+    >;
+    FRDeficitAbsorbed: TypedContractEvent<
+      FRDeficitAbsorbedEvent.InputTuple,
+      FRDeficitAbsorbedEvent.OutputTuple,
+      FRDeficitAbsorbedEvent.OutputObject
+    >;
+
+    "JuniorCapReached(uint256,uint256)": TypedContractEvent<
+      JuniorCapReachedEvent.InputTuple,
+      JuniorCapReachedEvent.OutputTuple,
+      JuniorCapReachedEvent.OutputObject
+    >;
+    JuniorCapReached: TypedContractEvent<
+      JuniorCapReachedEvent.InputTuple,
+      JuniorCapReachedEvent.OutputTuple,
+      JuniorCapReachedEvent.OutputObject
+    >;
+
+    "JuniorCapacityRestored(uint256,uint256)": TypedContractEvent<
+      JuniorCapacityRestoredEvent.InputTuple,
+      JuniorCapacityRestoredEvent.OutputTuple,
+      JuniorCapacityRestoredEvent.OutputObject
+    >;
+    JuniorCapacityRestored: TypedContractEvent<
+      JuniorCapacityRestoredEvent.InputTuple,
+      JuniorCapacityRestoredEvent.OutputTuple,
+      JuniorCapacityRestoredEvent.OutputObject
     >;
 
     "LockupPeriodSet(uint256)": TypedContractEvent<
