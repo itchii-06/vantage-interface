@@ -3309,8 +3309,8 @@ msgid "Decentralized finance dashboard"
 msgstr "去中心化金融儀表板"
 
 #: src/pages/Trade/components/OpenPositionPanel.tsx
-msgid "Index"
-msgstr ""
+#~ msgid "Index"
+#~ msgstr ""
 
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Pending PnL from all open positions"

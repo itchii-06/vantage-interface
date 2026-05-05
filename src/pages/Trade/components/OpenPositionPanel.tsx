@@ -54,12 +54,6 @@ const SKEW_ABI = [
 
 type PrismAxis = "price" | "yield" | "total";
 
-const PRISM_AXIS_LABELS: Record<PrismAxis, string> = {
-  price: "Price",
-  yield: "Yield",
-  total: "Total",
-};
-
 type Props = {
   isLong: boolean;
   indexToken: string;
@@ -341,27 +335,8 @@ export function OpenPositionPanel({
       {/* Spread display */}
       <SpreadBadge spread={spread} />
 
-      {/* ── Interest Prism Index Selector (Issue #227) ─────────────────────── */}
-      {isPrismVault && (
-        <div>
-          <div className="mb-6 text-12 text-slate-400">{t`Index`}</div>
-          <div className="flex gap-6">
-            {(["price", "yield", "total"] as PrismAxis[]).map((axis) => (
-              <button
-                key={axis}
-                onClick={() => setSelectedAxis(axis)}
-                className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${
-                  selectedAxis === axis
-                    ? "bg-vantage-accent text-black"
-                    : "bg-vantage-input text-vantage-text-secondary hover:text-white"
-                }`}
-              >
-                {PRISM_AXIS_LABELS[axis]}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Interest Prism axis is now determined by market selection in the dropdown.
+          The internal axis tabs have been removed to avoid redundancy. */}
 
       {/* Collateral type toggle */}
       <div className="flex gap-8">
