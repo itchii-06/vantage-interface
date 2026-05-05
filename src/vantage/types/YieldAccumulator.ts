@@ -31,6 +31,7 @@ export interface YieldAccumulatorInterface extends Interface {
       | "authorizedCallerCount"
       | "getAccumulatedYield"
       | "getEffectiveRate"
+      | "getEffectiveYieldBps"
       | "isAuthorized"
       | "isOracleEnabled"
       | "owner"
@@ -63,6 +64,7 @@ export interface YieldAccumulatorInterface extends Interface {
   encodeFunctionData(functionFragment: "authorizedCallerCount", values?: undefined): string;
   encodeFunctionData(functionFragment: "getAccumulatedYield", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getEffectiveRate", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getEffectiveYieldBps", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "isAuthorized", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "isOracleEnabled", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -82,6 +84,7 @@ export interface YieldAccumulatorInterface extends Interface {
   decodeFunctionResult(functionFragment: "authorizedCallerCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAccumulatedYield", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getEffectiveRate", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getEffectiveYieldBps", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isAuthorized", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isOracleEnabled", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -260,6 +263,8 @@ export interface YieldAccumulator extends BaseContract {
 
   getEffectiveRate: TypedContractMethod<[asset: AddressLike], [bigint], "view">;
 
+  getEffectiveYieldBps: TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+
   isAuthorized: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
   isOracleEnabled: TypedContractMethod<[], [boolean], "view">;
@@ -307,6 +312,7 @@ export interface YieldAccumulator extends BaseContract {
   getFunction(nameOrSignature: "authorizedCallerCount"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "getAccumulatedYield"): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
   getFunction(nameOrSignature: "getEffectiveRate"): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getEffectiveYieldBps"): TypedContractMethod<[asset: AddressLike], [bigint], "view">;
   getFunction(nameOrSignature: "isAuthorized"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
   getFunction(nameOrSignature: "isOracleEnabled"): TypedContractMethod<[], [boolean], "view">;
   getFunction(nameOrSignature: "owner"): TypedContractMethod<[], [string], "view">;

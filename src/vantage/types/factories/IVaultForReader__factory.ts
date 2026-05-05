@@ -35,25 +35,41 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "token",
-        type: "address",
+        internalType: "uint8",
+        name: "rType",
+        type: "uint8",
       },
     ],
-    name: "feeReserves",
+    name: "distributions",
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
+        internalType: "uint16",
+        name: "seniorBps",
+        type: "uint16",
+      },
+      {
+        internalType: "uint16",
+        name: "juniorBps",
+        type: "uint16",
+      },
+      {
+        internalType: "uint16",
+        name: "protocolBps",
+        type: "uint16",
       },
     ],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [],
-    name: "feeReservesLpShareBp",
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+    ],
+    name: "feeReserves",
     outputs: [
       {
         internalType: "uint256",

@@ -43,72 +43,23 @@ const _abi = [
     type: "constructor",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "newDebt",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "ceiling",
-        type: "uint256",
-      },
-    ],
-    name: "DebtCeilingExceeded",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "hubBalanceAfter",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "requiredReserve",
-        type: "uint256",
-      },
-    ],
-    name: "GlobalSolvencyInsufficient",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-    ],
-    name: "HubOrVaultPaused",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "requested",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "available",
-        type: "uint256",
-      },
-    ],
-    name: "InsufficientHubBalance",
+    inputs: [],
+    name: "BucketSplitInvalid",
     type: "error",
   },
   {
     inputs: [],
-    name: "NoPendingChange",
+    name: "InsufficientBucketBalance",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "InvariantViolated",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NoPendingOperation",
     type: "error",
   },
   {
@@ -139,51 +90,8 @@ const _abi = [
     type: "error",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "payer",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "RepaymentTransferFailed",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "token",
-        type: "address",
-      },
-    ],
-    name: "SafeERC20FailedOperation",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "earliest",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "current",
-        type: "uint256",
-      },
-    ],
-    name: "TimelockNotExpired",
+    inputs: [],
+    name: "TimelockNotElapsed",
     type: "error",
   },
   {
@@ -192,26 +100,54 @@ const _abi = [
     type: "error",
   },
   {
+    anonymous: false,
     inputs: [
       {
-        internalType: "address",
-        name: "vault",
-        type: "address",
+        indexed: false,
+        internalType: "uint256",
+        name: "lpBoostBps",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "frDeficitBps",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "emergencyBps",
+        type: "uint256",
       },
     ],
-    name: "VaultIsIsolated",
-    type: "error",
+    name: "BucketSplitSet",
+    type: "event",
   },
   {
+    anonymous: false,
     inputs: [
       {
-        internalType: "address",
-        name: "vault",
-        type: "address",
+        indexed: true,
+        internalType: "uint8",
+        name: "from",
+        type: "uint8",
+      },
+      {
+        indexed: true,
+        internalType: "uint8",
+        name: "to",
+        type: "uint8",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
       },
     ],
-    name: "VaultNotRegistered",
-    type: "error",
+    name: "BucketsRebalanced",
+    type: "event",
   },
   {
     anonymous: false,
@@ -230,31 +166,6 @@ const _abi = [
       },
     ],
     name: "Claimed",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "oldCeiling",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "newCeiling",
-        type: "uint256",
-      },
-    ],
-    name: "DebtCeilingUpdated",
     type: "event",
   },
   {
@@ -287,12 +198,80 @@ const _abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "bool",
-        name: "paused",
-        type: "bool",
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "memo",
+        type: "string",
       },
     ],
-    name: "GlobalPauseSet",
+    name: "EmergencyWithdrawExecuted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "executableAt",
+        type: "uint64",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "memo",
+        type: "string",
+      },
+    ],
+    name: "EmergencyWithdrawProposed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "requested",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "covered",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "bucketRemaining",
+        type: "uint256",
+      },
+    ],
+    name: "FRDeficitCovered",
     type: "event",
   },
   {
@@ -312,19 +291,44 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
         indexed: false,
         internalType: "uint256",
         name: "amount",
         type: "uint256",
       },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "duration",
+        type: "uint64",
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "startTime",
+        type: "uint64",
+      },
     ],
-    name: "LiquidityWithdrawn",
+    name: "LPBoostActivated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "dripAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "totalReleased",
+        type: "uint256",
+      },
+    ],
+    name: "LPBoostDripped",
     type: "event",
   },
   {
@@ -401,31 +405,6 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "receiver",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "PayoutRequested",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
         indexed: false,
         internalType: "enum IRevenueStore.Phase",
         name: "newPhase",
@@ -446,15 +425,15 @@ const _abi = [
     inputs: [
       {
         indexed: true,
-        internalType: "address",
-        name: "vault",
-        type: "address",
+        internalType: "uint8",
+        name: "from",
+        type: "uint8",
       },
       {
         indexed: true,
-        internalType: "address",
-        name: "payer",
-        type: "address",
+        internalType: "uint8",
+        name: "to",
+        type: "uint8",
       },
       {
         indexed: false,
@@ -462,8 +441,39 @@ const _abi = [
         name: "amount",
         type: "uint256",
       },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "executableAt",
+        type: "uint64",
+      },
     ],
-    name: "ProfitSettled",
+    name: "RebalanceProposed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "lpAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "reserveAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "int256",
+        name: "newRevenueBalance",
+        type: "int256",
+      },
+    ],
+    name: "RecordedAndSplit",
     type: "event",
   },
   {
@@ -477,6 +487,44 @@ const _abi = [
       },
     ],
     name: "RecruitingPayoutShareSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "bps",
+        type: "uint256",
+      },
+    ],
+    name: "ReserveRatioSet",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "lpBoost",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "frDeficit",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "emergency",
+        type: "uint256",
+      },
+    ],
+    name: "ReserveSplit",
     type: "event",
   },
   {
@@ -512,115 +560,21 @@ const _abi = [
     type: "event",
   },
   {
-    anonymous: false,
-    inputs: [
+    inputs: [],
+    name: "EMERGENCY_REBALANCE_TIMELOCK",
+    outputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "bool",
-        name: "isolated",
-        type: "bool",
-      },
-    ],
-    name: "VaultIsolationSet",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "bool",
-        name: "paused",
-        type: "bool",
-      },
-    ],
-    name: "VaultPauseSet",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        indexed: false,
         internalType: "uint256",
-        name: "debtCeiling",
+        name: "",
         type: "uint256",
       },
     ],
-    name: "VaultRegistered",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "ceiling",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "executableAt",
-        type: "uint256",
-      },
-    ],
-    name: "VaultRegistrationProposed",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "executableAt",
-        type: "uint256",
-      },
-    ],
-    name: "WithdrawalProposed",
-    type: "event",
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
-    name: "HUB_TIMELOCK",
+    name: "EMERGENCY_WITHDRAW_TIMELOCK",
     outputs: [
       {
         internalType: "uint256",
@@ -641,19 +595,17 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "vault",
-        type: "address",
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint64",
+        name: "duration",
+        type: "uint64",
       },
     ],
-    name: "acceptVault",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "acceptWithdrawal",
+    name: "activateLPBoost",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -672,6 +624,81 @@ const _abi = [
         internalType: "bool",
         name: "",
         type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "boostSchedule",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "total",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "released",
+        type: "uint256",
+      },
+      {
+        internalType: "uint64",
+        name: "startTime",
+        type: "uint64",
+      },
+      {
+        internalType: "uint64",
+        name: "duration",
+        type: "uint64",
+      },
+      {
+        internalType: "uint64",
+        name: "lastDripTime",
+        type: "uint64",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "bucketSplitBps",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "buckets",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "lpBoost",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "frDeficit",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "emergency",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -712,20 +739,20 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "debtCeilings",
-    outputs: [
-      {
         internalType: "uint256",
-        name: "",
+        name: "amount",
         type: "uint256",
       },
     ],
-    stateMutability: "view",
+    name: "coverFRDeficit",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "covered",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -736,24 +763,97 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address[]",
-        name: "vaults",
-        type: "address[]",
-      },
-    ],
-    name: "getHubHealth",
+    inputs: [],
+    name: "drip",
     outputs: [
       {
         internalType: "uint256",
-        name: "usdcBalance",
+        name: "dripAmount",
         type: "uint256",
       },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "executeEmergencyWithdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "executeRebalance",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getBoostSchedule",
+    outputs: [
       {
-        internalType: "uint256",
-        name: "totalDebt",
-        type: "uint256",
+        components: [
+          {
+            internalType: "uint256",
+            name: "total",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "released",
+            type: "uint256",
+          },
+          {
+            internalType: "uint64",
+            name: "startTime",
+            type: "uint64",
+          },
+          {
+            internalType: "uint64",
+            name: "duration",
+            type: "uint64",
+          },
+          {
+            internalType: "uint64",
+            name: "lastDripTime",
+            type: "uint64",
+          },
+        ],
+        internalType: "struct IRevenueStore.BoostSchedule",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getBuckets",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "lpBoost",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "frDeficit",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "emergency",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct IRevenueStore.BucketBalances",
+        name: "",
+        type: "tuple",
       },
     ],
     stateMutability: "view",
@@ -780,51 +880,6 @@ const _abi = [
         internalType: "uint256",
         name: "ratioBps",
         type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getTotalRemainingCapacity",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "globalPaused",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "isVaultIsolated",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
       },
     ],
     stateMutability: "view",
@@ -954,6 +1009,47 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "pendingDrip",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "pendingEmergencyWithdraw",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint64",
+        name: "executableAt",
+        type: "uint64",
+      },
+      {
+        internalType: "string",
+        name: "memo",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "pendingOwner",
     outputs: [
       {
@@ -985,42 +1081,23 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "pendingVaultRegistrations",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "ceiling",
-        type: "uint256",
-      },
-      {
-        internalType: "uint64",
-        name: "executableAt",
-        type: "uint64",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
-    name: "pendingWithdrawal",
+    name: "pendingRebalance",
     outputs: [
+      {
+        internalType: "uint8",
+        name: "from",
+        type: "uint8",
+      },
+      {
+        internalType: "uint8",
+        name: "to",
+        type: "uint8",
+      },
       {
         internalType: "uint256",
         name: "amount",
         type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "to",
-        type: "address",
       },
       {
         internalType: "uint64",
@@ -1053,17 +1130,76 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
         internalType: "address",
-        name: "vault",
+        name: "to",
         type: "address",
       },
       {
+        internalType: "string",
+        name: "memo",
+        type: "string",
+      },
+    ],
+    name: "proposeEmergencyWithdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint8",
+        name: "to",
+        type: "uint8",
+      },
+      {
         internalType: "uint256",
-        name: "ceiling",
+        name: "amount",
         type: "uint256",
       },
     ],
-    name: "proposeVault",
+    name: "proposeRebalance",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint8",
+        name: "from",
+        type: "uint8",
+      },
+      {
+        internalType: "uint8",
+        name: "to",
+        type: "uint8",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "rebalanceBuckets",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "recordAndSplit",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -1108,25 +1244,6 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "registeredVaults",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "renounceOwnership",
     outputs: [],
@@ -1134,21 +1251,16 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "receiver",
-        type: "address",
-      },
+    inputs: [],
+    name: "reserveRatioBps",
+    outputs: [
       {
         internalType: "uint256",
-        name: "amount",
+        name: "",
         type: "uint256",
       },
     ],
-    name: "requestPayout",
-    outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -1198,30 +1310,12 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "newCeiling",
-        type: "uint256",
+        internalType: "uint256[3]",
+        name: "bps",
+        type: "uint256[3]",
       },
     ],
-    name: "setDebtCeiling",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "bool",
-        name: "paused",
-        type: "bool",
-      },
-    ],
-    name: "setGlobalPaused",
+    name: "setBucketSplit",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -1269,6 +1363,19 @@ const _abi = [
     inputs: [
       {
         internalType: "uint256",
+        name: "bps",
+        type: "uint256",
+      },
+    ],
+    name: "setReserveRatio",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
         name: "_bps",
         type: "uint256",
       },
@@ -1276,86 +1383,6 @@ const _abi = [
     name: "setRiskFactor",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        internalType: "bool",
-        name: "isolated",
-        type: "bool",
-      },
-    ],
-    name: "setVaultIsolation",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-      {
-        internalType: "bool",
-        name: "paused",
-        type: "bool",
-      },
-    ],
-    name: "setVaultPaused",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_vault",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-    ],
-    name: "settleProfit",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "totalOutstandingDebt",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "totalRegisteredCeilings",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
     type: "function",
   },
   {
@@ -1382,62 +1409,6 @@ const _abi = [
       },
     ],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "vaultDebts",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "vaultPaused",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-    ],
-    name: "withdrawLiquidity",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
   },
   {

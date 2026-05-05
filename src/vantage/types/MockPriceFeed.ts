@@ -8,6 +8,7 @@ import type {
   FunctionFragment,
   Result,
   Interface,
+  EventFragment,
   AddressLike,
   ContractRunner,
   ContractMethod,
@@ -17,6 +18,7 @@ import type {
   TypedContractEvent,
   TypedDeferredTopicFilter,
   TypedEventLog,
+  TypedLogDescription,
   TypedListener,
   TypedContractMethod,
 } from "./common";
@@ -37,83 +39,45 @@ export interface MockPriceFeedInterface extends Interface {
       | "setPrice"
   ): FunctionFragment;
 
-  encodeFunctionData(
-    functionFragment: "getLastPriceTimestamp",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getLatestPrimaryPrice",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPrice",
-    values: [AddressLike, boolean, boolean, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getPrimaryPrice",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isMarketOpen",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lastPriceTimestamps",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "marketClosed",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(functionFragment: "prices", values: [AddressLike]): string;
-  encodeFunctionData(
-    functionFragment: "setLastPriceTimestamp",
-    values: [AddressLike, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setMarketClosed",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setPrice",
-    values: [AddressLike, BigNumberish]
-  ): string;
+  getEvent(nameOrSignatureOrTopic: "PriceUpdated"): EventFragment;
 
-  decodeFunctionResult(
-    functionFragment: "getLastPriceTimestamp",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getLatestPrimaryPrice",
-    data: BytesLike
-  ): Result;
+  encodeFunctionData(functionFragment: "getLastPriceTimestamp", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getLatestPrimaryPrice", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getPrice", values: [AddressLike, boolean, boolean, boolean]): string;
+  encodeFunctionData(functionFragment: "getPrimaryPrice", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "isMarketOpen", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "lastPriceTimestamps", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "marketClosed", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "prices", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setLastPriceTimestamp", values: [AddressLike, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "setMarketClosed", values: [AddressLike, boolean]): string;
+  encodeFunctionData(functionFragment: "setPrice", values: [AddressLike, BigNumberish]): string;
+
+  decodeFunctionResult(functionFragment: "getLastPriceTimestamp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getLatestPrimaryPrice", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getPrice", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getPrimaryPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isMarketOpen",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "lastPriceTimestamps",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "marketClosed",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "getPrimaryPrice", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isMarketOpen", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "lastPriceTimestamps", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "marketClosed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "prices", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "setLastPriceTimestamp",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setMarketClosed",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "setLastPriceTimestamp", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setMarketClosed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setPrice", data: BytesLike): Result;
+}
+
+export namespace PriceUpdatedEvent {
+  export type InputTuple = [token: AddressLike, price: BigNumberish, timestamp: BigNumberish];
+  export type OutputTuple = [token: string, price: bigint, timestamp: bigint];
+  export interface OutputObject {
+    token: string;
+    price: bigint;
+    timestamp: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export interface MockPriceFeed extends BaseContract {
@@ -133,143 +97,82 @@ export interface MockPriceFeed extends BaseContract {
     toBlock?: string | number | undefined
   ): Promise<Array<TypedEventLog<TCEvent>>>;
 
-  on<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  on<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  once<TCEvent extends TypedContractEvent>(
-    event: TCEvent,
-    listener: TypedListener<TCEvent>
-  ): Promise<this>;
+  once<TCEvent extends TypedContractEvent>(event: TCEvent, listener: TypedListener<TCEvent>): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
   ): Promise<this>;
 
-  listeners<TCEvent extends TypedContractEvent>(
-    event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners<TCEvent extends TypedContractEvent>(event: TCEvent): Promise<Array<TypedListener<TCEvent>>>;
   listeners(eventName?: string): Promise<Array<Listener>>;
-  removeAllListeners<TCEvent extends TypedContractEvent>(
-    event?: TCEvent
-  ): Promise<this>;
+  removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
-  getLastPriceTimestamp: TypedContractMethod<
-    [_token: AddressLike],
-    [bigint],
-    "view"
-  >;
+  getLastPriceTimestamp: TypedContractMethod<[_token: AddressLike], [bigint], "view">;
 
-  getLatestPrimaryPrice: TypedContractMethod<
-    [_token: AddressLike],
-    [bigint],
-    "view"
-  >;
+  getLatestPrimaryPrice: TypedContractMethod<[_token: AddressLike], [bigint], "view">;
 
-  getPrice: TypedContractMethod<
-    [_token: AddressLike, arg1: boolean, arg2: boolean, arg3: boolean],
-    [bigint],
-    "view"
-  >;
+  getPrice: TypedContractMethod<[_token: AddressLike, arg1: boolean, arg2: boolean, arg3: boolean], [bigint], "view">;
 
-  getPrimaryPrice: TypedContractMethod<
-    [_token: AddressLike, arg1: boolean],
-    [bigint],
-    "view"
-  >;
+  getPrimaryPrice: TypedContractMethod<[_token: AddressLike, arg1: boolean], [bigint], "view">;
 
   isMarketOpen: TypedContractMethod<[_token: AddressLike], [boolean], "view">;
 
-  lastPriceTimestamps: TypedContractMethod<
-    [arg0: AddressLike],
-    [bigint],
-    "view"
-  >;
+  lastPriceTimestamps: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
   marketClosed: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
   prices: TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
 
-  setLastPriceTimestamp: TypedContractMethod<
-    [token: AddressLike, timestamp: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  setLastPriceTimestamp: TypedContractMethod<[token: AddressLike, timestamp: BigNumberish], [void], "nonpayable">;
 
-  setMarketClosed: TypedContractMethod<
-    [token: AddressLike, closed: boolean],
-    [void],
-    "nonpayable"
-  >;
+  setMarketClosed: TypedContractMethod<[token: AddressLike, closed: boolean], [void], "nonpayable">;
 
-  setPrice: TypedContractMethod<
-    [token: AddressLike, price: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  setPrice: TypedContractMethod<[token: AddressLike, price: BigNumberish], [void], "nonpayable">;
 
-  getFunction<T extends ContractMethod = ContractMethod>(
-    key: string | FunctionFragment
-  ): T;
+  getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
-  getFunction(
-    nameOrSignature: "getLastPriceTimestamp"
-  ): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "getLatestPrimaryPrice"
-  ): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getLastPriceTimestamp"): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "getLatestPrimaryPrice"): TypedContractMethod<[_token: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "getPrice"
-  ): TypedContractMethod<
-    [_token: AddressLike, arg1: boolean, arg2: boolean, arg3: boolean],
-    [bigint],
-    "view"
-  >;
+  ): TypedContractMethod<[_token: AddressLike, arg1: boolean, arg2: boolean, arg3: boolean], [bigint], "view">;
   getFunction(
     nameOrSignature: "getPrimaryPrice"
-  ): TypedContractMethod<
-    [_token: AddressLike, arg1: boolean],
-    [bigint],
-    "view"
-  >;
-  getFunction(
-    nameOrSignature: "isMarketOpen"
-  ): TypedContractMethod<[_token: AddressLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "lastPriceTimestamps"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "marketClosed"
-  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
-  getFunction(
-    nameOrSignature: "prices"
-  ): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  ): TypedContractMethod<[_token: AddressLike, arg1: boolean], [bigint], "view">;
+  getFunction(nameOrSignature: "isMarketOpen"): TypedContractMethod<[_token: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "lastPriceTimestamps"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "marketClosed"): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
+  getFunction(nameOrSignature: "prices"): TypedContractMethod<[arg0: AddressLike], [bigint], "view">;
   getFunction(
     nameOrSignature: "setLastPriceTimestamp"
-  ): TypedContractMethod<
-    [token: AddressLike, timestamp: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[token: AddressLike, timestamp: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setMarketClosed"
-  ): TypedContractMethod<
-    [token: AddressLike, closed: boolean],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[token: AddressLike, closed: boolean], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setPrice"
-  ): TypedContractMethod<
-    [token: AddressLike, price: BigNumberish],
-    [void],
-    "nonpayable"
-  >;
+  ): TypedContractMethod<[token: AddressLike, price: BigNumberish], [void], "nonpayable">;
 
-  filters: {};
+  getEvent(
+    key: "PriceUpdated"
+  ): TypedContractEvent<PriceUpdatedEvent.InputTuple, PriceUpdatedEvent.OutputTuple, PriceUpdatedEvent.OutputObject>;
+
+  filters: {
+    "PriceUpdated(address,uint256,uint256)": TypedContractEvent<
+      PriceUpdatedEvent.InputTuple,
+      PriceUpdatedEvent.OutputTuple,
+      PriceUpdatedEvent.OutputObject
+    >;
+    PriceUpdated: TypedContractEvent<
+      PriceUpdatedEvent.InputTuple,
+      PriceUpdatedEvent.OutputTuple,
+      PriceUpdatedEvent.OutputObject
+    >;
+  };
 }

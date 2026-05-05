@@ -72,6 +72,9 @@ export declare namespace IAssetRegistry {
     requiresWeekendLock: boolean;
     fundingRateFactor: BigNumberish;
     maxFundingRate: BigNumberish;
+    borrowingExponent: BigNumberish;
+    borrowingMultiplier: BigNumberish;
+    borrowingBaseRate: BigNumberish;
   };
 
   export type AssetRiskInfoStructOutput = [
@@ -84,6 +87,9 @@ export declare namespace IAssetRegistry {
     requiresWeekendLock: boolean,
     fundingRateFactor: bigint,
     maxFundingRate: bigint,
+    borrowingExponent: bigint,
+    borrowingMultiplier: bigint,
+    borrowingBaseRate: bigint,
   ] & {
     maxLeverage: bigint;
     maxGlobalLongSize: bigint;
@@ -94,6 +100,9 @@ export declare namespace IAssetRegistry {
     requiresWeekendLock: boolean;
     fundingRateFactor: bigint;
     maxFundingRate: bigint;
+    borrowingExponent: bigint;
+    borrowingMultiplier: bigint;
+    borrowingBaseRate: bigint;
   };
 }
 
@@ -103,6 +112,7 @@ export interface IAssetRegistryInterface extends Interface {
       | "complianceAdapters"
       | "getAssetInfo"
       | "getAssetRiskInfo"
+      | "getBorrowingParams"
       | "getFundingParams"
       | "getMinLegalUnit"
       | "getRequiresWeekendLock"
@@ -114,6 +124,7 @@ export interface IAssetRegistryInterface extends Interface {
   encodeFunctionData(functionFragment: "complianceAdapters", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getAssetInfo", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getAssetRiskInfo", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getBorrowingParams", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getFundingParams", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getMinLegalUnit", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getRequiresWeekendLock", values: [AddressLike]): string;
@@ -124,6 +135,7 @@ export interface IAssetRegistryInterface extends Interface {
   decodeFunctionResult(functionFragment: "complianceAdapters", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAssetInfo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAssetRiskInfo", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getBorrowingParams", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getFundingParams", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getMinLegalUnit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getRequiresWeekendLock", data: BytesLike): Result;
@@ -171,6 +183,18 @@ export interface IAssetRegistry extends BaseContract {
 
   getAssetRiskInfo: TypedContractMethod<[asset: AddressLike], [IAssetRegistry.AssetRiskInfoStructOutput], "view">;
 
+  getBorrowingParams: TypedContractMethod<
+    [asset: AddressLike],
+    [
+      [bigint, bigint, bigint] & {
+        exponent: bigint;
+        multiplier: bigint;
+        baseRate: bigint;
+      },
+    ],
+    "view"
+  >;
+
   getFundingParams: TypedContractMethod<
     [asset: AddressLike],
     [[bigint, bigint] & { fundingRateFactor: bigint; maxFundingRate: bigint }],
@@ -196,6 +220,17 @@ export interface IAssetRegistry extends BaseContract {
   getFunction(
     nameOrSignature: "getAssetRiskInfo"
   ): TypedContractMethod<[asset: AddressLike], [IAssetRegistry.AssetRiskInfoStructOutput], "view">;
+  getFunction(nameOrSignature: "getBorrowingParams"): TypedContractMethod<
+    [asset: AddressLike],
+    [
+      [bigint, bigint, bigint] & {
+        exponent: bigint;
+        multiplier: bigint;
+        baseRate: bigint;
+      },
+    ],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "getFundingParams"
   ): TypedContractMethod<

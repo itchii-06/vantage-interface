@@ -1,0 +1,115 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "collateralToken",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "indexToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountIn",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "sizeDelta",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isLong",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "acceptablePrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isHedge",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "convertOnADL",
+        "type": "bool"
+      }
+    ],
+    "name": "createIncreasePositionFor",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "requestKey",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "indexToken",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "sizeDelta",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isLong",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "acceptablePrice",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "executionFee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isHedge",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "convertOnADL",
+        "type": "bool"
+      }
+    ],
+    "name": "increasePositionETHFor",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "requestKey",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  }
+]

@@ -23,52 +23,169 @@ import type {
   TypedContractMethod,
 } from "./common";
 
+export declare namespace IRevenueStore {
+  export type BoostScheduleStruct = {
+    total: BigNumberish;
+    released: BigNumberish;
+    startTime: BigNumberish;
+    duration: BigNumberish;
+    lastDripTime: BigNumberish;
+  };
+
+  export type BoostScheduleStructOutput = [
+    total: bigint,
+    released: bigint,
+    startTime: bigint,
+    duration: bigint,
+    lastDripTime: bigint,
+  ] & {
+    total: bigint;
+    released: bigint;
+    startTime: bigint;
+    duration: bigint;
+    lastDripTime: bigint;
+  };
+
+  export type BucketBalancesStruct = {
+    lpBoost: BigNumberish;
+    frDeficit: BigNumberish;
+    emergency: BigNumberish;
+  };
+
+  export type BucketBalancesStructOutput = [lpBoost: bigint, frDeficit: bigint, emergency: bigint] & {
+    lpBoost: bigint;
+    frDeficit: bigint;
+    emergency: bigint;
+  };
+}
+
 export interface IRevenueStoreInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "activateLPBoost"
       | "checkpoint"
       | "claim"
+      | "coverFRDeficit"
       | "distribute"
+      | "drip"
+      | "executeEmergencyWithdraw"
+      | "executeRebalance"
+      | "getBoostSchedule"
+      | "getBuckets"
       | "getPhase"
       | "getReserveRatio"
       | "pendingClaim"
+      | "pendingDrip"
+      | "proposeEmergencyWithdraw"
+      | "proposeRebalance"
+      | "rebalanceBuckets"
+      | "recordAndSplit"
       | "recordLoss"
       | "recordRevenue"
       | "revenueBalance"
+      | "setBucketSplit"
+      | "setReserveRatio"
   ): FunctionFragment;
 
   getEvent(
     nameOrSignatureOrTopic:
+      | "BucketSplitSet"
+      | "BucketsRebalanced"
       | "Claimed"
       | "Distributed"
+      | "EmergencyWithdrawExecuted"
+      | "EmergencyWithdrawProposed"
+      | "FRDeficitCovered"
       | "HaircutSet"
+      | "LPBoostActivated"
+      | "LPBoostDripped"
       | "LossRecorded"
       | "MinimumUsdcFloorSet"
       | "PhaseChanged"
+      | "RebalanceProposed"
+      | "RecordedAndSplit"
       | "RecruitingPayoutShareSet"
+      | "ReserveRatioSet"
+      | "ReserveSplit"
       | "RevenueRecorded"
       | "RiskFactorSet"
   ): EventFragment;
 
+  encodeFunctionData(functionFragment: "activateLPBoost", values: [BigNumberish, BigNumberish]): string;
   encodeFunctionData(functionFragment: "checkpoint", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "claim", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "coverFRDeficit", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "distribute", values?: undefined): string;
+  encodeFunctionData(functionFragment: "drip", values?: undefined): string;
+  encodeFunctionData(functionFragment: "executeEmergencyWithdraw", values?: undefined): string;
+  encodeFunctionData(functionFragment: "executeRebalance", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getBoostSchedule", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getBuckets", values?: undefined): string;
   encodeFunctionData(functionFragment: "getPhase", values?: undefined): string;
   encodeFunctionData(functionFragment: "getReserveRatio", values?: undefined): string;
   encodeFunctionData(functionFragment: "pendingClaim", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "pendingDrip", values?: undefined): string;
+  encodeFunctionData(functionFragment: "proposeEmergencyWithdraw", values: [BigNumberish, AddressLike, string]): string;
+  encodeFunctionData(functionFragment: "proposeRebalance", values: [BigNumberish, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "rebalanceBuckets", values: [BigNumberish, BigNumberish, BigNumberish]): string;
+  encodeFunctionData(functionFragment: "recordAndSplit", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "recordLoss", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "recordRevenue", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "revenueBalance", values?: undefined): string;
+  encodeFunctionData(functionFragment: "setBucketSplit", values: [[BigNumberish, BigNumberish, BigNumberish]]): string;
+  encodeFunctionData(functionFragment: "setReserveRatio", values: [BigNumberish]): string;
 
+  decodeFunctionResult(functionFragment: "activateLPBoost", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "checkpoint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "coverFRDeficit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "distribute", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "drip", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "executeEmergencyWithdraw", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "executeRebalance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getBoostSchedule", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getBuckets", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getPhase", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getReserveRatio", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "pendingClaim", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pendingDrip", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "proposeEmergencyWithdraw", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "proposeRebalance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "rebalanceBuckets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "recordAndSplit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "recordLoss", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "recordRevenue", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "revenueBalance", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setBucketSplit", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setReserveRatio", data: BytesLike): Result;
+}
+
+export namespace BucketSplitSetEvent {
+  export type InputTuple = [lpBoostBps: BigNumberish, frDeficitBps: BigNumberish, emergencyBps: BigNumberish];
+  export type OutputTuple = [lpBoostBps: bigint, frDeficitBps: bigint, emergencyBps: bigint];
+  export interface OutputObject {
+    lpBoostBps: bigint;
+    frDeficitBps: bigint;
+    emergencyBps: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace BucketsRebalancedEvent {
+  export type InputTuple = [from: BigNumberish, to: BigNumberish, amount: BigNumberish];
+  export type OutputTuple = [from: bigint, to: bigint, amount: bigint];
+  export interface OutputObject {
+    from: bigint;
+    to: bigint;
+    amount: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export namespace ClaimedEvent {
@@ -98,11 +215,81 @@ export namespace DistributedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace EmergencyWithdrawExecutedEvent {
+  export type InputTuple = [amount: BigNumberish, to: AddressLike, memo: string];
+  export type OutputTuple = [amount: bigint, to: string, memo: string];
+  export interface OutputObject {
+    amount: bigint;
+    to: string;
+    memo: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace EmergencyWithdrawProposedEvent {
+  export type InputTuple = [amount: BigNumberish, to: AddressLike, executableAt: BigNumberish, memo: string];
+  export type OutputTuple = [amount: bigint, to: string, executableAt: bigint, memo: string];
+  export interface OutputObject {
+    amount: bigint;
+    to: string;
+    executableAt: bigint;
+    memo: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace FRDeficitCoveredEvent {
+  export type InputTuple = [requested: BigNumberish, covered: BigNumberish, bucketRemaining: BigNumberish];
+  export type OutputTuple = [requested: bigint, covered: bigint, bucketRemaining: bigint];
+  export interface OutputObject {
+    requested: bigint;
+    covered: bigint;
+    bucketRemaining: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace HaircutSetEvent {
   export type InputTuple = [bps: BigNumberish];
   export type OutputTuple = [bps: bigint];
   export interface OutputObject {
     bps: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace LPBoostActivatedEvent {
+  export type InputTuple = [amount: BigNumberish, duration: BigNumberish, startTime: BigNumberish];
+  export type OutputTuple = [amount: bigint, duration: bigint, startTime: bigint];
+  export interface OutputObject {
+    amount: bigint;
+    duration: bigint;
+    startTime: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace LPBoostDrippedEvent {
+  export type InputTuple = [dripAmount: BigNumberish, totalReleased: BigNumberish];
+  export type OutputTuple = [dripAmount: bigint, totalReleased: bigint];
+  export interface OutputObject {
+    dripAmount: bigint;
+    totalReleased: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -148,11 +335,66 @@ export namespace PhaseChangedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace RebalanceProposedEvent {
+  export type InputTuple = [from: BigNumberish, to: BigNumberish, amount: BigNumberish, executableAt: BigNumberish];
+  export type OutputTuple = [from: bigint, to: bigint, amount: bigint, executableAt: bigint];
+  export interface OutputObject {
+    from: bigint;
+    to: bigint;
+    amount: bigint;
+    executableAt: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RecordedAndSplitEvent {
+  export type InputTuple = [lpAmount: BigNumberish, reserveAmount: BigNumberish, newRevenueBalance: BigNumberish];
+  export type OutputTuple = [lpAmount: bigint, reserveAmount: bigint, newRevenueBalance: bigint];
+  export interface OutputObject {
+    lpAmount: bigint;
+    reserveAmount: bigint;
+    newRevenueBalance: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export namespace RecruitingPayoutShareSetEvent {
   export type InputTuple = [bps: BigNumberish];
   export type OutputTuple = [bps: bigint];
   export interface OutputObject {
     bps: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ReserveRatioSetEvent {
+  export type InputTuple = [bps: BigNumberish];
+  export type OutputTuple = [bps: bigint];
+  export interface OutputObject {
+    bps: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace ReserveSplitEvent {
+  export type InputTuple = [lpBoost: BigNumberish, frDeficit: BigNumberish, emergency: BigNumberish];
+  export type OutputTuple = [lpBoost: bigint, frDeficit: bigint, emergency: bigint];
+  export interface OutputObject {
+    lpBoost: bigint;
+    frDeficit: bigint;
+    emergency: bigint;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -218,11 +460,25 @@ export interface IRevenueStore extends BaseContract {
   listeners(eventName?: string): Promise<Array<Listener>>;
   removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
+  activateLPBoost: TypedContractMethod<[amount: BigNumberish, duration: BigNumberish], [void], "nonpayable">;
+
   checkpoint: TypedContractMethod<[lp: AddressLike], [void], "nonpayable">;
 
   claim: TypedContractMethod<[lp: AddressLike], [bigint], "nonpayable">;
 
+  coverFRDeficit: TypedContractMethod<[amount: BigNumberish], [bigint], "nonpayable">;
+
   distribute: TypedContractMethod<[], [void], "nonpayable">;
+
+  drip: TypedContractMethod<[], [bigint], "nonpayable">;
+
+  executeEmergencyWithdraw: TypedContractMethod<[], [void], "nonpayable">;
+
+  executeRebalance: TypedContractMethod<[], [void], "nonpayable">;
+
+  getBoostSchedule: TypedContractMethod<[], [IRevenueStore.BoostScheduleStructOutput], "view">;
+
+  getBuckets: TypedContractMethod<[], [IRevenueStore.BucketBalancesStructOutput], "view">;
 
   getPhase: TypedContractMethod<[], [bigint], "view">;
 
@@ -230,24 +486,88 @@ export interface IRevenueStore extends BaseContract {
 
   pendingClaim: TypedContractMethod<[lp: AddressLike], [bigint], "view">;
 
+  pendingDrip: TypedContractMethod<[], [bigint], "view">;
+
+  proposeEmergencyWithdraw: TypedContractMethod<
+    [amount: BigNumberish, to: AddressLike, memo: string],
+    [void],
+    "nonpayable"
+  >;
+
+  proposeRebalance: TypedContractMethod<[to: BigNumberish, amount: BigNumberish], [void], "nonpayable">;
+
+  rebalanceBuckets: TypedContractMethod<
+    [from: BigNumberish, to: BigNumberish, amount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  recordAndSplit: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
+
   recordLoss: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
 
   recordRevenue: TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
 
   revenueBalance: TypedContractMethod<[], [bigint], "view">;
 
+  setBucketSplit: TypedContractMethod<[bps: [BigNumberish, BigNumberish, BigNumberish]], [void], "nonpayable">;
+
+  setReserveRatio: TypedContractMethod<[bps: BigNumberish], [void], "nonpayable">;
+
   getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
+  getFunction(
+    nameOrSignature: "activateLPBoost"
+  ): TypedContractMethod<[amount: BigNumberish, duration: BigNumberish], [void], "nonpayable">;
   getFunction(nameOrSignature: "checkpoint"): TypedContractMethod<[lp: AddressLike], [void], "nonpayable">;
   getFunction(nameOrSignature: "claim"): TypedContractMethod<[lp: AddressLike], [bigint], "nonpayable">;
+  getFunction(nameOrSignature: "coverFRDeficit"): TypedContractMethod<[amount: BigNumberish], [bigint], "nonpayable">;
   getFunction(nameOrSignature: "distribute"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "drip"): TypedContractMethod<[], [bigint], "nonpayable">;
+  getFunction(nameOrSignature: "executeEmergencyWithdraw"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(nameOrSignature: "executeRebalance"): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "getBoostSchedule"
+  ): TypedContractMethod<[], [IRevenueStore.BoostScheduleStructOutput], "view">;
+  getFunction(
+    nameOrSignature: "getBuckets"
+  ): TypedContractMethod<[], [IRevenueStore.BucketBalancesStructOutput], "view">;
   getFunction(nameOrSignature: "getPhase"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "getReserveRatio"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "pendingClaim"): TypedContractMethod<[lp: AddressLike], [bigint], "view">;
+  getFunction(nameOrSignature: "pendingDrip"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "proposeEmergencyWithdraw"
+  ): TypedContractMethod<[amount: BigNumberish, to: AddressLike, memo: string], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "proposeRebalance"
+  ): TypedContractMethod<[to: BigNumberish, amount: BigNumberish], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "rebalanceBuckets"
+  ): TypedContractMethod<[from: BigNumberish, to: BigNumberish, amount: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "recordAndSplit"): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
   getFunction(nameOrSignature: "recordLoss"): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
   getFunction(nameOrSignature: "recordRevenue"): TypedContractMethod<[amount: BigNumberish], [void], "nonpayable">;
   getFunction(nameOrSignature: "revenueBalance"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "setBucketSplit"
+  ): TypedContractMethod<[bps: [BigNumberish, BigNumberish, BigNumberish]], [void], "nonpayable">;
+  getFunction(nameOrSignature: "setReserveRatio"): TypedContractMethod<[bps: BigNumberish], [void], "nonpayable">;
 
+  getEvent(
+    key: "BucketSplitSet"
+  ): TypedContractEvent<
+    BucketSplitSetEvent.InputTuple,
+    BucketSplitSetEvent.OutputTuple,
+    BucketSplitSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "BucketsRebalanced"
+  ): TypedContractEvent<
+    BucketsRebalancedEvent.InputTuple,
+    BucketsRebalancedEvent.OutputTuple,
+    BucketsRebalancedEvent.OutputObject
+  >;
   getEvent(
     key: "Claimed"
   ): TypedContractEvent<ClaimedEvent.InputTuple, ClaimedEvent.OutputTuple, ClaimedEvent.OutputObject>;
@@ -255,8 +575,43 @@ export interface IRevenueStore extends BaseContract {
     key: "Distributed"
   ): TypedContractEvent<DistributedEvent.InputTuple, DistributedEvent.OutputTuple, DistributedEvent.OutputObject>;
   getEvent(
+    key: "EmergencyWithdrawExecuted"
+  ): TypedContractEvent<
+    EmergencyWithdrawExecutedEvent.InputTuple,
+    EmergencyWithdrawExecutedEvent.OutputTuple,
+    EmergencyWithdrawExecutedEvent.OutputObject
+  >;
+  getEvent(
+    key: "EmergencyWithdrawProposed"
+  ): TypedContractEvent<
+    EmergencyWithdrawProposedEvent.InputTuple,
+    EmergencyWithdrawProposedEvent.OutputTuple,
+    EmergencyWithdrawProposedEvent.OutputObject
+  >;
+  getEvent(
+    key: "FRDeficitCovered"
+  ): TypedContractEvent<
+    FRDeficitCoveredEvent.InputTuple,
+    FRDeficitCoveredEvent.OutputTuple,
+    FRDeficitCoveredEvent.OutputObject
+  >;
+  getEvent(
     key: "HaircutSet"
   ): TypedContractEvent<HaircutSetEvent.InputTuple, HaircutSetEvent.OutputTuple, HaircutSetEvent.OutputObject>;
+  getEvent(
+    key: "LPBoostActivated"
+  ): TypedContractEvent<
+    LPBoostActivatedEvent.InputTuple,
+    LPBoostActivatedEvent.OutputTuple,
+    LPBoostActivatedEvent.OutputObject
+  >;
+  getEvent(
+    key: "LPBoostDripped"
+  ): TypedContractEvent<
+    LPBoostDrippedEvent.InputTuple,
+    LPBoostDrippedEvent.OutputTuple,
+    LPBoostDrippedEvent.OutputObject
+  >;
   getEvent(
     key: "LossRecorded"
   ): TypedContractEvent<LossRecordedEvent.InputTuple, LossRecordedEvent.OutputTuple, LossRecordedEvent.OutputObject>;
@@ -271,12 +626,36 @@ export interface IRevenueStore extends BaseContract {
     key: "PhaseChanged"
   ): TypedContractEvent<PhaseChangedEvent.InputTuple, PhaseChangedEvent.OutputTuple, PhaseChangedEvent.OutputObject>;
   getEvent(
+    key: "RebalanceProposed"
+  ): TypedContractEvent<
+    RebalanceProposedEvent.InputTuple,
+    RebalanceProposedEvent.OutputTuple,
+    RebalanceProposedEvent.OutputObject
+  >;
+  getEvent(
+    key: "RecordedAndSplit"
+  ): TypedContractEvent<
+    RecordedAndSplitEvent.InputTuple,
+    RecordedAndSplitEvent.OutputTuple,
+    RecordedAndSplitEvent.OutputObject
+  >;
+  getEvent(
     key: "RecruitingPayoutShareSet"
   ): TypedContractEvent<
     RecruitingPayoutShareSetEvent.InputTuple,
     RecruitingPayoutShareSetEvent.OutputTuple,
     RecruitingPayoutShareSetEvent.OutputObject
   >;
+  getEvent(
+    key: "ReserveRatioSet"
+  ): TypedContractEvent<
+    ReserveRatioSetEvent.InputTuple,
+    ReserveRatioSetEvent.OutputTuple,
+    ReserveRatioSetEvent.OutputObject
+  >;
+  getEvent(
+    key: "ReserveSplit"
+  ): TypedContractEvent<ReserveSplitEvent.InputTuple, ReserveSplitEvent.OutputTuple, ReserveSplitEvent.OutputObject>;
   getEvent(
     key: "RevenueRecorded"
   ): TypedContractEvent<
@@ -289,6 +668,28 @@ export interface IRevenueStore extends BaseContract {
   ): TypedContractEvent<RiskFactorSetEvent.InputTuple, RiskFactorSetEvent.OutputTuple, RiskFactorSetEvent.OutputObject>;
 
   filters: {
+    "BucketSplitSet(uint256,uint256,uint256)": TypedContractEvent<
+      BucketSplitSetEvent.InputTuple,
+      BucketSplitSetEvent.OutputTuple,
+      BucketSplitSetEvent.OutputObject
+    >;
+    BucketSplitSet: TypedContractEvent<
+      BucketSplitSetEvent.InputTuple,
+      BucketSplitSetEvent.OutputTuple,
+      BucketSplitSetEvent.OutputObject
+    >;
+
+    "BucketsRebalanced(uint8,uint8,uint256)": TypedContractEvent<
+      BucketsRebalancedEvent.InputTuple,
+      BucketsRebalancedEvent.OutputTuple,
+      BucketsRebalancedEvent.OutputObject
+    >;
+    BucketsRebalanced: TypedContractEvent<
+      BucketsRebalancedEvent.InputTuple,
+      BucketsRebalancedEvent.OutputTuple,
+      BucketsRebalancedEvent.OutputObject
+    >;
+
     "Claimed(address,uint256)": TypedContractEvent<
       ClaimedEvent.InputTuple,
       ClaimedEvent.OutputTuple,
@@ -307,6 +708,39 @@ export interface IRevenueStore extends BaseContract {
       DistributedEvent.OutputObject
     >;
 
+    "EmergencyWithdrawExecuted(uint256,address,string)": TypedContractEvent<
+      EmergencyWithdrawExecutedEvent.InputTuple,
+      EmergencyWithdrawExecutedEvent.OutputTuple,
+      EmergencyWithdrawExecutedEvent.OutputObject
+    >;
+    EmergencyWithdrawExecuted: TypedContractEvent<
+      EmergencyWithdrawExecutedEvent.InputTuple,
+      EmergencyWithdrawExecutedEvent.OutputTuple,
+      EmergencyWithdrawExecutedEvent.OutputObject
+    >;
+
+    "EmergencyWithdrawProposed(uint256,address,uint64,string)": TypedContractEvent<
+      EmergencyWithdrawProposedEvent.InputTuple,
+      EmergencyWithdrawProposedEvent.OutputTuple,
+      EmergencyWithdrawProposedEvent.OutputObject
+    >;
+    EmergencyWithdrawProposed: TypedContractEvent<
+      EmergencyWithdrawProposedEvent.InputTuple,
+      EmergencyWithdrawProposedEvent.OutputTuple,
+      EmergencyWithdrawProposedEvent.OutputObject
+    >;
+
+    "FRDeficitCovered(uint256,uint256,uint256)": TypedContractEvent<
+      FRDeficitCoveredEvent.InputTuple,
+      FRDeficitCoveredEvent.OutputTuple,
+      FRDeficitCoveredEvent.OutputObject
+    >;
+    FRDeficitCovered: TypedContractEvent<
+      FRDeficitCoveredEvent.InputTuple,
+      FRDeficitCoveredEvent.OutputTuple,
+      FRDeficitCoveredEvent.OutputObject
+    >;
+
     "HaircutSet(uint256)": TypedContractEvent<
       HaircutSetEvent.InputTuple,
       HaircutSetEvent.OutputTuple,
@@ -316,6 +750,28 @@ export interface IRevenueStore extends BaseContract {
       HaircutSetEvent.InputTuple,
       HaircutSetEvent.OutputTuple,
       HaircutSetEvent.OutputObject
+    >;
+
+    "LPBoostActivated(uint256,uint64,uint64)": TypedContractEvent<
+      LPBoostActivatedEvent.InputTuple,
+      LPBoostActivatedEvent.OutputTuple,
+      LPBoostActivatedEvent.OutputObject
+    >;
+    LPBoostActivated: TypedContractEvent<
+      LPBoostActivatedEvent.InputTuple,
+      LPBoostActivatedEvent.OutputTuple,
+      LPBoostActivatedEvent.OutputObject
+    >;
+
+    "LPBoostDripped(uint256,uint256)": TypedContractEvent<
+      LPBoostDrippedEvent.InputTuple,
+      LPBoostDrippedEvent.OutputTuple,
+      LPBoostDrippedEvent.OutputObject
+    >;
+    LPBoostDripped: TypedContractEvent<
+      LPBoostDrippedEvent.InputTuple,
+      LPBoostDrippedEvent.OutputTuple,
+      LPBoostDrippedEvent.OutputObject
     >;
 
     "LossRecorded(uint256,int256)": TypedContractEvent<
@@ -351,6 +807,28 @@ export interface IRevenueStore extends BaseContract {
       PhaseChangedEvent.OutputObject
     >;
 
+    "RebalanceProposed(uint8,uint8,uint256,uint64)": TypedContractEvent<
+      RebalanceProposedEvent.InputTuple,
+      RebalanceProposedEvent.OutputTuple,
+      RebalanceProposedEvent.OutputObject
+    >;
+    RebalanceProposed: TypedContractEvent<
+      RebalanceProposedEvent.InputTuple,
+      RebalanceProposedEvent.OutputTuple,
+      RebalanceProposedEvent.OutputObject
+    >;
+
+    "RecordedAndSplit(uint256,uint256,int256)": TypedContractEvent<
+      RecordedAndSplitEvent.InputTuple,
+      RecordedAndSplitEvent.OutputTuple,
+      RecordedAndSplitEvent.OutputObject
+    >;
+    RecordedAndSplit: TypedContractEvent<
+      RecordedAndSplitEvent.InputTuple,
+      RecordedAndSplitEvent.OutputTuple,
+      RecordedAndSplitEvent.OutputObject
+    >;
+
     "RecruitingPayoutShareSet(uint256)": TypedContractEvent<
       RecruitingPayoutShareSetEvent.InputTuple,
       RecruitingPayoutShareSetEvent.OutputTuple,
@@ -360,6 +838,28 @@ export interface IRevenueStore extends BaseContract {
       RecruitingPayoutShareSetEvent.InputTuple,
       RecruitingPayoutShareSetEvent.OutputTuple,
       RecruitingPayoutShareSetEvent.OutputObject
+    >;
+
+    "ReserveRatioSet(uint256)": TypedContractEvent<
+      ReserveRatioSetEvent.InputTuple,
+      ReserveRatioSetEvent.OutputTuple,
+      ReserveRatioSetEvent.OutputObject
+    >;
+    ReserveRatioSet: TypedContractEvent<
+      ReserveRatioSetEvent.InputTuple,
+      ReserveRatioSetEvent.OutputTuple,
+      ReserveRatioSetEvent.OutputObject
+    >;
+
+    "ReserveSplit(uint256,uint256,uint256)": TypedContractEvent<
+      ReserveSplitEvent.InputTuple,
+      ReserveSplitEvent.OutputTuple,
+      ReserveSplitEvent.OutputObject
+    >;
+    ReserveSplit: TypedContractEvent<
+      ReserveSplitEvent.InputTuple,
+      ReserveSplitEvent.OutputTuple,
+      ReserveSplitEvent.OutputObject
     >;
 
     "RevenueRecorded(uint256,int256)": TypedContractEvent<

@@ -215,6 +215,37 @@ const _abi = [
         type: "address",
       },
       {
+        indexed: false,
+        internalType: "uint256",
+        name: "exponent",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "multiplier",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "baseRate",
+        type: "uint256",
+      },
+    ],
+    name: "BorrowingParamsUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
         indexed: true,
         internalType: "address",
         name: "adapter",
@@ -611,6 +642,21 @@ const _abi = [
         name: "maxFundingRate",
         type: "uint256",
       },
+      {
+        internalType: "uint256",
+        name: "borrowingExponent",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "borrowingMultiplier",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "borrowingBaseRate",
+        type: "uint256",
+      },
     ],
     stateMutability: "view",
     type: "function",
@@ -780,10 +826,73 @@ const _abi = [
             name: "maxFundingRate",
             type: "uint256",
           },
+          {
+            internalType: "uint256",
+            name: "borrowingExponent",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "borrowingMultiplier",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "borrowingBaseRate",
+            type: "uint256",
+          },
         ],
         internalType: "struct AssetRegistry.AssetRiskInfo",
         name: "info",
         type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "getAssetType",
+    outputs: [
+      {
+        internalType: "uint8",
+        name: "",
+        type: "uint8",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "getBorrowingParams",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "exponent",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "multiplier",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "baseRate",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -1006,6 +1115,57 @@ const _abi = [
   {
     inputs: [],
     name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "rawPrice",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "newYieldBps",
+        type: "uint256",
+      },
+    ],
+    name: "setAnnualYield",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "exponent",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "multiplier",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "baseRate",
+        type: "uint256",
+      },
+    ],
+    name: "setBorrowingParams",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

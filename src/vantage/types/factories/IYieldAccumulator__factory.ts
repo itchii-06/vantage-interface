@@ -3,10 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  IYieldAccumulator,
-  IYieldAccumulatorInterface,
-} from "../IYieldAccumulator";
+import type { IYieldAccumulator, IYieldAccumulatorInterface } from "../IYieldAccumulator";
 
 const _abi = [
   {
@@ -18,6 +15,25 @@ const _abi = [
       },
     ],
     name: "getAccumulatedYield",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "asset",
+        type: "address",
+      },
+    ],
+    name: "getEffectiveYieldBps",
     outputs: [
       {
         internalType: "uint256",
@@ -53,10 +69,7 @@ export class IYieldAccumulator__factory {
   static createInterface(): IYieldAccumulatorInterface {
     return new Interface(_abi) as IYieldAccumulatorInterface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): IYieldAccumulator {
+  static connect(address: string, runner?: ContractRunner | null): IYieldAccumulator {
     return new Contract(address, _abi, runner) as unknown as IYieldAccumulator;
   }
 }

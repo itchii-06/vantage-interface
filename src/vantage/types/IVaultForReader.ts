@@ -26,8 +26,8 @@ export interface IVaultForReaderInterface extends Interface {
     nameOrSignature:
       | "PRICE_PRECISION"
       | "assetRegistry"
+      | "distributions"
       | "feeReserves"
-      | "feeReservesLpShareBp"
       | "getAUM"
       | "getDelta"
       | "getMaxPrice"
@@ -47,8 +47,8 @@ export interface IVaultForReaderInterface extends Interface {
 
   encodeFunctionData(functionFragment: "PRICE_PRECISION", values?: undefined): string;
   encodeFunctionData(functionFragment: "assetRegistry", values?: undefined): string;
+  encodeFunctionData(functionFragment: "distributions", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "feeReserves", values: [AddressLike]): string;
-  encodeFunctionData(functionFragment: "feeReservesLpShareBp", values?: undefined): string;
   encodeFunctionData(functionFragment: "getAUM", values?: undefined): string;
   encodeFunctionData(functionFragment: "getDelta", values: [AddressLike, BigNumberish, BigNumberish, boolean]): string;
   encodeFunctionData(functionFragment: "getMaxPrice", values: [AddressLike]): string;
@@ -70,8 +70,8 @@ export interface IVaultForReaderInterface extends Interface {
 
   decodeFunctionResult(functionFragment: "PRICE_PRECISION", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "assetRegistry", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "distributions", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "feeReserves", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "feeReservesLpShareBp", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAUM", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getDelta", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getMaxPrice", data: BytesLike): Result;
@@ -126,9 +126,19 @@ export interface IVaultForReader extends BaseContract {
 
   assetRegistry: TypedContractMethod<[], [string], "view">;
 
-  feeReserves: TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  distributions: TypedContractMethod<
+    [rType: BigNumberish],
+    [
+      [bigint, bigint, bigint] & {
+        seniorBps: bigint;
+        juniorBps: bigint;
+        protocolBps: bigint;
+      },
+    ],
+    "view"
+  >;
 
-  feeReservesLpShareBp: TypedContractMethod<[], [bigint], "view">;
+  feeReserves: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
   getAUM: TypedContractMethod<[], [bigint], "view">;
 
@@ -186,8 +196,18 @@ export interface IVaultForReader extends BaseContract {
 
   getFunction(nameOrSignature: "PRICE_PRECISION"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "assetRegistry"): TypedContractMethod<[], [string], "view">;
+  getFunction(nameOrSignature: "distributions"): TypedContractMethod<
+    [rType: BigNumberish],
+    [
+      [bigint, bigint, bigint] & {
+        seniorBps: bigint;
+        juniorBps: bigint;
+        protocolBps: bigint;
+      },
+    ],
+    "view"
+  >;
   getFunction(nameOrSignature: "feeReserves"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
-  getFunction(nameOrSignature: "feeReservesLpShareBp"): TypedContractMethod<[], [bigint], "view">;
   getFunction(nameOrSignature: "getAUM"): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "getDelta"

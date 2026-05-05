@@ -26,20 +26,24 @@ import type {
 export interface IVaultInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "absorbFRDeficitFromSeniorYield"
+      | "authorizedJuniorVault"
       | "decreasePosition"
       | "getAUM"
+      | "getAbsorbableYield"
       | "getMaxPrice"
       | "getMinPrice"
       | "getPositionKey"
       | "increasePosition"
+      | "isJuniorCapReached"
       | "isRouter"
       | "liquidatePosition"
       | "lpManager"
-      | "payoutHub"
       | "priceFeed"
       | "recordDeposit"
       | "recordWithdraw"
       | "reservedAmounts"
+      | "setAuthorizedJuniorVault"
       | "setLPManager"
       | "setRouter"
       | "tokenBalances"
@@ -60,10 +64,16 @@ export interface IVaultInterface extends Interface {
   ): EventFragment;
 
   encodeFunctionData(
+    functionFragment: "absorbFRDeficitFromSeniorYield",
+    values: [AddressLike, AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(functionFragment: "authorizedJuniorVault", values?: undefined): string;
+  encodeFunctionData(
     functionFragment: "decreasePosition",
     values: [AddressLike, AddressLike, AddressLike, BigNumberish, BigNumberish, boolean, AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "getAUM", values?: undefined): string;
+  encodeFunctionData(functionFragment: "getAbsorbableYield", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getMaxPrice", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "getMinPrice", values: [AddressLike]): string;
   encodeFunctionData(
@@ -72,37 +82,42 @@ export interface IVaultInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "increasePosition",
-    values: [AddressLike, AddressLike, AddressLike, BigNumberish, boolean, BigNumberish]
+    values: [AddressLike, AddressLike, AddressLike, BigNumberish, boolean, BigNumberish, boolean, boolean]
   ): string;
+  encodeFunctionData(functionFragment: "isJuniorCapReached", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "isRouter", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "liquidatePosition",
     values: [AddressLike, AddressLike, AddressLike, boolean, AddressLike]
   ): string;
   encodeFunctionData(functionFragment: "lpManager", values?: undefined): string;
-  encodeFunctionData(functionFragment: "payoutHub", values?: undefined): string;
   encodeFunctionData(functionFragment: "priceFeed", values?: undefined): string;
   encodeFunctionData(functionFragment: "recordDeposit", values: [AddressLike, BigNumberish, AddressLike]): string;
   encodeFunctionData(functionFragment: "recordWithdraw", values: [AddressLike, BigNumberish, AddressLike]): string;
   encodeFunctionData(functionFragment: "reservedAmounts", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "setAuthorizedJuniorVault", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "setLPManager", values: [AddressLike]): string;
   encodeFunctionData(functionFragment: "setRouter", values: [AddressLike, boolean]): string;
   encodeFunctionData(functionFragment: "tokenBalances", values: [AddressLike]): string;
 
+  decodeFunctionResult(functionFragment: "absorbFRDeficitFromSeniorYield", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "authorizedJuniorVault", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "decreasePosition", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getAUM", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getAbsorbableYield", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getMaxPrice", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getMinPrice", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getPositionKey", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "increasePosition", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "isJuniorCapReached", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isRouter", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "liquidatePosition", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "lpManager", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "payoutHub", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "priceFeed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "recordDeposit", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "recordWithdraw", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "reservedAmounts", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setAuthorizedJuniorVault", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setLPManager", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setRouter", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "tokenBalances", data: BytesLike): Result;
@@ -398,6 +413,14 @@ export interface IVault extends BaseContract {
   listeners(eventName?: string): Promise<Array<Listener>>;
   removeAllListeners<TCEvent extends TypedContractEvent>(event?: TCEvent): Promise<this>;
 
+  absorbFRDeficitFromSeniorYield: TypedContractMethod<
+    [juniorVault: AddressLike, token: AddressLike, usdAmount: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  authorizedJuniorVault: TypedContractMethod<[], [string], "view">;
+
   decreasePosition: TypedContractMethod<
     [
       _account: AddressLike,
@@ -414,6 +437,8 @@ export interface IVault extends BaseContract {
   >;
 
   getAUM: TypedContractMethod<[], [bigint], "view">;
+
+  getAbsorbableYield: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
   getMaxPrice: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
@@ -433,10 +458,14 @@ export interface IVault extends BaseContract {
       _sizeDelta: BigNumberish,
       _isLong: boolean,
       _collateralDelta: BigNumberish,
+      _isHedge: boolean,
+      _convertOnADL: boolean,
     ],
     [void],
     "nonpayable"
   >;
+
+  isJuniorCapReached: TypedContractMethod<[juniorVault: AddressLike], [boolean], "view">;
 
   isRouter: TypedContractMethod<[router: AddressLike], [boolean], "view">;
 
@@ -454,8 +483,6 @@ export interface IVault extends BaseContract {
 
   lpManager: TypedContractMethod<[], [string], "view">;
 
-  payoutHub: TypedContractMethod<[], [string], "view">;
-
   priceFeed: TypedContractMethod<[], [string], "view">;
 
   recordDeposit: TypedContractMethod<[token: AddressLike, amount: BigNumberish, lp: AddressLike], [void], "nonpayable">;
@@ -468,6 +495,8 @@ export interface IVault extends BaseContract {
 
   reservedAmounts: TypedContractMethod<[token: AddressLike], [bigint], "view">;
 
+  setAuthorizedJuniorVault: TypedContractMethod<[juniorVault: AddressLike], [void], "nonpayable">;
+
   setLPManager: TypedContractMethod<[_lpManager: AddressLike], [void], "nonpayable">;
 
   setRouter: TypedContractMethod<[router: AddressLike, enabled: boolean], [void], "nonpayable">;
@@ -476,6 +505,10 @@ export interface IVault extends BaseContract {
 
   getFunction<T extends ContractMethod = ContractMethod>(key: string | FunctionFragment): T;
 
+  getFunction(
+    nameOrSignature: "absorbFRDeficitFromSeniorYield"
+  ): TypedContractMethod<[juniorVault: AddressLike, token: AddressLike, usdAmount: BigNumberish], [void], "nonpayable">;
+  getFunction(nameOrSignature: "authorizedJuniorVault"): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "decreasePosition"
   ): TypedContractMethod<
@@ -493,6 +526,7 @@ export interface IVault extends BaseContract {
     "nonpayable"
   >;
   getFunction(nameOrSignature: "getAUM"): TypedContractMethod<[], [bigint], "view">;
+  getFunction(nameOrSignature: "getAbsorbableYield"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
   getFunction(nameOrSignature: "getMaxPrice"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
   getFunction(nameOrSignature: "getMinPrice"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
   getFunction(
@@ -512,10 +546,15 @@ export interface IVault extends BaseContract {
       _sizeDelta: BigNumberish,
       _isLong: boolean,
       _collateralDelta: BigNumberish,
+      _isHedge: boolean,
+      _convertOnADL: boolean,
     ],
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "isJuniorCapReached"
+  ): TypedContractMethod<[juniorVault: AddressLike], [boolean], "view">;
   getFunction(nameOrSignature: "isRouter"): TypedContractMethod<[router: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "liquidatePosition"
@@ -531,7 +570,6 @@ export interface IVault extends BaseContract {
     "nonpayable"
   >;
   getFunction(nameOrSignature: "lpManager"): TypedContractMethod<[], [string], "view">;
-  getFunction(nameOrSignature: "payoutHub"): TypedContractMethod<[], [string], "view">;
   getFunction(nameOrSignature: "priceFeed"): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "recordDeposit"
@@ -540,6 +578,9 @@ export interface IVault extends BaseContract {
     nameOrSignature: "recordWithdraw"
   ): TypedContractMethod<[token: AddressLike, amount: BigNumberish, to: AddressLike], [void], "nonpayable">;
   getFunction(nameOrSignature: "reservedAmounts"): TypedContractMethod<[token: AddressLike], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "setAuthorizedJuniorVault"
+  ): TypedContractMethod<[juniorVault: AddressLike], [void], "nonpayable">;
   getFunction(nameOrSignature: "setLPManager"): TypedContractMethod<[_lpManager: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setRouter"

@@ -28,6 +28,53 @@ const _abi = [
     type: "constructor",
   },
   {
+    inputs: [],
+    name: "ClaimNotAvailable",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "earliest",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "current",
+        type: "uint256",
+      },
+    ],
+    name: "EpochNotReady",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "available",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "required",
+        type: "uint256",
+      },
+    ],
+    name: "InsufficientIdleLiquidity",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "InvalidCancelAmount",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "NoRedemptionPending",
+    type: "error",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -50,6 +97,21 @@ const _abi = [
     type: "error",
   },
   {
+    inputs: [],
+    name: "RedemptionAlreadyPending",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "ReentrancyGuardReentrantCall",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "UsdcTokenNotSet",
+    type: "error",
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -63,6 +125,11 @@ const _abi = [
       },
     ],
     name: "WithdrawalBlockedByOI",
+    type: "error",
+  },
+  {
+    inputs: [],
+    name: "ZeroShares",
     type: "error",
   },
   {
@@ -100,6 +167,25 @@ const _abi = [
       },
     ],
     name: "AddLiquidity",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "keeper",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "enabled",
+        type: "bool",
+      },
+    ],
+    name: "KeeperSet",
     type: "event",
   },
   {
@@ -150,6 +236,100 @@ const _abi = [
         type: "address",
       },
       {
+        indexed: false,
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256",
+      },
+    ],
+    name: "RedemptionCancelled",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "epochId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdcAmount",
+        type: "uint256",
+      },
+    ],
+    name: "RedemptionClaimed",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "epochId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "pricePerShare",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "totalSharesBurned",
+        type: "uint256",
+      },
+    ],
+    name: "RedemptionEpochExecuted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "epochId",
+        type: "uint256",
+      },
+    ],
+    name: "RedemptionRequested",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
         indexed: true,
         internalType: "address",
         name: "token",
@@ -170,6 +350,38 @@ const _abi = [
     ],
     name: "RemoveLiquidity",
     type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previous",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "next",
+        type: "address",
+      },
+    ],
+    name: "RevenueStoreSet",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "ADL_BUFFER_BPS",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
   },
   {
     inputs: [],
@@ -236,8 +448,208 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "address",
+        name: "recipient",
+        type: "address",
+      },
+    ],
+    name: "addLiquidityFor",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256",
+      },
+    ],
+    name: "cancelRedeem",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "claimRedeemedFunds",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "usdcAmount",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "currentEpochId",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "epochPricePerShare",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "account",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "collateralToken",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "indexToken",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "isLong",
+            type: "bool",
+          },
+        ],
+        internalType: "struct LPManager.PositionRef[]",
+        name: "tradeRefs",
+        type: "tuple[]",
+      },
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "account",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "collateralToken",
+            type: "address",
+          },
+          {
+            internalType: "address",
+            name: "indexToken",
+            type: "address",
+          },
+          {
+            internalType: "bool",
+            name: "isLong",
+            type: "bool",
+          },
+        ],
+        internalType: "struct LPManager.PositionRef[]",
+        name: "hedgeRefs",
+        type: "tuple[]",
+      },
+    ],
+    name: "executeRedemptionEpoch",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "getSharePrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "isKeeper",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "isRouter",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "lastEpochTimestamp",
     outputs: [
       {
         internalType: "uint256",
@@ -288,6 +700,43 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "redemptionCycleDuration",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    name: "redemptionRequests",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "epochId",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -326,6 +775,120 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256",
+      },
+    ],
+    name: "requestRedeem",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "revenueStore",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "keeper",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "enabled",
+        type: "bool",
+      },
+    ],
+    name: "setKeeper",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "duration",
+        type: "uint256",
+      },
+    ],
+    name: "setRedemptionCycleDuration",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "store",
+        type: "address",
+      },
+    ],
+    name: "setRevenueStore",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "router",
+        type: "address",
+      },
+      {
+        internalType: "bool",
+        name: "enabled",
+        type: "bool",
+      },
+    ],
+    name: "setRouter",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "token",
+        type: "address",
+      },
+    ],
+    name: "setUsdcToken",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "totalPendingShares",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "newOwner",
         type: "address",
@@ -334,6 +897,19 @@ const _abi = [
     name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "usdcToken",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {

@@ -15,11 +15,6 @@ const _abi = [
       },
       {
         internalType: "address",
-        name: "_hub",
-        type: "address",
-      },
-      {
-        internalType: "address",
         name: "_assetRegistry",
         type: "address",
       },
@@ -52,12 +47,6 @@ const _abi = [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newHubOwner",
-        type: "address",
-      },
       {
         indexed: true,
         internalType: "address",
@@ -122,15 +111,9 @@ const _abi = [
         type: "address",
       },
       {
-        indexed: false,
-        internalType: "uint256",
-        name: "debtCeiling",
-        type: "uint256",
-      },
-      {
         indexed: true,
         internalType: "address",
-        name: "governance",
+        name: "owner",
         type: "address",
       },
     ],
@@ -185,11 +168,6 @@ const _abi = [
         type: "address",
       },
       {
-        internalType: "uint256",
-        name: "debtCeiling",
-        type: "uint256",
-      },
-      {
         internalType: "address",
         name: "lpManager",
         type: "address",
@@ -217,9 +195,9 @@ const _abi = [
             type: "address",
           },
           {
-            internalType: "uint256",
+            internalType: "uint8",
             name: "decimals",
-            type: "uint256",
+            type: "uint8",
           },
           {
             internalType: "bool",
@@ -312,32 +290,6 @@ const _abi = [
         internalType: "uint256",
         name: "",
         type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "vault",
-        type: "address",
-      },
-    ],
-    name: "finalizeVaultRegistration",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "hub",
-    outputs: [
-      {
-        internalType: "contract SharedPayoutHub",
-        name: "",
-        type: "address",
       },
     ],
     stateMutability: "view",

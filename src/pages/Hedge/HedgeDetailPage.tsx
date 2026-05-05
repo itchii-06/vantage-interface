@@ -28,8 +28,9 @@ import { useChainId } from "lib/chains";
 import { getProvider } from "lib/rpc";
 import useWallet from "lib/wallets/useWallet";
 import { PriceChart } from "pages/Trade/components/PriceChart";
-import MockPriceFeedAbi from "vantage/abis/MockPriceFeed.json";
+import { getVantageContractAddress } from "vantage/contracts";
 import localhostDeployment from "vantage/deployments/frontend-localhost.json";
+import { Vault__factory } from "vantage/types";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
@@ -49,7 +50,6 @@ const ERC20_BALANCE_ABI = [
   "function decimals() view returns (uint8)",
 ] as const;
 
-const MOCK_PRICE_FEED = (localhostDeployment.addresses as { MockPriceFeed?: string }).MockPriceFeed ?? "";
 const USDC_ADDRESS = (localhostDeployment.addresses as { tokens?: { USDC?: string } }).tokens?.USDC ?? "";
 const POLL_MS = 15_000;
 
@@ -74,23 +74,33 @@ function fmtBps(bps: number | null): string {
 }
 
 // ---------------------------------------------------------------------------
-// useRwaSpotPrice — fetches oracle price from MockPriceFeed
+// useRwaSpotPrice — fetches oracle price via vault.getMinPrice()
 // ---------------------------------------------------------------------------
+
+const ZERO_ADDR = "0x0000000000000000000000000000000000000000";
 
 function useRwaSpotPrice(tokenAddress: string | undefined): number | null {
   const { chainId } = useChainId();
   const [price, setPrice] = useState<number | null>(null);
 
   useEffect(() => {
-    if (!tokenAddress || !MOCK_PRICE_FEED) return;
+    if (!tokenAddress) return;
+
+    let vaultAddr: string;
+    try {
+      vaultAddr = getVantageContractAddress(chainId, "JuniorTrancheVault");
+    } catch {
+      return;
+    }
+    if (!vaultAddr || vaultAddr === ZERO_ADDR) return;
 
     const provider = getProvider(undefined, chainId);
-    const feed = new Contract(MOCK_PRICE_FEED, MockPriceFeedAbi, provider);
+    const vault = Vault__factory.connect(vaultAddr, provider);
     let cancelled = false;
 
     async function poll() {
       try {
-        const raw: bigint = await feed.prices(tokenAddress);
+        const raw = await vault.getMinPrice(tokenAddress!);
         if (!cancelled && raw > 0n) setPrice(parseFloat(formatEther(raw)));
       } catch {
         // leave null
