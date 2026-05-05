@@ -54,6 +54,8 @@ export type HedgeParams = {
   sizeDelta: bigint;
   /** Maximum acceptable entry price (0 = accept any) */
   acceptablePrice: bigint;
+  /** Price adapter address for per-index skew tracking (Issue #227). Must be non-zero. */
+  priceAdapter: string;
 };
 
 export type HedgeActionResult = {
@@ -187,6 +189,7 @@ export function useHedgeActions(): HedgeActionResult {
               params.sizeDelta,
               acceptablePrice,
               convertOnADL,
+              params.priceAdapter,
               executionFee,
               { value: executionFee }
             );
@@ -202,6 +205,7 @@ export function useHedgeActions(): HedgeActionResult {
               params.sizeDelta,
               acceptablePrice,
               convertOnADL,
+              params.priceAdapter,
               executionFee,
               { value: msgValue }
             );
@@ -226,6 +230,7 @@ export function useHedgeActions(): HedgeActionResult {
               params.sizeDelta,
               acceptablePrice,
               convertOnADL,
+              params.priceAdapter,
               executionFee,
               { value: executionFee }
             );
@@ -238,6 +243,7 @@ export function useHedgeActions(): HedgeActionResult {
               params.sizeDelta,
               acceptablePrice,
               convertOnADL,
+              params.priceAdapter,
               executionFee,
               { value: msgValue }
             );

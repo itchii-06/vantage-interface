@@ -717,6 +717,7 @@ export default function HedgeDetailPage() {
       collateralAmount,
       indexToken: cfg.tokenAddress,
       sizeDelta: sizeDeltaWad,
+      priceAdapter: cfg.adapterAddress ?? "",
     };
 
     const err = await validate(mode, marginToken, params);

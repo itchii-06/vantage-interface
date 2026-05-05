@@ -30,6 +30,8 @@ export type HedgeListItem = {
   assetType: AssetTypeId;
   vaultAddress: string;
   indexToken: string;
+  /** Prism axis for sUSDe entries ("price" | "yield" | "total"), undefined for standard assets */
+  prismAxis: VaultConfig["prismAxis"];
   /** RWA vault APY (null if unavailable) */
   vaultApy: number | null;
   /** Short funding rate annualised (null if unavailable) */
@@ -136,6 +138,7 @@ function useHedgeItem(cfg: VaultConfig): HedgeListItem {
       assetType: cfg.assetType,
       vaultAddress: cfg.vaultAddress ?? "",
       indexToken: cfg.tokenAddress ?? "",
+      prismAxis: cfg.prismAxis,
       vaultApy,
       fundingApy,
       managedNetApy,
@@ -147,15 +150,27 @@ function useHedgeItem(cfg: VaultConfig): HedgeListItem {
 }
 
 // ── Public hook (fixed-order: hooks must not be conditional) ──────────────────
+//
+// Supports up to 8 hedgeable vaults. sUSDe has 3 Prism axes (Price/Yield/Total)
+// so the ceiling is: 3 standard (mBUIDL/mUSDY/mRWA) + 3 sUSDe = 6 minimum.
+// Padded to 8 to accommodate near-future additions without another refactor.
 
 const HEDGEABLE = VAULT_CONFIGS.filter((v) => v.tokenAddress && v.vaultAddress && v.assetType !== "stable");
+const FALLBACK = VAULT_CONFIGS[0];
 
 export function useHedgeList(): HedgeListItem[] {
   // Hooks called in fixed order — never inside map()
-  const item0 = useHedgeItem(HEDGEABLE[0] ?? VAULT_CONFIGS[0]);
-  const item1 = useHedgeItem(HEDGEABLE[1] ?? VAULT_CONFIGS[0]);
-  const item2 = useHedgeItem(HEDGEABLE[2] ?? VAULT_CONFIGS[0]);
-  const item3 = useHedgeItem(HEDGEABLE[3] ?? VAULT_CONFIGS[0]);
+  const item0 = useHedgeItem(HEDGEABLE[0] ?? FALLBACK);
+  const item1 = useHedgeItem(HEDGEABLE[1] ?? FALLBACK);
+  const item2 = useHedgeItem(HEDGEABLE[2] ?? FALLBACK);
+  const item3 = useHedgeItem(HEDGEABLE[3] ?? FALLBACK);
+  const item4 = useHedgeItem(HEDGEABLE[4] ?? FALLBACK);
+  const item5 = useHedgeItem(HEDGEABLE[5] ?? FALLBACK);
+  const item6 = useHedgeItem(HEDGEABLE[6] ?? FALLBACK);
+  const item7 = useHedgeItem(HEDGEABLE[7] ?? FALLBACK);
 
-  return useMemo(() => [item0, item1, item2, item3].slice(0, HEDGEABLE.length), [item0, item1, item2, item3]);
+  return useMemo(
+    () => [item0, item1, item2, item3, item4, item5, item6, item7].slice(0, HEDGEABLE.length),
+    [item0, item1, item2, item3, item4, item5, item6, item7]
+  );
 }

@@ -13,6 +13,7 @@ import { formatEther } from "ethers";
 import { useHistory } from "react-router-dom";
 
 import { useHedgeList } from "domain/vantage/hedge/useHedgeList";
+import type { VaultConfig } from "domain/vantage/vaults/vaultConfig";
 import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL } from "domain/vantage/vaults/vaultConfig";
 import { COLORS } from "styles/vantageTheme";
 
@@ -41,6 +42,22 @@ function _apyColor(apy: number | null): string {
   if (apy === null) return "text-slate-500";
   return apy >= 0 ? "text-green-400" : "text-red-400";
 }
+
+// ---------------------------------------------------------------------------
+// Prism axis label helpers
+// ---------------------------------------------------------------------------
+
+const PRISM_AXIS_LABEL: Record<NonNullable<VaultConfig["prismAxis"]>, string> = {
+  price: "価格ヘッジ",
+  yield: "利回りヘッジ",
+  total: "全体ヘッジ",
+};
+
+const PRISM_AXIS_COLOR: Record<NonNullable<VaultConfig["prismAxis"]>, string> = {
+  price: "bg-blue-900/50 text-blue-300",
+  yield: "bg-green-900/50 text-green-300",
+  total: "bg-purple-900/50 text-purple-300",
+};
 
 // ---------------------------------------------------------------------------
 // Component
@@ -91,6 +108,13 @@ export default function HedgePage() {
                     <span className={`text-xs rounded-full px-8 py-1 ${ASSET_TYPE_COLOR[item.assetType]}`}>
                       {ASSET_TYPE_LABEL[item.assetType]}
                     </span>
+                    {item.prismAxis && (
+                      <span
+                        className={`text-xs rounded-full px-8 py-1 font-medium ${PRISM_AXIS_COLOR[item.prismAxis]}`}
+                      >
+                        {PRISM_AXIS_LABEL[item.prismAxis]}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
