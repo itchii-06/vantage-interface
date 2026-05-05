@@ -9,6 +9,9 @@
  *   - Slippage selector (0.1% / 0.3% / 0.5% / custom)
  *   - Bid/Ask spread display
  *   - Approve + Submit buttons with correct state management
+ *   - Index selector (Price / Yield / Total) for Interest Prism vaults (Issue #227)
+ *   - Skew Fee preview: Base Fee + Skew Adjustment = Total (Issue #225/#227)
+ *   - Per-adapter sub-limit capacity bar (Issue #225/#227)
  */
 
 import { t } from "@lingui/macro";
@@ -19,6 +22,7 @@ import type { UsePositionRequestsResult } from "domain/vantage/trade/usePosition
 import type { PositionRouterTradeResult } from "domain/vantage/trade/usePositionRouterTrade";
 import { DEFAULT_SLIPPAGE_BPS } from "domain/vantage/trade/usePositionRouterTrade";
 import type { SpreadData } from "domain/vantage/trade/useSpread";
+import { VAULT_CONFIGS, type VaultConfig } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import { helperToast } from "lib/helperToast";
 import { getProvider } from "lib/rpc";
@@ -39,6 +43,23 @@ const COLLATERAL_OPTIONS = [
 
 const SLIPPAGE_PRESETS = [10, 30, 50] as const; // bps
 
+// Minimal ABI for per-index skew reads (Issue #225)
+const SKEW_ABI = [
+  "function adapterLongOI(address) view returns (uint256)",
+  "function adapterShortOI(address) view returns (uint256)",
+  "function adapterMaxOI(address) view returns (uint256)",
+  "function skewFeeMultiplier(address) view returns (uint256)",
+  "function minFeeRateBps(address) view returns (uint256)",
+];
+
+type PrismAxis = "price" | "yield" | "total";
+
+const PRISM_AXIS_LABELS: Record<PrismAxis, string> = {
+  price: "Price",
+  yield: "Yield",
+  total: "Total",
+};
+
 type Props = {
   isLong: boolean;
   indexToken: string;
@@ -49,6 +70,8 @@ type Props = {
   onSuccess?: () => void;
   /** True when JuniorTrancheVault has no USDC — trades would revert on-chain. */
   noLiquidity?: boolean;
+  /** Full vault config for the selected market. Used to enable Prism axis selector. */
+  vaultConfig?: VaultConfig;
 };
 
 export function OpenPositionPanel({
@@ -60,6 +83,7 @@ export function OpenPositionPanel({
   requests,
   onSuccess,
   noLiquidity,
+  vaultConfig,
 }: Props) {
   const { account, signer } = useWallet();
   const { chainId } = useChainId();
@@ -75,7 +99,99 @@ export function OpenPositionPanel({
   const [isApproving, setIsApproving] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Dynamic OI cap: read from Vault + AssetRegistry
+  // ── Prism axis selector (Issue #227) ──────────────────────────────────────
+
+  const isPrismVault = Boolean(vaultConfig?.prismAxis);
+  const [selectedAxis, setSelectedAxis] = useState<PrismAxis>((vaultConfig?.prismAxis as PrismAxis) ?? "price");
+
+  // Sync selectedAxis when vaultConfig changes (e.g. user switches market)
+  useEffect(() => {
+    if (vaultConfig?.prismAxis) {
+      setSelectedAxis(vaultConfig.prismAxis as PrismAxis);
+    }
+  }, [vaultConfig?.prismAxis]);
+
+  // Resolve the active prism config based on the selected axis tab
+  const activePrismConfig = useMemo<VaultConfig | undefined>(() => {
+    if (!isPrismVault) return undefined;
+    return VAULT_CONFIGS.find((v) => v.prismAxis === selectedAxis);
+  }, [isPrismVault, selectedAxis]);
+
+  // Effective index token and adapter address for this trade
+  const activeIndexToken = activePrismConfig?.tokenAddress ?? indexToken;
+  const activeAdapterAddress =
+    activePrismConfig?.adapterAddress && activePrismConfig.adapterAddress !== ""
+      ? activePrismConfig.adapterAddress
+      : undefined;
+
+  // ── Skew Fee State (Issue #225/#227) ─────────────────────────────────────
+
+  type SkewData = {
+    longOI: bigint;
+    shortOI: bigint;
+    maxOI: bigint;
+    multiplier: bigint;
+    minFeeRate: bigint;
+    baseFee: bigint; // marginFeeBps from AssetRegistry
+  };
+  const [skewData, setSkewData] = useState<SkewData | null>(null);
+
+  useEffect(() => {
+    if (!activeAdapterAddress) {
+      setSkewData(null);
+      return;
+    }
+    const vaultAddr = getVantageContractAddress(chainId, "JuniorTrancheVault");
+    const registryAddr = getVantageContractAddress(chainId, "AssetRegistry");
+    const ZERO = "0x0000000000000000000000000000000000000000";
+    if (!vaultAddr || vaultAddr === ZERO || !registryAddr || registryAddr === ZERO) return;
+
+    const skewContract = new Contract(vaultAddr, SKEW_ABI, provider);
+    const registry = AssetRegistry__factory.connect(registryAddr, provider);
+
+    Promise.all([
+      skewContract.adapterLongOI(activeAdapterAddress) as Promise<bigint>,
+      skewContract.adapterShortOI(activeAdapterAddress) as Promise<bigint>,
+      skewContract.adapterMaxOI(activeAdapterAddress) as Promise<bigint>,
+      skewContract.skewFeeMultiplier(activeAdapterAddress) as Promise<bigint>,
+      skewContract.minFeeRateBps(activeAdapterAddress) as Promise<bigint>,
+      registry.getAssetRiskInfo(activeIndexToken).then((r) => r.marginFeeBps) as Promise<bigint>,
+    ])
+      .then(([longOI, shortOI, maxOI, multiplier, minFeeRate, baseFee]) => {
+        setSkewData({ longOI, shortOI, maxOI, multiplier, minFeeRate, baseFee });
+      })
+      .catch(() => setSkewData(null));
+  }, [activeAdapterAddress, activeIndexToken, chainId, provider]);
+
+  // Compute effective fee bps for current direction
+  const { skewBps, effectiveBps, isIncreasingSkew } = useMemo(() => {
+    if (!skewData || skewData.maxOI === 0n) {
+      return { skewBps: 0n, effectiveBps: skewData?.baseFee ?? 0n, isIncreasingSkew: false };
+    }
+    const { longOI, shortOI, maxOI, multiplier, minFeeRate, baseFee } = skewData;
+    const skew = longOI >= shortOI ? longOI - shortOI : shortOI - longOI;
+    const sBps = (multiplier * skew) / maxOI;
+    const increasing = (isLong && longOI >= shortOI) || (!isLong && shortOI >= longOI);
+    let eBps: bigint;
+    if (increasing) {
+      eBps = baseFee + sBps;
+    } else {
+      eBps = baseFee > sBps + minFeeRate ? baseFee - sBps : minFeeRate;
+    }
+    return { skewBps: sBps, effectiveBps: eBps, isIncreasingSkew: increasing };
+  }, [skewData, isLong]);
+
+  // Sub-limit utilization ratio (0–1)
+  const subLimitRatio = useMemo(() => {
+    if (!skewData || skewData.maxOI === 0n) return 0;
+    const totalOI = skewData.longOI + skewData.shortOI;
+    return Number((totalOI * 10_000n) / skewData.maxOI) / 10_000;
+  }, [skewData]);
+
+  const subLimitBarStyle = useMemo(() => ({ width: `${Math.min(subLimitRatio * 100, 100)}%` }), [subLimitRatio]);
+
+  // ── Dynamic OI cap: read from Vault + AssetRegistry ──────────────────────
+
   const [oiCapError, setOiCapError] = useState<string | null>(null);
 
   const collateralDecimals = useNativeEth ? 18 : 6;
@@ -186,13 +302,14 @@ export function OpenPositionPanel({
 
       const requestKey = await trade.createIncreasePosition({
         collateralToken,
-        indexToken,
+        indexToken: activeIndexToken,
         amountIn,
         sizeDelta,
         isLong,
         markPrice,
         slippageBps,
         useNativeEth,
+        priceAdapter: activeAdapterAddress,
       });
 
       if (requestKey) {
@@ -201,7 +318,7 @@ export function OpenPositionPanel({
           type: "increase",
           createdAtMs: now,
           expiresAtMs,
-          indexToken,
+          indexToken: activeIndexToken,
           isLong,
           sizeDelta,
         });
@@ -223,6 +340,28 @@ export function OpenPositionPanel({
     <div className="flex flex-col gap-12">
       {/* Spread display */}
       <SpreadBadge spread={spread} />
+
+      {/* ── Interest Prism Index Selector (Issue #227) ─────────────────────── */}
+      {isPrismVault && (
+        <div>
+          <div className="mb-6 text-12 text-slate-400">{t`Index`}</div>
+          <div className="flex gap-6">
+            {(["price", "yield", "total"] as PrismAxis[]).map((axis) => (
+              <button
+                key={axis}
+                onClick={() => setSelectedAxis(axis)}
+                className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${
+                  selectedAxis === axis
+                    ? "bg-vantage-accent text-black"
+                    : "bg-vantage-input text-vantage-text-secondary hover:text-white"
+                }`}
+              >
+                {PRISM_AXIS_LABELS[axis]}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Collateral type toggle */}
       <div className="flex gap-8">
@@ -306,6 +445,44 @@ export function OpenPositionPanel({
               )
             ).toFixed(4)}
           </span>
+        </div>
+      )}
+
+      {/* ── Skew Fee Preview (Issue #225/#227) ──────────────────────────────── */}
+      {skewData && skewData.maxOI > 0n && (
+        <div className="rounded-4 border border-vantage-border bg-vantage-input/50 px-12 py-10 text-12">
+          <div className="text-slate-300 mb-8 font-medium">{t`Estimated Fee`}</div>
+          <div className="flex items-center justify-between text-slate-400">
+            <span>{t`Base Fee`}</span>
+            <span>{Number(skewData.baseFee) / 100}%</span>
+          </div>
+          <div className="mt-4 flex items-center justify-between">
+            <span className="text-slate-400">{t`Skew Adjustment`}</span>
+            <span className={isIncreasingSkew ? "text-red-400" : "text-green-400"}>
+              {isIncreasingSkew ? "+" : "−"}
+              {Number(skewBps) / 100}%
+            </span>
+          </div>
+          <div className="mt-6 flex items-center justify-between border-t border-vantage-border pt-6 font-semibold text-white">
+            <span>{t`Total`}</span>
+            <span>{Number(effectiveBps) / 100}%</span>
+          </div>
+
+          {/* Sub-limit capacity bar */}
+          <div className="mt-8">
+            <div className="mb-4 flex items-center justify-between text-11 text-slate-500">
+              <span>{t`Index Capacity`}</span>
+              <span>{(subLimitRatio * 100).toFixed(1)}%</span>
+            </div>
+            <div className="h-4 overflow-hidden rounded-full bg-slate-700">
+              <div
+                className={`h-full rounded-full transition-all ${
+                  subLimitRatio > 0.9 ? "bg-red-500" : subLimitRatio > 0.7 ? "bg-amber-500" : "bg-green-500"
+                }`}
+                style={subLimitBarStyle}
+              />
+            </div>
+          </div>
         </div>
       )}
 

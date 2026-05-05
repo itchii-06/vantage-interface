@@ -33,6 +33,8 @@ export type IncreaseRequest = {
   markPrice: bigint;
   slippageBps?: number;
   useNativeEth?: boolean;
+  /** Price adapter address for per-index skew tracking (Issue #225). Omit for standard path. */
+  priceAdapter?: string;
 };
 
 export type DecreaseRequest = {
@@ -110,6 +112,20 @@ export function usePositionRouterTrade(): PositionRouterTradeResult {
             acceptablePrice,
             minExecutionFee,
             { value: totalValue }
+          );
+        } else if (req.priceAdapter) {
+          // Per-index adapter path: routes through Vault.increasePositionWithAdapter.
+          // Cast to any: createIncreasePositionWithAdapter is not yet in the generated PositionRouter typechain.
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          tx = await (positionRouterWrite as any).createIncreasePositionWithAdapter(
+            req.collateralToken,
+            req.indexToken,
+            req.amountIn,
+            req.sizeDelta,
+            req.isLong,
+            acceptablePrice,
+            req.priceAdapter,
+            { value: minExecutionFee }
           );
         } else {
           tx = await positionRouterWrite.createIncreasePosition(

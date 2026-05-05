@@ -4,6 +4,9 @@
  * Static configuration for the 4 supported Vaults:
  *   USDC (stable), mBUIDL (Rebasing), mUSDY (PriceShare), mRWA (Direct)
  *
+ * Also includes 3 Interest Prism display configs (no real vault — chart-only):
+ *   sUSDe_Price (raw market price), sUSDe_Yield (rate→price), sUSDe_Total (return index)
+ *
  * Addresses are resolved from the deployment JSON at runtime so this file
  * remains network-agnostic. For localhost these come from frontend-localhost.json.
  */
@@ -84,6 +87,20 @@ export interface VaultConfig {
   isMock: boolean;
   /** TradingView symbol used for the price chart (e.g. "BINANCE:BTCUSDT") */
   tvSymbol: string;
+  /**
+   * Interest Prism axis (display-only configs; no real vault or LPManager).
+   *   "price" — raw market price via MockPriceFeed / price oracle
+   *   "yield" — interest rate → price via InterestRateAdapter
+   *   "total" — cumulative total return index via TotalReturnAccumulatorAdapter
+   * When set, vaultAddress / lpManagerAddress / lpTokenAddress are empty strings.
+   */
+  prismAxis?: "price" | "yield" | "total";
+  /**
+   * Price adapter address for per-index skew tracking (Issue #225/#227).
+   * Set on Prism axis configs to route increasePositionWithAdapter calls.
+   * Undefined on standard configs (no adapter binding).
+   */
+  adapterAddress?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -99,6 +116,14 @@ const d = localhostDeployment.addresses as {
   mockRWAVaults?: Record<string, string>;
   mockRWALPManagers?: Record<string, string>;
   mockRWALPTokens?: Record<string, string>;
+  /** Interest Prism virtual index token addresses (localhost only) */
+  prismTokens?: { Price?: string; Yield?: string; Total?: string };
+  /** Interest Prism adapter addresses (localhost only) */
+  prismAdapters?: {
+    benchmarkOracle?: string;
+    interestRateAdapter?: string;
+    totalReturnAdapter?: string;
+  };
 };
 
 export const VAULT_CONFIGS: VaultConfig[] = [
@@ -161,6 +186,66 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     tokenDecimals: 18,
     isMock: true,
     tvSymbol: "BINANCE:BTCUSDT",
+  },
+
+  // ── Interest Prism (display-only; no real vault or LPManager) ────────────
+  //
+  // Three views of the same sUSDe asset across different axes:
+  //   Price — raw oracle market price
+  //   Yield — InterestRateAdapter: (benchmarkRate + margin) × scalingFactor
+  //   Total — TotalReturnAccumulatorAdapter: compounding return index
+  //
+  // These configs are only meaningful on localhost where the Prism adapters are
+  // deployed. On other networks prismTokens is absent and tokenAddress will be
+  // an empty string, causing the chart to skip data loading gracefully.
+
+  {
+    key: "sUSDe_Price",
+    name: "sUSDe Market Price",
+    symbol: "sUSDe_P",
+    assetType: 2,
+    trancheType: "senior",
+    vaultAddress: d.JuniorTrancheVault ?? "",
+    tokenAddress: d.prismTokens?.Price ?? "",
+    lpManagerAddress: "",
+    lpTokenAddress: "",
+    tokenDecimals: 18,
+    isMock: true,
+    tvSymbol: "BINANCE:BTCUSDT",
+    prismAxis: "price",
+    adapterAddress: d.prismAdapters?.benchmarkOracle ?? "",
+  },
+  {
+    key: "sUSDe_Yield",
+    name: "sUSDe Yield Rate → Price",
+    symbol: "sUSDe_Y",
+    assetType: 2,
+    trancheType: "senior",
+    vaultAddress: d.JuniorTrancheVault ?? "",
+    tokenAddress: d.prismTokens?.Yield ?? "",
+    lpManagerAddress: "",
+    lpTokenAddress: "",
+    tokenDecimals: 18,
+    isMock: true,
+    tvSymbol: "BINANCE:BTCUSDT",
+    prismAxis: "yield",
+    adapterAddress: d.prismAdapters?.interestRateAdapter ?? "",
+  },
+  {
+    key: "sUSDe_Total",
+    name: "sUSDe Total Return Index",
+    symbol: "sUSDe_T",
+    assetType: 2,
+    trancheType: "senior",
+    vaultAddress: d.JuniorTrancheVault ?? "",
+    tokenAddress: d.prismTokens?.Total ?? "",
+    lpManagerAddress: "",
+    lpTokenAddress: "",
+    tokenDecimals: 18,
+    isMock: true,
+    tvSymbol: "BINANCE:BTCUSDT",
+    prismAxis: "total",
+    adapterAddress: d.prismAdapters?.totalReturnAdapter ?? "",
   },
 ];
 

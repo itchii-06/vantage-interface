@@ -1891,6 +1891,7 @@ msgstr "추천인 주소:"
 #: src/pages/LeaderboardPage/components/LeaderboardContainer.tsx
 #: src/pages/Pools/PoolsTimeRangeFilter.tsx
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
 msgid "Total"
 msgstr "총계"
 
@@ -3307,6 +3308,10 @@ msgstr ""
 msgid "Decentralized finance dashboard"
 msgstr "탈중앙화 금융 대시보드"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Index"
+msgstr ""
+
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Pending PnL from all open positions"
 msgstr "모든 미결 포지션의 미실현 PnL"
@@ -3891,6 +3896,10 @@ msgstr ""
 #: src/components/SideNav/BottomMenuSection.tsx
 msgid "Collapse"
 msgstr "접기"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Index Capacity"
+msgstr ""
 
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Banners"
@@ -5899,6 +5908,10 @@ msgstr "원활한 거래"
 #: landing/src/pages/Home/HeroSection/HeroSection.tsx
 msgid "from your wallet"
 msgstr "지갑에서"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Base Fee"
+msgstr ""
 
 #: src/components/Earn/Portfolio/RecommendedAssets/RecommendedAssets.tsx
 msgid "Explore more"
@@ -8262,6 +8275,10 @@ msgstr "최대 수량 초과"
 
 #: src/pages/Admin/AdminPage.tsx
 msgid "Trade OI is near cap (≥95%). Oracle price movements at TX time may trigger TradeCapExceeded."
+msgstr ""
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Skew Adjustment"
 msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
@@ -11716,6 +11733,10 @@ msgstr "수령 매개변수를 사용할 수 없습니다. 몇 초 후 다시 �
 #: src/pages/UiPage/BannerTest.tsx
 msgid "Read details"
 msgstr "상세 내용 보기"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Estimated Fee"
+msgstr ""
 
 #: src/domain/vantage/vaults/vaultConfig.ts
 msgid "Senior"
