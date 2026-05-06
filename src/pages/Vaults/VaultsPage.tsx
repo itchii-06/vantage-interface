@@ -127,7 +127,7 @@ type VaultTableProps = {
   sortKey: SortKey;
   sortDir: SortDir;
   onSort: (key: SortKey) => void;
-  onRowClick: (vaultAddress: string) => void;
+  onRowClick: (item: VaultListItem) => void;
 };
 
 function VaultTable({ items, apyByKey, account, sortKey, sortDir, onSort, onRowClick }: VaultTableProps) {
@@ -168,7 +168,7 @@ function VaultTable({ items, apyByKey, account, sortKey, sortDir, onSort, onRowC
         return (
           <div
             key={item.key}
-            onClick={() => item.vaultAddress && onRowClick(item.vaultAddress)}
+            onClick={() => onRowClick(item)}
             className="grid cursor-pointer grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-0 border-b border-b-vantage-border px-20 py-16 transition-colors last:border-0 hover:bg-slate-800/40"
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = COLORS.baseHover)}
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
@@ -247,7 +247,7 @@ type TrancheSectionProps = {
   sortKey: SortKey;
   sortDir: SortDir;
   onSort: (key: SortKey) => void;
-  onRowClick: (vaultAddress: string) => void;
+  onRowClick: (item: VaultListItem) => void;
 };
 
 function TrancheSection({
@@ -307,18 +307,21 @@ export default function VaultsPage() {
   const items = useVaultList();
 
   // APY per vault — hooks must be called unconditionally in fixed order
+  // VAULT_CONFIGS[0..4]: usdc, mBUIDL, mUSDY, mRWA, sUSDe (non-prism)
   const apy0 = useVaultApy(VAULT_CONFIGS[0]);
   const apy1 = useVaultApy(VAULT_CONFIGS[1]);
   const apy2 = useVaultApy(VAULT_CONFIGS[2]);
   const apy3 = useVaultApy(VAULT_CONFIGS[3]);
+  const apy4 = useVaultApy(VAULT_CONFIGS[4]);
   const apyByKey: Record<string, number | null> = useMemo(
     () => ({
       [VAULT_CONFIGS[0].key]: apy0,
       [VAULT_CONFIGS[1].key]: apy1,
       [VAULT_CONFIGS[2].key]: apy2,
       [VAULT_CONFIGS[3].key]: apy3,
+      [VAULT_CONFIGS[4].key]: apy4,
     }),
-    [apy0, apy1, apy2, apy3]
+    [apy0, apy1, apy2, apy3, apy4]
   );
 
   const [sortKey, setSortKey] = useState<SortKey>("none");
@@ -359,7 +362,7 @@ export default function VaultsPage() {
           sortKey={sortKey}
           sortDir={sortDir}
           onSort={handleSort}
-          onRowClick={(addr) => history.push(`/vaults/${addr}`)}
+          onRowClick={(item) => history.push(`/vaults/${item.vaultAddress || item.key}`)}
         />
 
         {/* Junior Vault section */}
@@ -371,7 +374,7 @@ export default function VaultsPage() {
           sortKey={sortKey}
           sortDir={sortDir}
           onSort={handleSort}
-          onRowClick={(addr) => history.push(`/vaults/${addr}`)}
+          onRowClick={(item) => history.push(`/vaults/${item.vaultAddress || item.key}`)}
         />
 
         {/* Footer hint */}

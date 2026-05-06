@@ -116,6 +116,11 @@ const d = localhostDeployment.addresses as {
   mockRWAVaults?: Record<string, string>;
   mockRWALPManagers?: Record<string, string>;
   mockRWALPTokens?: Record<string, string>;
+  /** sUSDe Senior Vault (Step 17e-3b) */
+  sUSDeVault?: string;
+  sUSDeLPToken?: string;
+  sUSDeLPManager?: string;
+  sUSDeToken?: string;
   /** Interest Prism virtual index token addresses (localhost only) */
   prismTokens?: { Price?: string; Yield?: string; Total?: string };
   /** Interest Prism adapter addresses (localhost only) */
@@ -123,6 +128,10 @@ const d = localhostDeployment.addresses as {
     benchmarkOracle?: string;
     interestRateAdapter?: string;
     totalReturnAdapter?: string;
+  };
+  /** Exchange rate adapters for yield-bearing tokens */
+  exchangeRateAdapters?: {
+    sUSDe?: { mockVault?: string; adapter?: string };
   };
 };
 
@@ -188,6 +197,24 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     tvSymbol: "BINANCE:BTCUSDT",
   },
 
+  // ── sUSDe (PriceShare / Senior) ──────────────────────────────────────────
+  // LP deposit vault for sUSDe. Shown once on the Vaults page.
+  // Trading / hedging uses the three Prism axis configs below.
+  {
+    key: "sUSDe",
+    name: "sUSDe Vault",
+    symbol: "sUSDe",
+    assetType: 2,
+    trancheType: "senior",
+    vaultAddress: d.sUSDeVault ?? "",
+    tokenAddress: d.sUSDeToken ?? "",
+    lpManagerAddress: d.sUSDeLPManager ?? "",
+    lpTokenAddress: d.sUSDeLPToken ?? "",
+    tokenDecimals: 18,
+    isMock: true,
+    tvSymbol: "BINANCE:ETHUSD",
+  },
+
   // ── Interest Prism (display-only; no real vault or LPManager) ────────────
   //
   // Three views of the same sUSDe asset across different axes:
@@ -205,7 +232,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     symbol: "sUSDe_P",
     assetType: 2,
     trancheType: "senior",
-    vaultAddress: d.JuniorTrancheVault ?? "",
+    vaultAddress: d.sUSDeVault ?? "",
     tokenAddress: d.prismTokens?.Price ?? "",
     lpManagerAddress: "",
     lpTokenAddress: "",
@@ -221,7 +248,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     symbol: "sUSDe_Y",
     assetType: 2,
     trancheType: "senior",
-    vaultAddress: d.JuniorTrancheVault ?? "",
+    vaultAddress: d.sUSDeVault ?? "",
     tokenAddress: d.prismTokens?.Yield ?? "",
     lpManagerAddress: "",
     lpTokenAddress: "",
@@ -237,7 +264,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     symbol: "sUSDe_T",
     assetType: 2,
     trancheType: "senior",
-    vaultAddress: d.JuniorTrancheVault ?? "",
+    vaultAddress: d.sUSDeVault ?? "",
     tokenAddress: d.prismTokens?.Total ?? "",
     lpManagerAddress: "",
     lpTokenAddress: "",
@@ -252,6 +279,11 @@ export const VAULT_CONFIGS: VaultConfig[] = [
 /** Returns the VaultConfig for a given vault address (case-insensitive). */
 export function getVaultConfigByAddress(address: string): VaultConfig | undefined {
   return VAULT_CONFIGS.find((v) => v.vaultAddress.toLowerCase() === address.toLowerCase());
+}
+
+/** Returns the VaultConfig for a given key. */
+export function getVaultConfigByKey(key: string): VaultConfig | undefined {
+  return VAULT_CONFIGS.find((v) => v.key === key);
 }
 
 /** Returns the VaultConfig for a given token address (case-insensitive). */

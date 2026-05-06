@@ -22,6 +22,7 @@ import {
   ASSET_TYPE_LABEL,
   getTrancheMeta,
   getVaultConfigByAddress,
+  getVaultConfigByKey,
 } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
@@ -101,7 +102,7 @@ export default function VaultDetailPage() {
   const { account } = useWallet();
   const { chainId } = useChainId();
 
-  const cfg = getVaultConfigByAddress(address);
+  const cfg = getVaultConfigByAddress(address) ?? getVaultConfigByKey(address);
 
   const [activeTab, setActiveTab] = useState<Tab>(location.state?.tab ?? "deposit");
   const [depositInput, setDepositInput] = useState("");

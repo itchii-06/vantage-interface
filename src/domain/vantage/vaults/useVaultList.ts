@@ -20,7 +20,7 @@ import VaultAbi from "vantage/abis/Vault.json";
 import { VAULT_CONFIGS, type VaultConfig } from "./vaultConfig";
 
 // Prism axis variants (sUSDe_Price/Yield/Total) are display-only for Trade/Hedge pages.
-// Vaults page shows only real LP deposit destinations.
+// Vaults page shows only real LP deposit destinations (including the non-prism sUSDe entry).
 const VAULT_LIST_CONFIGS = VAULT_CONFIGS.filter((v) => !v.prismAxis);
 
 // ---------------------------------------------------------------------------

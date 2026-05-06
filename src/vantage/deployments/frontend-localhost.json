@@ -1,51 +1,69 @@
 {
   "network": "localhost",
   "addresses": {
-    "LPManager": "0x4631BCAbD6dF18D94796344963cB60d44a4136b6",
-    "LPToken": "0x49fd2BE640DB2910c2fAb69bB8531Ab6E76127ff",
-    "AssetRegistry": "0x1c85638e118b37167e9298c2268758e058DdfDA0",
-    "YieldAccumulator": "0xC9a43158891282A2B1475592D5719c001986Aaec",
-    "Router": "0x86A2EE8FAf9A840F7a2c64CA3d51209F9A02081D",
-    "PositionRouter": "0xA4899D35897033b927acFCf422bc745916139776",
-    "OrderBook": "0xf953b3A269d80e3eB0F2947630Da976B896A8C5b",
-    "HedgeController": "0xD42912755319665397FF090fBB63B1a31aE87Cee",
-    "VaultReader": "0xAA292E8611aDF267e563f334Ee42320aC96D0463",
-    "MockPriceFeed": "0xD84379CEae14AA33C123Af12424A37803F885889",
+    "LPManager": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+    "LPToken": "0x9A676e781A523b5d0C0e43731313A708CB607508",
+    "AssetRegistry": "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+    "YieldAccumulator": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+    "Router": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+    "PositionRouter": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+    "OrderBook": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
+    "HedgeController": "0x922D6956C99E12DFeB3224DEA977D0939758A1Fe",
+    "VaultReader": "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+    "MockPriceFeed": "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707",
     "tokens": {
-      "USDC": "0xf4B146FbA71F41E0592668ffbF264F1D186b2Ca8",
-      "ETH": "0x4EE6eCAD1c2Dae9f525404De8555724e3c35d07B",
-      "WETH": "0xBEc49fA140aCaA83533fB00A2BB19bDdd0290f25"
+      "USDC": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+      "ETH": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "WETH": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
     },
-    "JuniorTrancheVault": "0x7A9Ec1d04904907De0ED7b6839CcdD59c3716AC9",
+    "JuniorTrancheVault": "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
     "mockRWA": {
-      "Rebasing": "0x276C216D241856199A83bf27b2286659e5b877D3",
-      "PriceShare": "0x3347B4d90ebe72BeFb30444C9966B2B990aE9FcB",
-      "Direct": "0x3155755b79aA083bd953911C92705B7aA82a18F9"
+      "Rebasing": "0xf5059a5D33d5853360D16C683c16e67980206f36",
+      "PriceShare": "0x95401dc811bb5740090279Ba06cfA8fcF6113778",
+      "Direct": "0x998abeb3E57409262aE5b751f60747921B33613E"
     },
     "mockRWAVaults": {
-      "Rebasing": "0xab16A69A5a8c12C732e0DEFF4BE56A70bb64c926",
-      "PriceShare": "0x1f10F3Ba7ACB61b2F50B9d6DdCf91a6f787C0E82",
-      "Direct": "0x525C7063E7C20997BaaE9bDa922159152D0e8417"
+      "Rebasing": "0x0E801D84Fa97b50751Dbf25036d067dCf18858bF",
+      "PriceShare": "0x9d4454B023096f34B160D6B654540c56A1F81688",
+      "Direct": "0x36C02dA8a0983159322a80FFE9F24b1acfF8B570"
     },
     "mockRWALPTokens": {
-      "Rebasing": "0x5fc748f1FEb28d7b76fa1c6B07D8ba2d5535177c",
-      "PriceShare": "0x40918Ba7f132E0aCba2CE4de4c4baF9BD2D7D849",
-      "Direct": "0xCA8c8688914e0F7096c920146cd0Ad85cD7Ae8b9"
+      "Rebasing": "0x4c5859f0F772848b2D91F1D83E2Fe57935348029",
+      "PriceShare": "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
+      "Direct": "0xFD471836031dc5108809D173A067e8486B9047A3"
     },
     "mockRWALPManagers": {
-      "Rebasing": "0xB82008565FdC7e44609fA118A4a681E92581e680",
-      "PriceShare": "0xF32D39ff9f6Aa7a7A64d7a4F00a54826Ef791a55",
-      "Direct": "0xB0f05d25e41FbC2b52013099ED9616f1206Ae21B"
+      "Rebasing": "0x1291Be112d480055DaFd8a610b7d1e203891C274",
+      "PriceShare": "0x2bdCC0de6bE1f7D2ee689a0342D76F52E8EFABa3",
+      "Direct": "0xcbEAF3BDe82155F56486Fb5a1072cb8baAf547cc"
     },
     "prismAdapters": {
-      "benchmarkOracle": "0x0ed64d01D0B4B655E410EF1441dD677B695639E7",
-      "interestRateAdapter": "0x40a42Baf86Fc821f972Ad2aC878729063CeEF403",
-      "totalReturnAdapter": "0x96F3Ce39Ad2BfDCf92C0F6E2C2CAbF83874660Fc"
+      "benchmarkOracle": "0x36b58F5C1969B7b6591D752ea6F5486D069010AB",
+      "interestRateAdapter": "0x0355B7B8cb128fA5692729Ab3AAa199C1753f726",
+      "totalReturnAdapter": "0x202CCe504e04bEd6fC0521238dDf04Bc9E8E15aB"
     },
     "prismTokens": {
-      "Price": "0xFD6F7A6a5c21A3f503EBaE7a473639974379c351",
-      "Yield": "0xa6e99A4ED7498b3cdDCBB61a6A607a4925Faa1B7",
-      "Total": "0x5302E909d1e93e30F05B5D6Eea766363D14F9892"
+      "Price": "0xD8a5a9b31c3C0232E196d518E89Fd8bF83AcAd43",
+      "Yield": "0xDC11f7E700A4c898AE5CAddB1082cFfa76512aDD",
+      "Total": "0x51A1ceB83B83F1985a81C295d1fF28Afef186E02"
+    },
+    "sUSDeVault": "0xBEc49fA140aCaA83533fB00A2BB19bDdd0290f25",
+    "sUSDeLPToken": "0xfbC22278A96299D91d41C453234d97b4F5Eb9B2d",
+    "sUSDeLPManager": "0x46b142DD1E924FAb83eCc3c08e4D46E82f005e0E",
+    "sUSDeToken": "0x172076E0166D1F9Cc711C77Adf8488051744980C",
+    "exchangeRateAdapters": {
+      "sUSDe": {
+        "mockVault": "0x172076E0166D1F9Cc711C77Adf8488051744980C",
+        "adapter": "0x4EE6eCAD1c2Dae9f525404De8555724e3c35d07B"
+      },
+      "wstETH": {
+        "mockRate": "0x4C2F7092C2aE51D986bEFEe378e50BD4dB99C901",
+        "adapter": "0x7A9Ec1d04904907De0ED7b6839CcdD59c3716AC9"
+      }
+    },
+    "rwaRateAdapters": {
+      "SOFR": "0x49fd2BE640DB2910c2fAb69bB8531Ab6E76127ff",
+      "TONA": "0xA4899D35897033b927acFCf422bc745916139776"
     }
   },
   "abis": {
@@ -3719,6 +3737,11 @@
             "internalType": "uint256",
             "name": "_acceptablePrice",
             "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
         "name": "increasePosition",
@@ -3762,6 +3785,11 @@
             "internalType": "uint256",
             "name": "_acceptablePrice",
             "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
         "name": "increasePositionForAccount",
@@ -4167,50 +4195,6 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_collateralToken",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "_indexToken",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_amountIn",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_sizeDelta",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "_isLong",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_acceptablePrice",
-            "type": "uint256"
-          }
-        ],
-        "name": "createIncreasePosition",
-        "outputs": [
-          {
-            "internalType": "bytes32",
-            "name": "requestKey",
-            "type": "bytes32"
-          }
-        ],
-        "stateMutability": "payable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "address",
             "name": "_account",
             "type": "address"
           },
@@ -4253,9 +4237,63 @@
             "internalType": "bool",
             "name": "_convertOnADL",
             "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
         "name": "createIncreasePositionFor",
+        "outputs": [
+          {
+            "internalType": "bytes32",
+            "name": "requestKey",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_collateralToken",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_indexToken",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_amountIn",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_sizeDelta",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_isLong",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_acceptablePrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
+          }
+        ],
+        "name": "createIncreasePositionWithAdapter",
         "outputs": [
           {
             "internalType": "bytes32",
@@ -4441,6 +4479,11 @@
             "internalType": "uint256",
             "name": "_executionFee",
             "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
         "name": "increasePositionETH",
@@ -4495,6 +4538,11 @@
             "internalType": "bool",
             "name": "_convertOnADL",
             "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
         "name": "increasePositionETHFor",
@@ -4582,6 +4630,11 @@
             "internalType": "bool",
             "name": "convertOnADL",
             "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "priceAdapter",
+            "type": "address"
           }
         ],
         "stateMutability": "view",
@@ -5263,6 +5316,11 @@
             "internalType": "bool",
             "name": "_triggerAboveThreshold",
             "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
         "name": "createIncreaseOrder",
@@ -5476,6 +5534,11 @@
             "internalType": "uint256",
             "name": "executionFee",
             "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "priceAdapter",
+            "type": "address"
           }
         ],
         "stateMutability": "view",
@@ -5843,6 +5906,11 @@
             "internalType": "bool",
             "name": "_convertOnADL",
             "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
         "name": "createManagedHedge",
@@ -5891,6 +5959,11 @@
             "internalType": "bool",
             "name": "_convertOnADL",
             "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
         "name": "createManagedHedgeETH",
@@ -5939,6 +6012,11 @@
             "internalType": "bool",
             "name": "_convertOnADL",
             "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
         "name": "createSelfCustodyHedge",
@@ -5977,6 +6055,11 @@
             "internalType": "bool",
             "name": "_convertOnADL",
             "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
         "name": "createSelfCustodyHedgeETH",
@@ -6935,6 +7018,33 @@
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "adapter",
+            "type": "address"
+          }
+        ],
+        "name": "AdapterNotAllowed",
+        "type": "error"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "projected",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "limit",
+            "type": "uint256"
+          }
+        ],
+        "name": "AdapterSubLimitExceeded",
+        "type": "error"
       },
       {
         "inputs": [
@@ -9533,6 +9643,63 @@
         "inputs": [
           {
             "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "adapterLongOI",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "adapterMaxOI",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "adapterShortOI",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
             "name": "_account",
             "type": "address"
           },
@@ -9555,6 +9722,25 @@
         "name": "adlPosition",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "allowedAdapter",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
         "type": "function"
       },
       {
@@ -10741,9 +10927,14 @@
             "internalType": "bool",
             "name": "_convertOnADL",
             "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_priceAdapter",
+            "type": "address"
           }
         ],
-        "name": "increasePosition",
+        "name": "increasePositionWithAdapter",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -11189,6 +11380,25 @@
         "inputs": [
           {
             "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "minFeeRateBps",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
             "name": "lp",
             "type": "address"
           },
@@ -11348,6 +11558,25 @@
             "internalType": "uint64",
             "name": "executableAt",
             "type": "uint64"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "name": "positionAdapter",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
           }
         ],
         "stateMutability": "view",
@@ -11731,6 +11960,42 @@
           }
         ],
         "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_adapter",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "_allowed",
+            "type": "bool"
+          }
+        ],
+        "name": "setAdapterAllowed",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_adapter",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_maxOI",
+            "type": "uint256"
+          }
+        ],
+        "name": "setAdapterMaxOI",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
       },
       {
@@ -12157,6 +12422,29 @@
       {
         "inputs": [
           {
+            "internalType": "address",
+            "name": "_adapter",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_multiplierBps",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_minFeeBps",
+            "type": "uint256"
+          }
+        ],
+        "name": "setSkewFeeConfig",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
             "internalType": "uint256",
             "name": "_seconds",
             "type": "uint256"
@@ -12390,6 +12678,25 @@
             "internalType": "bool",
             "name": "",
             "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "skewFeeMultiplier",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
           }
         ],
         "stateMutability": "view",
