@@ -102,20 +102,30 @@ export function usePositionRouterTrade(): PositionRouterTradeResult {
 
       try {
         let tx;
+        if (!req.priceAdapter) {
+          // All PositionRouter paths now require a non-zero priceAdapter (Issue #227).
+          helperToast.error(t`Price adapter not configured for this market`);
+          return null;
+        }
+
         if (req.useNativeEth) {
           // ETH collateral: msg.value = collateralAmount + executionFee
           const totalValue = req.amountIn + minExecutionFee;
-          tx = await positionRouterWrite.increasePositionETH(
+          // Cast to any: priceAdapter arg added to contract but typechain not yet regenerated.
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          tx = await (positionRouterWrite as any).increasePositionETH(
             req.indexToken,
             req.sizeDelta,
             req.isLong,
             acceptablePrice,
             minExecutionFee,
+            req.priceAdapter,
             { value: totalValue }
           );
-        } else if (req.priceAdapter) {
-          // Per-index adapter path: routes through Vault.increasePositionWithAdapter.
-          // Cast to any: createIncreasePositionWithAdapter is not yet in the generated PositionRouter typechain.
+        } else {
+          // ERC-20 collateral: createIncreasePosition was removed (Issue #227).
+          // All ERC-20 positions now go through createIncreasePositionWithAdapter.
+          // Cast to any: not yet in generated PositionRouter typechain.
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           tx = await (positionRouterWrite as any).createIncreasePositionWithAdapter(
             req.collateralToken,
@@ -125,16 +135,6 @@ export function usePositionRouterTrade(): PositionRouterTradeResult {
             req.isLong,
             acceptablePrice,
             req.priceAdapter,
-            { value: minExecutionFee }
-          );
-        } else {
-          tx = await positionRouterWrite.createIncreasePosition(
-            req.collateralToken,
-            req.indexToken,
-            req.amountIn,
-            req.sizeDelta,
-            req.isLong,
-            acceptablePrice,
             { value: minExecutionFee }
           );
         }

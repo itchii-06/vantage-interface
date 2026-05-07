@@ -136,9 +136,17 @@ export default function TradePage() {
                         >
                           <div className="flex items-center gap-10">
                             {/* Symbol avatar */}
-                            <div className="flex h-32 w-32 items-center justify-center rounded-full bg-slate-700 text-12 font-bold text-white">
-                              {vault.symbol.slice(0, 2)}
-                            </div>
+                            {vault.imageUrl ? (
+                              <img
+                                src={vault.imageUrl}
+                                alt={vault.name}
+                                className="h-48 w-48 rounded-full object-cover"
+                              />
+                            ) : (
+                              <div className="flex h-32 w-32 items-center justify-center rounded-full bg-slate-700 text-12 font-bold text-white">
+                                {vault.symbol.slice(0, 2)}
+                              </div>
+                            )}
                             <div>
                               <div className="text-14 font-semibold text-white">{vault.symbol}</div>
                               <div className="text-11 text-slate-400">{vault.name}</div>

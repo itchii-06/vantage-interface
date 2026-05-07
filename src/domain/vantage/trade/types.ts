@@ -23,6 +23,8 @@ export type IncreasePositionParams = {
   markPrice: bigint;
   /** Slippage tolerance in basis points. Default: 30 (0.3%). */
   slippageBps?: number;
+  /** Price adapter address for per-index skew tracking (Issue #227). Must be non-zero. */
+  priceAdapter?: string;
 };
 
 export type DecreasePositionParams = {

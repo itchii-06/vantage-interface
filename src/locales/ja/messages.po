@@ -490,6 +490,10 @@ msgstr "@ユーザー名"
 msgid "Failed to claim affiliate rewards"
 msgstr "アフィリエイト報酬の受け取りに失敗しました"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "大盛況につき受付停止中"
+msgstr ""
+
 #: src/components/TradeBox/hooks/useTradeButtonState.tsx
 msgid "decrease"
 msgstr ""
@@ -686,6 +690,10 @@ msgstr "準備基金の活用"
 #: src/components/NetworkFeeRow/NetworkFeeRow.tsx
 msgid "Max network fee includes fees for additional orders. Refunded in full if they don't trigger and are canceled. <0>Read more</0>."
 msgstr "最大ネットワーク手数料には追加注文の手数料が含まれます。トリガーされずキャンセルされた場合は全額返金されます。<0>詳細を読む</0>。"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Exceeds Remaining Capacity"
+msgstr ""
 
 #: src/pages/PriceImpactRebatesStats/PriceImpactRebatesStats.tsx
 msgid "Copy cmd"
@@ -3058,6 +3066,7 @@ msgstr "正常"
 msgid "You have not traded during the selected period"
 msgstr "選択した期間中に取引はありませんでした"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Token Balance"
 msgstr "トークン残高"
@@ -3065,6 +3074,10 @@ msgstr "トークン残高"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Default parts for TWAP orders"
 msgstr "TWAP注文のデフォルト分割数"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Exceeds Trade Capacity"
+msgstr ""
 
 #: src/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
 #: src/components/GmxAccountModal/MainView.tsx
@@ -3550,8 +3563,8 @@ msgid "Your GMX Account balance, usable for trading from any supported chain. <0
 msgstr "GMX Accountの残高です。対応するすべてのチェーンからお取引にご利用いただけます。<0>詳細はこちら</0>。"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "TVL Protected"
-msgstr "保護済みTVL"
+#~ msgid "TVL Protected"
+#~ msgstr "保護済みTVL"
 
 #: src/components/AllowedSwapSlippageInputRowImpl/AllowedSwapSlippageInputRowImpl.tsx
 #: src/components/AllowedSwapSlippageInputRowImpl/AllowedSwapSlippageInputRowImpl.tsx
@@ -4176,6 +4189,10 @@ msgstr "マーケットを選択"
 msgid "Decreasing..."
 msgstr "ポジション縮小中..."
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "空き枠ができ次第、新規受付を再開いたします。今しばらくお待ちください。"
+msgstr ""
+
 #: src/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
 msgid "Claim successful"
 msgstr "受け取りが完了しました"
@@ -4755,6 +4772,10 @@ msgid "UI page"
 msgstr "UIページ"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "おかげさまで現在のヘッジ枠はすべて埋まっております。"
+msgstr ""
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Delta Neutral"
 msgstr "デルタニュートラル"
 
@@ -5165,6 +5186,11 @@ msgstr "無効"
 msgid "Max open interest exceeded. Current: {openInterestText}, max: {maxOpenInterestText}"
 msgstr "最大建玉を超過しました。現在: {openInterestText}、上限: {maxOpenInterestText}"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "受付停止中"
+msgstr ""
+
 #: src/domain/synthetics/positions/utils.ts
 msgid "stop-loss"
 msgstr "ストップロス"
@@ -5440,8 +5466,8 @@ msgid "Current impact: {0}. Add 0.30% buffer for better order execution."
 msgstr "現在の影響: {0}。注文の約定精度を高めるために0.30%のバッファを追加してください。"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Deposit {0} + Open Short"
-msgstr "{0} を預入＋ショートを開く"
+#~ msgid "Deposit {0} + Open Short"
+#~ msgstr "{0} を預入＋ショートを開く"
 
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settle {totalStr}"
@@ -5458,6 +5484,10 @@ msgstr "正の影響係数"
 #: src/components/ModalViews/RedirectModal.tsx
 msgid "Alternative links are in the <0>docs</0>.<1/><2/>By clicking Agree, you accept the <3>T&Cs</3> and <4>Referral T&Cs</4>.<5/><6/>"
 msgstr "代替リンクは<0>ドキュメント</0>に記載されています。<1/><2/>「同意する」をクリックすると、<3>利用規約</3>および<4>リファラル利用規約</4>に同意したことになります。<5/><6/>"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "最大入力可能量："
+msgstr ""
 
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "GM pools:"
@@ -5563,6 +5593,10 @@ msgstr "bps"
 msgid "Create TWAP"
 msgstr "TWAPを作成"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposit {rwaSymbol} + Open Short"
+msgstr ""
+
 #: src/components/TradeBox/SwapSlippageField.tsx
 msgid "Slippage is the difference between your expected and actual execution price due to price volatility. Orders won't execute if slippage exceeds your allowed maximum. The default can be adjusted in settings.<0/><1/>A low value (e.g. less than -{0}) may cause failed orders during volatility.<2/><3/>Note: slippage is different from price impact, which is based on open interest imbalances. <4>Read more</4>."
 msgstr "スリッページとは、価格変動により予想約定価格と実際の約定価格の差です。スリッページが許容最大値を超えると注文は約定されません。デフォルト値は設定で調整できます。<0/><1/>低い値（例：-{0}未満）は、ボラティリティ時に注文失敗の原因となる場合があります。<2/><3/>注：スリッページは、オープンインタレストの不均衡に基づく価格影響とは異なります。<4>詳細はこちら</4>。"
@@ -5597,6 +5631,11 @@ msgstr "利用規約"
 #: src/components/GmList/GmList.tsx
 msgid "TVL (SUPPLY)"
 msgstr "TVL (供給)"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "リクエストサイズ"
+msgstr ""
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Hedge Protection Status"
@@ -6180,6 +6219,11 @@ msgstr "NFT、トレーディング、教育活動を展開する GMX コミュ�
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Longs"
 msgstr "ロング"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "入力サイズが残余容量を超えています"
+msgstr ""
 
 #: src/domain/synthetics/referrals/claimAffiliateRewardsTxn.ts
 msgid "Affiliate rewards claimed"
@@ -6939,6 +6983,10 @@ msgstr "構成"
 msgid "Favorites"
 msgstr "お気に入り"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "おかげさまで現在のトレード枠はすべて埋まっております。"
+msgstr ""
+
 #: src/components/Earn/AdditionalOpportunities/useOpportunities.tsx
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Lending and borrowing"
@@ -7237,6 +7285,10 @@ msgstr "スプレッド"
 msgid "GMX newsletter and long-form updates"
 msgstr "GMXのニュースレターおよび詳細なアップデート"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "を超えています。"
+msgstr ""
+
 #: src/components/TPSLModal/TPSLInputRow.tsx
 msgid "TP price"
 msgstr "TP価格"
@@ -7480,6 +7532,7 @@ msgid "Yield Yak Optimizer"
 msgstr "Yield Yak Optimizer"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Remaining Capacity"
 msgstr "残余容量"
 
@@ -7490,6 +7543,10 @@ msgstr "メインアカウントに{balanceFormatted}を出金中…"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Used"
 msgstr "使用済み"
+
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+msgid "Price adapter not configured for this market"
+msgstr ""
 
 #: src/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "{orderText} updated"
@@ -8101,6 +8158,10 @@ msgstr ""
 #: src/pages/RpcDebug/parts.tsx
 msgid "STATUS"
 msgstr "STATUS"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Total capacity"
+msgstr ""
 
 #: src/components/TwapRows/TwapRows.tsx
 msgid "<0>every</0> {seconds} seconds"
@@ -9444,6 +9505,10 @@ msgstr "言語を選択"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Open New Hedge"
 msgstr "新規ヘッジを開く"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "を超えています。サイズを小さくしてください。"
+msgstr ""
 
 #: src/pages/ParseTransaction/ParseTransaction.tsx
 msgid "Unknown value"
@@ -11698,6 +11763,11 @@ msgstr "一致するプールなし"
 msgid "Liquidation confirmations"
 msgstr "清算確認"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "が残余容量"
+msgstr ""
+
 #: src/pages/Ecosystem/Ecosystem.tsx
 #: src/pages/Ecosystem/Ecosystem.tsx
 #: src/pages/Ecosystem/Ecosystem.tsx
@@ -11749,6 +11819,10 @@ msgstr "PnL ロング"
 #: src/pages/Dashboard/DashboardV2.tsx
 msgid "For detailed stats"
 msgstr "詳細統計のために"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "空き枠ができ次第、新規受付を再開いたします。次回の受付開始まで今しばらくお待ちください。"
+msgstr ""
 
 #: src/components/TenderlySettings/TenderlySettings.tsx
 msgid "Simulate transactions"
@@ -11953,6 +12027,10 @@ msgstr "テキストカラー"
 #: src/components/DateRangeSelect/DateRangeSelect.tsx
 msgid "7d"
 msgstr "7日"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Total Capacity"
+msgstr ""
 
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Token permit"

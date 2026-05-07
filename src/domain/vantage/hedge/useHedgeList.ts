@@ -43,6 +43,7 @@ export type HedgeListItem = {
   /** Vault AUM in USD WAD */
   aum: bigint;
   isLoading: boolean;
+  imageUrl?: string;
 };
 
 /** Annualise hourly cumulative funding rate stored in the Vault. */
@@ -145,6 +146,7 @@ function useHedgeItem(cfg: VaultConfig): HedgeListItem {
       selfCustodyApy,
       aum,
       isLoading,
+      imageUrl: cfg.imageUrl,
     };
   }, [cfg, vaultApy, fundingApy, aum, isLoading]);
 }
@@ -163,14 +165,12 @@ export function useHedgeList(): HedgeListItem[] {
   const item0 = useHedgeItem(HEDGEABLE[0] ?? FALLBACK);
   const item1 = useHedgeItem(HEDGEABLE[1] ?? FALLBACK);
   const item2 = useHedgeItem(HEDGEABLE[2] ?? FALLBACK);
-  const item3 = useHedgeItem(HEDGEABLE[3] ?? FALLBACK);
   const item4 = useHedgeItem(HEDGEABLE[4] ?? FALLBACK);
   const item5 = useHedgeItem(HEDGEABLE[5] ?? FALLBACK);
   const item6 = useHedgeItem(HEDGEABLE[6] ?? FALLBACK);
-  const item7 = useHedgeItem(HEDGEABLE[7] ?? FALLBACK);
 
   return useMemo(
-    () => [item0, item1, item2, item3, item4, item5, item6, item7].slice(0, HEDGEABLE.length),
-    [item0, item1, item2, item3, item4, item5, item6, item7]
+    () => [item0, item1, item2, item4, item5, item6].slice(0, HEDGEABLE.length),
+    [item0, item1, item2, item4, item5, item6]
   );
 }

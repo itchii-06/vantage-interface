@@ -649,9 +649,13 @@ function VaultLpSection({ items, hasAccount }: VaultLpSectionProps) {
             >
               {/* Vault */}
               <div className="flex items-center gap-10">
-                <div className="flex h-48 w-48 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
-                  {v.symbol.slice(0, 2)}
-                </div>
+                {v.imageUrl ? (
+                  <img src={v.imageUrl} alt={v.name} className="h-48 w-48 rounded-full object-cover" />
+                ) : (
+                  <div className="flex h-48 w-48 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
+                    {v.symbol.slice(0, 2)}
+                  </div>
+                )}
                 <div>
                   <div className="text-16 font-semibold text-white">{v.symbol}</div>
                   <div className="text-14 text-slate-500">{v.name}</div>

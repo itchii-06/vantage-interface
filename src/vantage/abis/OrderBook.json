@@ -449,6 +449,11 @@
         "internalType": "bool",
         "name": "_triggerAboveThreshold",
         "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "_priceAdapter",
+        "type": "address"
       }
     ],
     "name": "createIncreaseOrder",
@@ -662,6 +667,11 @@
         "internalType": "uint256",
         "name": "executionFee",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "priceAdapter",
+        "type": "address"
       }
     ],
     "stateMutability": "view",

@@ -188,9 +188,10 @@ export function useHedgeActions(): HedgeActionResult {
               params.indexToken,
               params.sizeDelta,
               acceptablePrice,
-              convertOnADL,
-              params.priceAdapter,
               executionFee,
+              true, // _isHedge (always true for hedge positions)
+              convertOnADL, // _convertOnADL
+              params.priceAdapter, // _priceAdapter
               { value: executionFee }
             );
             const receipt = await tx.wait();
@@ -204,9 +205,10 @@ export function useHedgeActions(): HedgeActionResult {
               params.indexToken,
               params.sizeDelta,
               acceptablePrice,
-              convertOnADL,
-              params.priceAdapter,
               executionFee,
+              true, // _isHedge
+              convertOnADL, // _convertOnADL
+              params.priceAdapter, // _priceAdapter
               { value: msgValue }
             );
             const receipt = await tx.wait();
@@ -229,9 +231,10 @@ export function useHedgeActions(): HedgeActionResult {
               params.indexToken,
               params.sizeDelta,
               acceptablePrice,
-              convertOnADL,
-              params.priceAdapter,
               executionFee,
+              true, // _isHedge
+              convertOnADL, // _convertOnADL
+              params.priceAdapter, // _priceAdapter
               { value: executionFee }
             );
             const receipt = await tx.wait();
@@ -242,9 +245,10 @@ export function useHedgeActions(): HedgeActionResult {
               params.indexToken,
               params.sizeDelta,
               acceptablePrice,
-              convertOnADL,
-              params.priceAdapter,
               executionFee,
+              true, // _isHedge
+              convertOnADL, // _convertOnADL
+              params.priceAdapter, // _priceAdapter
               { value: msgValue }
             );
             const receipt = await tx.wait();

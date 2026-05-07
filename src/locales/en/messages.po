@@ -490,6 +490,10 @@ msgstr "@username"
 msgid "Failed to claim affiliate rewards"
 msgstr "Failed to claim affiliate rewards"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "大盛況につき受付停止中"
+msgstr "大盛況につき受付停止中"
+
 #: src/components/TradeBox/hooks/useTradeButtonState.tsx
 msgid "decrease"
 msgstr "decrease"
@@ -686,6 +690,10 @@ msgstr "Reserve Fund Utilization"
 #: src/components/NetworkFeeRow/NetworkFeeRow.tsx
 msgid "Max network fee includes fees for additional orders. Refunded in full if they don't trigger and are canceled. <0>Read more</0>."
 msgstr "Max network fee includes fees for additional orders. Refunded in full if they don't trigger and are canceled. <0>Read more</0>."
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Exceeds Remaining Capacity"
+msgstr "Exceeds Remaining Capacity"
 
 #: src/pages/PriceImpactRebatesStats/PriceImpactRebatesStats.tsx
 msgid "Copy cmd"
@@ -3058,6 +3066,7 @@ msgstr "Normal"
 msgid "You have not traded during the selected period"
 msgstr "You have not traded during the selected period"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Token Balance"
 msgstr "Token Balance"
@@ -3065,6 +3074,10 @@ msgstr "Token Balance"
 #: src/components/SettingsModal/TradingSettings.tsx
 msgid "Default parts for TWAP orders"
 msgstr "Default parts for TWAP orders"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Exceeds Trade Capacity"
+msgstr "Exceeds Trade Capacity"
 
 #: src/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
 #: src/components/GmxAccountModal/MainView.tsx
@@ -3550,8 +3563,8 @@ msgid "Your GMX Account balance, usable for trading from any supported chain. <0
 msgstr "Your GMX Account balance, usable for trading from any supported chain. <0>Read more</0>."
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "TVL Protected"
-msgstr "TVL Protected"
+#~ msgid "TVL Protected"
+#~ msgstr "TVL Protected"
 
 #: src/components/AllowedSwapSlippageInputRowImpl/AllowedSwapSlippageInputRowImpl.tsx
 #: src/components/AllowedSwapSlippageInputRowImpl/AllowedSwapSlippageInputRowImpl.tsx
@@ -4176,6 +4189,10 @@ msgstr "Select Market"
 msgid "Decreasing..."
 msgstr "Decreasing..."
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "空き枠ができ次第、新規受付を再開いたします。今しばらくお待ちください。"
+msgstr "空き枠ができ次第、新規受付を再開いたします。今しばらくお待ちください。"
+
 #: src/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
 msgid "Claim successful"
 msgstr "Claim successful"
@@ -4755,6 +4772,10 @@ msgid "UI page"
 msgstr "UI page"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "おかげさまで現在のヘッジ枠はすべて埋まっております。"
+msgstr "おかげさまで現在のヘッジ枠はすべて埋まっております。"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Delta Neutral"
 msgstr "Delta Neutral"
 
@@ -5165,6 +5186,11 @@ msgstr "Inactive"
 msgid "Max open interest exceeded. Current: {openInterestText}, max: {maxOpenInterestText}"
 msgstr "Max open interest exceeded. Current: {openInterestText}, max: {maxOpenInterestText}"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "受付停止中"
+msgstr "受付停止中"
+
 #: src/domain/synthetics/positions/utils.ts
 msgid "stop-loss"
 msgstr "stop-loss"
@@ -5440,8 +5466,8 @@ msgid "Current impact: {0}. Add 0.30% buffer for better order execution."
 msgstr "Current impact: {0}. Add 0.30% buffer for better order execution."
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
-msgid "Deposit {0} + Open Short"
-msgstr "Deposit {0} + Open Short"
+#~ msgid "Deposit {0} + Open Short"
+#~ msgstr "Deposit {0} + Open Short"
 
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Settle {totalStr}"
@@ -5458,6 +5484,10 @@ msgstr "Positive impact factor"
 #: src/components/ModalViews/RedirectModal.tsx
 msgid "Alternative links are in the <0>docs</0>.<1/><2/>By clicking Agree, you accept the <3>T&Cs</3> and <4>Referral T&Cs</4>.<5/><6/>"
 msgstr "Alternative links are in the <0>docs</0>.<1/><2/>By clicking Agree, you accept the <3>T&Cs</3> and <4>Referral T&Cs</4>.<5/><6/>"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "最大入力可能量："
+msgstr "最大入力可能量："
 
 #: src/components/Earn/Portfolio/RewardsBar.tsx
 msgid "GM pools:"
@@ -5563,6 +5593,10 @@ msgstr "bps"
 msgid "Create TWAP"
 msgstr "Create TWAP"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Deposit {rwaSymbol} + Open Short"
+msgstr "Deposit {rwaSymbol} + Open Short"
+
 #: src/components/TradeBox/SwapSlippageField.tsx
 msgid "Slippage is the difference between your expected and actual execution price due to price volatility. Orders won't execute if slippage exceeds your allowed maximum. The default can be adjusted in settings.<0/><1/>A low value (e.g. less than -{0}) may cause failed orders during volatility.<2/><3/>Note: slippage is different from price impact, which is based on open interest imbalances. <4>Read more</4>."
 msgstr "Slippage is the difference between your expected and actual execution price due to price volatility. Orders won't execute if slippage exceeds your allowed maximum. The default can be adjusted in settings.<0/><1/>A low value (e.g. less than -{0}) may cause failed orders during volatility.<2/><3/>Note: slippage is different from price impact, which is based on open interest imbalances. <4>Read more</4>."
@@ -5597,6 +5631,11 @@ msgstr "Terms and conditions"
 #: src/components/GmList/GmList.tsx
 msgid "TVL (SUPPLY)"
 msgstr "TVL (SUPPLY)"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "リクエストサイズ"
+msgstr "リクエストサイズ"
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Hedge Protection Status"
@@ -6180,6 +6219,11 @@ msgstr "GMX community with NFTs, trading, and education initiatives"
 #: src/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Longs"
 msgstr "Longs"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "入力サイズが残余容量を超えています"
+msgstr "入力サイズが残余容量を超えています"
 
 #: src/domain/synthetics/referrals/claimAffiliateRewardsTxn.ts
 msgid "Affiliate rewards claimed"
@@ -6943,6 +6987,10 @@ msgstr "COMPOSITION"
 msgid "Favorites"
 msgstr "Favorites"
 
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "おかげさまで現在のトレード枠はすべて埋まっております。"
+msgstr "おかげさまで現在のトレード枠はすべて埋まっております。"
+
 #: src/components/Earn/AdditionalOpportunities/useOpportunities.tsx
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Lending and borrowing"
@@ -7241,6 +7289,10 @@ msgstr "Spread"
 msgid "GMX newsletter and long-form updates"
 msgstr "GMX newsletter and long-form updates"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "を超えています。"
+msgstr "を超えています。"
+
 #: src/components/TPSLModal/TPSLInputRow.tsx
 msgid "TP price"
 msgstr "TP price"
@@ -7484,6 +7536,7 @@ msgid "Yield Yak Optimizer"
 msgstr "Yield Yak Optimizer"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Remaining Capacity"
 msgstr "Remaining Capacity"
 
@@ -7494,6 +7547,10 @@ msgstr "Withdrawing {balanceFormatted} to main account..."
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Used"
 msgstr "Used"
+
+#: src/domain/vantage/trade/usePositionRouterTrade.ts
+msgid "Price adapter not configured for this market"
+msgstr "Price adapter not configured for this market"
 
 #: src/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "{orderText} updated"
@@ -8105,6 +8162,10 @@ msgstr "Liq."
 #: src/pages/RpcDebug/parts.tsx
 msgid "STATUS"
 msgstr "STATUS"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "Total capacity"
+msgstr "Total capacity"
 
 #: src/components/TwapRows/TwapRows.tsx
 msgid "<0>every</0> {seconds} seconds"
@@ -9448,6 +9509,10 @@ msgstr "Select language"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "Open New Hedge"
 msgstr "Open New Hedge"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "を超えています。サイズを小さくしてください。"
+msgstr "を超えています。サイズを小さくしてください。"
 
 #: src/pages/ParseTransaction/ParseTransaction.tsx
 msgid "Unknown value"
@@ -11706,6 +11771,11 @@ msgstr "No pools matched"
 msgid "Liquidation confirmations"
 msgstr "Liquidation confirmations"
 
+#: src/pages/Hedge/HedgeDetailPage.tsx
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "が残余容量"
+msgstr "が残余容量"
+
 #: src/pages/Ecosystem/Ecosystem.tsx
 #: src/pages/Ecosystem/Ecosystem.tsx
 #: src/pages/Ecosystem/Ecosystem.tsx
@@ -11757,6 +11827,10 @@ msgstr "PnL long"
 #: src/pages/Dashboard/DashboardV2.tsx
 msgid "For detailed stats"
 msgstr "For detailed stats"
+
+#: src/pages/Hedge/HedgeDetailPage.tsx
+msgid "空き枠ができ次第、新規受付を再開いたします。次回の受付開始まで今しばらくお待ちください。"
+msgstr "空き枠ができ次第、新規受付を再開いたします。次回の受付開始まで今しばらくお待ちください。"
 
 #: src/components/TenderlySettings/TenderlySettings.tsx
 msgid "Simulate transactions"
@@ -11961,6 +12035,10 @@ msgstr "Text colors"
 #: src/components/DateRangeSelect/DateRangeSelect.tsx
 msgid "7d"
 msgstr "7d"
+
+#: src/pages/Trade/components/OpenPositionPanel.tsx
+msgid "Total Capacity"
+msgstr "Total Capacity"
 
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Token permit"

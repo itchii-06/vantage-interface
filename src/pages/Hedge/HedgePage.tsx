@@ -98,13 +98,16 @@ export default function HedgePage() {
             >
               {/* Asset */}
               <div className="flex items-center gap-12">
-                <div className="flex h-56 w-56 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
-                  {item.symbol.slice(0, 2)}
-                </div>
+                {item.imageUrl ? (
+                  <img src={item.imageUrl} alt={item.name} className="h-56 w-56 rounded-full object-cover" />
+                ) : (
+                  <div className="flex h-56 w-56 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
+                    {item.symbol.slice(0, 2)}
+                  </div>
+                )}
                 <div>
-                  <div className="text-16 font-black text-white">{item.symbol}</div>
-                  <div className="mt-2 flex items-center gap-6">
-                    <span className="text-14 text-vantage-text-secondary">{item.name}</span>
+                  <div className="text-16 font-black text-white">{item.name}</div>
+                  <div className="mt-4 flex items-center gap-6">
                     <span className={`text-xs rounded-full px-8 py-1 ${ASSET_TYPE_COLOR[item.assetType]}`}>
                       {ASSET_TYPE_LABEL[item.assetType]}
                     </span>
@@ -117,6 +120,11 @@ export default function HedgePage() {
                     )}
                   </div>
                 </div>
+              </div>
+
+              {/* Vault APY */}
+              <div className="text-right">
+                <span className={`text-15 font-medium ${_apyColor(item.vaultApy)}`}>{_formatApy(item.vaultApy)}</span>
               </div>
 
               {/* AUM */}

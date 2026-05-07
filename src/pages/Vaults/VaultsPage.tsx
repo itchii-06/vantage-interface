@@ -175,9 +175,13 @@ function VaultTable({ items, apyByKey, account, sortKey, sortDir, onSort, onRowC
           >
             {/* Asset */}
             <div className="flex items-center gap-12">
-              <div className="flex h-56 w-56 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
-                {item.symbol.slice(0, 2)}
-              </div>
+              {item.imageUrl ? (
+                <img src={item.imageUrl} alt={item.name} className="h-56 w-56 rounded-full object-cover" />
+              ) : (
+                <div className="flex h-56 w-56 items-center justify-center rounded-full bg-slate-700 text-14 font-bold text-white">
+                  {item.symbol.slice(0, 2)}
+                </div>
+              )}
               <div>
                 <div className="flex items-center gap-8">
                   <div className="text-16 font-semibold text-white">{item.symbol}</div>
@@ -187,7 +191,6 @@ function VaultTable({ items, apyByKey, account, sortKey, sortDir, onSort, onRowC
                     {getTrancheMeta()[item.trancheType].shortLabel} · {getTrancheMeta()[item.trancheType].riskLabel}
                   </span>
                 </div>
-                <div className="text-14 text-vantage-text-secondary">{item.name}</div>
               </div>
             </div>
 

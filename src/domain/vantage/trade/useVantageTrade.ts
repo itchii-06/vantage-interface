@@ -44,13 +44,17 @@ export function useVantageTrade(chainId: number) {
 
       try {
         // path = [collateralToken] (no token swap; Router is nonpayable — no ETH value)
-        const tx = await router.increasePosition(
+        // _priceAdapter is mandatory (address(0) rejected by Vault — Issue #227).
+        // Cast to any: priceAdapter arg added to contract but typechain not yet regenerated.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const tx = await (router as any).increasePosition(
           [params.collateralToken],
           params.indexToken,
           params.amountIn,
           params.sizeDelta,
           params.isLong,
-          acceptablePrice
+          acceptablePrice,
+          params.priceAdapter ?? ""
         );
 
         helperToast.info(t`Transaction submitted`);

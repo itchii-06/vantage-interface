@@ -49,6 +49,7 @@ export type VaultLpItem = {
   /** Annualized vault yield APY (decimal, e.g. 0.052 = 5.2%) */
   apy: number | null;
   isLoading: boolean;
+  imageUrl?: string;
 };
 
 export type HedgePortfolioItem = {
@@ -152,6 +153,7 @@ export function usePortfolioData(chainId: number, account: string | undefined): 
         usdValue: vaultDetails[i]?.usdValue ?? 0n,
         apy: apyList[i] ?? null,
         isLoading: vaultDetails[i]?.isLoading ?? true,
+        imageUrl: cfg.imageUrl,
       })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [vd0, vd1, vd2, vd3, apy0, apy1, apy2, apy3]

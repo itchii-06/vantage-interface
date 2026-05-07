@@ -645,9 +645,14 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
       }
     ],
-    "name": "increasePosition",
+    "name": "increasePositionWithAdapter",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

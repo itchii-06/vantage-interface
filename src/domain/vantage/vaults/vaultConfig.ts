@@ -101,6 +101,21 @@ export interface VaultConfig {
    * Undefined on standard configs (no adapter binding).
    */
   adapterAddress?: string;
+  /**
+   * Real ERC20 token address for LP deposit (Prism axis configs only).
+   * Prism `tokenAddress` is a virtual index token used for oracle/perp routing;
+   * the actual collateral deposited into the vault is a different token (e.g. sUSDe).
+   * Falls back to `tokenAddress` when absent.
+   */
+  collateralTokenAddress?: string;
+  /**
+   * Display symbol for the LP deposit token (Prism axis configs only).
+   * Falls back to `symbol` when absent.
+   */
+  collateralSymbol?: string;
+
+  /** Image URL for the token */
+  imageUrl?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -150,6 +165,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     tokenDecimals: 6,
     isMock: false,
     tvSymbol: "BINANCE:BTCUSDT",
+    imageUrl: "/coins/usdc.png",
   },
   // ── mBUIDL (Rebasing / Senior) ───────────────────────────────────────────
   {
@@ -213,6 +229,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     tokenDecimals: 18,
     isMock: true,
     tvSymbol: "BINANCE:ETHUSD",
+    imageUrl: "/coins/susde.png",
   },
 
   // ── Interest Prism (display-only; no real vault or LPManager) ────────────
@@ -229,7 +246,7 @@ export const VAULT_CONFIGS: VaultConfig[] = [
   {
     key: "sUSDe_Price",
     name: "sUSDe Market Price",
-    symbol: "sUSDe_P",
+    symbol: "sUSDe",
     assetType: 2,
     trancheType: "senior",
     vaultAddress: d.sUSDeVault ?? "",
@@ -241,11 +258,14 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     tvSymbol: "BINANCE:BTCUSDT",
     prismAxis: "price",
     adapterAddress: d.prismAdapters?.benchmarkOracle ?? "",
+    collateralTokenAddress: d.sUSDeToken ?? "",
+    collateralSymbol: "sUSDe",
+    imageUrl: "/coins/susde.png",
   },
   {
     key: "sUSDe_Yield",
-    name: "sUSDe Yield Rate → Price",
-    symbol: "sUSDe_Y",
+    name: "sUSDe Yield Rate",
+    symbol: "sUSDe",
     assetType: 2,
     trancheType: "senior",
     vaultAddress: d.sUSDeVault ?? "",
@@ -257,11 +277,14 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     tvSymbol: "BINANCE:BTCUSDT",
     prismAxis: "yield",
     adapterAddress: d.prismAdapters?.interestRateAdapter ?? "",
+    collateralTokenAddress: d.sUSDeToken ?? "",
+    collateralSymbol: "sUSDe",
+    imageUrl: "/coins/susde.png",
   },
   {
     key: "sUSDe_Total",
     name: "sUSDe Total Return Index",
-    symbol: "sUSDe_T",
+    symbol: "sUSDe",
     assetType: 2,
     trancheType: "senior",
     vaultAddress: d.sUSDeVault ?? "",
@@ -273,6 +296,9 @@ export const VAULT_CONFIGS: VaultConfig[] = [
     tvSymbol: "BINANCE:BTCUSDT",
     prismAxis: "total",
     adapterAddress: d.prismAdapters?.totalReturnAdapter ?? "",
+    collateralTokenAddress: d.sUSDeToken ?? "",
+    collateralSymbol: "sUSDe",
+    imageUrl: "/coins/susde.png",
   },
 ];
 

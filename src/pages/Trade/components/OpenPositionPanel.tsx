@@ -184,6 +184,62 @@ export function OpenPositionPanel({
 
   const subLimitBarStyle = useMemo(() => ({ width: `${Math.min(subLimitRatio * 100, 100)}%` }), [subLimitRatio]);
 
+  // ── Trade allocation cap: vault.getAllocationStatus() ────────────────────
+  //
+  // Mirrors the on-chain TradeCapExceeded check:
+  //   cap = getAUM() × tradeCapBps / 10000
+  //   getAUM() already deducts unrealised PnL → effectively NAV-adjusted
+  //   A 5% buffer is reserved so the UI blocks before the contract reverts.
+  //
+  // When maxTradeOI == 0 (tradeCapBps not set) the check is skipped.
+
+  type TradeCapData = {
+    currentTradeOI: bigint;
+    maxTradeOI: bigint;
+    /** Effective cap after 5% buffer */
+    effectiveCap: bigint;
+    /** remainingCapacity = effectiveCap - currentTradeOI (floored at 0) */
+    remainingCapacity: bigint;
+  };
+  const [tradeCapData, setTradeCapData] = useState<TradeCapData | null>(null);
+
+  useEffect(() => {
+    const ZERO_ADDR = "0x0000000000000000000000000000000000000000";
+    const vaultAddr = getVantageContractAddress(chainId, "JuniorTrancheVault");
+    if (!vaultAddr || vaultAddr === ZERO_ADDR) return;
+
+    const vault = Vault__factory.connect(vaultAddr, provider);
+    let cancelled = false;
+
+    const BUFFER_BPS = 500n; // 5%
+    const BASIS = 10_000n;
+
+    async function fetchCap() {
+      try {
+        const status = await vault.getAllocationStatus();
+        if (cancelled) return;
+        const maxTradeOI: bigint = status.maxTradeOI;
+        const currentTradeOI: bigint = status.currentTradeOI;
+        if (maxTradeOI === 0n) {
+          setTradeCapData(null); // no cap configured — no restriction
+          return;
+        }
+        const effectiveCap = (maxTradeOI * (BASIS - BUFFER_BPS)) / BASIS;
+        const remainingCapacity = effectiveCap > currentTradeOI ? effectiveCap - currentTradeOI : 0n;
+        setTradeCapData({ currentTradeOI, maxTradeOI, effectiveCap, remainingCapacity });
+      } catch {
+        setTradeCapData(null); // older deployment without getAllocationStatus — skip
+      }
+    }
+
+    fetchCap();
+    const timer = setInterval(fetchCap, 15_000);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [chainId, provider]);
+
   // ── Dynamic OI cap: read from Vault + AssetRegistry ──────────────────────
 
   const [oiCapError, setOiCapError] = useState<string | null>(null);
@@ -211,6 +267,10 @@ export function OpenPositionPanel({
   }, [amountIn, useNativeEth, spread, isLong]);
 
   const sizeDelta = collateralUsd * BigInt(leverage);
+
+  const isTradeCapFull = tradeCapData !== null && tradeCapData.remainingCapacity === 0n;
+  const exceedsTradeCapacity =
+    tradeCapData !== null && tradeCapData.remainingCapacity > 0n && sizeDelta > tradeCapData.remainingCapacity;
 
   // Mark price for acceptablePrice calculation
   const markPrice = isLong ? spread.askPrice : spread.bidPrice;
@@ -330,149 +390,199 @@ export function OpenPositionPanel({
 
   const approveBtnCls = isApproving ? "bg-[#334155] text-[#94a3b8]" : "bg-vantage-accent text-black";
 
+  const remainingCapacityUsd = tradeCapData !== null ? parseFloat(formatEther(tradeCapData.remainingCapacity)) : null;
+  const maxCapacityUsd = tradeCapData !== null ? parseFloat(formatEther(tradeCapData.effectiveCap)) : null;
+
   return (
     <div className="flex flex-col gap-12">
       {/* Spread display */}
       <SpreadBadge spread={spread} />
 
+      {/* ── Trade capacity full notice ─────────────────────────────────────── */}
+      {isTradeCapFull && (
+        <div className="flex flex-col items-center rounded-4 border border-slate-600/40 bg-slate-800/60 py-32 text-center">
+          <div className="text-36 mb-10">🎉</div>
+          <div className="mb-6 text-15 font-bold text-white">{t`大盛況につき受付停止中`}</div>
+          <p className="leading-relaxed text-slate-300 mb-4 max-w-[260px] text-12">
+            {t`おかげさまで現在のトレード枠はすべて埋まっております。`}
+          </p>
+          <p className="leading-relaxed max-w-[260px] text-12 text-slate-400">
+            {t`空き枠ができ次第、新規受付を再開いたします。今しばらくお待ちください。`}
+          </p>
+          {maxCapacityUsd !== null && (
+            <div className="mt-16 rounded-4 border border-slate-600/40 bg-slate-900/60 px-16 py-10 text-12">
+              <div className="text-slate-500">{t`Total Capacity`}</div>
+              <div className="mt-2 text-14 font-bold text-white">
+                ${maxCapacityUsd.toLocaleString("en-US", { maximumFractionDigits: 0 })}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Interest Prism axis is now determined by market selection in the dropdown.
           The internal axis tabs have been removed to avoid redundancy. */}
 
-      {/* Collateral type toggle */}
-      <div className="flex gap-8">
-        {COLLATERAL_OPTIONS.map((opt) => (
-          <button
-            key={opt.label}
-            onClick={() => setUseNativeEth(opt.isNative)}
-            className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${useNativeEth === opt.isNative ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
-          >
-            {opt.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Size input */}
-      <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
-        <div className="mb-2 flex items-center justify-between text-12 text-slate-400">
-          <span>{t`Size`}</span>
-          <span>{useNativeEth ? "ETH" : "USDC"}</span>
-        </div>
-        <input
-          type="number"
-          min="0"
-          placeholder="0.00"
-          value={collateralInput}
-          onChange={(e) => setCollateralInput(e.target.value)}
-          className="bg-transparent w-full pl-0 pr-12 text-[36px] font-semibold text-white outline-none placeholder:text-slate-600"
-        />
-        {collateralUsd > 0n && (
-          <div className="mt-2 text-12 text-slate-400">≈ ${parseFloat(formatEther(collateralUsd)).toFixed(2)} USD</div>
-        )}
-      </div>
-
-      {/* Leverage slider */}
-      <VantageLeverageSlider value={leverage} onChange={setLeverage} max={50} />
-
-      {/* Slippage */}
-      <div>
-        <div className="mb-16 mt-8 text-12 text-slate-400">{t`Slippage Tolerance`}</div>
-        <div className="flex items-center gap-6">
-          {SLIPPAGE_PRESETS.map((bps) => (
-            <button
-              key={bps}
-              onClick={() => {
-                setSlippageBps(bps);
-                setCustomSlippage("");
-              }}
-              className={`rounded-4 px-10 py-5 text-12 transition-colors ${!customSlippage && slippageBps === bps ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
-            >
-              {bps / 100}%
-            </button>
-          ))}
-          <input
-            type="number"
-            min="0"
-            placeholder={t`Custom %`}
-            value={customSlippage}
-            onChange={(e) => setCustomSlippage(e.target.value)}
-            className="w-20 rounded-4 border border-vantage-border bg-vantage-input px-8 py-5 text-12 text-white outline-none placeholder:text-slate-600"
-          />
-        </div>
-      </div>
-
-      {/* Execution fee */}
-      <div className="mb-12 mt-8 flex items-center justify-between text-12">
-        <span className="text-slate-400">{t`Execution Fee`}</span>
-        <span className="text-slate-300">{feeEth} ETH</span>
-      </div>
-
-      {/* Accept price */}
-      {markPrice > 0n && (
-        <div className="flex items-center justify-between text-12">
-          <span className="text-slate-400">{t`Acceptable Price`}</span>
-          <span className="text-slate-300">
-            $
-            {parseFloat(
-              formatEther(
-                isLong
-                  ? (markPrice * (10_000n + BigInt(activeSlippage))) / 10_000n
-                  : (markPrice * (10_000n - BigInt(activeSlippage))) / 10_000n
-              )
-            ).toFixed(4)}
-          </span>
-        </div>
-      )}
-
-      {/* ── Skew Fee Preview (Issue #225/#227) ──────────────────────────────── */}
-      {skewData && skewData.maxOI > 0n && (
-        <div className="rounded-4 border border-vantage-border bg-vantage-input/50 px-12 py-10 text-12">
-          <div className="text-slate-300 mb-8 font-medium">{t`Estimated Fee`}</div>
-          <div className="flex items-center justify-between text-slate-400">
-            <span>{t`Base Fee`}</span>
-            <span>{Number(skewData.baseFee) / 100}%</span>
-          </div>
-          <div className="mt-4 flex items-center justify-between">
-            <span className="text-slate-400">{t`Skew Adjustment`}</span>
-            <span className={isIncreasingSkew ? "text-red-400" : "text-green-400"}>
-              {isIncreasingSkew ? "+" : "−"}
-              {Number(skewBps) / 100}%
-            </span>
-          </div>
-          <div className="mt-6 flex items-center justify-between border-t border-vantage-border pt-6 font-semibold text-white">
-            <span>{t`Total`}</span>
-            <span>{Number(effectiveBps) / 100}%</span>
+      {/* ── Form (hidden when capacity is full) ──────────────────────────────── */}
+      {!isTradeCapFull && (
+        <>
+          {/* Collateral type toggle */}
+          <div className="flex gap-8">
+            {COLLATERAL_OPTIONS.map((opt) => (
+              <button
+                key={opt.label}
+                onClick={() => setUseNativeEth(opt.isNative)}
+                className={`rounded-4 px-12 py-6 text-12 font-medium transition-colors ${useNativeEth === opt.isNative ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
+              >
+                {opt.label}
+              </button>
+            ))}
           </div>
 
-          {/* Sub-limit capacity bar */}
-          <div className="mt-8">
-            <div className="mb-4 flex items-center justify-between text-11 text-slate-500">
-              <span>{t`Index Capacity`}</span>
-              <span>{(subLimitRatio * 100).toFixed(1)}%</span>
+          {/* Size input */}
+          <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
+            <div className="mb-2 flex items-center justify-between text-12 text-slate-400">
+              <span>{t`Size`}</span>
+              <span>{useNativeEth ? "ETH" : "USDC"}</span>
             </div>
-            <div className="h-4 overflow-hidden rounded-full bg-slate-700">
-              <div
-                className={`h-full rounded-full transition-all ${
-                  subLimitRatio > 0.9 ? "bg-red-500" : subLimitRatio > 0.7 ? "bg-amber-500" : "bg-green-500"
-                }`}
-                style={subLimitBarStyle}
+            <input
+              type="number"
+              min="0"
+              placeholder="0.00"
+              value={collateralInput}
+              onChange={(e) => setCollateralInput(e.target.value)}
+              className="bg-transparent w-full pl-0 pr-12 text-[36px] font-semibold text-white outline-none placeholder:text-slate-600"
+            />
+            {collateralUsd > 0n && (
+              <div className="mt-2 text-12 text-slate-400">
+                ≈ ${parseFloat(formatEther(collateralUsd)).toFixed(2)} USD
+              </div>
+            )}
+          </div>
+
+          {/* Leverage slider */}
+          <VantageLeverageSlider value={leverage} onChange={setLeverage} max={50} />
+
+          {/* Slippage */}
+          <div>
+            <div className="mb-16 mt-8 text-12 text-slate-400">{t`Slippage Tolerance`}</div>
+            <div className="flex items-center gap-6">
+              {SLIPPAGE_PRESETS.map((bps) => (
+                <button
+                  key={bps}
+                  onClick={() => {
+                    setSlippageBps(bps);
+                    setCustomSlippage("");
+                  }}
+                  className={`rounded-4 px-10 py-5 text-12 transition-colors ${!customSlippage && slippageBps === bps ? "bg-vantage-accent text-black" : "bg-vantage-input text-vantage-text-secondary"}`}
+                >
+                  {bps / 100}%
+                </button>
+              ))}
+              <input
+                type="number"
+                min="0"
+                placeholder={t`Custom %`}
+                value={customSlippage}
+                onChange={(e) => setCustomSlippage(e.target.value)}
+                className="w-20 rounded-4 border border-vantage-border bg-vantage-input px-8 py-5 text-12 text-white outline-none placeholder:text-slate-600"
               />
             </div>
           </div>
-        </div>
-      )}
 
-      {/* OI cap error */}
-      {oiCapError && (
-        <div className="rounded-4 border border-red-500/40 bg-red-500/10 px-12 py-8 text-12 text-red-400">
-          {oiCapError}
-        </div>
-      )}
+          {/* Execution fee */}
+          <div className="mb-12 mt-8 flex items-center justify-between text-12">
+            <span className="text-slate-400">{t`Execution Fee`}</span>
+            <span className="text-slate-300">{feeEth} ETH</span>
+          </div>
 
-      {/* No liquidity warning */}
-      {noLiquidity && (
-        <div className="rounded-4 border border-slate-600/40 bg-slate-800/60 px-12 py-8 text-12 text-slate-400">
-          {t`No liquidity in the payout vault. An LP deposit is required before trading can begin.`}
-        </div>
+          {/* Accept price */}
+          {markPrice > 0n && (
+            <div className="flex items-center justify-between text-12">
+              <span className="text-slate-400">{t`Acceptable Price`}</span>
+              <span className="text-slate-300">
+                $
+                {parseFloat(
+                  formatEther(
+                    isLong
+                      ? (markPrice * (10_000n + BigInt(activeSlippage))) / 10_000n
+                      : (markPrice * (10_000n - BigInt(activeSlippage))) / 10_000n
+                  )
+                ).toFixed(4)}
+              </span>
+            </div>
+          )}
+
+          {/* ── Skew Fee Preview (Issue #225/#227) ──────────────────────────────── */}
+          {skewData && skewData.maxOI > 0n && (
+            <div className="rounded-4 border border-vantage-border bg-vantage-input/50 px-12 py-10 text-12">
+              <div className="text-slate-300 mb-8 font-medium">{t`Estimated Fee`}</div>
+              <div className="flex items-center justify-between text-slate-400">
+                <span>{t`Base Fee`}</span>
+                <span>{Number(skewData.baseFee) / 100}%</span>
+              </div>
+              <div className="mt-4 flex items-center justify-between">
+                <span className="text-slate-400">{t`Skew Adjustment`}</span>
+                <span className={isIncreasingSkew ? "text-red-400" : "text-green-400"}>
+                  {isIncreasingSkew ? "+" : "−"}
+                  {Number(skewBps) / 100}%
+                </span>
+              </div>
+              <div className="mt-6 flex items-center justify-between border-t border-vantage-border pt-6 font-semibold text-white">
+                <span>{t`Total`}</span>
+                <span>{Number(effectiveBps) / 100}%</span>
+              </div>
+
+              {/* Sub-limit capacity bar */}
+              <div className="mt-8">
+                <div className="mb-4 flex items-center justify-between text-11 text-slate-500">
+                  <span>{t`Index Capacity`}</span>
+                  <span>{(subLimitRatio * 100).toFixed(1)}%</span>
+                </div>
+                <div className="h-4 overflow-hidden rounded-full bg-slate-700">
+                  <div
+                    className={`h-full rounded-full transition-all ${
+                      subLimitRatio > 0.9 ? "bg-red-500" : subLimitRatio > 0.7 ? "bg-amber-500" : "bg-green-500"
+                    }`}
+                    style={subLimitBarStyle}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Trade capacity exceeded alert */}
+          {exceedsTradeCapacity && remainingCapacityUsd !== null && (
+            <div className="border-orange-700/50 bg-orange-900/20 text-orange-300 rounded-4 border px-12 py-10 text-12">
+              <div className="mb-4 font-semibold">⚠ {t`入力サイズが残余容量を超えています`}</div>
+              <div className="leading-relaxed text-orange-400/80">
+                {t`リクエストサイズ`}{" "}
+                <span className="text-orange-200 font-semibold">
+                  ${parseFloat(formatEther(sizeDelta)).toLocaleString("en-US", { maximumFractionDigits: 0 })}
+                </span>{" "}
+                {t`が残余容量`}{" "}
+                <span className="text-orange-200 font-semibold">
+                  ${remainingCapacityUsd.toLocaleString("en-US", { maximumFractionDigits: 0 })}
+                </span>{" "}
+                {t`を超えています。サイズを小さくしてください。`}
+              </div>
+            </div>
+          )}
+
+          {/* OI cap error */}
+          {oiCapError && (
+            <div className="rounded-4 border border-red-500/40 bg-red-500/10 px-12 py-8 text-12 text-red-400">
+              {oiCapError}
+            </div>
+          )}
+
+          {/* No liquidity warning */}
+          {noLiquidity && (
+            <div className="rounded-4 border border-slate-600/40 bg-slate-800/60 px-12 py-8 text-12 text-slate-400">
+              {t`No liquidity in the payout vault. An LP deposit is required before trading can begin.`}
+            </div>
+          )}
+        </>
       )}
 
       {/* CTA buttons */}
@@ -481,7 +591,7 @@ export function OpenPositionPanel({
       ) : needsApproval ? (
         <button
           onClick={handleApprove}
-          disabled={isApproving || !!noLiquidity}
+          disabled={isApproving || !!noLiquidity || isTradeCapFull}
           className={`w-full rounded-8 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed ${approveBtnCls}`}
         >
           {isApproving ? t`Approving…` : t`Approve USDC`}
@@ -489,9 +599,23 @@ export function OpenPositionPanel({
       ) : (
         <button
           onClick={handleSubmit}
-          disabled={isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError || !!noLiquidity}
+          disabled={
+            isSubmitting ||
+            sizeDelta === 0n ||
+            !trade.isReady ||
+            !!oiCapError ||
+            !!noLiquidity ||
+            isTradeCapFull ||
+            exceedsTradeCapacity
+          }
           className={`w-full rounded-8 py-14 text-16 font-semibold transition-colors ${
-            isSubmitting || sizeDelta === 0n || !trade.isReady || !!oiCapError || !!noLiquidity
+            isSubmitting ||
+            sizeDelta === 0n ||
+            !trade.isReady ||
+            !!oiCapError ||
+            !!noLiquidity ||
+            isTradeCapFull ||
+            exceedsTradeCapacity
               ? "cursor-not-allowed bg-slate-700 text-slate-500"
               : isLong
                 ? "bg-green-600 text-white hover:bg-green-500"
@@ -500,15 +624,19 @@ export function OpenPositionPanel({
         >
           {isSubmitting
             ? t`Submitting…`
-            : noLiquidity
-              ? t`No Liquidity`
-              : sizeDelta === 0n
-                ? isLong
-                  ? t`Buy`
-                  : t`Sell`
-                : isLong
-                  ? `Buy ${parseFloat(formatEther(sizeDelta))} USDC`
-                  : `Sell ${parseFloat(formatEther(sizeDelta))} USDC`}
+            : isTradeCapFull
+              ? t`受付停止中`
+              : noLiquidity
+                ? t`No Liquidity`
+                : exceedsTradeCapacity
+                  ? t`Exceeds Trade Capacity`
+                  : sizeDelta === 0n
+                    ? isLong
+                      ? t`Buy`
+                      : t`Sell`
+                    : isLong
+                      ? `Buy ${parseFloat(formatEther(sizeDelta))} USDC`
+                      : `Sell ${parseFloat(formatEther(sizeDelta))} USDC`}
         </button>
       )}
     </div>

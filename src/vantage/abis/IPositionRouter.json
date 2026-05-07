@@ -45,6 +45,11 @@
         "internalType": "bool",
         "name": "convertOnADL",
         "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "priceAdapter",
+        "type": "address"
       }
     ],
     "name": "createIncreasePositionFor",
@@ -99,6 +104,11 @@
         "internalType": "bool",
         "name": "convertOnADL",
         "type": "bool"
+      },
+      {
+        "internalType": "address",
+        "name": "priceAdapter",
+        "type": "address"
       }
     ],
     "name": "increasePositionETHFor",

@@ -301,6 +301,11 @@
         "internalType": "uint256",
         "name": "_acceptablePrice",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_priceAdapter",
+        "type": "address"
       }
     ],
     "name": "increasePosition",
@@ -344,6 +349,11 @@
         "internalType": "uint256",
         "name": "_acceptablePrice",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_priceAdapter",
+        "type": "address"
       }
     ],
     "name": "increasePositionForAccount",

@@ -159,7 +159,13 @@ export function useHedgePageData(
 
     async function poll() {
       try {
-        const tokenAddr = cfg!.tokenAddress;
+        // For Prism axis configs, tokenAddress is a virtual index token (e.g. sUSDe_P)
+        // that is not registered in AssetRegistry. Use collateralTokenAddress (the real
+        // underlying ERC20, e.g. MockSUSDe) for all registry / yield / OI queries.
+        // The virtual prism token is only used for per-position key lookup.
+        const tokenAddr = cfg!.collateralTokenAddress || cfg!.tokenAddress;
+        // Index token stored in the on-chain position (may differ for Prism configs).
+        const positionIndexToken = cfg!.tokenAddress;
 
         // ── 1. Vault AUM ────────────────────────────────────────────────────
         const aumRaw: bigint = await vault.getAUM();
@@ -170,18 +176,56 @@ export function useHedgePageData(
         const totalLongRaw: bigint = await vault.totalLongSize(tokenAddr);
         const totalShortUsd = parseFloat(formatEther(totalShortRaw));
 
-        // ── 3. Max short capacity + assetType from AssetRegistry ───────────
+        // ── 3. Max short capacity (AUM-based) + assetType from AssetRegistry ─
+        //
+        // Use vault.getAllocationStatus() so the cap mirrors the on-chain check
+        // in _increasePosition:
+        //   cap = getAUM() × hedgeCapBps / 10000
+        //   HedgeCapExceeded when (totalHedgedNotional + sizeDelta) > cap
+        //
+        // getAUM() already deducts unrealised trader PnL (Component 2), so this
+        // is effectively NAV-adjusted capacity.
+        //
+        // A 5% buffer (matching LPManager ADL_BUFFER_BPS = 500) is reserved so
+        // the UI blocks new hedges before the contract would revert at the edge.
+        //
+        // When maxHedgeOI == 0 (hedgeCapBps not configured), fall back to
+        // vaultAumUsd as a best-effort upper bound.
+        const HEDGE_BUFFER_BPS = 500n; // 5%
+        const BASIS = 10_000n;
+
         let maxShortCapacityUsd: number | null = null;
         let remainingCapacityUsd: number | null = null;
         let isYieldBearing: boolean | undefined = undefined;
+
+        // Fetch assetType from AssetRegistry (still needed for Mode A/B detection)
         if (assetReg) {
           const assetData = await assetReg.assets(tokenAddr);
-          // maxGlobalShortSize is stored in 1e30; divide by 1e12 to get WAD
-          const maxShortWad: bigint = BigInt(assetData.maxGlobalShortSize) / 10n ** 12n;
-          maxShortCapacityUsd = parseFloat(formatEther(maxShortWad));
-          remainingCapacityUsd = Math.max(0, maxShortCapacityUsd - totalShortUsd);
-          // AssetType: 0 = SPOT (Mode B), 1 = YIELD_BEARING (Mode A)
           isYieldBearing = Number(assetData.assetType) === 1;
+        }
+
+        // Fetch AUM-based hedge cap from vault
+        try {
+          const [currentHedgeOIRaw, maxHedgeOIRaw]: [bigint, bigint] = await vault
+            .getAllocationStatus()
+            .then((r: { currentHedgeOI: bigint; maxHedgeOI: bigint }) => [r.currentHedgeOI, r.maxHedgeOI]);
+
+          if (maxHedgeOIRaw > 0n) {
+            // Apply 5% buffer: effective cap = maxHedgeOI × (1 - 5%) = maxHedgeOI × 9500 / 10000
+            const effectiveCapRaw = (maxHedgeOIRaw * (BASIS - HEDGE_BUFFER_BPS)) / BASIS;
+            maxShortCapacityUsd = parseFloat(formatEther(effectiveCapRaw));
+            const remaining = effectiveCapRaw > currentHedgeOIRaw ? effectiveCapRaw - currentHedgeOIRaw : 0n;
+            remainingCapacityUsd = parseFloat(formatEther(remaining));
+          } else {
+            // hedgeCapBps not set — fall back to vaultAumUsd with the same 5% buffer
+            const effectiveCap = vaultAumUsd * (1 - Number(HEDGE_BUFFER_BPS) / Number(BASIS));
+            maxShortCapacityUsd = effectiveCap;
+            remainingCapacityUsd = Math.max(0, effectiveCap - parseFloat(formatEther(totalShortRaw)));
+          }
+        } catch {
+          // getAllocationStatus unavailable in older deployments — degrade gracefully
+          maxShortCapacityUsd = vaultAumUsd;
+          remainingCapacityUsd = Math.max(0, vaultAumUsd - parseFloat(formatEther(totalShortRaw)));
         }
 
         // ── 4. Yield APR ────────────────────────────────────────────────────
@@ -265,7 +309,7 @@ export function useHedgePageData(
           const key: string = await vault.getPositionKey(
             account,
             USDC_ADDRESS,
-            tokenAddr,
+            positionIndexToken, // Prism configs: virtual index token (sUSDe_P etc.)
             false // isLong = false (short)
           );
           const [pos, softLocked, convertOnADL] = await Promise.all([

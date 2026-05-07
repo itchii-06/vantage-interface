@@ -301,9 +301,13 @@ export default function VaultDetailPage() {
           <div className="space-y-20">
             {/* Header */}
             <div className="mb-4 flex items-center gap-12">
-              <div className="flex h-40 w-40 items-center justify-center rounded-full bg-slate-700 text-16 font-bold text-white">
-                {cfg.symbol.slice(0, 2)}
-              </div>
+              {cfg.imageUrl ? (
+                <img src={cfg.imageUrl} alt={cfg.name} className="h-56 w-56 rounded-full object-cover" />
+              ) : (
+                <div className="flex h-40 w-40 items-center justify-center rounded-full bg-slate-700 text-16 font-bold text-white">
+                  {cfg.symbol.slice(0, 2)}
+                </div>
+              )}
               <div>
                 <div className="flex flex-wrap items-center gap-8">
                   <h1 className="text-h1">{cfg.symbol}</h1>

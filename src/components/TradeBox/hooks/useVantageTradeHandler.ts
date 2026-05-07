@@ -17,6 +17,7 @@ import { useCallback } from "react";
 import { useVantageApproval } from "domain/vantage/trade/useVantageApproval";
 import { useVantageTrade } from "domain/vantage/trade/useVantageTrade";
 import { validateDecreasePosition, validateIncreasePosition } from "domain/vantage/trade/utils";
+import { getVaultConfigByToken } from "domain/vantage/vaults/vaultConfig";
 import { helperToast } from "lib/helperToast";
 
 /** Toggle to instantly switch the trade button between Vantage and GMX flows. */
@@ -104,6 +105,9 @@ export function useVantageTradeHandler({
         return;
       }
 
+      // Look up the price adapter for this index token (required by Router — Issue #227).
+      const priceAdapter = getVaultConfigByToken(toToken.address)?.adapterAddress;
+
       await increasePosition({
         collateralToken: fromToken.address,
         indexToken: toToken.address,
@@ -111,6 +115,7 @@ export function useVantageTradeHandler({
         sizeDelta,
         isLong: tradeFlags.isLong,
         markPrice: vantagePriceMark,
+        priceAdapter,
         // isIncrease defaults to true → correct upper/lower bound in calcAcceptablePrice
       });
       return;
