@@ -29,6 +29,9 @@ msgstr "滑點超出限制"
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 #: src/pages/AccountTransfer/CompleteAccountTransfer/CompleteAccountTransfer.tsx
 #: src/pages/ReferralsTier/ReferralsTier.tsx
@@ -208,6 +211,10 @@ msgstr "除錯數值不可用"
 msgid "Existing limit order in {0} pool but lacks liquidity for this order"
 msgstr "在 {0} 池中有現有限價單，但該池流動性不足以執行此訂單"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "Redemption Ready to Claim"
+#~ msgstr "可領取贖回款"
+
 #: src/components/PositionSeller/rows/PositionSellerPriceImpactFeesRow.tsx
 msgid "Price impact from closing. Positive values benefit you. <0>Read more</0>."
 msgstr "平倉時的價格影響。正值對您有利。<0>了解更多</0>。"
@@ -261,6 +268,11 @@ msgstr "Oracle keeper 事件"
 #: src/components/GmList/GmTokensTotalBalanceInfo.tsx
 msgid "365d est. fees"
 msgstr "365 天預估費用"
+
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Redemption Requests"
+msgstr "贖回請求列表"
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "RabbitHole"
@@ -720,6 +732,11 @@ msgstr "V1 空投"
 msgid "Order execution price"
 msgstr "訂單成交價格"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Redemption cancelled"
+msgstr "贖回已取消"
+
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "The Vault's payout capacity (Junior AUM) is below the total unrealised profit in the market. Profitable positions — prioritised by leverage × profit — may be force-closed by the ADL keeper to restore solvency."
 msgstr ""
@@ -1025,6 +1042,10 @@ msgstr ""
 msgid "27% of protocol fees fund Treasury buybacks — rewards distributed at $90"
 msgstr ""
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "USDC to Receive"
+#~ msgstr "待領取USDC"
+
 #: src/components/NotifyModal/NotifyModal.tsx
 msgid "GMX alerts"
 msgstr "GMX 通知"
@@ -1108,6 +1129,10 @@ msgstr "網路費用緩衝精度上限為 0.01%"
 msgid "DeltaPrime"
 msgstr "DeltaPrime"
 
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Redemption request confirmed"
+msgstr "贖回請求已確認"
+
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "h"
 msgstr ""
@@ -1116,6 +1141,10 @@ msgstr ""
 #: src/pages/LeaderboardPage/components/CompetitionPrizes.tsx
 msgid "1st place"
 msgstr "第 1 名"
+
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+msgid "Cancelling…"
+msgstr "取消中…"
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "New hedge positions are temporarily blocked due to the Safety Buffer Lock. Trade mode remains available."
@@ -2251,6 +2280,10 @@ msgstr "已將 {0} 兌換為 {1}"
 #: src/pages/UiPage/UiPage.tsx
 msgid "H2 text size"
 msgstr "H2 文字大小"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "Your VLP is locked. The Keeper will execute the epoch on or after the date above, after which you can claim USDC."
+#~ msgstr "您的VLP已鎖定。Keeper將在上述日期或之後執行紀元，執行後即可領取USDC。"
 
 #: src/components/CollateralSelector/PositionEditorCollateralSelector.tsx
 #: src/components/GmxAccountModal/DepositView.tsx
@@ -3476,10 +3509,15 @@ msgstr "訂單類型"
 msgid "risking insolvency. New hedge positions are blocked. Trade mode remains available."
 msgstr ""
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Transaction submitted"
@@ -3488,6 +3526,10 @@ msgstr ""
 #: src/pages/Trade/components/SpreadBadge.tsx
 msgid "Ask"
 msgstr ""
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Est. USD value"
+msgstr "預估USD價值"
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
 msgid "Low leverage and long tenure protect you from ADL. You are in the loyalty tier."
@@ -3654,6 +3696,10 @@ msgstr "<0>設定建議影響值：{0}</0>。"
 msgid "Claiming affiliate rewards failed"
 msgstr "領取推薦獎勵失敗"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "VLP Redeemed"
+#~ msgstr "已贖回VLP"
+
 #: src/pages/DebugOracleKeeper/DebugOracleKeeper.tsx
 #: src/pages/RpcDebug/RpcDebug.tsx
 msgid "DATA TYPE"
@@ -3725,6 +3771,7 @@ msgstr "移除端點"
 msgid "Community-led Telegram groups"
 msgstr "社群主導的 Telegram 群組"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Vault"
 msgstr ""
@@ -4054,7 +4101,6 @@ msgid "May lack liquidity for parts of this order when triggered"
 msgstr "觸發時此訂單的部分可能缺乏流動性"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdrawing…"
 msgstr ""
 
@@ -4854,6 +4900,10 @@ msgstr ""
 msgid "Swap submitted"
 msgstr "兌換已提交"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+msgid "Claim USDC"
+msgstr "領取USDC"
+
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "OI growing relative to payout capacity. Monitor closely."
 msgstr ""
@@ -4905,8 +4955,9 @@ msgstr "Blueberry Pulse"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Submitting…"
-msgstr ""
+msgstr "提交中…"
 
 #: src/domain/tokens/approveTokens.tsx
 msgid "Approval cancelled"
@@ -5256,6 +5307,11 @@ msgstr "解除質押"
 msgid "Max action count reached. <0>Click here</0> to update"
 msgstr "已達到最大操作次數。<0>點此</0>更新"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "USDC claimed"
+msgstr "USDC已領取"
+
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Signature:"
 msgstr "簽名："
@@ -5395,7 +5451,6 @@ msgstr "強制外部兌換失敗"
 #: src/pages/UiPage/BannerTest.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdraw"
@@ -6164,6 +6219,10 @@ msgstr "獎勵"
 msgid "Max negative factor"
 msgstr "最大負向因子"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "Redemption Pending"
+#~ msgstr "贖回待處理"
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Asset management"
 msgstr "資產管理"
@@ -6271,7 +6330,6 @@ msgid "Buy failed"
 msgstr "買入失敗"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "USD value"
 msgstr ""
 
@@ -6367,6 +6425,7 @@ msgstr ""
 
 #: src/components/Claims/ClaimableCard.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 msgid "Claimable"
 msgstr "可領取"
 
@@ -6593,6 +6652,7 @@ msgstr "點擊編輯圖示以調整抵押品。"
 msgid "Staked on Avalanche"
 msgstr "已在 Avalanche 上質押"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Pending"
 msgstr ""
@@ -6720,6 +6780,10 @@ msgstr "所有網路"
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Select positions"
 msgstr "選擇倉位"
+
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+msgid "Claiming…"
+msgstr "領取中…"
 
 #: src/components/AppHeader/AppHeaderUser.tsx
 #: src/components/Earn/Portfolio/AssetsList/AssetsList.tsx
@@ -7208,6 +7272,11 @@ msgstr "倉位規模超過池價值"
 msgid "Impact exponent (positive)"
 msgstr "影響指數（正向）"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Cancelling redemption..."
+msgstr "取消贖回中..."
+
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Sync Rebasing Balance"
 msgstr ""
@@ -7395,8 +7464,8 @@ msgid "Updating {updateOrdersCount} TP/SL orders..."
 msgstr "正在更新 {updateOrdersCount} 個 TP/SL 訂單..."
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
-msgid "Estimated {0}"
-msgstr ""
+#~ msgid "Estimated {0}"
+#~ msgstr ""
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Execution price didn't meet acceptable price"
@@ -8124,6 +8193,7 @@ msgid "Governance"
 msgstr "治理"
 
 #: src/components/OrderItem/OrderItem.tsx
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/components/StatusNotification/OrderStatusNotification.tsx
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
@@ -8215,6 +8285,7 @@ msgstr ""
 msgid "Share position"
 msgstr "分享倉位"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "USD Value"
 msgstr ""
@@ -9142,6 +9213,10 @@ msgstr "可領取總額"
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Insufficient gas for execution. Estimated: {estimatedGasLimitText}, starting: {startingGasText}"
 msgstr "執行 Gas 不足。預估：{estimatedGasLimitText}，起始：{startingGasText}"
+
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Redemption request submitted..."
+msgstr "贖回請求已提交..."
 
 #: src/components/PositionShare/PositionShareCard.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
@@ -10190,6 +10265,10 @@ msgstr "深度"
 msgid "Layer 1"
 msgstr "Layer 1"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Next epoch"
+msgstr "下一紀元"
+
 #: landing/src/pages/Home/SocialSection/SocialSlider.tsx
 msgid "<0>With a 75.5% majority vote, GMX has selected LayerZero as its messaging partner for multichain expansion! The integration brings GMX:</0><1><2>The ability to expand to 125+ chains</2><3>Full ownership of all contracts and security</3><4>Fast, zero-slippage transfers</4><5>Battle-tested rails already trusted by billions of dollars in assets and hundreds of applications... <6>see more</6></5></1>"
 msgstr "<0>以 75.5% 的多數票，GMX 選擇了 LayerZero 作為其多鏈擴展的訊息傳遞夥伴！此整合為 GMX 帶來：</0><1><2>擴展至 125+ 條鏈的能力</2><3>所有合約和安全性的完全所有權</3><4>快速、零滑點的轉帳</4><5>經過實戰檢驗的基礎設施，已獲數十億美元資產和數百個應用程式的信賴⋯⋯<6>查看更多</6></5></1>"
@@ -10937,6 +11016,10 @@ msgstr "池中可用流動性不足"
 msgid "Vested claimable GMX:"
 msgstr "已歸屬可領取的 GMX："
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Withdrawals follow a monthly redemption cycle. Submit a request to join the next epoch (~30 days), then claim your USDC after the Keeper executes the epoch."
+msgstr "提款遵循每月贖回週期。提交請求加入下一個紀元（約30天），Keeper執行紀元後即可領取USDC。"
+
 #: src/components/CollateralDestinationSelector/CollateralDestinationSelector.tsx
 #: src/components/CollateralDestinationSelector/CollateralDestinationSelector.tsx
 #: src/components/GmxAccountModal/AvailableToTradeAssetsView.tsx
@@ -11629,6 +11712,7 @@ msgid "Depositing..."
 msgstr "存入中..."
 
 #: src/components/AppNav/AppNav.tsx
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
@@ -11961,6 +12045,7 @@ msgstr "超過池最大金額"
 msgid "Unknown order"
 msgstr "未知訂單"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "VLP Amount"
@@ -11989,6 +12074,10 @@ msgstr "搜尋圖示和圖片..."
 #: src/components/MarketStats/components/CompositionTable.tsx
 msgid "{column}"
 msgstr "{column}"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Request Redemption"
+msgstr "申請贖回"
 
 #: src/pages/RpcDebug/parts.tsx
 msgid "No trackers registered"
@@ -12068,6 +12157,11 @@ msgstr ""
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Rage Trade"
 msgstr "Rage Trade"
+
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Approving VLP — waiting for confirmation…"
+msgstr ""
 
 #: src/domain/synthetics/common/incentivesAirdropMessages.ts
 msgid "EIP-4844, 20-27 Mar"
@@ -12173,6 +12267,10 @@ msgstr "Limit Swap"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/ClaimModal.tsx
 msgid "Claim {tokenSymbol} rewards"
 msgstr "領取 {tokenSymbol} 獎勵"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "Cancel Redemption"
+#~ msgstr "取消贖回"
 
 #: src/components/ChartTokenSelector/ChartTokenSelector.tsx
 msgid "24H VOL."
@@ -12341,6 +12439,10 @@ msgstr "無可領取的分配"
 msgid "Copy link"
 msgstr "複製連結"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+msgid "Next Epoch"
+msgstr "下一紀元"
+
 #: src/components/PositionShare/CreateReferralCode.tsx
 #: src/components/PositionShare/CreateReferralCode.tsx
 #: src/components/Referrals/AddAffiliateCode.tsx
@@ -12501,6 +12603,11 @@ msgstr "不再顯示"
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "Great for passive users"
 msgstr "適合被動型用戶"
+
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Claiming USDC..."
+msgstr "領取USDC中..."
 
 #: src/components/MarketsList/MarketsList.tsx
 msgid "NET RATE / 1H"

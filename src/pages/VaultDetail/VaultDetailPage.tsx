@@ -12,6 +12,7 @@ import { formatEther, formatUnits, parseUnits } from "ethers";
 import { ChangeEvent, useMemo, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
 
+import { useAllRedemptionRequests } from "domain/vantage/lp/useAllRedemptionRequests";
 import { useVaultActions } from "domain/vantage/vaults/useVaultActions";
 import { useVaultApy } from "domain/vantage/vaults/useVaultApy";
 import { useVaultDetail } from "domain/vantage/vaults/useVaultDetail";
@@ -32,6 +33,7 @@ import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
 import Button from "components/Button/Button";
 import NumberInput from "components/NumberInput/NumberInput";
+import { RedemptionRequestList } from "components/RedemptionRequestList/RedemptionRequestList";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -117,6 +119,10 @@ export default function VaultDetailPage() {
   const zapActions = useZapInActions(cfg!, zapToken, chainId);
   const { txs } = useVaultTxHistory(cfg!);
   const apy = useVaultApy(cfg!);
+  const { items: redemptionItems, isLoading: isRedemptionLoading } = useAllRedemptionRequests(
+    chainId,
+    account ?? undefined
+  );
 
   const isTestnet = !MAINNET_CHAIN_IDS.has(chainId);
 
@@ -205,7 +211,7 @@ export default function VaultDetailPage() {
     }
   })();
 
-  const estimatedTokenOut: bigint =
+  const _estimatedTokenOut: bigint =
     withdrawShares > 0n && data.sharePrice > 0n && data.tokenPrice > 0n
       ? (((withdrawShares * data.sharePrice) / WAD) * WAD) / data.tokenPrice
       : 0n;
@@ -238,7 +244,7 @@ export default function VaultDetailPage() {
     if (withdrawShares === 0n) return;
     setIsSubmitting(true);
     try {
-      await actions.withdraw(withdrawShares);
+      await actions.requestRedeem(withdrawShares);
       setWithdrawInput("");
     } finally {
       setIsSubmitting(false);
@@ -285,7 +291,7 @@ export default function VaultDetailPage() {
         <AppHeader leftContent={<AppNav />} />
       </div>
 
-      <div className="mt-24 px-16">
+      <div className="mt-24 px-16 pb-[60px]">
         {/* Back link */}
         <button
           onClick={() => history.push("/vaults")}
@@ -338,28 +344,74 @@ export default function VaultDetailPage() {
               <AumSparkline history={data.aumHistory} />
             </div>
 
-            {/* Stats */}
-            <div className="rounded-4 border border-vantage-border bg-vantage-base p-20">
-              <h2 className="mb-16 text-16 font-semibold text-white">{t`Stats`}</h2>
-              <div className="grid grid-cols-2 gap-16">
-                <StatRow label={t`Total AUM`} value={data.isLoading ? "—" : formatUsd(data.aum)} />
-                <StatRow
-                  label={t`APY`}
-                  value={apy === null ? "—" : `${(apy * 100).toFixed(2)}%`}
-                  highlight={apy !== null ? "green" : undefined}
-                />
-                <StatRow label={t`Share Price`} value={data.isLoading ? "—" : formatPrice(data.sharePrice)} />
-                {account && (
-                  <StatRow label={t`My Deposit (USD)`} value={data.isLoading ? "—" : formatUsd(data.usdValue)} />
-                )}
-                {account && data.shortfall > 0n && (
+            <div className="flex w-full gap-8">
+              {/* Stats */}
+              <div className="flex-1 rounded-4 border border-vantage-border bg-vantage-base p-20">
+                <h2 className="mb-16 text-16 font-semibold text-white">{t`Stats`}</h2>
+                <div className="grid grid-cols-2 gap-16">
+                  <StatRow label={t`Total AUM`} value={data.isLoading ? "—" : formatUsd(data.aum)} />
                   <StatRow
-                    label={t`Shortfall Debt`}
-                    value={formatToken(data.shortfall, cfg.symbol, cfg.tokenDecimals)}
-                    highlight="red"
+                    label={t`APY`}
+                    value={apy === null ? "—" : `${(apy * 100).toFixed(2)}%`}
+                    highlight={apy !== null ? "green" : undefined}
                   />
-                )}
+                  <StatRow label={t`Share Price`} value={data.isLoading ? "—" : formatPrice(data.sharePrice)} />
+                  {account && (
+                    <StatRow label={t`My Deposit (USD)`} value={data.isLoading ? "—" : formatUsd(data.usdValue)} />
+                  )}
+                  {account && data.shortfall > 0n && (
+                    <StatRow
+                      label={t`Shortfall Debt`}
+                      value={formatToken(data.shortfall, cfg.symbol, cfg.tokenDecimals)}
+                      highlight="red"
+                    />
+                  )}
+                </div>
               </div>
+
+              {/* My Position */}
+              {account && data.vlpBalance > 0n && (
+                <div className="flex-1 rounded-4 border border-vantage-border bg-vantage-base p-20">
+                  <h2 className="mb-16 text-16 font-semibold text-white">{t`My Position`}</h2>
+                  <div className="space-y-8 text-13">
+                    <div className="flex justify-between">
+                      <span className="text-14 text-vantage-text-secondary">{t`VLP Balance`}</span>
+                      <span className="text-14 font-semibold text-white">{formatToken(data.vlpBalance, "VLP")}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-14 text-vantage-text-secondary">{t`USD Value`}</span>
+                      <span className="text-14 font-semibold text-white">{formatUsd(data.usdValue)}</span>
+                    </div>
+                    {cfg.assetType === 1 && (
+                      <div className="flex justify-between">
+                        <span className="text-14 text-vantage-text-secondary">{t`Token Balance`}</span>
+                        <span className="text-14 font-semibold text-white">
+                          {formatToken(data.tokenBalance, cfg.symbol, cfg.tokenDecimals)}
+                        </span>
+                      </div>
+                    )}
+                    {cfg.assetType === 2 && data.tokenPrice > WAD && (
+                      <div className="flex justify-between">
+                        <span className="text-vantage-text-secondary">{t`Price Yield`}</span>
+                        <span className="font-semibold text-vantage-accent">
+                          +{((parseFloat(formatEther(data.tokenPrice)) - 1) * 100).toFixed(2)}%
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Redemption request list (all vaults) */}
+            <div className="flex-1 rounded-4 border border-vantage-border bg-vantage-base p-20">
+              <h2 className="mb-16 text-16 font-semibold text-white">{t`Redemption Requests`}</h2>
+              <RedemptionRequestList
+                items={redemptionItems}
+                isLoading={isRedemptionLoading}
+                chainId={chainId}
+                onRefresh={data.refresh}
+              />
             </div>
 
             {/* Transactions */}
@@ -371,7 +423,7 @@ export default function VaultDetailPage() {
                     <div key={tx.txHash} className="flex items-center justify-between text-13">
                       <div className="flex items-center gap-8">
                         <span
-                          className={`rounded-full px-8 py-2 text-11 font-medium ${
+                          className={`rounded-full px-8 py-2 text-14 font-medium ${
                             tx.type === "deposit"
                               ? "bg-emerald-900/60 text-emerald-300"
                               : "bg-orange-900/60 text-orange-300"
@@ -379,9 +431,11 @@ export default function VaultDetailPage() {
                         >
                           {tx.type === "deposit" ? t`Deposit` : t`Withdraw`}
                         </span>
-                        <span className="text-white">{formatToken(tx.tokenAmount, cfg.symbol, cfg.tokenDecimals)}</span>
+                        <span className="text-14 text-white">
+                          {formatToken(tx.tokenAmount, cfg.symbol, cfg.tokenDecimals)}
+                        </span>
                       </div>
-                      <span className="font-mono text-12 text-slate-500">#{tx.blockNumber}</span>
+                      <span className="font-mono text-14 text-slate-500">#{tx.blockNumber}</span>
                     </div>
                   ))}
                 </div>
@@ -575,6 +629,13 @@ export default function VaultDetailPage() {
                 {/* ── Withdraw tab ─────────────────────────────────────────── */}
                 {activeTab === "withdraw" && (
                   <div className="flex flex-col gap-16">
+                    {/* How it works notice */}
+                    <div className="leading-relaxed rounded-4 border border-slate-700/60 bg-slate-800/40 px-12 py-10 text-12 text-slate-400">
+                      🗓{" "}
+                      {t`Withdrawals follow a monthly redemption cycle. Submit a request to join the next epoch (~30 days), then claim your USDC after the Keeper executes the epoch.`}
+                    </div>
+
+                    {/* VLP input */}
                     <div>
                       <div className="rounded-4 border border-vantage-border bg-vantage-input px-12 py-12">
                         <div className="mb-2 flex items-center justify-between text-12 text-slate-400">
@@ -604,14 +665,16 @@ export default function VaultDetailPage() {
                     {withdrawShares > 0n && (
                       <div className="space-y-4 text-13 text-slate-400">
                         <div className="flex justify-between">
-                          <span>{t`Estimated ${cfg.symbol}`}</span>
-                          <span className="text-white">
-                            {formatToken(estimatedTokenOut, cfg.symbol, cfg.tokenDecimals)}
-                          </span>
+                          <span>{t`Est. USD value`}</span>
+                          <span className="text-white">{formatUsd((withdrawShares * data.sharePrice) / WAD)}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span>{t`USD value`}</span>
-                          <span className="text-white">{formatUsd((withdrawShares * data.sharePrice) / WAD)}</span>
+                          <span>{t`Next epoch`}</span>
+                          <span className="text-slate-300">
+                            {data.nextEpochTimestamp > 0n
+                              ? new Date(Number(data.nextEpochTimestamp) * 1000).toLocaleDateString()
+                              : "—"}
+                          </span>
                         </div>
                       </div>
                     )}
@@ -628,7 +691,7 @@ export default function VaultDetailPage() {
                         className="w-full rounded-4 py-14 text-15 font-semibold transition-colors disabled:cursor-not-allowed"
                         style={withdrawBtnStyle}
                       >
-                        {isSubmitting ? t`Withdrawing…` : t`Withdraw`}
+                        {isSubmitting ? t`Submitting…` : t`Request Redemption`}
                       </button>
                     )}
 
@@ -639,39 +702,6 @@ export default function VaultDetailPage() {
                 )}
               </div>
             </div>
-
-            {/* My Position */}
-            {account && data.vlpBalance > 0n && (
-              <div className="rounded-4 border border-vantage-border bg-vantage-base p-20">
-                <h2 className="mb-12 text-14 font-semibold text-white">{t`My Position`}</h2>
-                <div className="space-y-8 text-13">
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">{t`VLP Balance`}</span>
-                    <span className="text-white">{formatToken(data.vlpBalance, "VLP")}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-400">{t`USD Value`}</span>
-                    <span className="text-white">{formatUsd(data.usdValue)}</span>
-                  </div>
-                  {cfg.assetType === 1 && (
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">{t`Token Balance`}</span>
-                      <span className="text-emerald-400">
-                        {formatToken(data.tokenBalance, cfg.symbol, cfg.tokenDecimals)}
-                      </span>
-                    </div>
-                  )}
-                  {cfg.assetType === 2 && data.tokenPrice > WAD && (
-                    <div className="flex justify-between">
-                      <span className="text-slate-400">{t`Price Yield`}</span>
-                      <span className="text-vantage-accent">
-                        +{((parseFloat(formatEther(data.tokenPrice)) - 1) * 100).toFixed(2)}%
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
 
             {/* Debug panel (testnet only) */}
             {isTestnet && cfg.isMock && (

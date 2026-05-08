@@ -29,6 +29,9 @@ msgstr "Slippage überschritten"
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 #: src/pages/AccountTransfer/BeginAccountTransfer/BeginAccountTransfer.tsx
 #: src/pages/AccountTransfer/CompleteAccountTransfer/CompleteAccountTransfer.tsx
 #: src/pages/ReferralsTier/ReferralsTier.tsx
@@ -208,6 +211,10 @@ msgstr "Debugwerte nicht verfügbar"
 msgid "Existing limit order in {0} pool but lacks liquidity for this order"
 msgstr "Bestehende Limitorder im {0} Pool, aber unzureichende Liquidität für diese Order"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "Redemption Ready to Claim"
+#~ msgstr ""
+
 #: src/components/PositionSeller/rows/PositionSellerPriceImpactFeesRow.tsx
 msgid "Price impact from closing. Positive values benefit you. <0>Read more</0>."
 msgstr "Preiseinfluss beim Schließen. Positive Werte kommen Ihnen zugute. <0>Mehr erfahren</0>."
@@ -261,6 +268,11 @@ msgstr "Oracle-Keeper-Ereignisse"
 #: src/components/GmList/GmTokensTotalBalanceInfo.tsx
 msgid "365d est. fees"
 msgstr "365T gesch. Gebühren"
+
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Redemption Requests"
+msgstr ""
 
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "RabbitHole"
@@ -720,6 +732,11 @@ msgstr "V1 Airdrop"
 msgid "Order execution price"
 msgstr "Orderausführungspreis"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Redemption cancelled"
+msgstr ""
+
 #: src/pages/Status/components/WaterfallAdlRisk.tsx
 msgid "The Vault's payout capacity (Junior AUM) is below the total unrealised profit in the market. Profitable positions — prioritised by leverage × profit — may be force-closed by the ADL keeper to restore solvency."
 msgstr ""
@@ -1025,6 +1042,10 @@ msgstr ""
 msgid "27% of protocol fees fund Treasury buybacks — rewards distributed at $90"
 msgstr ""
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "USDC to Receive"
+#~ msgstr ""
+
 #: src/components/NotifyModal/NotifyModal.tsx
 msgid "GMX alerts"
 msgstr "GMX-Benachrichtigungen"
@@ -1108,6 +1129,10 @@ msgstr "Max. Netzwerkgebühr-Puffer-Präzision beträgt 0,01 %"
 msgid "DeltaPrime"
 msgstr "DeltaPrime"
 
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Redemption request confirmed"
+msgstr ""
+
 #: src/pages/VantageLP/VantageLPPage.tsx
 msgid "h"
 msgstr ""
@@ -1116,6 +1141,10 @@ msgstr ""
 #: src/pages/LeaderboardPage/components/CompetitionPrizes.tsx
 msgid "1st place"
 msgstr "1. Platz"
+
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+msgid "Cancelling…"
+msgstr ""
 
 #: src/pages/Hedge/HedgeDetailPage.tsx
 msgid "New hedge positions are temporarily blocked due to the Safety Buffer Lock. Trade mode remains available."
@@ -2251,6 +2280,10 @@ msgstr "{0} gegen {1} getauscht"
 #: src/pages/UiPage/UiPage.tsx
 msgid "H2 text size"
 msgstr "H2-Textgröße"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "Your VLP is locked. The Keeper will execute the epoch on or after the date above, after which you can claim USDC."
+#~ msgstr ""
 
 #: src/components/CollateralSelector/PositionEditorCollateralSelector.tsx
 #: src/components/GmxAccountModal/DepositView.tsx
@@ -3476,10 +3509,15 @@ msgstr "Ordertyp"
 msgid "risking insolvency. New hedge positions are blocked. Trade mode remains available."
 msgstr ""
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/lp/useVantageLPActions.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
 #: src/domain/vantage/trade/useVantageTrade.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
+#: src/domain/vantage/vaults/useVaultActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
 #: src/domain/vantage/vaults/useVaultActions.ts
 msgid "Transaction submitted"
@@ -3487,6 +3525,10 @@ msgstr ""
 
 #: src/pages/Trade/components/SpreadBadge.tsx
 msgid "Ask"
+msgstr ""
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Est. USD value"
 msgstr ""
 
 #: src/pages/Status/components/AdlLeaderboard.tsx
@@ -3654,6 +3696,10 @@ msgstr "<0>Empfohlenen Einfluss festlegen: {0}</0>."
 msgid "Claiming affiliate rewards failed"
 msgstr "Einlösen von Partnerbelohnungen fehlgeschlagen"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "VLP Redeemed"
+#~ msgstr ""
+
 #: src/pages/DebugOracleKeeper/DebugOracleKeeper.tsx
 #: src/pages/RpcDebug/RpcDebug.tsx
 msgid "DATA TYPE"
@@ -3725,6 +3771,7 @@ msgstr "Endpunkt entfernen"
 msgid "Community-led Telegram groups"
 msgstr "Community-geführte Telegram-Gruppen"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
 msgid "Vault"
 msgstr ""
@@ -4054,7 +4101,6 @@ msgid "May lack liquidity for parts of this order when triggered"
 msgstr "Bei Auslösung kann für Teile dieser Order unzureichende Liquidität vorhanden sein"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdrawing…"
 msgstr ""
 
@@ -4854,6 +4900,10 @@ msgstr ""
 msgid "Swap submitted"
 msgstr "Swap eingereicht"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+msgid "Claim USDC"
+msgstr ""
+
 #: src/pages/Status/components/WaterfallHealthWidget.tsx
 msgid "OI growing relative to payout capacity. Monitor closely."
 msgstr ""
@@ -4905,6 +4955,7 @@ msgstr "Blueberry Pulse"
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Trade/components/ClosePositionPanel.tsx
 #: src/pages/Trade/components/OpenPositionPanel.tsx
+#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Submitting…"
 msgstr ""
 
@@ -5256,6 +5307,11 @@ msgstr "Unstaken"
 msgid "Max action count reached. <0>Click here</0> to update"
 msgstr "Maximale Aktionsanzahl erreicht. <0>Klicken Sie hier</0>, um zu aktualisieren"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "USDC claimed"
+msgstr ""
+
 #: src/pages/TestPermits/TestPermits.tsx
 msgid "Signature:"
 msgstr "Signatur:"
@@ -5395,7 +5451,6 @@ msgstr "Externe Swaps fehlschlagen lassen"
 #: src/pages/UiPage/BannerTest.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Withdraw"
@@ -6164,6 +6219,10 @@ msgstr "BELOHNUNGEN"
 msgid "Max negative factor"
 msgstr "Maximaler negativer Faktor"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "Redemption Pending"
+#~ msgstr ""
+
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Asset management"
 msgstr "Vermögensverwaltung"
@@ -6271,7 +6330,6 @@ msgid "Buy failed"
 msgstr "Kauf fehlgeschlagen"
 
 #: src/pages/VantageLP/VantageLPPage.tsx
-#: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "USD value"
 msgstr ""
 
@@ -6367,6 +6425,7 @@ msgstr ""
 
 #: src/components/Claims/ClaimableCard.tsx
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/VestModal.tsx
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 msgid "Claimable"
 msgstr "Beanspruchbar"
 
@@ -6593,6 +6652,7 @@ msgstr "Klicken Sie auf das Bearbeitungssymbol, um die Sicherheit anzupassen."
 msgid "Staked on Avalanche"
 msgstr "Gestaket auf Avalanche"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/pages/Trade/components/PendingRequestsPanel.tsx
 msgid "Pending"
 msgstr ""
@@ -6720,6 +6780,10 @@ msgstr "Alle Netzwerke"
 #: src/components/SettleAccruedFundingFeeModal/SettleAccruedFundingFeeModal.tsx
 msgid "Select positions"
 msgstr "Positionen auswählen"
+
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+msgid "Claiming…"
+msgstr ""
 
 #: src/components/AppHeader/AppHeaderUser.tsx
 #: src/components/Earn/Portfolio/AssetsList/AssetsList.tsx
@@ -7208,6 +7272,11 @@ msgstr "Positionsgröße übersteigt den Poolwert"
 msgid "Impact exponent (positive)"
 msgstr "Auswirkungsexponent (positiv)"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Cancelling redemption..."
+msgstr ""
+
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "Sync Rebasing Balance"
 msgstr ""
@@ -7395,8 +7464,8 @@ msgid "Updating {updateOrdersCount} TP/SL orders..."
 msgstr "Aktualisierung von {updateOrdersCount} TP/SL Orders..."
 
 #: src/pages/VaultDetail/VaultDetailPage.tsx
-msgid "Estimated {0}"
-msgstr ""
+#~ msgid "Estimated {0}"
+#~ msgstr ""
 
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Execution price didn't meet acceptable price"
@@ -8124,6 +8193,7 @@ msgid "Governance"
 msgstr "Governance"
 
 #: src/components/OrderItem/OrderItem.tsx
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/components/StatusNotification/OrderStatusNotification.tsx
 #: src/components/TPSLModal/TPSLOrdersList.tsx
 #: src/components/TradeHistory/TradeHistoryRow/utils/shared.ts
@@ -8215,6 +8285,7 @@ msgstr ""
 msgid "Share position"
 msgstr "Position teilen"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "USD Value"
 msgstr ""
@@ -9142,6 +9213,10 @@ msgstr "Gesamtbetrag zum Beanspruchen"
 #: src/components/Errors/getContractErrorToastContent.tsx
 msgid "Insufficient gas for execution. Estimated: {estimatedGasLimitText}, starting: {startingGasText}"
 msgstr "Unzureichend Gas für die Ausführung. Geschätzt: {estimatedGasLimitText}, verfügbar: {startingGasText}"
+
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Redemption request submitted..."
+msgstr ""
 
 #: src/components/PositionShare/PositionShareCard.tsx
 #: src/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
@@ -10190,6 +10265,10 @@ msgstr "Tiefe"
 msgid "Layer 1"
 msgstr "Layer 1"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Next epoch"
+msgstr ""
+
 #: landing/src/pages/Home/SocialSection/SocialSlider.tsx
 msgid "<0>With a 75.5% majority vote, GMX has selected LayerZero as its messaging partner for multichain expansion! The integration brings GMX:</0><1><2>The ability to expand to 125+ chains</2><3>Full ownership of all contracts and security</3><4>Fast, zero-slippage transfers</4><5>Battle-tested rails already trusted by billions of dollars in assets and hundreds of applications... <6>see more</6></5></1>"
 msgstr "<0>Mit 75,5% Mehrheitsstimme hat GMX LayerZero als Messaging-Partner für Multichain-Erweiterung ausgewählt! Die Integration bringt GMX:</0><1><2>Die Fähigkeit, auf 125+ Chains zu erweitern</2><3>Vollständiges Eigentum an allen Verträgen und Sicherheit</3><4>Schnelle, zero-Slippage-Transfers</4><5>Battle-tested Rails, die bereits von Milliarden Dollar an Assets und Hunderten von Anwendungen vertraut werden... <6>mehr sehen</6></5></1>"
@@ -10937,6 +11016,10 @@ msgstr "Unzureichende Liquidität im Pool verfügbar"
 msgid "Vested claimable GMX:"
 msgstr "Unverfallbare beanspruchbare GMX:"
 
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Withdrawals follow a monthly redemption cycle. Submit a request to join the next epoch (~30 days), then claim your USDC after the Keeper executes the epoch."
+msgstr ""
+
 #: src/components/CollateralDestinationSelector/CollateralDestinationSelector.tsx
 #: src/components/CollateralDestinationSelector/CollateralDestinationSelector.tsx
 #: src/components/GmxAccountModal/AvailableToTradeAssetsView.tsx
@@ -11629,6 +11712,7 @@ msgid "Depositing..."
 msgstr "Wird eingezahlt…"
 
 #: src/components/AppNav/AppNav.tsx
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 #: src/pages/Hedge/HedgeDetailPage.tsx
 #: src/pages/Portfolio/PortfolioPage.tsx
@@ -11961,6 +12045,7 @@ msgstr "Max. Pool-Betrag überschritten"
 msgid "Unknown order"
 msgstr "Unbekannte Order"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
 #: src/pages/VantageLP/VantageLPPage.tsx
 #: src/pages/VaultDetail/VaultDetailPage.tsx
 msgid "VLP Amount"
@@ -11989,6 +12074,10 @@ msgstr "Symbole und Bilder suchen..."
 #: src/components/MarketStats/components/CompositionTable.tsx
 msgid "{column}"
 msgstr "{column}"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+msgid "Request Redemption"
+msgstr ""
 
 #: src/pages/RpcDebug/parts.tsx
 msgid "No trackers registered"
@@ -12068,6 +12157,11 @@ msgstr ""
 #: src/pages/Ecosystem/ecosystemConstants.tsx
 msgid "Rage Trade"
 msgstr "Rage Trade"
+
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Approving VLP — waiting for confirmation…"
+msgstr ""
 
 #: src/domain/synthetics/common/incentivesAirdropMessages.ts
 msgid "EIP-4844, 20-27 Mar"
@@ -12173,6 +12267,10 @@ msgstr "Limit-Tausch"
 #: src/components/Earn/Portfolio/AssetsList/GmxAssetCard/ClaimModal.tsx
 msgid "Claim {tokenSymbol} rewards"
 msgstr "{tokenSymbol} Belohnungen beanspruchen"
+
+#: src/pages/VaultDetail/VaultDetailPage.tsx
+#~ msgid "Cancel Redemption"
+#~ msgstr ""
 
 #: src/components/ChartTokenSelector/ChartTokenSelector.tsx
 msgid "24H VOL."
@@ -12341,6 +12439,10 @@ msgstr "Keine Ausschüttungen zum Beanspruchen"
 msgid "Copy link"
 msgstr "Link kopieren"
 
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+msgid "Next Epoch"
+msgstr ""
+
 #: src/components/PositionShare/CreateReferralCode.tsx
 #: src/components/PositionShare/CreateReferralCode.tsx
 #: src/components/Referrals/AddAffiliateCode.tsx
@@ -12501,6 +12603,11 @@ msgstr "Nicht mehr anzeigen"
 #: src/components/Earn/Discovery/EarnProductCard.tsx
 msgid "Great for passive users"
 msgstr "Ideal für passive Nutzer"
+
+#: src/components/RedemptionRequestList/RedemptionRequestList.tsx
+#: src/domain/vantage/vaults/useVaultActions.ts
+msgid "Claiming USDC..."
+msgstr ""
 
 #: src/components/MarketsList/MarketsList.tsx
 msgid "NET RATE / 1H"

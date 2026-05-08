@@ -87,7 +87,9 @@ export function useVantageLPData(): VantageLPData & { isLoading: boolean } {
       const bps = weekendBufferBps as bigint;
       const lastTs = lastEpochTs as bigint;
       const duration = cycleDuration as bigint;
-      const nextEpochTimestamp = lastTs + duration;
+      // When no epoch has been executed yet, lastTs is 0 — use current time as base.
+      const baseTs = lastTs > 0n ? lastTs : BigInt(Math.floor(Date.now() / 1000));
+      const nextEpochTimestamp = baseTs + duration;
       const pendingShares = pendingReq.shares as bigint;
       const pendingEpochId = pendingReq.epochId as bigint;
       const pendingUsdValue = (pendingShares * sp) / WAD;

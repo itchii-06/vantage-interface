@@ -15,6 +15,7 @@ import { Contract, formatEther } from "ethers";
 import { useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import { useAllRedemptionRequests } from "domain/vantage/lp/useAllRedemptionRequests";
 import { usePortfolioData } from "domain/vantage/portfolio/usePortfolioData";
 import type { HedgePortfolioItem, VaultLpItem } from "domain/vantage/portfolio/usePortfolioData";
 import type { VantagePosition } from "domain/vantage/positions/types";
@@ -28,6 +29,7 @@ import localhostDeployment from "vantage/deployments/frontend-localhost.json";
 
 import { AppHeader } from "components/AppHeader/AppHeader";
 import { AppNav } from "components/AppNav/AppNav";
+import { RedemptionRequestList } from "components/RedemptionRequestList/RedemptionRequestList";
 import { VantagePageContainer } from "components/VantagePageContainer/VantagePageContainer";
 
 // ---------------------------------------------------------------------------
@@ -713,6 +715,10 @@ export default function PortfolioPage() {
 
   const { globalStats, hedgeItems, vaultLpItems, allPositions } = usePortfolioData(chainId, account ?? undefined);
   const { hedge: adlHedge } = useUserPositions(chainId, account ?? undefined);
+  const { items: redemptionItems, isLoading: isRedemptionLoading } = useAllRedemptionRequests(
+    chainId,
+    account ?? undefined
+  );
 
   return (
     <div className="w-full">
@@ -744,6 +750,14 @@ export default function PortfolioPage() {
 
         {/* ⑤ Vault LP Status */}
         <VaultLpSection items={vaultLpItems} hasAccount={!!account} />
+
+        {/* ⑥ Redemption Requests */}
+        <RedemptionRequestList
+          items={redemptionItems}
+          isLoading={isRedemptionLoading}
+          chainId={chainId}
+          showHeading={true}
+        />
 
         {/* Disclaimer */}
         <p className="mt-8 text-center text-14 text-slate-600">

@@ -54,64 +54,72 @@ type SortDir = "asc" | "desc";
 
 function WaterfallDiagram() {
   return (
-    <div className="mb-28 rounded-4 border border-vantage-border bg-vantage-base p-20">
-      <h2 className="mb-16 text-13 font-semibold text-slate-400">{t`Tranche Structure`}</h2>
-      <div className="flex flex-col gap-0 sm:flex-row sm:items-stretch sm:gap-0">
-        {/* Protocol Revenue box */}
-        <div className="flex flex-1 flex-col items-center justify-center rounded-4 border border-slate-700 bg-slate-800/60 px-16 py-14 text-center">
-          <div className="text-slate-300 mb-4 text-16">⬇</div>
-          <div className="text-slate-200 text-13 font-semibold">{t`Protocol Revenue`}</div>
-          <div className="mt-4 text-12 text-slate-500">{t`RWA yield + Trading fees`}</div>
-        </div>
-
-        {/* Arrow right */}
-        <div className="flex items-center justify-center px-8 text-slate-600 sm:px-12">→</div>
-
-        {/* Senior box */}
-        <div className="border-indigo-700/50 bg-indigo-900/20 flex flex-1 flex-col justify-between rounded-4 border px-16 py-14">
-          <div className="mb-8 flex items-center gap-8">
-            <span className="text-16">🛡️</span>
-            <span className="text-indigo-300 text-14 font-semibold">{t`Senior Vaults`}</span>
-            <span className="border-indigo-700 bg-indigo-900/60 text-indigo-300 rounded-full border px-8 py-1 text-11">
-              {t`Priority Layer`}
-            </span>
-          </div>
-          <div className="leading-relaxed text-12 text-slate-400">
-            {t`Receives yield first. Junior capital cushions any losses.`}
-          </div>
-          <div className="mt-8 flex items-center gap-6 text-12 text-green-400">
-            <span className="h-8 w-8 rounded-full bg-green-500" />
-            {t`Lower risk · Stable yield`}
-          </div>
-        </div>
-
-        {/* Arrow right */}
-        <div className="flex items-center justify-center px-8 text-slate-600 sm:px-12">→</div>
-
-        {/* Junior box */}
-        <div className="border-amber-700/50 bg-amber-900/20 flex flex-1 flex-col justify-between rounded-4 border px-16 py-14">
-          <div className="mb-8 flex items-center gap-8">
-            <span className="text-16">🚀</span>
-            <span className="text-amber-300 text-14 font-semibold">{t`Junior Vault`}</span>
-            <span className="border-amber-700 bg-amber-900/60 text-amber-300 rounded-full border px-8 py-1 text-11">
-              {t`Performance Layer`}
-            </span>
-          </div>
-          <div className="leading-relaxed text-12 text-slate-400">
-            {t`Captures residual yield after Senior. Absorbs FR deficits first.`}
-          </div>
-          <div className="text-amber-400 mt-8 flex items-center gap-6 text-12">
-            <span className="bg-amber-500 h-8 w-8 rounded-full" />
-            {t`Higher APY · First-loss layer`}
-          </div>
+    <div className="mb-48">
+      {/* Section header */}
+      <div className={`mb-12 pl-12`}>
+        <div className="flex items-center gap-10">
+          <span className="text-20">Risk mitigation</span>
         </div>
       </div>
+      <div className="mb-48 rounded-4 border border-vantage-border bg-vantage-base p-20">
+        <h2 className="mb-16 text-13 font-semibold text-slate-400">{t`Tranche Structure`}</h2>
+        <div className="flex flex-col gap-0 sm:flex-row sm:items-stretch sm:gap-0">
+          {/* Protocol Revenue box */}
+          <div className="flex flex-1 flex-col items-center justify-center rounded-4 border border-slate-700 bg-slate-800/60 px-16 py-14 text-center">
+            <div className="text-slate-300 mb-4 text-16">⬇</div>
+            <div className="text-slate-200 text-13 font-semibold">{t`Protocol Revenue`}</div>
+            <div className="mt-4 text-12 text-slate-500">{t`RWA yield + Trading fees`}</div>
+          </div>
 
-      {/* Tooltip hint */}
-      <p className="mt-12 text-12 text-slate-600">
-        💡{" "}
-        {t`Senior: "Always gets served first at the buffet." Junior: "Gets whatever is left — but more of it, faster."`}
-      </p>
+          {/* Arrow right */}
+          <div className="flex items-center justify-center px-8 text-slate-600 sm:px-12">→</div>
+
+          {/* Senior box */}
+          <div className="border-indigo-700/50 bg-indigo-900/20 flex flex-1 flex-col justify-between rounded-4 border px-16 py-14">
+            <div className="mb-8 flex items-center gap-8">
+              <span className="text-16">🛡️</span>
+              <span className="text-indigo-300 text-14 font-semibold">{t`Senior Vaults`}</span>
+              <span className="border-indigo-700 bg-indigo-900/60 text-indigo-300 rounded-full border px-8 py-1 text-11">
+                {t`Priority Layer`}
+              </span>
+            </div>
+            <div className="leading-relaxed text-12 text-slate-400">
+              {t`Receives yield first. Junior capital cushions any losses.`}
+            </div>
+            <div className="mt-8 flex items-center gap-6 text-12 text-green-400">
+              <span className="h-8 w-8 rounded-full bg-green-500" />
+              {t`Lower risk · Stable yield`}
+            </div>
+          </div>
+
+          {/* Arrow right */}
+          <div className="flex items-center justify-center px-8 text-slate-600 sm:px-12">→</div>
+
+          {/* Junior box */}
+          <div className="border-amber-700/50 bg-amber-900/20 flex flex-1 flex-col justify-between rounded-4 border px-16 py-14">
+            <div className="mb-8 flex items-center gap-8">
+              <span className="text-16">🚀</span>
+              <span className="text-amber-300 text-14 font-semibold">{t`Junior Vault`}</span>
+              <span className="border-amber-700 bg-amber-900/60 text-amber-300 rounded-full border px-8 py-1 text-11">
+                {t`Performance Layer`}
+              </span>
+            </div>
+            <div className="leading-relaxed text-12 text-slate-400">
+              {t`Captures residual yield after Senior. Absorbs FR deficits first.`}
+            </div>
+            <div className="text-amber-400 mt-8 flex items-center gap-6 text-12">
+              <span className="bg-amber-500 h-8 w-8 rounded-full" />
+              {t`Higher APY · First-loss layer`}
+            </div>
+          </div>
+        </div>
+
+        {/* Tooltip hint */}
+        <p className="mt-12 text-12 text-slate-600">
+          💡{" "}
+          {t`Senior: "Always gets served first at the buffet." Junior: "Gets whatever is left — but more of it, faster."`}
+        </p>
+      </div>
     </div>
   );
 }
@@ -267,7 +275,7 @@ function TrancheSection({
   const icon = tranche === "senior" ? "🛡️" : "🚀";
 
   return (
-    <div className="mb-28">
+    <div className="mb-48">
       {/* Section header */}
       <div className={`mb-12 pl-12`}>
         <div className="flex items-center gap-10">
@@ -353,8 +361,17 @@ export default function VaultsPage() {
         title={t`Vaults`}
         description={t`Choose your risk-return profile: Senior vaults offer stability, Junior captures higher yield.`}
       >
-        {/* Waterfall structure diagram */}
-        <WaterfallDiagram />
+        {/* Junior Vault section */}
+        <TrancheSection
+          tranche="junior"
+          items={juniorItems}
+          apyByKey={apyByKey}
+          account={account}
+          sortKey={sortKey}
+          sortDir={sortDir}
+          onSort={handleSort}
+          onRowClick={(item) => history.push(`/vaults/${item.vaultAddress || item.key}`)}
+        />
 
         {/* Senior Vaults section */}
         <TrancheSection
@@ -368,17 +385,8 @@ export default function VaultsPage() {
           onRowClick={(item) => history.push(`/vaults/${item.vaultAddress || item.key}`)}
         />
 
-        {/* Junior Vault section */}
-        <TrancheSection
-          tranche="junior"
-          items={juniorItems}
-          apyByKey={apyByKey}
-          account={account}
-          sortKey={sortKey}
-          sortDir={sortDir}
-          onSort={handleSort}
-          onRowClick={(item) => history.push(`/vaults/${item.vaultAddress || item.key}`)}
-        />
+        {/* Waterfall structure diagram */}
+        <WaterfallDiagram />
 
         {/* Footer hint */}
         {!account && (

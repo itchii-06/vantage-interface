@@ -47,6 +47,19 @@ export interface VaultDetailData {
   aumHistory: AumDataPoint[];
   isLoading: boolean;
   refresh: () => Promise<void>; // manually trigger a data refetch
+  /** Pending redemption request shares (0 = no active request) */
+  pendingShares: bigint;
+  /** Epoch ID at which the pending redemption was registered */
+  pendingEpochId: bigint;
+  /** Unix timestamp (seconds) of the next scheduled epoch execution */
+  nextEpochTimestamp: bigint;
+  /**
+   * Share price set when the user's epoch was executed (0 = not yet executed).
+   * When > 0, the user can call claimRedeemedFunds().
+   */
+  pendingEpochPricePerShare: bigint;
+  /** USD value of the pending redemption at current (or epoch) share price, WAD */
+  pendingUsdValue: bigint;
 }
 
 // ---------------------------------------------------------------------------
@@ -77,6 +90,11 @@ export function useVaultDetail(cfg: VaultConfig, chainId: number): VaultDetailDa
     shortfall: 0n,
     aumHistory: [],
     isLoading: true,
+    pendingShares: 0n,
+    pendingEpochId: 0n,
+    nextEpochTimestamp: 0n,
+    pendingEpochPricePerShare: 0n,
+    pendingUsdValue: 0n,
   });
 
   const aumHistoryRef = useRef<AumDataPoint[]>([]);
@@ -119,6 +137,39 @@ export function useVaultDetail(cfg: VaultConfig, chainId: number): VaultDetailDa
 
     const usdValue = (vlpBalance * sharePrice) / WAD;
 
+    // --- Redemption epoch state (skip for Prism configs without a real LPManager) ---
+    let pendingShares = 0n;
+    let pendingEpochId = 0n;
+    let nextEpochTimestamp = 0n;
+    let pendingEpochPricePerShare = 0n;
+    let pendingUsdValue = 0n;
+
+    if (cfg.lpManagerAddress) {
+      try {
+        const [lastEpochTs, cycleDuration, pendingReq] = await Promise.all([
+          lpManager.lastEpochTimestamp() as Promise<bigint>,
+          lpManager.redemptionCycleDuration() as Promise<bigint>,
+          account
+            ? (lpManager.redemptionRequests(account) as Promise<{ shares: bigint; epochId: bigint }>)
+            : Promise.resolve({ shares: 0n, epochId: 0n }),
+        ]);
+        pendingShares = pendingReq.shares;
+        pendingEpochId = pendingReq.epochId;
+        // When no epoch has been executed yet, lastEpochTimestamp is 0.
+        // Use current time as the base so the displayed date is meaningful.
+        const baseTs = lastEpochTs > 0n ? lastEpochTs : BigInt(Math.floor(Date.now() / 1000));
+        nextEpochTimestamp = baseTs + cycleDuration;
+
+        if (pendingShares > 0n && pendingEpochId > 0n) {
+          pendingEpochPricePerShare = (await lpManager.epochPricePerShare(pendingEpochId)) as bigint;
+          const priceForValue = pendingEpochPricePerShare > 0n ? pendingEpochPricePerShare : sharePrice;
+          pendingUsdValue = (pendingShares * priceForValue) / WAD;
+        }
+      } catch {
+        // Older deployment without redemption epoch methods — skip gracefully
+      }
+    }
+
     // Append AUM to history
     const point: AumDataPoint = { timestamp: Date.now(), aum };
     aumHistoryRef.current = [...aumHistoryRef.current.slice(-MAX_HISTORY_POINTS + 1), point];
@@ -133,6 +184,11 @@ export function useVaultDetail(cfg: VaultConfig, chainId: number): VaultDetailDa
       shortfall,
       aumHistory: [...aumHistoryRef.current],
       isLoading: false,
+      pendingShares,
+      pendingEpochId,
+      nextEpochTimestamp,
+      pendingEpochPricePerShare,
+      pendingUsdValue,
     });
   }, [cfg, account, provider]);
 

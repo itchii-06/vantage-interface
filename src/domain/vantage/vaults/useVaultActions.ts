@@ -160,6 +160,88 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
   );
 
   // ---------------------------------------------------------------------------
+  // Request Redemption (monthly epoch)
+  // ---------------------------------------------------------------------------
+
+  const requestRedeem = useCallback(
+    async (shares: bigint): Promise<void> => {
+      if (!account || !signer || !lpManager) {
+        helperToast.error(t`Wallet not connected`);
+        return;
+      }
+      try {
+        // requestRedeem calls lpToken.transferFrom(user, lpManager, shares),
+        // so the user must first approve the LPToken to the LPManager.
+        const lpToken = new Contract(cfg.lpTokenAddress, TokenAbi, signer);
+        const currentAllowance = (await lpToken.allowance(account, cfg.lpManagerAddress)) as bigint;
+        if (currentAllowance < shares) {
+          helperToast.info(t`Approving VLP — waiting for confirmation…`);
+          const approveTx = await lpToken.approve(cfg.lpManagerAddress, maxUint256);
+          await approveTx.wait();
+        }
+
+        const tx = await lpManager.requestRedeem(shares);
+        helperToast.info(t`Transaction submitted`);
+        setPendingTxns((prev) => [...prev, { hash: tx.hash, message: t`Redemption request submitted...` }]);
+        const receipt = await tx.wait();
+        if (receipt) {
+          pushSuccessNotification(chainId, t`Redemption request confirmed`, { transactionHash: receipt.hash });
+        }
+      } catch (err: unknown) {
+        helperToast.error(err instanceof Error ? err.message : String(err));
+      }
+    },
+    [account, signer, lpManager, cfg.lpTokenAddress, cfg.lpManagerAddress, chainId, setPendingTxns]
+  );
+
+  // ---------------------------------------------------------------------------
+  // Cancel Redemption (before epoch execution)
+  // ---------------------------------------------------------------------------
+
+  const cancelRedeem = useCallback(
+    async (shares: bigint): Promise<void> => {
+      if (!account || !signer || !lpManager) {
+        helperToast.error(t`Wallet not connected`);
+        return;
+      }
+      try {
+        const tx = await lpManager.cancelRedeem(shares);
+        helperToast.info(t`Transaction submitted`);
+        setPendingTxns((prev) => [...prev, { hash: tx.hash, message: t`Cancelling redemption...` }]);
+        const receipt = await tx.wait();
+        if (receipt) {
+          pushSuccessNotification(chainId, t`Redemption cancelled`, { transactionHash: receipt.hash });
+        }
+      } catch (err: unknown) {
+        helperToast.error(err instanceof Error ? err.message : String(err));
+      }
+    },
+    [account, signer, lpManager, chainId, setPendingTxns]
+  );
+
+  // ---------------------------------------------------------------------------
+  // Claim Redeemed Funds (after epoch execution)
+  // ---------------------------------------------------------------------------
+
+  const claimRedeemedFunds = useCallback(async (): Promise<void> => {
+    if (!account || !signer || !lpManager) {
+      helperToast.error(t`Wallet not connected`);
+      return;
+    }
+    try {
+      const tx = await lpManager.claimRedeemedFunds();
+      helperToast.info(t`Transaction submitted`);
+      setPendingTxns((prev) => [...prev, { hash: tx.hash, message: t`Claiming USDC...` }]);
+      const receipt = await tx.wait();
+      if (receipt) {
+        pushSuccessNotification(chainId, t`USDC claimed`, { transactionHash: receipt.hash });
+      }
+    } catch (err: unknown) {
+      helperToast.error(err instanceof Error ? err.message : String(err));
+    }
+  }, [account, signer, lpManager, chainId, setPendingTxns]);
+
+  // ---------------------------------------------------------------------------
   // Debug: Rebase (Rebasing vault only)
   // ---------------------------------------------------------------------------
 
@@ -254,6 +336,9 @@ export function useVaultActions(cfg: VaultConfig, chainId: number = DEFAULT_SETT
   return {
     deposit,
     withdraw,
+    requestRedeem,
+    cancelRedeem,
+    claimRedeemedFunds,
     approve,
     debugRebase,
     debugSetPrice,
