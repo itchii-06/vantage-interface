@@ -12809,4 +12809,4 @@ msgstr "{orderText}の更新に失敗しました"
 
 #: src/components/UserIncentiveDistribution/UserIncentiveDistribution.tsx
 msgid "Success"
-msgstr "成功"
+msgstr "成功受付停止中"

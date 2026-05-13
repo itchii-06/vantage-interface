@@ -6294,5 +6294,36 @@
     ],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "executionReserve",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "actualCost",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "oracleExpected",
+        "type": "uint256"
+      }
+    ],
+    "name": "reconcileExecutionReserve",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]

@@ -18,7 +18,7 @@ import { usePositionRouterTrade } from "domain/vantage/trade/usePositionRouterTr
 import { useSpread } from "domain/vantage/trade/useSpread";
 import { useJuniorVaultLiquidity } from "domain/vantage/useJuniorVaultLiquidity";
 import type { VaultConfig } from "domain/vantage/vaults/vaultConfig";
-import { ASSET_TYPE_COLOR, ASSET_TYPE_LABEL, VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
+import { VAULT_CONFIGS } from "domain/vantage/vaults/vaultConfig";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
 import localhostDeployment from "vantage/deployments/frontend-localhost.json";
@@ -105,18 +105,30 @@ export default function TradePage() {
               {/* Dropdown trigger — same style as MarketSelector */}
               <div className="relative" ref={dropdownRef}>
                 <div
-                  className="group flex cursor-pointer items-center gap-4 whitespace-nowrap tracking-wide hover:text-vantage-accent"
+                  className="group flex cursor-pointer items-center gap-4 gap-8 whitespace-nowrap tracking-wide hover:text-vantage-accent"
                   onClick={() => setIsMarketOpen((o) => !o)}
                 >
+                  {/* Symbol avatar */}
+                  {selectedVault.imageUrl ? (
+                    <img
+                      src={selectedVault.imageUrl}
+                      alt={selectedVault.name}
+                      className="h-40 w-40 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-40 w-40 items-center justify-center rounded-full bg-slate-700 text-12 font-bold text-white">
+                      {selectedVault.symbol.slice(0, 2)}
+                    </div>
+                  )}
                   <span className="text-24 font-bold text-white group-hover:text-vantage-accent">
-                    {selectedVault?.symbol ?? "—"}
+                    {selectedVault?.name ?? "—"}
                   </span>
                   <ChevronDownIcon className="w-16 text-slate-400 group-hover:text-vantage-accent" />
                 </div>
 
                 {/* Dropdown list */}
                 {isMarketOpen && (
-                  <div className="absolute left-0 top-full z-50 mt-8 w-[280px] overflow-hidden rounded-4 border border-vantage-border bg-vantage-base-hover shadow-xl">
+                  <div className="absolute left-0 top-full z-50 mt-8 w-[320px] overflow-hidden rounded-4 border border-vantage-border bg-vantage-base-hover shadow-xl">
                     {/* Header */}
                     <div className="border-b border-b-vantage-border px-16 py-10 text-12 font-medium text-vantage-text-secondary">
                       {t`Select Market`}
@@ -140,7 +152,7 @@ export default function TradePage() {
                               <img
                                 src={vault.imageUrl}
                                 alt={vault.name}
-                                className="h-48 w-48 rounded-full object-cover"
+                                className="h-32 w-32 rounded-full object-cover"
                               />
                             ) : (
                               <div className="flex h-32 w-32 items-center justify-center rounded-full bg-slate-700 text-12 font-bold text-white">
@@ -148,8 +160,7 @@ export default function TradePage() {
                               </div>
                             )}
                             <div>
-                              <div className="text-14 font-semibold text-white">{vault.symbol}</div>
-                              <div className="text-11 text-slate-400">{vault.name}</div>
+                              <div className="text-14 font-semibold text-white">{vault.name}</div>
                             </div>
                           </div>
                           <div className="flex items-center gap-4">
@@ -160,11 +171,6 @@ export default function TradePage() {
                                 {PRISM_AXIS_LABEL[vault.prismAxis]}
                               </span>
                             )}
-                            <span
-                              className={`text-10 rounded-full px-8 py-2 font-medium ${ASSET_TYPE_COLOR[vault.assetType]}`}
-                            >
-                              {ASSET_TYPE_LABEL[vault.assetType]}
-                            </span>
                           </div>
                         </div>
                       );

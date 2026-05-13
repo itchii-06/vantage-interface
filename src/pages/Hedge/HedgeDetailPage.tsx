@@ -938,7 +938,6 @@ export default function HedgeDetailPage() {
             {/* ── Capacity Full Notice ────────────────────────────────── */}
             {isCapacityFull && (
               <div className="flex flex-col items-center py-40 text-center">
-                <div className="text-48 mb-16">🎉</div>
                 <h3 className="text-18 mb-10 font-bold text-white">{t`受付停止中`}</h3>
                 <p className="leading-relaxed text-slate-300 mb-6 max-w-[300px] text-14">
                   {t`おかげさまで現在のヘッジ枠はすべて埋まっております。`}
