@@ -8,8 +8,10 @@
  * Step 1: LP Boost (Phase 1-1) — reserveFund being redirected to lpBoostPool.
  * Step 2: High-Lev Lock or OI Cap (Phase 1-2) — new high-leverage hedges blocked.
  * Step 3: Premium Surge (Phase 1-3) — new hedges pay elevated premium.
- * Step 4: Reserve Fund releasing (Phase 2-4) — hedgeCapacityPct >= 80.
+ * Step 4: Senior Yield absorbing (Phase 2-4) — hedgeCapacityPct >= 80.
+ *         (Issue #230: Senior yield is now the PRIMARY FR buffer — consumed before Junior.)
  * Step 5: Junior Buffer absorbing (Phase 2-5) — juniorDeficitAbsorbed > 0.
+ *         (Junior absorbs only if Senior yield is exhausted.)
  * Step 6: Trade ADL in progress (Phase 3-6) — isHedgeDisabled && solvencyDropAt > 0.
  * Step 7: Hedge ADL / Termination (Phase 3-7) — isHedgeDisabled with extended duration.
  *
@@ -58,12 +60,13 @@ export function getDefenseStep(input: DefenseStepInput): DefenseStep {
     return 6;
   }
 
-  // Step 5: Junior Buffer actively absorbing FR deficit.
+  // Step 5: Junior Buffer absorbing FR deficit (Senior yield exhausted).
   if (juniorDeficitAbsorbed !== null && juniorDeficitAbsorbed > 0) {
     return 5;
   }
 
-  // Step 4: Reserve Fund being tapped (hedgeCapacityPct >= 80 indicates approaching limit).
+  // Step 4: Senior Yield absorbing FR deficit (hedgeCapacityPct >= 80 signals Senior yield is
+  // being consumed to cover the shortfall — Issue #230: Senior absorbs BEFORE Junior).
   if (hedgeCapacityPct !== null && hedgeCapacityPct >= 80) {
     return 4;
   }
@@ -124,15 +127,15 @@ export const STEP_META: Record<DefenseStep, StepMeta> = {
     severity: "warning",
   },
   4: {
-    label: "Junior Buffer",
+    label: "Senior Yield",
     phase: "Phase 2 · Internal Defense",
-    description: "Junior LP (USDC) profits absorbing FR deficit. Senior RWA LP and hedge users protected.",
+    description: "Senior LP (RWA) yield consumed to cover the FR deficit. Junior LP is protected at this stage.",
     severity: "warning",
   },
   5: {
-    label: "Senior Yield",
+    label: "Junior Buffer",
     phase: "Phase 2 · Internal Defense",
-    description: "Senior LP (RWA) yield routed to cover the remaining FR shortfall.",
+    description: "Junior LP (USDC) profits absorbing the remaining FR deficit after Senior yield is exhausted.",
     severity: "warning",
   },
   6: {

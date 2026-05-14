@@ -93,14 +93,14 @@ const PHASES: Phase[] = [
       {
         num: 4,
         icon: null,
-        title: msg`Junior Vault Buffer`,
-        desc: msg`High-yield junior LP (USDC) profits absorb the FR deficit, shielding senior LPs (RWA) and maintaining hedge user costs.`,
+        title: msg`Senior Vault Yield`,
+        desc: msg`Yield earned by senior LP (RWA) deposits is consumed first to cover the FR shortfall, shielding junior LPs and hedge users.`,
       },
       {
         num: 5,
         icon: null,
-        title: msg`Senior Vault Yield`,
-        desc: msg`Yield earned by senior LP (RWA) deposits is routed to cover the remaining FR shortfall.`,
+        title: msg`Junior Vault Buffer`,
+        desc: msg`High-yield junior LP (USDC) profits absorb any remaining FR deficit after senior yield is exhausted.`,
       },
       {
         num: 6,

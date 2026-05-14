@@ -7,8 +7,8 @@
  * T2  isLPBoostActive=true → step 1.
  * T3  isHighLeverageLocked=true → step 2.
  * T4  isPremiumSurgeActive=true → step 3.
- * T5  hedgeCapacityPct >= 80 → step 4.
- * T6  juniorDeficitAbsorbed > 0 → step 5.
+ * T5  hedgeCapacityPct >= 80 → step 4 (Senior Yield absorbing — Issue #230: Senior first).
+ * T6  juniorDeficitAbsorbed > 0 → step 5 (Junior Buffer — only after Senior exhausted).
  * T7  isHedgeDisabled + solvencyDropAt > 0 (< 24h) → step 6.
  * T8  isHedgeDisabled + solvencyDropAt > 0 (>= 24h) → step 7.
  * T9  Overlap: isPremiumSurge AND juniorDeficit → highest wins (step 5).
@@ -64,12 +64,12 @@ describe("getDefenseStep", () => {
     expect(getDefenseStep({ ...base(), isPremiumSurgeActive: true })).toBe(3);
   });
 
-  it("T5: hedgeCapacityPct >= 80 → step 4", () => {
+  it("T5: hedgeCapacityPct >= 80 → step 4 (Senior Yield absorbing)", () => {
     expect(getDefenseStep({ ...base(), hedgeCapacityPct: 80 })).toBe(4);
     expect(getDefenseStep({ ...base(), hedgeCapacityPct: 110 })).toBe(4);
   });
 
-  it("T6: juniorDeficitAbsorbed > 0 → step 5", () => {
+  it("T6: juniorDeficitAbsorbed > 0 → step 5 (Junior Buffer absorbing, after Senior exhausted)", () => {
     expect(getDefenseStep({ ...base(), juniorDeficitAbsorbed: 1_000 })).toBe(5);
   });
 
@@ -81,7 +81,7 @@ describe("getDefenseStep", () => {
     expect(getDefenseStep({ ...base(), isHedgeDisabled: true, solvencyDropAt: DROP_25H_AGO })).toBe(7);
   });
 
-  it("T9: overlap — isPremiumSurge AND juniorDeficit → highest wins (step 5)", () => {
+  it("T9: overlap — isPremiumSurge AND juniorDeficit → highest wins (step 5 Junior Buffer)", () => {
     expect(
       getDefenseStep({
         ...base(),

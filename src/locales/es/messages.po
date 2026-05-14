@@ -105,6 +105,10 @@ msgstr "Firme cada transacción en cadena utilizando su propio RPC, normalmente 
 msgid "Automatically compounds your GMX rewards without manual claiming"
 msgstr "Reinvierte automáticamente sus recompensas de GMX sin necesidad de reclamar manualmente"
 
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "High-yield junior LP (USDC) profits absorb any remaining FR deficit after senior yield is exhausted."
+msgstr ""
+
 #: src/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
 #: src/components/GmxAccountModal/MainView.tsx
 msgid "Disconnect"
@@ -6094,8 +6098,8 @@ msgid "Liq. Price"
 msgstr ""
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "Yield earned by senior LP (RWA) deposits is routed to cover the remaining FR shortfall."
-msgstr ""
+#~ msgid "Yield earned by senior LP (RWA) deposits is routed to cover the remaining FR shortfall."
+#~ msgstr ""
 
 #: src/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "LEV."
@@ -10091,8 +10095,8 @@ msgid "Unable to verify code availability on {0}. You can still create the code,
 msgstr "No se ha podido verificar la disponibilidad del código en {0}. Aún puede crear el código, pero es posible que ya esté en uso en esa red."
 
 #: src/pages/Status/components/FrDefenseExplainer.tsx
-msgid "High-yield junior LP (USDC) profits absorb the FR deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
-msgstr ""
+#~ msgid "High-yield junior LP (USDC) profits absorb the FR deficit, shielding senior LPs (RWA) and maintaining hedge user costs."
+#~ msgstr ""
 
 #: src/components/Referrals/AffiliatesStats.tsx
 #: src/components/Referrals/TradersStats.tsx
@@ -12558,6 +12562,10 @@ msgstr "TIMEKEY"
 #: src/pages/SyntheticsStats/SyntheticsStats.tsx
 msgid "Min position size"
 msgstr "Tamaño mínimo de posición"
+
+#: src/pages/Status/components/FrDefenseExplainer.tsx
+msgid "Yield earned by senior LP (RWA) deposits is consumed first to cover the FR shortfall, shielding junior LPs and hedge users."
+msgstr ""
 
 #: src/components/TwapRows/TwapRows.tsx
 msgid "Hours"
